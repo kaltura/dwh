@@ -208,8 +208,8 @@ mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_bandwidth.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_storage.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_streaming.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_usage_totals.sql
-mysqlexec $DW_ROOT_DIR/aggr/daily_procedure_dwh_hourly_events_widget.sql
-mysqlexec $DW_ROOT_DIR/aggr/daily_procedure_dwh_hourly_partner.sql
+mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_dwh_hourly_events_widget.sql
+mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_dwh_hourly_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/recalc_aggr_day_procedure.sql
 mysqlexec $DW_ROOT_DIR/aggr/resolve_aggr_name_function.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_aggr_events_partitions_view.sql
@@ -238,7 +238,6 @@ mysqlexec $DW_ROOT_DIR/ri/ri_defaults_grouped_view.sql
 mysqlexec $DW_ROOT_DIR/ri/ri_mapping_and_defaults_view.sql
 
 #dw/views/
-mysqlexec $DW_ROOT_DIR/views/dwh_aggr_active_partners_v.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_dim_entries_v.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_dim_partners_v.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_dim_uiconf_v.sql
