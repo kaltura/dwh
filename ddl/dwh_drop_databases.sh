@@ -3,7 +3,7 @@
 USER="etl"
 PW="etl"
 KITCHEN=/usr/local/pentaho/pdi/kitchen.sh
-ROOT_DIR=/home/etl/
+ROOT_DIR=/opt/kaltura/dwh
 HOST=localhost
 PORT=3306
 
