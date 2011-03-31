@@ -202,22 +202,22 @@
         <field>
           <variable_name>ExportToFileTransformation</variable_name>
           <variable_value>file:&#47;&#47;&#47;${EtlBasePath}aggregation&#47;kuser_storage_usage_export_from_dw.ktr</variable_value>
-          <variable_type>JVM</variable_type>
+          <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
           <variable_name>TempFileName</variable_name>
           <variable_value>${ExportPath}&#47;sync_kuser_storage_usage</variable_value>
-          <variable_type>JVM</variable_type>
+          <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
           <variable_name>ImportFromFileTransformation</variable_name>
           <variable_value>file:&#47;&#47;&#47;${EtlBasePath}aggregation&#47;kuser_storage_usage_import_to_op.ktr</variable_value>
-          <variable_type>JVM</variable_type>
+          <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
           <variable_name>ImportStoredProcedure</variable_name>
           <variable_value>update_kusers</variable_value>
-          <variable_type>JVM</variable_type>
+          <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
           <variable_name>AggrName</variable_name>
