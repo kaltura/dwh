@@ -215,6 +215,11 @@
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
+          <variable_name>FetchMethod</variable_name>
+          <variable_value>${BandwidthUsageLLNFetchMethod}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
           <variable_name>FetchFTPServer</variable_name>
           <variable_value>${BandwidthUsageLLNFTPServer}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
@@ -237,6 +242,11 @@
         <field>
           <variable_name>FetchWildcard</variable_name>
           <variable_value>${BandwidthUsageLLNWildCard}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchLogsDir</variable_name>
+          <variable_value>${BandwidthUsageLLNLogsDir}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>

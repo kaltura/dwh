@@ -210,13 +210,43 @@
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
+          <variable_name>FetchMethod</variable_name>
+          <variable_value>${BandwidthUsageWWWFetchMethod}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
           <variable_name>FetchJob</variable_name>
-          <variable_value>${EtlBasePath}bandwidth_usage&#47;generate&#47;fetch_www_files.kjb</variable_value>
+          <variable_value>${EtlBasePath}bandwidth_usage&#47;generate&#47;fetch_files.kjb</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPServer</variable_name>
+          <variable_value>${BandwidthUsageWWWFTPServer}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPPort</variable_name>
+          <variable_value>${BandwidthUsageWWWFTPPort}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPUser</variable_name>
+          <variable_value>${BandwidthUsageWWWFTPUser}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPPassword</variable_name>
+          <variable_value>${BandwidthUsageWWWFTPPassword}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
           <variable_name>FetchWildcard</variable_name>
           <variable_value>${BandwidthUsageWWWWildCard}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchLogsDir</variable_name>
+          <variable_value>${BandwidthUsageWWWLogsDir}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
