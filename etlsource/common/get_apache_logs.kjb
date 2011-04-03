@@ -196,38 +196,6 @@
       <yloc>100</yloc>
       </entry>
     <entry>
-      <name>Get Apache Files</name>
-      <description>Shell</description>
-      <type>SHELL</type>
-      <filename>${PHPExecutable}</filename>
-      <work_directory>&#47;usr&#47;bin</work_directory>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>N</insertScript>
-      <script/>
-      <loglevel>Nothing</loglevel>
-      <argument0>${EtlScripts}&#47;fetch_local_logs.php</argument0>
-      <argument1>${LogsDir}</argument1>
-      <argument2>${FetchWildcard}</argument2>
-      <argument3>${TempStorage}</argument3>
-      <argument4>${DbHostName}</argument4>
-      <argument5>${DbPort}</argument5>
-      <argument6>${DbUser}</argument6>
-      <argument7>${DbPassword}</argument7>
-      <argument8>${ProcessID}</argument8>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>660</xloc>
-      <yloc>100</yloc>
-      </entry>
-    <entry>
       <name>START</name>
       <description>Special entries</description>
       <type>SPECIAL</type>
@@ -271,7 +239,6 @@
       <type>TRANS</type>
       <filename>file:&#47;&#47;&#47;${EtlBasePath}common&#47;list_files_from_dir.ktr</filename>
       <transname/>
-      <directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -291,8 +258,126 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>780</xloc>
-      <yloc>100</yloc>
+      <xloc>961</xloc>
+      <yloc>102</yloc>
+      </entry>
+    <entry>
+      <name>Get FTP Files</name>
+      <description>Shell</description>
+      <type>SHELL</type>
+      <filename>${PHPExecutable}</filename>
+      <work_directory>&#47;usr&#47;bin</work_directory>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script/>
+      <loglevel>Nothing</loglevel>
+      <argument0>${EtlScripts}&#47;etl_ftp_retrieve.php</argument0>
+      <argument1>${FetchFTPServer}&#47;${FetchLogsDir}</argument1>
+      <argument2>${FetchFTPPort}</argument2>
+      <argument3>${FetchFTPUser}</argument3>
+      <argument4>${FetchFTPPassword}</argument4>
+      <argument5>${FetchWildcard}</argument5>
+      <argument6>${TempStorage}</argument6>
+      <argument7>${DbHostName}</argument7>
+      <argument8>${DbPort}</argument8>
+      <argument9>${DbUser}</argument9>
+      <argument10>${DbPassword}</argument10>
+      <argument11>${ProcessID}</argument11>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>828</xloc>
+      <yloc>69</yloc>
+      </entry>
+    <entry>
+      <name>Get Local Files</name>
+      <description>Shell</description>
+      <type>SHELL</type>
+      <filename>${PHPExecutable}</filename>
+      <work_directory>&#47;usr&#47;bin</work_directory>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script/>
+      <loglevel>Nothing</loglevel>
+      <argument0>${EtlScripts}&#47;fetch_local_logs.php</argument0>
+      <argument1>${FetchLogsDir}</argument1>
+      <argument2>${FetchWildcard}</argument2>
+      <argument3>${TempStorage}</argument3>
+      <argument4>${DbHostName}</argument4>
+      <argument5>${DbPort}</argument5>
+      <argument6>${DbUser}</argument6>
+      <argument7>${DbPassword}</argument7>
+      <argument8>${ProcessID}</argument8>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>830</xloc>
+      <yloc>147</yloc>
+      </entry>
+    <entry>
+      <name>Is Remote Fetch</name>
+      <description>Simple evaluation</description>
+      <type>SIMPLE_EVAL</type>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${FetchMethod}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>remote</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>equal</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>718</xloc>
+      <yloc>70</yloc>
+      </entry>
+    <entry>
+      <name>Is Local Fetch</name>
+      <description>Simple evaluation</description>
+      <type>SIMPLE_EVAL</type>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${FetchMethod}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>local</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>equal</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>718</xloc>
+      <yloc>153</yloc>
+      </entry>
+    <entry>
+      <name>Abort job</name>
+      <description>Abort job</description>
+      <type>ABORT</type>
+      <message>Unknown fetch method: ${FetchMethod}</message>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>719</xloc>
+      <yloc>277</yloc>
       </entry>
   </entries>
   <hops>
@@ -325,7 +410,7 @@
     </hop>
     <hop>
       <from>Clean  Temp Folder</from>
-      <to>Get Apache Files</to>
+      <to>Is Remote Fetch</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -333,7 +418,52 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Get Apache Files</from>
+      <from>Is Remote Fetch</from>
+      <to>Get FTP Files</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Is Remote Fetch</from>
+      <to>Is Local Fetch</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Is Local Fetch</from>
+      <to>Get Local Files</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Is Local Fetch</from>
+      <to>Abort job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Get FTP Files</from>
+      <to>List files</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Get Local Files</from>
       <to>List files</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

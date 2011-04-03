@@ -189,7 +189,7 @@
       <yloc>80</yloc>
       </entry>
     <entry>
-      <name>Set Temp Storage Location</name>
+      <name>Set fetch job variables</name>
       <description>Set variables</description>
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
@@ -200,7 +200,7 @@
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
-          <variable_name>LogsDir</variable_name>
+          <variable_name>FetchLogsDir</variable_name>
           <variable_value>${EventsLogsDir}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
@@ -214,11 +214,36 @@
           <variable_value>${EventsProcessID}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
+        <field>
+          <variable_name>FetchMethod</variable_name>
+          <variable_value>${EventsFetchMethod}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPServer</variable_name>
+          <variable_value>${EventsFTPServer}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPPort</variable_name>
+          <variable_value>${EventsFTPPort}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPUser</variable_name>
+          <variable_value>${EventsFTPUser}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPPassword</variable_name>
+          <variable_value>${EventsFTPPassword}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>200</xloc>
+      <xloc>199</xloc>
       <yloc>80</yloc>
       </entry>
     <entry>
@@ -297,7 +322,7 @@
   <hops>
     <hop>
       <from>START</from>
-      <to>Set Temp Storage Location</to>
+      <to>Set fetch job variables</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -305,7 +330,7 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Set Temp Storage Location</from>
+      <from>Set fetch job variables</from>
       <to>Get Apache Logs</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
