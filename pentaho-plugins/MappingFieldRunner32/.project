@@ -14,4 +14,10 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>RESOURCES_LOC</name>
+			<value>$%7BPARENT-1-PROJECT_LOC%7D/resources</value>
+		</variable>
+	</variableList>
 </projectDescription>

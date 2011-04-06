@@ -11,34 +11,12 @@
 
 package org.kaltura.getftpfilenames;
 
-import com.enterprisedt.net.ftp.FTPClient;
-import com.enterprisedt.net.ftp.FTPConnectMode;
-//import com.enterprisedt.net.ftp.FTPException;
-//import com.enterprisedt.net.ftp.FTPTransferType;
-//import com.enterprisedt.net.ftp.FTPFile;
-
-import java.io.IOException;
-import java.net.InetAddress;
-import java.util.Date;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.vfs.FileObject;
-import org.apache.commons.vfs.FileType;
 import org.pentaho.di.core.Const;
-import org.pentaho.di.core.Result;
-import org.pentaho.di.core.ResultFile;
 import org.pentaho.di.core.exception.KettleException;
 import org.pentaho.di.core.exception.KettleStepException;
-import org.pentaho.di.core.fileinput.FileInputList;
-import org.pentaho.di.core.logging.LogWriter;
 import org.pentaho.di.core.row.RowDataUtil;
 import org.pentaho.di.core.row.RowMeta;
-import org.pentaho.di.core.vfs.KettleVFS;
-import org.pentaho.di.job.Job;
 import org.pentaho.di.job.entries.ftp.Messages;
-import org.pentaho.di.repository.Repository;
 import org.pentaho.di.trans.Trans;
 import org.pentaho.di.trans.TransMeta;
 import org.pentaho.di.trans.step.BaseStep;
@@ -48,10 +26,6 @@ import org.pentaho.di.trans.step.StepMeta;
 import org.pentaho.di.trans.step.StepMetaInterface;
 
 import com.enterprisedt.net.ftp.FTPClient;
-import com.enterprisedt.net.ftp.FTPConnectMode;
-import com.enterprisedt.net.ftp.FTPException;
-import com.enterprisedt.net.ftp.FTPFile;
-import com.enterprisedt.net.ftp.FTPTransferType;
 
 /**
  * Read all sorts of text files, convert them to rows and writes these to one or more output streams.
@@ -158,8 +132,7 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
         try
         {
         	Object[] outputRow = buildEmptyRow();
-        	int outputIndex = 0;
-			Object extraData[] = new Object[data.nrStepFields];
+        	Object extraData[] = new Object[data.nrStepFields];
         	if(meta.isFileField())
         	{
     			if (data.filenr >= data.filessize)
@@ -172,9 +145,8 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
     	    		
     	    		String[] filesname={filename};
     		      	String[] filesmask={wildcard};
-    		      	String[] filesrequired={"N"};
     		      	// Get files list
-    		      	data.files = meta.getDynamicFileList(ftpClient, getTransMeta(), filesname, filesmask, filesrequired);
+    		      	data.files = meta.getDynamicFileList(ftpClient, getTransMeta(), filesname, filesmask);
     		      	data.filessize=data.files.nrOfFiles();
     		      	data.filenr=0;
     		     }
@@ -184,11 +156,12 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
         	}
         	if(data.filessize>0)
         	{
-	        	data.file = data.files.getFile(data.filenr);
+	        	data.file = data.files.get(data.filenr);
 	
-         	
-                //// filename
-        		//extraData[outputIndex++]=KettleVFS.getFilename(data.file);
+	        	//int outputIndex = 0;
+				
+                //// filename        		
+	        	//extraData[outputIndex++]=KettleVFS.getFilename(data.file);
 
                 //// short_filename
         		//extraData[outputIndex++]=data.file.getName().getBaseName();
@@ -275,26 +248,6 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
         return true;
     }
 
-    private void handleMissingFiles() throws KettleException
-    {
-        List<FTPFileObject> nonExistantFiles = data.files.getNonExistantFiles();
-
-        if (nonExistantFiles.size() != 0)
-        {
-            String message = FTPFileInputList.getRequiredFilesDescription(nonExistantFiles);
-            logBasic("ERROR: Missing " + message);
-            throw new KettleException("Following required files are missing: " + message);
-        }
-
-        List<FTPFileObject> nonAccessibleFiles = data.files.getNonAccessibleFiles();
-        if (nonAccessibleFiles.size() != 0)
-        {
-            String message = FTPFileInputList.getRequiredFilesDescription(nonAccessibleFiles);
-            logBasic("WARNING: Not accessible " + message);
-            throw new KettleException("Following required files are not accessible: " + message);
-        }
-    }
-
     public boolean init(StepMetaInterface smi, StepDataInterface sdi)
     {
         meta = (GetFTPFileNamesMeta) smi;
@@ -307,7 +260,10 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
 			{
 				// TODO: Validate FTP input
 				
-				OpenFTPConnection();
+				if(ftpClient==null || !ftpClient.connected())
+				{
+					ftpClient = FTPHelper.connectToFTP(meta.getHost(), meta.getPort(), meta.getUsername(), meta.getPassword());
+				}
 				
 				 // Create the output row meta-data
 	            data.outputRowMeta = new RowMeta();
@@ -318,9 +274,11 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
 				{
 	                data.files = meta.getFileList(ftpClient, getTransMeta());
 	                data.filessize=data.files.nrOfFiles();
-					handleMissingFiles();
-				}else
+				}
+				else
+				{
 					data.filessize=0;
+				}
 		            
 			}
 			catch(Exception e)
@@ -346,19 +304,25 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
         data = (GetFTPFileNamesData) sdi;
         if(data.file!=null)
         {
-        	try{
-        	    	data.file.close();
-        	    	data.file=null;
-        	}catch(Exception e){}
-        	
+        	data.file=null;        	
         }
         super.dispose(smi, sdi);
     }
 
     @Override
-    public void setOutputDone() {
+    public void setOutputDone() 
+    {
        	super.setOutputDone();
-       	CloseFTPConnection(); 
+       	if(ftpClient!=null && ftpClient.connected())
+		{
+       		try
+			{
+				ftpClient.quit();
+			} catch (Exception e)
+			{
+				log.logBasic("Error","Failed to cleanly disconnect from ftp");
+			}
+		}	 
     }
     
     //
@@ -367,263 +331,4 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
     {
     	BaseStep.runStepThread(this, meta, data);
     }
-    
-    
-	private boolean OpenFTPConnection(/*Result previousResult, int nr, Repository rep, Job parentJob*/)
-	{
-		//LogWriter log = LogWriter.getInstance();
-		//log4j.info(Messages.getString("JobEntryFTP.Started", serverName)); //$NON-NLS-1$
-		
-		//Result result = previousResult;
-		//result.setNrErrors(1);
-		//result.setResult( false );
-		//NrErrors = 0;
-		//NrfilesRetrieved=0;
-		//successConditionBroken=false;
-		//boolean exitjobentry=false;
-		//limitFiles=Const.toInt(environmentSubstitute(getLimit()),10);
-
-		
-		// Here let's put some controls before stating the job
-//		if(movefiles)
-//		{
-//			if(Const.isEmpty(movetodirectory))
-//			{
-//				log.logError(toString(), Messages.getString("JobEntryFTP.MoveToFolderEmpty"));
-//				return result;
-//			}
-//				
-//		}
-//		
-//		if(log.isDetailed()) log.logDetailed(toString(), Messages.getString("JobEntryFTP.Start")); //$NON-NLS-1$
-
-        //String realMoveToFolder=null;
-		if (ftpClient.connected())
-		{
-			CloseFTPConnection();
-			OpenFTPConnection();
-		}
-		try
-		{
-			// Create ftp client to host:port ...
-			ftpClient = new FTPClient();
-            String realServername = environmentSubstitute(meta.getHost());
-            //String realServerPort = environmentSubstitute(port);
-            //ftpclient.setRemoteAddr(InetAddress.getByName(realServername));
-            //if(!Const.isEmpty(realServerPort))
-            //{
-            //	 ftpclient.setRemotePort(Const.toInt(realServerPort, 21));
-            //}
-
-            if (!Const.isEmpty(meta.getProxyHost())) 
-            {
-          	  String realProxy_host = environmentSubstitute(meta.getProxyHost());
-          	  ftpClient.setRemoteAddr(InetAddress.getByName(realProxy_host));
-          	  //if ( log.isDetailed() )
-          	  //    log.logDetailed(toString(), Messages.getString("JobEntryFTP.OpenedProxyConnectionOn",realProxy_host));
-
-          	  // FIXME: Proper default port for proxy    	  
-          	  //int port = Const.toInt(environmentSubstitute(proxyPort), 21);
-          	  //if (port != 0) 
-          	  //{
-          	     ftpClient.setRemotePort(meta.getProxyPort());
-          	  //}
-            } 
-            else 
-            {
-                ftpClient.setRemoteAddr(InetAddress.getByName(realServername));
-                
-                //if ( log.isDetailed() )
-          	    //  log.logDetailed(toString(), Messages.getString("JobEntryFTP.OpenedConnectionTo",realServername));
-                ftpClient.setRemotePort(meta.getPort());
-            }
-            
-            
-			// set activeConnection connectmode ...
-            if (meta.isActiveFtpConnectionMode()){
-                ftpClient.setConnectMode(FTPConnectMode.ACTIVE);
-                if(log.isDetailed()) log.logDetailed(toString(), Messages.getString("JobEntryFTP.SetActive")); //$NON-NLS-1$
-            }
-            else{
-                ftpClient.setConnectMode(FTPConnectMode.PASV);
-                if(log.isDetailed()) log.logDetailed(toString(), Messages.getString("JobEntryFTP.SetPassive")); //$NON-NLS-1$
-            }
-			
-			// Set the timeout
-			ftpClient.setTimeout(meta.getTimeout());
-		      //if(log.isDetailed()) log.logDetailed(toString(), Messages.getString("JobEntryFTP.SetTimeout", String.valueOf(timeout))); //$NON-NLS-1$
-			
-			ftpClient.setControlEncoding(meta.getEncoding());
-		    //  if(log.isDetailed()) log.logDetailed(toString(), Messages.getString("JobEntryFTP.SetEncoding", controlEncoding)); //$NON-NLS-1$
-
-			// login to ftp host ...
-            ftpClient.connect();
-			
-            String realUsername = environmentSubstitute(meta.getUsername()) +
-            (!Const.isEmpty(meta.getProxyHost()) ? "@" + realServername : "") + 
-            (!Const.isEmpty(meta.getProxyUsername()) ? " " + environmentSubstitute(meta.getProxyUsername()) 
-        		                           : ""); 
-	            
-            String realPassword = environmentSubstitute(meta.getPassword()) + 
-            (!Const.isEmpty(meta.getProxyPassword()) ? " " + environmentSubstitute(meta.getProxyPassword()) : "" );
-            
-            
-            ftpClient.login(realUsername, realPassword);
-			//  Remove password from logging, you don't know where it ends up.
-			//if(log.isDetailed()) log.logDetailed(toString(), Messages.getString("JobEntryFTP.LoggedIn", realUsername)); //$NON-NLS-1$
-
-			// move to spool dir ...
-			//if (!Const.isEmpty(ftpDirectory)) {
-            //    String realFtpDirectory = environmentSubstitute(ftpDirectory);
-            //    realFtpDirectory=normalizePath(realFtpDirectory);
-            //    ftpclient.chdir(realFtpDirectory);
-            //    if(log.isDetailed()) log.logDetailed(toString(), Messages.getString("JobEntryFTP.ChangedDir", realFtpDirectory)); //$NON-NLS-1$
-			//}	
-
-			//Create move to folder if necessary
-			//if(movefiles && !Const.isEmpty(movetodirectory)) {
-			//	realMoveToFolder=environmentSubstitute(movetodirectory);
-			//	realMoveToFolder=normalizePath(realMoveToFolder);
-			//	// Folder exists?
-//				boolean folderExist=true;
-//				try{
-//					folderExist=ftpclient.exists(realMoveToFolder);
-//				}
-//				catch (Exception e){
-//					// Assume file does not exist !!
-//				}
-//				
-//				if(!folderExist){
-//					if(createmovefolder){
-//						ftpclient.mkdir(realMoveToFolder);
-//						if(log.isDetailed()) log.logDetailed(toString(), Messages.getString("JobEntryFTP.MoveToFolderCreated",realMoveToFolder));
-//					}else{
-//						log.logError(toString(),Messages.getString("JobEntryFTP.MoveToFolderNotExist"));
-//						exitjobentry=true;
-//						NrErrors++;
-//					}
-//				}
-//			}
-			
-//			if(!exitjobentry)
-//			{
-//				// Get all the files in the current directory...
-//				FTPFile[] ftpFiles = ftpclient.dirDetails(".");
-//				
-//			    //if(log.isDetailed()) log.logDetailed(toString(), Messages.getString("JobEntryFTP.FoundNFiles", String.valueOf(filelist.length))); //$NON-NLS-1$
-//				if(log.isDetailed()) log.logDetailed(toString(), Messages.getString("JobEntryFTP.FoundNFiles", String.valueOf(ftpFiles.length))); //$NON-NLS-1$
-//			    
-//				// set transfertype ...
-//				if (binaryMode) 
-//				{
-//					ftpclient.setType(FTPTransferType.BINARY);
-//			        if(log.isDetailed()) log.logDetailed(toString(), Messages.getString("JobEntryFTP.SetBinary")); //$NON-NLS-1$
-//				}
-//				else
-//				{
-//					ftpclient.setType(FTPTransferType.ASCII);
-//			        if(log.isDetailed()) log.logDetailed(toString(), Messages.getString("JobEntryFTP.SetAscii")); //$NON-NLS-1$
-//				}
-//	
-//				// Some FTP servers return a message saying no files found as a string in the filenlist
-//				// e.g. Solaris 8
-//				// CHECK THIS !!!
-//				
-//				if (ftpFiles.length == 1)
-//				{
-//					String translatedWildcard = environmentSubstitute(wildcard);
-//					if(!Const.isEmpty(translatedWildcard)){
-//					  if (ftpFiles[0].getName().startsWith(translatedWildcard))
-//					  {
-//					    throw new FTPException(ftpFiles[0].getName());
-//					  }
-//					}
-//				}
-//	
-//				Pattern pattern = null;
-//				if (!Const.isEmpty(wildcard)) {
-//	                String realWildcard = environmentSubstitute(wildcard);
-//	                pattern = Pattern.compile(realWildcard);
-//				}
-//				
-//				if(!getSuccessCondition().equals(SUCCESS_IF_NO_ERRORS))
-//					limitFiles=Const.toInt(environmentSubstitute(getLimit()),10);
-//				
-//				// Get the files in the list...
-//				for (FTPFile ftpFile : ftpFiles) 
-//				{
-//					
-//					if(parentJob.isStopped()){
-//						exitjobentry=true;
-//						throw new Exception(Messages.getString("JobEntryFTP.JobStopped"));
-//					}
-//					
-//					if(successConditionBroken){
-//						throw new Exception(Messages.getString("JobEntryFTP.SuccesConditionBroken",""+NrErrors));
-//					}
-//				
-//					boolean getIt = true;
-//					
-//					String filename=ftpFile.getName();
-//					if(log.isDebug()) log.logDebug(toString(), Messages.getString("JobEntryFTP.AnalysingFile",filename));
-//					
-//					// We get only files
-//					if(ftpFile.isDir() || ftpFile.isLink()) getIt=false;
-//
-//					try
-//					{
-//						// See if the file matches the regular expression!
-//						if(getIt){
-//							if (pattern!=null){
-//								Matcher matcher = pattern.matcher(filename);
-//								getIt = matcher.matches();
-//							}
-//						}
-//						
-//						if (getIt)	downloadFile(ftpclient,filename,realMoveToFolder,log, parentJob ,result) ;
-//						
-//					}catch (Exception e){
-//						// Update errors number
-//						updateErrors();
-//						log.logError(toString(),Messages.getString("JobFTP.UnexpectedError",e.getMessage()));
-//					}
-//				} // end for
-//			}
-		}
-		catch(Exception e){
-			//if(!successConditionBroken && !exitjobentry) updateErrors();
-			//log.logError(toString(), Messages.getString("JobEntryFTP.ErrorGetting", e.getMessage())); //$NON-NLS-1$
-		}
-//        finally{
-//            if (ftpclient!=null) {
-//                try {
-//                    ftpclient.quit();
-//                }
-//                catch(Exception e) {
-//                	log.logError(toString(), Messages.getString("JobEntryFTP.ErrorQuitting", e.getMessage())); //$NON-NLS-1$
-//                }
-//            }
-//        }
-		
-		//result.setNrErrors(NrErrors);
-		//result.setNrFilesRetrieved(NrfilesRetrieved);
-		//if(getSuccessStatus())	result.setResult(true);
-		//if(exitjobentry) result.setResult(false);
-		//displayResults(log);
-		//return result;
-		return ftpClient.connected();
-	}
-
-	private void CloseFTPConnection()
-	{
-		if (ftpClient!=null && ftpClient.connected()) {
-          try {
-              ftpClient.quit();
-          }
-          catch(Exception e) {
-          //	log.logError(toString(), Messages.getString("JobEntryFTP.ErrorQuitting", e.getMessage())); //$NON-NLS-1$
-          }
-      }
-
-	}
 }

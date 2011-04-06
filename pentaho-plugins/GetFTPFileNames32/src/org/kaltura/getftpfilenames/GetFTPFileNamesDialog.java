@@ -55,11 +55,9 @@ import org.pentaho.di.core.util.StringUtil;
 import org.pentaho.di.trans.Trans;
 import org.pentaho.di.trans.TransMeta;
 import org.pentaho.di.trans.TransPreviewFactory;
-import org.pentaho.di.ui.trans.step.BaseStepDialog;
 import org.pentaho.di.trans.step.BaseStepMeta;
 import org.pentaho.di.trans.step.StepDialogInterface;
 import org.pentaho.di.ui.core.dialog.EnterNumberDialog;
-import org.pentaho.di.ui.core.dialog.EnterSelectionDialog;
 import org.pentaho.di.ui.core.dialog.EnterTextDialog;
 import org.pentaho.di.ui.core.dialog.ErrorDialog;
 import org.pentaho.di.ui.core.dialog.PreviewRowsDialog;
@@ -68,6 +66,9 @@ import org.pentaho.di.ui.core.widget.LabelTextVar;
 import org.pentaho.di.ui.core.widget.TableView;
 import org.pentaho.di.ui.core.widget.TextVar;
 import org.pentaho.di.ui.trans.dialog.TransPreviewProgressDialog;
+import org.pentaho.di.ui.trans.step.BaseStepDialog;
+
+import com.enterprisedt.net.ftp.FTPClient;
 
 public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		StepDialogInterface {
@@ -1082,7 +1083,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		});
 
 		// Show the files that are selected at this time...
-		wbShowFiles.addSelectionListener(new SelectionAdapter() {
+		/*wbShowFiles.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				GetFTPFileNamesMeta tfii = new GetFTPFileNamesMeta();
 				getInfo(tfii);
@@ -1101,7 +1102,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 					mb.open();
 				}
 			}
-		});
+		});*/
 
 		// Listen to the Browse... button
 		wbbFilename.addSelectionListener(new SelectionAdapter() {
@@ -1148,8 +1149,45 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 					}
 				}
 			}
+		});	
+		
+		wTest.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				try
+				{									
+					String host = variables.environmentSubstitute(wServerName.getText());
+					int port = Const.toInt(variables.environmentSubstitute(wPort.getText()),21);
+					String username = variables.environmentSubstitute(wUserName.getText());
+					String pw = variables.environmentSubstitute(wPassword.getText());
+					FTPClient ftp = FTPHelper.connectToFTP(host, port, username, pw);
+										
+			    	if(ftp.connected())
+			    	{
+						MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_INFORMATION );
+						mb.setMessage(Messages.getString("GetFTPFileNamesDialog.Connected.OK",wServerName.getText()) +Const.CR);
+						mb.setText(Messages.getString("GetFTPFileNamesDialog.Connected.Title.Ok"));
+						mb.open();
+						ftp.quit();
+					}else
+					{
+						MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR );
+						mb.setMessage(Messages.getString("GetFTPFileNamesDialog.Connected.NOK.ConnectionBad",wServerName.getText()) +Const.CR);
+						mb.setText(Messages.getString("GetFTPFileNamesDialog.Connected.Title.Bad"));
+						mb.open(); 
+				    }
+				} catch(Exception e1)
+				{
+					MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR );
+					mb.setMessage(e1.getMessage());
+					mb.setText(Messages.getString("GetFTPFileNamesDialog.Connected.Title.Bad"));
+					mb.open(); 
+				}
+			}
 		});
-
+		
 		// Detect X or ALT-F4 or something that kills this window...
 		shell.addShellListener(new ShellAdapter() {
 			public void shellClosed(ShellEvent e) {
@@ -1243,28 +1281,43 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 			wFilenameList.removeEmptyRows();
 			wFilenameList.setRowNums();
 			wFilenameList.optWidth(true);
-
-			if (in.getFileTypeFilter() != null) {
-				wFilterFileType.select(in.getFileTypeFilter().ordinal());
-			} else {
-				wFilterFileType.select(0);
-
-			}
+			wFilterFileType.select(0);
 
 			wInclRownum.setSelection(in.includeRowNumber());
 			wAddResult.setSelection(in.isAddResultFile());
 			wFileField.setSelection(in.isFileField());
 			if (in.getRowNumberField() != null)
+			{
 				wInclRownumField.setText(in.getRowNumberField());
+			}
 			if (in.getDynamicFilenameField() != null)
+			{
 				wFilenameField.setText(in.getDynamicFilenameField());
+			}
 			if (in.getDynamicWildcardField() != null)
+			{
 				wWildcardField.setText(in.getDynamicWildcardField());
+			}
 			wLimit.setText("" + in.getRowLimit());
 
 		}
 		wStepname.selectAll();
-		// TODO: load the data from the meta into the form
+		
+		if(in.getHost()!=null)
+		{
+			wServerName.setText(in.getHost());
+		}
+		wPort.setText(""+in.getPort());
+		
+		if(in.getUsername()!=null)
+		{
+			wUserName.setText(in.getUsername());
+		}
+		
+		if(in.getPassword()!=null)
+		{
+			wPassword.setText(in.getPassword());
+		}
 	}
 
 	private void cancel() {
@@ -1291,7 +1344,6 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		in.setFileMask(wFilenameList.getItems(1));
 		in.setFileRequired(wFilenameList.getItems(2));
 
-		in.setFilterFileType(wFilterFileType.getSelectionIndex());
 		in.setIncludeRowNumber(wInclRownum.getSelection());
 		in.setAddResultFile(wAddResult.getSelection());
 		in.setDynamicFilenameField(wFilenameField.getText());
@@ -1299,7 +1351,11 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		in.setFileField(wFileField.getSelection());
 		in.setRowNumberField(wInclRownumField.getText());
 		in.setRowLimit(Const.toLong(wLimit.getText(), 0L));
-		// TODO: set into the meta
+		
+		in.setHost(wServerName.getText());
+		in.setPort(Const.toInt(wPort.getText(), 21));
+		in.setUsername(wUserName.getText());
+		in.setPassword(wPassword.getText());
 	}
 
 	public void checkPasswordVisible()

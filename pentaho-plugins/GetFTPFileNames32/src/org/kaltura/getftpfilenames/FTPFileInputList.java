@@ -1,61 +1,56 @@
 package org.kaltura.getftpfilenames;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import org.pentaho.di.core.Const;
+import org.pentaho.di.core.exception.KettleException;
+import org.pentaho.di.core.variables.VariableSpace;
+
 import com.enterprisedt.net.ftp.FTPClient;
-import com.enterprisedt.net.ftp.FTPConnectMode;
+import com.enterprisedt.net.ftp.FTPException;
 import com.enterprisedt.net.ftp.FTPFile;
 
-import java.util.List;
-
-//import org.apache.commons.vfs.FileObject;
-//import org.pentaho.di.core.fileinput.FileInputList.FileTypeFilter;
-import org.apache.commons.vfs.AllFileSelector;
-import org.apache.commons.vfs.FileObject;
-import org.apache.commons.vfs.FileSelectInfo;
-import org.apache.commons.vfs.FileSystemException;
-import org.apache.commons.vfs.FileType;
-import org.apache.commons.vfs.provider.ftp.FtpFileSystemConfigBuilder;
-import org.pentaho.di.core.Const;
-import org.pentaho.di.core.fileinput.FileInputList;
-import org.pentaho.di.core.fileinput.FileInputList.FileTypeFilter;
-import org.pentaho.di.core.logging.LogWriter;
-import org.pentaho.di.core.variables.VariableSpace;
-import org.pentaho.di.core.vfs.KettleVFS;
-
-public class FTPFileInputList {
-
+public class FTPFileInputList 
+{
+	private ArrayList<FTPFile> files;
 	
-	private static final String YES                = "Y";
+	public FTPFileInputList()
+	{
+		files = new ArrayList<FTPFile>();
+	}
 	
-	public int nrOfFiles() {
+	public int nrOfFiles() 
+	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public static FTPFileInputList createFileList(FTPClient ftpClient, VariableSpace space,
-			String[] fileName, String[] fileMask, String[] fileRequired,
-			boolean[] includeSubdirs,
-			FileTypeFilter[] fileTypeFilters) {
-		FileInputList fileInputList = new FileInputList();
+	public static FTPFileInputList createFileList(
+			FTPClient ftpClient, 
+			VariableSpace space,
+			String[] fileName, 
+			String[] fileMask, 
+			boolean includeSubdirs) throws KettleException 
+	{
+		FTPFileInputList files = new FTPFileInputList();
 
         // Replace possible environment variables...
-        final String realfile[] = space.environmentSubstitute(fileName);
-        final String realmask[] = space.environmentSubstitute(fileMask);
+        String realfile[] = space.environmentSubstitute(fileName);
+        String realmask[] = space.environmentSubstitute(fileMask);
 
         for (int i = 0; i < realfile.length; i++)
         {
-            final String onefile = realfile[i];
-            final String onemask = realmask[i];
+            String onefile = realfile[i];
+            String onemask = realmask[i];
 
-            final boolean onerequired = YES.equalsIgnoreCase(fileRequired[i]);
-            final boolean subdirs = includeSubdirs[i];
-            final FileTypeFilter filter = (
-                    (fileTypeFilters == null || fileTypeFilters[i] == null) ?
-                            FileTypeFilter.ONLY_FILES : fileTypeFilters[i]);
+            if (Const.isEmpty(onefile)) 
+            {
+            	continue;
+            }
             
-            if (Const.isEmpty(onefile)) continue;
-
             // 
             // If a wildcard is set we search for files
             //
@@ -63,145 +58,68 @@ public class FTPFileInputList {
             {
                 try
                 {
-                    // Find all file names that match the wildcard in this directory
-                    //
-                    FTPFile directoryFileObject = ftpClient.fileDetails(onefile);
-                    if (directoryFileObject != null && directoryFileObject.isDir()) // it's a directory
-                    {
-                        FTPFile[] fullFileObjects = directoryFileObject.listFiles();
-                        //List<FTPFile> fileObjects = new List<FTPFile>();
-                        for (FTPFile file : fullFileObjects)
-                        {
-                        	
-                        }
-                        /*(
-                                new AllFileSelector()
-                                {
-                                    public boolean traverseDescendents(FileSelectInfo info)
-                                    {
-                                        return info.getDepth()==0 || subdirs;
-                                    }
-                                    
-                                    public boolean includeFile(FileSelectInfo info)
-                                    {
-                                        // Never return the parent directory of a file list.
-                                        if (info.getDepth() == 0) {
-                                            return false;
-                                        }
-                                        
-                                    	FileObject fileObject = info.getFile();
-                                    	try {
-                                    	    if ( fileObject != null && filter.isFileTypeAllowed(fileObject.getType()))
-                                    	    {
-                                                String name = fileObject.getName().getBaseName();
-                                                boolean matches = Pattern.matches(onemask, name);
-                                                /*
-                                                if (matches)
-                                                {
-                                                    System.out.println("File match: URI: "+info.getFile()+", name="+name+", depth="+info.getDepth());
-                                                }
-                                                *//*
-                                                return matches;
-                                    	    }
-                                    	    return false;
-                                    	}
-                                    	catch ( FileSystemException ex )
-                                    	{
-                                    		// Upon error don't process the file.
-                                    		return false;
-                                    	}
-                                    }
-                                }
-                            );*/
-                        if (fileObjects != null) 
-                        {
-                            for (int j = 0; j < fileObjects.length; j++)
-                            {
-                                if (fileObjects[j].exists()) fileInputList.addFile(fileObjects[j]);
-                            }
-                        }
-                        if (Const.isEmpty(fileObjects))
-                        {
-                            if (onerequired) fileInputList.addNonAccessibleFile(directoryFileObject);
-                        }
-                        
-                        // Sort the list: quicksort, only for regular files
-                        fileInputList.sortFiles();
-                    }
-                    else
-                    {
-                        FileObject[] children = directoryFileObject.getChildren();
-                        for (int j = 0; j < children.length; j++)
-                        {
-                            // See if the wildcard (regexp) matches...
-                            String name = children[j].getName().getBaseName();
-                            if (Pattern.matches(onemask, name)) fileInputList.addFile(children[j]);
-                        }
-                        // We don't sort here, keep the order of the files in the archive.
-                    }
+                   addFiles(files, ftpClient, onemask, onefile, includeSubdirs);                    
                 }
                 catch (Exception e)
                 {
-                    LogWriter.getInstance().logError("FileInputList", Const.getStackTracker(e));
+                    throw new KettleException(e);
                 }
             }
             else
             // A normal file...
             {
-                try
+                try               
                 {
-                    FileObject fileObject = KettleVFS.getFileObject(onefile);
-                    if (fileObject.exists())
+                    FTPFile file = ftpClient.fileDetails(onefile);
+                    if (file!=null && !file.isDir())
                     {
-                        if (fileObject.isReadable())
-                        {
-                            fileInputList.addFile(fileObject);
-                        }
-                        else
-                        {
-                            if (onerequired) fileInputList.addNonAccessibleFile(fileObject);
-                        }
-                    }
-                    else
-                    {
-                        if (onerequired) fileInputList.addNonExistantFile(fileObject);
+                        files.add(file);
                     }
                 }
                 catch (Exception e)
                 {
-                    LogWriter.getInstance().logError("FileInputList", Const.getStackTracker(e));
+                    throw new KettleException(e);
                 }
             }
         }
 
-        return new FTPFileInputList();
-        //return fileInputList;
-		//return null;
+        return files;
 	}
 
-	private static FTPFile[] GetFTPFileList(FTPClient ftpClient)
+	private static void addFiles(FTPFileInputList fileList, FTPClient ftpClient, String pattern, String dir, boolean includeSubdirs) throws IOException, FTPException, ParseException
 	{
-		return new FTPFile[8];
-	}
-	public FTPFile getFile(int filenr) {
-		// TODO Auto-generated method stub
-		return null;
+		 // Find all file names that match the wildcard in this directory
+        //
+        FTPFile[] files = ftpClient.dirDetails(dir);
+        //List<FTPFile> fileObjects = new List<FTPFile>();
+        for (FTPFile file : files)
+        {
+        	if(file.isDir())
+        	{
+        		if (includeSubdirs)
+        		{
+        			addFiles(fileList, ftpClient, pattern, file.getName(), includeSubdirs);
+        		}
+        	}
+        	else
+        	{
+        		String name = file.getName();
+                boolean matches = Pattern.matches(pattern, name);
+                if(matches)
+            	{
+                	fileList.add(file);
+            	}
+        	}
+        }
+    }
+	
+	private void add(FTPFile file)
+	{
+		files.add(file);		
 	}
 
-	public List<FTPFile> getNonExistantFiles() {
-		// TODO Auto-generated method stub
-		return null;
+	public FTPFile get(int index)
+	{
+		return files.get(index);
 	}
-
-	public List<FTPFile> getNonAccessibleFiles() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public static String getRequiredFilesDescription(
-			List<FTPFileObject> nonExistantFiles) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
