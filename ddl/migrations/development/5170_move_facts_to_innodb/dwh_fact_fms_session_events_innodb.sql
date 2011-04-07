@@ -1,4 +1,4 @@
-DROP TABLE `kalturadw`.`dwh_fact_fms_session_events_innodb`;
+DROP TABLE IF EXISTS `kalturadw`.`dwh_fact_fms_session_events_innodb`;
 CREATE TABLE `kalturadw`.`dwh_fact_fms_session_events_innodb` (
   `file_id` INT(11) UNSIGNED NOT NULL,
   `event_type_id` TINYINT(3) UNSIGNED NOT NULL,

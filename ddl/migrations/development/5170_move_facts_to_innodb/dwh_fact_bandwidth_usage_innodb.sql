@@ -1,4 +1,4 @@
-DROP TABLE `kalturadw`.`dwh_fact_bandwidth_usage_innodb`;
+DROP TABLE IF EXISTS `kalturadw`.`dwh_fact_bandwidth_usage_innodb`;
 CREATE TABLE `kalturadw`.`dwh_fact_bandwidth_usage_innodb` (
   `file_id` INT(11) NOT NULL,
   `partner_id` INT(11) NOT NULL DEFAULT '-1',

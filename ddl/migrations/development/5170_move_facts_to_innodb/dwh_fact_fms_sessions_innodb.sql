@@ -1,4 +1,4 @@
-DROP TABLE `kalturadw`.`dwh_fact_fms_sessions_innodb`;
+DROP TABLE IF EXISTS `kalturadw`.`dwh_fact_fms_sessions_innodb`;
 CREATE TABLE `dwh_fact_fms_sessions_innodb` (
   `session_id` VARCHAR(20) NOT NULL,
   `session_time` DATETIME NOT NULL,
