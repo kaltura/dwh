@@ -98,5 +98,5 @@ CREATE TABLE `kalturadw_ds`.`ods_fms_session_events` (
 ALTER TABLE kalturadw_ds.invalid_ds_lines ENGINE = INNODB;
 ALTER TABLE kalturadw_ds.invalid_ds_lines_error_codes ENGINE = INNODB;
 ALTER TABLE kalturadw_ds.invalid_event_lines ENGINE = INNODB;
-ALTER TABLE kalturadw_ds.invalid_fms_event_line ENGINE = INNODB;
+ALTER TABLE kalturadw_ds.invalid_fms_event_lines ENGINE = INNODB;
 
