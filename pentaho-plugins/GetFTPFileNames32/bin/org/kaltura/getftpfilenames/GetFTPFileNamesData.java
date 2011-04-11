@@ -62,6 +62,8 @@ public class GetFTPFileNamesData extends BaseStepData implements StepDataInterfa
 
 	public int filenr;
 	
+	public int filessize;
+
 	public FileInputStream fr;
 
 	public ZipInputStream zi;
@@ -116,6 +118,7 @@ public class GetFTPFileNamesData extends BaseStepData implements StepDataInterfa
 		nr_repeats = 0;
 		previous_row = null;
 		filenr = 0;
+		filessize=0;
 
 		nrLinesOnPage = 0;
 

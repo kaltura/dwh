@@ -22,9 +22,10 @@ public class FTPFileInputList
 		files = new ArrayList<FTPFile>();
 	}
 	
-	public int size() 
+	public int nrOfFiles() 
 	{
-		return files.size();
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	public static FTPFileInputList createFileList(
@@ -93,12 +94,11 @@ public class FTPFileInputList
         //List<FTPFile> fileObjects = new List<FTPFile>();
         for (FTPFile file : files)
         {
-        	file.setPath(dir);
         	if(file.isDir())
         	{
         		if (includeSubdirs)
         		{
-        			addFiles(fileList, ftpClient, pattern, file.getPath() + "/" + file.getName(), includeSubdirs);
+        			addFiles(fileList, ftpClient, pattern, file.getName(), includeSubdirs);
         		}
         	}
         	else

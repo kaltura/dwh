@@ -54,12 +54,16 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 	private static final String YES = "Y";
 
 	private String host;
-	private String port;
+	private int port;
 	private String username;
 	private String password;
-	
+	private String proxyHost;
+	private int proxyPort;
+	private String proxyUsername;
+	private String proxyPassword;
+
 	private boolean binaryMode;
-	private String timeout;
+	private int timeout;
 	private boolean activeFtpConnectionMode;
 	private String encoding;
 
@@ -88,8 +92,6 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 
 	/** file name from previous fields **/
 	private boolean filefield;
-	
-	private boolean searchRecursively;
 
 	private boolean isaddresult;
 
@@ -141,10 +143,10 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 		dynamicFilenameField = "";
 		dynamicWildcardField = "";
 		host = "";
-		port = "21";
+		port = 21;
 		username = "";
 		password = "";
-		encoding = "UTF-8";
+		
 		allocate(nrfiles);
 
 		for (int i = 0; i < nrfiles; i++)
@@ -179,10 +181,32 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 		path.setOrigin(name);
 		row.addValueMeta(path);
 
-		// the isDir
-		ValueMetaInterface type = new ValueMeta("is_directory", ValueMeta.TYPE_BOOLEAN);
+		// the type
+		ValueMetaInterface type = new ValueMeta("type", ValueMeta.TYPE_STRING);
+		type.setLength(500);
+		type.setPrecision(-1);
 		type.setOrigin(name);
 		row.addValueMeta(type);
+
+		// the exists
+		ValueMetaInterface exists = new ValueMeta("exists", ValueMeta.TYPE_BOOLEAN);
+		exists.setOrigin(name);
+		row.addValueMeta(exists);
+
+		// the ishidden
+		ValueMetaInterface ishidden = new ValueMeta("ishidden", ValueMeta.TYPE_BOOLEAN);
+		ishidden.setOrigin(name);
+		row.addValueMeta(ishidden);
+
+		// the isreadable
+		ValueMetaInterface isreadable = new ValueMeta("isreadable", ValueMeta.TYPE_BOOLEAN);
+		isreadable.setOrigin(name);
+		row.addValueMeta(isreadable);
+
+		// the iswriteable
+		ValueMetaInterface iswriteable = new ValueMeta("iswriteable", ValueMeta.TYPE_BOOLEAN);
+		iswriteable.setOrigin(name);
+		row.addValueMeta(iswriteable);
 
 		// the lastmodifiedtime
 		ValueMetaInterface lastmodifiedtime = new ValueMeta("lastmodifiedtime", ValueMeta.TYPE_DATE);
@@ -194,7 +218,22 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 		size.setOrigin(name);
 		row.addValueMeta(size);
 
-    	if (includeRowNumber)
+		// the extension
+		ValueMetaInterface extension = new ValueMeta("extension", ValueMeta.TYPE_STRING);
+		extension.setOrigin(name);
+		row.addValueMeta(extension);
+
+		// the uri
+		ValueMetaInterface uri = new ValueMeta("uri", ValueMeta.TYPE_STRING);
+		uri.setOrigin(name);
+		row.addValueMeta(uri);
+
+		// the rooturi
+		ValueMetaInterface rooturi = new ValueMeta("rooturi", ValueMeta.TYPE_STRING);
+		rooturi.setOrigin(name);
+		row.addValueMeta(rooturi);
+
+		if (includeRowNumber)
 		{
 			ValueMetaInterface v = new ValueMeta(space.environmentSubstitute(rowNumberField), ValueMeta.TYPE_INTEGER);
 			v.setLength(ValueMetaInterface.DEFAULT_INTEGER_LENGTH, 0);
@@ -212,6 +251,10 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 		retval.append("    ").append(XMLHandler.addTagValue("port", getPort()));
 		retval.append("    ").append(XMLHandler.addTagValue("username", getUsername()));
 		retval.append("    ").append(XMLHandler.addTagValue("password", getPassword()));
+		retval.append("    ").append(XMLHandler.addTagValue("proxyHost", getProxyHost()));
+		retval.append("    ").append(XMLHandler.addTagValue("proxyPort", getProxyPort()));
+		retval.append("    ").append(XMLHandler.addTagValue("proxyUsername", getProxyUsername()));
+		retval.append("    ").append(XMLHandler.addTagValue("proxyPassword", getProxyPassword()));
 		retval.append("    ").append(XMLHandler.addTagValue("binaryMode", isBinaryMode()));
 		retval.append("    ").append(XMLHandler.addTagValue("timeout", getTimeout()));
 		retval.append("    ").append(XMLHandler.addTagValue("activeFtpConnectionMode", isActiveFtpConnectionMode()));
@@ -225,7 +268,7 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 		retval.append("    ").append(XMLHandler.addTagValue("wildcard_Field", dynamicWildcardField));
 
 		retval.append("    ").append(XMLHandler.addTagValue("limit", rowLimit));
-		retval.append("    ").append(XMLHandler.addTagValue("recursive", searchRecursively));
+
 		retval.append("    <file>").append(Const.CR);
 
 		for (int i = 0; i < fileNames.length; i++)
@@ -244,11 +287,16 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 		try
 		{
 			setHost(XMLHandler.getTagValue(stepnode, "host"));
-			setPort(XMLHandler.getTagValue(stepnode, "port"));
+			setPort(Const.toInt(XMLHandler.getTagValue(stepnode, "port"), 21));
 			setUsername(XMLHandler.getTagValue(stepnode, "username"));
 			setPassword(XMLHandler.getTagValue(stepnode, "password"));
+			setProxyHost(XMLHandler.getTagValue(stepnode, "proxyHost"));
+			setProxyPort(Const.toInt(XMLHandler.getTagValue(stepnode, "proxyPort"), 21));
+			setProxyUsername(XMLHandler.getTagValue(stepnode, "proxyUsername"));
+			setProxyPassword(XMLHandler.getTagValue(stepnode, "proxyPassword"));
+
 			setBinaryMode("Y".equalsIgnoreCase(XMLHandler.getTagValue(stepnode, "binaryMode")));
-			setTimeout(XMLHandler.getTagValue(stepnode, "timeout"));
+			setTimeout(Const.toInt(XMLHandler.getTagValue(stepnode, "timeout"), 3600));
 			setActiveFtpConnectionMode("Y"
 					.equalsIgnoreCase(XMLHandler.getTagValue(stepnode, "activeFtpConnectionMode")));
 			setEncoding(XMLHandler.getTagValue(stepnode, "encoding"));
@@ -262,7 +310,6 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 
 			// Is there a limit on the number of rows we process?
 			rowLimit = Const.toLong(XMLHandler.getTagValue(stepnode, "limit"), 0L);
-			setSearchRecursively("Y".equals(XMLHandler.getTagValue(stepnode, "recursive")));
 
 			Node filenode = XMLHandler.getSubNode(stepnode, "file");
 			int nrfiles = XMLHandler.countNodes(filenode, "name");
@@ -298,12 +345,12 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 			filefield = rep.getStepAttributeBoolean(id_step, "filefield");
 			rowNumberField = rep.getStepAttributeString(id_step, "rownum_field");
 			rowLimit = rep.getStepAttributeInteger(id_step, "limit");
-			searchRecursively = rep.getStepAttributeBoolean(id_step, "recursive");
+
 			host = rep.getStepAttributeString(id_step, "host");
-			port = rep.getStepAttributeString(id_step, "port");
+			port = (int) rep.getStepAttributeInteger(id_step, "port");
 			username= rep.getStepAttributeString(id_step, "username");
 			password = rep.getStepAttributeString(id_step, "password");
-			// TODO: add FTP advanced
+			
 			allocate(nrfiles);
 
 			for (int i = 0; i < nrfiles; i++)
@@ -324,6 +371,7 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 	{
 		try
 		{
+
 			rep.saveStepAttribute(id_transformation, id_step, "rownum", includeRowNumber);
 			rep.saveStepAttribute(id_transformation, id_step, "isaddresult", isaddresult);
 			rep.saveStepAttribute(id_transformation, id_step, "filefield", filefield);
@@ -332,12 +380,12 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 
 			rep.saveStepAttribute(id_transformation, id_step, "rownum_field", rowNumberField);
 			rep.saveStepAttribute(id_transformation, id_step, "limit", rowLimit);
-			rep.saveStepAttribute(id_transformation, id_step, "revursive", searchRecursively);
+			
 			rep.saveStepAttribute(id_transformation, id_step, "host", host);
 			rep.saveStepAttribute(id_transformation, id_step, "port", port);
 			rep.saveStepAttribute(id_transformation, id_step, "username", username);
 			rep.saveStepAttribute(id_transformation, id_step, "password", password);
-			// TODO: add FTP advanced
+
 			for (int i = 0; i < fileNames.length; i++)
 			{
 				rep.saveStepAttribute(id_transformation, id_step, i, "file_name", fileNames[i]);
@@ -352,12 +400,12 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 
 	public FTPFileInputList getFileList(FTPClient ftpClient, VariableSpace space) throws KettleException
 	{
-		return FTPFileInputList.createFileList(ftpClient, space, fileNames, fileMask, searchRecursively);
+		return FTPFileInputList.createFileList(ftpClient, space, fileNames, fileMask, false);
 	}
 
 	public FTPFileInputList getDynamicFileList(FTPClient ftpClient, VariableSpace space, String[] filename, String[] filemask) throws KettleException
 	{
-		return FTPFileInputList.createFileList(ftpClient, space, filename, filemask, searchRecursively);
+		return FTPFileInputList.createFileList(ftpClient, space, filename, filemask, false);
 	}
 
 	public void check(List<CheckResultInterface> remarks, TransMeta transMeta, StepMeta stepinfo, RowMetaInterface prev, String input[], String output[], RowMetaInterface info)
@@ -621,12 +669,12 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 		return host;
 	}
 
-	public void setPort(String port)
+	public void setPort(int port)
 	{
 		this.port = port;
 	}
 
-	public String getPort()
+	public int getPort()
 	{
 		return port;
 	}
@@ -651,6 +699,46 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 		return password;
 	}
 
+	public void setProxyHost(String proxyHost)
+	{
+		this.proxyHost = proxyHost;
+	}
+
+	public String getProxyHost()
+	{
+		return proxyHost;
+	}
+
+	public void setProxyPort(int proxyPort)
+	{
+		this.proxyPort = proxyPort;
+	}
+
+	public int getProxyPort()
+	{
+		return proxyPort;
+	}
+
+	public void setProxyUsername(String proxyUsername)
+	{
+		this.proxyUsername = proxyUsername;
+	}
+
+	public String getProxyUsername()
+	{
+		return proxyUsername;
+	}
+
+	public void setProxyPassword(String proxyPassword)
+	{
+		this.proxyPassword = proxyPassword;
+	}
+
+	public String getProxyPassword()
+	{
+		return proxyPassword;
+	}
+
 	public void setBinaryMode(boolean binaryMode)
 	{
 		this.binaryMode = binaryMode;
@@ -661,12 +749,12 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 		return binaryMode;
 	}
 
-	public void setTimeout(String timeout)
+	public void setTimeout(int timeout)
 	{
 		this.timeout = timeout;
 	}
 
-	public String getTimeout()
+	public int getTimeout()
 	{
 		return timeout;
 	}
@@ -689,14 +777,6 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 	public String getEncoding()
 	{
 		return encoding;
-	}
-
-	public void setSearchRecursively(boolean searchRecursively) {
-		this.searchRecursively = searchRecursively;
-	}
-
-	public boolean isSearchRecursively() {
-		return searchRecursively;
 	}
 
 }

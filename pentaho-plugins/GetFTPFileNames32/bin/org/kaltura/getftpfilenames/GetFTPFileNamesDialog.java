@@ -113,11 +113,11 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 	private FormData fdbShowFiles;
 
-	private Label wlRecursiveSearch;
+	private Label wlFilterFileType;
 
-	private Button wRecursiveSearch;
+	private CCombo wFilterFileType;
 
-	private FormData fdlRecursiveSearch, fdRecursiveSearch;
+	private FormData fdlFilterFileType, fdFilterFileType;
 
 	private GetFTPFileNamesMeta input;
 
@@ -178,6 +178,22 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 	private LabelTextVar wPassword;
 
 	private FormData fdPassword;
+
+	private LabelTextVar wProxyHost;
+
+	private FormData fdProxyHost;
+
+	private LabelTextVar wProxyPort;
+
+	private FormData fdProxyPort;
+
+	private LabelTextVar wProxyUsername;
+
+	private FormData fdProxyUsername;
+
+	private LabelTextVar wProxyPassword;
+
+	private FormData fdProxyPasswd;
 
 	private Button wTest;
 
@@ -366,6 +382,55 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 				checkPasswordVisible();
 			}
 		});
+
+		// Proxy host line
+		wProxyHost = new LabelTextVar(transMeta, wServerSettings,
+				Messages.getString("GetFTPFileNamesDialog.ProxyHost.Label"),
+				Messages.getString("GetFTPFileNamesDialog.ProxyHost.Tooltip"));
+		props.setLook(wProxyHost);
+		wProxyHost.addModifyListener(lsMod);
+		fdProxyHost = new FormData();
+		fdProxyHost.left = new FormAttachment(0, 0);
+		fdProxyHost.top = new FormAttachment(wPassword, 2 * margin);
+		fdProxyHost.right = new FormAttachment(100, 0);
+		wProxyHost.setLayoutData(fdProxyHost);
+
+		// Proxy port line
+		wProxyPort = new LabelTextVar(transMeta, wServerSettings,
+				Messages.getString("GetFTPFileNamesDialog.ProxyPort.Label"),
+				Messages.getString("GetFTPFileNamesDialog.ProxyPort.Tooltip"));
+		props.setLook(wProxyPort);
+		wProxyPort.addModifyListener(lsMod);
+		fdProxyPort = new FormData();
+		fdProxyPort.left = new FormAttachment(0, 0);
+		fdProxyPort.top = new FormAttachment(wProxyHost, margin);
+		fdProxyPort.right = new FormAttachment(100, 0);
+		wProxyPort.setLayoutData(fdProxyPort);
+
+		// Proxy username line
+		wProxyUsername = new LabelTextVar(transMeta, wServerSettings,
+				Messages.getString("GetFTPFileNamesDialog.ProxyUsername.Label"),
+				Messages.getString("GetFTPFileNamesDialog.ProxyUsername.Tooltip"));
+		props.setLook(wProxyUsername);
+		wProxyUsername.addModifyListener(lsMod);
+		fdProxyUsername = new FormData();
+		fdProxyUsername.left = new FormAttachment(0, 0);
+		fdProxyUsername.top = new FormAttachment(wProxyPort, margin);
+		fdProxyUsername.right = new FormAttachment(100, 0);
+		wProxyUsername.setLayoutData(fdProxyUsername);
+
+		// Proxy password line
+		wProxyPassword = new LabelTextVar(transMeta, wServerSettings,
+				Messages.getString("GetFTPFileNamesDialog.ProxyPassword.Label"),
+				Messages.getString("GetFTPFileNamesDialog.ProxyPassword.Tooltip"));
+		props.setLook(wProxyPassword);
+		wProxyPassword.addModifyListener(lsMod);
+		fdProxyPasswd = new FormData();
+		fdProxyPasswd.left = new FormAttachment(0, 0);
+		fdProxyPasswd.top = new FormAttachment(wProxyUsername, margin);
+		fdProxyPasswd.right = new FormAttachment(100, 0);
+		wProxyPassword.setLayoutData(fdProxyPasswd);
+
 		// Test connection button
 		wTest = new Button(wServerSettings, SWT.PUSH);
 		wTest.setText(Messages.getString("GetFTPFileNamesDialog.TestConnection.Label"));
@@ -374,7 +439,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		wTest.setToolTipText(Messages
 				.getString("GetFTPFileNamesDialog.TestConnection.Tooltip"));
 		// fdTest.left = new FormAttachment(middle, 0);
-		fdTest.top = new FormAttachment(wPassword, margin);
+		fdTest.top = new FormAttachment(wProxyPassword, margin);
 		fdTest.right = new FormAttachment(100, 0);
 		wTest.setLayoutData(fdTest);
 
@@ -495,7 +560,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		wFTPTab.setControl(wFTPComp);
 
 		// ///////////////////////////////////////////////////////////
-		// / END OF FTP TAB
+		// / END OF FILE TAB
 		// ///////////////////////////////////////////////////////////
 
 		// ////////////////////////
@@ -773,26 +838,33 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		wFilterComp.setLayout(fileLayout);
 
 		// Filter File Type
-		wlRecursiveSearch = new Label(wFilterComp, SWT.RIGHT);
-		wlRecursiveSearch.setText(Messages
-				.getString("GetFTPFileNamesDialog.FilterTab.RecursiveSearch.Label"));
-		props.setLook(wlRecursiveSearch);
-		fdlRecursiveSearch = new FormData();
-		fdlRecursiveSearch.left = new FormAttachment(0, 0);
-		fdlRecursiveSearch.right = new FormAttachment(middle, 0);
-		fdlRecursiveSearch.top = new FormAttachment(0, 3 * margin);
-		wlRecursiveSearch.setLayoutData(fdlRecursiveSearch);
-		
-		wRecursiveSearch = new Button(wFilterComp, SWT.CHECK);
-		wRecursiveSearch.setToolTipText(Messages
-				.getString("GetFTPFileNamesDialog.FilterTab.RecursiveSearch.CheckBox"));
+		wlFilterFileType = new Label(wFilterComp, SWT.RIGHT);
+		wlFilterFileType.setText(Messages
+				.getString("GetFTPFileNamesDialog.FilterTab.FileType.Label"));
+		props.setLook(wlFilterFileType);
+		fdlFilterFileType = new FormData();
+		fdlFilterFileType.left = new FormAttachment(0, 0);
+		fdlFilterFileType.right = new FormAttachment(middle, 0);
+		fdlFilterFileType.top = new FormAttachment(0, 3 * margin);
+		wlFilterFileType.setLayoutData(fdlFilterFileType);
+		wFilterFileType = new CCombo(wFilterComp, SWT.SINGLE | SWT.READ_ONLY
+				| SWT.BORDER);
+		wFilterFileType
+				.add(Messages
+						.getString("GetFTPFileNamesDialog.FilterTab.FileType.All.Label"));
+		wFilterFileType
+				.add(Messages
+						.getString("GetFTPFileNamesDialog.FilterTab.FileType.OnlyFile.Label"));
+		wFilterFileType
+				.add(Messages
+						.getString("GetFTPFileNamesDialog.FilterTab.FileType.OnlyFolder.Label"));
 		// wFilterFileType.select(0); // +1: starts at -1
-		props.setLook(wRecursiveSearch);
-		fdRecursiveSearch = new FormData();
-		fdRecursiveSearch.left = new FormAttachment(middle, margin);
-		fdRecursiveSearch.top = new FormAttachment(0, 3 * margin);
-		fdRecursiveSearch.right = new FormAttachment(100, 0);
-		wRecursiveSearch.setLayoutData(fdRecursiveSearch);
+		props.setLook(wFilterFileType);
+		fdFilterFileType = new FormData();
+		fdFilterFileType.left = new FormAttachment(middle, 0);
+		fdFilterFileType.top = new FormAttachment(0, 3 * margin);
+		fdFilterFileType.right = new FormAttachment(100, 0);
+		wFilterFileType.setLayoutData(fdFilterFileType);
 
 		// /////////////////////////////////
 		// START OF Additional Fields GROUP
@@ -815,7 +887,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		props.setLook(wlInclRownum);
 		fdlInclRownum = new FormData();
 		fdlInclRownum.left = new FormAttachment(0, 0);
-		fdlInclRownum.top = new FormAttachment(wRecursiveSearch, 2 * margin);
+		fdlInclRownum.top = new FormAttachment(wFilterFileType, 2 * margin);
 		fdlInclRownum.right = new FormAttachment(middle, -margin);
 		wlInclRownum.setLayoutData(fdlInclRownum);
 		wInclRownum = new Button(wAdditionalGroup, SWT.CHECK);
@@ -824,7 +896,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 				.getString("GetFTPFileNamesDialog.InclRownum.Tooltip"));
 		fdRownum = new FormData();
 		fdRownum.left = new FormAttachment(middle, 0);
-		fdRownum.top = new FormAttachment(wRecursiveSearch, 2 * margin);
+		fdRownum.top = new FormAttachment(wFilterFileType, 2 * margin);
 		wInclRownum.setLayoutData(fdRownum);
 
 		wlInclRownumField = new Label(wAdditionalGroup, SWT.RIGHT);
@@ -833,7 +905,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		props.setLook(wlInclRownumField);
 		fdlInclRownumField = new FormData();
 		fdlInclRownumField.left = new FormAttachment(wInclRownum, margin);
-		fdlInclRownumField.top = new FormAttachment(wRecursiveSearch, 2 * margin);
+		fdlInclRownumField.top = new FormAttachment(wFilterFileType, 2 * margin);
 		wlInclRownumField.setLayoutData(fdlInclRownumField);
 		wInclRownumField = new TextVar(transMeta, wAdditionalGroup, SWT.SINGLE
 				| SWT.LEFT | SWT.BORDER);
@@ -841,13 +913,13 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		wInclRownumField.addModifyListener(lsMod);
 		fdInclRownumField = new FormData();
 		fdInclRownumField.left = new FormAttachment(wlInclRownumField, margin);
-		fdInclRownumField.top = new FormAttachment(wRecursiveSearch, 2 * margin);
+		fdInclRownumField.top = new FormAttachment(wFilterFileType, 2 * margin);
 		fdInclRownumField.right = new FormAttachment(100, 0);
 		wInclRownumField.setLayoutData(fdInclRownumField);
 
 		fdAdditionalGroup = new FormData();
 		fdAdditionalGroup.left = new FormAttachment(0, margin);
-		fdAdditionalGroup.top = new FormAttachment(wRecursiveSearch, margin);
+		fdAdditionalGroup.top = new FormAttachment(wFilterFileType, margin);
 		fdAdditionalGroup.right = new FormAttachment(100, -margin);
 		wAdditionalGroup.setLayoutData(fdAdditionalGroup);
 
@@ -1090,14 +1162,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 					int port = Const.toInt(variables.environmentSubstitute(wPort.getText()),21);
 					String username = variables.environmentSubstitute(wUserName.getText());
 					String pw = variables.environmentSubstitute(wPassword.getText());
-					
-					boolean activeMode = wActive.getSelection();
-					boolean binaryMode = wBinaryMode.getSelection();
-					int timeout = Const.toInt(variables.environmentSubstitute(wTimeout.getText()),3600000);
-					String encoding = wControlEncoding.getText();
-					
-					
-					FTPClient ftp = FTPHelper.connectToFTP(host, port, username, pw, activeMode, binaryMode, timeout, encoding);
+					FTPClient ftp = FTPHelper.connectToFTP(host, port, username, pw);
 										
 			    	if(ftp.connected())
 			    	{
@@ -1216,7 +1281,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 			wFilenameList.removeEmptyRows();
 			wFilenameList.setRowNums();
 			wFilenameList.optWidth(true);
-			wRecursiveSearch.setSelection(in.isSearchRecursively());
+			wFilterFileType.select(0);
 
 			wInclRownum.setSelection(in.includeRowNumber());
 			wAddResult.setSelection(in.isAddResultFile());
@@ -1253,27 +1318,6 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		{
 			wPassword.setText(in.getPassword());
 		}
-		
-		if (in.getEncoding() != null)
-		{
-			int i=0;
-			for (String item : wControlEncoding.getItems())
-			{
-				if (in.getEncoding().equals(item))
-				{
-					wControlEncoding.select(i);
-					break;
-				}
-				i++;
-			}
-		}
-		
-		wActive.setSelection(in.isActiveFtpConnectionMode());
-		wBinaryMode.setSelection(in.isBinaryMode());
-		if (in.getTimeout() != null)
-		{
-			wTimeout.setText(in.getTimeout());
-		}
 	}
 
 	private void cancel() {
@@ -1307,17 +1351,11 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		in.setFileField(wFileField.getSelection());
 		in.setRowNumberField(wInclRownumField.getText());
 		in.setRowLimit(Const.toLong(wLimit.getText(), 0L));
-		in.setSearchRecursively(wRecursiveSearch.getSelection());
 		
 		in.setHost(wServerName.getText());
-		in.setPort(wPort.getText());
+		in.setPort(Const.toInt(wPort.getText(), 21));
 		in.setUsername(wUserName.getText());
 		in.setPassword(wPassword.getText());
-		
-		in.setActiveFtpConnectionMode(wActive.getSelection());
-		in.setBinaryMode(wBinaryMode.getSelection());
-		in.setEncoding(wControlEncoding.getText());
-		in.setTimeout(wTimeout.getText());
 	}
 
 	public void checkPasswordVisible()

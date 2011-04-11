@@ -62,14 +62,14 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
     {
     	if(!meta.isFileField())
 		{
-    		if (data.filenr >= data.files.size())
+    		if (data.filenr >= data.filessize)
   	        {
   	            setOutputDone();
   	            return false;
   	        }
 		}else
 		{
-			if (data.filenr >= data.files.size())
+			if (data.filenr >= data.filessize)
   	        {
 				// Grab one row from previous step ...
 				data.readrow=getRow();
@@ -135,7 +135,7 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
         	Object extraData[] = new Object[data.nrStepFields];
         	if(meta.isFileField())
         	{
-    			if (data.filenr >= data.files.size())
+    			if (data.filenr >= data.filessize)
     		    {
     				// Get value of dynamic filename field ...
     	    		String filename=getInputRowMeta().getString(data.readrow,data.indexOfFilenameField);
@@ -147,41 +147,77 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
     		      	String[] filesmask={wildcard};
     		      	// Get files list
     		      	data.files = meta.getDynamicFileList(ftpClient, getTransMeta(), filesname, filesmask);
+    		      	data.filessize=data.files.nrOfFiles();
     		      	data.filenr=0;
     		     }
         		
         		// Clone current input row
     			outputRow = data.readrow.clone();
         	}
-        	if(data.files.size()>0)
+        	if(data.filessize>0)
         	{
 	        	data.file = data.files.get(data.filenr);
 	
-	        	int outputIndex = 0;
+	        	//int outputIndex = 0;
 				
                 //// filename        		
-	        	extraData[outputIndex++]=data.file.getPath() + "/" + data.file.getName();
+	        	//extraData[outputIndex++]=KettleVFS.getFilename(data.file);
 
                 //// short_filename
-        		extraData[outputIndex++]=data.file.getName();
+        		//extraData[outputIndex++]=data.file.getName().getBaseName();
 
-				 // Path
-            	extraData[outputIndex++]=data.file.getPath();
+//                try
+//                {
+//    				 // Path
+//                	 extraData[outputIndex++]=KettleVFS.getFilename(data.file.getParent());
+//
+//                	 // type
+//    				 extraData[outputIndex++]=data.file.getType().toString();
+//    				 
+//                     // exists
+//    				 extraData[outputIndex++]=Boolean.valueOf(data.file.exists());
+//                    
+//                     // ishidden
+//    				 extraData[outputIndex++]=Boolean.valueOf(data.file.isHidden());
+//
+//                     // isreadable
+//    				 extraData[outputIndex++]=Boolean.valueOf(data.file.isReadable());
+//    				
+//                     // iswriteable
+//    				 extraData[outputIndex++]=Boolean.valueOf(data.file.isWriteable());
+//
+//                     // lastmodifiedtime
+//    				 extraData[outputIndex++]=new Date( data.file.getContent().getLastModifiedTime() );
+//
+//                     // size
+//                     Long size = null;
+//                     if (data.file.getType().equals(FileType.FILE))
+//                     {
+//                         size = new Long( data.file.getContent().getSize() );
+//                     }
+//   
+//   				 	 extraData[outputIndex++]=size;
+//   				 	
+//                }
+//                catch (IOException e)
+//                {
+//                    throw new KettleException(e);
+//                }
 
-                // isDir
-    			extraData[outputIndex++]=data.file.isDir();
-
-                // lastmodifiedtime
-				extraData[outputIndex++]=data.file.lastModified();
-
-	            // size
-	   		 	extraData[outputIndex++]=data.file.size();
-
-				// See if we need to add the row number to the row...  
-				if (meta.includeRowNumber() && !Const.isEmpty(meta.getRowNumberField()))
-				{
-				  extraData[outputIndex++]= new Long(data.rownr);
-				}
+//                 // extension
+//	 		  	 extraData[outputIndex++]=data.file.getName().getExtension();
+//   	
+//                 // uri	
+//				 extraData[outputIndex++]= data.file.getName().getURI();
+//   	
+//                 // rooturi	
+//				 extraData[outputIndex++]= data.file.getName().getRootURI();
+//  
+//		         // See if we need to add the row number to the row...  
+//		         if (meta.includeRowNumber() && !Const.isEmpty(meta.getRowNumberField()))
+//		         {
+//					  extraData[outputIndex++]= new Long(data.rownr);
+//		         }
 		
 		         data.rownr++;
 		        // Add row data
@@ -226,16 +262,7 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
 				
 				if(ftpClient==null || !ftpClient.connected())
 				{
-					String host = environmentSubstitute(meta.getHost());
-					int port = Const.toInt(environmentSubstitute(meta.getPort()),21);
-					String username = environmentSubstitute(meta.getUsername());
-					String pw = environmentSubstitute(meta.getPassword());
-					
-					boolean activeMode = meta.isActiveFtpConnectionMode();
-					boolean binaryMode = meta.isBinaryMode();
-					int timeout = Const.toInt(environmentSubstitute(meta.getTimeout()),3600000);
-					String encoding = meta.getEncoding();
-					ftpClient = FTPHelper.connectToFTP(host, port, username, pw, activeMode, binaryMode, timeout, encoding);
+					ftpClient = FTPHelper.connectToFTP(meta.getHost(), meta.getPort(), meta.getUsername(), meta.getPassword());
 				}
 				
 				 // Create the output row meta-data
@@ -246,7 +273,13 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
 				if(!meta.isFileField())
 				{
 	                data.files = meta.getFileList(ftpClient, getTransMeta());
+	                data.filessize=data.files.nrOfFiles();
 				}
+				else
+				{
+					data.filessize=0;
+				}
+		            
 			}
 			catch(Exception e)
 			{
