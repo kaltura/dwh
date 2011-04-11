@@ -93,7 +93,6 @@ Lookup country&#47;location</note>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.characterEncoding</code><attribute>utf8</attribute></attribute>
       <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
@@ -1694,8 +1693,8 @@ else
     <enclosure>&quot;</enclosure>
     <enclosure_breaks>N</enclosure_breaks>
     <escapechar/>
-    <header>N</header>
-    <nr_headerlines>4</nr_headerlines>
+    <header>Y</header>
+    <nr_headerlines>1</nr_headerlines>
     <footer>N</footer>
     <nr_footerlines>1</nr_footerlines>
     <line_wrapped>N</line_wrapped>

@@ -254,6 +254,11 @@
           <variable_value>True</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
+        <field>
+          <variable_name>TempDestination</variable_name>
+          <variable_value>${ExportPath}&#47;dwh_inbound&#47;bandwidth_usage&#47;</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>

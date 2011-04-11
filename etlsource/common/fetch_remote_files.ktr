@@ -1,17 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<job>
-  <name>fetch_files</name>
+<transformation>
+  <info>
+    <name>Fetch remote files</name>
     <description/>
     <extended_description/>
-    <job_version/>
-    <job_status>0</job_status>
-  <directory>&#47;</directory>
-  <created_user>-</created_user>
-  <created_date>2010&#47;09&#47;12 12:21:52.748</created_date>
-  <modified_user>-</modified_user>
-  <modified_date>2010&#47;09&#47;12 12:21:52.748</modified_date>
+    <trans_version/>
+    <trans_status>0</trans_status>
+    <directory>&#47;</directory>
     <parameters>
     </parameters>
+    <log>
+      <read/>
+      <write/>
+      <input/>
+      <output/>
+      <update/>
+      <rejected/>
+      <connection/>
+      <table/>
+      <step_performance_table/>
+      <use_batchid>Y</use_batchid>
+      <use_logfield>N</use_logfield>
+      <size_limit_lines/>
+    </log>
+    <maxdate>
+      <connection/>
+      <table/>
+      <field/>
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file/>
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+  <modified_user>-</modified_user>
+  <modified_date>2011&#47;04&#47;11 16:28:55.729</modified_date>
+  </info>
+  <notepads>
+  </notepads>
   <connection>
     <name>Kaltura</name>
     <server>${OpDbHostName}</server>
@@ -45,31 +86,6 @@
     <port>${OpDbPort}</port>
     <username>${OpWritableDbUser}</username>
     <password>${OpWritableDbPassword}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SQL_CONNECT</code><attribute>SET SESSION sql_log_bin=0</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>Kaltura_Writeable</name>
-    <server>${OpWriteableDbHost}</server>
-    <type>MYSQL</type>
-    <access>Native</access>
-    <database>kaltura</database>
-    <port>${OpDbPort}</port>
-    <username>${OpWriteableDbUser}</username>
-    <password>${OpWriteableDbPassword}</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -183,124 +199,61 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
-    <slaveservers>
-    </slaveservers>
-  <logconnection/>
-  <logtable/>
-  <size_limit_lines/>
-   <use_batchid>Y</use_batchid>
-   <pass_batchid>N</pass_batchid>
-   <use_logfield>Y</use_logfield>
-   <shared_objects_file/>
-  <entries>
-    <entry>
-      <name>START</name>
-      <description>Special entries</description>
-      <type>SPECIAL</type>
-      <start>Y</start>
-      <dummy>N</dummy>
-      <repeat>N</repeat>
-      <schedulerType>0</schedulerType>
-      <intervalSeconds>0</intervalSeconds>
-      <intervalMinutes>60</intervalMinutes>
-      <hour>12</hour>
-      <minutes>0</minutes>
-      <weekDay>1</weekDay>
-      <DayOfMonth>1</DayOfMonth>
-      <parallel>N</parallel>
+  <order>
+  <hop> <from>Get rows from result</from><to>Fetch FTP file</to><enabled>Y</enabled> </hop>  </order>
+  <step>
+    <name>Fetch FTP file</name>
+    <type>FetchFTPFilePlugin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <dynamicFilenameField>filename</dynamicFilenameField>
+    <destinationDir>${TempDestination}</destinationDir>
+    <host>${FetchFTPServer}</host>
+    <port>${FetchFTPPort}</port>
+    <username>${FetchFTPUser}</username>
+    <password>${FetchFTPPassword}</password>
+    <binaryMode>Y</binaryMode>
+    <timeout/>
+    <activeFtpConnectionMode>N</activeFtpConnectionMode>
+    <encoding>UTF-8</encoding>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>368</xloc>
+      <yloc>293</yloc>
       <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>140</xloc>
-      <yloc>80</yloc>
-      </entry>
-    <entry>
-      <name>Move Files</name>
-      <description>Move Files</description>
-      <type>MOVE_FILES</type>
-      <move_empty_folders>N</move_empty_folders>
-      <arg_from_previous>N</arg_from_previous>
-      <include_subfolders>N</include_subfolders>
-      <add_result_filesname>N</add_result_filesname>
-      <destination_is_a_file>N</destination_is_a_file>
-      <create_destination_folder>N</create_destination_folder>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <nr_errors_less_than>10</nr_errors_less_than>
-      <success_condition>success_if_no_errors</success_condition>
-      <AddDateBeforeExtension>N</AddDateBeforeExtension>
-      <DoNotKeepFolderStructure>N</DoNotKeepFolderStructure>
-      <iffileexists>overwrite_file</iffileexists>
-      <destinationFolder/>
-      <ifmovedfileexists>do_nothing</ifmovedfileexists>
-      <moved_date_time_format/>
-      <create_move_to_folder>N</create_move_to_folder>
-      <add_moved_date>N</add_moved_date>
-      <add_moved_time>N</add_moved_time>
-      <SpecifyMoveFormat>N</SpecifyMoveFormat>
-      <AddMovedDateBeforeExtension>N</AddMovedDateBeforeExtension>
-      <simulate>N</simulate>
-      <fields>
-        <field>
-          <source_filefolder>${TempDestination}</source_filefolder>
-          <destination_filefolder>${GeneratePath}&#47;${ProcessName}</destination_filefolder>
-          <wildcard>${FetchWildcard}</wildcard>
-        </field>
-      </fields>
-      <parallel>N</parallel>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get rows from result</name>
+    <type>RowsFromResult</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>filename</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>189</xloc>
+      <yloc>295</yloc>
       <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>432</xloc>
-      <yloc>79</yloc>
-      </entry>
-    <entry>
-      <name>Get bandwidth source files</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${EtlBasePath}&#47;common&#47;get_source_files.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>282</xloc>
-      <yloc>79</yloc>
-      </entry>
-  </entries>
-  <hops>
-    <hop>
-      <from>START</from>
-      <to>Get bandwidth source files</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Get bandwidth source files</from>
-      <to>Move Files</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-  </hops>
-  <notepads>
-  </notepads>
-</job>
+      </GUI>
+    </step>
+
+  <step_error_handling>
+  </step_error_handling>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+</transformation>

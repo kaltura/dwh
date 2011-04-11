@@ -195,7 +195,7 @@
       <replacevars>Y</replacevars>
       <fields>
         <field>
-          <variable_name>TempStorage</variable_name>
+          <variable_name>TempDestination</variable_name>
           <variable_value>${ExportPath}&#47;dwh_inbound&#47;events</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
@@ -243,14 +243,14 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>199</xloc>
-      <yloc>80</yloc>
+      <xloc>208</xloc>
+      <yloc>83</yloc>
       </entry>
     <entry>
       <name>Get Apache Logs</name>
       <description>Job</description>
       <type>JOB</type>
-      <filename>file:&#47;&#47;&#47;${EtlBasePath}&#47;common&#47;get_apache_logs.kjb</filename>
+      <filename>file:&#47;&#47;&#47;${EtlBasePath}&#47;common&#47;get_source_files.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -269,8 +269,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>340</xloc>
-      <yloc>80</yloc>
+      <xloc>520</xloc>
+      <yloc>81</yloc>
       </entry>
     <entry>
       <name>parse apache file</name>
@@ -297,11 +297,76 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>480</xloc>
+      <xloc>966</xloc>
       <yloc>80</yloc>
       </entry>
     <entry>
-      <name>Clean  Temp Folder</name>
+      <name>Clean  Temp Folder - Post parsing</name>
+      <description>Delete files</description>
+      <type>DELETE_FILES</type>
+      <arg_from_previous>N</arg_from_previous>
+      <include_subfolders>N</include_subfolders>
+      <fields>
+        <field>
+          <name>${TempDestination}</name>
+          <filemask>${FetchWildcard}</filemask>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1150</xloc>
+      <yloc>81</yloc>
+      </entry>
+    <entry>
+      <name>Reset input dir variable</name>
+      <description>Set variables</description>
+      <type>SET_VARIABLES</type>
+      <replacevars>Y</replacevars>
+      <fields>
+        <field>
+          <variable_name>FetchLogsDir</variable_name>
+          <variable_value>${TempDestination}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>684</xloc>
+      <yloc>81</yloc>
+      </entry>
+    <entry>
+      <name>List files</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename>file:&#47;&#47;&#47;${EtlBasePath}common&#47;list_files_from_local_dir.ktr</filename>
+      <transname/>
+      <directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile>${LogPath}\log ${Internal.Job.Name}</logfile>
+      <logext>log</logext>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>Y</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>836</xloc>
+      <yloc>80</yloc>
+      </entry>
+    <entry>
+      <name>Clean  Temp Folder - Pre parsing</name>
       <description>Delete files</description>
       <type>DELETE_FILES</type>
       <arg_from_previous>N</arg_from_previous>
@@ -315,8 +380,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>604</xloc>
-      <yloc>79</yloc>
+      <xloc>372</xloc>
+      <yloc>84</yloc>
       </entry>
   </entries>
   <hops>
@@ -330,8 +395,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Set fetch job variables</from>
-      <to>Get Apache Logs</to>
+      <from>parse apache file</from>
+      <to>Clean  Temp Folder - Post parsing</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -340,6 +405,24 @@
     </hop>
     <hop>
       <from>Get Apache Logs</from>
+      <to>Reset input dir variable</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Reset input dir variable</from>
+      <to>List files</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>List files</from>
       <to>parse apache file</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -348,8 +431,17 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>parse apache file</from>
-      <to>Clean  Temp Folder</to>
+      <from>Set fetch job variables</from>
+      <to>Clean  Temp Folder - Pre parsing</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Clean  Temp Folder - Pre parsing</from>
+      <to>Get Apache Logs</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
