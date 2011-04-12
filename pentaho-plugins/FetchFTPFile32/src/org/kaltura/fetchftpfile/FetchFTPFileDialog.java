@@ -478,14 +478,14 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 			    	if(ftp.connected())
 			    	{
 						MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_INFORMATION );
-						mb.setMessage(Messages.getString("FetchFTPFileDialog.Connected.OK",wServerName.getText()) +Const.CR);
+						mb.setMessage(Messages.getString("FetchFTPFileDialog.Connected.OK",host) +Const.CR);
 						mb.setText(Messages.getString("FetchFTPFileDialog.Connected.Title.Ok"));
 						mb.open();
 						ftp.quit();
 					}else
 					{
 						MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR );
-						mb.setMessage(Messages.getString("FetchFTPFileDialog.Connected.NOK.ConnectionBad",wServerName.getText()) +Const.CR);
+						mb.setMessage(Messages.getString("FetchFTPFileDialog.Connected.NOK.ConnectionBad",host) +Const.CR);
 						mb.setText(Messages.getString("FetchFTPFileDialog.Connected.Title.Bad"));
 						mb.open(); 
 				    }
