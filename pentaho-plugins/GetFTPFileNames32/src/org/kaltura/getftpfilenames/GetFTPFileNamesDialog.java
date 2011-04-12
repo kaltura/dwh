@@ -1086,14 +1086,14 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 			{
 				try
 				{									
-					String host = variables.environmentSubstitute(wServerName.getText());
-					int port = Const.toInt(variables.environmentSubstitute(wPort.getText()),21);
-					String username = variables.environmentSubstitute(wUserName.getText());
-					String pw = variables.environmentSubstitute(wPassword.getText());
+					String host = transMeta.environmentSubstitute(wServerName.getText());
+					int port = Const.toInt(transMeta.environmentSubstitute(wPort.getText()),21);
+					String username = transMeta.environmentSubstitute(wUserName.getText());
+					String pw = transMeta.environmentSubstitute(wPassword.getText());
 					
 					boolean activeMode = wActive.getSelection();
 					boolean binaryMode = wBinaryMode.getSelection();
-					int timeout = Const.toInt(variables.environmentSubstitute(wTimeout.getText()),3600000);
+					int timeout = Const.toInt(transMeta.environmentSubstitute(wTimeout.getText()),3600000);
 					String encoding = wControlEncoding.getText();
 					
 					

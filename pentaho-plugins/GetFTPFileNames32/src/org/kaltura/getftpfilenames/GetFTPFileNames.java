@@ -222,8 +222,6 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
         	
 			try
 			{
-				// TODO: Validate FTP input
-				
 				if(ftpClient==null || !ftpClient.connected())
 				{
 					String host = environmentSubstitute(meta.getHost());

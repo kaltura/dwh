@@ -28,10 +28,10 @@ public class FTPFileInputList
 	}
 
 	public static FTPFileInputList createFileList(
-			FTPClient ftpClient, 
+			FTPClient ftpClient,
 			VariableSpace space,
-			String[] fileName, 
-			String[] fileMask, 
+			String[] fileName,
+			String[] fileMask,
 			boolean includeSubdirs) throws KettleException 
 	{
 		FTPFileInputList files = new FTPFileInputList();

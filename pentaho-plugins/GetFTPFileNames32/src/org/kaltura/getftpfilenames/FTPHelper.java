@@ -3,6 +3,8 @@ package org.kaltura.getftpfilenames;
 import java.io.IOException;
 import java.net.InetAddress;
 
+import org.pentaho.di.core.encryption.Encr;
+
 import com.enterprisedt.net.ftp.FTPClient;
 import com.enterprisedt.net.ftp.FTPConnectMode;
 import com.enterprisedt.net.ftp.FTPException;
@@ -26,9 +28,9 @@ public class FTPHelper
         
         // login to ftp host ...
         ftpclient.connect();     
-        
+        String password = Encr.decryptPasswordOptionallyEncrypted(pw);
         // login now ...
-        ftpclient.login(user, pw);
+        ftpclient.login(user, password);
 
         ftpclient.setType(binaryMode ? FTPTransferType.BINARY : FTPTransferType.ASCII);
         
