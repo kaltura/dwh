@@ -1102,14 +1102,14 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 			    	if(ftp.connected())
 			    	{
 						MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_INFORMATION );
-						mb.setMessage(Messages.getString("GetFTPFileNamesDialog.Connected.OK",wServerName.getText()) +Const.CR);
+						mb.setMessage(Messages.getString("GetFTPFileNamesDialog.Connected.OK",host) +Const.CR);
 						mb.setText(Messages.getString("GetFTPFileNamesDialog.Connected.Title.Ok"));
 						mb.open();
 						ftp.quit();
 					}else
 					{
 						MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR );
-						mb.setMessage(Messages.getString("GetFTPFileNamesDialog.Connected.NOK.ConnectionBad",wServerName.getText()) +Const.CR);
+						mb.setMessage(Messages.getString("GetFTPFileNamesDialog.Connected.NOK.ConnectionBad",host) +Const.CR);
 						mb.setText(Messages.getString("GetFTPFileNamesDialog.Connected.Title.Bad"));
 						mb.open(); 
 				    }
