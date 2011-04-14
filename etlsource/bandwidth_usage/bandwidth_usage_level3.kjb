@@ -211,12 +211,52 @@
         </field>
         <field>
           <variable_name>FetchJob</variable_name>
-          <variable_value>${EtlBasePath}bandwidth_usage&#47;generate&#47;fetch_level3_files.kjb</variable_value>
+          <variable_value>${EtlBasePath}bandwidth_usage&#47;generate&#47;fetch_files.kjb</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
           <variable_name>FetchWildcard</variable_name>
           <variable_value>${BandwidthUsageLevel3WildCard}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchMethod</variable_name>
+          <variable_value>${BandwidthUsageLevel3FetchMethod}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPServer</variable_name>
+          <variable_value>${BandwidthUsageLevel3FTPServer}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPPort</variable_name>
+          <variable_value>${BandwidthUsageLevel3FTPPort}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPUser</variable_name>
+          <variable_value>${BandwidthUsageLevel3FTPUser}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPPassword</variable_name>
+          <variable_value>${BandwidthUsageLevel3FTPPassword}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchWildcard</variable_name>
+          <variable_value>${BandwidthUsageLevel3WildCard}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchLogsDir</variable_name>
+          <variable_value>${BandwidthUsageLevel3LogsDir}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>TempDestination</variable_name>
+          <variable_value>${ExportPath}&#47;dwh_inbound&#47;bandwidth_usage&#47;</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
