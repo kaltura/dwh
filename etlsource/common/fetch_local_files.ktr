@@ -200,7 +200,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get rows from result</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Create target filename</from><to>Process files</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>Add constants - dir seperator</to><enabled>Y</enabled> </hop>  <hop> <from>Add constants - dir seperator</from><to>Create target filename</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Get rows from result</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>Add constants - dir seperator</to><enabled>Y</enabled> </hop>  <hop> <from>Create target filename</from><to>Process files</to><enabled>Y</enabled> </hop>  <hop> <from>Add constants - dir seperator</from><to>Yield short file name</to><enabled>Y</enabled> </hop>  <hop> <from>Yield short file name</from><to>Create target filename</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Add constants - dir seperator</name>
     <type>Constant</type>
@@ -258,7 +258,7 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>585</xloc>
+      <xloc>693</xloc>
       <yloc>208</yloc>
       <draw>Y</draw>
       </GUI>
@@ -310,10 +310,6 @@
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
-        </field>      <field>        <name>short_filename</name>
-        <type>-</type>
-        <length>-1</length>
-        <precision>-1</precision>
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>152</xloc>
@@ -341,7 +337,37 @@
     <simulate>N</simulate>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>751</xloc>
+      <xloc>842</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Yield short file name</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+short_filename = getShortFilename(filename);</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>short_filename</name>
+        <rename>short_filename</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>563</xloc>
       <yloc>209</yloc>
       <draw>Y</draw>
       </GUI>
