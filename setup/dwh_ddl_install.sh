@@ -32,17 +32,17 @@ function mysqlexec {
 }
 
 ETL_ROOT_DIR=$ROOT_DIR/etlsource/
+SETUP_ROOT_DIR=$ROOT_DIR/setup
+DDL_ROOT_DIR=$ROOT_DIR/ddl/
+BISOURCE_ROOT_DIR=$DDL_ROOT_DIR/bi_sources/
+DS_ROOT_DIR=$DDL_ROOT_DIR/ds/
+DW_ROOT_DIR=$DDL_ROOT_DIR/dw/
+DDL_SETUP_ROOT_DIR=$DDL_ROOT_DIR/setup/
 
-SQL_ROOT_DIR=$ROOT_DIR/ddl/
-BISOURCE_ROOT_DIR=$SQL_ROOT_DIR/bi_sources/
-DS_ROOT_DIR=$SQL_ROOT_DIR/ds/
-DW_ROOT_DIR=$SQL_ROOT_DIR/dw/
-SETUP_ROOT_DIR=$SQL_ROOT_DIR/setup/
-
-SQL_LOG=$SQL_ROOT_DIR/installation_log
+SQL_LOG=$DDL_ROOT_DIR/installation_log
 
 #general
-mysqlexec $SQL_ROOT_DIR/db_create.sql
+mysqlexec $DDL_ROOT_DIR/db_create.sql
 
 #bisource
 mysqlexec $BISOURCE_ROOT_DIR/bisources_EDITOR_TYPE.sql
@@ -117,8 +117,8 @@ mysqlexec $DS_ROOT_DIR/populate_locks.sql
 mysqlexec $DS_ROOT_DIR/pentaho_sequences.sql
 
 #etl_log
-mysqlexec $SQL_ROOT_DIR/log/etl_log.sql
-#mysqlexec $SQL_ROOT_DIR/log/create_monitor_status.sql
+mysqlexec $DDL_ROOT_DIR/log/etl_log.sql
+#mysqlexec $DDL_ROOT_DIR/log/create_monitor_status.sql
 
 #dw
 mysqlexec $DW_ROOT_DIR/batch_jobs.sql
@@ -263,9 +263,9 @@ mysqlexec $DW_ROOT_DIR/fms/dwh_fact_fms_session_events.sql
         fi
 
 mysqlexec $DW_ROOT_DIR/maintenance/populate_table_partitions.sql
-#mysqlexec $SETUP_ROOT_DIR/populate_time_table.sql
-mysqlexec $SETUP_ROOT_DIR/populate_aggr_managment_table.sql
-#mysqlexec $SETUP_ROOT_DIR/populate_old_entries.sql
-mysqlexec $SETUP_ROOT_DIR/populate_dwh_dim_ip_ranges.sql
-/bin/cp -r $ROOT_DIR/pentaho-plugins/MySQLInserter32/MySQLInserter $KITCHEN/plugins/steps/
-/bin/cp -r $ROOT_DIR/pentaho-plugins/MappingFieldRunner32/MappingFieldRunner $KITCHEN/plugins/steps/
+#mysqlexec $DDL_SETUP_ROOT_DIR/populate_time_table.sql
+mysqlexec $DDL_SETUP_ROOT_DIR/populate_aggr_managment_table.sql
+#mysqlexec $DDL_SETUP_ROOT_DIR/populate_old_entries.sql
+mysqlexec $DDL_SETUP_ROOT_DIR/populate_dwh_dim_ip_ranges.sql
+
+$SETUP_ROOT_DIR/copy_pentaho_plugins.sh -d $ROOT_DIR -k $KITCHEN

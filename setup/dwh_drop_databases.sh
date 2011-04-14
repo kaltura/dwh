@@ -32,15 +32,5 @@ function mysqlexec {
         fi
 }
 
-ETL_ROOT_DIR=$ROOT_DIR/etlsource/
-
-SQL_ROOT_DIR=$ROOT_DIR/ddl/
-BISOURCE_ROOT_DIR=$SQL_ROOT_DIR/bi_sources/
-DS_ROOT_DIR=$SQL_ROOT_DIR/ds/
-DW_ROOT_DIR=$SQL_ROOT_DIR/dw/
-SETUP_ROOT_DIR=$SQL_ROOT_DIR/setup/
-
-SQL_LOG=$SQL_ROOT_DIR/installation_log
-
-#general
-mysqlexec $SQL_ROOT_DIR/db_drop.sql
+DDL_ROOT_DIR=$ROOT_DIR/ddl/
+mysqlexec $DDL_ROOT_DIR/db_drop.sql
