@@ -78,7 +78,7 @@
   </connection>
   <connection>
     <name>Kaltura_Writable</name>
-    <server>${OpWritableDbHostName}</server>
+    <server>${OpDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
     <database>kaltura</database>
@@ -399,7 +399,10 @@
     <limit>0</limit>
     <file>
       <name>${FMSBasePath}</name>
-      <filemask>split_${FMSFileWildcard}</filemask>
+      <filemask>split_akamai.*</filemask>
+      <file_required/>
+      <name/>
+      <filemask/>
       <file_required/>
     </file>
      <cluster_schema/>
