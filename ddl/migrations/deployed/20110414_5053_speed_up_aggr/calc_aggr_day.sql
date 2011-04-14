@@ -76,7 +76,7 @@ BEGIN
 			,count_postroll_50
 			,count_postroll_75
 			) 
-		SELECT  partner_id,event_date_id date_id, HOUR(event_time) hour_id',v_aggr_id_field_str,',
+		SELECT  ev.partner_id,ev.event_date_id date_id, HOUR(ev.event_time) hour_id',v_aggr_id_field_str,',
 		SUM(IF(ev.event_type_id = 2, 1,NULL)) count_loads,
 		SUM(IF(ev.event_type_id = 3, 1,NULL)) count_plays,
 		SUM(IF(ev.event_type_id = 4, 1,NULL)) count_plays_25,
@@ -116,7 +116,7 @@ BEGIN
 		SUM(IF(ev.event_type_id = 38, 1,NULL)) count_postroll_25,
 		SUM(IF(ev.event_type_id = 39, 1,NULL)) count_postroll_50,
 		SUM(IF(ev.event_type_id = 40, 1,NULL)) count_postroll_75
-		FROM dwh_fact_events as ev ',v_aggr_join_stmt,' 
+		FROM dwh_fact_events as ev USE INDEX (event_date_id) ',v_aggr_join_stmt,' 
 		WHERE ev.event_type_id BETWEEN 2 AND 40 
 			AND ev.event_date_id  = DATE(''',p_date_val,''')*1
 			AND ev.event_time BETWEEN DATE(''',p_date_val,''') AND DATE(''',p_date_val,''') + INTERVAL 1 DAY
@@ -137,8 +137,8 @@ BEGIN
 			,count_time_viewed)
 			SELECT partner_id, date_id, hour_id',v_aggr_id_field_str,', SUM(time_viewed) sum_time_viewed, COUNT(time_viewed) count_time_viewed
 			FROM(
-			SELECT partner_id, MIN(event_date_id) date_id, HOUR(MIN(event_time)) hour_id',v_aggr_id_field_str,', session_id, MAX(current_point/60000) time_viewed
-			FROM dwh_fact_events as ev ',v_aggr_join_stmt,' 
+			SELECT ev.partner_id, MIN(ev.event_date_id) date_id, HOUR(MIN(ev.event_time)) hour_id',v_aggr_id_field_str,', ev.session_id, MAX(ev.current_point/60000) time_viewed
+			FROM dwh_fact_events as ev USE INDEX (event_date_id) ',v_aggr_join_stmt,' 
 			WHERE ev.event_type_id BETWEEN 2 AND 40 
 				AND ev.event_date_id  = DATE(''',p_date_val,''')*1
 				AND ev.event_time BETWEEN DATE(''',p_date_val,''') AND DATE(''',p_date_val,''') + INTERVAL 1 DAY
