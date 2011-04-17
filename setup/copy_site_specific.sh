@@ -1,6 +1,5 @@
 #!/bin/bash
 
-KITCHEN=/usr/local/pentaho/pdi
 ROOT_DIR=/opt/kaltura/dwh
 SITE_SPECIFIC_DIR=/opt/kaltura/dwh_site-specific
 
