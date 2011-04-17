@@ -30,7 +30,7 @@ CREATE TABLE kalturadw_ds.ds_events
 	, entry_media_type_id INT
 	, entry_partner_id INT
 	, referrer_id INT(11)
-     ) ENGINE=MYISAM  DEFAULT CHARSET=utf8  
+     ) ENGINE=INNODB  DEFAULT CHARSET=utf8  
      PARTITION BY 	LIST(file_id) (
 	PARTITION p_0 VALUES IN (0)
 

@@ -23,7 +23,7 @@ CREATE TABLE `invalid_ds_lines_error_codes` (
   `error_code_reason` VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (`error_code_id`),
   UNIQUE KEY `error_code_reason` (`error_code_reason`)
-) ENGINE=MYISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

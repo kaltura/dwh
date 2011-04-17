@@ -11,4 +11,4 @@ CREATE TABLE kalturadw_ds.`invalid_event_lines` (
           PRIMARY KEY (`line_id`)  ,
 		  KEY `date_id_partner_id` (`date_id`,`partner_id`) ,
 		  INDEX `file_reason_code` (`file_id` ASC, `error_reason_code` ASC) 
-        ) ENGINE=MYISAM DEFAULT CHARSET=utf8
+        ) ENGINE=INNODB DEFAULT CHARSET=utf8

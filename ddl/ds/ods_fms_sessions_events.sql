@@ -45,6 +45,6 @@ CREATE TABLE `kalturadw_ds`.`ods_fms_session_events` (
   `client_to_server_stream_bytes` int(10) unsigned DEFAULT NULL,
   `server_to_client_stream_bytes` int(10) unsigned DEFAULT NULL,
   `server_to_client_qos_bytes` int(10) unsigned DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8
+) ENGINE=INNODB DEFAULT CHARSET=utf8
 /*!50100 PARTITION BY LIST (file_id)
-(PARTITION p_0 VALUES IN (0) ENGINE = MyISAM) */;
+(PARTITION p_0 VALUES IN (0) ENGINE = INNODB) */;

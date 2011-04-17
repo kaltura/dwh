@@ -42,6 +42,6 @@ CREATE TABLE kalturadw.dwh_fact_events
 #	,KEY entry_partner_id_event_type_id_time (`entry_partner_id`,`event_type_id`,`event_time` )
 	,KEY event_date_id (event_date_id)
 	,KEY domain_id (domain_id)
-     ) ENGINE=MYISAM  DEFAULT CHARSET=utf8  
+     ) ENGINE=INNODB  DEFAULT CHARSET=utf8  
      PARTITION BY RANGE (TO_DAYS(event_time))
 	(PARTITION p_201001 VALUES LESS THAN (734169));

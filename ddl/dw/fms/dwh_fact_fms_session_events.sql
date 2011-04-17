@@ -45,6 +45,6 @@ CREATE TABLE  `kalturadw`.`dwh_fact_fms_session_events` (
   `server_to_client_stream_bytes` INT(10) UNSIGNED DEFAULT NULL,
   `server_to_client_qos_bytes` INT(10) UNSIGNED DEFAULT NULL,
   KEY `partner_id_event_type_id_time` (`partner_id`,`event_type_id`,`event_time`)
-) ENGINE=MYISAM DEFAULT CHARSET=utf8
+) ENGINE=INNODB DEFAULT CHARSET=utf8
 PARTITION BY RANGE (TO_DAYS(event_time))
 (PARTITION p_201001 VALUES LESS THAN (734169));

@@ -12,4 +12,4 @@ CREATE TABLE  `kalturadw_ds`.`invalid_fms_event_lines` (
   PRIMARY KEY (`line_id`),
   KEY `date_id_partner_id` (`date_id`,`entry_id`),
   KEY `file_reason_code` (`file_id`,`error_reason_code`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
