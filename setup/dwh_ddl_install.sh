@@ -115,6 +115,7 @@ mysqlexec $DS_ROOT_DIR/ds_bandwidth_usage.sql
 mysqlexec $DS_ROOT_DIR/locks.sql
 mysqlexec $DS_ROOT_DIR/populate_locks.sql
 mysqlexec $DS_ROOT_DIR/pentaho_sequences.sql
+mysqlexec $DS_ROOT_DIR/version_table.sql
 
 #etl_log
 mysqlexec $DDL_ROOT_DIR/log/etl_log.sql
