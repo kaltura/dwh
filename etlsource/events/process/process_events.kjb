@@ -191,7 +191,7 @@
       <name>Process events wrapper</name>
       <description>Transformation</description>
       <type>TRANS</type>
-      <filename>${EtlBasePath}&#47;events&#47;process&#47;process_events_wrapper.ktr</filename>
+      <filename>${EtlBasePath}&#47;events&#47;process&#47;process_file.ktr</filename>
       <transname/>
       <directory/>
       <arg_from_previous>N</arg_from_previous>
