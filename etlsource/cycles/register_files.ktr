@@ -427,7 +427,7 @@
     <limit>0</limit>
     <file>
       <name>${CyclePath}generate&#47;${ProcessName}</name>
-      <filemask>split_${FetchWildcard}\..*</filemask>
+      <filemask>(split_)?${FetchWildcard}.*</filemask>
       <file_required/>
     </file>
      <cluster_schema/>

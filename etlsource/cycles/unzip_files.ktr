@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Unzip files</name>
+    <name>Archive_and_Unzip files</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -200,30 +200,10 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get Variables</from><to>Get events file names</to><enabled>Y</enabled> </hop>  <hop> <from>Get events file names</from><to>Filter rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>Log file not zipped</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>Modified Java Script Value</to><enabled>Y</enabled> </hop>  <hop> <from>Modified Java Script Value</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log</from><to>Execute a process</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Get Variables</from><to>Get events file names</to><enabled>Y</enabled> </hop>  <hop> <from>create copy archive command</from><to>Should copy archive</to><enabled>Y</enabled> </hop>  <hop> <from>Create gunzip command</from><to>Gunzip</to><enabled>Y</enabled> </hop>  <hop> <from>Should copy archive</from><to>Copy archive</to><enabled>Y</enabled> </hop>  <hop> <from>Get events file names</from><to>create copy archive command</to><enabled>Y</enabled> </hop>  <hop> <from>Create gzip archive command</from><to>Gzip Archive</to><enabled>Y</enabled> </hop>  <hop> <from>Copy archive</from><to>Remove copy archive result</to><enabled>Y</enabled> </hop>  <hop> <from>Should copy archive</from><to>Ends with gz</to><enabled>Y</enabled> </hop>  <hop> <from>Remove copy archive result</from><to>Ends with gz archive</to><enabled>Y</enabled> </hop>  <hop> <from>Ends with gz archive</from><to>Create gzip archive command</to><enabled>Y</enabled> </hop>  <hop> <from>Ends with gz</from><to>Create gunzip command</to><enabled>Y</enabled> </hop>  <hop> <from>Ends with gz archive</from><to>Create gunzip command</to><enabled>Y</enabled> </hop>  <hop> <from>Ends with gz</from><to>Dummy (do nothing)</to><enabled>Y</enabled> </hop>  </order>
   <step>
-    <name>Execute a process</name>
+    <name>Copy archive</name>
     <type>ExecProcess</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <processfield>shell_command</processfield>
-    <resultfieldname>result</resultfieldname>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>485</xloc>
-      <yloc>356</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
     <description/>
     <distribute>N</distribute>
     <copies>1</copies>
@@ -231,20 +211,41 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Modified Java Script Value</send_true_to>
-<send_false_to>Log file not zipped</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>filename</leftvalue>
- <function>ENDS WITH</function>
- <rightvalue/>
- <value><name>constant</name><type>String</type><text>.gz</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
+    <processfield>archive_command</processfield>
+    <resultfieldname>result</resultfieldname>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>485</xloc>
-      <yloc>86</yloc>
+      <xloc>666</xloc>
+      <yloc>78</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Create gunzip command</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>gunzip_command = &quot;gunzip &quot; + filename;
+</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>gunzip_command</name>
+        <rename>gunzip_command</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>668</xloc>
+      <yloc>175</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -261,7 +262,7 @@
            </partitioning>
     <fields>
       <field>
-        <name>original_path</name>
+        <name>generate_path</name>
         <variable>${CyclePath}generate&#47;${ProcessName}</variable>
         <type>String</type>
         <format/>
@@ -275,6 +276,18 @@
       <field>
         <name>wildcard</name>
         <variable>${FetchWildcard}</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>0</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>originals_path</name>
+        <variable>${CyclePath}&#47;originals&#47;${CycleID}</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -310,7 +323,7 @@
     <isaddresult>N</isaddresult>
     <filefield>Y</filefield>
     <rownum_field/>
-    <filename_Field>original_path</filename_Field>
+    <filename_Field>generate_path</filename_Field>
     <wildcard_Field>wildcard</wildcard_Field>
     <limit>0</limit>
     <file>
@@ -320,15 +333,15 @@
     </file>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>270</xloc>
-      <yloc>87</yloc>
+      <xloc>248</xloc>
+      <yloc>85</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Log file not zipped</name>
-    <type>WriteToLog</type>
+    <name>Gunzip</name>
+    <type>ExecProcess</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -336,23 +349,46 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>N</displayHeader>
-    <fields>
-      <field>
-        <name>filename</name>
-        </field>
-      </fields>
+    <processfield>gunzip_command</processfield>
+    <resultfieldname>result</resultfieldname>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>643</xloc>
-      <yloc>82</yloc>
+      <xloc>671</xloc>
+      <yloc>269</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Modified Java Script Value</name>
+    <name>Should copy archive</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Copy archive</send_true_to>
+<send_false_to>Ends with gz</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>archive_command</leftvalue>
+ <function>IS NOT NULL</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>.gz</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>552</xloc>
+      <yloc>78</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>create copy archive command</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -364,25 +400,28 @@
     <compatible>N</compatible>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>shell_command = &quot;gunzip &quot; + filename;
-</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>shell_command</name>
-        <rename>shell_command</rename>
+        <jsScript_script>var isArchived = getVariable(&quot;isArchived&quot;, &quot;True&quot;) != &quot;False&quot;;
+archive_command = null;
+if (isArchived) {
+	archive_command = &quot;&#47;bin&#47;cp &quot; + filename + &quot; &quot; + originals_path + &quot;&#47;&quot; + short_filename;
+}</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>archive_command</name>
+        <rename>archive_command</rename>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>485</xloc>
-      <yloc>168</yloc>
+      <xloc>394</xloc>
+      <yloc>83</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
+    <name>Remove copy archive result</name>
+    <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -390,17 +429,135 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>N</displayHeader>
-    <fields>
-      <field>
-        <name>shell_command</name>
-        </field>
-      </fields>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>result</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>790</xloc>
+      <yloc>77</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Create gzip archive command</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>gzip_command = &quot;gzip &quot; + originals_path + &quot;&#47;&quot; + short_filename;
+</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>gzip_command</name>
+        <rename>gzip_command</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>949</xloc>
+      <yloc>170</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Gzip Archive</name>
+    <type>ExecProcess</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <processfield>gzip_command</processfield>
+    <resultfieldname>result</resultfieldname>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>485</xloc>
-      <yloc>269</yloc>
+      <xloc>1109</xloc>
+      <yloc>170</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Ends with gz</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Create gunzip command</send_true_to>
+<send_false_to>Dummy (do nothing)</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>filename</leftvalue>
+ <function>ENDS WITH</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>.gz</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>553</xloc>
+      <yloc>175</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Ends with gz archive</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Create gunzip command</send_true_to>
+<send_false_to>Create gzip archive command</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>filename</leftvalue>
+ <function>ENDS WITH</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>.gz</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>794</xloc>
+      <yloc>173</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Dummy (do nothing)</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>397</xloc>
+      <yloc>173</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

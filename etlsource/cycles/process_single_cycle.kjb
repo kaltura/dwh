@@ -193,7 +193,7 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>440</xloc>
+      <xloc>540</xloc>
       <yloc>160</yloc>
       </entry>
     <entry>
@@ -224,7 +224,7 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>732</xloc>
+      <xloc>832</xloc>
       <yloc>166</yloc>
       </entry>
     <entry>
@@ -259,7 +259,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>560</xloc>
+      <xloc>660</xloc>
       <yloc>160</yloc>
       </entry>
     <entry>
@@ -290,7 +290,7 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>180</xloc>
+      <xloc>280</xloc>
       <yloc>160</yloc>
       </entry>
     <entry>
@@ -338,7 +338,7 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
+      <xloc>420</xloc>
       <yloc>160</yloc>
       </entry>
     <entry>
@@ -347,7 +347,6 @@
       <type>TRANS</type>
       <filename>${EtlBasePath}cycles&#47;set_cycle_status.ktr</filename>
       <transname/>
-      <directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -370,7 +369,7 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>558</xloc>
+      <xloc>658</xloc>
       <yloc>268</yloc>
       </entry>
   </entries>
@@ -392,15 +391,6 @@
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>set cycle status running</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
     </hop>
     <hop>
       <from>set cycle status running</from>
@@ -428,6 +418,15 @@
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>set cycle status running</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>

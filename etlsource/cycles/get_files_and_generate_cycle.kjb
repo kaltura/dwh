@@ -241,8 +241,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1374</xloc>
-      <yloc>119</yloc>
+      <xloc>1375</xloc>
+      <yloc>118</yloc>
       </entry>
     <entry>
       <name>get files</name>
@@ -269,32 +269,6 @@
       <nr>0</nr>
       <xloc>248</xloc>
       <yloc>118</yloc>
-      </entry>
-    <entry>
-      <name>Zip cycle</name>
-      <description>Zip file</description>
-      <type>ZIP_FILE</type>
-      <zipfilename>${CyclePath}originals&#47;${CycleID}&#47;files.zip</zipfilename>
-      <compressionrate>1</compressionrate>
-      <ifzipfileexists>2</ifzipfileexists>
-      <wildcard>${FetchWildcard}</wildcard>
-      <wildcardexclude/>
-      <sourcedirectory>${CyclePath}originals&#47;${CycleID}</sourcedirectory>
-      <movetodirectory/>
-      <afterzip>0</afterzip>
-      <addfiletoresult>N</addfiletoresult>
-      <isfromprevious>N</isfromprevious>
-      <createparentfolder>Y</createparentfolder>
-      <adddate>N</adddate>
-      <addtime>N</addtime>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <createMoveToDirectory>N</createMoveToDirectory>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1221</xloc>
-      <yloc>269</yloc>
       </entry>
     <entry>
       <name>set cycle status generated</name>
@@ -324,8 +298,8 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1370</xloc>
-      <yloc>485</yloc>
+      <xloc>1375</xloc>
+      <yloc>314</yloc>
       </entry>
     <entry>
       <name>set cycle status generating</name>
@@ -333,7 +307,6 @@
       <type>TRANS</type>
       <filename>${EtlBasePath}cycles&#47;set_cycle_status.ktr</filename>
       <transname/>
-      <directory/>
       <arg_from_previous>Y</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -372,28 +345,14 @@
       <yloc>117</yloc>
       </entry>
     <entry>
-      <name>Check if a originals folder is empty</name>
-      <description>Check if a folder is empty</description>
-      <type>FOLDER_IS_EMPTY</type>
-      <foldername>${CyclePath}originals&#47;${CycleID}&#47;</foldername>
-      <include_subfolders>N</include_subfolders>
-      <specify_wildcard>Y</specify_wildcard>
-      <wildcard>${FetchWildcard}</wildcard>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1371</xloc>
-      <yloc>268</yloc>
-      </entry>
-    <entry>
       <name>Success</name>
       <description>Success</description>
       <type>SUCCESS</type>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1367</xloc>
-      <yloc>589</yloc>
+      <xloc>1372</xloc>
+      <yloc>418</yloc>
       </entry>
     <entry>
       <name>split_files</name>
@@ -422,24 +381,6 @@
       <nr>0</nr>
       <xloc>1111</xloc>
       <yloc>118</yloc>
-      </entry>
-    <entry>
-      <name>Delete files</name>
-      <description>Delete files</description>
-      <type>DELETE_FILES</type>
-      <arg_from_previous>N</arg_from_previous>
-      <include_subfolders>N</include_subfolders>
-      <fields>
-        <field>
-          <name>${CyclePath}originals&#47;${CycleID}&#47;</name>
-          <filemask>^((?!files.zip).)*$</filemask>
-        </field>
-      </fields>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1223</xloc>
-      <yloc>390</yloc>
       </entry>
     <entry>
       <name>Check for files</name>
@@ -484,7 +425,7 @@
       <yloc>118</yloc>
       </entry>
     <entry>
-      <name>Unzip files attempt</name>
+      <name>Unzip and archive</name>
       <description>Transformation</description>
       <type>TRANS</type>
       <filename>${EtlBasePath}cycles&#47;unzip_files.ktr</filename>
@@ -536,8 +477,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1372</xloc>
-      <yloc>389</yloc>
+      <xloc>1377</xloc>
+      <yloc>218</yloc>
       </entry>
     <entry>
       <name>Print Cycle ID to stream for generating</name>
@@ -592,8 +533,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>777</xloc>
-      <yloc>272</yloc>
+      <xloc>1113</xloc>
+      <yloc>217</yloc>
       </entry>
     <entry>
       <name>set cycle status failed</name>
@@ -623,8 +564,8 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>776</xloc>
-      <yloc>380</yloc>
+      <xloc>1112</xloc>
+      <yloc>325</yloc>
       </entry>
     <entry>
       <name>Check if a generate folder is empty</name>
@@ -633,33 +574,15 @@
       <foldername>${CyclePath}generate&#47;${ProcessName}</foldername>
       <include_subfolders>N</include_subfolders>
       <specify_wildcard>Y</specify_wildcard>
-      <wildcard>split_${FetchWildcard}\..*</wildcard>
+      <wildcard>(split_)?${FetchWildcard}.*</wildcard>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1238</xloc>
-      <yloc>120</yloc>
+      <xloc>1239</xloc>
+      <yloc>119</yloc>
       </entry>
   </entries>
   <hops>
-    <hop>
-      <from>Register files</from>
-      <to>Check if a originals folder is empty</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Check if a originals folder is empty</from>
-      <to>Zip cycle</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
     <hop>
       <from>set cycle status generated</from>
       <to>Success</to>
@@ -672,15 +595,6 @@
     <hop>
       <from>set cycle status generating</from>
       <to>split_files</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Zip cycle</from>
-      <to>Delete files</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -733,16 +647,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Delete files</from>
-      <to>Print Cycle ID to stream for generated</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Unzip files attempt</from>
+      <from>Unzip and archive</from>
       <to>Print Cycle ID to stream for generating</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -762,24 +667,6 @@
     <hop>
       <from>Print Cycle ID to stream for failed</from>
       <to>set cycle status failed</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Check if a originals folder is empty</from>
-      <to>Print Cycle ID to stream for generated</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>split_files</from>
-      <to>Check if a generate folder is empty</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -815,7 +702,25 @@
     </hop>
     <hop>
       <from>Create originals cycle folder</from>
-      <to>Unzip files attempt</to>
+      <to>Unzip and archive</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Register files</from>
+      <to>Print Cycle ID to stream for generated</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>split_files</from>
+      <to>Check if a generate folder is empty</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

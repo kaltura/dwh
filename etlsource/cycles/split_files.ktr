@@ -225,10 +225,10 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get events file names</from><to>Now splitting file</to><enabled>Y</enabled> </hop>  <hop> <from>Modified Java Script Value</from><to>run &apos;split&apos; files</to><enabled>Y</enabled> </hop>  <hop> <from>Now splitting file</from><to>Modified Java Script Value</to><enabled>Y</enabled> </hop>  <hop> <from>run &apos;split&apos; files</from><to>Create new fields</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>Get events file names</to><enabled>Y</enabled> </hop>  <hop> <from>Move original files</from><to>Wait till all are split</to><enabled>Y</enabled> </hop>  <hop> <from>Create new fields</from><to>Is Archived default value</to><enabled>Y</enabled> </hop>  <hop> <from>Is Archived default value</from><to>Decide to Archive</to><enabled>Y</enabled> </hop>  <hop> <from>Delete original files</from><to>Wait till all are split</to><enabled>Y</enabled> </hop>  <hop> <from>Decide to Archive</from><to>Log Delete</to><enabled>Y</enabled> </hop>  <hop> <from>Log Delete</from><to>Delete original files</to><enabled>Y</enabled> </hop>  <hop> <from>Decide to Archive</from><to>Log Move</to><enabled>Y</enabled> </hop>  <hop> <from>Log Move</from><to>Move original files</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Get Variables</from><to>Get events file names</to><enabled>Y</enabled> </hop>  <hop> <from>Create split command</from><to>Spit files?</to><enabled>Y</enabled> </hop>  <hop> <from>Spit files?</from><to>Do not split</to><enabled>Y</enabled> </hop>  <hop> <from>run &apos;split&apos; files</from><to>Delete original file</to><enabled>Y</enabled> </hop>  <hop> <from>Delete original file</from><to>Wait till all are split</to><enabled>Y</enabled> </hop>  <hop> <from>Spit files?</from><to>Now splitting file</to><enabled>Y</enabled> </hop>  <hop> <from>Now splitting file</from><to>run &apos;split&apos; files</to><enabled>Y</enabled> </hop>  <hop> <from>Get events file names</from><to>Create split command</to><enabled>Y</enabled> </hop>  </order>
   <step>
-    <name>Create new fields</name>
-    <type>Calculator</type>
+    <name>Create split command</name>
+    <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -236,59 +236,37 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>newpath</field_name>
-<calc_type>ADD</calc_type>
-<field_a>dest_path</field_a>
-<field_b>short_filename</field_b>
-<field_c/>
-<value_type>String</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-     <cluster_schema/>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var max_file_size_env = getEnvironmentVar(&quot;EventLogSplitSize&quot;);
+var split_command = null;
+var max_file_size = max_file_size_env ? max_file_size_env : 500000;
+if (max_file_size &gt; 0 &amp;&amp; getFileSize(filename) &gt; 0) {
+	split_command = 
+		&quot;split -d -l &quot; + max_file_size + 
+		&quot; &quot; + filename + &quot;&quot; + 				&#47;&#47; the file to split
+		&quot; &quot; + generate_path + &quot;&#47;split_&quot; + short_filename + &quot;.&quot; ; 	&#47;&#47; the prefix of the output file names
+}
+		
+</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>split_command</name>
+        <rename>split_command</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>500</xloc>
+      <xloc>145</xloc>
       <yloc>140</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Decide to Archive</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>N</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Log Move</send_true_to>
-<send_false_to>Log Delete</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>isArchived</leftvalue>
- <function>=</function>
- <rightvalue/>
- <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>755</xloc>
-      <yloc>141</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Delete original files</name>
-    <type>ProcessFiles</type>
+    <name>Do not split</name>
+    <type>Dummy</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -296,17 +274,10 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <sourcefilenamefield>filename</sourcefilenamefield>
-    <targetfilenamefield>newpath</targetfilenamefield>
-    <operation_type>delete</operation_type>
-    <addresultfilenames>N</addresultfilenames>
-    <overwritetargetfile>N</overwritetargetfile>
-    <createparentfolder>Y</createparentfolder>
-    <simulate>N</simulate>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>908</xloc>
-      <yloc>63</yloc>
+      <xloc>318</xloc>
+      <yloc>250</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -323,20 +294,8 @@
            </partitioning>
     <fields>
       <field>
-        <name>original_path</name>
+        <name>generate_path</name>
         <variable>${CyclePath}generate&#47;${ProcessName}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>dest_path</name>
-        <variable>${CyclePath}originals&#47;${CycleID}&#47;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -350,18 +309,6 @@
         <name>wildcard</name>
         <variable>${FetchWildcard}</variable>
         <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>isArchived</name>
-        <variable>${IsArchived}</variable>
-        <type>Boolean</type>
         <format/>
         <currency/>
         <decimal/>
@@ -396,7 +343,7 @@
     <isaddresult>N</isaddresult>
     <filefield>Y</filefield>
     <rownum_field/>
-    <filename_Field>original_path</filename_Field>
+    <filename_Field>generate_path</filename_Field>
     <wildcard_Field>wildcard</wildcard_Field>
     <limit>0</limit>
     <file>
@@ -408,99 +355,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>140</xloc>
       <yloc>19</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Is Archived default value</name>
-    <type>IfNull</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <replaceAllByValue/>
-      <replaceAllMask/>
-      <selectFields>Y</selectFields>
-      <selectValuesType>N</selectValuesType>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>isArchived</name>
-        <value>True</value>
-        <mask/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>627</xloc>
-      <yloc>139</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Modified Java Script Value</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var max_file_size_env = getEnvironmentVar(&quot;EventLogSplitSize&quot;);
-
-var max_file_size = max_file_size_env ? max_file_size_env : 500000;
-var shell_command = 
-	&quot;split -d -l &quot; + max_file_size + 
-	&quot; &quot; + filename + &quot;&quot; + 				&#47;&#47; the file to split
-	&quot; &quot; + original_path + &quot;&#47;split_&quot; + short_filename + &quot;.&quot; ; 	&#47;&#47; the prefix of the output file names
-
-		
-</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>shell_command</name>
-        <rename>shell_command</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>258</xloc>
-      <yloc>140</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Move original files</name>
-    <type>ProcessFiles</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <sourcefilenamefield>filename</sourcefilenamefield>
-    <targetfilenamefield>newpath</targetfilenamefield>
-    <operation_type>move</operation_type>
-    <addresultfilenames>N</addresultfilenames>
-    <overwritetargetfile>N</overwritetargetfile>
-    <createparentfolder>Y</createparentfolder>
-    <simulate>N</simulate>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>915</xloc>
-      <yloc>223</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -524,8 +378,36 @@ var shell_command =
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>140</xloc>
-      <yloc>140</yloc>
+      <xloc>439</xloc>
+      <yloc>143</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Spit files?</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Now splitting file</send_true_to>
+<send_false_to>Do not split</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>split_command</leftvalue>
+ <function>IS NOT NULL</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>317</xloc>
+      <yloc>142</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -547,8 +429,8 @@ var shell_command =
       <compress>Y</compress>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1047</xloc>
-      <yloc>140</yloc>
+      <xloc>913</xloc>
+      <yloc>143</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -563,19 +445,19 @@ var shell_command =
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <processfield>shell_command</processfield>
+    <processfield>split_command</processfield>
     <resultfieldname>result</resultfieldname>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>400</xloc>
-      <yloc>141</yloc>
+      <xloc>549</xloc>
+      <yloc>146</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Log Delete</name>
-    <type>WriteToLog</type>
+    <name>Delete original file</name>
+    <type>ProcessFiles</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -583,36 +465,17 @@ var shell_command =
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-    <fields>
-      </fields>
+    <sourcefilenamefield>filename</sourcefilenamefield>
+    <targetfilenamefield/>
+    <operation_type>delete</operation_type>
+    <addresultfilenames>N</addresultfilenames>
+    <overwritetargetfile>N</overwritetargetfile>
+    <createparentfolder>N</createparentfolder>
+    <simulate>N</simulate>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>830</xloc>
-      <yloc>98</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Log Move</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-    <fields>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>834</xloc>
-      <yloc>179</yloc>
+      <xloc>711</xloc>
+      <yloc>145</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
