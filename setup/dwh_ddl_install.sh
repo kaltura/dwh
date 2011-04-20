@@ -93,6 +93,7 @@ mysqlexec $DS_ROOT_DIR/restore_file_status_procedure.sql
 mysqlexec $DS_ROOT_DIR/set_file_status_full_procedure.sql
 mysqlexec $DS_ROOT_DIR/set_file_status_procedure.sql
 mysqlexec $DS_ROOT_DIR/updated_entries.sql
+mysqlexec $DS_ROOT_DIR/updated_kusers_storage_usage.sql
 mysqlexec $DS_ROOT_DIR/aggr_managment_procs.sql
 mysqlexec $DS_ROOT_DIR/aggr_name_resolver.sql
 mysqlexec $DS_ROOT_DIR/parameters.sql
