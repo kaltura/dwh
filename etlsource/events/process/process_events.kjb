@@ -188,7 +188,7 @@
       <yloc>77</yloc>
       </entry>
     <entry>
-      <name>Process events wrapper</name>
+      <name>Process events</name>
       <description>Transformation</description>
       <type>TRANS</type>
       <filename>${EtlBasePath}&#47;events&#47;process&#47;process_file.ktr</filename>
@@ -220,7 +220,7 @@
   <hops>
     <hop>
       <from>START</from>
-      <to>Process events wrapper</to>
+      <to>Process events</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

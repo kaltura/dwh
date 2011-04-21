@@ -200,7 +200,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Write to log</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Get PS2 lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Irrelevant line</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Set line type = 3</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 3</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Set line type = 2</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 2</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>decode http string</from><to>Get API_V_3 lines</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>empty ps2 line</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>decode http string</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath</from><to>iterate file</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>filter bad lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle_id and file_id</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids</from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids for error</from><to>format errornouse line</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>ip to location lookup error </to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>referrer -&gt; domain</to><enabled>Y</enabled> </hop>  <hop> <from>check valid line </from><to>Calc day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>check valid line </from><to>Calc day and hour ids for error</to><enabled>Y</enabled> </hop>  <hop> <from>convert IP and domain</from><to>Get IP location</to><enabled>Y</enabled> </hop>  <hop> <from>fix invalid values</from><to>referrer lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>format errornouse line</from><to>Get now</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>convert IP and domain</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>Write to log on error</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>domain lookup</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>check valid line </to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>domain lookup</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>fix invalid values</to><enabled>Y</enabled> </hop>  <hop> <from>referrer lookup&#47;update</from><to>write events</to><enabled>Y</enabled> </hop>  <hop> <from>Get now</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append file_id</from><to>write invalid line</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich file_id</from><to>Append file_id</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Write to log</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Get PS2 lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Irrelevant line</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Set line type = 3</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 3</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Set line type = 2</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 2</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>decode http string</from><to>Get API_V_3 lines</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>empty ps2 line</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>decode http string</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath</from><to>iterate file</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>filter bad lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle_id and file_id</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids</from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids for error</from><to>format errornouse line</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>ip to location lookup error </to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>referrer -&gt; domain</to><enabled>Y</enabled> </hop>  <hop> <from>check valid line </from><to>Calc day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>check valid line </from><to>Calc day and hour ids for error</to><enabled>Y</enabled> </hop>  <hop> <from>convert IP and domain</from><to>Get IP location</to><enabled>Y</enabled> </hop>  <hop> <from>fix invalid values</from><to>referrer lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>convert IP and domain</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>Write to log on error</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>domain lookup</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>check valid line </to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>domain lookup</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>fix invalid values</to><enabled>Y</enabled> </hop>  <hop> <from>referrer lookup&#47;update</from><to>write events</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich file_id</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Insert invalid line</from><to>Write to log - invalid line insert error</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log - invalid line insert error</from><to>Line exists</to><enabled>Y</enabled> </hop>  <hop> <from>format errornouse line</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append file_id</from><to>Insert invalid line</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Abort</name>
     <type>Abort</type>
@@ -253,6 +253,152 @@
     </step>
 
   <step>
+    <name>Append file_id</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>%%java.io.tmpdir%%</directory>
+      <prefix>out</prefix>
+      <cache_size>500</cache_size>
+      <main>format errornouse line</main>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue/>
+ <function>=</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>680</xloc>
+      <yloc>300</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calc day and hour ids</name>
+    <type>Formula</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <formula><field_name>hour</field_name>
+<formula_string>hour([eventTime])</formula_string>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
+       <formula><field_name>day_id</field_name>
+<formula_string>10000*year([eventTime])+100*month([eventTime])+day([eventTime])</formula_string>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>794</xloc>
+      <yloc>87</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calc day and hour ids for error</name>
+    <type>Formula</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <formula><field_name>hour</field_name>
+<formula_string>hour([eventTime])</formula_string>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
+       <formula><field_name>day_id</field_name>
+<formula_string>10000*year([eventTime])+100*month([eventTime])+day([eventTime])</formula_string>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>682</xloc>
+      <yloc>159</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Enrich cycle_id and file_id</name>
+    <type>RowsFromResult</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>cycle_id</name>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      <field>        <name>file_id</name>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>875</xloc>
+      <yloc>376</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Enrich file_id</name>
+    <type>RowsFromResult</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>cycle_id</name>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      <field>        <name>file_id</name>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>574</xloc>
+      <yloc>301</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Get API_V_3 lines</name>
     <type>FilterRows</type>
     <description/>
@@ -294,6 +440,31 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>208</xloc>
       <yloc>119</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get IP location</name>
+    <type>DynamicSQLRow</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>3</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select 1 country_id, 2 location_id</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <sql_fieldname>ipLookupSQL</sql_fieldname>
+    <query_only_on_change>Y</query_only_on_change>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1013</xloc>
+      <yloc>166</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -364,6 +535,36 @@
     </step>
 
   <step>
+    <name>Get cycle and file</name>
+    <type>RowsFromResult</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>cycle_id</name>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      <field>        <name>file_name</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      <field>        <name>file_id</name>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>110</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Irrelevant line</name>
     <type>Dummy</type>
     <description/>
@@ -377,6 +578,87 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>203</xloc>
       <yloc>272</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set defaults</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <replaceAllByValue/>
+      <replaceAllMask/>
+      <selectFields>Y</selectFields>
+      <selectValuesType>N</selectValuesType>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>eventTime</name>
+        <value>01&#47;01&#47;2099</value>
+        <mask>dd&#47;MM&#47;yyyy</mask>
+        </field>
+      <field>
+        <name>clientVersion</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>eventType</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>sessionID</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>partnerID</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>entryID</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>widgetID</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>uiConfID</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>controlID</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>seekIndicator</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>newPoint</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>893</xloc>
+      <yloc>231</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -466,6 +748,194 @@
     </step>
 
   <step>
+    <name>Write to log on error</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+    <fields>
+      <field>
+        <name>client_version</name>
+        </field>
+      <field>
+        <name>event_type_id</name>
+        </field>
+      <field>
+        <name>eventTime</name>
+        </field>
+      <field>
+        <name>session_id</name>
+        </field>
+      <field>
+        <name>partner_id</name>
+        </field>
+      <field>
+        <name>entry_id</name>
+        </field>
+      <field>
+        <name>unique_viewer</name>
+        </field>
+      <field>
+        <name>widget_id</name>
+        </field>
+      <field>
+        <name>ui_conf_id</name>
+        </field>
+      <field>
+        <name>uid</name>
+        </field>
+      <field>
+        <name>current_point</name>
+        </field>
+      <field>
+        <name>duration</name>
+        </field>
+      <field>
+        <name>user_ip</name>
+        </field>
+      <field>
+        <name>process_duration</name>
+        </field>
+      <field>
+        <name>control_id</name>
+        </field>
+      <field>
+        <name>seek</name>
+        </field>
+      <field>
+        <name>new_point</name>
+        </field>
+      <field>
+        <name>referrer</name>
+        </field>
+      <field>
+        <name>iplong</name>
+        </field>
+      <field>
+        <name>country_id</name>
+        </field>
+      <field>
+        <name>location_id</name>
+        </field>
+      <field>
+        <name>hour</name>
+        </field>
+      <field>
+        <name>day_id</name>
+        </field>
+      <field>
+        <name>err_desc</name>
+        </field>
+      <field>
+        <name>entry_media_type_id</name>
+        </field>
+      <field>
+        <name>entry_partner_id</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1130</xloc>
+      <yloc>229</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>check valid line </name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Calc day and hour ids</send_true_to>
+<send_false_to>Calc day and hour ids for error</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>error_reason_code</leftvalue>
+ <function>=</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>0</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>681</xloc>
+      <yloc>88</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>convert IP and domain</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var iplong = ip2number(user_ip);
+
+function ip2number (ip_address) 
+{
+	numeric_ip = 0;
+	if (ip_address) 
+	{
+		ip_array = ip_address.split(&apos;.&apos;);
+		if (ip_array.length == 4) 
+		{
+			with (Math) 
+			{
+   		    	numeric_ip = ip_array[0]*pow(256,3)+ip_array[1]*pow(256,2)+ip_array[2]*256+ip_array[3]*1;
+			}
+		}
+	}
+	return numeric_ip;
+}
+
+var referrer = unescape(referrer);
+var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM kalturadw.dwh_dim_ip_ranges WHERE &quot; + iplong + &quot;&gt;= ip_from)&quot;;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>ipLookupSQL</name>
+        <rename>ipLookupSQL</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>referrer</name>
+        <rename>referrer</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>      <field>        <name>iplong</name>
+        <rename>iplong</rename>
+        <type>Integer</type>
+        <length>10</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>895</xloc>
+      <yloc>165</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>decode http string</name>
     <type>ScriptValueMod</type>
     <description/>
@@ -549,6 +1019,45 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
     </step>
 
   <step>
+    <name>domain lookup</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dwh_dim_domain</table>
+      <connection>KalturaDW</connection>
+      <commit>100</commit>
+      <cache_size>9999</cache_size>
+      <replace>Y</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>domain</name>
+          <lookup>domain_name</lookup>
+        </key>
+        <return>
+          <name>domain_id</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1013</xloc>
+      <yloc>303</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>empty ps2 line</name>
     <type>Dummy</type>
     <description/>
@@ -590,6 +1099,242 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>483</xloc>
       <yloc>159</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>fix invalid values</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+var client_version_fixed = clientVersion != null ? substr(clientVersion,0,31) : null;
+var partnerID = isNum(partnerID) ? partnerID : -1;
+var referrer_fixed = referrer != null ? substr(referrer,0,255) : &quot;&quot;;
+var seek_fixed = seekIndicator == &quot;true&quot; || seekIndicator == &quot;1&quot; ? &quot;1&quot; : &quot;0&quot;;
+var unique_viewer_fixed = uv != null ? substr(uv,0,40) : null;
+var session_id_fixed = sessionID != null ? substr(sessionID,0,50) : null;
+var current_point_fixed = isNaN(parseInt(currentPoint)) ? 0 : currentPoint;
+var duration_fixed = isNum(duration_fixed) ? duration : null;
+
+if ( currentPoint &lt; 0 ) {
+&#47;&#47; _current_point_fixed - is in seconds NOT millis
+	switch (eventType) {
+		case 4: &#47;&#47; 25%
+                _current_point_fixed = duration_fixed&#47;4;
+				break;
+        case 5: &#47;&#47; 50%
+                _current_point_fixed = duration_fixed&#47;2;
+				break;
+		case 6: &#47;&#47;75%
+                _current_point_fixed = 3*duration_fixed&#47;4;
+				break;
+        case 7: &#47;&#47;100%
+                _current_point_fixed = duration_fixed;
+				break;
+		default:
+                _current_point_fixed = 0;        
+        		&#47;&#47; don&apos;t know - but it shouldn&apos;t be negative
+		}
+        current_point_fixed=floor(1000*_current_point_fixed);
+}
+</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>client_version_fixed</name>
+        <rename>client_version_fixed</rename>
+        <type>String</type>
+        <length>31</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>referrer_fixed</name>
+        <rename>referrer_fixed</rename>
+        <type>String</type>
+        <length>255</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>seek_fixed</name>
+        <rename>seek_fixed</rename>
+        <type>String</type>
+        <length>1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>unique_viewer_fixed</name>
+        <rename>unique_viewer_fixed</rename>
+        <type>String</type>
+        <length>40</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>session_id_fixed</name>
+        <rename>session_id_fixed</rename>
+        <type>String</type>
+        <length>50</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>current_point_fixed</name>
+        <rename>current_point_fixed</rename>
+        <type>Integer</type>
+        <length>10</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>duration_fixed</name>
+        <rename>duration_fixed</rename>
+        <type>String</type>
+        <length>20</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>partnerID</name>
+        <rename>partnerID</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1016</xloc>
+      <yloc>449</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>format errornouse line</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+var errornous_line = clientVersion + &quot;,&quot; +
+        eventType + &quot;,&quot; +
+        eventTime + &quot;,&quot; +
+        sessionID + &quot;,&quot; +
+        partnerID + &quot;,&quot; +
+        entryID + &quot;,&quot; +
+        uv + &quot;,&quot; +
+        widgetID + &quot;,&quot; +
+        uiConfID + &quot;,&quot; +
+        uid + &quot;,&quot; +
+        currentPoint + &quot;,&quot; +
+        duration + &quot;,&quot; +
+        user_ip + &quot;,&quot; +
+        processDuration + &quot;,&quot; +
+        controlID + &quot;,&quot; +
+        seekIndicator + &quot;,&quot; +
+        newPoint + &quot;,&quot; +
+        referrer;
+
+&#47;&#47; make sure line isn&apos;t TOO long
+errornous_line = substr ( errornous_line , 0 ,1023 );</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>errornous_line</name>
+        <rename>errornous_line</rename>
+        <type>String</type>
+        <length>1023</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>681</xloc>
+      <yloc>227</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>ip to location lookup error </name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+    <fields>
+      <field>
+        <name>client_version</name>
+        </field>
+      <field>
+        <name>event_type_id</name>
+        </field>
+      <field>
+        <name>eventTime</name>
+        </field>
+      <field>
+        <name>session_id</name>
+        </field>
+      <field>
+        <name>partner_id</name>
+        </field>
+      <field>
+        <name>entry_id</name>
+        </field>
+      <field>
+        <name>unique_viewer</name>
+        </field>
+      <field>
+        <name>widget_id</name>
+        </field>
+      <field>
+        <name>ui_conf_id</name>
+        </field>
+      <field>
+        <name>uid</name>
+        </field>
+      <field>
+        <name>current_point</name>
+        </field>
+      <field>
+        <name>duration</name>
+        </field>
+      <field>
+        <name>user_ip</name>
+        </field>
+      <field>
+        <name>process_duration</name>
+        </field>
+      <field>
+        <name>control_id</name>
+        </field>
+      <field>
+        <name>seek</name>
+        </field>
+      <field>
+        <name>new_point</name>
+        </field>
+      <field>
+        <name>referrer</name>
+        </field>
+      <field>
+        <name>entry_media_type_id</name>
+        </field>
+      <field>
+        <name>entry_partner_id</name>
+        </field>
+      <field>
+        <name>err_desc</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1131</xloc>
+      <yloc>165</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -839,6 +1584,53 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>392</xloc>
       <yloc>33</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>lookup entry</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <cache>Y</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>dwh_dim_entries</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>entryID</name>
+        <field>entry_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>entry_media_type_id</name>
+        <rename>entry_media_type_id</rename>
+        <default>-1</default>
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>partner_id</name>
+        <rename>entry_partner_id</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>894</xloc>
+      <yloc>87</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1181,818 +1973,6 @@ Alert(getEnvironmentVar(strVarName));</jsScript_script>
     </step>
 
   <step>
-    <name>set file fullpath</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47;Script here
-
-var file_fullpath = cycle_path + &quot;&#47;process&#47;&quot; + cycle_id +&quot;&#47;&quot; + file_name;</jsScript_script>
-      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
-        <jsScript_name>str2RegExp_Sample</jsScript_name>
-        <jsScript_script>&#47;&#47; Split&apos;s a String with a Regular Expression to an Array.
-&#47;&#47;
-&#47;&#47; Usage:
-&#47;&#47; replace(var, var, var);
-&#47;&#47; 1: String - The Variable with the Content
-&#47;&#47; 2: String - The Regular Expression to apply
-&#47;&#47;
-&#47;&#47; 2006-11-15
-&#47;&#47;
-var strToMatch = &quot;info@proconis.de&quot;;
-var strReg = &quot;^(\\w+)@([a-zA-Z_]+?)\\.([a-zA-Z]{2,3})$&quot;;
-var xArr =  str2RegExp(strToMatch, strReg);
-if ( xArr != null ) {
-    for(i=0;i&lt;xArr.length;i++) {
-	    Alert(xArr[i]);
-	}
-}
-else {
-    Alert(&quot;no match&quot;);
-}</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>file_fullpath</name>
-        <rename>file_fullpath</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>296</xloc>
-      <yloc>33</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get cycle and file</name>
-    <type>RowsFromResult</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>cycle_id</name>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        </field>      <field>        <name>file_name</name>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        </field>      <field>        <name>file_id</name>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        </field>      </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>110</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Enrich cycle_id and file_id</name>
-    <type>RowsFromResult</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>cycle_id</name>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        </field>      <field>        <name>file_id</name>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        </field>      </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>875</xloc>
-      <yloc>376</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Calc day and hour ids</name>
-    <type>Formula</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <formula><field_name>hour</field_name>
-<formula_string>hour([eventTime])</formula_string>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-       <formula><field_name>day_id</field_name>
-<formula_string>10000*year([eventTime])+100*month([eventTime])+day([eventTime])</formula_string>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>794</xloc>
-      <yloc>87</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Calc day and hour ids for error</name>
-    <type>Formula</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <formula><field_name>hour</field_name>
-<formula_string>hour([eventTime])</formula_string>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-       <formula><field_name>day_id</field_name>
-<formula_string>10000*year([eventTime])+100*month([eventTime])+day([eventTime])</formula_string>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>682</xloc>
-      <yloc>159</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get IP location</name>
-    <type>DynamicSQLRow</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>3</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select 1 country_id, 2 location_id</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>N</replace_vars>
-    <sql_fieldname>ipLookupSQL</sql_fieldname>
-    <query_only_on_change>Y</query_only_on_change>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1013</xloc>
-      <yloc>166</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get now</name>
-    <type>SystemInfo</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>now</name>
-        <type>system date (variable)</type>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>681</xloc>
-      <yloc>293</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set defaults</name>
-    <type>IfNull</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <replaceAllByValue/>
-      <replaceAllMask/>
-      <selectFields>Y</selectFields>
-      <selectValuesType>N</selectValuesType>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>eventTime</name>
-        <value>01&#47;01&#47;2099</value>
-        <mask>dd&#47;MM&#47;yyyy</mask>
-        </field>
-      <field>
-        <name>clientVersion</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      <field>
-        <name>eventType</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      <field>
-        <name>sessionID</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      <field>
-        <name>partnerID</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      <field>
-        <name>entryID</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      <field>
-        <name>widgetID</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      <field>
-        <name>uiConfID</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      <field>
-        <name>controlID</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      <field>
-        <name>seekIndicator</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      <field>
-        <name>newPoint</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>893</xloc>
-      <yloc>231</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Write to log on error</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-    <fields>
-      <field>
-        <name>client_version</name>
-        </field>
-      <field>
-        <name>event_type_id</name>
-        </field>
-      <field>
-        <name>eventTime</name>
-        </field>
-      <field>
-        <name>session_id</name>
-        </field>
-      <field>
-        <name>partner_id</name>
-        </field>
-      <field>
-        <name>entry_id</name>
-        </field>
-      <field>
-        <name>unique_viewer</name>
-        </field>
-      <field>
-        <name>widget_id</name>
-        </field>
-      <field>
-        <name>ui_conf_id</name>
-        </field>
-      <field>
-        <name>uid</name>
-        </field>
-      <field>
-        <name>current_point</name>
-        </field>
-      <field>
-        <name>duration</name>
-        </field>
-      <field>
-        <name>user_ip</name>
-        </field>
-      <field>
-        <name>process_duration</name>
-        </field>
-      <field>
-        <name>control_id</name>
-        </field>
-      <field>
-        <name>seek</name>
-        </field>
-      <field>
-        <name>new_point</name>
-        </field>
-      <field>
-        <name>referrer</name>
-        </field>
-      <field>
-        <name>iplong</name>
-        </field>
-      <field>
-        <name>country_id</name>
-        </field>
-      <field>
-        <name>location_id</name>
-        </field>
-      <field>
-        <name>hour</name>
-        </field>
-      <field>
-        <name>day_id</name>
-        </field>
-      <field>
-        <name>err_desc</name>
-        </field>
-      <field>
-        <name>entry_media_type_id</name>
-        </field>
-      <field>
-        <name>entry_partner_id</name>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1130</xloc>
-      <yloc>229</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>check valid line </name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Calc day and hour ids</send_true_to>
-<send_false_to>Calc day and hour ids for error</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>error_reason_code</leftvalue>
- <function>=</function>
- <rightvalue/>
- <value><name>constant</name><type>String</type><text>0</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>681</xloc>
-      <yloc>88</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>convert IP and domain</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var iplong = ip2number(user_ip);
-
-function ip2number (ip_address) 
-{
-	numeric_ip = 0;
-	if (ip_address) 
-	{
-		ip_array = ip_address.split(&apos;.&apos;);
-		if (ip_array.length == 4) 
-		{
-			with (Math) 
-			{
-   		    	numeric_ip = ip_array[0]*pow(256,3)+ip_array[1]*pow(256,2)+ip_array[2]*256+ip_array[3]*1;
-			}
-		}
-	}
-	return numeric_ip;
-}
-
-var referrer = unescape(referrer);
-var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM kalturadw.dwh_dim_ip_ranges WHERE &quot; + iplong + &quot;&gt;= ip_from)&quot;;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>ipLookupSQL</name>
-        <rename>ipLookupSQL</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>referrer</name>
-        <rename>referrer</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>      <field>        <name>iplong</name>
-        <rename>iplong</rename>
-        <type>Integer</type>
-        <length>10</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>895</xloc>
-      <yloc>165</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>domain lookup</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <schema/>
-      <table>dwh_dim_domain</table>
-      <connection>KalturaDW</connection>
-      <commit>100</commit>
-      <cache_size>9999</cache_size>
-      <replace>Y</replace>
-      <crc>N</crc>
-      <crcfield>hashcode</crcfield>
-      <fields>
-        <key>
-          <name>domain</name>
-          <lookup>domain_name</lookup>
-        </key>
-        <return>
-          <name>domain_id</name>
-          <creation_method>autoinc</creation_method>
-          <use_autoinc>Y</use_autoinc>
-        </return>
-      </fields>
-      <sequence/>
-      <last_update_field/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1013</xloc>
-      <yloc>303</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>fix invalid values</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47;Script here
-var client_version_fixed = clientVersion != null ? substr(clientVersion,0,31) : null;
-var partnerID = isNum(partnerID) ? partnerID : -1;
-var referrer_fixed = referrer != null ? substr(referrer,0,255) : &quot;&quot;;
-var seek_fixed = seekIndicator == &quot;true&quot; || seekIndicator == &quot;1&quot; ? &quot;1&quot; : &quot;0&quot;;
-var unique_viewer_fixed = uv != null ? substr(uv,0,40) : null;
-var session_id_fixed = sessionID != null ? substr(sessionID,0,50) : null;
-var current_point_fixed = isNaN(parseInt(currentPoint)) ? 0 : currentPoint;
-var duration_fixed = isNum(duration_fixed) ? duration : null;
-
-if ( currentPoint &lt; 0 ) {
-&#47;&#47; _current_point_fixed - is in seconds NOT millis
-	switch (eventType) {
-		case 4: &#47;&#47; 25%
-                _current_point_fixed = duration_fixed&#47;4;
-				break;
-        case 5: &#47;&#47; 50%
-                _current_point_fixed = duration_fixed&#47;2;
-				break;
-		case 6: &#47;&#47;75%
-                _current_point_fixed = 3*duration_fixed&#47;4;
-				break;
-        case 7: &#47;&#47;100%
-                _current_point_fixed = duration_fixed;
-				break;
-		default:
-                _current_point_fixed = 0;        
-        		&#47;&#47; don&apos;t know - but it shouldn&apos;t be negative
-		}
-        current_point_fixed=floor(1000*_current_point_fixed);
-}
-</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>client_version_fixed</name>
-        <rename>client_version_fixed</rename>
-        <type>String</type>
-        <length>31</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>referrer_fixed</name>
-        <rename>referrer_fixed</rename>
-        <type>String</type>
-        <length>255</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>seek_fixed</name>
-        <rename>seek_fixed</rename>
-        <type>String</type>
-        <length>1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>unique_viewer_fixed</name>
-        <rename>unique_viewer_fixed</rename>
-        <type>String</type>
-        <length>40</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>session_id_fixed</name>
-        <rename>session_id_fixed</rename>
-        <type>String</type>
-        <length>50</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>current_point_fixed</name>
-        <rename>current_point_fixed</rename>
-        <type>Integer</type>
-        <length>10</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>duration_fixed</name>
-        <rename>duration_fixed</rename>
-        <type>String</type>
-        <length>20</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>partnerID</name>
-        <rename>partnerID</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1016</xloc>
-      <yloc>449</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>format errornouse line</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47;Script here
-
-var errornous_line = clientVersion + &quot;,&quot; +
-        eventType + &quot;,&quot; +
-        eventTime + &quot;,&quot; +
-        sessionID + &quot;,&quot; +
-        partnerID + &quot;,&quot; +
-        entryID + &quot;,&quot; +
-        uv + &quot;,&quot; +
-        widgetID + &quot;,&quot; +
-        uiConfID + &quot;,&quot; +
-        uid + &quot;,&quot; +
-        currentPoint + &quot;,&quot; +
-        duration + &quot;,&quot; +
-        user_ip + &quot;,&quot; +
-        processDuration + &quot;,&quot; +
-        controlID + &quot;,&quot; +
-        seekIndicator + &quot;,&quot; +
-        newPoint + &quot;,&quot; +
-        referrer;
-
-&#47;&#47; make sure line isn&apos;t TOO long
-errornous_line = substr ( errornous_line , 0 ,1023 );</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>errornous_line</name>
-        <rename>errornous_line</rename>
-        <type>String</type>
-        <length>1023</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>681</xloc>
-      <yloc>227</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>ip to location lookup error </name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-    <fields>
-      <field>
-        <name>client_version</name>
-        </field>
-      <field>
-        <name>event_type_id</name>
-        </field>
-      <field>
-        <name>eventTime</name>
-        </field>
-      <field>
-        <name>session_id</name>
-        </field>
-      <field>
-        <name>partner_id</name>
-        </field>
-      <field>
-        <name>entry_id</name>
-        </field>
-      <field>
-        <name>unique_viewer</name>
-        </field>
-      <field>
-        <name>widget_id</name>
-        </field>
-      <field>
-        <name>ui_conf_id</name>
-        </field>
-      <field>
-        <name>uid</name>
-        </field>
-      <field>
-        <name>current_point</name>
-        </field>
-      <field>
-        <name>duration</name>
-        </field>
-      <field>
-        <name>user_ip</name>
-        </field>
-      <field>
-        <name>process_duration</name>
-        </field>
-      <field>
-        <name>control_id</name>
-        </field>
-      <field>
-        <name>seek</name>
-        </field>
-      <field>
-        <name>new_point</name>
-        </field>
-      <field>
-        <name>referrer</name>
-        </field>
-      <field>
-        <name>entry_media_type_id</name>
-        </field>
-      <field>
-        <name>entry_partner_id</name>
-        </field>
-      <field>
-        <name>err_desc</name>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1131</xloc>
-      <yloc>165</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>lookup entry</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <cache>Y</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema/>
-      <table>dwh_dim_entries</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>entryID</name>
-        <field>entry_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>entry_media_type_id</name>
-        <rename>entry_media_type_id</rename>
-        <default>-1</default>
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>partner_id</name>
-        <rename>entry_partner_id</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>894</xloc>
-      <yloc>87</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>referrer -&gt; domain</name>
     <type>RegexEval</type>
     <description/>
@@ -2070,6 +2050,58 @@ errornous_line = substr ( errornous_line , 0 ,1023 );</jsScript_script>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1017</xloc>
       <yloc>521</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>set file fullpath</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+var file_fullpath = cycle_path + &quot;&#47;process&#47;&quot; + cycle_id +&quot;&#47;&quot; + file_name;</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
+        <jsScript_name>str2RegExp_Sample</jsScript_name>
+        <jsScript_script>&#47;&#47; Split&apos;s a String with a Regular Expression to an Array.
+&#47;&#47;
+&#47;&#47; Usage:
+&#47;&#47; replace(var, var, var);
+&#47;&#47; 1: String - The Variable with the Content
+&#47;&#47; 2: String - The Regular Expression to apply
+&#47;&#47;
+&#47;&#47; 2006-11-15
+&#47;&#47;
+var strToMatch = &quot;info@proconis.de&quot;;
+var strReg = &quot;^(\\w+)@([a-zA-Z_]+?)\\.([a-zA-Z]{2,3})$&quot;;
+var xArr =  str2RegExp(strToMatch, strReg);
+if ( xArr != null ) {
+    for(i=0;i&lt;xArr.length;i++) {
+	    Alert(xArr[i]);
+	}
+}
+else {
+    Alert(&quot;no match&quot;);
+}</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>file_fullpath</name>
+        <rename>file_fullpath</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>296</xloc>
+      <yloc>33</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2181,75 +2213,6 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>582</xloc>
       <yloc>87</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>write invalid line</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>kalturadw_ds</connection>
-    <schema/>
-    <table>invalid_event_lines</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-        <field>
-          <column_name>file_id</column_name>
-          <stream_name>file_id</stream_name>
-        </field>
-        <field>
-          <column_name>event_line</column_name>
-          <stream_name>errornous_line</stream_name>
-        </field>
-        <field>
-          <column_name>error_reason_code</column_name>
-          <stream_name>error_reason_code</stream_name>
-        </field>
-        <field>
-          <column_name>error_reason</column_name>
-          <stream_name>error_reason</stream_name>
-        </field>
-        <field>
-          <column_name>insert_time</column_name>
-          <stream_name>now</stream_name>
-        </field>
-        <field>
-          <column_name>line_number</column_name>
-          <stream_name>line_number</stream_name>
-        </field>
-        <field>
-          <column_name>partner_id</column_name>
-          <stream_name>partnerID</stream_name>
-        </field>
-        <field>
-          <column_name>date_id</column_name>
-          <stream_name>day_id</stream_name>
-        </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>683</xloc>
-      <yloc>472</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2406,8 +2369,8 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
     </step>
 
   <step>
-    <name>Enrich file_id</name>
-    <type>RowsFromResult</type>
+    <name>Insert invalid line</name>
+    <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -2415,25 +2378,34 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>      <field>        <name>cycle_id</name>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        </field>      <field>        <name>file_id</name>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        </field>      </fields>     <cluster_schema/>
+    <connection>kalturadw_ds</connection>
+    <execute_each_row>Y</execute_each_row>
+    <replace_variables>Y</replace_variables>
+    <sql>call kalturadw_ds.insert_invalid_ds_line(?, ?, &apos;?&apos;, &apos;?&apos;, ?, ?, ?, ${ProcessID});</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>line_number</name></argument>
+       <argument><name>file_id</name></argument>
+       <argument><name>error_reason</name></argument>
+       <argument><name>errornous_line</name></argument>
+       <argument><name>day_id</name></argument>
+       <argument><name>partnerID</name></argument>
+       <argument><name>cycle_id</name></argument>
+    </arguments>
+     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>575</xloc>
-      <yloc>380</yloc>
+      <xloc>683</xloc>
+      <yloc>370</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Append file_id</name>
-    <type>JoinRows</type>
+    <name>Line exists</name>
+    <type>Dummy</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -2441,39 +2413,37 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <directory>%%java.io.tmpdir%%</directory>
-      <prefix>out</prefix>
-      <cache_size>500</cache_size>
-      <main>Get now</main>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue/>
- <function>=</function>
- <rightvalue/>
- </condition>
-    </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>680</xloc>
-      <yloc>380</yloc>
+      <xloc>683</xloc>
+      <yloc>515</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log - invalid line insert error</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+    <fields>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>682</xloc>
+      <yloc>441</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step_error_handling>
-      <error>
-        <source_step>parse line</source_step>
-        <target_step>Write to log</target_step>
-        <is_enabled>Y</is_enabled>
-        <nr_valuename/>
-        <descriptions_valuename>error_desc</descriptions_valuename>
-        <fields_valuename>error_fields</fields_valuename>
-        <codes_valuename>error_codes</codes_valuename>
-        <max_errors>-1</max_errors>
-        <max_pct_errors>-1</max_pct_errors>
-        <min_pct_rows>-1</min_pct_rows>
-      </error>
       <error>
         <source_step>Get IP location</source_step>
         <target_step>ip to location lookup error </target_step>
@@ -2487,6 +2457,18 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
         <min_pct_rows>-1</min_pct_rows>
       </error>
       <error>
+        <source_step>parse line</source_step>
+        <target_step>Write to log</target_step>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename>error_desc</descriptions_valuename>
+        <fields_valuename>error_fields</fields_valuename>
+        <codes_valuename>error_codes</codes_valuename>
+        <max_errors>-1</max_errors>
+        <max_pct_errors>-1</max_pct_errors>
+        <min_pct_rows>-1</min_pct_rows>
+      </error>
+      <error>
         <source_step>referrer -&gt; domain</source_step>
         <target_step>Write to log on error</target_step>
         <is_enabled>Y</is_enabled>
@@ -2494,6 +2476,18 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
         <descriptions_valuename>desc</descriptions_valuename>
         <fields_valuename>codes</fields_valuename>
         <codes_valuename>fields</codes_valuename>
+        <max_errors>-1</max_errors>
+        <max_pct_errors>-1</max_pct_errors>
+        <min_pct_rows>-1</min_pct_rows>
+      </error>
+      <error>
+        <source_step>Insert invalid line</source_step>
+        <target_step>Write to log - invalid line insert error</target_step>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename>desc</descriptions_valuename>
+        <fields_valuename>fields</fields_valuename>
+        <codes_valuename>codes</codes_valuename>
         <max_errors>-1</max_errors>
         <max_pct_errors>-1</max_pct_errors>
         <min_pct_rows>-1</min_pct_rows>
