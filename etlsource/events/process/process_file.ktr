@@ -1784,7 +1784,7 @@ if (lineType == 2){
 	newPoint = getValue(queryStringDictionary, &quot;newPoint&quot;);
 	referrer = getValue(queryStringDictionary, &quot;referrer&quot;);
 	eventTimestamp = getValue(queryStringDictionary, &quot;eventTimestamp&quot;);
-	strPartnerID = getValue(queryStringDictionary, &quot;partner_id&quot;);
+	strPartnerID = getValue(queryStringDictionary, &quot;partnerId&quot;);
 	partnerID = isNaN(parseInt(strPartnerID)) ? -1 : str2num(strPartnerID);
 	entryID = getValue(queryStringDictionary, &quot;entryId&quot;);
 	uid = getValue(queryStringDictionary,&quot;userId&quot;);
