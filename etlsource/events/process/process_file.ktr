@@ -1798,15 +1798,17 @@ if (lineType == 2){
 &#47;&#47; Parse a queryString into a dictionary
 function parseQueryString(s){
 	var sDictionary = {};
-	s.replace(&#47;([^=&amp;]+)=([^&amp;]*)&#47;g, function(m, key, value){ 
-        sDictionary[key] = value; 
-    }); 
+	if (s != null) {
+		s.replace(&#47;([^=&amp;]+)=([^&amp;]*)&#47;g, function(m, key, value){ 
+        	sDictionary[key] = value; 
+    	});
+	} 
 	return sDictionary;
 }
 
 function getValue(dictionary, key){
 	var val = dictionary[keyPrefix + key];
-	return val ? replace(val, &apos;,&apos;, &apos;~&apos;) : null;
+	return val != null ? replace(val, &apos;,&apos;, &apos;~&apos;) : null;
 }
 </jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
