@@ -565,6 +565,41 @@
     </step>
 
   <step>
+    <name>Insert invalid line</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>kalturadw_ds</connection>
+    <execute_each_row>Y</execute_each_row>
+    <replace_variables>Y</replace_variables>
+    <sql>call kalturadw_ds.insert_invalid_ds_line(&apos;?&apos;, &apos;?&apos;, &apos;?&apos;, &apos;?&apos;, &apos;?&apos;, &apos;?&apos;, &apos;?&apos;, ${ProcessID});</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>line_number</name></argument>
+       <argument><name>file_id</name></argument>
+       <argument><name>error_reason</name></argument>
+       <argument><name>errornous_line</name></argument>
+       <argument><name>day_id</name></argument>
+       <argument><name>partnerID</name></argument>
+       <argument><name>cycle_id</name></argument>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>683</xloc>
+      <yloc>370</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Irrelevant line</name>
     <type>Dummy</type>
     <description/>
@@ -578,6 +613,24 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>203</xloc>
       <yloc>272</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Line exists</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>683</xloc>
+      <yloc>515</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -743,6 +796,28 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>404</xloc>
       <yloc>242</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log - invalid line insert error</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+    <fields>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>682</xloc>
+      <yloc>441</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1653,24 +1728,23 @@ var keyPrefix = &quot;&quot;;
 var ignoreLine = false;
 
 var clientVersion = &quot;0.5:0.1&quot;;
-var eventType = &quot;&quot;;
-var sessionID = &quot;&quot;;
-var partnerID = &quot;&quot;;
-var entryID = &quot;&quot;;
-var uniqueViewer = &quot;&quot;;
-var widgetID = &quot;&quot;;
-var uiConfID = &quot;&quot;;
-var uid = &quot;&quot;;
-var currentPoint = &quot;&quot;;
-var duration = &quot;&quot;;
-var processDuration = &quot;&quot;;
-var controlID = &quot;&quot;;
+var eventType = null;
+var sessionID = null;
+var partnerID = null;
+var entryID = null;
+var uniqueViewer = null;
+var widgetID = null;
+var uiConfID = null;
+var uid = null;
+var currentPoint = null;
+var duration = null;
+var processDuration = null;
+var controlID = null;
 var seekIndicator = &quot;0&quot;;
-var newPoint = &quot;&quot;;
-var referrer = &quot;&quot;;
-var eventTimestamp = &quot;&quot;;
+var newPoint = null;
+var referrer = null;
+var eventTimestamp = null;
 
-&#47;&#47; TODO: parse it to the proper string format
 &#47;&#47; Trim &quot;[&quot; and set it to a date
 eventTime = str2date(substr(raw_datetime,1),&apos;dd&#47;MMM&#47;yyyy:HH:mm:ss&apos;);
 
@@ -1723,26 +1797,6 @@ if (lineType == 2){
 
 &#47;&#47; Parse a queryString into a dictionary
 function parseQueryString(s){
-	&#47;&#47;sVars = s.split(&apos;&amp;&apos;);
-	&#47;&#47;var sDictionaryDefinition = &quot;&quot;;
-	&#47;&#47;firstRow = true;
-	&#47;&#47;for (i=0;i&lt;sVars.length;i++) {
-	&#47;&#47;	keyValuePair = sVars[i];
-	&#47;&#47;	seperatorLoaction = indexOf(keyValuePair, &quot;=&quot;);
-	&#47;&#47;	if (seperatorLoaction &gt; - 1) {
-	&#47;&#47;		key = substr(keyValuePair, 0, seperatorLoaction);
-	&#47;&#47;		value = substr(keyValuePair, seperatorLoaction + 1);
-	&#47;&#47;		if (!firstRow) {
-	&#47;&#47;			sDictionaryDefinition += &quot;,&quot;;
-	&#47;&#47;		} else {
-	&#47;&#47;			firstRow = false;
-	&#47;&#47;		}
-	&#47;&#47;		&#47;&#47; Handle single quotes
-	&#47;&#47;		value = replace(value, &apos;\&apos;&apos;,&apos;\\\\\\\&apos;&apos;);
-	&#47;&#47;		sDictionaryDefinition += &quot;&apos;&quot; + key + &quot;&apos;&quot; + &quot;:&quot; +  &quot;&apos;&quot; +  value +  &quot;&apos;&quot;;
-	&#47;&#47;	}
-	&#47;&#47;}
-	&#47;&#47;eval(&quot;sDictionary = {&quot; + sDictionaryDefinition + &quot;};&quot;);
 	var sDictionary = {};
 	s.replace(&#47;([^=&amp;]+)=([^&amp;]*)&#47;g, function(m, key, value){ 
         sDictionary[key] = value; 
@@ -1752,8 +1806,7 @@ function parseQueryString(s){
 
 function getValue(dictionary, key){
 	var val = dictionary[keyPrefix + key];
-	return val ? replace(val, &apos;,&apos;, &apos;~&apos;) : &quot;&quot;;
-	&#47;&#47;return val ? val : &quot;&quot;;
+	return val ? replace(val, &apos;,&apos;, &apos;~&apos;) : null;
 }
 </jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
@@ -2368,85 +2421,22 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
       </GUI>
     </step>
 
-  <step>
-    <name>Insert invalid line</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>kalturadw_ds</connection>
-    <execute_each_row>Y</execute_each_row>
-    <replace_variables>Y</replace_variables>
-    <sql>call kalturadw_ds.insert_invalid_ds_line(?, ?, &apos;?&apos;, &apos;?&apos;, ?, ?, ?, ${ProcessID});</sql>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-       <argument><name>line_number</name></argument>
-       <argument><name>file_id</name></argument>
-       <argument><name>error_reason</name></argument>
-       <argument><name>errornous_line</name></argument>
-       <argument><name>day_id</name></argument>
-       <argument><name>partnerID</name></argument>
-       <argument><name>cycle_id</name></argument>
-    </arguments>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>683</xloc>
-      <yloc>370</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Line exists</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>683</xloc>
-      <yloc>515</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Write to log - invalid line insert error</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-    <fields>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>682</xloc>
-      <yloc>441</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step_error_handling>
       <error>
         <source_step>Get IP location</source_step>
         <target_step>ip to location lookup error </target_step>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename>desc</descriptions_valuename>
+        <fields_valuename>fields</fields_valuename>
+        <codes_valuename>codes</codes_valuename>
+        <max_errors>-1</max_errors>
+        <max_pct_errors>-1</max_pct_errors>
+        <min_pct_rows>-1</min_pct_rows>
+      </error>
+      <error>
+        <source_step>Insert invalid line</source_step>
+        <target_step>Write to log - invalid line insert error</target_step>
         <is_enabled>Y</is_enabled>
         <nr_valuename/>
         <descriptions_valuename>desc</descriptions_valuename>
@@ -2476,18 +2466,6 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
         <descriptions_valuename>desc</descriptions_valuename>
         <fields_valuename>codes</fields_valuename>
         <codes_valuename>fields</codes_valuename>
-        <max_errors>-1</max_errors>
-        <max_pct_errors>-1</max_pct_errors>
-        <min_pct_rows>-1</min_pct_rows>
-      </error>
-      <error>
-        <source_step>Insert invalid line</source_step>
-        <target_step>Write to log - invalid line insert error</target_step>
-        <is_enabled>Y</is_enabled>
-        <nr_valuename/>
-        <descriptions_valuename>desc</descriptions_valuename>
-        <fields_valuename>fields</fields_valuename>
-        <codes_valuename>codes</codes_valuename>
         <max_errors>-1</max_errors>
         <max_pct_errors>-1</max_pct_errors>
         <min_pct_rows>-1</min_pct_rows>
