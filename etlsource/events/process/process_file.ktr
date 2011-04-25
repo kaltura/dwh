@@ -577,7 +577,7 @@
     <connection>kalturadw_ds</connection>
     <execute_each_row>Y</execute_each_row>
     <replace_variables>Y</replace_variables>
-    <sql>call kalturadw_ds.insert_invalid_ds_line(&apos;?&apos;, &apos;?&apos;, &apos;?&apos;, &apos;?&apos;, &apos;?&apos;, &apos;?&apos;, &apos;?&apos;, ${ProcessID});</sql>
+    <sql>call kalturadw_ds.insert_invalid_ds_line(?, ?, &apos;?&apos;, &apos;?&apos;, ?, ?, ?, ${ProcessID});</sql>
     <insert_field/>
     <update_field/>
     <delete_field/>
@@ -669,11 +669,6 @@
         </field>
       <field>
         <name>sessionID</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      <field>
-        <name>partnerID</name>
         <value>-1</value>
         <mask/>
         </field>
@@ -1193,7 +1188,7 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
 var client_version_fixed = clientVersion != null ? substr(clientVersion,0,31) : null;
-var partnerID = isNum(partnerID) ? partnerID : -1;
+&#47;&#47;var partnerID = isNum(partnerID) ? partnerID : -1;
 var referrer_fixed = referrer != null ? substr(referrer,0,255) : &quot;&quot;;
 var seek_fixed = seekIndicator == &quot;true&quot; || seekIndicator == &quot;1&quot; ? &quot;1&quot; : &quot;0&quot;;
 var unique_viewer_fixed = uv != null ? substr(uv,0,40) : null;
@@ -1766,7 +1761,8 @@ if (lineType == 2){
 		if (uv.length &gt; 34 &amp;&amp; substr(uv,0,3) == &quot;uv_&quot;) {
 			uv = substr(uv,3);
 		}
-		partnerID = getValue(queryStringDictionary, &quot;partner_id&quot;);
+		strPartnerID = getValue(queryStringDictionary, &quot;partner_id&quot;));
+		partnerID = isNaN(parseInt(strPartnerID)) ? -1 : str2num(strPartnerID);
 		entryID = getValue(queryStringDictionary, &quot;obj_id&quot;);
 		uid = getValue(queryStringDictionary, &quot;uid&quot;);
 		eventType = decode(queryStringDictionary[&quot;command&quot;], &apos;view&apos;, 2, &apos;play&apos;,3, 0);
@@ -1931,7 +1927,7 @@ Alert(getEnvironmentVar(strVarName));</jsScript_script>
         <replace>N</replace>
       </field>      <field>        <name>partnerID</name>
         <rename>partnerID</rename>
-        <type>String</type>
+        <type>Integer</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
@@ -2184,7 +2180,11 @@ if (eventType == null || eventType == &quot;&quot;)
 {
 	error_reason_code=1;
 	error_reason=&quot;missing event type&quot;;
-}
+}&#47;*
+else if (partnerID == -1)
+{
+	error_reason=&quot;missing partner id&quot;;
+}*&#47;
 else if ( year(eventTime)&gt;2020 ) &#47;&#47; validate event time is less than 2020
 {
 	error_reason_code=2;
@@ -2210,6 +2210,7 @@ else if ( sessionID==&quot;false&quot; )
 	error_reason_code=7;
 	error_reason=&quot;invalid session id&quot;;
 }
+
 </jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>str2date_Sample</jsScript_name>
