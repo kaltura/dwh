@@ -2017,7 +2017,7 @@ Alert(getEnvironmentVar(strVarName));</jsScript_script>
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>408</xloc>
+      <xloc>407</xloc>
       <yloc>158</yloc>
       <draw>Y</draw>
       </GUI>
@@ -2209,6 +2209,10 @@ else if ( sessionID==&quot;false&quot; )
 {
 	error_reason_code=7;
 	error_reason=&quot;invalid session id&quot;;
+} else if (isNaN(uiConfID))
+{
+	error_reason_code=8;
+	error_reason=&quot;invalid uiconf id&quot;;
 }
 
 </jsScript_script>
