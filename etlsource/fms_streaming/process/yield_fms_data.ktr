@@ -252,7 +252,8 @@
     <compatible>N</compatible>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>entry_id = null;
+        <jsScript_script>event_time = null;
+entry_id = null;
 external_stream_id = null;
 bitrate = -1;
 
@@ -264,12 +265,12 @@ if (x_sname) {
 		if (seperatorLocation &gt; -1) {
 			entry_id = substr(entry_id_bitrate, 0, seperatorLocation);
 			bitrate_string =  substr(entry_id_bitrate, seperatorLocation + 1);
+			if (!isNaN(bitrate_string)){
+				bitrate = str2num(bitrate_string);
+			}
 		}
 		external_stream_id = x_sname_array[1];
 		x_sname = entry_id + &quot;@&quot; + external_stream_id;
-		if (!isNaN(bitrate_string)){
-			bitrate = str2num(bitrate_string);
-		}
 	}
 }</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>x_sname</name>
