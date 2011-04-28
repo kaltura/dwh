@@ -12,7 +12,7 @@ do      case "$o" in
         esac
 done
 
-/bin/cp -r $ROOT_DIR/pentaho-plugins/MySQLInserter32/MySQLInserter $KITCHEN/plugins/steps/
-/bin/cp -r $ROOT_DIR/pentaho-plugins/MappingFieldRunner32/MappingFieldRunner $KITCHEN/plugins/steps/
-/bin/cp -r $ROOT_DIR/pentaho-plugins/GetFTPFileNames32/GetFTPFileNames $KITCHEN/plugins/steps/
-/bin/cp -r $ROOT_DIR/pentaho-plugins/FetchFTPFile32/FetchFTPFile $KITCHEN/plugins/steps/
+rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/MySQLInserter32/MySQLInserter $KITCHEN/plugins/steps/
+rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/MappingFieldRunner32/MappingFieldRunner $KITCHEN/plugins/steps/
+rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/GetFTPFileNames32/GetFTPFileNames $KITCHEN/plugins/steps/
+rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/FetchFTPFile32/FetchFTPFile $KITCHEN/plugins/steps/
