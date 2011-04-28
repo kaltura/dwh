@@ -1,17 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<job>
-  <name>events cycle process</name>
+<transformation>
+  <info>
+    <name>yield_fms_data</name>
     <description/>
     <extended_description/>
-    <job_version/>
-    <job_status>0</job_status>
-  <directory>&#47;</directory>
-  <created_user>-</created_user>
-  <created_date>2010&#47;09&#47;12 12:04:39.476</created_date>
-  <modified_user>-</modified_user>
-  <modified_date>2010&#47;09&#47;12 12:04:39.476</modified_date>
+    <trans_version/>
+    <directory>&#47;</directory>
     <parameters>
     </parameters>
+    <log>
+      <read/>
+      <write/>
+      <input/>
+      <output/>
+      <update/>
+      <rejected/>
+      <connection/>
+      <table/>
+      <step_performance_table/>
+      <use_batchid>Y</use_batchid>
+      <use_logfield>N</use_logfield>
+      <size_limit_lines/>
+    </log>
+    <maxdate>
+      <connection/>
+      <table/>
+      <field/>
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file/>
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+  <modified_user>-</modified_user>
+  <modified_date>2011&#47;04&#47;21 14:07:21.119</modified_date>
+  </info>
+  <notepads>
+  </notepads>
   <connection>
     <name>Kaltura</name>
     <server>${OpDbHostName}</server>
@@ -158,226 +198,115 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
-    <slaveservers>
-    </slaveservers>
-  <logconnection>KalturaLogs</logconnection>
-  <logtable>etl_log</logtable>
-  <size_limit_lines/>
-   <use_batchid>Y</use_batchid>
-   <pass_batchid>N</pass_batchid>
-   <use_logfield>Y</use_logfield>
-   <shared_objects_file/>
-  <entries>
-    <entry>
-      <name>START</name>
-      <description>Special entries</description>
-      <type>SPECIAL</type>
-      <start>Y</start>
-      <dummy>N</dummy>
-      <repeat>N</repeat>
-      <schedulerType>0</schedulerType>
-      <intervalSeconds>0</intervalSeconds>
-      <intervalMinutes>60</intervalMinutes>
-      <hour>12</hour>
-      <minutes>0</minutes>
-      <weekDay>1</weekDay>
-      <DayOfMonth>1</DayOfMonth>
-      <parallel>N</parallel>
+  <order>
+  <hop> <from>Mapping input specification</from><to>Yield data</to><enabled>Y</enabled> </hop>  <hop> <from>Yield data</from><to>Mapping output specification</to><enabled>Y</enabled> </hop>  </order>
+  <step>
+    <name>Mapping input specification</name>
+    <type>MappingInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+        <select_unspecified>Y</select_unspecified>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>138</xloc>
+      <yloc>141</yloc>
       <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>59</xloc>
-      <yloc>108</yloc>
-      </entry>
-    <entry>
-      <name>Set Main Variables</name>
-      <description>Set variables</description>
-      <type>SET_VARIABLES</type>
-      <replacevars>N</replacevars>
-      <fields>
-        <field>
-          <variable_name>ProcessID</variable_name>
-          <variable_value>${EventsProcessID}</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-        <field>
-          <variable_name>ProcessJob</variable_name>
-          <variable_value>${EtlBasePath}&#47;events&#47;process&#47;process_events.kjb</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-        <field>
-          <variable_name>FetchMethod</variable_name>
-          <variable_value>${EventsFetchMethod}</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-        <field>
-          <variable_name>FetchJob</variable_name>
-          <variable_value>${EtlBasePath}&#47;common&#47;fetch_files.kjb</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-        <field>
-          <variable_name>FetchFTPServer</variable_name>
-          <variable_value>${EventsFTPServer}</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-        <field>
-          <variable_name>FetchFTPPort</variable_name>
-          <variable_value>${EventsFTPPort}</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-        <field>
-          <variable_name>FetchFTPUser</variable_name>
-          <variable_value>${EventsFTPUser}</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-        <field>
-          <variable_name>FetchFTPPassword</variable_name>
-          <variable_value>${EventsFTPPassword}</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-        <field>
-          <variable_name>FetchWildcard</variable_name>
-          <variable_value>${EventsWildcard}</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-        <field>
-          <variable_name>FetchLogsDir</variable_name>
-          <variable_value>${EventsLogsDir}</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-        <field>
-          <variable_name>TempDestination</variable_name>
-          <variable_value>${ExportPath}&#47;dwh_inbound&#47;events</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-        <field>
-          <variable_name>IsArchived</variable_name>
-          <variable_value>True</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-      </fields>
-      <parallel>N</parallel>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Mapping output specification</name>
+    <type>MappingOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>415</xloc>
+      <yloc>139</yloc>
       <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>241</xloc>
-      <yloc>106</yloc>
-      </entry>
-    <entry>
-      <name>generate_cycle</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${EtlBasePath}cycles&#47;get_files_and_generate_cycle.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Yield data</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>2</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>entry_id = null;
+external_stream_id = null;
+bitrate = -1;
+
+if (x_sname) {
+	x_sname_array = x_sname.split(&apos;@&apos;);
+	if (x_sname_array.length == 2) {
+		entry_id_bitrate = x_sname_array[0];
+		seperatorLocation = entry_id_bitrate.lastIndexOf(&apos;_&apos;);
+		if (seperatorLocation &gt; -1) {
+			entry_id = substr(entry_id_bitrate, 0, seperatorLocation);
+			bitrate_string =  substr(entry_id_bitrate, seperatorLocation + 1);
+		}
+		external_stream_id = x_sname_array[1];
+		x_sname = entry_id + &quot;@&quot; + external_stream_id;
+		if (!isNaN(bitrate_string)){
+			bitrate = str2num(bitrate_string);
+		}
+	}
+}</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>x_sname</name>
+        <rename>x_sname</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>      <field>        <name>entry_id</name>
+        <rename>entry_id</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>bitrate</name>
+        <rename>bitrate</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>external_stream_id</name>
+        <rename>external_stream_id</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>264</xloc>
+      <yloc>136</yloc>
       <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>379</xloc>
-      <yloc>107</yloc>
-      </entry>
-    <entry>
-      <name>process cycle</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${EtlBasePath}cycles&#47;process_cycle.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>510</xloc>
-      <yloc>107</yloc>
-      </entry>
-    <entry>
-      <name>transfer cycle</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${EtlBasePath}cycles&#47;transfer_cycle.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>627</xloc>
-      <yloc>106</yloc>
-      </entry>
-  </entries>
-  <hops>
-    <hop>
-      <from>Set Main Variables</from>
-      <to>generate_cycle</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>Set Main Variables</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>generate_cycle</from>
-      <to>process cycle</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>process cycle</from>
-      <to>transfer cycle</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-  </hops>
-  <notepads>
-  </notepads>
-</job>
+      </GUI>
+    </step>
+
+  <step_error_handling>
+  </step_error_handling>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+</transformation>

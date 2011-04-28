@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>fetch_files</name>
+  <name>fms_cycle_process</name>
     <description/>
     <extended_description/>
     <job_version/>
     <job_status>0</job_status>
   <directory>&#47;</directory>
   <created_user>-</created_user>
-  <created_date>2010&#47;09&#47;12 12:21:52.748</created_date>
+  <created_date>2010&#47;09&#47;12 12:04:39.476</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2010&#47;09&#47;12 12:21:52.748</modified_date>
+  <modified_date>2010&#47;09&#47;12 12:04:39.476</modified_date>
     <parameters>
     </parameters>
   <connection>
@@ -45,31 +45,6 @@
     <port>${OpDbPort}</port>
     <username>${OpWritableDbUser}</username>
     <password>${OpWritableDbPassword}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SQL_CONNECT</code><attribute>SET SESSION sql_log_bin=0</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>Kaltura_Writeable</name>
-    <server>${OpWriteableDbHost}</server>
-    <type>MYSQL</type>
-    <access>Native</access>
-    <database>kaltura</database>
-    <port>${OpDbPort}</port>
-    <username>${OpWriteableDbUser}</username>
-    <password>${OpWriteableDbPassword}</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -210,55 +185,87 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>140</xloc>
-      <yloc>80</yloc>
+      <xloc>120</xloc>
+      <yloc>100</yloc>
       </entry>
     <entry>
-      <name>Move Files</name>
-      <description>Move Files</description>
-      <type>MOVE_FILES</type>
-      <move_empty_folders>N</move_empty_folders>
-      <arg_from_previous>N</arg_from_previous>
-      <include_subfolders>N</include_subfolders>
-      <add_result_filesname>N</add_result_filesname>
-      <destination_is_a_file>N</destination_is_a_file>
-      <create_destination_folder>N</create_destination_folder>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <nr_errors_less_than>10</nr_errors_less_than>
-      <success_condition>success_if_no_errors</success_condition>
-      <AddDateBeforeExtension>N</AddDateBeforeExtension>
-      <DoNotKeepFolderStructure>N</DoNotKeepFolderStructure>
-      <iffileexists>overwrite_file</iffileexists>
-      <destinationFolder/>
-      <ifmovedfileexists>do_nothing</ifmovedfileexists>
-      <moved_date_time_format/>
-      <create_move_to_folder>N</create_move_to_folder>
-      <add_moved_date>N</add_moved_date>
-      <add_moved_time>N</add_moved_time>
-      <SpecifyMoveFormat>N</SpecifyMoveFormat>
-      <AddMovedDateBeforeExtension>N</AddMovedDateBeforeExtension>
-      <simulate>N</simulate>
+      <name>Set variables</name>
+      <description>Set variables</description>
+      <type>SET_VARIABLES</type>
+      <replacevars>N</replacevars>
       <fields>
         <field>
-          <source_filefolder>${TempDestination}</source_filefolder>
-          <destination_filefolder>${GeneratePath}&#47;${ProcessName}</destination_filefolder>
-          <wildcard>${FetchWildcard}</wildcard>
+          <variable_name>ProcessID</variable_name>
+          <variable_value>${FMSProcessID}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>ProcessJob</variable_name>
+          <variable_value>${EtlBasePath}&#47;fms_streaming&#47;process&#47;process_fms_events.kjb</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchWildcard</variable_name>
+          <variable_value>${FMSFileWildcard}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchJob</variable_name>
+          <variable_value>${EtlBasePath}&#47;common&#47;fetch_files.kjb</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchMethod</variable_name>
+          <variable_value>${FMSFetchMethod}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPServer</variable_name>
+          <variable_value>${FMSFtpHost}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPPort</variable_name>
+          <variable_value>${FMSFtpPort}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPUser</variable_name>
+          <variable_value>${FMSFtpUser}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchFTPPassword</variable_name>
+          <variable_value>${FMSFtpPassword}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FetchLogsDir</variable_name>
+          <variable_value>${FMSLogsDir}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>TempDestination</variable_name>
+          <variable_value>${ExportPath}&#47;dwh_inbound&#47;fms_streaming</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>IsArchived</variable_name>
+          <variable_value>True</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
         </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>432</xloc>
-      <yloc>79</yloc>
+      <xloc>240</xloc>
+      <yloc>99</yloc>
       </entry>
     <entry>
-      <name>Get bandwidth source files</name>
+      <name>generate_cycle</name>
       <description>Job</description>
       <type>JOB</type>
-      <filename>${EtlBasePath}&#47;common&#47;get_source_files.kjb</filename>
+      <filename>${EtlBasePath}cycles&#47;get_files_and_generate_cycle.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -277,14 +284,66 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>282</xloc>
-      <yloc>79</yloc>
+      <xloc>360</xloc>
+      <yloc>100</yloc>
+      </entry>
+    <entry>
+      <name>process cycle</name>
+      <description>Job</description>
+      <type>JOB</type>
+      <filename>${EtlBasePath}cycles&#47;process_cycle.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>460</xloc>
+      <yloc>100</yloc>
+      </entry>
+    <entry>
+      <name>transfer cycle</name>
+      <description>Job</description>
+      <type>JOB</type>
+      <filename>${EtlBasePath}cycles&#47;transfer_cycle.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>567</xloc>
+      <yloc>100</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>Get bandwidth source files</to>
+      <to>Set variables</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -292,8 +351,26 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Get bandwidth source files</from>
-      <to>Move Files</to>
+      <from>process cycle</from>
+      <to>transfer cycle</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set variables</from>
+      <to>generate_cycle</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>generate_cycle</from>
+      <to>process cycle</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
