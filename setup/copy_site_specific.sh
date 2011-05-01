@@ -13,3 +13,4 @@ do      case "$o" in
 done
 
 cp $SITE_SPECIFIC_DIR/.kettle/kettle.properties $ROOT_DIR/.kettle/kettle.properties
+cp $SITE_SPECIFIC_DIR/etlsource/execute/* $ROOT_DIR/etlsource/execute
