@@ -19,7 +19,7 @@ USE `kalturadw_ds`;
 DROP TABLE IF EXISTS `locks`;
 
 CREATE TABLE `locks` (
-  `lock_id` int(11) NOT NULL AUTO_INCREMENT,
+  `lock_id` int(11) NOT NULL,
   `lock_name` varchar(30) DEFAULT NULL,
   `lock_time` datetime DEFAULT NULL,
   `lock_state` tinyint(1) DEFAULT NULL,
