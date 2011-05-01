@@ -6,4 +6,4 @@ CREATE TABLE version_management (
 	`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO version_management(VERSION, filename) VALUES(5999, 'version_table.sql');
+	INSERT INTO version_management(VERSION, filename) VALUES(5999, 'version_table.sql');

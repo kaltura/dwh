@@ -1,6 +1,7 @@
 CREATE TABLE kalturadw_ds.ds_events
      (
-	  file_id INT NOT NULL
+	 `cycle_id` int(11) NOT NULL
+	, file_id INT NOT NULL
 	, event_id INT  NOT NULL
 	, event_type_id SMALLINT  NOT NULL
 	, client_version VARCHAR(31)
@@ -31,7 +32,7 @@ CREATE TABLE kalturadw_ds.ds_events
 	, entry_partner_id INT
 	, referrer_id INT(11)
      ) ENGINE=INNODB  DEFAULT CHARSET=utf8  
-     PARTITION BY 	LIST(file_id) (
+     PARTITION BY 	LIST(cycle_id) (
 	PARTITION p_0 VALUES IN (0)
 
 	);

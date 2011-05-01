@@ -1,5 +1,6 @@
-﻿DROP TABLE IF EXISTS `kalturadw_ds`.`ods_fms_session_events`;
-CREATE TABLE `kalturadw_ds`.`ods_fms_session_events` (
+﻿DROP TABLE IF EXISTS `kalturadw_ds`.`ds_fms_session_events`;
+CREATE TABLE `kalturadw_ds`.`ds_fms_session_events` (
+  `cycle_id` INT(11) NOT NULL,
   `file_id` int(11) unsigned NOT NULL,
   `event_type_id` tinyint(3) unsigned NOT NULL,
   `event_category_id` tinyint(3) unsigned NOT NULL,
@@ -46,5 +47,5 @@ CREATE TABLE `kalturadw_ds`.`ods_fms_session_events` (
   `server_to_client_stream_bytes` int(10) unsigned DEFAULT NULL,
   `server_to_client_qos_bytes` int(10) unsigned DEFAULT NULL
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
-/*!50100 PARTITION BY LIST (file_id)
+/*!50100 PARTITION BY LIST (cycle_id)
 (PARTITION p_0 VALUES IN (0) ENGINE = INNODB) */;
