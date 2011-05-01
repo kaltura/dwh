@@ -236,7 +236,7 @@ caluculate all the non calculated aggr from the aggr_managment table
 AND 
 the ones of type &quot;partner&quot; that are 3 days old - this will allow fixing bandwidth aggregations that relay on pending logs that arrive 3 days late
 *&#47;
-SELECT 	aggr_name,aggr_day	 
+SELECT 	aggr_name,aggr_day, hour_id aggr_hour 
 FROM kalturadw.aggr_managment 
 WHERE 	aggr_day &lt; DATE(NOW()) AND 
 		is_calculated = 0 AND 
