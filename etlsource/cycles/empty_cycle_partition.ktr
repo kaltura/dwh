@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>empty_ods_partition</name>
+    <name>empty_cycle_partition</name>
     <description/>
     <extended_description/>
     <trans_version/>
+    <trans_status>0</trans_status>
     <directory>&#47;</directory>
     <parameters>
     </parameters>
@@ -65,7 +66,6 @@
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.characterEncoding</code><attribute>utf8</attribute></attribute>
       <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
@@ -254,7 +254,7 @@
     <connection>kalturadw_ds</connection>
     <execute_each_row>Y</execute_each_row>
     <replace_variables>N</replace_variables>
-    <sql>call kalturadw_ds.empty_cycle_partition(&apos;?&apos;);</sql>
+    <sql>call kalturadw_ds.empty_cycle_partition(?);</sql>
     <insert_field/>
     <update_field/>
     <delete_field/>

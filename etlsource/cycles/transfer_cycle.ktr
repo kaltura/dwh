@@ -225,7 +225,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>drop partition</from><to>Transfer Fail</to><enabled>Y</enabled> </hop>  <hop> <from>Transfer Fail</from><to>set cycle status fail</to><enabled>Y</enabled> </hop>  <hop> <from>set cycle status transfer</from><to>Transfer Fail</to><enabled>Y</enabled> </hop>  <hop> <from>set cycle status transfer</from><to>transfer partition</to><enabled>Y</enabled> </hop>  <hop> <from>transfer partition</from><to>drop partition</to><enabled>Y</enabled> </hop>  <hop> <from>transfer partition</from><to>Transfer Fail</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>Formula</to><enabled>Y</enabled> </hop>  <hop> <from>drop partition</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>set cycle status done</from><to>Transfer Fail</to><enabled>Y</enabled> </hop>  <hop> <from>set cycle status fail</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>set cycle status done</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>  <hop> <from>get cycle id</from><to>Join Rows</to><enabled>Y</enabled> </hop>  <hop> <from>Join Rows</from><to>set cycle status transfer</to><enabled>Y</enabled> </hop>  <hop> <from>Get table</from><to>Join Rows</to><enabled>Y</enabled> </hop>  <hop> <from>Get process id</from><to>Get table</to><enabled>Y</enabled> </hop>  <hop> <from>Formula</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Move cycle folder to transfer</from><to>Zip files</to><enabled>Y</enabled> </hop>  <hop> <from>Move cycle folder to transfer</from><to>Transfer Fail</to><enabled>Y</enabled> </hop>  <hop> <from>Zip files</from><to>Transfer Fail</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log</from><to>Set isArchived default value</to><enabled>Y</enabled> </hop>  <hop> <from>Delete cycle folder</from><to>Transfer Fail</to><enabled>Y</enabled> </hop>  <hop> <from>Set isArchived default value</from><to>Define finalization shell commands</to><enabled>Y</enabled> </hop>  <hop> <from>Define finalization shell commands</from><to>Filter rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>Move cycle folder to transfer</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>Delete cycle folder</to><enabled>Y</enabled> </hop>  <hop> <from>Zip files</from><to>select cycle_id archive route</to><enabled>Y</enabled> </hop>  <hop> <from>select cycle_id archive route</from><to>set cycle status done</to><enabled>Y</enabled> </hop>  <hop> <from>Delete cycle folder</from><to>select cycle_id delete route</to><enabled>Y</enabled> </hop>  <hop> <from>select cycle_id delete route</from><to>set cycle status done</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>drop partition</from><to>Transfer Fail</to><enabled>Y</enabled> </hop>  <hop> <from>Transfer Fail</from><to>set cycle status fail</to><enabled>Y</enabled> </hop>  <hop> <from>set cycle status transfer</from><to>Transfer Fail</to><enabled>Y</enabled> </hop>  <hop> <from>set cycle status transfer</from><to>transfer partition</to><enabled>Y</enabled> </hop>  <hop> <from>transfer partition</from><to>drop partition</to><enabled>Y</enabled> </hop>  <hop> <from>transfer partition</from><to>Transfer Fail</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>Formula</to><enabled>Y</enabled> </hop>  <hop> <from>drop partition</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>set cycle status done</from><to>Transfer Fail</to><enabled>Y</enabled> </hop>  <hop> <from>set cycle status fail</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>set cycle status done</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>  <hop> <from>Formula</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Move cycle folder to transfer</from><to>Zip files</to><enabled>Y</enabled> </hop>  <hop> <from>Move cycle folder to transfer</from><to>Transfer Fail</to><enabled>Y</enabled> </hop>  <hop> <from>Zip files</from><to>Transfer Fail</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log</from><to>Set isArchived default value</to><enabled>Y</enabled> </hop>  <hop> <from>Delete cycle folder</from><to>Transfer Fail</to><enabled>Y</enabled> </hop>  <hop> <from>Set isArchived default value</from><to>Define finalization shell commands</to><enabled>Y</enabled> </hop>  <hop> <from>Define finalization shell commands</from><to>Filter rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>Move cycle folder to transfer</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>Delete cycle folder</to><enabled>Y</enabled> </hop>  <hop> <from>Zip files</from><to>select cycle_id archive route</to><enabled>Y</enabled> </hop>  <hop> <from>select cycle_id archive route</from><to>set cycle status done</to><enabled>Y</enabled> </hop>  <hop> <from>Delete cycle folder</from><to>select cycle_id delete route</to><enabled>Y</enabled> </hop>  <hop> <from>select cycle_id delete route</from><to>set cycle status done</to><enabled>Y</enabled> </hop>  <hop> <from>get cycle id</from><to>Get process id</to><enabled>Y</enabled> </hop>  <hop> <from>Get process id</from><to>set cycle status transfer</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Abort</name>
     <type>Abort</type>
@@ -307,6 +307,54 @@ var deleteCommand = &quot;rm -Rf &quot; + oldpath;</jsScript_script>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>998</xloc>
       <yloc>264</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Delete cycle folder</name>
+    <type>ExecProcess</type>
+    <description/>
+    <distribute>N</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <processfield>deleteCommand</processfield>
+    <resultfieldname>result</resultfieldname>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1104</xloc>
+      <yloc>436</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Move cycle folder to transfer</send_true_to>
+<send_false_to>Delete cycle folder</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>isArchived</leftvalue>
+ <function>=</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>998</xloc>
+      <yloc>340</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -425,66 +473,7 @@ var deleteCommand = &quot;rm -Rf &quot; + oldpath;</jsScript_script>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>59</xloc>
-      <yloc>28</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get table</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>kalturadw_ds</connection>
-    <sql>SELECT
- id staging_area_id, source_table
-FROM staging_areas
-WHERE process_id = ?
-</sql>
-    <limit>0</limit>
-    <lookup>Get process id</lookup>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>62</xloc>
-      <yloc>180</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Join Rows</name>
-    <type>JoinRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <directory>%%java.io.tmpdir%%</directory>
-      <prefix>out</prefix>
-      <cache_size>500</cache_size>
-      <main>get cycle id</main>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue/>
- <function>=</function>
- <rightvalue/>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>199</xloc>
+      <xloc>193</xloc>
       <yloc>179</yloc>
       <draw>Y</draw>
       </GUI>
@@ -506,6 +495,37 @@ WHERE process_id = ?
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>886</xloc>
       <yloc>405</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set isArchived default value</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <replaceAllByValue/>
+      <replaceAllMask/>
+      <selectFields>Y</selectFields>
+      <selectValuesType>N</selectValuesType>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>isArchived</name>
+        <value>True</value>
+        <mask/>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>996</xloc>
+      <yloc>178</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -593,14 +613,13 @@ WHERE process_id = ?
     <connection>kalturadw_ds</connection>
     <execute_each_row>Y</execute_each_row>
     <replace_variables>Y</replace_variables>
-    <sql>call kalturadw_ds.drop_ods_partition(?,&apos;?&apos;);</sql>
+    <sql>call kalturadw_ds.drop_cycle_partition(?);</sql>
     <insert_field/>
     <update_field/>
     <delete_field/>
     <read_field/>
     <arguments>
        <argument><name>cycle_id</name></argument>
-       <argument><name>source_table</name></argument>
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -628,6 +647,52 @@ WHERE process_id = ?
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>195</xloc>
       <yloc>29</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>select cycle_id archive route</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>cycle_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>889</xloc>
+      <yloc>552</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>select cycle_id delete route</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>cycle_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1089</xloc>
+      <yloc>553</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -732,13 +797,12 @@ WHERE process_id = ?
     <connection>kalturadw_ds</connection>
     <execute_each_row>Y</execute_each_row>
     <replace_variables>Y</replace_variables>
-    <sql>call kalturadw_ds.transfer_ods_partition(?,?);</sql>
+    <sql>call kalturadw_ds.transfer_cycle_partition(?);</sql>
     <insert_field/>
     <update_field/>
     <delete_field/>
     <read_field/>
     <arguments>
-       <argument><name>staging_area_id</name></argument>
        <argument><name>cycle_id</name></argument>
     </arguments>
      <cluster_schema/>
@@ -749,136 +813,23 @@ WHERE process_id = ?
       </GUI>
     </step>
 
-  <step>
-    <name>Set isArchived default value</name>
-    <type>IfNull</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <replaceAllByValue/>
-      <replaceAllMask/>
-      <selectFields>Y</selectFields>
-      <selectValuesType>N</selectValuesType>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>isArchived</name>
-        <value>True</value>
-        <mask/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>996</xloc>
-      <yloc>178</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>N</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Move cycle folder to transfer</send_true_to>
-<send_false_to>Delete cycle folder</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>isArchived</leftvalue>
- <function>=</function>
- <rightvalue/>
- <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>998</xloc>
-      <yloc>340</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Delete cycle folder</name>
-    <type>ExecProcess</type>
-    <description/>
-    <distribute>N</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <processfield>deleteCommand</processfield>
-    <resultfieldname>result</resultfieldname>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1104</xloc>
-      <yloc>436</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>select cycle_id archive route</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>cycle_id</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>889</xloc>
-      <yloc>552</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>select cycle_id delete route</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>cycle_id</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1089</xloc>
-      <yloc>553</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step_error_handling>
       <error>
         <source_step>Define finalization shell commands</source_step>
         <target_step/>
         <is_enabled>N</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename/>
+        <fields_valuename/>
+        <codes_valuename/>
+        <max_errors>-1</max_errors>
+        <max_pct_errors>-1</max_pct_errors>
+        <min_pct_rows>-1</min_pct_rows>
+      </error>
+      <error>
+        <source_step>Delete cycle folder</source_step>
+        <target_step>Transfer Fail</target_step>
+        <is_enabled>Y</is_enabled>
         <nr_valuename/>
         <descriptions_valuename/>
         <fields_valuename/>
@@ -955,18 +906,6 @@ WHERE process_id = ?
         <descriptions_valuename>description</descriptions_valuename>
         <fields_valuename>fields</fields_valuename>
         <codes_valuename>codes</codes_valuename>
-        <max_errors>-1</max_errors>
-        <max_pct_errors>-1</max_pct_errors>
-        <min_pct_rows>-1</min_pct_rows>
-      </error>
-      <error>
-        <source_step>Delete cycle folder</source_step>
-        <target_step>Transfer Fail</target_step>
-        <is_enabled>Y</is_enabled>
-        <nr_valuename/>
-        <descriptions_valuename/>
-        <fields_valuename/>
-        <codes_valuename/>
         <max_errors>-1</max_errors>
         <max_pct_errors>-1</max_pct_errors>
         <min_pct_rows>-1</min_pct_rows>
