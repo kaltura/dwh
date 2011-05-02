@@ -208,7 +208,7 @@
       <yloc>129</yloc>
       </entry>
     <entry>
-      <name>Execute daily sequence</name>
+      <name>Execute hourly sequence</name>
       <description>Job</description>
       <type>JOB</type>
       <filename>${EtlBasePath}&#47;execute&#47;pentaho_sequence_executioner.kjb</filename>
@@ -295,7 +295,7 @@
   <hops>
     <hop>
       <from>Set jobs sequence file name</from>
-      <to>Execute daily sequence</to>
+      <to>Execute hourly sequence</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -312,7 +312,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Execute daily sequence</from>
+      <from>Execute hourly sequence</from>
       <to>Release hourly lock</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
