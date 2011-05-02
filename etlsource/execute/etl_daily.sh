@@ -14,7 +14,8 @@ done
 
 LOGFILE=$ROOT_DIR/logs/etl_daily-${WHEN}.log
 
-sh $ROOT_DIR/etlsource/execute/daily.sh -k $KITCHEN -p $ROOT_DIR >> $LOGFILE 2>&1
+export KETTLE_HOME=$ROOT_DIR
+sh $KITCHEN /file $ROOT_DIR/etlsource/execute/daily.kjb >> $LOGFILE 2>&1
 
 if [ $? == "0" ]; then
         notify_mail_subject="Dev Daily succeeded"
