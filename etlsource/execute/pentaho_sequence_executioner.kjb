@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>daily</name>
+  <name>Sequence executioner</name>
     <description/>
     <extended_description/>
     <job_version/>
@@ -170,6 +170,61 @@
    <shared_objects_file/>
   <entries>
     <entry>
+      <name>get jobs</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename>${Internal.Job.Filename.Directory}&#47;get_jobs.ktr</filename>
+      <transname/>
+      <directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>446</xloc>
+      <yloc>136</yloc>
+      </entry>
+    <entry>
+      <name>execute kettle-job file</name>
+      <description>Job</description>
+      <type>JOB</type>
+      <filename>${Internal.Job.Filename.Directory}&#47;execute_kjb_file.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>Y</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>556</xloc>
+      <yloc>135</yloc>
+      </entry>
+    <entry>
       <name>START</name>
       <description>Special entries</description>
       <type>SPECIAL</type>
@@ -186,258 +241,28 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>131</xloc>
-      <yloc>133</yloc>
-      </entry>
-    <entry>
-      <name>Set jobs sequence file name</name>
-      <description>Set variables</description>
-      <type>SET_VARIABLES</type>
-      <replacevars>N</replacevars>
-      <fields>
-        <field>
-          <variable_name>ExecutionSequenceFile</variable_name>
-          <variable_value>daily_etl_execution_sequence.txt</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-      </fields>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>591</xloc>
-      <yloc>134</yloc>
-      </entry>
-    <entry>
-      <name>Get daily lock</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${EtlBasePath}&#47;common&#47;get_lock.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>lock_id</name>
-            <stream_name/>
-            <value>1</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>218</xloc>
-      <yloc>56</yloc>
-      </entry>
-    <entry>
-      <name>Execute daily sequence</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${EtlBasePath}&#47;execute&#47;pentaho_sequence_executioner.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>739</xloc>
-      <yloc>136</yloc>
-      </entry>
-    <entry>
-      <name>Get hourly lock</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${EtlBasePath}&#47;common&#47;get_lock.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>lock_id</name>
-            <stream_name/>
-            <value>2</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>450</xloc>
-      <yloc>54</yloc>
-      </entry>
-    <entry>
-      <name>Wait for hourly lock</name>
-      <description>Wait for SQL</description>
-      <type>WAIT_FOR_SQL</type>
-      <connection>kalturadw_ds</connection>
-      <schemaname/>
-      <tablename>locks</tablename>
-      <success_condition>rows_count_equal</success_condition>
-      <rows_count_value>0</rows_count_value>
-      <is_custom_sql>Y</is_custom_sql>
-      <is_usevars>N</is_usevars>
-      <custom_sql>select * from kalturadw_ds.locks
-where lock_id = 2
-and lock_state = 1;</custom_sql>
-      <add_rows_result>N</add_rows_result>
-      <maximum_timeout>5400</maximum_timeout>
-      <check_cycle_time>60</check_cycle_time>
-      <success_on_timeout>N</success_on_timeout>
-      <clear_result_rows>N</clear_result_rows>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>332</xloc>
-      <yloc>57</yloc>
-      </entry>
-    <entry>
-      <name>Release daily lock</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${EtlBasePath}&#47;common&#47;release_lock.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>lock_id</name>
-            <stream_name/>
-            <value>1</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>977</xloc>
-      <yloc>229</yloc>
-      </entry>
-    <entry>
-      <name>Release hourly lock</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${EtlBasePath}&#47;common&#47;release_lock.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>lock_id</name>
-            <stream_name/>
-            <value>2</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>861</xloc>
-      <yloc>227</yloc>
+      <xloc>351</xloc>
+      <yloc>135</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
+      <from>get jobs</from>
+      <to>execute kettle-job file</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
       <from>START</from>
-      <to>Get daily lock</to>
+      <to>get jobs</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Set jobs sequence file name</from>
-      <to>Execute daily sequence</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Get daily lock</from>
-      <to>Wait for hourly lock</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Wait for hourly lock</from>
-      <to>Get hourly lock</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Get hourly lock</from>
-      <to>Set jobs sequence file name</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Execute daily sequence</from>
-      <to>Release hourly lock</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Release hourly lock</from>
-      <to>Release daily lock</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>

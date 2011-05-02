@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>daily</name>
+  <name>execute kjb file</name>
     <description/>
     <extended_description/>
     <job_version/>
     <job_status>0</job_status>
   <directory>&#47;</directory>
   <created_user>-</created_user>
-  <created_date>2009&#47;06&#47;28 16:29:15.734</created_date>
+  <created_date>2009&#47;06&#47;28 16:45:11.203</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2009&#47;06&#47;28 16:29:15.734</modified_date>
+  <modified_date>2009&#47;06&#47;28 16:45:11.203</modified_date>
     <parameters>
     </parameters>
   <connection>
@@ -30,6 +30,31 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Kaltura_op_mon</name>
+    <server>${DbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kaltura_op_mon</database>
+    <port>${DbPort}</port>
+    <username>${DbUser}</username>
+    <password>${DbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
@@ -170,6 +195,35 @@
    <shared_objects_file/>
   <entries>
     <entry>
+      <name>set kjb and log path into vars</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename>${Internal.Job.Filename.Directory}&#47;set_file_var.ktr</filename>
+      <transname/>
+      <directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>165</xloc>
+      <yloc>96</yloc>
+      </entry>
+    <entry>
       <name>START</name>
       <description>Special entries</description>
       <type>SPECIAL</type>
@@ -186,199 +240,92 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>131</xloc>
-      <yloc>133</yloc>
+      <xloc>39</xloc>
+      <yloc>96</yloc>
       </entry>
     <entry>
-      <name>Set jobs sequence file name</name>
-      <description>Set variables</description>
-      <type>SET_VARIABLES</type>
-      <replacevars>N</replacevars>
-      <fields>
-        <field>
-          <variable_name>ExecutionSequenceFile</variable_name>
-          <variable_value>daily_etl_execution_sequence.txt</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-      </fields>
+      <name>Abort job 1</name>
+      <description>Abort job</description>
+      <type>ABORT</type>
+      <message/>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>591</xloc>
-      <yloc>134</yloc>
+      <xloc>631</xloc>
+      <yloc>340</yloc>
       </entry>
     <entry>
-      <name>Get daily lock</name>
+      <name>Run kjbVar job</name>
       <description>Job</description>
       <type>JOB</type>
-      <filename>${EtlBasePath}&#47;common&#47;get_lock.kjb</filename>
+      <filename>${EtlBasePath}&#47;${fileVar}</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
+      <set_logfile>Y</set_logfile>
+      <logfile>${LogPath}&#47;log_${jobVar}</logfile>
+      <logext>log</logext>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
+      <loglevel>Basic</loglevel>
       <slave_server_name/>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>lock_id</name>
-            <stream_name/>
-            <value>1</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      </parameters>      <set_append_logfile>Y</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>218</xloc>
-      <yloc>56</yloc>
+      <xloc>457</xloc>
+      <yloc>157</yloc>
       </entry>
     <entry>
-      <name>Execute daily sequence</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${EtlBasePath}&#47;execute&#47;pentaho_sequence_executioner.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <name>Write To Log - start job</name>
+      <description>Write To Log</description>
+      <type>WRITE_TO_LOG</type>
+      <logmessage>Executing ${fileVar}
+Etl base path: ${EtlBasePath}
+Writing to log [${LogPath}&#47;log_${jobVar}]</logmessage>
+      <loglevel>Minimal</loglevel>
+      <logsubject>Status</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>739</xloc>
-      <yloc>136</yloc>
+      <xloc>334</xloc>
+      <yloc>96</yloc>
       </entry>
     <entry>
-      <name>Get hourly lock</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${EtlBasePath}&#47;common&#47;get_lock.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>lock_id</name>
-            <stream_name/>
-            <value>2</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <name>Write To Log on success</name>
+      <description>Write To Log</description>
+      <type>WRITE_TO_LOG</type>
+      <logmessage>Success ${fileVar}</logmessage>
+      <loglevel>Minimal</loglevel>
+      <logsubject>Status</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>450</xloc>
-      <yloc>54</yloc>
+      <xloc>581</xloc>
+      <yloc>73</yloc>
       </entry>
     <entry>
-      <name>Wait for hourly lock</name>
-      <description>Wait for SQL</description>
-      <type>WAIT_FOR_SQL</type>
-      <connection>kalturadw_ds</connection>
-      <schemaname/>
-      <tablename>locks</tablename>
-      <success_condition>rows_count_equal</success_condition>
-      <rows_count_value>0</rows_count_value>
-      <is_custom_sql>Y</is_custom_sql>
-      <is_usevars>N</is_usevars>
-      <custom_sql>select * from kalturadw_ds.locks
-where lock_id = 2
-and lock_state = 1;</custom_sql>
-      <add_rows_result>N</add_rows_result>
-      <maximum_timeout>5400</maximum_timeout>
-      <check_cycle_time>60</check_cycle_time>
-      <success_on_timeout>N</success_on_timeout>
-      <clear_result_rows>N</clear_result_rows>
+      <name>Write To Log on error</name>
+      <description>Write To Log</description>
+      <type>WRITE_TO_LOG</type>
+      <logmessage>Failed ${fileVar}</logmessage>
+      <loglevel>Minimal</loglevel>
+      <logsubject>Status</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>332</xloc>
-      <yloc>57</yloc>
-      </entry>
-    <entry>
-      <name>Release daily lock</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${EtlBasePath}&#47;common&#47;release_lock.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>lock_id</name>
-            <stream_name/>
-            <value>1</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>977</xloc>
-      <yloc>229</yloc>
-      </entry>
-    <entry>
-      <name>Release hourly lock</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${EtlBasePath}&#47;common&#47;release_lock.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>lock_id</name>
-            <stream_name/>
-            <value>2</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>861</xloc>
-      <yloc>227</yloc>
+      <xloc>461</xloc>
+      <yloc>298</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>Get daily lock</to>
+      <to>set kjb and log path into vars</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -386,8 +333,8 @@ and lock_state = 1;</custom_sql>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Set jobs sequence file name</from>
-      <to>Execute daily sequence</to>
+      <from>set kjb and log path into vars</from>
+      <to>Write To Log - start job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -395,8 +342,8 @@ and lock_state = 1;</custom_sql>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Get daily lock</from>
-      <to>Wait for hourly lock</to>
+      <from>Write To Log - start job</from>
+      <to>Run kjbVar job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -404,8 +351,8 @@ and lock_state = 1;</custom_sql>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Wait for hourly lock</from>
-      <to>Get hourly lock</to>
+      <from>Run kjbVar job</from>
+      <to>Write To Log on success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -413,26 +360,17 @@ and lock_state = 1;</custom_sql>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Get hourly lock</from>
-      <to>Set jobs sequence file name</to>
+      <from>Run kjbVar job</from>
+      <to>Write To Log on error</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Execute daily sequence</from>
-      <to>Release hourly lock</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Release hourly lock</from>
-      <to>Release daily lock</to>
+      <from>Write To Log on error</from>
+      <to>Abort job 1</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
