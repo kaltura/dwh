@@ -306,8 +306,8 @@
 where lock_id = 2
 and lock_state = 1;</custom_sql>
       <add_rows_result>N</add_rows_result>
-      <maximum_timeout>5400</maximum_timeout>
-      <check_cycle_time>60</check_cycle_time>
+      <maximum_timeout>${DailyLockTimeout}</maximum_timeout>
+      <check_cycle_time>${HourlyLockPoleInterval}</check_cycle_time>
       <success_on_timeout>N</success_on_timeout>
       <clear_result_rows>N</clear_result_rows>
       <parallel>N</parallel>
