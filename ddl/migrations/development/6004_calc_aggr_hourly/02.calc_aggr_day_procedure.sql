@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day`(p_date_val DATE,p_hour_id int(11), p_aggr_name VARCHAR(100))
+CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day`(p_date_val DATE,p_hour_id INT(11), p_aggr_name VARCHAR(100))
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
 	DECLARE v_aggr_id_field VARCHAR(100);
@@ -23,7 +23,6 @@ BEGIN
 		SET v_aggr_id_field_str = "";
 	END IF;
 	
-
 	SET @s = CONCAT('UPDATE aggr_managment SET start_time = NOW()
 	WHERE aggr_name = ''',p_aggr_name,''' AND aggr_day = ''',p_date_val,''' AND hour_id = ',p_hour_id);
 	PREPARE stmt FROM  @s;
@@ -76,7 +75,7 @@ BEGIN
 			,count_postroll_50
 			,count_postroll_75
 			) 
-		SELECT  ev.partner_id,ev.event_date_id date_id, HOUR(ev.event_time) hour_id',v_aggr_id_field_str,',
+		SELECT  ev.partner_id,ev.event_date_id, event_hour_id',v_aggr_id_field_str,',
 		SUM(IF(ev.event_type_id = 2, 1,NULL)) count_loads,
 		SUM(IF(ev.event_type_id = 3, 1,NULL)) count_plays,
 		SUM(IF(ev.event_type_id = 4, 1,NULL)) count_plays_25,
@@ -116,12 +115,12 @@ BEGIN
 		SUM(IF(ev.event_type_id = 38, 1,NULL)) count_postroll_25,
 		SUM(IF(ev.event_type_id = 39, 1,NULL)) count_postroll_50,
 		SUM(IF(ev.event_type_id = 40, 1,NULL)) count_postroll_75
-		FROM dwh_fact_events as ev USE INDEX (event_date_id) ',v_aggr_join_stmt,' 
+		FROM dwh_fact_events as ev ',v_aggr_join_stmt,' 
 		WHERE ev.event_type_id BETWEEN 2 AND 40 
 			AND ev.event_date_id  = DATE(''',p_date_val,''')*1
-			AND ev.hour_id = ',p_hour_id,'
+			AND ev.event_hour_id = ',p_hour_id,'
 			AND ev.entry_media_type_id IN (1,5,6)  /* allow only video & audio & mix */
-		GROUP BY partner_id,date_id, hour_id',v_aggr_id_field_str,';');
+		GROUP BY partner_id,event_date_id, event_hour_id',v_aggr_id_field_str,';');
 	
 	PREPARE stmt FROM  @s;
 	EXECUTE stmt;
@@ -135,42 +134,41 @@ BEGIN
 			',v_aggr_id_field_str,'
 			,sum_time_viewed
 			,count_time_viewed)
-			SELECT partner_id, date_id, hour_id',v_aggr_id_field_str,',
+			SELECT partner_id, event_date_id, event_hour_id',v_aggr_id_field_str,',
 			SUM(duration / 60 / 4 * (v_25+v_50+v_75+v_100)) sum_time_viewed,
-			COUNT(DISTINCT s_play) count_time_viewed,
+			COUNT(DISTINCT s_play) count_time_viewed
 			FROM(
-			SELECT ev.partner_id, ev.entry_id, ev.event_date_id date_id, ev.hour_id hour_id',v_aggr_id_field_str,', ev.session_id
+			SELECT ev.partner_id, ev.event_date_id, ev.event_hour_id',v_aggr_id_field_str,', ev.session_id,
 				MAX(duration) duration,
 				COUNT(DISTINCT IF(ev.event_type_id IN (4),1,NULL)) v_25,
 				COUNT(DISTINCT IF(ev.event_type_id IN (5),1,NULL)) v_50,
 				COUNT(DISTINCT IF(ev.event_type_id IN (6),1,NULL)) v_75,
 				COUNT(DISTINCT IF(ev.event_type_id IN (7),1,NULL)) v_100,
 				MAX(IF(event_type_id IN (3),session_id,NULL)) s_play
-			FROM dwh_fact_events as ev USE INDEX (event_date_id) ',v_aggr_join_stmt,' 
+			FROM dwh_fact_events as ev ',v_aggr_join_stmt,' 
 			WHERE ev.event_date_id  = DATE(''',p_date_val,''')*1
-				AND ev.hour_id = ',p_hour_id,'
+				AND ev.event_hour_id = ',p_hour_id,'
 				AND ev.entry_media_type_id IN (1,5,6)  /* allow only video & audio & mix */
 				AND ev.event_type_id IN(3,4,5,6,7) /* time viewed only when player reaches 25,50,75,100 */
-			GROUP BY ev.partner_id, ev.event_date_id date_id, ev.hour_id , ev.entry_id',v_aggr_id_field_str,',ev.session_id) e
-			GROUP BY partner_id, date_id, hour_id',v_aggr_id_field_str,'
+			GROUP BY ev.partner_id, ev.event_date_id, ev.event_hour_id , ev.entry_id',v_aggr_id_field_str,',ev.session_id) e
+			GROUP BY partner_id, event_date_id, event_hour_id',v_aggr_id_field_str,'
 			ON DUPLICATE KEY UPDATE
 			sum_time_viewed = values(sum_time_viewed), count_time_viewed=values(count_time_viewed);');
-		
+	
 		PREPARE stmt FROM  @s;
 		EXECUTE stmt;
 		DEALLOCATE PREPARE stmt;
 		
 		SET extra = CONCAT('post_aggregation_',p_aggr_name);
 		IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_NAME=extra) THEN
-			
-			SET @ss = CONCAT('CALL ',extra,'(''', p_date_val,''');'); 
+			SET @ss = CONCAT('CALL ',extra,'(''', p_date_val,''',',p_hour_id,');'); 
 			PREPARE stmt1 FROM  @ss;
 			EXECUTE stmt1;
 			DEALLOCATE PREPARE stmt1;
 		END IF ;
 	END IF;
     
-  
+	
 	SET @s = CONCAT('UPDATE aggr_managment SET is_calculated = 1,end_time = NOW()
 	WHERE aggr_name = ''',p_aggr_name,''' AND aggr_day = ''',p_date_val,''' AND hour_id =',p_hour_id);
 	PREPARE stmt FROM  @s;
