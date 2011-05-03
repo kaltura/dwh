@@ -226,7 +226,7 @@
 			AND is_calculated = 1) aggr_m
 		WHERE dwh_dim_file_sync.dwh_creation_date &gt; last_execution 
 		AND original = 1) dates
-	SET a.is_calculated=0 WHERE a.aggr_day_int = dates.date_id
+	SET a.is_calculated=0 WHERE a.aggr_day = dates.date_id
 	AND a.aggr_name = &apos;storage_usage&apos;;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
@@ -265,8 +265,8 @@
 -- file sync record is rarely updated.</note>
       <xloc>296</xloc>
       <yloc>176</yloc>
-      <width>413</width>
-      <heigth>35</heigth>
+      <width>438</width>
+      <heigth>36</heigth>
     </notepad>
   </notepads>
 </job>
