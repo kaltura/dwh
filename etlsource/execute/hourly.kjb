@@ -288,8 +288,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>601</xloc>
-      <yloc>222</yloc>
+      <xloc>638</xloc>
+      <yloc>208</yloc>
       </entry>
   </entries>
   <hops>
@@ -318,7 +318,7 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
+      <unconditional>Y</unconditional>
     </hop>
     <hop>
       <from>START</from>

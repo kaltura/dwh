@@ -342,8 +342,8 @@ and lock_state = 1;</custom_sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>977</xloc>
-      <yloc>229</yloc>
+      <xloc>329</xloc>
+      <yloc>227</yloc>
       </entry>
     <entry>
       <name>Release hourly lock</name>
@@ -428,7 +428,7 @@ and lock_state = 1;</custom_sql>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
+      <unconditional>Y</unconditional>
     </hop>
     <hop>
       <from>Release hourly lock</from>
@@ -437,6 +437,15 @@ and lock_state = 1;</custom_sql>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Wait for hourly lock</from>
+      <to>Release daily lock</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
