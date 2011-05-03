@@ -228,7 +228,7 @@ and then parallel execution of two instances of the same aggregation (such as en
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
-        </field>      <field>        <name>aggr_hour </name>
+        </field>      <field>        <name>aggr_hour</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -260,7 +260,7 @@ and then parallel execution of two instances of the same aggregation (such as en
         <name>aggr_day</name>
         </field>
       <field>
-        <name>aggr_hour </name>
+        <name>aggr_hour</name>
         </field>
       </fields>
      <cluster_schema/>
@@ -291,7 +291,7 @@ and then parallel execution of two instances of the same aggregation (such as en
         <name>aggr_day</name>
         </field>
       <field>
-        <name>aggr_hour </name>
+        <name>aggr_hour</name>
         </field>
       </fields>
      <cluster_schema/>
@@ -322,12 +322,12 @@ and then parallel execution of two instances of the same aggregation (such as en
     <read_field/>
     <arguments>
        <argument><name>aggr_day</name></argument>
-       <argument><name>aggr_hour </name></argument>
+       <argument><name>aggr_hour</name></argument>
        <argument><name>aggr_name</name></argument>
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>374</xloc>
+      <xloc>375</xloc>
       <yloc>145</yloc>
       <draw>Y</draw>
       </GUI>
