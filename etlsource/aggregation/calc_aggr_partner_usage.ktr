@@ -211,10 +211,11 @@
            <schema_name/>
            </partitioning>
     <connection>KalturaDW</connection>
-    <sql>SELECT aggr_day	 
+    <sql>SELECT distinct aggr_day	 
 FROM kalturadw.aggr_managment 
 WHERE aggr_name=&apos;partner_usage&apos;
-AND aggr_day &lt; DATE(NOW()) and is_calculated = 0
+AND aggr_day + INTERVAL hour_id HOUR &lt; NOW() - INTERVAL 1 HOUR 
+and is_calculated = 0
 ORDER BY aggr_day</sql>
     <limit>0</limit>
     <lookup/>
@@ -223,8 +224,8 @@ ORDER BY aggr_day</sql>
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>154</xloc>
-      <yloc>136</yloc>
+      <xloc>153</xloc>
+      <yloc>137</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
