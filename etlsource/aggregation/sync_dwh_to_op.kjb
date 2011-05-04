@@ -208,8 +208,8 @@
       <description>SQL</description>
       <type>SQL</type>
       <sql>update kalturadw.aggr_managment set is_calculated=1, end_time=now()
-where aggr_day &lt; date(&apos;${MaxDate}&apos;),
-and is_calculated = 0,
+where aggr_day &lt; date(&apos;${MaxDate}&apos;)
+and is_calculated = 0
 and (aggr_name = &apos;${AggrName}&apos;);</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
