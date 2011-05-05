@@ -178,7 +178,9 @@ mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_flavor_params_output.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_media_info.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_user_agent.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_bandwidth_source.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_domain_referrer.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_referrer.sql
+
 
 #dw/events
 mysqlexec $DW_ROOT_DIR/events/dwh_fact_events_partitions_view.sql
@@ -204,8 +206,8 @@ mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_bandwidth.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_storage.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_streaming.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_usage_totals.sql
-mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_dwh_hourly_events_widget.sql
-mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_dwh_hourly_partner.sql
+mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_widget.sql
+mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/recalc_aggr_day_procedure.sql
 mysqlexec $DW_ROOT_DIR/aggr/resolve_aggr_name_function.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_aggr_events_partitions_view.sql
@@ -221,6 +223,8 @@ mysqlexec $DW_ROOT_DIR/functions/calc_prev_date_id_function.sql
 mysqlexec $DW_ROOT_DIR/functions/primary_partner_functions.sql
 mysqlexec $DW_ROOT_DIR/functions/top_activities_procedure.sql
 mysqlexec $DW_ROOT_DIR/functions/calc_time_shift.sql
+mysqlexec $DW_ROOT_DIR/functions/calc_partner_storage_data_last_month.sql
+
 
 #dw/op_services/
 mysqlexec $DW_ROOT_DIR/op_services/calc_partner_billing_data_procedure.sql

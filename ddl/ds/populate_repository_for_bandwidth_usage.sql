@@ -11,7 +11,8 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
         `staging_partition_field`,
         `post_transfer_sp`,
 	`post_transfer_aggregations`,
-	`aggr_date_field`
+	`aggr_date_field`,
+	`hour_id_field`
         )
         VALUES
         (4,      4,
@@ -21,7 +22,8 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
          'cycle_id',
          NULL,
 	'(\'partner_usage\')',
-	'activity_date_id'
+	'activity_date_id',
+	'activity_hour_id'
         );
 
 
@@ -34,7 +36,8 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
         `staging_partition_field`,
         `post_transfer_sp`,
 	`post_transfer_aggregations`,
-	`aggr_date_field`
+	`aggr_date_field`,
+	`hour_id_field`
         )
         VALUES
         (5,      5,
@@ -44,7 +47,8 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
          'cycle_id',
          NULL,
 	'(\'partner_usage\')',
-	'activity_date_id'
+	'activity_date_id',
+	'activity_hour_id'
         );
 
 INSERT INTO `kalturadw_ds`.`staging_areas`
@@ -56,7 +60,8 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
         `staging_partition_field`,
         `post_transfer_sp`,
 	`post_transfer_aggregations`,
-	`aggr_date_field`
+	`aggr_date_field`,
+	`hour_id_field`
         )
         VALUES
         (6,      6,
@@ -66,7 +71,8 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
          'cycle_id',
          NULL,
 	'(\'partner_usage\')',
-	'activity_date_id'
+	'activity_date_id',
+	'activity_hour_id'
         );
 
 INSERT INTO `kalturadw_ds`.`staging_areas`
@@ -78,7 +84,8 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
         `staging_partition_field`,
         `post_transfer_sp`,
 	`post_transfer_aggregations`,
-	`aggr_date_field`
+	`aggr_date_field`,
+	`hour_id_field`
         )
         VALUES
         (7,      1,
@@ -88,6 +95,7 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
          'cycle_id',
          NULL,
 	'(\'partner_usage\')',
-	'activity_date_id'
+	'activity_date_id',
+	'activity_hour_id'
         );
 

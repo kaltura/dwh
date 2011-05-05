@@ -4,15 +4,14 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `post_aggregation_partner`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `post_aggregation_partner`(date_val DATE)
+CREATE DEFINER=`etl`@`localhost` PROCEDURE `post_aggregation_partner`(date_val DATE, p_hour_id INT(11))
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
 	
 	SELECT aggr_table INTO v_aggr_table
 	FROM kalturadw_ds.aggr_name_resolver
 	WHERE aggr_name = 'partner';
-	SET @s = CONCAT('
-    	INSERT INTO ',v_aggr_table,'
+	SET @s = CONCAT('INSERT INTO ',v_aggr_table,'
     		(partner_id, 
     		date_id, 
             hour_id,
@@ -37,8 +36,9 @@ BEGIN
     			COUNT(IF(entry_type_id = 5, 1,NULL)) count_playlist
     		FROM dwh_dim_entries  en 
     		WHERE (en.entry_media_type_id IN (1,2,5,6) OR en.entry_type_id IN (5) ) 
-    			AND en.created_date_id=DATE(''',date_val,''')*1
-    		GROUP BY partner_id,en.created_date_id, HOUR(en.created_at)
+    			AND en.created_at between DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' HOUR ',' 
+					   AND DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' + 1 HOUR ','
+    		GROUP BY partner_id, en.created_date_id, en.created_hour_id
     	) AS a
     	GROUP BY partner_id,date_id, hour_id
     	ON DUPLICATE KEY UPDATE
@@ -59,15 +59,16 @@ BEGIN
             hour_id,
     		count_users)
     	SELECT  
-    		partner_id,ku.created_date_id, HOUR(ku.created_at),
+    		partner_id,ku.created_date_id, ku.created_hour_id,
     		COUNT(1)
     	FROM dwh_dim_kusers  ku
-    	WHERE 
-    		ku.created_date_id=DATE(''',date_val,''')*1
-   		GROUP BY partner_id,ku.created_date_id, HOUR(ku.created_at)
+    	WHERE ku.created_at between DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' HOUR ',' 
+					   AND DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' + 1 HOUR ','
+   		GROUP BY partner_id,ku.created_date_id, ku.created_hour_id
     	ON DUPLICATE KEY UPDATE
     		count_users=VALUES(count_users) ;
         ');
+	
 	PREPARE stmt FROM  @s;
 	EXECUTE stmt;
 	DEALLOCATE PREPARE stmt;
@@ -79,15 +80,16 @@ BEGIN
             hour_id,
     		count_widgets)
     	SELECT  
-    		partner_id,wd.created_date_id,HOUR(wd.created_at),
+    		partner_id,wd.created_date_id, wd.created_hour_id,
     		COUNT(1)
         FROM dwh_dim_widget  wd
-    	WHERE 
-    		wd.created_date_id=DATE(''',date_val,''')*1
-   		GROUP BY partner_id,wd.created_date_id,HOUR(wd.created_at)
+    	WHERE wd.created_at between DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' HOUR ',' 
+					   AND DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' + 1 HOUR ','
+   		GROUP BY partner_id,wd.created_date_id, wd.created_hour_id
     	ON DUPLICATE KEY UPDATE
     		count_widgets=VALUES(count_widgets) ;
     	');
+
 	PREPARE stmt FROM  @s;
 	EXECUTE stmt;
 	DEALLOCATE PREPARE stmt;

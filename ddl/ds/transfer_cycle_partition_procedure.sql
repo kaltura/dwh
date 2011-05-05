@@ -12,14 +12,15 @@ BEGIN
 	DECLARE partition_field VARCHAR(45);
 	DECLARE select_fields VARCHAR(4000);
 	DECLARE post_transfer_sp_val VARCHAR(4000);
-	DECLARE aggr_date VARCHAR(4000);
+	DECLARE aggr_date VARCHAR(400);
+	DECLARE aggr_hour VARCHAR(400);
 	DECLARE aggr_names VARCHAR(4000);
 	DECLARE reset_aggr_sql VARCHAR(4000);
 	DECLARE insert_to_fact_sql VARCHAR(4000);
 	DECLARE post_transfer_sp_sql VARCHAR(4000);
 	
 	DECLARE done INT DEFAULT 0;
-	DECLARE staging_areas_cursor CURSOR FOR SELECT 	source_table, target_table, IFNULL(on_duplicate_clause,''),	staging_partition_field, post_transfer_sp, aggr_date_field, post_transfer_aggregations
+	DECLARE staging_areas_cursor CURSOR FOR SELECT 	source_table, target_table, IFNULL(on_duplicate_clause,''),	staging_partition_field, post_transfer_sp, aggr_date_field, hour_id_field, post_transfer_aggregations
 											FROM staging_areas s, cycles c
 											WHERE s.process_id=c.process_id AND c.cycle_id = p_cycle_id;
 											
@@ -27,16 +28,16 @@ BEGIN
 	OPEN staging_areas_cursor;
 	
 	read_loop: LOOP
-		FETCH staging_areas_cursor INTO src_table, tgt_table, dup_clause, partition_field, post_transfer_sp_val, aggr_date, aggr_names;
+		FETCH staging_areas_cursor INTO src_table, tgt_table, dup_clause, partition_field, post_transfer_sp_val, aggr_date, aggr_hour, aggr_names;
 		IF done THEN
 			LEAVE read_loop;
 		END IF;
 		
 		IF ((LENGTH(AGGR_DATE) > 0) && (LENGTH(aggr_names) > 0)) THEN
-			SELECT CONCAT(	'update kalturadw.aggr_managment a, (select distinct ',aggr_date,
+			SELECT CONCAT(	'update kalturadw.aggr_managment a, (select distinct ',aggr_date, ',' ,aggr_hour,
 							' from ',src_table,
 							' where ',partition_field,' = ',p_cycle_id,') ds'
-							' set a.is_calculated=0 where a.aggr_day_int = ds.', aggr_date,
+							' set a.is_calculated=0 where a.aggr_day_int = ds.', aggr_date, ' and a.hour_id = ds.',aggr_hour,
 							' AND aggr_name in', aggr_names) INTO reset_aggr_sql;
 			
 			SET @reset_aggr_sql = reset_aggr_sql;

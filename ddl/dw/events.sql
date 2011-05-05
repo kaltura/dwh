@@ -30,9 +30,7 @@ CREATE TABLE kalturadw.dwh_fact_events
 	, referrer_id INT(11)
 	,PRIMARY KEY (file_id,event_id,event_date_id)
 	,KEY Entry_id (Entry_id)
-	,KEY partner_id_event_type_id_time (`partner_id`,`event_type_id`,`event_time` )
-	,KEY event_date_id (event_date_id)
-	,KEY domain_id (domain_id)
+	,KEY `event_hour_id_event_date_id_partner_id` (event_hour_id, event_date_id, partner_id)
      ) ENGINE=INNODB  DEFAULT CHARSET=utf8  
      PARTITION BY RANGE (events_date_id)
 	(PARTITION p_20100101 VALUES LESS THAN (20100102));

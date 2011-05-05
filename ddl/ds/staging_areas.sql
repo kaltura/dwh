@@ -27,6 +27,7 @@ CREATE TABLE `staging_areas` (
   `staging_partition_field` varchar(45) DEFAULT NULL,
   `post_transfer_sp` varchar(500) DEFAULT NULL,
   `aggr_date_field` varchar(45),
+  `hour_id_field` VARCHAR(45),
   `post_transfer_aggregations` VARCHAR(255),
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

@@ -13,10 +13,8 @@ BEGIN
 	INSERT INTO kalturadw_ds.updated_entries SELECT entries.entry_id, SUM(count_loads)+IFNULL(old_entries.views,0) views, SUM(count_plays)+IFNULL(old_entries.plays,0) plays FROM 
 	(SELECT DISTINCT entry_id 
 		FROM kalturadw.dwh_hourly_events_entry e
-		INNER JOIN kalturadw.aggr_managment m ON (e.date_id = m.aggr_day_int)
-		WHERE is_calculated = 0 
-		  AND m.aggr_day < max_date
-		  AND m.aggr_name = 'plays_views') entries
+		INNER JOIN (SELECT DISTINCT aggr_day_int FROM kalturadw.aggr_managment WHERE is_calculated = 0 AND aggr_day < max_date AND aggr_name = 'plays_views') aggr_managment
+		ON (e.date_id = aggr_managment.aggr_day_int)) entries
 	INNER JOIN
 	kalturadw.dwh_hourly_events_entry
 	ON (dwh_hourly_events_entry.entry_id = entries.entry_id)
