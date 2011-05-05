@@ -200,7 +200,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get Variables</from><to>Get events file names</to><enabled>Y</enabled> </hop>  <hop> <from>create copy archive command</from><to>Should copy archive</to><enabled>Y</enabled> </hop>  <hop> <from>Create gunzip command</from><to>Gunzip</to><enabled>Y</enabled> </hop>  <hop> <from>Get events file names</from><to>create copy archive command</to><enabled>Y</enabled> </hop>  <hop> <from>Create gzip archive command</from><to>Gzip Archive</to><enabled>Y</enabled> </hop>  <hop> <from>Copy archive</from><to>Remove copy archive result</to><enabled>Y</enabled> </hop>  <hop> <from>Should copy archive</from><to>Ends with gz</to><enabled>Y</enabled> </hop>  <hop> <from>Remove copy archive result</from><to>Ends with gz archive</to><enabled>Y</enabled> </hop>  <hop> <from>Ends with gz archive</from><to>Create gzip archive command</to><enabled>Y</enabled> </hop>  <hop> <from>Ends with gz</from><to>Create gunzip command</to><enabled>Y</enabled> </hop>  <hop> <from>Ends with gz archive</from><to>Create gunzip command</to><enabled>Y</enabled> </hop>  <hop> <from>Ends with gz</from><to>Dummy (do nothing)</to><enabled>Y</enabled> </hop>  <hop> <from>Should copy archive</from><to>Enable parallel</to><enabled>Y</enabled> </hop>  <hop> <from>Enable parallel</from><to>Copy archive</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Get Variables</from><to>Get events file names</to><enabled>Y</enabled> </hop>  <hop> <from>create copy archive command</from><to>Should copy archive</to><enabled>Y</enabled> </hop>  <hop> <from>Create gunzip command</from><to>Gunzip</to><enabled>Y</enabled> </hop>  <hop> <from>Get events file names</from><to>create copy archive command</to><enabled>Y</enabled> </hop>  <hop> <from>Create gzip archive command</from><to>Gzip Archive</to><enabled>Y</enabled> </hop>  <hop> <from>Should copy archive</from><to>Ends with gz</to><enabled>Y</enabled> </hop>  <hop> <from>Remove copy archive result</from><to>Ends with gz archive</to><enabled>Y</enabled> </hop>  <hop> <from>Ends with gz archive</from><to>Create gzip archive command</to><enabled>Y</enabled> </hop>  <hop> <from>Ends with gz</from><to>Create gunzip command</to><enabled>Y</enabled> </hop>  <hop> <from>Ends with gz archive</from><to>Create gunzip command</to><enabled>Y</enabled> </hop>  <hop> <from>Ends with gz</from><to>Dummy (do nothing)</to><enabled>Y</enabled> </hop>  <hop> <from>Should copy archive</from><to>Enable parallel</to><enabled>Y</enabled> </hop>  <hop> <from>Enable parallel</from><to>Copy archive</to><enabled>Y</enabled> </hop>  <hop> <from>Copy archive</from><to>Blocking Step</to><enabled>Y</enabled> </hop>  <hop> <from>Blocking Step</from><to>Remove copy archive result</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Copy archive</name>
     <type>ExecProcess</type>
@@ -273,8 +273,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1004</xloc>
-      <yloc>164</yloc>
+      <xloc>1102</xloc>
+      <yloc>162</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -293,6 +293,24 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>397</xloc>
       <yloc>173</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Enable parallel</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>654</xloc>
+      <yloc>77</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -347,8 +365,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>859</xloc>
-      <yloc>165</yloc>
+      <xloc>957</xloc>
+      <yloc>163</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -476,8 +494,8 @@
     <resultfieldname>result</resultfieldname>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1126</xloc>
-      <yloc>165</yloc>
+      <xloc>1224</xloc>
+      <yloc>163</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -496,8 +514,8 @@
       <remove>        <name>result</name>
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>857</xloc>
-      <yloc>78</yloc>
+      <xloc>955</xloc>
+      <yloc>76</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -563,8 +581,8 @@ if (isArchived) {
     </step>
 
   <step>
-    <name>Enable parallel</name>
-    <type>Dummy</type>
+    <name>Blocking Step</name>
+    <type>BlockingStep</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -572,9 +590,14 @@ if (isArchived) {
            <method>none</method>
            <schema_name/>
            </partitioning>
+      <pass_all_rows>Y</pass_all_rows>
+      <directory>%%java.io.tmpdir%%</directory>
+      <prefix>block</prefix>
+      <cache_size>5000</cache_size>
+      <compress>Y</compress>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>654</xloc>
+      <xloc>839</xloc>
       <yloc>77</yloc>
       <draw>Y</draw>
       </GUI>

@@ -213,8 +213,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>409</xloc>
-      <yloc>118</yloc>
+      <xloc>500</xloc>
+      <yloc>120</yloc>
       </entry>
     <entry>
       <name>Register files</name>
@@ -241,8 +241,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1375</xloc>
-      <yloc>118</yloc>
+      <xloc>1440</xloc>
+      <yloc>120</yloc>
       </entry>
     <entry>
       <name>get files</name>
@@ -267,8 +267,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>248</xloc>
-      <yloc>118</yloc>
+      <xloc>340</xloc>
+      <yloc>120</yloc>
       </entry>
     <entry>
       <name>set cycle status generated</name>
@@ -298,8 +298,8 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1375</xloc>
-      <yloc>314</yloc>
+      <xloc>1440</xloc>
+      <yloc>320</yloc>
       </entry>
     <entry>
       <name>set cycle status generating</name>
@@ -329,8 +329,8 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>989</xloc>
-      <yloc>119</yloc>
+      <xloc>1080</xloc>
+      <yloc>120</yloc>
       </entry>
     <entry>
       <name>Create originals cycle folder</name>
@@ -341,8 +341,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>535</xloc>
-      <yloc>117</yloc>
+      <xloc>620</xloc>
+      <yloc>120</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -351,8 +351,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1372</xloc>
-      <yloc>418</yloc>
+      <xloc>1440</xloc>
+      <yloc>420</yloc>
       </entry>
     <entry>
       <name>split_files</name>
@@ -379,8 +379,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1111</xloc>
-      <yloc>118</yloc>
+      <xloc>1180</xloc>
+      <yloc>120</yloc>
       </entry>
     <entry>
       <name>Check for files</name>
@@ -393,8 +393,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>324</xloc>
-      <yloc>118</yloc>
+      <xloc>420</xloc>
+      <yloc>120</yloc>
       </entry>
     <entry>
       <name>Validate process exists in DB</name>
@@ -421,8 +421,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>132</xloc>
-      <yloc>118</yloc>
+      <xloc>138</xloc>
+      <yloc>119</yloc>
       </entry>
     <entry>
       <name>Unzip and archive</name>
@@ -449,8 +449,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>666</xloc>
-      <yloc>117</yloc>
+      <xloc>749</xloc>
+      <yloc>121</yloc>
       </entry>
     <entry>
       <name>Print Cycle ID to stream for generated</name>
@@ -477,8 +477,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1377</xloc>
-      <yloc>218</yloc>
+      <xloc>1440</xloc>
+      <yloc>220</yloc>
       </entry>
     <entry>
       <name>Print Cycle ID to stream for generating</name>
@@ -505,8 +505,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>816</xloc>
-      <yloc>119</yloc>
+      <xloc>900</xloc>
+      <yloc>120</yloc>
       </entry>
     <entry>
       <name>Print Cycle ID to stream for failed</name>
@@ -533,8 +533,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1113</xloc>
-      <yloc>217</yloc>
+      <xloc>1180</xloc>
+      <yloc>220</yloc>
       </entry>
     <entry>
       <name>set cycle status failed</name>
@@ -564,8 +564,8 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1112</xloc>
-      <yloc>325</yloc>
+      <xloc>1180</xloc>
+      <yloc>320</yloc>
       </entry>
     <entry>
       <name>Check if a generate folder is empty</name>
@@ -578,8 +578,26 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1239</xloc>
-      <yloc>119</yloc>
+      <xloc>1300</xloc>
+      <yloc>120</yloc>
+      </entry>
+    <entry>
+      <name>Clean generate folder</name>
+      <description>Delete files</description>
+      <type>DELETE_FILES</type>
+      <arg_from_previous>N</arg_from_previous>
+      <include_subfolders>N</include_subfolders>
+      <fields>
+        <field>
+          <name>${GeneratePath}&#47;${ProcessName}</name>
+          <filemask>.*</filemask>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>260</xloc>
+      <yloc>106</yloc>
       </entry>
   </entries>
   <hops>
@@ -627,15 +645,6 @@
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Validate process exists in DB</from>
-      <to>get files</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>Print Cycle ID to stream for generated</from>
@@ -721,6 +730,24 @@
     <hop>
       <from>split_files</from>
       <to>Check if a generate folder is empty</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Validate process exists in DB</from>
+      <to>Clean generate folder</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Clean generate folder</from>
+      <to>get files</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
