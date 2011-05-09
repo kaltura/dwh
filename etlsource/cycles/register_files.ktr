@@ -199,7 +199,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Move files</from><to>Write to log File Failed</to><enabled>Y</enabled> </hop>  <hop> <from>Registering file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Table output</from><to>Error writing to files managment table</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log File Failed</from><to>set cycle status fail</to><enabled>Y</enabled> </hop>  <hop> <from>Get files</from><to>Registering file</to><enabled>Y</enabled> </hop>  <hop> <from>Table output</from><to>Filter rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>Move files</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>duplicate files found</to><enabled>Y</enabled> </hop>  <hop> <from>Get now</from><to>Formula</to><enabled>Y</enabled> </hop>  <hop> <from>Formula</from><to>Table output</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>Get now</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Move files</from><to>Write to log File Failed</to><enabled>Y</enabled> </hop>  <hop> <from>Registering file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Table output</from><to>Error writing to files managment table</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log File Failed</from><to>set cycle status fail</to><enabled>Y</enabled> </hop>  <hop> <from>Get files</from><to>Registering file</to><enabled>Y</enabled> </hop>  <hop> <from>Table output</from><to>Filter rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>Move files</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>duplicate files found</to><enabled>Y</enabled> </hop>  <hop> <from>Get now</from><to>Formula</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>Get now</to><enabled>Y</enabled> </hop>  <hop> <from>Formula</from><to>Table output</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Error writing to files managment table</name>
     <type>WriteToLog</type>
@@ -282,8 +282,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>420</xloc>
-      <yloc>260</yloc>
+      <xloc>430</xloc>
+      <yloc>257</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -310,8 +310,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>600</xloc>
-      <yloc>120</yloc>
+      <xloc>610</xloc>
+      <yloc>117</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -341,9 +341,16 @@
 <value_precision>-1</value_precision>
 <replace_field/>
 </formula>
+       <formula><field_name>size_kb</field_name>
+<formula_string>[size]&#47;1024</formula_string>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>420</xloc>
+      <xloc>419</xloc>
       <yloc>120</yloc>
       <draw>Y</draw>
       </GUI>
@@ -481,8 +488,8 @@
     <simulate>N</simulate>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>720</xloc>
-      <yloc>121</yloc>
+      <xloc>730</xloc>
+      <yloc>118</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -553,8 +560,8 @@
           <stream_name>now</stream_name>
         </field>
         <field>
-          <column_name>file_size</column_name>
-          <stream_name>size</stream_name>
+          <column_name>file_size_kb</column_name>
+          <stream_name>size_kb</stream_name>
         </field>
         <field>
           <column_name>process_id</column_name>
@@ -567,8 +574,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>500</xloc>
-      <yloc>123</yloc>
+      <xloc>510</xloc>
+      <yloc>120</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -604,8 +611,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>720</xloc>
-      <yloc>260</yloc>
+      <xloc>730</xloc>
+      <yloc>257</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -629,8 +636,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>601</xloc>
-      <yloc>259</yloc>
+      <xloc>611</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -658,8 +665,8 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>720</xloc>
-      <yloc>380</yloc>
+      <xloc>730</xloc>
+      <yloc>377</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
