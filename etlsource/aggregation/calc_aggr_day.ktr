@@ -307,7 +307,7 @@ and then parallel execution of two instances of the same aggregation (such as en
     <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
-    <copies>2</copies>
+    <copies>4</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
