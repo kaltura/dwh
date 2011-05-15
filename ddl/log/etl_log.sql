@@ -15,4 +15,4 @@ CREATE TABLE kalturalog.`etl_log` (
            `REPLAYDATE` DATETIME DEFAULT NULL,            
            `LOG_FIELD` MEDIUMTEXT,                        
            KEY `etl_log_name_date` (`JOBNAME`,`LOGDATE`)  
-         ) ENGINE=MYISAM DEFAULT CHARSET=latin1 
+         ) ENGINE=MYISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci

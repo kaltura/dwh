@@ -65,8 +65,11 @@ INSERT INTO kalturadw.`ri_mapping` (`table_name`, `column_name`, `date_id_column
 	('dwh_dim_flavor_params_output', 'ready_behavior', 'dwh_update_date','dwh_dim_ready_behavior','ready_behavior_id',1),
 	('dwh_dim_flavor_params_output', 'entry_id', 'dwh_update_date','dwh_dim_entries','entry_id',1),
 	('dwh_dim_flavor_params_output', 'flavor_asset_id', 'dwh_update_date','dwh_dim_flavor_asset','id',1),
-	('dwh_dim_media_info', 'flavor_asset_id', 'dwh_update_date','dwh_dim_flavor_asset','id',1)	
-;
+	('dwh_dim_media_info', 'flavor_asset_id', 'dwh_update_date','dwh_dim_flavor_asset','id',1),
+	('dwh_dim_batch_job', 'job_type_id', 'dwh_update_date','dwh_dim_batch_job_type','batch_job_type_id',1),
+	('dwh_dim_batch_job', 'status_id', 'dwh_update_date','dwh_dim_batch_job_status','batch_job_status_id',1),
+	('dwh_dim_batch_job', 'error_type_id', 'dwh_update_date','dwh_dim_batch_job_error_type','batch_job_error_type_id',1),
+	('dwh_dim_batch_job', 'partner_id', 'dwh_update_date','dwh_dim_partners','partner_id',1);
 
 
 # andromeda

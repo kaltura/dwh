@@ -1,6 +1,6 @@
-﻿INSERT INTO kalturadw_ds.processes (id, process_name) VALUE (4, 'bandwidth_usage_AKAMAI');
-INSERT INTO kalturadw_ds.processes (id, process_name) VALUE (5, 'bandwidth_usage_LLN');
-INSERT INTO kalturadw_ds.processes (id, process_name) VALUE (6, 'bandwidth_usage_LEVEL3');
+﻿INSERT INTO kalturadw_ds.processes (id, process_name, max_files_per_cycle) VALUE (4, 'bandwidth_usage_AKAMAI', 50);
+INSERT INTO kalturadw_ds.processes (id, process_name, max_files_per_cycle) VALUE (5, 'bandwidth_usage_LLN', 50);
+INSERT INTO kalturadw_ds.processes (id, process_name, max_files_per_cycle) VALUE (6, 'bandwidth_usage_LEVEL3', 1000);
 
 INSERT INTO `kalturadw_ds`.`staging_areas`
         (`id`,

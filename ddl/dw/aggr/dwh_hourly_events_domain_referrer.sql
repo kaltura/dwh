@@ -65,7 +65,7 @@ CREATE TABLE `dwh_hourly_events_domain_referrer` (
   `count_postroll_25` int(11) DEFAULT NULL,
   `count_postroll_50` int(11) DEFAULT NULL,
   `count_postroll_75` int(11) DEFAULT NULL,
-  PRIMARY KEY (`partner_id`, `domain_id`, `date_id`, `hour_id`, `referrer_id`)
+  PRIMARY KEY (`partner_id`, `date_id`, `hour_id`, `domain_id`, `referrer_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
 /*!50100 PARTITION BY RANGE (date_id)
 (PARTITION p_201001 VALUES LESS THAN (20100201) ENGINE = MyISAM,

@@ -62,8 +62,7 @@ CREATE TABLE kalturadw.`dwh_hourly_partner` (
   `count_postroll_75` INT DEFAULT NULL,
   `count_streaming` bigint(20) DEFAULT '0',
   `aggr_streaming` bigint(20) DEFAULT '0',
-  PRIMARY KEY `partner_id` (`partner_id`,`date_id`, `hour_id`),
-  KEY `date_id` (`date_id`)
+  PRIMARY KEY `partner_id` (`partner_id`,`date_id`, `hour_id`)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8
 PARTITION BY RANGE (date_id)
 (PARTITION p_201001 VALUES LESS THAN (20100201) ENGINE = MYISAM,

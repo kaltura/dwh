@@ -28,7 +28,6 @@ INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('e
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('control','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('editor_type','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('gender','1');
-#INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('flavor_asset_status','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('partner_group_type','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('file_sync_object_type','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('file_sync_status','1');
@@ -36,8 +35,9 @@ INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('r
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('asset_status','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('creation_mode',1);
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('bandwidth_source',1);
+INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('batch_job_type',1);
+INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('batch_job_status',1);
+INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('batch_job_error_type',1);
 
-#andromeda
-#INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('batch_job_type','1');
 
 

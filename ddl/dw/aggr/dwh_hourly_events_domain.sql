@@ -46,9 +46,7 @@ CREATE TABLE kalturadw.`dwh_hourly_events_domain` (
   `count_postroll_25` INT DEFAULT NULL,
   `count_postroll_50` INT DEFAULT NULL,
   `count_postroll_75` INT DEFAULT NULL,
-  PRIMARY KEY `partner_id` (`partner_id`,`date_id`,`hour_id`,`domain_id`),
-  KEY `domain_id` (`domain_id`,`partner_id`,`date_id`,`hour_id`),
-  KEY `date_id` (`date_id`)
+  PRIMARY KEY `partner_id` (`partner_id`,`date_id`,`hour_id`,`domain_id`)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8
 PARTITION BY RANGE (date_id)
 (PARTITION p_201001 VALUES LESS THAN (20100201) ENGINE = MYISAM,

@@ -8,7 +8,7 @@
           `transfer_time` DATETIME DEFAULT NULL,   
 		      `lines` INT DEFAULT NULL,
     		  `err_lines` INT DEFAULT NULL,
-    		  `file_size` INT (20) DEFAULT NULL,
+    		  `file_size_kb` INT (20) DEFAULT NULL,
           `process_id` INT DEFAULT 1,
 		  cycle_id INT(11) DEFAULT NULL,
           PRIMARY KEY (`file_id`),

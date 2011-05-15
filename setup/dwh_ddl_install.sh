@@ -71,6 +71,9 @@ mysqlexec $BISOURCE_ROOT_DIR/bisources_file_sync_status.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_ready_behavior.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_creation_mode.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_bandwidth_source.sql
+mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_error_type.sql
+mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_status.sql
+mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_type.sql
 
 #ds/
 mysqlexec $DS_ROOT_DIR/files.sql
@@ -180,7 +183,11 @@ mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_user_agent.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_bandwidth_source.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_domain_referrer.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_referrer.sql
-
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_error_type.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_status.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_sub_type.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_type.sql
 
 #dw/events
 mysqlexec $DW_ROOT_DIR/events/dwh_fact_events_partitions_view.sql
