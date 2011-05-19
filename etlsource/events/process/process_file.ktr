@@ -1618,8 +1618,11 @@ var referrer_fixed = referrer_wo_domain != null ? substr(referrer_wo_domain,0,25
 var seek_fixed = seekIndicator == &quot;true&quot; || seekIndicator == &quot;1&quot; ? &quot;1&quot; : &quot;0&quot;;
 var unique_viewer_fixed = uv != null ? substr(uv,0,40) : null;
 var session_id_fixed = sessionID != null ? substr(sessionID,0,50) : null;
-var current_point_fixed = isNaN(parseInt(currentPoint)) ? 0 : parseInt(currentPoint);
-var duration_fixed = isNaN(parseInt(duration)) ? 0 : parseInt(duration);
+
+var tmpCurrentPoint = parseInt(currentPoint);
+var current_point_fixed = isNaN(tmpCurrentPoint) ? 0 : tmpCurrentPoint;
+var tmpDuration = parseInt(duration);
+var duration_fixed = isNaN(tmpDuration) ? 0 : tmpDuration;
 
 if ( currentPoint &lt; 0 ) {
 &#47;&#47; _current_point_fixed - is in seconds NOT millis
@@ -2289,8 +2292,8 @@ if (lineType == 2){
 		if (uv.length &gt; 34 &amp;&amp; substr(uv,0,3) == &quot;uv_&quot;) {
 			uv = substr(uv,3);
 		}
-		strPartnerID = getValue(queryStringDictionary, &quot;partner_id&quot;);
-		partnerID = isNaN(parseInt(strPartnerID)) ? -1 : parseInt(strPartnerID);
+		tmpPartnerID = parseInt(getValue(queryStringDictionary, &quot;partner_id&quot;));
+		partnerID = isNaN(strPartnerID) ? -1 : strPartnerID;
 		entryID = getValue(queryStringDictionary, &quot;obj_id&quot;);
 		uid = getValue(queryStringDictionary, &quot;uid&quot;);
 		eventType = decode(queryStringDictionary[&quot;command&quot;], &apos;view&apos;, 2, &apos;play&apos;,3, 0);
@@ -2312,8 +2315,8 @@ if (lineType == 2){
 	newPoint = getValue(queryStringDictionary, &quot;newPoint&quot;);
 	referrer = getValue(queryStringDictionary, &quot;referrer&quot;);
 	eventTimestamp = getValue(queryStringDictionary, &quot;eventTimestamp&quot;);
-	strPartnerID = getValue(queryStringDictionary, &quot;partnerId&quot;);
-	partnerID = isNaN(parseInt(strPartnerID)) ? -1 : parseInt(strPartnerID);
+	tmpPartnerID = parseInt(getValue(queryStringDictionary, &quot;partnerId&quot;));
+	partnerID = isNaN(tmpPartnerID) ? -1 : tmpPartnerID;
 	entryID = getValue(queryStringDictionary, &quot;entryId&quot;);
 	uid = getValue(queryStringDictionary,&quot;userId&quot;);
 	eventType = getValue(queryStringDictionary, &quot;eventType&quot;);
