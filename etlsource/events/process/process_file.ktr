@@ -2293,7 +2293,7 @@ if (lineType == 2){
 			uv = substr(uv,3);
 		}
 		tmpPartnerID = parseInt(getValue(queryStringDictionary, &quot;partner_id&quot;));
-		partnerID = isNaN(strPartnerID) ? -1 : strPartnerID;
+		partnerID = isNaN(tmpPartnerID) ? -1 : tmpPartnerID;
 		entryID = getValue(queryStringDictionary, &quot;obj_id&quot;);
 		uid = getValue(queryStringDictionary, &quot;uid&quot;);
 		eventType = decode(queryStringDictionary[&quot;command&quot;], &apos;view&apos;, 2, &apos;play&apos;,3, 0);
