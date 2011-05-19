@@ -10,7 +10,7 @@ BEGIN
 	
 	UPDATE kalturadw.aggr_managment SET start_time = NOW() WHERE is_calculated = 0 AND aggr_day < max_date AND aggr_name = 'plays_views';
 	
-	INSERT INTO kalturadw_ds.updated_entries SELECT entries.entry_id, SUM(count_loads)+IFNULL(old_entries.views,0) views, SUM(count_plays)+IFNULL(old_entries.plays,0) plays FROM 
+	INSERT INTO kalturadw_ds.updated_entries SELECT entries.entry_id, SUM(IFNULL(count_loads, 0))+IFNULL(old_entries.views,0) views, SUM(IFNULL(count_plays, 0))+IFNULL(old_entries.plays,0) plays FROM 
 	(SELECT DISTINCT entry_id 
 		FROM kalturadw.dwh_hourly_events_entry e
 		INNER JOIN (SELECT DISTINCT aggr_day_int FROM kalturadw.aggr_managment WHERE is_calculated = 0 AND aggr_day < max_date AND aggr_name = 'plays_views') aggr_managment
