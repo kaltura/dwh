@@ -821,6 +821,90 @@
     </step>
 
   <step>
+    <name>Insert bw invalid ds line</name>
+    <type>Mapping</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <trans_name/>
+    <filename>${EtlBasePath}&#47;common&#47;insert_invalid_ds_line.ktr</filename>
+    <directory_path/>
+    <mappings>
+      <input>
+    <mapping>    <input_step>Get BW Process ID</input_step>
+    <output_step>Mapping input specification</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+       <connector><parent>error_reason</parent><child>error_reason</child></connector>
+       <connector><parent>errornous_line</parent><child>errornous_line</child></connector>
+       <connector><parent>process_id</parent><child>process_id</child></connector>
+       <connector><parent>file_id</parent><child>file_id</child></connector>
+       <connector><parent>cycle_id</parent><child>cycle_id</child></connector>
+       <connector><parent>day_id</parent><child>date_id</child></connector>
+       <connector><parent>line_number</parent><child>line_number</child></connector>
+       <connector><parent>partnerID</parent><child>partner_id</child></connector>
+    </mapping>      </input>
+      <output>
+      </output>
+          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    </mappings>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>474</xloc>
+      <yloc>673</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Insert events invalid ds line</name>
+    <type>Mapping</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <trans_name/>
+    <filename>${EtlBasePath}&#47;common&#47;insert_invalid_ds_line.ktr</filename>
+    <directory_path/>
+    <mappings>
+      <input>
+    <mapping>    <input_step>Get Events Process ID</input_step>
+    <output_step>Mapping input specification</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+       <connector><parent>error_reason</parent><child>error_reason</child></connector>
+       <connector><parent>errornous_line</parent><child>errornous_line</child></connector>
+       <connector><parent>process_id</parent><child>process_id</child></connector>
+       <connector><parent>file_id</parent><child>file_id</child></connector>
+       <connector><parent>cycle_id</parent><child>cycle_id</child></connector>
+       <connector><parent>day_id</parent><child>date_id</child></connector>
+       <connector><parent>line_number</parent><child>line_number</child></connector>
+       <connector><parent>partnerID</parent><child>partner_id</child></connector>
+    </mapping>      </input>
+      <output>
+      </output>
+          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    </mappings>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1018</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Irrelevant line</name>
     <type>Dummy</type>
     <description/>
@@ -2923,90 +3007,6 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1340</xloc>
       <yloc>580</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Insert bw invalid ds line</name>
-    <type>Mapping</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <trans_name/>
-    <filename>${EtlBasePath}&#47;common&#47;insert_invalid_ds_line.ktr</filename>
-    <directory_path/>
-    <mappings>
-      <input>
-    <mapping>    <input_step>format BW errornous line</input_step>
-    <output_step>Mapping input specification</output_step>
-    <main_path>Y</main_path>
-    <rename_on_output>N</rename_on_output>
-    <description/>
-       <connector><parent>error_reason</parent><child>error_reason</child></connector>
-       <connector><parent>errornous_line</parent><child>errornous_line</child></connector>
-       <connector><parent>process_id</parent><child>process_id</child></connector>
-       <connector><parent>file_id</parent><child>file_id</child></connector>
-       <connector><parent>cycle_id</parent><child>cycle_id</child></connector>
-       <connector><parent>day_id</parent><child>date_id</child></connector>
-       <connector><parent>line_number</parent><child>line_number</child></connector>
-       <connector><parent>partnerID</parent><child>partner_id</child></connector>
-    </mapping>      </input>
-      <output>
-      </output>
-          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
-    </parameters>
-    </mappings>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>474</xloc>
-      <yloc>673</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Insert events invalid ds line</name>
-    <type>Mapping</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <trans_name/>
-    <filename>${EtlBasePath}&#47;common&#47;insert_invalid_ds_line.ktr</filename>
-    <directory_path/>
-    <mappings>
-      <input>
-    <mapping>    <input_step>Append file_id</input_step>
-    <output_step>Mapping input specification</output_step>
-    <main_path>Y</main_path>
-    <rename_on_output>N</rename_on_output>
-    <description/>
-       <connector><parent>error_reason</parent><child>error_reason</child></connector>
-       <connector><parent>errornous_line</parent><child>errornous_line</child></connector>
-       <connector><parent>process_id</parent><child>process_id</child></connector>
-       <connector><parent>file_id</parent><child>file_id</child></connector>
-       <connector><parent>cycle_id</parent><child>cycle_id</child></connector>
-       <connector><parent>day_id</parent><child>date_id</child></connector>
-       <connector><parent>line_number</parent><child>line_number</child></connector>
-       <connector><parent>partnerID</parent><child>partner_id</child></connector>
-    </mapping>      </input>
-      <output>
-      </output>
-          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
-    </parameters>
-    </mappings>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1018</xloc>
-      <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
