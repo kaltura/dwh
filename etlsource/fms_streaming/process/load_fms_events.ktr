@@ -314,7 +314,7 @@ Lookup country&#47;location</note>
     </attributes>
   </connection>
   <order>
-  <hop> <from>convert client and server IP</from><to>Write to log on error 2</to><enabled>Y</enabled> </hop>  <hop> <from>write events</from><to>Write to log on insert error</to><enabled>Y</enabled> </hop>  <hop> <from>Event type lookup</from><to>Event Category Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Event Category Lookup</from><to>Adaptor Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Adaptor Lookup</from><to>Virtual Host Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Virtual Host Lookup</from><to>App Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>App Lookup</from><to>App Instance Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>App Instance Lookup</from><to>Client Protocol Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Client Protocol Lookup</from><to>Stream Type Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Stream Type Lookup</from><to>Status Desc Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>convert client and server IP</from><to>Add constants 2</to><enabled>Y</enabled> </hop>  <hop> <from>Add constants 2</from><to>Event type lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids valid line</from><to>convert client and server IP</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids invalid line</from><to>Trim Line and Error reason</to><enabled>Y</enabled> </hop>  <hop> <from>check valid line </from><to>Fix event time and partner</to><enabled>Y</enabled> </hop>  <hop> <from>Fix event time and partner</from><to>Calc day and hour ids invalid line</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>check valid line </from><to>Enable parallelization</to><enabled>Y</enabled> </hop>  <hop> <from>Enable parallelization</from><to>Calc day and hour ids valid line</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>check valid line </to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath</from><to>file input</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>Get event time</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>Yield FMS data</from><to>Get event time</to><enabled>Y</enabled> </hop>  <hop> <from>file input</from><to>Append cycle and file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle and file_id</from><to>Yield FMS data</to><enabled>Y</enabled> </hop>  <hop> <from>Status Desc Lookup</from><to>Trim x_sname_query</to><enabled>Y</enabled> </hop>  <hop> <from>Trim x_sname_query</from><to>write events</to><enabled>Y</enabled> </hop>  <hop> <from>Trim Line and Error reason</from><to>Insert invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file id</from><to>Get Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get Process ID</from><to>Append cycle and file_id</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>convert client and server IP</from><to>Write to log on error 2</to><enabled>Y</enabled> </hop>  <hop> <from>write events</from><to>Write to log on insert error</to><enabled>Y</enabled> </hop>  <hop> <from>Event type lookup</from><to>Event Category Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Event Category Lookup</from><to>Adaptor Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Adaptor Lookup</from><to>Virtual Host Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Virtual Host Lookup</from><to>App Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>App Lookup</from><to>App Instance Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>App Instance Lookup</from><to>Client Protocol Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Client Protocol Lookup</from><to>Stream Type Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Stream Type Lookup</from><to>Status Desc Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>convert client and server IP</from><to>Add constants 2</to><enabled>Y</enabled> </hop>  <hop> <from>Add constants 2</from><to>Event type lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids valid line</from><to>convert client and server IP</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids invalid line</from><to>Trim Line and Error reason</to><enabled>Y</enabled> </hop>  <hop> <from>check valid line </from><to>Fix event time and partner</to><enabled>Y</enabled> </hop>  <hop> <from>Fix event time and partner</from><to>Calc day and hour ids invalid line</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>check valid line </from><to>Enable parallelization</to><enabled>Y</enabled> </hop>  <hop> <from>Enable parallelization</from><to>Calc day and hour ids valid line</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>check valid line </to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath</from><to>file input</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>Get event time</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>Yield FMS data</from><to>Get event time</to><enabled>Y</enabled> </hop>  <hop> <from>file input</from><to>Append cycle and file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle and file_id</from><to>Yield FMS data</to><enabled>Y</enabled> </hop>  <hop> <from>Status Desc Lookup</from><to>Trim x_sname_query</to><enabled>Y</enabled> </hop>  <hop> <from>Trim x_sname_query</from><to>write events</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file id</from><to>Append cycle and file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Trim Line and Error reason</from><to>Get Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get Process ID</from><to>Insert invalid ds line</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Adaptor Lookup</name>
     <type>CombinationLookup</type>
@@ -746,6 +746,38 @@ if (entry_partner_id == null)
     </step>
 
   <step>
+    <name>Get Process ID</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>process_id</name>
+        <variable>${ProcessID}</variable>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>0</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>696</xloc>
+      <yloc>396</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Get Variables</name>
     <type>GetVariable</type>
     <description/>
@@ -857,6 +889,48 @@ if (entry_partner_id == null)
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>412</xloc>
       <yloc>71</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Insert invalid ds line</name>
+    <type>Mapping</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <trans_name/>
+    <filename>${EtlBasePath}&#47;common&#47;insert_invalid_ds_line.ktr</filename>
+    <directory_path/>
+    <mappings>
+      <input>
+    <mapping>    <input_step>Trim Line and Error reason</input_step>
+    <output_step>Mapping input specification</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+       <connector><parent>cycle_id</parent><child>cycle_id</child></connector>
+       <connector><parent>file_id</parent><child>file_id</child></connector>
+       <connector><parent>line_number</parent><child>line_number</child></connector>
+       <connector><parent>error_reason</parent><child>error_reason</child></connector>
+       <connector><parent>day_id</parent><child>date_id</child></connector>
+       <connector><parent>row</parent><child>errornous_line</child></connector>
+       <connector><parent>entry_partner_id</parent><child>partner_id</child></connector>
+       <connector><parent>process_id</parent><child>process_id</child></connector>
+    </mapping>      </input>
+      <output>
+      </output>
+          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    </mappings>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>699</xloc>
+      <yloc>473</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2540,80 +2614,6 @@ else if ( substr(entry_id,0,5)==&quot;rtmp:&quot;  )  &#47;&#47; validate the en
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1403</xloc>
       <yloc>522</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Insert invalid ds line</name>
-    <type>Mapping</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <trans_name/>
-    <filename>${EtlBasePath}&#47;common&#47;insert_invalid_ds_line.ktr</filename>
-    <directory_path/>
-    <mappings>
-      <input>
-    <mapping>    <input_step>Trim Line and Error reason</input_step>
-    <output_step>Mapping input specification</output_step>
-    <main_path>Y</main_path>
-    <rename_on_output>N</rename_on_output>
-    <description/>
-       <connector><parent>cycle_id</parent><child>cycle_id</child></connector>
-       <connector><parent>file_id</parent><child>file_id</child></connector>
-       <connector><parent>line_number</parent><child>line_number</child></connector>
-       <connector><parent>error_reason</parent><child>error_reason</child></connector>
-       <connector><parent>day_id</parent><child>date_id</child></connector>
-       <connector><parent>row</parent><child>errornous_line</child></connector>
-       <connector><parent>entry_partner_id</parent><child>partner_id</child></connector>
-       <connector><parent>process_id</parent><child>process_id</child></connector>
-    </mapping>      </input>
-      <output>
-      </output>
-          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
-    </parameters>
-    </mappings>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>703</xloc>
-      <yloc>428</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Process ID</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>process_id</name>
-        <variable>${ProcessID}</variable>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>0</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>188</xloc>
-      <yloc>190</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
