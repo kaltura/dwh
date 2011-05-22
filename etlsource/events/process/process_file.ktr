@@ -2640,8 +2640,8 @@ else {
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>342</xloc>
-      <yloc>9</yloc>
+      <xloc>266</xloc>
+      <yloc>19</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2960,11 +2960,26 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
       <loglevel>log_level_basic</loglevel>
       <displayHeader>Y</displayHeader>
     <fields>
+      <field>
+        <name>cycle_id</name>
+        </field>
+      <field>
+        <name>file_name</name>
+        </field>
+      <field>
+        <name>file_id</name>
+        </field>
+      <field>
+        <name>cycle_path</name>
+        </field>
+      <field>
+        <name>file_fullpath</name>
+        </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>251</xloc>
-      <yloc>46</yloc>
+      <xloc>404</xloc>
+      <yloc>23</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
