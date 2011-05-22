@@ -200,7 +200,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Write to log</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Get PS2 lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Irrelevant line</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Set line type = 3</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 3</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Set line type = 2</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 2</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>decode http string</from><to>Get API_V_3 lines</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>empty ps2 line</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath</from><to>iterate file</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>filter bad lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle_id and file_id</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>ip to location lookup error </to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>referrer -&gt; domain</to><enabled>Y</enabled> </hop>  <hop> <from>convert IP and domain</from><to>Get IP location</to><enabled>Y</enabled> </hop>  <hop> <from>fix invalid values</from><to>referrer lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>convert IP and domain</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>Write to log on error</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>domain lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>domain lookup</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>fix invalid values</to><enabled>Y</enabled> </hop>  <hop> <from>referrer lookup&#47;update</from><to>write events</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich file_id</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Insert events invalid line</from><to>Write to log - invalid line insert error - events</to><enabled>Y</enabled> </hop>  <hop> <from>format errornouse line</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>parse bandwidth lines</from><to>Filter rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>Not a bandwidth match</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>validate bandwidth raw input</to><enabled>Y</enabled> </hop>  <hop> <from>validate bandwidth raw input</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich bandwidth rows</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle and file to bandwidth</from><to>Calc bandwidth day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc bandwidth day and hour ids</from><to>check bandwidth valid line</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Calc day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids</from><to>check events valid line </to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>format errornouse line</to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>Trim Line and Error reason</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source lookup</from><to>Write bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>Trim URL</to><enabled>Y</enabled> </hop>  <hop> <from>Trim URL</from><to>Bandwidth Source = WWW</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source = WWW</from><to>Bandwidth Source lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - events</from><to>decode http string</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - bandwidth</from><to>parse bandwidth lines</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - events</to><enabled>Y</enabled> </hop>  <hop> <from>Append file_id</from><to>Insert events invalid line</to><enabled>Y</enabled> </hop>  <hop> <from>Insert bandwidth invalid line</from><to>Write to log - invalid line insert error - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Trim Line and Error reason</from><to>Insert bandwidth invalid line</to><enabled>Y</enabled> </hop>  <hop> <from>Write bandwidth</from><to>insert error - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>write events</from><to>insert error - events</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Write to log</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Get PS2 lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Irrelevant line</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Set line type = 3</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 3</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Set line type = 2</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 2</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>decode http string</from><to>Get API_V_3 lines</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>empty ps2 line</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath</from><to>iterate file</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>filter bad lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle_id and file_id</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>ip to location lookup error </to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>referrer -&gt; domain</to><enabled>Y</enabled> </hop>  <hop> <from>convert IP and domain</from><to>Get IP location</to><enabled>Y</enabled> </hop>  <hop> <from>fix invalid values</from><to>referrer lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>convert IP and domain</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>Write to log on error</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>domain lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>domain lookup</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>fix invalid values</to><enabled>Y</enabled> </hop>  <hop> <from>referrer lookup&#47;update</from><to>write events</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich file_id</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Insert events invalid line</from><to>Write to log - invalid line insert error - events</to><enabled>Y</enabled> </hop>  <hop> <from>format errornouse line</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>parse bandwidth lines</from><to>Filter rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>Not a bandwidth match</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>validate bandwidth raw input</to><enabled>Y</enabled> </hop>  <hop> <from>validate bandwidth raw input</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich bandwidth rows</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle and file to bandwidth</from><to>Calc bandwidth day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc bandwidth day and hour ids</from><to>check bandwidth valid line</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Calc day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids</from><to>check events valid line </to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>format errornouse line</to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>Trim Line and Error reason</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source lookup</from><to>Write bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>Trim URL</to><enabled>Y</enabled> </hop>  <hop> <from>Trim URL</from><to>Bandwidth Source = WWW</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source = WWW</from><to>Bandwidth Source lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - events</from><to>decode http string</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - bandwidth</from><to>parse bandwidth lines</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - events</to><enabled>Y</enabled> </hop>  <hop> <from>Insert bandwidth invalid line</from><to>Write to log - invalid line insert error - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Trim Line and Error reason</from><to>Insert bandwidth invalid line</to><enabled>Y</enabled> </hop>  <hop> <from>Write bandwidth</from><to>insert error - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>write events</from><to>insert error - events</to><enabled>Y</enabled> </hop>  <hop> <from>Append file_id</from><to>Insert events invalid line</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Abort</name>
     <type>Abort</type>
@@ -820,8 +820,8 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1020</xloc>
-      <yloc>300</yloc>
+      <xloc>1019</xloc>
+      <yloc>427</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1209,7 +1209,7 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1020</xloc>
-      <yloc>400</yloc>
+      <yloc>549</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1618,11 +1618,8 @@ var referrer_fixed = referrer_wo_domain != null ? substr(referrer_wo_domain,0,25
 var seek_fixed = seekIndicator == &quot;true&quot; || seekIndicator == &quot;1&quot; ? &quot;1&quot; : &quot;0&quot;;
 var unique_viewer_fixed = uv != null ? substr(uv,0,40) : null;
 var session_id_fixed = sessionID != null ? substr(sessionID,0,50) : null;
-
-var tmpCurrentPoint = parseInt(currentPoint);
-var current_point_fixed = isNaN(tmpCurrentPoint) ? 0 : tmpCurrentPoint;
-var tmpDuration = parseInt(duration);
-var duration_fixed = isNaN(tmpDuration) ? 0 : tmpDuration;
+var current_point_fixed = is_not_numeric(currentPoint) ? 0 : currentPoint;
+var duration_fixed = is_not_numeric(duration) ? 0 : duration;
 
 if ( currentPoint &lt; 0 ) {
 &#47;&#47; _current_point_fixed - is in seconds NOT millis
@@ -1645,7 +1642,10 @@ if ( currentPoint &lt; 0 ) {
 		}
         current_point_fixed=floor(1000*_current_point_fixed);
 }
-</jsScript_script>
+
+function is_not_numeric(s) {
+	return (isNaN(s) || s == null || s == &quot;&quot;);
+}</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>client_version_fixed</name>
         <rename>client_version_fixed</rename>
         <type>String</type>
@@ -1717,27 +1717,10 @@ if ( currentPoint &lt; 0 ) {
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
 
-var errornous_line = clientVersion + &quot;,&quot; +
-        eventType + &quot;,&quot; +
-        eventTime + &quot;,&quot; +
-        sessionID + &quot;,&quot; +
-        partnerID + &quot;,&quot; +
-        entryID + &quot;,&quot; +
-        uv + &quot;,&quot; +
-        widgetID + &quot;,&quot; +
-        uiConfID + &quot;,&quot; +
-        uid + &quot;,&quot; +
-        currentPoint + &quot;,&quot; +
-        duration + &quot;,&quot; +
-        user_ip + &quot;,&quot; +
-        processDuration + &quot;,&quot; +
-        controlID + &quot;,&quot; +
-        seekIndicator + &quot;,&quot; +
-        newPoint + &quot;,&quot; +
-        referrer;
+var errornous_line = user_ip + &quot; &quot; + raw_datetime + &quot; &quot; + timezone_offset + &quot; &quot; + http_string + &quot; &quot; + http_response_code + &quot; &quot; + response_size + &quot; &quot; + response_duration  + &quot; &quot; + referrer;
 
 &#47;&#47; make sure line isn&apos;t TOO long
-errornous_line = substr ( errornous_line , 0 ,1023 );</jsScript_script>
+errornous_line = substr (replace(errornous_line, &quot;&apos;&quot;, &quot;&apos;&apos;&quot;), 0 , 1023);</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>errornous_line</name>
         <rename>errornous_line</rename>
         <type>String</type>
@@ -2292,8 +2275,9 @@ if (lineType == 2){
 		if (uv.length &gt; 34 &amp;&amp; substr(uv,0,3) == &quot;uv_&quot;) {
 			uv = substr(uv,3);
 		}
-		tmpPartnerID = parseInt(getValue(queryStringDictionary, &quot;partner_id&quot;));
-		partnerID = isNaN(tmpPartnerID) ? -1 : tmpPartnerID;
+
+		strPartnerID = getValue(queryStringDictionary, &quot;partner_id&quot;);
+		partnerID = is_not_numeric(strPartnerID) ? -1 : strPartnerID;
 		entryID = getValue(queryStringDictionary, &quot;obj_id&quot;);
 		uid = getValue(queryStringDictionary, &quot;uid&quot;);
 		eventType = decode(queryStringDictionary[&quot;command&quot;], &apos;view&apos;, 2, &apos;play&apos;,3, 0);
@@ -2315,8 +2299,8 @@ if (lineType == 2){
 	newPoint = getValue(queryStringDictionary, &quot;newPoint&quot;);
 	referrer = getValue(queryStringDictionary, &quot;referrer&quot;);
 	eventTimestamp = getValue(queryStringDictionary, &quot;eventTimestamp&quot;);
-	tmpPartnerID = parseInt(getValue(queryStringDictionary, &quot;partnerId&quot;));
-	partnerID = isNaN(tmpPartnerID) ? -1 : tmpPartnerID;
+	strPartnerID = getValue(queryStringDictionary, &quot;partnerId&quot;);
+	partnerID = is_not_numeric(strPartnerID) ? -1 : strPartnerID;
 	entryID = getValue(queryStringDictionary, &quot;entryId&quot;);
 	uid = getValue(queryStringDictionary,&quot;userId&quot;);
 	eventType = getValue(queryStringDictionary, &quot;eventType&quot;);
@@ -2336,6 +2320,10 @@ function parseQueryString(s){
 function getValue(dictionary, key){
 	var val = dictionary[keyPrefix + key];
 	return val != null ? replace(val, &apos;,&apos;, &apos;~&apos;) : null;
+}
+
+function is_not_numeric(s) {
+	return (isNaN(s) || s == null || s == &quot;&quot;);
 }
 </jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
