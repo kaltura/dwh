@@ -1895,7 +1895,7 @@ errornous_line = substr (errornous_line, 0 , 1023);</jsScript_script>
     <accept_filenames>Y</accept_filenames>
     <passing_through_fields>N</passing_through_fields>
     <accept_field>file_fullpath</accept_field>
-    <accept_stepname>set file fullpath</accept_stepname>
+    <accept_stepname>Write to log 2</accept_stepname>
     <separator> </separator>
     <enclosure>&quot;</enclosure>
     <enclosure_breaks>N</enclosure_breaks>
