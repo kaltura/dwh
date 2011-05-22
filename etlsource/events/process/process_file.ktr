@@ -200,7 +200,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Write to log</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Get PS2 lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Irrelevant line</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Set line type = 3</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 3</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Set line type = 2</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 2</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>decode http string</from><to>Get API_V_3 lines</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>empty ps2 line</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>filter bad lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle_id and file_id</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>ip to location lookup error </to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>referrer -&gt; domain</to><enabled>Y</enabled> </hop>  <hop> <from>convert IP and domain</from><to>Get IP location</to><enabled>Y</enabled> </hop>  <hop> <from>fix invalid values</from><to>referrer lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>convert IP and domain</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>Write to log on error</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>domain lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>domain lookup</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>fix invalid values</to><enabled>Y</enabled> </hop>  <hop> <from>referrer lookup&#47;update</from><to>write events</to><enabled>Y</enabled> </hop>  <hop> <from>format events errornouse line</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>parse bandwidth lines</from><to>Filter BW rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>Not a bandwidth match</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>validate bandwidth raw input</to><enabled>Y</enabled> </hop>  <hop> <from>validate bandwidth raw input</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle and file to bandwidth</from><to>Calc bandwidth day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc bandwidth day and hour ids</from><to>check bandwidth valid line</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Calc day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids</from><to>check events valid line </to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>format events errornouse line</to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>format BW errornous line</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source lookup</from><to>Write bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>Trim BW URL</to><enabled>Y</enabled> </hop>  <hop> <from>Trim BW URL</from><to>Bandwidth Source = WWW</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source = WWW</from><to>Bandwidth Source lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - events</from><to>decode http string</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - bandwidth</from><to>parse bandwidth lines</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - events</to><enabled>Y</enabled> </hop>  <hop> <from>Write bandwidth</from><to>insert error - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>write events</from><to>insert error - events</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich file_id</from><to>Get events Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get events Process ID</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append file_id</from><to>Insert events invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich bandwidth rows</from><to>Get BW Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get BW Process ID</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>format BW errornous line</from><to>Insert bw invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath</from><to>Write to log 2</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log 2</from><to>iterate file</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Write to log</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Get PS2 lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Irrelevant line</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Set line type = 3</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 3</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Set line type = 2</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 2</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>decode http string</from><to>Get API_V_3 lines</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>empty ps2 line</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>filter bad lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle_id and file_id</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>ip to location lookup error </to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>referrer -&gt; domain</to><enabled>Y</enabled> </hop>  <hop> <from>convert IP and domain</from><to>Get IP location</to><enabled>Y</enabled> </hop>  <hop> <from>fix invalid values</from><to>referrer lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>convert IP and domain</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>Write to log on error</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>domain lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>domain lookup</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>fix invalid values</to><enabled>Y</enabled> </hop>  <hop> <from>referrer lookup&#47;update</from><to>write events</to><enabled>Y</enabled> </hop>  <hop> <from>format events errornouse line</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>parse bandwidth lines</from><to>Filter BW rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>Not a bandwidth match</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>validate bandwidth raw input</to><enabled>Y</enabled> </hop>  <hop> <from>validate bandwidth raw input</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle and file to bandwidth</from><to>Calc bandwidth day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc bandwidth day and hour ids</from><to>check bandwidth valid line</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Calc day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids</from><to>check events valid line </to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>format events errornouse line</to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>format BW errornous line</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source lookup</from><to>Write bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>Trim BW URL</to><enabled>Y</enabled> </hop>  <hop> <from>Trim BW URL</from><to>Bandwidth Source = WWW</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source = WWW</from><to>Bandwidth Source lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - events</from><to>decode http string</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - bandwidth</from><to>parse bandwidth lines</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - events</to><enabled>Y</enabled> </hop>  <hop> <from>Write bandwidth</from><to>insert error - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>write events</from><to>insert error - events</to><enabled>Y</enabled> </hop>  <hop> <from>Append file_id</from><to>Insert events invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>format BW errornous line</from><to>Insert bw invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath</from><to>Write to log 2</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log 2</from><to>iterate file</to><enabled>Y</enabled> </hop>  <hop> <from>Get BW process id</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich bandwidth rows</from><to>Get BW process id</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich file_id</from><to>Get events process id</to><enabled>Y</enabled> </hop>  <hop> <from>Get events process id</from><to>Append file_id</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Abort</name>
     <type>Abort</type>
@@ -556,7 +556,7 @@
         <precision>-1</precision>
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>846</xloc>
+      <xloc>811</xloc>
       <yloc>222</yloc>
       <draw>Y</draw>
       </GUI>
@@ -632,38 +632,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>440</xloc>
       <yloc>100</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get BW Process ID</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>process_id</name>
-        <variable>${ProcessID}</variable>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>237</xloc>
-      <yloc>434</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -784,38 +752,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>80</xloc>
       <yloc>20</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get events Process ID</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>process_id</name>
-        <variable>${ProcessID}</variable>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>932</xloc>
-      <yloc>222</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3029,6 +2965,70 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>251</xloc>
       <yloc>46</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get BW process id</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>process_id</name>
+        <variable>${ProcessID}</variable>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>239</xloc>
+      <yloc>433</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get events process id</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>process_id</name>
+        <variable>${ProcessID}</variable>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>919</xloc>
+      <yloc>223</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
