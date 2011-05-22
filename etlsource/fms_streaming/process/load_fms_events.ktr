@@ -908,7 +908,7 @@ if (entry_partner_id == null)
     <directory_path/>
     <mappings>
       <input>
-    <mapping>    <input_step>Trim Line and Error reason</input_step>
+    <mapping>    <input_step>Get Process ID</input_step>
     <output_step>Mapping input specification</output_step>
     <main_path>Y</main_path>
     <rename_on_output>N</rename_on_output>
