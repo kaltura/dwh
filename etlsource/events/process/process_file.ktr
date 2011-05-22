@@ -200,7 +200,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Write to log</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Get PS2 lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Irrelevant line</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Set line type = 3</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 3</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Set line type = 2</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 2</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>decode http string</from><to>Get API_V_3 lines</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>empty ps2 line</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>filter bad lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle_id and file_id</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>ip to location lookup error </to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>referrer -&gt; domain</to><enabled>Y</enabled> </hop>  <hop> <from>convert IP and domain</from><to>Get IP location</to><enabled>Y</enabled> </hop>  <hop> <from>fix invalid values</from><to>referrer lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>convert IP and domain</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>Write to log on error</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>domain lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>domain lookup</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>fix invalid values</to><enabled>Y</enabled> </hop>  <hop> <from>referrer lookup&#47;update</from><to>write events</to><enabled>Y</enabled> </hop>  <hop> <from>format events errornouse line</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>parse bandwidth lines</from><to>Filter BW rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>Not a bandwidth match</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>validate bandwidth raw input</to><enabled>Y</enabled> </hop>  <hop> <from>validate bandwidth raw input</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle and file to bandwidth</from><to>Calc bandwidth day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc bandwidth day and hour ids</from><to>check bandwidth valid line</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Calc day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids</from><to>check events valid line </to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>format events errornouse line</to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>format BW errornous line</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source lookup</from><to>Write bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>Trim BW URL</to><enabled>Y</enabled> </hop>  <hop> <from>Trim BW URL</from><to>Bandwidth Source = WWW</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source = WWW</from><to>Bandwidth Source lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - events</from><to>decode http string</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - bandwidth</from><to>parse bandwidth lines</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - events</to><enabled>Y</enabled> </hop>  <hop> <from>Write bandwidth</from><to>insert error - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>write events</from><to>insert error - events</to><enabled>Y</enabled> </hop>  <hop> <from>Append file_id</from><to>Insert events invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>format BW errornous line</from><to>Insert bw invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath</from><to>Write to log 2</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log 2</from><to>iterate file</to><enabled>Y</enabled> </hop>  <hop> <from>Get BW process id</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich bandwidth rows</from><to>Get BW process id</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich file_id</from><to>Get events process id</to><enabled>Y</enabled> </hop>  <hop> <from>Get events process id</from><to>Append file_id</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Write to log</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Get PS2 lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Irrelevant line</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Set line type = 3</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 3</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Set line type = 2</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 2</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>decode http string</from><to>Get API_V_3 lines</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>empty ps2 line</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath</from><to>iterate file</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>filter bad lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle_id and file_id</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>ip to location lookup error </to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>referrer -&gt; domain</to><enabled>Y</enabled> </hop>  <hop> <from>convert IP and domain</from><to>Get IP location</to><enabled>Y</enabled> </hop>  <hop> <from>fix invalid values</from><to>referrer lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>convert IP and domain</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>Write to log on error</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>domain lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>domain lookup</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>fix invalid values</to><enabled>Y</enabled> </hop>  <hop> <from>referrer lookup&#47;update</from><to>write events</to><enabled>Y</enabled> </hop>  <hop> <from>format events errornouse line</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>parse bandwidth lines</from><to>Filter BW rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>Not a bandwidth match</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>validate bandwidth raw input</to><enabled>Y</enabled> </hop>  <hop> <from>validate bandwidth raw input</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich bandwidth rows</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle and file to bandwidth</from><to>Calc bandwidth day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc bandwidth day and hour ids</from><to>check bandwidth valid line</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Calc day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids</from><to>check events valid line </to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>format events errornouse line</to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>format BW errornous line</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source lookup</from><to>Write bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>Trim BW URL</to><enabled>Y</enabled> </hop>  <hop> <from>Trim BW URL</from><to>Bandwidth Source = WWW</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source = WWW</from><to>Bandwidth Source lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - events</from><to>decode http string</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - bandwidth</from><to>parse bandwidth lines</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - events</to><enabled>Y</enabled> </hop>  <hop> <from>Write bandwidth</from><to>insert error - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>write events</from><to>insert error - events</to><enabled>Y</enabled> </hop>  <hop> <from>Append file_id</from><to>get events error_reason code</to><enabled>Y</enabled> </hop>  <hop> <from>get events error_reason code</from><to>Insert events invalid line</to><enabled>Y</enabled> </hop>  <hop> <from>Insert events invalid line</from><to>Write to log - invalid line insert error - events</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich file_id</from><to>Get Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get Process ID</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>format BW errornous line</from><to>get bandwidth error_reason code</to><enabled>Y</enabled> </hop>  <hop> <from>get bandwidth error_reason code</from><to>Insert bandwidth invalid line</to><enabled>Y</enabled> </hop>  <hop> <from>Insert bandwidth invalid line</from><to>Write to log - invalid line insert error - bandwidth</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Abort</name>
     <type>Abort</type>
@@ -504,8 +504,8 @@
         <precision>-1</precision>
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>362</xloc>
-      <yloc>433</yloc>
+      <xloc>260</xloc>
+      <yloc>440</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -556,7 +556,7 @@
         <precision>-1</precision>
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>811</xloc>
+      <xloc>846</xloc>
       <yloc>222</yloc>
       <draw>Y</draw>
       </GUI>
@@ -757,90 +757,6 @@
     </step>
 
   <step>
-    <name>Insert bw invalid ds line</name>
-    <type>Mapping</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <trans_name/>
-    <filename>${EtlBasePath}&#47;common&#47;insert_invalid_ds_line.ktr</filename>
-    <directory_path/>
-    <mappings>
-      <input>
-    <mapping>    <input_step>format BW errornous line</input_step>
-    <output_step>Mapping input specification</output_step>
-    <main_path>Y</main_path>
-    <rename_on_output>N</rename_on_output>
-    <description/>
-       <connector><parent>error_reason</parent><child>error_reason</child></connector>
-       <connector><parent>errornous_line</parent><child>errornous_line</child></connector>
-       <connector><parent>process_id</parent><child>process_id</child></connector>
-       <connector><parent>file_id</parent><child>file_id</child></connector>
-       <connector><parent>cycle_id</parent><child>cycle_id</child></connector>
-       <connector><parent>day_id</parent><child>date_id</child></connector>
-       <connector><parent>line_number</parent><child>line_number</child></connector>
-       <connector><parent>partnerID</parent><child>partner_id</child></connector>
-    </mapping>      </input>
-      <output>
-      </output>
-          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
-    </parameters>
-    </mappings>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>367</xloc>
-      <yloc>584</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Insert events invalid ds line</name>
-    <type>Mapping</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <trans_name/>
-    <filename>${EtlBasePath}&#47;common&#47;insert_invalid_ds_line.ktr</filename>
-    <directory_path/>
-    <mappings>
-      <input>
-    <mapping>    <input_step>Append file_id</input_step>
-    <output_step>Mapping input specification</output_step>
-    <main_path>Y</main_path>
-    <rename_on_output>N</rename_on_output>
-    <description/>
-       <connector><parent>error_reason</parent><child>error_reason</child></connector>
-       <connector><parent>errornous_line</parent><child>errornous_line</child></connector>
-       <connector><parent>process_id</parent><child>process_id</child></connector>
-       <connector><parent>file_id</parent><child>file_id</child></connector>
-       <connector><parent>cycle_id</parent><child>cycle_id</child></connector>
-       <connector><parent>day_id</parent><child>date_id</child></connector>
-       <connector><parent>line_number</parent><child>line_number</child></connector>
-       <connector><parent>partnerID</parent><child>partner_id</child></connector>
-    </mapping>      </input>
-      <output>
-      </output>
-          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
-    </parameters>
-    </mappings>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1027</xloc>
-      <yloc>309</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Irrelevant line</name>
     <type>Dummy</type>
     <description/>
@@ -1015,6 +931,39 @@
     </step>
 
   <step>
+    <name>format BW errornous line</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+var errornous_line = user_ip + &quot; &quot; + raw_datetime + &quot; &quot; + timezone_offset + &quot; &quot; + http_string + &quot; &quot; + http_response_code + &quot; &quot; + response_size + &quot; &quot; + response_duration  + &quot; &quot; + referrer;
+
+&#47;&#47; make sure line isn&apos;t TOO long
+errornous_line = substr (errornous_line, 0 , 1023);</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>errornous_line</name>
+        <rename>errornous_line</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>257</xloc>
+      <yloc>578</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Trim BW URL</name>
     <type>ScriptValueMod</type>
     <description/>
@@ -1131,6 +1080,50 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>640</xloc>
       <yloc>220</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log - invalid line insert error - bandwidth</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+    <fields>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>712</xloc>
+      <yloc>541</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log - invalid line insert error - events</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+    <fields>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1020</xloc>
+      <yloc>549</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1624,39 +1617,6 @@ function is_not_numeric(s) {
     </step>
 
   <step>
-    <name>format BW errornous line</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47;Script here
-
-var errornous_line = user_ip + &quot; &quot; + raw_datetime + &quot; &quot; + timezone_offset + &quot; &quot; + http_string + &quot; &quot; + http_response_code + &quot; &quot; + response_size + &quot; &quot; + response_duration  + &quot; &quot; + referrer;
-
-&#47;&#47; make sure line isn&apos;t TOO long
-errornous_line = substr (errornous_line, 0 , 1023);</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>errornous_line</name>
-        <rename>errornous_line</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>221</xloc>
-      <yloc>585</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>format events errornouse line</name>
     <type>ScriptValueMod</type>
     <description/>
@@ -1831,7 +1791,7 @@ errornous_line = substr (errornous_line, 0 , 1023);</jsScript_script>
     <accept_filenames>Y</accept_filenames>
     <passing_through_fields>N</passing_through_fields>
     <accept_field>file_fullpath</accept_field>
-    <accept_stepname>Write to log 2</accept_stepname>
+    <accept_stepname>set file fullpath</accept_stepname>
     <separator> </separator>
     <enclosure>&quot;</enclosure>
     <enclosure_breaks>N</enclosure_breaks>
@@ -2640,8 +2600,8 @@ else {
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>266</xloc>
-      <yloc>19</yloc>
+      <xloc>240</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2948,8 +2908,8 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
     </step>
 
   <step>
-    <name>Write to log 2</name>
-    <type>WriteToLog</type>
+    <name>get events error_reason code</name>
+    <type>CombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -2957,35 +2917,106 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-    <fields>
-      <field>
-        <name>cycle_id</name>
-        </field>
-      <field>
-        <name>file_name</name>
-        </field>
-      <field>
-        <name>file_id</name>
-        </field>
-      <field>
-        <name>cycle_path</name>
-        </field>
-      <field>
-        <name>file_fullpath</name>
-        </field>
+      <schema/>
+      <table>invalid_ds_lines_error_codes</table>
+      <connection>kalturadw_ds</connection>
+      <commit>100</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>error_reason</name>
+          <lookup>error_code_reason</lookup>
+        </key>
+        <return>
+          <name>error_code_id</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
       </fields>
+      <sequence/>
+      <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>404</xloc>
-      <yloc>23</yloc>
+      <xloc>1019</xloc>
+      <yloc>319</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Get BW process id</name>
+    <name>Insert events invalid line</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>kalturadw_ds</connection>
+    <schema/>
+    <table>invalid_ds_lines</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>Y</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>cycle_id</column_name>
+          <stream_name>cycle_id</stream_name>
+        </field>
+        <field>
+          <column_name>file_id</column_name>
+          <stream_name>file_id</stream_name>
+        </field>
+        <field>
+          <column_name>line_number</column_name>
+          <stream_name>line_number</stream_name>
+        </field>
+        <field>
+          <column_name>error_reason_code</column_name>
+          <stream_name>error_code_id</stream_name>
+        </field>
+        <field>
+          <column_name>ds_line</column_name>
+          <stream_name>errornous_line</stream_name>
+        </field>
+        <field>
+          <column_name>date_id</column_name>
+          <stream_name>day_id</stream_name>
+        </field>
+        <field>
+          <column_name>partner_id</column_name>
+          <stream_name>partnerID</stream_name>
+        </field>
+        <field>
+          <column_name>process_id</column_name>
+          <stream_name>process_id</stream_name>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1020</xloc>
+      <yloc>426</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Process ID</name>
     <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -3010,15 +3041,15 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>239</xloc>
-      <yloc>433</yloc>
+      <xloc>932</xloc>
+      <yloc>222</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Get events process id</name>
-    <type>GetVariable</type>
+    <name>get bandwidth error_reason code</name>
+    <type>CombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -3026,24 +3057,100 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
            <method>none</method>
            <schema_name/>
            </partitioning>
+      <schema/>
+      <table>invalid_ds_lines_error_codes</table>
+      <connection>kalturadw_ds</connection>
+      <commit>100</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>error_reason</name>
+          <lookup>error_code_reason</lookup>
+        </key>
+        <return>
+          <name>error_code_id</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>387</xloc>
+      <yloc>557</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Insert bandwidth invalid line</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>kalturadw_ds</connection>
+    <schema/>
+    <table>invalid_ds_lines</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>Y</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
     <fields>
-      <field>
-        <name>process_id</name>
-        <variable>${ProcessID}</variable>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
+        <field>
+          <column_name>cycle_id</column_name>
+          <stream_name>cycle_id</stream_name>
+        </field>
+        <field>
+          <column_name>file_id</column_name>
+          <stream_name>file_id</stream_name>
+        </field>
+        <field>
+          <column_name>line_number</column_name>
+          <stream_name>line_number</stream_name>
+        </field>
+        <field>
+          <column_name>error_reason_code</column_name>
+          <stream_name>error_code_id</stream_name>
+        </field>
+        <field>
+          <column_name>ds_line</column_name>
+          <stream_name>errornous_line</stream_name>
+        </field>
+        <field>
+          <column_name>date_id</column_name>
+          <stream_name>day_id</stream_name>
+        </field>
+        <field>
+          <column_name>partner_id</column_name>
+          <stream_name>partnerID</stream_name>
+        </field>
+        <field>
+          <column_name>process_id</column_name>
+          <stream_name>process_id</stream_name>
+        </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>919</xloc>
-      <yloc>223</yloc>
+      <xloc>522</xloc>
+      <yloc>542</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3100,6 +3207,30 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
       <error>
         <source_step>write events</source_step>
         <target_step>insert error - events</target_step>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename>desc</descriptions_valuename>
+        <fields_valuename>fields</fields_valuename>
+        <codes_valuename>codes</codes_valuename>
+        <max_errors>-1</max_errors>
+        <max_pct_errors>-1</max_pct_errors>
+        <min_pct_rows>-1</min_pct_rows>
+      </error>
+      <error>
+        <source_step>Insert events invalid line</source_step>
+        <target_step>Write to log - invalid line insert error - events</target_step>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename>desc</descriptions_valuename>
+        <fields_valuename>fields</fields_valuename>
+        <codes_valuename>codes</codes_valuename>
+        <max_errors>-1</max_errors>
+        <max_pct_errors>-1</max_pct_errors>
+        <min_pct_rows>-1</min_pct_rows>
+      </error>
+      <error>
+        <source_step>Insert bandwidth invalid line</source_step>
+        <target_step>Write to log - invalid line insert error - bandwidth</target_step>
         <is_enabled>Y</is_enabled>
         <nr_valuename/>
         <descriptions_valuename>desc</descriptions_valuename>
