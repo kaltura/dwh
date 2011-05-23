@@ -1,4 +1,4 @@
-MITER $$
+DELIMITER $$
 
 USE `kalturadw`$$
 
