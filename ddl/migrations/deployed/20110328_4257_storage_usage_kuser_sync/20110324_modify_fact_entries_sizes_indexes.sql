@@ -47,6 +47,8 @@ CREATE TABLE `dwh_fact_entries_sizes_new` (
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+CALL add_partition_for_table('dwh_fact_entries_sizes_new');
+
 INSERT INTO kalturadw.dwh_fact_entries_sizes_new
 SELECT * FROM kalturadw.dwh_fact_entries_sizes;
 
