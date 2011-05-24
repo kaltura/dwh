@@ -88,7 +88,7 @@ BEGIN
 		entry_additional_size_kb = VALUES(entry_additional_size_kb);
 	
 	UPDATE aggr_managment SET is_calculated = 1, end_time = NOW() WHERE aggr_name = 'storage_usage' AND aggr_day_int = p_date_id;
-	UPDATE aggr_managment SET is_calculated = 0 WHERE aggr_name = 'partner_usage' AND aggr_day_int = p_date_id;
+	UPDATE aggr_managment SET is_calculated = 0 WHERE aggr_name = 'partner_usage' AND aggr_day_int >= p_date_id;
 	
 END$$
 

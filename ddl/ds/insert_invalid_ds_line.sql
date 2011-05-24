@@ -13,7 +13,7 @@ CREATE DEFINER=`etl`@`localhost` PROCEDURE `insert_invalid_ds_line`(line_number_
 									cycle_id_param INT(11), 
 									process_id_param INT(11))
 BEGIN
-	INSERT INTO invalid_ds_lines (line_number, file_id, error_reason_code, ds_line, date_id, partner_id, cycle_id, process_id)
+	INSERT IGNORE INTO invalid_ds_lines (line_number, file_id, error_reason_code, ds_line, date_id, partner_id, cycle_id, process_id)
 	VALUES (line_number_param, file_id_param, get_error_code(error_reason_param), ds_line_param, date_id_param, partner_id_param, cycle_id_param, process_id_param);
 END$$
 
