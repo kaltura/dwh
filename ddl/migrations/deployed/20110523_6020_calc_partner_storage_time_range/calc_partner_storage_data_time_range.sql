@@ -10,7 +10,7 @@ BEGIN
 	DECLARE avg_cont_aggr_storage INT;
 	SET @current_partner_id=partner_id;
 	SET @current_start_date_id=start_date_id;
-	SET @current_end_date_id=end_date_id;
+	SET @current_end_date_id=LEAST(end_date_id, DATE(NOW())*1);
 
 	SELECT	SUM(continuous_aggr_storage/DAY(LAST_DAY(continuous_partner_storage.date_id))) avg_continuous_aggr_storage_mb
 	INTO avg_cont_aggr_storage
