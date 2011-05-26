@@ -244,7 +244,7 @@
         <jsScript_script>&#47;&#47;Script here
 
 
-subtype_key = num2str(job_type) + &quot;_&quot; + str2num(job_sub_type)</jsScript_script>
+subtype_key = num2str(job_type) + &quot;_&quot; + num2str(job_sub_type)</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>subtype_key</name>
         <rename>subtype_key</rename>
         <type>String</type>
