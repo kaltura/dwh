@@ -225,7 +225,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath</to><enabled>Y</enabled> </hop>  <hop> <from>Get bandwidth_source_name</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>Table output</to><enabled>Y</enabled> </hop>  <hop> <from>Table output</from><to>Write to log on insert error</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath</from><to>Text file input</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Trim URL</to><enabled>Y</enabled> </hop>  <hop> <from>Mapping (sub-transformation)</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>Text file input</from><to>Mapping (sub-transformation)</to><enabled>Y</enabled> </hop>  <hop> <from>Filter vaild rows</from><to>Enable parallelization vaild lines</to><enabled>Y</enabled> </hop>  <hop> <from>Enable parallelization vaild lines</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Filter vaild rows</from><to>Enable parallelization invaild lines</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Enrich rows</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich rows</from><to>Filter vaild rows</to><enabled>Y</enabled> </hop>  <hop> <from>Trim URL</from><to>Get bandwidth_source_name</to><enabled>Y</enabled> </hop>  <hop> <from>Enable parallelization invaild lines</from><to>Find ignored lines</to><enabled>Y</enabled> </hop>  <hop> <from>Filter ignored lines</from><to>Ignored line</to><enabled>Y</enabled> </hop>  <hop> <from>Filter ignored lines</from><to>Trim Line and Error reason</to><enabled>Y</enabled> </hop>  <hop> <from>Find ignored lines</from><to>Filter ignored lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file for enrichment</from><to>Enrich rows</to><enabled>Y</enabled> </hop>  <hop> <from>Trim Line and Error reason</from><to>Get Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get Process ID</from><to>Insert invalid ds line</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath</to><enabled>Y</enabled> </hop>  <hop> <from>Table output</from><to>Write to log on insert error</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath</from><to>Text file input</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Trim URL</to><enabled>Y</enabled> </hop>  <hop> <from>Mapping (sub-transformation)</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>Text file input</from><to>Mapping (sub-transformation)</to><enabled>Y</enabled> </hop>  <hop> <from>Filter vaild rows</from><to>Enable parallelization vaild lines</to><enabled>Y</enabled> </hop>  <hop> <from>Enable parallelization vaild lines</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Filter vaild rows</from><to>Enable parallelization invaild lines</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Enrich rows</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich rows</from><to>Filter vaild rows</to><enabled>Y</enabled> </hop>  <hop> <from>Trim URL</from><to>Get bandwidth_source_name</to><enabled>Y</enabled> </hop>  <hop> <from>Enable parallelization invaild lines</from><to>Find ignored lines</to><enabled>Y</enabled> </hop>  <hop> <from>Filter ignored lines</from><to>Ignored line</to><enabled>Y</enabled> </hop>  <hop> <from>Filter ignored lines</from><to>Trim Line and Error reason</to><enabled>Y</enabled> </hop>  <hop> <from>Find ignored lines</from><to>Filter ignored lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file for enrichment</from><to>Enrich rows</to><enabled>Y</enabled> </hop>  <hop> <from>Trim Line and Error reason</from><to>Get Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get Process ID</from><to>Insert invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>ip to location lookup error</to><enabled>Y</enabled> </hop>  <hop> <from>Get numeric IP - BW</from><to>Get IP location - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get bandwidth_source_name</from><to>Get numeric IP - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>Table output</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Database lookup</name>
     <type>DBLookup</type>
@@ -261,8 +261,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1230</xloc>
-      <yloc>272</yloc>
+      <xloc>1011</xloc>
+      <yloc>266</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -297,8 +297,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>723</xloc>
-      <yloc>263</yloc>
+      <xloc>757</xloc>
+      <yloc>180</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -327,8 +327,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>613</xloc>
-      <yloc>147</yloc>
+      <xloc>608</xloc>
+      <yloc>105</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -383,8 +383,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>612</xloc>
-      <yloc>258</yloc>
+      <xloc>611</xloc>
+      <yloc>181</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -424,6 +424,31 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai&ap
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>618</xloc>
       <yloc>434</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get IP location - BW</name>
+    <type>DynamicSQLRow</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>3</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select 1 country_id, 2 location_id</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <sql_fieldname>ipLookupSQL</sql_fieldname>
+    <query_only_on_change>Y</query_only_on_change>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>895</xloc>
+      <yloc>269</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -530,8 +555,8 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai&ap
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1088</xloc>
-      <yloc>271</yloc>
+      <xloc>1126</xloc>
+      <yloc>183</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -586,8 +611,61 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai&ap
         <precision>-1</precision>
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>409</xloc>
-      <yloc>146</yloc>
+      <xloc>404</xloc>
+      <yloc>104</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get numeric IP - BW</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var iplong = ip2number(user_ip);
+
+function ip2number (ip_address) 
+{
+	numeric_ip = 0;
+	if (ip_address) 
+	{
+		ip_array = ip_address.split(&apos;.&apos;);
+		if (ip_array.length == 4) 
+		{
+			with (Math) 
+			{
+   		    	numeric_ip = ip_array[0]*pow(256,3)+ip_array[1]*pow(256,2)+ip_array[2]*256+ip_array[3]*1;
+			}
+		}
+	}
+	return numeric_ip;
+}
+
+var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM kalturadw.dwh_dim_ip_ranges WHERE &quot; + iplong + &quot;&gt;= ip_from)&quot;;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>ipLookupSQL</name>
+        <rename>ipLookupSQL</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>iplong</name>
+        <rename>iplong</rename>
+        <type>Integer</type>
+        <length>10</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>761</xloc>
+      <yloc>266</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -714,8 +792,8 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai&ap
       </remove>      <remove>        <name>error_reason</name>
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>839</xloc>
-      <yloc>272</yloc>
+      <xloc>895</xloc>
+      <yloc>182</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -780,11 +858,31 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai&ap
           <column_name>bandwidth_bytes</column_name>
           <stream_name>bandwidth</stream_name>
         </field>
+        <field>
+          <column_name>user_ip</column_name>
+          <stream_name>user_ip</stream_name>
+        </field>
+        <field>
+          <column_name>user_ip_number</column_name>
+          <stream_name>iplong</stream_name>
+        </field>
+        <field>
+          <column_name>location_id</column_name>
+          <stream_name>location_id</stream_name>
+        </field>
+        <field>
+          <column_name>country_id</column_name>
+          <stream_name>country_id</stream_name>
+        </field>
+        <field>
+          <column_name>line_number</column_name>
+          <stream_name>line_number</stream_name>
+        </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1327</xloc>
-      <yloc>272</yloc>
+      <xloc>1125</xloc>
+      <yloc>269</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -934,8 +1032,8 @@ var url = substr(url, 0, 200);</jsScript_script>
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>942</xloc>
-      <yloc>274</yloc>
+      <xloc>1010</xloc>
+      <yloc>185</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -956,8 +1054,93 @@ var url = substr(url, 0, 200);</jsScript_script>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1437</xloc>
-      <yloc>273</yloc>
+      <xloc>1126</xloc>
+      <yloc>357</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>ip to location lookup error</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+    <fields>
+      <field>
+        <name>client_version</name>
+        </field>
+      <field>
+        <name>event_type_id</name>
+        </field>
+      <field>
+        <name>eventTime</name>
+        </field>
+      <field>
+        <name>session_id</name>
+        </field>
+      <field>
+        <name>partner_id</name>
+        </field>
+      <field>
+        <name>entry_id</name>
+        </field>
+      <field>
+        <name>unique_viewer</name>
+        </field>
+      <field>
+        <name>widget_id</name>
+        </field>
+      <field>
+        <name>ui_conf_id</name>
+        </field>
+      <field>
+        <name>uid</name>
+        </field>
+      <field>
+        <name>current_point</name>
+        </field>
+      <field>
+        <name>duration</name>
+        </field>
+      <field>
+        <name>user_ip</name>
+        </field>
+      <field>
+        <name>process_duration</name>
+        </field>
+      <field>
+        <name>control_id</name>
+        </field>
+      <field>
+        <name>seek</name>
+        </field>
+      <field>
+        <name>new_point</name>
+        </field>
+      <field>
+        <name>referrer</name>
+        </field>
+      <field>
+        <name>entry_media_type_id</name>
+        </field>
+      <field>
+        <name>entry_partner_id</name>
+        </field>
+      <field>
+        <name>err_desc</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>896</xloc>
+      <yloc>350</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1058,6 +1241,18 @@ var error_reason=null;
     </step>
 
   <step_error_handling>
+      <error>
+        <source_step>Get IP location - BW</source_step>
+        <target_step>ip to location lookup error</target_step>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename>desc</descriptions_valuename>
+        <fields_valuename>errors</fields_valuename>
+        <codes_valuename>codes</codes_valuename>
+        <max_errors>-1</max_errors>
+        <max_pct_errors>-1</max_pct_errors>
+        <min_pct_rows>-1</min_pct_rows>
+      </error>
       <error>
         <source_step>Table output</source_step>
         <target_step>Write to log on insert error</target_step>

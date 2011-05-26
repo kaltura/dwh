@@ -200,7 +200,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Write to log</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Get PS2 lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Irrelevant line</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Set line type = 3</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 3</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Set line type = 2</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 2</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>decode http string</from><to>Get API_V_3 lines</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>empty ps2 line</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath</from><to>iterate file</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>filter bad lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle_id and file_id</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>ip to location lookup error </to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>referrer -&gt; domain</to><enabled>Y</enabled> </hop>  <hop> <from>convert IP and domain</from><to>Get IP location</to><enabled>Y</enabled> </hop>  <hop> <from>fix invalid values</from><to>referrer lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>convert IP and domain</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>Write to log on error</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>domain lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>domain lookup</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>fix invalid values</to><enabled>Y</enabled> </hop>  <hop> <from>referrer lookup&#47;update</from><to>write events</to><enabled>Y</enabled> </hop>  <hop> <from>format events errornouse line</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>parse bandwidth lines</from><to>Filter BW rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>Not a bandwidth match</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>validate bandwidth raw input</to><enabled>Y</enabled> </hop>  <hop> <from>Calc bandwidth day and hour ids</from><to>check bandwidth valid line</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Calc day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids</from><to>check events valid line </to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>format events errornouse line</to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>format BW errornous line</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source lookup</from><to>Write bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>Trim BW URL</to><enabled>Y</enabled> </hop>  <hop> <from>Trim BW URL</from><to>Bandwidth Source = WWW</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source = WWW</from><to>Bandwidth Source lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - events</from><to>decode http string</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - bandwidth</from><to>parse bandwidth lines</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - events</to><enabled>Y</enabled> </hop>  <hop> <from>Write bandwidth</from><to>insert error - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>write events</from><to>insert error - events</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich bandwidth rows</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich file_id</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append file_id</from><to>Get Events Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>validate bandwidth raw input</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Get Events Process ID</from><to>Insert events invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle and file to bandwidth</from><to>Calc bandwidth day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>format BW errornous line</from><to>Get BW Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get BW Process ID</from><to>Insert bw invalid ds line</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Write to log</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Get PS2 lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Irrelevant line</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Set line type = 3</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 3</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Set line type = 2</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 2</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>decode http string</from><to>Get API_V_3 lines</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>empty ps2 line</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath</from><to>iterate file</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>filter bad lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle_id and file_id</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - events</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - events</from><to>ip to location lookup error  - events</to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>referrer -&gt; domain</to><enabled>Y</enabled> </hop>  <hop> <from>convert IP and domain- events</from><to>Get IP location - events</to><enabled>Y</enabled> </hop>  <hop> <from>fix invalid values</from><to>referrer lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>convert IP and domain- events</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>Write to log on error</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>domain lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>domain lookup</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>fix invalid values</to><enabled>Y</enabled> </hop>  <hop> <from>referrer lookup&#47;update</from><to>write events</to><enabled>Y</enabled> </hop>  <hop> <from>format events errornouse line</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>parse bandwidth lines</from><to>Filter BW rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>Not a bandwidth match</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>validate bandwidth raw input</to><enabled>Y</enabled> </hop>  <hop> <from>Calc bandwidth day and hour ids</from><to>check bandwidth valid line</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Calc day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids</from><to>check events valid line </to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>format events errornouse line</to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>format BW errornous line</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source lookup</from><to>Write bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Trim BW URL</from><to>Bandwidth Source = WWW</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source = WWW</from><to>Bandwidth Source lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - events</from><to>decode http string</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - bandwidth</from><to>parse bandwidth lines</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - events</to><enabled>Y</enabled> </hop>  <hop> <from>Write bandwidth</from><to>insert error - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>write events</from><to>insert error - events</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich bandwidth rows</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich file_id</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append file_id</from><to>Get Events Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>validate bandwidth raw input</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Get Events Process ID</from><to>Insert events invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle and file to bandwidth</from><to>Calc bandwidth day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>format BW errornous line</from><to>Get BW Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get BW Process ID</from><to>Insert bw invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>ip to location lookup error - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get numeric IP - BW</from><to>Get IP location - BW</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>Get numeric IP - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>Trim BW URL</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Abort</name>
     <type>Abort</type>
@@ -246,8 +246,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>82</xloc>
-      <yloc>439</yloc>
+      <xloc>80</xloc>
+      <yloc>414</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -337,8 +337,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>210</xloc>
-      <yloc>756</yloc>
+      <xloc>216</xloc>
+      <yloc>754</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -378,8 +378,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>370</xloc>
-      <yloc>756</yloc>
+      <xloc>366</xloc>
+      <yloc>754</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -410,8 +410,8 @@
 </formula>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>102</xloc>
-      <yloc>548</yloc>
+      <xloc>80</xloc>
+      <yloc>481</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -504,8 +504,8 @@
         <precision>-1</precision>
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>355</xloc>
-      <yloc>437</yloc>
+      <xloc>353</xloc>
+      <yloc>412</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -662,8 +662,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>385</xloc>
-      <yloc>673</yloc>
+      <xloc>356</xloc>
+      <yloc>550</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -701,7 +701,7 @@
     </step>
 
   <step>
-    <name>Get IP location</name>
+    <name>Get IP location - BW</name>
     <type>DynamicSQLRow</type>
     <description/>
     <distribute>Y</distribute>
@@ -719,8 +719,33 @@
     <query_only_on_change>Y</query_only_on_change>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1340</xloc>
-      <yloc>140</yloc>
+      <xloc>79</xloc>
+      <yloc>687</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get IP location - events</name>
+    <type>DynamicSQLRow</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>3</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select 1 country_id, 2 location_id</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <sql_fieldname>ipLookupSQL</sql_fieldname>
+    <query_only_on_change>Y</query_only_on_change>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1343</xloc>
+      <yloc>133</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -821,6 +846,59 @@
     </step>
 
   <step>
+    <name>Get numeric IP - BW</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var iplong = ip2number(user_ip);
+
+function ip2number (ip_address) 
+{
+	numeric_ip = 0;
+	if (ip_address) 
+	{
+		ip_array = ip_address.split(&apos;.&apos;);
+		if (ip_array.length == 4) 
+		{
+			with (Math) 
+			{
+   		    	numeric_ip = ip_array[0]*pow(256,3)+ip_array[1]*pow(256,2)+ip_array[2]*256+ip_array[3]*1;
+			}
+		}
+	}
+	return numeric_ip;
+}
+
+var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM kalturadw.dwh_dim_ip_ranges WHERE &quot; + iplong + &quot;&gt;= ip_from)&quot;;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>ipLookupSQL</name>
+        <rename>ipLookupSQL</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>iplong</name>
+        <rename>iplong</rename>
+        <type>Integer</type>
+        <length>10</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>78</xloc>
+      <yloc>620</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Insert bw invalid ds line</name>
     <type>Mapping</type>
     <description/>
@@ -856,8 +934,8 @@
     </mappings>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>474</xloc>
-      <yloc>673</yloc>
+      <xloc>445</xloc>
+      <yloc>550</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1102,7 +1180,7 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>110</xloc>
+      <xloc>80</xloc>
       <yloc>756</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1168,10 +1246,30 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
           <column_name>bandwidth_bytes</column_name>
           <stream_name>response_size</stream_name>
         </field>
+        <field>
+          <column_name>user_ip</column_name>
+          <stream_name>user_ip</stream_name>
+        </field>
+        <field>
+          <column_name>user_ip_number</column_name>
+          <stream_name>iplong</stream_name>
+        </field>
+        <field>
+          <column_name>location_id</column_name>
+          <stream_name>location_id</stream_name>
+        </field>
+        <field>
+          <column_name>country_id</column_name>
+          <stream_name>country_id</stream_name>
+        </field>
+        <field>
+          <column_name>line_number</column_name>
+          <stream_name>line_number</stream_name>
+        </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>503</xloc>
+      <xloc>499</xloc>
       <yloc>755</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1309,7 +1407,7 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Trim BW URL</send_true_to>
+<send_true_to>Get numeric IP - BW</send_true_to>
 <send_false_to>format BW errornous line</send_false_to>
     <compare>
 <condition>
@@ -1321,8 +1419,8 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>110</xloc>
-      <yloc>676</yloc>
+      <xloc>81</xloc>
+      <yloc>553</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1356,7 +1454,7 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
     </step>
 
   <step>
-    <name>convert IP and domain</name>
+    <name>convert IP and domain- events</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -1409,8 +1507,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1220</xloc>
-      <yloc>140</yloc>
+      <xloc>1218</xloc>
+      <yloc>121</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1714,8 +1812,8 @@ errornous_line = substr (errornous_line, 0 , 1023);</jsScript_script>
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>267</xloc>
-      <yloc>674</yloc>
+      <xloc>238</xloc>
+      <yloc>551</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1769,8 +1867,8 @@ errornous_line = substr (errornous_line, 0 , 1023);</jsScript_script>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>640</xloc>
-      <yloc>750</yloc>
+      <xloc>624</xloc>
+      <yloc>753</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1798,7 +1896,7 @@ errornous_line = substr (errornous_line, 0 , 1023);</jsScript_script>
     </step>
 
   <step>
-    <name>ip to location lookup error </name>
+    <name>ip to location lookup error  - events</name>
     <type>WriteToLog</type>
     <description/>
     <distribute>Y</distribute>
@@ -1876,8 +1974,93 @@ errornous_line = substr (errornous_line, 0 , 1023);</jsScript_script>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1440</xloc>
-      <yloc>140</yloc>
+      <xloc>1451</xloc>
+      <yloc>145</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>ip to location lookup error - BW</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+    <fields>
+      <field>
+        <name>client_version</name>
+        </field>
+      <field>
+        <name>event_type_id</name>
+        </field>
+      <field>
+        <name>eventTime</name>
+        </field>
+      <field>
+        <name>session_id</name>
+        </field>
+      <field>
+        <name>partner_id</name>
+        </field>
+      <field>
+        <name>entry_id</name>
+        </field>
+      <field>
+        <name>unique_viewer</name>
+        </field>
+      <field>
+        <name>widget_id</name>
+        </field>
+      <field>
+        <name>ui_conf_id</name>
+        </field>
+      <field>
+        <name>uid</name>
+        </field>
+      <field>
+        <name>current_point</name>
+        </field>
+      <field>
+        <name>duration</name>
+        </field>
+      <field>
+        <name>user_ip</name>
+        </field>
+      <field>
+        <name>process_duration</name>
+        </field>
+      <field>
+        <name>control_id</name>
+        </field>
+      <field>
+        <name>seek</name>
+        </field>
+      <field>
+        <name>new_point</name>
+        </field>
+      <field>
+        <name>referrer</name>
+        </field>
+      <field>
+        <name>entry_media_type_id</name>
+        </field>
+      <field>
+        <name>entry_partner_id</name>
+        </field>
+      <field>
+        <name>err_desc</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>220</xloc>
+      <yloc>686</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2198,7 +2381,6 @@ var partnerID = -1;
 var bandwidth = -1;
 var url = null;
 var activityDate = str2date(&quot;2099-01-01&quot;, &quot;yyyy-MM-dd&quot;);
-
 var parnterRegex = &quot;GET &#47;p&#47;([0-9]+)&#47;.*&quot;;
 resArr = str2RegExp(http_string, parnterRegex);
 
@@ -2208,9 +2390,7 @@ if (resArr!=null &amp;&amp; resArr.length &gt; 0 &amp;&amp; http_response_code =
 	activityDate = str2date(substr(raw_datetime,1),&apos;dd&#47;MMM&#47;yyyy:HH:mm:ss&apos;);
 	partnerID = isNaN(parseInt(resArr[0])) ? -1 : str2num(resArr[0]);
 	matchingRow = true;
-}
-
-</jsScript_script>
+}</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>matchingRow</name>
         <rename>matchingRow</rename>
         <type>Boolean</type>
@@ -3013,8 +3193,20 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
 
   <step_error_handling>
       <error>
-        <source_step>Get IP location</source_step>
-        <target_step>ip to location lookup error </target_step>
+        <source_step>Get IP location - BW</source_step>
+        <target_step>ip to location lookup error - BW</target_step>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename>desc</descriptions_valuename>
+        <fields_valuename>fields</fields_valuename>
+        <codes_valuename>codes</codes_valuename>
+        <max_errors>-1</max_errors>
+        <max_pct_errors>-1</max_pct_errors>
+        <min_pct_rows>-1</min_pct_rows>
+      </error>
+      <error>
+        <source_step>Get IP location - events</source_step>
+        <target_step>ip to location lookup error  - events</target_step>
         <is_enabled>Y</is_enabled>
         <nr_valuename/>
         <descriptions_valuename>desc</descriptions_valuename>

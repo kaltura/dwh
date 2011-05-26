@@ -238,8 +238,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>607</xloc>
-      <yloc>59</yloc>
+      <xloc>402</xloc>
+      <yloc>62</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -248,7 +248,7 @@
     <name>Regex split row</name>
     <type>ScriptValueMod</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
@@ -269,12 +269,15 @@ var contentSize = -1;
 var activity_date = str2date(&quot;2099-01-01&quot;, &quot;yyyy-MM-dd&quot;);
 var activity_date_id = 20990101;
 var activity_hour_id = 0;
+var user_ip = null;
+var iplong = 0;
 &#47;&#47;var user_agent = null;
 
+var ip_field = 0;
+var complex_date_field = 3;
 var url_field = 5;
 var bandwidth_field = 9;
 &#47;&#47;var user_agent_field = 11;
-var complex_date_field = 3;
 
 var url_regex1 = &quot;http:&#47;&#47;[^.]+.kaltura.com&#47;p&#47;([0-9]+)&#47;.*&quot;;
 
@@ -295,7 +298,8 @@ if (resArr!=null &amp;&amp; resArr.length &gt;= bandwidth_field + 1)
 	var date = str2date(resArr[complex_date_field].split(&quot; &quot;)[0],&quot;dd&#47;MMM&#47;yyyy:HH:m:s&quot;);
 	activity_date_id = year(date)*10000+ (month(date)+1)*100 + getDayNumber(date,&quot;m&quot;);
 	activity_hour_id = date.getHours();
-	&#47;&#47;user_agent = resArr[user_agent_field];
+
+	user_ip = resArr[ip_field];
 }
 </jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
@@ -400,10 +404,16 @@ Alert(date2str(dValue,&quot;dd.MM.yyyy HH:mm:ss&quot;,&quot;EN&quot;, &quot;EST&
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
+      </field>      <field>        <name>user_ip</name>
+        <rename>user_ip</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>343</xloc>
-      <yloc>61</yloc>
+      <xloc>253</xloc>
+      <yloc>59</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

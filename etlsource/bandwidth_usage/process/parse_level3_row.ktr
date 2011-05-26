@@ -238,8 +238,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>607</xloc>
-      <yloc>59</yloc>
+      <xloc>451</xloc>
+      <yloc>56</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -248,7 +248,7 @@
     <name>Regex split row</name>
     <type>ScriptValueMod</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
@@ -269,11 +269,15 @@ var contentSize = -1;
 var activity_date = str2date(&quot;2099-01-01&quot;, &quot;yyyy-MM-dd&quot;);
 var activity_date_id = 20990101;
 var activity_hour_id = 0;
+var user_ip = null;
+var iplong = 0;
+
 &#47;&#47;var user_agent = null;
 
 var date_field = 0;
 var time_field = 1;
 var url_field = 3;
+var ip_field = 5;
 var bandwidth_field = 8;
 &#47;&#47;var user_agent_field = 11;
 
@@ -296,6 +300,8 @@ if (resArr!=null &amp;&amp; resArr.length &gt;= bandwidth_field + 1)
 	var date = str2date(resArr[date_field] + substr(resArr[time_field], 0, 8),&apos;yyyy-MM-ddHH:m:s&apos;);
 	activity_date_id = year(date)*10000+ (month(date)+1)*100 + getDayNumber(date,&quot;m&quot;);
 	activity_hour_id = date.getHours();
+	
+	user_ip = resArr[ip_field];
 	&#47;&#47;user_agent = resArr[user_agent_field];
 }
 </jsScript_script>
@@ -436,10 +442,16 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
+      </field>      <field>        <name>user_ip</name>
+        <rename>user_ip</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>342</xloc>
-      <yloc>61</yloc>
+      <xloc>289</xloc>
+      <yloc>56</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
