@@ -2384,12 +2384,17 @@ var activityDate = str2date(&quot;2099-01-01&quot;, &quot;yyyy-MM-dd&quot;);
 var parnterRegex = &quot;GET &#47;p&#47;([0-9]+)&#47;.*&quot;;
 resArr = str2RegExp(http_string, parnterRegex);
 
-if (resArr!=null &amp;&amp; resArr.length &gt; 0 &amp;&amp; http_response_code == &quot;200&quot; &amp;&amp; !isNaN(parseInt(response_size)))
+if (resArr!=null &amp;&amp; resArr.length &gt; 0 &amp;&amp; http_response_code == &quot;200&quot; &amp;&amp; (!is_not_numeric(response_size)))
 {
 	&#47;&#47; Trim &quot;[&quot; and set it to a date
 	activityDate = str2date(substr(raw_datetime,1),&apos;dd&#47;MMM&#47;yyyy:HH:mm:ss&apos;);
-	partnerID = isNaN(parseInt(resArr[0])) ? -1 : str2num(resArr[0]);
+	partnerIDStr = resArr[0];
+	partnerID = is_not_numeric(partnerIDStr) ? -1 : partnerIDStr;
 	matchingRow = true;
+}
+
+function is_not_numeric(s) {
+	return isNaN(s) || s == &apos;&apos; || s == null;
 }</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>matchingRow</name>
         <rename>matchingRow</rename>
@@ -2979,11 +2984,14 @@ else if ( substr(entryID,0,5)==&quot;rtmp:&quot;  )  &#47;&#47; validate the ent
 else if ( sessionID==&quot;false&quot; )
 {
 	error_reason=&quot;invalid session id&quot;;
-} else if (isNaN(uiConfID))
+} else if (is_not_numeric(uiConfID))
 {
 	error_reason=&quot;invalid uiconf id&quot;;
 }
 
+function is_not_numeric(s) {
+	return isNaN(s) || s == &apos;&apos; || s == null;
+}
 </jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>str2date_Sample</jsScript_name>

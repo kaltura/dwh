@@ -288,11 +288,11 @@ if (resArr!=null &amp;&amp; resArr.length &gt;= bandwidth_field + 1)
 	url = unescape(resArr[url_field]);
 	
 	var urlArr = str2RegExp(url, url_regex1);
-	if ((urlArr != null) &amp;&amp; (!isNaN(urlArr[0])))
+	if ((urlArr != null) &amp;&amp; (!is_not_numeric(urlArr[0])))
 	{
 		partner_id = urlArr[0];
 	}
-	if (!isNaN(resArr[bandwidth_field]))
+	if (!is_not_numeric(resArr[bandwidth_field]))
 	{
 		contentSize = resArr[bandwidth_field];
 	}
@@ -304,7 +304,11 @@ if (resArr!=null &amp;&amp; resArr.length &gt;= bandwidth_field + 1)
 	user_ip = resArr[ip_field];
 	&#47;&#47;user_agent = resArr[user_agent_field];
 }
-</jsScript_script>
+
+
+function is_not_numeric(s) {
+	return isNaN(s) || s == &quot;&quot; || s == null;
+}</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>str2RegExp_Sample</jsScript_name>
         <jsScript_script>&#47;&#47; Split&apos;s a String with a Regular Expression to an Array.
