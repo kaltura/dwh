@@ -33,7 +33,7 @@ BEGIN
                 ADD UNIQUE KEY (`file_id`,`line_number`,`event_date_id`),
 		ADD KEY `partner_id` (`partner_id`);
 
-	ALTER TABLE kalturadw.dwh_fact_fms_sessions
+	ALTER TABLE kalturadw.dwh_fact_fms_sessions_new
                 ADD KEY `session_partner_id` (`session_partner_id`);
 
         RENAME TABLE kalturadw.dwh_fact_fms_session_events TO kalturadw.dwh_fact_fms_session_events_old;
