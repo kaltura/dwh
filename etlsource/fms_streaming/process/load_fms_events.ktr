@@ -2500,6 +2500,10 @@ else if ( substr(entry_id,0,5)==&quot;rtmp:&quot;  )  &#47;&#47; validate the en
           <stream_name>c_ip</stream_name>
         </field>
         <field>
+          <column_name>server_ip</column_name>
+          <stream_name>s_ip</stream_name>
+        </field>
+        <field>
           <column_name>client_country_id</column_name>
           <stream_name>country_id</stream_name>
         </field>

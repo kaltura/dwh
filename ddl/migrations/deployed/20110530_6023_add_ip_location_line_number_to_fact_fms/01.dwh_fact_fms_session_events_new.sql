@@ -15,6 +15,7 @@ CREATE TABLE `dwh_fact_fms_session_events_new` (
   `entry_id` VARCHAR(20) DEFAULT NULL,
   `partner_id` INT(10) DEFAULT NULL,
   `external_id` VARCHAR(50) DEFAULT NULL,
+  `server_ip` VARCHAR(15),
   `server_ip_number` INT(10) UNSIGNED DEFAULT NULL,
   `server_process_id` INT(10) UNSIGNED NOT NULL,
   `server_cpu_load` SMALLINT(5) UNSIGNED NOT NULL,
