@@ -61,11 +61,11 @@ if [ $SITE_SPECIFIC_DIR ]; then
 	svn up $SITE_SPECIFIC_DIR
 
 	#cp site_specific
-	sh copy_site_specific.sh -d $ROOT_DIR -s $SITE_SPECIFIC_DIR
+	sh $ROOT_DIR/setup/copy_site_specific.sh -d $ROOT_DIR -s $SITE_SPECIFIC_DIR
 fi
 
 #cp pentaho plugins
-sh copy_pentaho_plugins.sh -d $ROOT_DIR -k $KITCHEN 
+sh $ROOT_DIR/setup/copy_pentaho_plugins.sh -d $ROOT_DIR -k $KITCHEN 
 
 # get ver
 version=$(mysql -u$USER -p$PW -h$HOST -P$PORT -se"SELECT max(version) version FROM kalturadw_ds.version_management" | head -2 | tail -1)
