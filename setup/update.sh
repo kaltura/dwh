@@ -61,7 +61,7 @@ if [ $SITE_SPECIFIC_DIR ]; then
 	svn up $SITE_SPECIFIC_DIR
 
 	#cp site_specific
-	sh $ROOT_DIR/setup/copy_site_specific.sh -d $ROOT_DIR -s $SITE_SPECIFIC_DIR
+	rsync -av $SITE_SPECIFIC_DIR $ROOT
 fi
 
 #cp pentaho plugins
