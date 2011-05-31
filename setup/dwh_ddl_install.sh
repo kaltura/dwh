@@ -260,7 +260,7 @@ mysqlexec $DW_ROOT_DIR/fms/dwh_fact_fms_session_events.sql
  #populate data
  # runnig the ETL is the better way to populate the dwh_dim_time table
  export KETTLE_HOME=$ROOT_DIR
- sh $KITCHEN/kitchen.sh /file $ETL_ROOT_DIR/create_time_dim.kjb
+ sh $KITCHEN/pn.sh /file $ETL_ROOT_DIR/create_time_dim.ktr
 
  # Check that the command didn't fail
         ret_val=$?
