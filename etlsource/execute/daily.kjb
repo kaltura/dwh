@@ -374,6 +374,16 @@ and lock_state = 1;</custom_sql>
       <xloc>861</xloc>
       <yloc>227</yloc>
       </entry>
+    <entry>
+      <name>Success 1</name>
+      <description>Success</description>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>216</xloc>
+      <yloc>227</yloc>
+      </entry>
   </entries>
   <hops>
     <hop>
@@ -442,6 +452,24 @@ and lock_state = 1;</custom_sql>
     <hop>
       <from>Wait for hourly lock</from>
       <to>Release daily lock</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Release daily lock</from>
+      <to>Success 1</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Get daily lock</from>
+      <to>Success 1</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
