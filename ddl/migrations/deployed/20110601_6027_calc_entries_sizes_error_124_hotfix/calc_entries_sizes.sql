@@ -1,5 +1,7 @@
 DELIMITER $$
 
+USE `kalturadw`$$
+
 DROP PROCEDURE IF EXISTS `calc_entries_sizes`$$
 
 CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_entries_sizes`(p_date_id INT(11))
