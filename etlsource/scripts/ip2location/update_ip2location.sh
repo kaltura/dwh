@@ -17,7 +17,7 @@ done
 
 mkdir -p $ROOT_DIR/etlsource/scripts/ip2location/`date +%b%y`
 cd $ROOT_DIR/etlsource/scripts/ip2location/`date +%b%y`
-perl $ROOT_DIR/etlsource/scripts/ip2location/download.pl -package DB7 -login alex.bandel@kaltura.com -password S47CW89L
+perl $ROOT_DIR/etlsource/scripts/ip2location/download.pl -package DB7 -login -password 
 
 unzip IP-COUNTRY-REGION-CITY-ISP-DOMAIN-FULL.ZIP
 
