@@ -61,7 +61,7 @@ if [ $SITE_SPECIFIC_DIR ]; then
 	svn up $SITE_SPECIFIC_DIR
 
 	#cp site_specific
-	rsync -av $SITE_SPECIFIC_DIR $ROOT
+	rsync -av --exclude=.svn  $SITE_SPECIFIC_DIR $ROOT
 fi
 
 #cp pentaho plugins
