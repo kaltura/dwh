@@ -233,7 +233,7 @@
 	created_at,
 	updated_at
 FROM flavor_params_conversion_profile
-WHERE updated_at &gt; now() - interval ${UpdateDaysInterval} day</sql>
+WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

@@ -410,7 +410,7 @@
 	container_format,
 	video_codec_id video_codec
 	FROM flavor_asset
-WHERE updated_at &gt; now() - interval ${UpdateDaysInterval} day
+WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -636,6 +636,27 @@ WHERE updated_at &gt; now() - interval ${UpdateDaysInterval} day
     </step>
 
   <step>
+    <name>input</name>
+    <type>MappingInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+        <select_unspecified>N</select_unspecified>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>59</xloc>
+      <yloc>26</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>video codec lookup &#47; update</name>
     <type>CombinationLookup</type>
     <description/>
@@ -670,27 +691,6 @@ WHERE updated_at &gt; now() - interval ${UpdateDaysInterval} day
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>599</xloc>
       <yloc>106</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>input</name>
-    <type>MappingInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-        <select_unspecified>N</select_unspecified>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>59</xloc>
-      <yloc>26</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

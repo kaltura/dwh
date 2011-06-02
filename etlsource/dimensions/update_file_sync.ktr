@@ -214,6 +214,24 @@ to the older version and its data.</note>
   <order>
   <hop> <from>Table input</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get Now</from><to>Insert &#47; Update File Sync</to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>Fix file_size</to><enabled>Y</enabled> </hop>  <hop> <from>Fix file_size</from><to>Get Now</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update File Sync</from><to>Get existing file_sync combo ID</to><enabled>Y</enabled> </hop>  <hop> <from>Update existing row version with new ID</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Get data of old id</to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults 2</from><to>Fix file_size 2</to><enabled>Y</enabled> </hop>  <hop> <from>Get data of old id</from><to>Set defaults 2</to><enabled>Y</enabled> </hop>  <hop> <from>Get existing file_sync combo ID</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log</from><to>Update existing row version with new ID</to><enabled>Y</enabled> </hop>  <hop> <from>Fix file_size 2</from><to>Get Now 2</to><enabled>Y</enabled> </hop>  <hop> <from>Get Now 2</from><to>Insert &#47; Update File Sync old record</to><enabled>Y</enabled> </hop>  <hop> <from>Update existing row version with new ID</from><to>Already updated</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update File Sync old record</from><to>Already updated 2</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI_IND = 1</from><to>Filter assets</to><enabled>Y</enabled> </hop>  <hop> <from>Filter assets</from><to>Filter entries</to><enabled>Y</enabled> </hop>  <hop> <from>Filter entries</from><to> Not an asset nor entry</to><enabled>Y</enabled> </hop>  <hop> <from>Update missing flavor asset</from><to>Created new asset version</to><enabled>Y</enabled> </hop>  <hop> <from>Filter assets</from><to>Attempt to insert to flavor asset</to><enabled>Y</enabled> </hop>  <hop> <from>Filter entries</from><to>Set int_id = -1</to><enabled>Y</enabled> </hop>  <hop> <from>Set int_id = -1</from><to>Insert &#47; Update entries</to><enabled>Y</enabled> </hop>  <hop> <from>Create older flavor asset version sql</from><to>lookup latest flavor asset version</to><enabled>Y</enabled> </hop>  <hop> <from>lookup latest flavor asset version</from><to>Update missing flavor asset</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update File Sync</from><to>Select RI  fields</to><enabled>Y</enabled> </hop>  <hop> <from>Select RI  fields</from><to>Set RI_IND = 1</to><enabled>Y</enabled> </hop>  <hop> <from>Attempt to insert to flavor asset</from><to>Create older flavor asset version sql</to><enabled>Y</enabled> </hop>  <hop> <from>Attempt to insert to flavor asset</from><to>Flavor Asset ID-Version exists</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Table input</to><enabled>Y</enabled> </hop>  </order>
   <step>
+    <name> Not an asset nor entry</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>843</xloc>
+      <yloc>366</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Already updated</name>
     <type>Dummy</type>
     <description/>
@@ -250,6 +268,119 @@ to the older version and its data.</note>
     </step>
 
   <step>
+    <name>Attempt to insert to flavor asset</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <schema/>
+    <table>dwh_dim_flavor_asset</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>id</column_name>
+          <stream_name>object_id</stream_name>
+        </field>
+        <field>
+          <column_name>version</column_name>
+          <stream_name>VERSION</stream_name>
+        </field>
+        <field>
+          <column_name>ri_ind</column_name>
+          <stream_name>RI_IND</stream_name>
+        </field>
+        <field>
+          <column_name>dwh_creation_date</column_name>
+          <stream_name>now</stream_name>
+        </field>
+        <field>
+          <column_name>dwh_update_date</column_name>
+          <stream_name>now</stream_name>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>839</xloc>
+      <yloc>82</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Create older flavor asset version sql</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+var sqlCommand = &quot;SELECT &quot; + VERSION + &quot; none_existent_version,	flavor_params_id, id, int_id, partner_id, tags, entry_id, STATUS, description, width, height, bitrate, frame_rate, size, is_original, file_ext_id, container_format_id, video_codec_id FROM dwh_dim_flavor_asset WHERE id = &apos;&quot; + object_id + &quot;&apos; AND VERSION &lt; &quot; + VERSION + &quot; ORDER BY VERSION DESC&quot;;
+</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>sqlCommand</name>
+        <rename>sqlCommand</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>838</xloc>
+      <yloc>14</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Created new asset version</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+    <fields>
+      <field>
+        <name>id</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1338</xloc>
+      <yloc>14</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Filter assets</name>
     <type>FilterRows</type>
     <description/>
@@ -273,6 +404,34 @@ to the older version and its data.</note>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>840</xloc>
       <yloc>175</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter entries</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Set int_id = -1</send_true_to>
+<send_false_to> Not an asset nor entry</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>object_type</leftvalue>
+ <function>=</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Integer</type><text>1</text><length>-1</length><precision>0</precision><isnull>N</isnull><mask>#;-#</mask></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>843</xloc>
+      <yloc>266</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -347,6 +506,24 @@ if (file_size &lt; 0)
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>526</xloc>
       <yloc>677</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Flavor Asset ID-Version exists</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1017</xloc>
+      <yloc>81</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -888,8 +1065,8 @@ if (file_size &lt; 0)
     </step>
 
   <step>
-    <name> Not an asset nor entry</name>
-    <type>Dummy</type>
+    <name>Insert &#47; Update entries</name>
+    <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -897,10 +1074,73 @@ if (file_size &lt; 0)
            <method>none</method>
            <schema_name/>
            </partitioning>
+    <connection>KalturaDW</connection>
+    <commit>100</commit>
+    <update_bypassed>Y</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>dwh_dim_entries</table>
+      <key>
+        <name>object_id</name>
+        <field>entry_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>entry_id</name>
+        <rename>object_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>ri_ind</name>
+        <rename>RI_IND</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>int_id</name>
+        <rename>int_id</rename>
+        <update>N</update>
+      </value>
+    </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>843</xloc>
-      <yloc>366</yloc>
+      <xloc>1083</xloc>
+      <yloc>266</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select RI  fields</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>object_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>object_type</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>VERSION</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>now</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>648</xloc>
+      <yloc>171</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -924,6 +1164,38 @@ if (file_size &lt; 0)
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>526</xloc>
       <yloc>477</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set RI_IND = 1</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>3</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>RI_IND</field_name>
+<calc_type>CONSTANT</calc_type>
+<field_a>1</field_a>
+<field_b/>
+<field_c/>
+<value_type>-</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>753</xloc>
+      <yloc>173</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1191,6 +1463,38 @@ if (file_size &lt; 0)
     </step>
 
   <step>
+    <name>Set int_id = -1</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>int_id</field_name>
+<calc_type>CONSTANT</calc_type>
+<field_a>-1</field_a>
+<field_b/>
+<field_c/>
+<value_type>-</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>963</xloc>
+      <yloc>266</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Table input</name>
     <type>TableInput</type>
     <description/>
@@ -1222,7 +1526,7 @@ if (file_size &lt; 0)
 	file_size
 	FROM 
 	kaltura.file_sync 
- WHERE updated_at &gt; now() - interval ${UpdateDaysInterval} day</sql>
+WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1354,240 +1658,6 @@ if (file_size &lt; 0)
     </step>
 
   <step>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-    <fields>
-      <field>
-        <name>id</name>
-        </field>
-      <field>
-        <name>old_id</name>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>526</xloc>
-      <yloc>337</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set RI_IND = 1</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>3</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <calculation><field_name>RI_IND</field_name>
-<calc_type>CONSTANT</calc_type>
-<field_a>1</field_a>
-<field_b/>
-<field_c/>
-<value_type>-</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>753</xloc>
-      <yloc>173</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter entries</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>N</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Set int_id = -1</send_true_to>
-<send_false_to> Not an asset nor entry</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>object_type</leftvalue>
- <function>=</function>
- <rightvalue/>
- <value><name>constant</name><type>Integer</type><text>1</text><length>-1</length><precision>0</precision><isnull>N</isnull><mask>#;-#</mask></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>843</xloc>
-      <yloc>266</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Insert &#47; Update entries</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <commit>100</commit>
-    <update_bypassed>Y</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>dwh_dim_entries</table>
-      <key>
-        <name>object_id</name>
-        <field>entry_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>entry_id</name>
-        <rename>object_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>ri_ind</name>
-        <rename>RI_IND</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>int_id</name>
-        <rename>int_id</rename>
-        <update>N</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1083</xloc>
-      <yloc>266</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Attempt to insert to flavor asset</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <schema/>
-    <table>dwh_dim_flavor_asset</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-        <field>
-          <column_name>id</column_name>
-          <stream_name>object_id</stream_name>
-        </field>
-        <field>
-          <column_name>version</column_name>
-          <stream_name>VERSION</stream_name>
-        </field>
-        <field>
-          <column_name>ri_ind</column_name>
-          <stream_name>RI_IND</stream_name>
-        </field>
-        <field>
-          <column_name>dwh_creation_date</column_name>
-          <stream_name>now</stream_name>
-        </field>
-        <field>
-          <column_name>dwh_update_date</column_name>
-          <stream_name>now</stream_name>
-        </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>839</xloc>
-      <yloc>82</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Created new asset version</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-    <fields>
-      <field>
-        <name>id</name>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1338</xloc>
-      <yloc>14</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Flavor Asset ID-Version exists</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1017</xloc>
-      <yloc>81</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Update missing flavor asset</name>
     <type>Update</type>
     <description/>
@@ -1691,8 +1761,8 @@ if (file_size &lt; 0)
     </step>
 
   <step>
-    <name>Set int_id = -1</name>
-    <type>Calculator</type>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -1700,24 +1770,41 @@ if (file_size &lt; 0)
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>int_id</field_name>
-<calc_type>CONSTANT</calc_type>
-<field_a>-1</field_a>
-<field_b/>
-<field_c/>
-<value_type>-</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+    <fields>
+      <field>
+        <name>id</name>
+        </field>
+      <field>
+        <name>old_id</name>
+        </field>
+      </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>963</xloc>
-      <yloc>266</yloc>
+      <xloc>526</xloc>
+      <yloc>337</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>input</name>
+    <type>MappingInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+        <select_unspecified>N</select_unspecified>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>42</xloc>
+      <yloc>76</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1768,94 +1855,19 @@ if (file_size &lt; 0)
       </GUI>
     </step>
 
-  <step>
-    <name>Create older flavor asset version sql</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47;Script here
-
-var sqlCommand = &quot;SELECT &quot; + VERSION + &quot; none_existent_version,	flavor_params_id, id, int_id, partner_id, tags, entry_id, STATUS, description, width, height, bitrate, frame_rate, size, is_original, file_ext_id, container_format_id, video_codec_id FROM dwh_dim_flavor_asset WHERE id = &apos;&quot; + object_id + &quot;&apos; AND VERSION &lt; &quot; + VERSION + &quot; ORDER BY VERSION DESC&quot;;
-</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>sqlCommand</name>
-        <rename>sqlCommand</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>838</xloc>
-      <yloc>14</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Select RI  fields</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>object_id</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>object_type</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>VERSION</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>now</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>648</xloc>
-      <yloc>171</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>input</name>
-    <type>MappingInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-        <select_unspecified>N</select_unspecified>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>42</xloc>
-      <yloc>76</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step_error_handling>
+      <error>
+        <source_step>Attempt to insert to flavor asset</source_step>
+        <target_step>Flavor Asset ID-Version exists</target_step>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename>desc</descriptions_valuename>
+        <fields_valuename>fields</fields_valuename>
+        <codes_valuename>codes</codes_valuename>
+        <max_errors>-1</max_errors>
+        <max_pct_errors>-1</max_pct_errors>
+        <min_pct_rows>-1</min_pct_rows>
+      </error>
       <error>
         <source_step>Insert &#47; Update File Sync</source_step>
         <target_step>Get existing file_sync combo ID</target_step>
@@ -1888,18 +1900,6 @@ var sqlCommand = &quot;SELECT &quot; + VERSION + &quot; none_existent_version,	f
         <descriptions_valuename/>
         <fields_valuename/>
         <codes_valuename/>
-        <max_errors>-1</max_errors>
-        <max_pct_errors>-1</max_pct_errors>
-        <min_pct_rows>-1</min_pct_rows>
-      </error>
-      <error>
-        <source_step>Attempt to insert to flavor asset</source_step>
-        <target_step>Flavor Asset ID-Version exists</target_step>
-        <is_enabled>Y</is_enabled>
-        <nr_valuename/>
-        <descriptions_valuename>desc</descriptions_valuename>
-        <fields_valuename>fields</fields_valuename>
-        <codes_valuename>codes</codes_valuename>
         <max_errors>-1</max_errors>
         <max_pct_errors>-1</max_pct_errors>
         <min_pct_rows>-1</min_pct_rows>

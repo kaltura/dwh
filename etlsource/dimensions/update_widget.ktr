@@ -441,7 +441,7 @@
 , updated_at
 , partner_data
 FROM widget
-WHERE updated_at &gt; now() - interval ${UpdateDaysInterval} day
+WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
 and  id &lt;&gt; &apos;&apos;
 </sql>
     <limit>0</limit>
