@@ -68,7 +68,7 @@ BEGIN
 	INSERT INTO
 		kalturadw.dwh_billing (month_id, partner_id, partner_parent_id, entries)
 	SELECT 
-		paying_partners.partner_id, paying_partners.partner_parent_id, @current_month_id, COUNT(*) 
+		@current_month_id, paying_partners.partner_id, paying_partners.partner_parent_id, COUNT(*) 
 	FROM 
 		kalturadw.dwh_dim_entries, paying_partners
 	WHERE 
