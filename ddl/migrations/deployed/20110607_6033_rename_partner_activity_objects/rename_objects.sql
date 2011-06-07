@@ -1,4 +1,5 @@
-RENAME TABLE kalturadw.dwh_dwh_dim_partner_sub_activity TO kalturadw.dwh_dwh_dim_partner_sub_activity_20110607;
+CREATE TABLE kalturadw.dwh_dwh_dim_partner_sub_activity_20110607 AS select * from kalturadw.dwh_dwh_dim_partner_sub_activity;
+DROP TABLE kalturadw.dwh_dwh_dim_partner_sub_activity;
 RENAME TABLE kalturadw.dwh_dim_partner_activity TO kalturadw.dwh_dim_partner_activity_20110607;
 RENAME TABLE kalturadw.dwh_fact_partner_activities TO kalturadw.dwh_fact_partner_activities_20110607;
 RENAME TABLE kalturadw_bisources.bisources_partner_activity TO kalturadw_bisources.bisources_partner_activity_20110607;
