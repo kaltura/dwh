@@ -5,12 +5,6 @@
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
     <property name="imageDPI">96</property>
-    <list-property name="cssStyleSheets">
-        <structure>
-            <property name="fileName">dashboard.css</property>
-            <property name="externalCssURI">http://localhost:8080/SpagoBI/themes/css/dashboard.css</property>
-        </structure>
-    </list-property>
     <parameters>
         <scalar-parameter name="__format" id="161">
             <property name="hidden">true</property>
@@ -1868,7 +1862,10 @@ function beforeGeneration( chart, icsc )&#xD;
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>row[&quot;DATE_ID&quot;]</Definition>
+          <Definition>var month = BirtMath.mod(row[&quot;DATE_ID&quot;],10000);&#xD;
+var day = BirtMath.mod(month,100);&#xD;
+month = BirtMath.roundDown((month - day)/100);&#xD;
+day + month / 100</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -1881,10 +1878,14 @@ function beforeGeneration( chart, icsc )&#xD;
         <Stacked>false</Stacked>
       </Series>
       <Grouping>
-        <Enabled>true</Enabled>
-        <GroupType>Numeric</GroupType>
+        <Enabled>false</Enabled>
+        <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
+      <Sorting>Ascending</Sorting>
+      <SortKey>
+        <Definition>row[&quot;DATE_ID&quot;]</Definition>
+      </SortKey>
     </SeriesDefinitions>
     <Orientation>Horizontal</Orientation>
     <LineAttributes>
@@ -3042,7 +3043,10 @@ function beforeGeneration( chart, icsc )&#xD;
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>row[&quot;DATE_ID&quot;]</Definition>
+          <Definition>var month = BirtMath.mod(row[&quot;DATE_ID&quot;],10000);&#xD;
+var day = BirtMath.mod(month,100);&#xD;
+month = BirtMath.roundDown((month - day)/100);&#xD;
+day + month / 100</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -3055,10 +3059,14 @@ function beforeGeneration( chart, icsc )&#xD;
         <Stacked>false</Stacked>
       </Series>
       <Grouping>
-        <Enabled>true</Enabled>
-        <GroupType>Numeric</GroupType>
+        <Enabled>false</Enabled>
+        <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
+      <Sorting>Ascending</Sorting>
+      <SortKey>
+        <Definition>row[&quot;DATE_ID&quot;]</Definition>
+      </SortKey>
     </SeriesDefinitions>
     <Orientation>Horizontal</Orientation>
     <LineAttributes>
@@ -4214,7 +4222,10 @@ function beforeGeneration( chart, icsc )&#xD;
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>row[&quot;DATE_ID&quot;]</Definition>
+          <Definition>var month = BirtMath.mod(row[&quot;DATE_ID&quot;],10000);&#xD;
+var day = BirtMath.mod(month,100);&#xD;
+month = BirtMath.roundDown((month - day)/100);&#xD;
+day + month / 100</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -4227,10 +4238,14 @@ function beforeGeneration( chart, icsc )&#xD;
         <Stacked>false</Stacked>
       </Series>
       <Grouping>
-        <Enabled>true</Enabled>
-        <GroupType>Numeric</GroupType>
+        <Enabled>false</Enabled>
+        <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
+      <Sorting>Ascending</Sorting>
+      <SortKey>
+        <Definition>row[&quot;DATE_ID&quot;]</Definition>
+      </SortKey>
     </SeriesDefinitions>
     <Orientation>Horizontal</Orientation>
     <LineAttributes>
@@ -4482,7 +4497,7 @@ function beforeGeneration( chart, icsc )&#xD;
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>Playbacks</Value>
+          <Value>Playbacks (Millions)</Value>
           <Font>
             <Size>16.0</Size>
             <Bold>true</Bold>
@@ -5097,7 +5112,7 @@ function beforeGeneration( chart, icsc )&#xD;
               <AggregateExpression>Sum</AggregateExpression>
             </Grouping>
           </DataDefinition>
-          <SeriesIdentifier>Plays</SeriesIdentifier>
+          <SeriesIdentifier>Plays (Millions)</SeriesIdentifier>
           <DataPoint>
             <Components>
               <Type>Orthogonal_Value</Type>
@@ -5147,6 +5162,10 @@ function beforeGeneration( chart, icsc )&#xD;
         </Insets>
         <Visible>true</Visible>
       </Label>
+      <FormatSpecifier xsi:type="attribute:JavaNumberFormatSpecifier">
+        <Pattern>##,###.##</Pattern>
+        <Multiplier>1.0E-6</Multiplier>
+      </FormatSpecifier>
       <LabelPosition>Left</LabelPosition>
       <MajorGrid>
         <LineAttributes>
@@ -5444,7 +5463,10 @@ function beforeGeneration( chart, icsc )&#xD;
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>row[&quot;DATE_ID&quot;]</Definition>
+          <Definition>var month = BirtMath.mod(row[&quot;DATE_ID&quot;],10000);&#xD;
+var day = BirtMath.mod(month,100);&#xD;
+month = BirtMath.roundDown((month - day)/100);&#xD;
+day + month / 100</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -5460,7 +5482,7 @@ function beforeGeneration( chart, icsc )&#xD;
         <Enabled>false</Enabled>
         <GroupingUnit>Years</GroupingUnit>
         <GroupingInterval>1.0</GroupingInterval>
-        <GroupType>Numeric</GroupType>
+        <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
       <Sorting>Ascending</Sorting>
@@ -5665,7 +5687,7 @@ function beforeGeneration( chart, icsc )&#xD;
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>Playback Dropoff</Value>
+          <Value>Playback Dropoff (Millions)</Value>
           <Font>
             <Size>16.0</Size>
             <Bold>true</Bold>
@@ -7388,6 +7410,10 @@ function beforeGeneration( chart, icsc )&#xD;
         </Insets>
         <Visible>true</Visible>
       </Label>
+      <FormatSpecifier xsi:type="attribute:JavaNumberFormatSpecifier">
+        <Pattern>##,###.##</Pattern>
+        <Multiplier>1.0E-6</Multiplier>
+      </FormatSpecifier>
       <LabelPosition>Left</LabelPosition>
       <MajorGrid>
         <LineAttributes>
@@ -7685,7 +7711,10 @@ function beforeGeneration( chart, icsc )&#xD;
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>row[&quot;DATE_ID&quot;]</Definition>
+          <Definition>var month = BirtMath.mod(row[&quot;DATE_ID&quot;],10000);&#xD;
+var year = (row[&quot;DATE_ID&quot;]-month)/100000000;&#xD;
+month = (month - BirtMath.mod(month,100))/100;&#xD;
+month + year;</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -7701,7 +7730,7 @@ function beforeGeneration( chart, icsc )&#xD;
         <Enabled>true</Enabled>
         <GroupingUnit>Years</GroupingUnit>
         <GroupingInterval>1000.0</GroupingInterval>
-        <GroupType>Numeric</GroupType>
+        <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
       <SortKey/>
@@ -10297,6 +10326,7 @@ function beforeGeneration( chart, icsc )
                         <property name="outputFormat">SVG</property>
                         <property name="inheritColumns">false</property>
                         <property name="display">block</property>
+                        <property name="pageBreakBefore">always</property>
                         <structure name="toc"/>
                         <property name="dataSet">EntryTypes</property>
                         <property name="height">300px</property>
@@ -10347,49 +10377,6 @@ function beforeGeneration( chart, icsc )
                     <grid id="116">
                         <column id="117"/>
                         <column id="118"/>
-                        <row id="119">
-                            <property name="style">middle</property>
-                            <cell id="120">
-                                <label id="103">
-                                    <property name="style">middle</property>
-                                    <text-property name="text">Total New Yesterday:</text-property>
-                                </label>
-                                <data id="105">
-                                    <property name="style">middle</property>
-                                    <property name="whiteSpace">nowrap</property>
-                                    <property name="dataSet">EntryTypes</property>
-                                    <list-property name="boundDataColumns">
-                                        <structure>
-                                            <property name="name">videos</property>
-                                            <text-property name="displayName">videos</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["videos"]+dataSetRow["audios"]+dataSetRow["images"]+dataSetRow["mixs"]+dataSetRow["PDF"]+dataSetRow["other"]</expression>
-                                            <property name="dataType">integer</property>
-                                        </structure>
-                                    </list-property>
-                                    <property name="resultSetColumn">videos</property>
-                                </data>
-                            </cell>
-                            <cell id="121">
-                                <label id="108">
-                                    <property name="style">middle</property>
-                                    <text-property name="text">Deleted Yesterday:</text-property>
-                                </label>
-                                <data id="107">
-                                    <property name="style">middle</property>
-                                    <property name="whiteSpace">nowrap</property>
-                                    <property name="dataSet">Deleted</property>
-                                    <list-property name="boundDataColumns">
-                                        <structure>
-                                            <property name="name">deleted</property>
-                                            <text-property name="displayName">deleted</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["deleted"]</expression>
-                                            <property name="dataType">integer</property>
-                                        </structure>
-                                    </list-property>
-                                    <property name="resultSetColumn">deleted</property>
-                                </data>
-                            </cell>
-                        </row>
                         <row id="157">
                             <property name="style">middle</property>
                             <cell id="158">
@@ -13762,6 +13749,333 @@ function beforeGeneration( chart, icsc )&#xD;
                     </grid>
                 </cell>
             </row>
+            <row id="162">
+                <cell id="163">
+                    <grid id="164">
+                        <column id="165"/>
+                        <column id="166"/>
+                        <column id="167"/>
+                        <column id="168"/>
+                        <column id="169"/>
+                        <column id="170"/>
+                        <column id="171"/>
+                        <row id="172">
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <cell id="173">
+                                <label id="103">
+                                    <property name="style">middle</property>
+                                    <text-property name="text">Videos</text-property>
+                                </label>
+                            </cell>
+                            <cell id="174">
+                                <label id="188">
+                                    <property name="style">middle</property>
+                                    <text-property name="text">Audios</text-property>
+                                </label>
+                            </cell>
+                            <cell id="175">
+                                <label id="189">
+                                    <property name="style">middle</property>
+                                    <text-property name="text">Images</text-property>
+                                </label>
+                            </cell>
+                            <cell id="176">
+                                <label id="190">
+                                    <property name="style">middle</property>
+                                    <text-property name="text">Mixs</text-property>
+                                </label>
+                            </cell>
+                            <cell id="177">
+                                <label id="191">
+                                    <property name="style">middle</property>
+                                    <text-property name="text">PDF</text-property>
+                                </label>
+                            </cell>
+                            <cell id="178">
+                                <label id="192">
+                                    <property name="style">middle</property>
+                                    <text-property name="text">Other</text-property>
+                                </label>
+                            </cell>
+                            <cell id="179">
+                                <label id="193">
+                                    <property name="style">middle</property>
+                                    <text-property name="text">Deleted</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="180">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <cell id="181">
+                                <data id="194">
+                                    <property name="style">middle</property>
+                                    <property name="whiteSpace">nowrap</property>
+                                    <property name="dataSet">EntryTypes</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">videos</property>
+                                            <text-property name="displayName">videos</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["videos"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">videos</property>
+                                </data>
+                            </cell>
+                            <cell id="182">
+                                <data id="105">
+                                    <property name="style">middle</property>
+                                    <property name="whiteSpace">nowrap</property>
+                                    <property name="dataSet">EntryTypes</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">videos</property>
+                                            <text-property name="displayName">audios</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["audios"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">videos</property>
+                                </data>
+                            </cell>
+                            <cell id="183">
+                                <data id="195">
+                                    <property name="style">middle</property>
+                                    <property name="whiteSpace">nowrap</property>
+                                    <property name="dataSet">EntryTypes</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">videos</property>
+                                            <text-property name="displayName">images</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["images"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">videos</property>
+                                </data>
+                            </cell>
+                            <cell id="184">
+                                <data id="196">
+                                    <property name="style">middle</property>
+                                    <property name="whiteSpace">nowrap</property>
+                                    <property name="dataSet">EntryTypes</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">videos</property>
+                                            <text-property name="displayName">mixs</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["mixs"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">videos</property>
+                                </data>
+                            </cell>
+                            <cell id="185">
+                                <data id="197">
+                                    <property name="style">middle</property>
+                                    <property name="whiteSpace">nowrap</property>
+                                    <property name="dataSet">EntryTypes</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">videos</property>
+                                            <text-property name="displayName">pdf</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["PDF"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">videos</property>
+                                </data>
+                            </cell>
+                            <cell id="186">
+                                <data id="198">
+                                    <property name="style">middle</property>
+                                    <property name="whiteSpace">nowrap</property>
+                                    <property name="dataSet">EntryTypes</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">videos</property>
+                                            <text-property name="displayName">others</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["other"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">videos</property>
+                                </data>
+                            </cell>
+                            <cell id="187">
+                                <data id="107">
+                                    <property name="style">middle</property>
+                                    <property name="whiteSpace">nowrap</property>
+                                    <property name="dataSet">Deleted</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">deleted</property>
+                                            <text-property name="displayName">deleted</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["deleted"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">deleted</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="200">
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <cell id="201">
+                                <label id="216">
+                                    <property name="style">middle</property>
+                                    <text-property name="text">Uploads</text-property>
+                                </label>
+                            </cell>
+                            <cell id="202">
+                                <label id="217">
+                                    <property name="style">middle</property>
+                                    <text-property name="text">Failed Uploads</text-property>
+                                </label>
+                            </cell>
+                            <cell id="203">
+                                <label id="218">
+                                    <property name="style">middle</property>
+                                    <text-property name="text">Webcam</text-property>
+                                </label>
+                            </cell>
+                            <cell id="204">
+                                <label id="219">
+                                    <property name="style">middle</property>
+                                    <text-property name="text">Failed Webcam</text-property>
+                                </label>
+                            </cell>
+                            <cell id="205">
+                                <label id="220">
+                                    <property name="style">middle</property>
+                                    <text-property name="text">Imports</text-property>
+                                </label>
+                            </cell>
+                            <cell id="206">
+                                <label id="221">
+                                    <property name="style">middle</property>
+                                    <text-property name="text">Failed Imports</text-property>
+                                </label>
+                            </cell>
+                            <cell id="207"/>
+                        </row>
+                        <row id="208">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <cell id="209">
+                                <data id="224">
+                                    <property name="whiteSpace">nowrap</property>
+                                    <property name="dataSet">Ingestion</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">uploads</property>
+                                            <text-property name="displayName">uploads</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["uploads"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">uploads</property>
+                                </data>
+                            </cell>
+                            <cell id="210">
+                                <data id="225">
+                                    <property name="whiteSpace">nowrap</property>
+                                    <property name="dataSet">Ingestion</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">failed_uploads</property>
+                                            <text-property name="displayName">failed_uploads</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["failed_uploads"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">failed_uploads</property>
+                                </data>
+                            </cell>
+                            <cell id="211">
+                                <data id="226">
+                                    <property name="whiteSpace">nowrap</property>
+                                    <property name="dataSet">Ingestion</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">webcam</property>
+                                            <text-property name="displayName">webcam</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["webcam"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">webcam</property>
+                                </data>
+                            </cell>
+                            <cell id="212">
+                                <data id="227">
+                                    <property name="whiteSpace">nowrap</property>
+                                    <property name="dataSet">Ingestion</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">failed_webcam</property>
+                                            <text-property name="displayName">failed_webcam</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["failed_webcam"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">failed_webcam</property>
+                                </data>
+                            </cell>
+                            <cell id="213">
+                                <data id="228">
+                                    <property name="whiteSpace">nowrap</property>
+                                    <property name="dataSet">Ingestion</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">imported</property>
+                                            <text-property name="displayName">imported</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["imported"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">imported</property>
+                                </data>
+                            </cell>
+                            <cell id="214">
+                                <data id="229">
+                                    <property name="whiteSpace">nowrap</property>
+                                    <property name="dataSet">Ingestion</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">failed_import</property>
+                                            <text-property name="displayName">failed_import</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["failed_import"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">failed_import</property>
+                                </data>
+                            </cell>
+                            <cell id="215"/>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
         </grid>
         <grid id="122">
             <property name="pageBreakBefore">auto</property>
@@ -16449,6 +16763,7 @@ function beforeGeneration( chart, icsc )&#xD;
 ]]></xml-property>
                         <property name="outputFormat">SVG</property>
                         <property name="inheritColumns">false</property>
+                        <property name="pageBreakBefore">always</property>
                         <property name="dataSet">Registries</property>
                         <property name="height">300px</property>
                         <property name="width">750px</property>
@@ -16495,6 +16810,178 @@ function beforeGeneration( chart, icsc )&#xD;
                             </structure>
                         </list-property>
                     </extended-item>
+                </cell>
+            </row>
+        </grid>
+        <grid id="313">
+            <column id="314"/>
+            <column id="315"/>
+            <column id="316"/>
+            <column id="317"/>
+            <column id="318"/>
+            <column id="319"/>
+            <column id="320"/>
+            <row id="321">
+                <property name="borderLeftColor">#000000</property>
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderRightColor">#000000</property>
+                <property name="borderRightStyle">solid</property>
+                <property name="borderTopColor">#000000</property>
+                <property name="borderTopStyle">solid</property>
+                <cell id="322">
+                    <label id="323">
+                        <property name="style">middle</property>
+                        <text-property name="text">KMC</text-property>
+                    </label>
+                </cell>
+                <cell id="324">
+                    <label id="325">
+                        <property name="style">middle</property>
+                        <text-property name="text">Drupal</text-property>
+                    </label>
+                </cell>
+                <cell id="326">
+                    <label id="327">
+                        <property name="style">middle</property>
+                        <text-property name="text">Wordpress</text-property>
+                    </label>
+                </cell>
+                <cell id="328">
+                    <label id="329">
+                        <property name="style">middle</property>
+                        <text-property name="text">Moodle</text-property>
+                    </label>
+                </cell>
+                <cell id="330">
+                    <label id="331">
+                        <property name="style">middle</property>
+                        <text-property name="text">Joomla</text-property>
+                    </label>
+                </cell>
+                <cell id="332">
+                    <label id="333">
+                        <property name="style">middle</property>
+                        <text-property name="text">MindTouch</text-property>
+                    </label>
+                </cell>
+                <cell id="334">
+                    <label id="335">
+                        <property name="style">middle</property>
+                        <text-property name="text">Other</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="336">
+                <property name="borderBottomColor">#000000</property>
+                <property name="borderBottomStyle">solid</property>
+                <property name="borderLeftColor">#000000</property>
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderRightColor">#000000</property>
+                <property name="borderRightStyle">solid</property>
+                <cell id="337">
+                    <data id="379">
+                        <property name="whiteSpace">nowrap</property>
+                        <property name="dataSet">Registries</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">kmc</property>
+                                <text-property name="displayName">kmc</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["kmc"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">kmc</property>
+                    </data>
+                </cell>
+                <cell id="339">
+                    <data id="380">
+                        <property name="whiteSpace">nowrap</property>
+                        <property name="dataSet">Registries</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">drupal</property>
+                                <text-property name="displayName">drupal</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["drupal"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">drupal</property>
+                    </data>
+                </cell>
+                <cell id="341">
+                    <data id="381">
+                        <property name="whiteSpace">nowrap</property>
+                        <property name="dataSet">Registries</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">wordpress</property>
+                                <text-property name="displayName">wordpress</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["wordpress"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">wordpress</property>
+                    </data>
+                </cell>
+                <cell id="343">
+                    <data id="382">
+                        <property name="whiteSpace">nowrap</property>
+                        <property name="dataSet">Registries</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">moodle</property>
+                                <text-property name="displayName">moodle</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["moodle"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">moodle</property>
+                    </data>
+                </cell>
+                <cell id="345">
+                    <data id="383">
+                        <property name="whiteSpace">nowrap</property>
+                        <property name="dataSet">Registries</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">joomla</property>
+                                <text-property name="displayName">joomla</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["joomla"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">joomla</property>
+                    </data>
+                </cell>
+                <cell id="347">
+                    <data id="384">
+                        <property name="whiteSpace">nowrap</property>
+                        <property name="dataSet">Registries</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">mind_touch</property>
+                                <text-property name="displayName">mind_touch</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mind_touch"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">mind_touch</property>
+                    </data>
+                </cell>
+                <cell id="349">
+                    <data id="385">
+                        <property name="whiteSpace">nowrap</property>
+                        <property name="dataSet">Registries</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">other</property>
+                                <text-property name="displayName">other</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["other"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">other</property>
+                    </data>
                 </cell>
             </row>
         </grid>
