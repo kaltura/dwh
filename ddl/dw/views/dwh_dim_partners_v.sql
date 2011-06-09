@@ -4,7 +4,7 @@ USE `kalturadw`;
 /*!50001 DROP TABLE IF EXISTS `dwh_dim_partners_v` */;
 /*!50001 DROP VIEW IF EXISTS `dwh_dim_partners_v` */;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER 
+CREATE ALGORITHM=UNDEFINED DEFINER=`etl`@`%` SQL SECURITY DEFINER 
 VIEW `dwh_dim_partners_v` AS (
     select 
         `a`.`partner_id` AS `partner_id`,

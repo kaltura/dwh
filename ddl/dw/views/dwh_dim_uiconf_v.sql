@@ -4,7 +4,7 @@ USE `kalturadw`;
 /*!50001 DROP TABLE IF EXISTS `dwh_dim_ui_conf_v` */;
 /*!50001 DROP VIEW IF EXISTS `dwh_dim_ui_conf_v` */;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `dwh_dim_ui_conf_v` AS (
+CREATE ALGORITHM=UNDEFINED DEFINER=`etl`@`%` SQL SECURITY DEFINER VIEW `dwh_dim_ui_conf_v` AS (
 select 
     `a`.`ui_conf_id` AS `ui_conf_id`,
     `a`.`ui_conf_type_id` AS `ui_conf_type_id`,
