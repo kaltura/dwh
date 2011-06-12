@@ -28,9 +28,4 @@ class Configuration
 }
 
 $CONF = new Configuration();
-
-$FTP_SERVER = '';
-$FTP_PORT = 21;
-$FTP_USER = '';
-$FTP_PW = '';
 ?>

@@ -18,15 +18,12 @@ class EventTest extends PHPUnit_Framework_TestCase
 
 	public function getFTPParmas()
 	{
-		global $FTP_SERVER;
-		global $FTP_PORT;
-		global $FTP_USER;
-		global $FTP_PW;
+		global $CONF;
 		
-		return array('FetchFTPServer'=>$FTP_SERVER,
-					 'FetchFTPPort'=>$FTP_PORT,
-					 'FetchFTPUser'=>$FTP_USER,
-					 'FetchFTPPassword'=>$FTP_PW);
+		return array('FetchFTPServer'=>$CONF->EventsFTPServer,
+					 'FetchFTPPort'=>$CONF->EventsFTPPort,
+					 'FetchFTPUser'=>$CONF->EventsFTPUser,
+					 'FetchFTPPassword'=>$CONF->EventsFTPPassword);
 	}
 	
     public function testGenereate()
