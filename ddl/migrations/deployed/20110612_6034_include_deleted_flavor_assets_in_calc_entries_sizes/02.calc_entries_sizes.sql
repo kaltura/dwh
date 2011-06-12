@@ -56,7 +56,7 @@ BEGIN
 	DROP TABLE IF EXISTS yesterday_file_sync_subset; 
 	CREATE TEMPORARY TABLE yesterday_file_sync_subset AS
 	SELECT f.id, f.partner_id, f.object_id, f.object_type, f.object_sub_type, IFNULL(f.file_size, 0) file_size
-	FROM today_file_sync_max_version_ids today, kalturadw.dwh_dim_file_sync f
+	FROM today_sizes today, kalturadw.dwh_dim_file_sync f
 	WHERE f.object_id = today.object_id
 	AND f.partner_id = today.partner_id
 	AND f.object_type = today.object_type
