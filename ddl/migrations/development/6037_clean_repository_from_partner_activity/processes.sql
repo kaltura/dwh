@@ -1,1 +1,1 @@
-DELETE FROM kalturadw_ds.processes where process_id = 3;
+DELETE FROM kalturadw_ds.processes where id = 3;
