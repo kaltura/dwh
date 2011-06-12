@@ -7729,7 +7729,7 @@ month + year;</Definition>
       <Grouping>
         <Enabled>true</Enabled>
         <GroupingUnit>Years</GroupingUnit>
-        <GroupingInterval>1000.0</GroupingInterval>
+        <GroupingInterval>1.0</GroupingInterval>
         <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
