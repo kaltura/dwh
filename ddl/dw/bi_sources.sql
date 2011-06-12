@@ -20,9 +20,7 @@ INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('u
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('ui_conf_type','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('user_status','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('moderation_status','1');
-INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('partner_sub_activity','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('widget_security_type','1');
-INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('partner_activity','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('widget_security_policy','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('event_type','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('control','1');

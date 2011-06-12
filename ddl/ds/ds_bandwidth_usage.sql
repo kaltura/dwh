@@ -16,6 +16,7 @@ MySQL - 5.1.41-3ubuntu12.6 : Database - kalturadw
 USE `kalturadw_ds`;
 
 CREATE TABLE `ds_bandwidth_usage` (
+  `line_number` INT (10) DEFAULT NULL,
   `cycle_id` INT(11) NOT NULL,
   `file_id` INT(11) NOT NULL,
   `partner_id` INT(11) NOT NULL default -1,
@@ -23,7 +24,11 @@ CREATE TABLE `ds_bandwidth_usage` (
   `activity_hour_id` TINYINT(4) DEFAULT '-1',
   `bandwidth_source_id` BIGINT(20) DEFAULT NULL,
   `url` varchar(2000) default null,
-  `bandwidth_bytes` BIGINT(20) DEFAULT '0'
+  `bandwidth_bytes` BIGINT(20) DEFAULT '0',
+  `user_ip` VARCHAR(15) DEFAULT NULL,
+  `user_ip_number` INT(10) UNSIGNED DEFAULT NULL,
+  `country_id` INT(11) DEFAULT NULL,
+  `location_id` INT(11) DEFAULT NULL
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 PARTITION BY LIST (cycle_id)
 (PARTITION p_0 VALUES IN (0) ENGINE = INNODB);

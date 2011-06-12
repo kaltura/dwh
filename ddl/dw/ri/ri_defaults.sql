@@ -109,8 +109,6 @@ insert into `kalturadw`.`ri_defaults` (`table_name`, `default_field`, `default_v
 	('Dwh_Dim_partner_type','partner_type_name','Missing Value'),
 	('Dwh_Dim_user_status','user_status_name','Missing Value'),
 	('Dwh_Dim_moderation_status','moderation_status_name','Missing Value'),
-	('Dwh_Dim_partner_sub_activity','partner_sub_activity_name','Missing Value'),
-	('Dwh_Dim_partner_activity','partner_activity_name','Missing Value'),
 	('Dwh_Dim_widget_security_type','widget_security_type_name','Missing Value'),
 	('Dwh_Dim_widget_security_policy','widget_security_policy_name','Missing Value'),
 	('Dwh_Dim_Widget','widget_int_id','-1'),

@@ -96,7 +96,6 @@ mysqlexec $DS_ROOT_DIR/processes.sql
 mysqlexec $DS_ROOT_DIR/staging_areas.sql
 mysqlexec $DS_ROOT_DIR/populate_repository_for_events.sql
 mysqlexec $DS_ROOT_DIR/populate_repository_for_fms_streaming.sql
-mysqlexec $DS_ROOT_DIR/populate_repository_for_partner_activity.sql
 mysqlexec $DS_ROOT_DIR/populate_repository_for_bandwidth_usage.sql
 mysqlexec $DS_ROOT_DIR/fms_incomplete_session.sql
 mysqlexec $DS_ROOT_DIR/fms_stale_sessions.sql
@@ -156,8 +155,10 @@ mysqlexec $DW_ROOT_DIR/countries_view.sql
 mysqlexec $DW_ROOT_DIR/dwh_fact_bandwidth_usage.sql
 mysqlexec $DW_ROOT_DIR/dwh_fact_entries_sizes.sql
 mysqlexec $DW_ROOT_DIR/calc_entries_sizes.sql
+mysqlexec $DW_ROOT_DIR/calc_monthly_billing.sql
 mysqlexec $DW_ROOT_DIR/generate_daily_usage_report.sql
 mysqlexec $DW_ROOT_DIR/dwh_daily_usage_reports.sql
+mysqlexec $DW_ROOT_DIR/dwh_billing.sql
 
 #dw/dimensions
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_asset_status.sql
@@ -192,8 +193,6 @@ mysqlexec $DW_ROOT_DIR/events/dwh_fact_events_partitions_view.sql
 
 #dw/maintenance
 mysqlexec $DW_ROOT_DIR/maintenance/add_partition_procedure.sql
-mysqlexec $DW_ROOT_DIR/maintenance/drop_events_partition_procedure.sql
-mysqlexec $DW_ROOT_DIR/maintenance/drop_events_partition_procedure.sql
 
 #dw/aggr
 mysqlexec $DW_ROOT_DIR/aggr/aggr_managment.sql

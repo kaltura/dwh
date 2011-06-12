@@ -1,5 +1,6 @@
 CREATE TABLE  `kalturadw`.`dwh_fact_fms_session_events` (
   `file_id` INT(11) UNSIGNED NOT NULL,
+  `line_number` INT(11),
   `event_type_id` TINYINT(3) UNSIGNED NOT NULL,
   `event_category_id` TINYINT(3) UNSIGNED NOT NULL,
   `event_time` DATETIME NOT NULL,
@@ -10,7 +11,8 @@ CREATE TABLE  `kalturadw`.`dwh_fact_fms_session_events` (
   `entry_id` VARCHAR(20) DEFAULT NULL,
   `partner_id` INT(10) DEFAULT NULL,
   `external_id` VARCHAR(50) DEFAULT NULL,
-  `server_ip` INT(10) UNSIGNED DEFAULT NULL,
+  `server_ip` VARCHAR(15),
+  `server_ip_number` INT(10) UNSIGNED DEFAULT NULL,
   `server_process_id` INT(10) UNSIGNED NOT NULL,
   `server_cpu_load` SMALLINT(5) UNSIGNED NOT NULL,
   `server_memory_load` SMALLINT(5) UNSIGNED NOT NULL,
@@ -21,8 +23,8 @@ CREATE TABLE  `kalturadw`.`dwh_fact_fms_session_events` (
   `duration_secs` INT(10) UNSIGNED NOT NULL,
   `status_id` SMALLINT(3) UNSIGNED DEFAULT NULL,
   `status_desc_id` TINYINT(3) UNSIGNED NOT NULL,
-  `client_ip_str` VARCHAR(15) NOT NULL,
-  `client_ip` INT(10) UNSIGNED NOT NULL,
+  `client_ip` VARCHAR(15) NOT NULL,
+  `client_ip_number` INT(10) UNSIGNED NOT NULL,
   `client_country_id` INT(10) UNSIGNED DEFAULT '0',
   `client_location_id` INT(10) UNSIGNED DEFAULT '0',
   `client_protocol_id` TINYINT(3) UNSIGNED NOT NULL,
@@ -44,7 +46,8 @@ CREATE TABLE  `kalturadw`.`dwh_fact_fms_session_events` (
   `client_to_server_stream_bytes` INT(10) UNSIGNED DEFAULT NULL,
   `server_to_client_stream_bytes` INT(10) UNSIGNED DEFAULT NULL,
   `server_to_client_qos_bytes` INT(10) UNSIGNED DEFAULT NULL,
-  KEY `partner_id_event_type_id_time` (`partner_id`,`event_type_id`,`event_time`)
+  UNIQUE KEY (`file_id`,`line_number`,`event_date_id`),
+  KEY `partner_id` (`partner_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 PARTITION BY RANGE (TO_DAYS(event_time))
 (PARTITION p_201001 VALUES LESS THAN (734169));

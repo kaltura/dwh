@@ -1,11 +1,16 @@
 USE `kalturadw`;
 
 CREATE TABLE `dwh_fact_fms_sessions` (
-  `session_id` varchar(20) NOT NULL,
-  `session_time` datetime NOT NULL,
-  `session_date_id` int(11) unsigned DEFAULT NULL,
-  `session_partner_id` int(10) unsigned DEFAULT NULL,
-  `total_bytes` bigint(20) unsigned DEFAULT NULL
+  `session_id` VARCHAR(20) NOT NULL,
+  `session_time` DATETIME NOT NULL,
+  `session_date_id` INT(11) UNSIGNED DEFAULT NULL,
+  `session_client_ip` VARCHAR(15),
+  `session_client_ip_number` INT(10) UNSIGNED,
+  `session_client_country_id` INT(10) UNSIGNED,
+  `session_client_location_id` INT(10) UNSIGNED,
+  `session_partner_id` INT(10) UNSIGNED DEFAULT NULL,
+  `total_bytes` BIGINT(20) UNSIGNED DEFAULT NULL,
+  KEY `session_partner_id` (`session_partner_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=latin1
 /*!50100 PARTITION BY RANGE (TO_DAYS(session_time))
 (PARTITION p_201001 VALUES LESS THAN (734169) ENGINE = INNODB,

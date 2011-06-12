@@ -1,5 +1,6 @@
 ﻿DROP TABLE IF EXISTS `kalturadw_ds`.`ds_fms_session_events`;
 CREATE TABLE `kalturadw_ds`.`ds_fms_session_events` (
+  `line_number` INT (10) DEFAULT NULL,
   `cycle_id` INT(11) NOT NULL,
   `file_id` int(11) unsigned NOT NULL,
   `event_type_id` tinyint(3) unsigned NOT NULL,
@@ -12,7 +13,8 @@ CREATE TABLE `kalturadw_ds`.`ds_fms_session_events` (
   `entry_id` varchar(20) DEFAULT NULL,
   `partner_id` int(10) DEFAULT NULL,
   `external_id` varchar(50) DEFAULT NULL,
-  `server_ip` int(10) unsigned DEFAULT NULL,
+  `server_ip` VARCHAR(15) DEFAULT NULL,
+  `server_ip_number` int(10) unsigned DEFAULT NULL,
   `server_process_id` int(10) unsigned NOT NULL,
   `server_cpu_load` smallint(5) unsigned NOT NULL,
   `server_memory_load` smallint(5) unsigned NOT NULL,
@@ -23,8 +25,8 @@ CREATE TABLE `kalturadw_ds`.`ds_fms_session_events` (
   `duration_secs` int(10) unsigned NOT NULL,
   `status_id` smallint(3) unsigned DEFAULT NULL,
   `status_desc_id` tinyint(3) unsigned NOT NULL,
-  `client_ip_str` varchar(15) NOT NULL,
-  `client_ip` int(10) unsigned NOT NULL,
+  `client_ip` varchar(15) NOT NULL,
+  `client_ip_number` int(10) unsigned NOT NULL,
   `client_country_id` int(10) unsigned DEFAULT '0',
   `client_location_id` int(10) unsigned DEFAULT '0',
   `client_protocol_id` tinyint(3) unsigned NOT NULL,

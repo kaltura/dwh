@@ -20,14 +20,19 @@ DROP TABLE IF EXISTS `dwh_fact_bandwidth_usage`;
 
 CREATE TABLE `dwh_fact_bandwidth_usage` (
   `file_id` INT(11) NOT NULL,
+  `line_number` INT (11),
   `partner_id` INT(11) NOT NULL DEFAULT '-1',
   `activity_date_id` INT(11) DEFAULT '-1',
   `activity_hour_id` TINYINT(4) DEFAULT '-1',
   `bandwidth_source_id` BIGINT(20) DEFAULT NULL,
   `url` VARCHAR(2000) DEFAULT NULL,
   `bandwidth_bytes` BIGINT(20) DEFAULT '0',
-  KEY `partner_id` (`partner_id`),
-  KEY `file_id` (`file_id`)
+  `user_ip` VARCHAR(15) DEFAULT NULL,
+  `user_ip_number` INT(10) UNSIGNED DEFAULT NULL,
+  `country_id` INT(11) DEFAULT NULL,
+  `location_id` INT(11) DEFAULT NULL,
+  UNIQUE KEY (`file_id`,`line_number`,`activity_date_id`),
+  KEY `partner_id` (`partner_id`)  
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 /*!50100 PARTITION BY RANGE (activity_date_id)
 (PARTITION p_20080531 VALUES LESS THAN (20080601) ENGINE = INNODB,

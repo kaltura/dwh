@@ -11,7 +11,7 @@ BEGIN
 	SET @current_partner_id=partner_id;
 	SET @current_start_date_id=start_date_id;
 	SET @current_end_date_id=LEAST(end_date_id, DATE(NOW())*1);
-
+	
 	SELECT	SUM(continuous_aggr_storage/DAY(LAST_DAY(continuous_partner_storage.date_id))) avg_continuous_aggr_storage_mb
 	INTO avg_cont_aggr_storage
 	FROM (SELECT * FROM (
@@ -25,15 +25,12 @@ BEGIN
 			FROM 	dwh_hourly_partner aggr_p RIGHT JOIN
 				dwh_dim_time all_times
 				ON (all_times.day_id=aggr_p.date_id 
-					AND all_times.day_id>=20081230
-					AND all_times.day_id<=@current_end_date_id
+					AND aggr_p.hour_id = 0
 					AND aggr_p.partner_id=@current_partner_id)
-			WHERE 	all_times.day_id>=20081230 AND all_times.day_id<=@current_end_date_id AND aggr_p.hour_id = 0) results
+			WHERE 	all_times.day_id>=20081230 AND all_times.day_id<=@current_end_date_id) results
 			WHERE date_id >= @current_start_date_id AND date_id <=@current_end_date_id
 		) continuous_partner_storage;
-
 	RETURN avg_cont_aggr_storage;
-
 END$$
 
 DELIMITER ;

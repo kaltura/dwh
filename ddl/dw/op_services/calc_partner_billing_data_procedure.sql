@@ -17,7 +17,7 @@ FROM
 		SELECT 
 			all_times.day_id date_id,
 			@current_partner_id partner_id,
-			aggr_p.count_bandwidth count_bandwidth,
+			ifnull(aggr_p.count_bandwidth, 0) + ifnull(aggr_p.count_streaming/1024, 0) count_bandwidth,
 			IF(aggr_p.aggr_storage IS NOT NULL, aggr_p.aggr_storage,
 				(SELECT aggr_storage FROM dwh_hourly_partner inner_a_p 
 				 WHERE 
