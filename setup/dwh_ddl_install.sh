@@ -21,7 +21,7 @@ done
 
 function mysqlexec {
         echo "now executing $1"
-        mysql -u$USER -p$PW -h$HOST -P$PORT < $1 >>  $SQL_LOG
+        mysql -u$USER -p$PW -h$HOST -P$PORT < $1
 
 		ret_val=$?
         if [ $ret_val -ne 0 ];then
@@ -38,8 +38,6 @@ BISOURCE_ROOT_DIR=$DDL_ROOT_DIR/bi_sources/
 DS_ROOT_DIR=$DDL_ROOT_DIR/ds/
 DW_ROOT_DIR=$DDL_ROOT_DIR/dw/
 DDL_SETUP_ROOT_DIR=$DDL_ROOT_DIR/setup/
-
-SQL_LOG=$DDL_ROOT_DIR/installation_log
 
 #general
 mysqlexec $DDL_ROOT_DIR/db_create.sql
@@ -257,23 +255,6 @@ mysqlexec $DW_ROOT_DIR/fms/fms_dim_tables.sql
 mysqlexec $DW_ROOT_DIR/fms/dwh_fact_fms_sessions.sql
 mysqlexec $DW_ROOT_DIR/fms/dwh_fact_fms_session_events.sql
  
- #populate data
- # runnig the ETL is the better way to populate the dwh_dim_time table
- export KETTLE_HOME=$ROOT_DIR
- sh $KITCHEN/pn.sh /file $ETL_ROOT_DIR/create_time_dim.ktr
-
- # Check that the command didn't fail
-        ret_val=$?
-        if [ $ret_val -ne 0 ];then
-                        echo $ret_val
-                        echo "Error - bailing out!"
-                        exit
-        fi
-
 mysqlexec $DW_ROOT_DIR/maintenance/populate_table_partitions.sql
-#mysqlexec $DDL_SETUP_ROOT_DIR/populate_time_table.sql
 mysqlexec $DDL_SETUP_ROOT_DIR/populate_aggr_managment_table.sql
-#mysqlexec $DDL_SETUP_ROOT_DIR/populate_old_entries.sql
 mysqlexec $DDL_SETUP_ROOT_DIR/populate_dwh_dim_ip_ranges.sql
-
-$SETUP_ROOT_DIR/copy_pentaho_plugins.sh -d $ROOT_DIR -k $KITCHEN
