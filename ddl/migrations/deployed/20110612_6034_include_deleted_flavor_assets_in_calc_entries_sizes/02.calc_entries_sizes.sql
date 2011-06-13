@@ -14,7 +14,7 @@ BEGIN
 	
 	/* Attach today's file_sync records with entries and flavor_assets*/
 	CREATE TEMPORARY TABLE today_file_sync_subset AS
-	SELECT s.id, s.partner_id, IFNULL(a.entry_id, object_id) entry_id, object_id, object_type, object_sub_type, IFNULL(file_size, 0) file_size
+	SELECT DISTINCT s.id, s.partner_id, IFNULL(a.entry_id, object_id) entry_id, object_id, object_type, object_sub_type, IFNULL(file_size, 0) file_size
 	FROM kalturadw.dwh_dim_file_sync s LEFT OUTER JOIN kalturadw.dwh_dim_flavor_asset a
 	ON (object_type = 4 AND s.object_id = a.id AND a.entry_id IS NOT NULL)
 	WHERE s.updated_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
@@ -48,8 +48,12 @@ BEGIN
 		AND f.deleted_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
 		AND f.id = s.object_id
 		AND s.object_type = 4
+		AND s.updated_at < v_date
+		AND s.file_size > 0
 	ON DUPLICATE KEY UPDATE
 		file_size = VALUES(file_size);
+	
+	ALTER TABLE today_sizes DROP INDEX unique_key;
 	
 	/* Get the the file_sync records that were created before today and are actually
 	earlier version of all the file_sync records of today (including the records we appended of deleted file_sync records */
@@ -70,7 +74,6 @@ BEGIN
 	CREATE TEMPORARY TABLE yesterday_file_sync_max_version_ids AS
 	SELECT MAX(id) id, partner_id, object_id, object_type, object_sub_type FROM yesterday_file_sync_subset
 	GROUP BY partner_id, object_id, object_type, object_sub_type;
-
 	/* Get the sizes of the latest versions of the past file_sync records*/
 	DROP TABLE IF EXISTS yesterday_sizes;
 	CREATE TEMPORARY TABLE yesterday_sizes AS
