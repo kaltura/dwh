@@ -5,17 +5,19 @@ ROOT_DIR=/opt/kaltura/dwh
 HOST=localhost
 PORT=3306
 KITCHEN=/usr/local/pentaho/pdi
+REGISTER_ONLY=0
 
-while getopts "u:p:d:h:P:s:k:" o
+while getopts "u:p:d:h:P:s:k:r:" o
 do	case "$o" in
 	u)	USER="$OPTARG";;
 	p)	PW="$OPTARG";;
 	d)	ROOT_DIR="$OPTARG";;
 	h)	HOST="$OPTARG";;
 	P)	PORT="$OPTARG";;
-	s)  	SITE_SPECIFIC_DIR="$OPTARG";;
+	s)  SITE_SPECIFIC_DIR="$OPTARG";;
 	k)	KITCHEN="$OPTARG";;
-	[?])	echo >&2 "Usage: $0 [-u username] [-p password] [-k  pdi-path] [-d dwh-path] [-h host-name] [-P port] [-s site-specific-path] [-k kitchen-path]"
+	r)  REGISTER_ONLY="$OPTARG";;
+	[?])	echo >&2 "Usage: $0 [-u username] [-p password] [-k  pdi-path] [-d dwh-path] [-h host-name] [-P port] [-s site-specific-path] [-k kitchen-path] [-r 0|1 (register files but skip run)]"
 		exit 1;;
 	esac
 done
@@ -37,7 +39,9 @@ function updatedir {
 	do
 		file_ver=$(mysql -u$USER -p$PW -h$HOST -P$PORT -se"SELECT count(version) FROM kalturadw_ds.version_management WHERE version = $2 AND filename = '$file_name'" | head -2 | tail -1)
 		if [ $file_ver -eq 0 ];then
-			mysqlexec $ROOT_DIR/ddl/migrations/deployed/$1/$file_name
+			if [ $REGISTER_ONLY -eq 0 ]; then
+				mysqlexec $ROOT_DIR/ddl/migrations/deployed/$1/$file_name
+			fi
 			mysql -u$USER -p$PW -h$HOST -P$PORT -e"INSERT INTO kalturadw_ds.version_management(version, filename) VALUES ($2, '$file_name')"
 		fi
 	done

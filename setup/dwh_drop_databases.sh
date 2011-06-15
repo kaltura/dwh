@@ -22,7 +22,7 @@ done
 
 function mysqlexec {
         echo "now executing $1"
-        mysql -u$USER -p$PW -h$HOST -P$PORT < $1 >>  $SQL_LOG
+        mysql -u$USER -p$PW -h$HOST -P$PORT < $1 >>  $ROOT_DIR/logs/dwh_drop_databases.log
 
 		ret_val=$?
         if [ $ret_val -ne 0 ];then

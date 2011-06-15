@@ -49,5 +49,5 @@ CREATE TABLE  `kalturadw`.`dwh_fact_fms_session_events` (
   UNIQUE KEY (`file_id`,`line_number`,`event_date_id`),
   KEY `partner_id` (`partner_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
-PARTITION BY RANGE (TO_DAYS(event_time))
-(PARTITION p_201001 VALUES LESS THAN (734169));
+PARTITION BY RANGE (event_date_id)
+(PARTITION p_201001 VALUES LESS THAN (20100131));

@@ -47,5 +47,17 @@ class EventTest extends PHPUnit_Framework_TestCase
 		$files = scandir($CONF->CyclePath.'/'.$cycleId);
 		$this->assertEquals(1, count(files));
 	}
+	
+	public function testProcess()
+	{
+	}
+	
+	public function testTransfer()
+	{
+	}
+	
+	public function testAggregation()
+	{
+	}
 }
 ?>

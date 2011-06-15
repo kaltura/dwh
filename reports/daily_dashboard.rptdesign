@@ -4497,7 +4497,7 @@ day + month / 100</Definition>
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>Playbacks (Millions)</Value>
+          <Value>Playbacks (Millions, 30 days back)</Value>
           <Font>
             <Size>16.0</Size>
             <Bold>true</Bold>
@@ -5687,7 +5687,7 @@ day + month / 100</Definition>
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>Playback Dropoff (Millions)</Value>
+          <Value>Playback Dropoff (Millions, 30 days back, by month)</Value>
           <Font>
             <Size>16.0</Size>
             <Bold>true</Bold>

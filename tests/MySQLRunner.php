@@ -54,7 +54,6 @@ class MySQLRunner
 		
 		mysql_free_result($result);		
 		MySQLRunner::disconnect();
-		
 		return $rows;
 	}	
 }

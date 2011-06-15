@@ -32,5 +32,5 @@ CREATE TABLE kalturadw.dwh_fact_events
 	,KEY Entry_id (Entry_id)
 	,KEY `event_hour_id_event_date_id_partner_id` (event_hour_id, event_date_id, partner_id)
      ) ENGINE=INNODB  DEFAULT CHARSET=utf8  
-     PARTITION BY RANGE (events_date_id)
+     PARTITION BY RANGE (event_date_id)
 	(PARTITION p_20100101 VALUES LESS THAN (20100102));

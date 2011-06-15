@@ -50,9 +50,7 @@ mysqlexec $BISOURCE_ROOT_DIR/bisources_ENTRY_STATUS.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_ENTRY_TYPE.sql 
 mysqlexec $BISOURCE_ROOT_DIR/bisources_FLAVOR_ASSET_STATUS.sql 
 mysqlexec $BISOURCE_ROOT_DIR/bisources_MODERATION_STATUS.sql
-mysqlexec $BISOURCE_ROOT_DIR/bisources_PARTNER_ACTIVITY.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_PARTNER_GROUP_TYPE.sql
-mysqlexec $BISOURCE_ROOT_DIR/bisources_PARTNER_SUB_ACTIVITY.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_UI_CONF_STATUS.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_UI_CONF_TYPE.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_WIDGET_SECURITY_POLICY.sql
@@ -129,10 +127,8 @@ mysqlexec $DW_ROOT_DIR/dw_ENTRY_TYPE.sql
 mysqlexec $DW_ROOT_DIR/dw_event_type.sql
 mysqlexec $DW_ROOT_DIR/dw_gender.sql
 mysqlexec $DW_ROOT_DIR/dw_MODERATION_STATUS.sql
-mysqlexec $DW_ROOT_DIR/dw_PARTNER_ACTIVITY.sql
 mysqlexec $DW_ROOT_DIR/dw_partner_group_type.sql
 mysqlexec $DW_ROOT_DIR/dw_partner_status.sql
-mysqlexec $DW_ROOT_DIR/dw_PARTNER_SUB_ACTIVITY.sql
 mysqlexec $DW_ROOT_DIR/dw_partner_type.sql
 mysqlexec $DW_ROOT_DIR/dw_UI_CONF_STATUS.sql
 mysqlexec $DW_ROOT_DIR/dw_UI_CONF_TYPE.sql
@@ -145,7 +141,6 @@ mysqlexec $DW_ROOT_DIR/ip_ranges.sql
 mysqlexec $DW_ROOT_DIR/kuser.sql
 mysqlexec $DW_ROOT_DIR/locations.sql
 mysqlexec $DW_ROOT_DIR/locations_init.sql
-mysqlexec $DW_ROOT_DIR/Partner_Activities.sql
 mysqlexec $DW_ROOT_DIR/partner.sql
 mysqlexec $DW_ROOT_DIR/time.sql
 mysqlexec $DW_ROOT_DIR/ui_conf.sql
@@ -246,8 +241,7 @@ mysqlexec $DW_ROOT_DIR/ri/ri_mapping_and_defaults_view.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_dim_entries_v.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_dim_partners_v.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_dim_uiconf_v.sql
-mysqlexec $DW_ROOT_DIR/views/dwh_fact_events_v.sql
-mysqlexec $DW_ROOT_DIR/views/dwh_fact_partner_activities_v.sql
+#mysqlexec $DW_ROOT_DIR/views/dwh_fact_events_v.sql
 
 #dw/fms/
 mysqlexec $DW_ROOT_DIR/fms/fms_dim_tables.sql

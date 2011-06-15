@@ -21,6 +21,7 @@ do      case "$o" in
 done
 
 SETUP_ROOT_DIR=$ROOT_DIR/setup
+ETL_ROOT_DIR=$ROOT_DIR/etlsource
 INSTALLATION_LOG=$SETUP_ROOT_DIR/installation_log.log
 
 # Create the DWH
@@ -39,3 +40,5 @@ if [ $ret_val -ne 0 ];then
 fi
 
 $SETUP_ROOT_DIR/copy_pentaho_plugins.sh -d $ROOT_DIR -k $KITCHEN
+
+$SETUP_ROOT_DIR/update.sh -k $KITCHEN -d $ROOT_DIR -u $USER -p $PW -h $HOST -P $PORT -r 1
