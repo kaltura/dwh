@@ -6,12 +6,16 @@ class KettleRunner
 	public static function execute($job, $params=array())
 	{
 		global $CONF;
-		$cmd = $CONF->EtlBasePath.$job;
+		$args = ' /file ' .$CONF->EtlBasePath.$job;		
 		foreach ($params as $k => $v)
 		{
-			$cmd = $cmd.' -param:'.$k.'='.$v;
+			$args=$args.' -param:'.$k.'='.$v;
 		}
-		exec('/usr/local/pentaho/pdi/kitchen.sh /file '.$cmd);
+		
+		$out = array();
+		putenv('KETTLE_HOME='.Configuration::$KETTLE_HOME);
+		exec('export KETTLE_HOME='.Configuration::$KETTLE_HOME.';/usr/local/pentaho/pdi/kitchen.sh'.$args, $out);
+		print_r($out);
 	}
 	
 	public static function getFiles($cycleId)
@@ -20,7 +24,7 @@ class KettleRunner
 		$files = array();
 		foreach ($res as $row)
 		{
-			$files.add($row["id"]);
+			$files.add($row["cycle_id"]);
 		}
 		return $files;
 	}	

@@ -16,19 +16,18 @@ class EventTest extends PHPUnit_Framework_TestCase
 		return '/common/fetch_files.kjb';
 	}
 
-	public function getFTPParmas()
+	public function getFetchParmas()
 	{
 		global $CONF;
 		
-		return array('FetchFTPServer'=>$CONF->EventsFTPServer,
-					 'FetchFTPPort'=>$CONF->EventsFTPPort,
-					 'FetchFTPUser'=>$CONF->EventsFTPUser,
-					 'FetchFTPPassword'=>$CONF->EventsFTPPassword);
+		return array('FetchLogsDir'=>$CONF->EventsLogsDir,
+					 'FetchWildcard'=>$CONF->EventsWildcard,
+					 'FetchMethod'=>$CONF->EventsFetchMethod);
 	}
 	
     public function testGenereate()
     {
-		KettleRunner::execute($this->getGenereateJob(), $this->getFTPParmas());
+		KettleRunner::execute($this->getGenereateJob(), $this->getFetchParmas());
 
 		$cycleId = DWHInspector::getGeneratedCycle();
 		$this->isFileRegistered($cycleId);
