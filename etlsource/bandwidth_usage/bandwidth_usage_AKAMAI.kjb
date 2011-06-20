@@ -206,7 +206,7 @@
         </field>
         <field>
           <variable_name>BandwidthSourceName</variable_name>
-          <variable_value>akamai</variable_value>
+          <variable_value>akamai_vod_http</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>

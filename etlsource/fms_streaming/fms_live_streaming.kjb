@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>fms_cycle_process</name>
+  <name>fms_live_streaming</name>
     <description/>
     <extended_description/>
     <job_version/>
@@ -196,7 +196,7 @@
       <fields>
         <field>
           <variable_name>ProcessID</variable_name>
-          <variable_value>${FMSProcessID}</variable_value>
+          <variable_value>${FMSLiveStreamingProcessID}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
@@ -206,7 +206,7 @@
         </field>
         <field>
           <variable_name>FetchWildcard</variable_name>
-          <variable_value>${FMSFileWildcard}</variable_value>
+          <variable_value>${FMSLiveStreamingFileWildcard}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
@@ -216,32 +216,32 @@
         </field>
         <field>
           <variable_name>FetchMethod</variable_name>
-          <variable_value>${FMSFetchMethod}</variable_value>
+          <variable_value>${FMSLiveStreamingFetchMethod}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
           <variable_name>FetchFTPServer</variable_name>
-          <variable_value>${FMSFtpHost}</variable_value>
+          <variable_value>${FMSLiveStreamingFtpHost}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
           <variable_name>FetchFTPPort</variable_name>
-          <variable_value>${FMSFtpPort}</variable_value>
+          <variable_value>${FMSLiveStreamingFtpPort}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
           <variable_name>FetchFTPUser</variable_name>
-          <variable_value>${FMSFtpUser}</variable_value>
+          <variable_value>${FMSLiveStreamingFtpUser}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
           <variable_name>FetchFTPPassword</variable_name>
-          <variable_value>${FMSFtpPassword}</variable_value>
+          <variable_value>${FMSLiveStreamingFtpPassword}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
           <variable_name>FetchLogsDir</variable_name>
-          <variable_value>${FMSLogsDir}</variable_value>
+          <variable_value>${FMSLiveStreamingLogsDir}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
@@ -253,6 +253,11 @@
           <variable_name>IsArchived</variable_name>
           <variable_value>True</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>FMSYieldMapping</variable_name>
+          <variable_value>${EtlBasePath}&#47;fms_streaming&#47;process&#47;yield_fms_live_streaming_data.ktr</variable_value>
+          <variable_type>JVM</variable_type>
         </field>
       </fields>
       <parallel>N</parallel>
