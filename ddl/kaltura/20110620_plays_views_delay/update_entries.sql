@@ -21,7 +21,7 @@ BEGIN
     SET SESSION sql_log_bin = 1;
     REPEAT
     FETCH updated_entries INTO entry_id, new_plays, new_views;
-    SELECT SLEEP(IF(@counter:=@counter+1%@iterations=0,@sleep_duration,0));
+    SELECT SLEEP(IF((@counter:=@counter+1)%@iterations=0,@sleep_duration,0));
     UPDATE entry SET entry.plays = new_plays, entry.views = new_views WHERE entry.id = entry_id;
     UNTIL done END REPEAT;
     SET SESSION sql_log_bin = 0;
