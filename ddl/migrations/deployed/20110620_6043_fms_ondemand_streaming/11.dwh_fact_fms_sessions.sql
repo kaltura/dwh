@@ -13,8 +13,7 @@ CREATE TABLE `dwh_fact_fms_sessions_new` (
   `session_client_location_id` INT(10) UNSIGNED,
   `session_partner_id` INT(10) UNSIGNED DEFAULT NULL,
   `total_bytes` BIGINT(20) UNSIGNED DEFAULT NULL,
-  KEY `session_partner_id` (`session_partner_id`),
-  UNIQUE KEY `session_id` (`session_id`)
+  KEY `session_partner_id` (`session_partner_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=latin1
 /*!50100 PARTITION BY RANGE (session_date_id)
 (PARTITION p_20080531 VALUES LESS THAN (20080601) ENGINE = INNODB,
