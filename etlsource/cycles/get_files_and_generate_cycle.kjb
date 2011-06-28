@@ -11,6 +11,61 @@
   <modified_user>-</modified_user>
   <modified_date>2010&#47;09&#47;05 16:25:30.282</modified_date>
     <parameters>
+        <parameter>
+            <name>FetchFTPPassword</name>
+            <default_value></default_value>
+            <description></description>
+        </parameter>
+        <parameter>
+            <name>FetchFTPPort</name>
+            <default_value></default_value>
+            <description></description>
+        </parameter>
+        <parameter>
+            <name>FetchFTPServer</name>
+            <default_value></default_value>
+            <description></description>
+        </parameter>
+        <parameter>
+            <name>FetchFTPUser</name>
+            <default_value></default_value>
+            <description></description>
+        </parameter>
+        <parameter>
+            <name>FetchJob</name>
+            <default_value></default_value>
+            <description></description>
+        </parameter>
+        <parameter>
+            <name>FetchLogsDir</name>
+            <default_value></default_value>
+            <description></description>
+        </parameter>
+        <parameter>
+            <name>FetchMethod</name>
+            <default_value></default_value>
+            <description></description>
+        </parameter>
+        <parameter>
+            <name>FetchWildcard</name>
+            <default_value></default_value>
+            <description></description>
+        </parameter>
+        <parameter>
+            <name>IsArchived</name>
+            <default_value></default_value>
+            <description></description>
+        </parameter>
+        <parameter>
+            <name>ProcessID</name>
+            <default_value></default_value>
+            <description></description>
+        </parameter>
+        <parameter>
+            <name>TempDestination</name>
+            <default_value></default_value>
+            <description></description>
+        </parameter>
     </parameters>
   <connection>
     <name>Kaltura</name>

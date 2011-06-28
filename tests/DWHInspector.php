@@ -24,7 +24,7 @@ class DWHInspector
 		$files = array();
 		foreach ($res as $row)
 		{
-			$files.add($row["file_id"]);
+			$files[]=$row["file_id"];
 		}
 		return $files;
 	}	

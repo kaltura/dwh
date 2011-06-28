@@ -49,7 +49,7 @@ class MySQLRunner
 		
 		while ($row = mysql_fetch_assoc ($result)) 
 		{
-			$rows.add($row);
+			$rows[]=$row;
 		}		
 		
 		mysql_free_result($result);		
