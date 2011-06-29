@@ -9,7 +9,7 @@ MACHINE=`hostname`
 for mycheck in `ls $MONDIR | grep ^find`
     do
       ##echo "$mycheck running :"
-      outcheck=`mysql -uetl -petl < $MONDIR/$mycheck`
+      outcheck=`mysql -uetl -petl -hpa-dwh1 < $MONDIR/$mycheck`
       if [ "X$outcheck" != "X" ]
          then
             echo "Error in $mycheck query : "  >> $OUTFILE
