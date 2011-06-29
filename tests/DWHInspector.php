@@ -1,15 +1,16 @@
 <?php
+require_once 'Configuration.php';
 require_once 'MySQLRunner.php';
 
 class DWHInspector
 {
-	public static function getGeneratedCycle()
+	public static function getCycle($status)
 	{
-		$res = MySQLRunner::execute("SELECT cycle_id FROM kalturadw_ds.cycles WHERE status = 'GENERATED'");
+		$res = MySQLRunner::execute("SELECT cycle_id FROM kalturadw_ds.cycles WHERE status = '".$status."'");
 		
 		if(1!=count($res))
 		{
-			die("No cycle created!");
+			die("No cycle found!");
 		}
 		
 		foreach ($res as $row)
@@ -29,10 +30,23 @@ class DWHInspector
 		return $files;
 	}	
 	
+	public static function countRows($table_name, $fileId, $extra='')
+	{
+		$res = MySQLRunner::execute("SELECT count(*) amount FROM ".$table_name." WHERE file_id = ? ".$extra,array(0=>$fileId));
+		foreach ($res as $row)
+		{
+			return $row["amount"];
+		}
+	}
+	
 	public static function cleanDB()
 	{
-		// drop DB
-		// create DB
+		global $CONF;
+		
+		$out = array();
+		putenv('KETTLE_HOME='.Configuration::$KETTLE_HOME);
+		exec('sh '.$CONF->RuntimePath.'/setup/dwh_drop_databases.sh -d '.$CONF->RuntimePath.' -h '.$CONF->DbHostName);
+		exec('export KETTLE_HOME='.Configuration::$KETTLE_HOME.';sh '.$CONF->RuntimePath.'/setup/dwh_setup.sh -d '.$CONF->RuntimePath.' -h '.$CONF->DbHostName);
 	}
 }
 ?>
