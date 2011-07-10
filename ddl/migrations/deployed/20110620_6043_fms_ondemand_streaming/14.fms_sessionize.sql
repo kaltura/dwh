@@ -55,7 +55,7 @@ SELECT session_id, MAX(event_time), MAX(event_date_id), MAX(client_ip), MAX(clie
  INNER JOIN kalturadw.dwh_dim_fms_event_type t ON e.event_type_id = t.event_type_id
  INNER JOIN cycles c ON e.cycle_id = c.cycle_id
  LEFT OUTER JOIN kalturadw.dwh_dim_fms_bandwidth_source fbs ON (e.fms_app_id = fbs.fms_app_id AND c.process_id = fbs.process_id)
-  WHERE e.cycle_id = 211
+  WHERE e.cycle_id = partition_id
   GROUP BY session_id
  HAVING MAX(bandwidth_source_id) IS NOT NULL;
  
@@ -103,7 +103,16 @@ SELECT session_id, MAX(event_time), MAX(event_date_id), MAX(client_ip), MAX(clie
   
   INSERT INTO kalturadw.dwh_fact_fms_sessions (session_id,session_time,session_date_id,session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id,session_partner_id,bandwidth_source_id,total_bytes)
   SELECT session_id,session_time,session_date_id,session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id,session_partner_id,bandwidth_source_id,total_bytes
-  FROM ds_temp_fms_sessions;
+  FROM ds_temp_fms_sessions
+  ON DUPLICATE KEY UPDATE
+	total_bytes=VALUES(total_bytes),
+	session_partner_id=VALUES(session_partner_id),
+	session_time=VALUES(session_time),
+	session_client_ip=VALUES(session_client_ip),
+	session_client_ip_number=VALUES(session_client_ip_number),
+	session_client_country_id=VALUES(session_client_country_id),
+	session_client_location_id=VALUES(session_client_location_id),
+	bandwidth_source_id=VALUES(bandwidth_source_id);
 
 END$$
 

@@ -13,7 +13,8 @@ CREATE TABLE `dwh_fact_fms_sessions_new` (
   `session_client_location_id` INT(10) UNSIGNED,
   `session_partner_id` INT(10) UNSIGNED DEFAULT NULL,
   `total_bytes` BIGINT(20) UNSIGNED DEFAULT NULL,
-  KEY `session_partner_id` (`session_partner_id`)
+  KEY `session_partner_id` (`session_partner_id`),
+  UNIQUE KEY `session_id` (`session_id`,`session_date_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=latin1
 /*!50100 PARTITION BY RANGE (session_date_id)
 (PARTITION p_20080531 VALUES LESS THAN (20080601) ENGINE = INNODB,
@@ -51,7 +52,7 @@ PARTITION p_20101231 VALUES LESS THAN (20110101) ENGINE = INNODB ) */;
 
 call kalturadw.add_daily_partition_for_table('dwh_fact_fms_sessions_new');
 
-INSERT INTO kalturadw.dwh_fact_fms_sessions_new (session_id, session_time, session_date_id, bandwidth_source_id, session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id, session_partner_id, total_bytes)
+INSERT IGNORE INTO kalturadw.dwh_fact_fms_sessions_new (session_id, session_time, session_date_id, bandwidth_source_id, session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id, session_partner_id, total_bytes)
  select session_id, session_time, session_date_id, 5, session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id, session_partner_id, total_bytes from dwh_fact_fms_sessions;
 
 DROP TABLE kalturadw.dwh_fact_fms_sessions;
