@@ -13,6 +13,7 @@ class EventTest extends PHPUnit_Framework_TestCase
 		DWHInspector::cleanDB();
 		self::rrmdir($CONF->CyclePath.'/generate/events/');
 		self::rrmdir($CONF->CyclePath.'/process/');
+		self::rrmdir($CONF->CyclePath.'/originals/');
 	}
 
 	private static function rrmdir($dir) 
@@ -92,6 +93,8 @@ class EventTest extends PHPUnit_Framework_TestCase
 	
 	public function testProcess()
 	{
+		global $CONF;
+		
 		$cycleId = DWHInspector::getCycle('GENERATED');
 		
 		KettleRunner::execute($this->getProcessJob(), $this->getProcessParmas());
@@ -99,17 +102,20 @@ class EventTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($cycleId,DWHInspector::getCycle('PROCESSED'));
 		$this->isDirExists($cycleId);
 		
+		$files = DWHInspector::getFiles($cycleId);
 		foreach($files as $fileId)
 		{
+			$filename =  $CONF->CyclePath.'/process/'.$cycleId.'/'.DWHInspector::getFileName($fileId);
+		
 			// compare rows in ds_events to rows in file
-			$this->assertEquals(DWHInspector::countRows('kalturadw_ds.ds_events',$fileId),$this->countRows(DWHInspector::getFileName($fileId)));
+			$this->assertEquals(DWHInspector::countRows('kalturadw_ds.ds_events',$fileId),$this->countRows($filename));
 			
 			// compare plays in ds_events to plays in file
-			$this->assertEquals(DWHInspector::countRows('kalturadw_ds.ds_events',$fileId,' and event_type_id=2'),$this->countPlays(DWHInspector::getFileName($fileId)));
+			$this->assertEquals(DWHInspector::countRows('kalturadw_ds.ds_events',$fileId,' and event_type_id=3'),$this->countPlays($filename));
 			
 			// compare per entry
-			$entries = $this->countPerEntry(DWHInspector::getFileName($fileId));		
-			$this->assertEquals(count($entires), $this->countDistinct('kalturadw_ds.ds_events',$fileId,'entry_id'));
+			$entries = $this->countPerEntry($filename);		
+			$this->assertEquals(count($entries), $this->countDistinct('kalturadw_ds.ds_events',$fileId,'entry_id'));
 			
 			foreach($entries as $entry=>$val)
 			{
@@ -118,7 +124,7 @@ class EventTest extends PHPUnit_Framework_TestCase
 			}						
 			
 			// compare per partner
-			$partners = $this->countPerPartner(DWHInspector::getFileName($fileId));		
+			$partners = $this->countPerPartner($filename);		
 			$this->assertEquals(count($partners), $this->countDistinct('kalturadw_ds.ds_events',$fileId,'partner_id'));
 			
 			foreach($partners as $partner=>$val)
@@ -154,7 +160,7 @@ class EventTest extends PHPUnit_Framework_TestCase
 		$counter = 0;
 		foreach($lines as $line)
 		{
-			if(strpos($line,'collectStats')>0)
+			if ((strpos($line,'service=stats')!==false && strpos($line,'action=collect')!==false) || (strpos($line,'collectstats')!==false))
 			{
 				$counter++;
 			}
@@ -168,7 +174,7 @@ class EventTest extends PHPUnit_Framework_TestCase
 		$counter = 0;
 		foreach($lines as $line)
 		{
-			if(strpos($line,'eventType=2')>0)
+			if(strpos($line,'eventType=3')!==false)
 			{
 				$counter++;
 			}
@@ -176,54 +182,42 @@ class EventTest extends PHPUnit_Framework_TestCase
 		return $counter;
 	}
 	
-	private function countPerEntry($file)
+	private function countPerRegex($file, $regex)
 	{
 		$lines = file($file);
 		$entries = array();
 		foreach($lines as $line)
 		{
-			$start = strpos($line,'entryId=');
-			if($start>0)
+			if(preg_match($regex, $line, $matches))
 			{
-				$entry_id = substr($line,$start,strpos($line,'&',$start)-$start);
+				$entry = $matches[1];
 				
-				if(!contains($entries,$entry_id))
+				if(!in_array($entry,$entries))
 				{
-					$entries[$entry_id]=0;
+					$entries[$entry]=0;
 				}
-				$entries[$entry_id]++;
+				$entries[$entry]++;
 			}
 		}
 		return $entries;
 	}
+		
+	private function countPerEntry($file)
+	{
+		return countPerRegex($file, '/^.*entryId=([^& "]*).*/');
+	}
 	
 	private function countPerPartner($file)
 	{
-		$lines = file($file);
-		$partners = array();
-		foreach($lines as $line)
-		{
-			$start = strpos($line,'partnerId=');
-			if($start>0)
-			{
-				$partner_id = substr($line,$start,strpos($line,'&',$start)-$start);
-				
-				if(!contains($partners,$partner_id))
-				{
-					$partners[$partner_id]=0;
-				}
-				$partners[$partner_id]++;
-			}
-		}
-		return $partners;
+		return countPerRegex($file, '/^.*partnerId=([^& "]*).*/');
 	}
-		
+	
 	private function countDistinct($table_name,$fileId,$select)
 	{
 		$res = MySQLRunner::execute("SELECT count(distinct ".$select.") amount FROM ".$table_name." WHERE file_id = ? ",array(0=>$fileId));
 		foreach($res as $row)
 		{
-			return $row["amount"];
+			return (int) $row["amount"];
 		}
 	}
 	

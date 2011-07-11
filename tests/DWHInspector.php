@@ -6,7 +6,7 @@ class DWHInspector
 {
 	public static function getCycle($status)
 	{
-		$res = MySQLRunner::execute("SELECT cycle_id FROM kalturadw_ds.cycles WHERE status = '".$status."'");
+		$res = MySQLRunner::execute("SELECT cycle_id FROM kalturadw_ds.cycles WHERE status = '?'",array(0=>$status));
 		
 		if(1!=count($res))
 		{
@@ -29,6 +29,16 @@ class DWHInspector
 		}
 		return $files;
 	}	
+	
+	public static function getFileName($fileId)
+	{
+		$res = MySQLRunner::execute("SELECT file_name FROM kalturadw_ds.files WHERE file_id = ?",array(0=>$fileId));
+		$files = array();
+		foreach ($res as $row)
+		{
+			return $row["file_name"];
+		}
+	}
 	
 	public static function countRows($table_name, $fileId, $extra='')
 	{
