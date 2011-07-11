@@ -6,8 +6,8 @@ HOST=localhost
 PORT=3306
 KITCHEN=/usr/local/pentaho/pdi
 REGISTER_ONLY=0
-
-while getopts "u:p:d:h:P:s:k:r:" o
+SVN=1
+while getopts "u:p:d:h:P:s:k:r:v:" o
 do	case "$o" in
 	u)	USER="$OPTARG";;
 	p)	PW="$OPTARG";;
@@ -17,7 +17,8 @@ do	case "$o" in
 	s)  SITE_SPECIFIC_DIR="$OPTARG";;
 	k)	KITCHEN="$OPTARG";;
 	r)  REGISTER_ONLY="$OPTARG";;
-	[?])	echo >&2 "Usage: $0 [-u username] [-p password] [-k  pdi-path] [-d dwh-path] [-h host-name] [-P port] [-s site-specific-path] [-k kitchen-path] [-r 0|1 (register files but skip run)]"
+	v)  SVN="$OPTARG";;
+	[?])	echo >&2 "Usage: $0 [-u username] [-p password] [-k  pdi-path] [-d dwh-path] [-h host-name] [-P port] [-s site-specific-path] [-k kitchen-path] [-r 0|1 (register files but skip run)] [-v 0|1 (update from svn)]"
 		exit 1;;
 	esac
 done
@@ -58,7 +59,9 @@ function update_all {
 }
 
 #svn up
-svn up $ROOT_DIR
+if [ $REGISTER_ONLY -eq 1 ]; then
+	svn up $ROOT_DIR
+fi
 
 if [ $SITE_SPECIFIC_DIR ]; then
 	#svn up site_specific
