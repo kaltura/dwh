@@ -38,28 +38,22 @@ class EventTest extends PHPUnit_Framework_TestCase
 		} 
 		reset($objects); 
 	}
-	
-	public function getGenereateJob()
-	{
-		return '/cycles/get_files_and_generate_cycle.kjb';
-	}
-	
-	public function getProcessJob()
-	{
-		return '/cycles/process_cycle.kjb';
-	}
-	
+		
     public function testGenereate()
     {
-		KettleRunner::execute($this->getGenereateJob(), $this->getFetchParmas());
+		KettleRunner::execute($this->getGenereateJob(), $this->getFetchParams());
 
 		$cycleId = DWHInspector::getCycle('GENERATED');
 		$this->isFileRegistered($cycleId);
 		$this->isDirExists($cycleId);
     }
 	
+	private function getGenereateJob()
+	{
+		return '/cycles/get_files_and_generate_cycle.kjb';
+	}
 	
-	private function getFetchParmas()
+	private function getFetchParams()
 	{
 		global $CONF;
 		
@@ -83,12 +77,19 @@ class EventTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $fileCount);
 	}
 	
-	private function isDirExists($cycleId)
+	private function isDirExists($cycleId, $exists = true, $path = '/process/')
 	{
 		global $CONF;
-		
-		$files = scandir($CONF->CyclePath.'/process/'.$cycleId);
-		$this->assertEquals(3, count($files)); // ., .. and file
+				
+		$dir = $CONF->CyclePath.$path.$cycleId;
+		if($exists)
+		{
+			$files = scandir($dir);
+			$this->assertEquals(3, count($files)); // ., .. and file
+		} else
+		{
+			$this->assertFalse(is_dir($dir));
+		}
 	}
 	
 	public function testProcess()
@@ -97,7 +98,7 @@ class EventTest extends PHPUnit_Framework_TestCase
 		
 		$cycleId = DWHInspector::getCycle('GENERATED');
 		
-		KettleRunner::execute($this->getProcessJob(), $this->getProcessParmas());
+		KettleRunner::execute($this->getProcessJob(), $this->getProcessParams());
 
 		$this->assertEquals($cycleId,DWHInspector::getCycle('PROCESSED'));
 		$this->isDirExists($cycleId);
@@ -138,20 +139,17 @@ class EventTest extends PHPUnit_Framework_TestCase
 		}
 	}
 	
-	private function getProcessParmas()
+	private function getProcessJob()
+	{
+		return '/cycles/process_cycle.kjb';
+	}
+	
+	private function getProcessParams()
 	{
 		global $CONF;
 		
 		return array('ProcessID'=>$CONF->EventsProcessID,
 					 'ProcessJob'=>$CONF->EtlBasePath.'/events/process/process_events.kjb');
-	}
-	
-	private function isCycleDirRemoved($cycleId)
-	{
-		global $CONF;
-		
-		$files = scandir($CONF->CyclePath.'/process/'.$cycleId);
-		$this->assertEquals(0, count($files));
 	}
 	
 	private function countRows($file)
@@ -160,6 +158,7 @@ class EventTest extends PHPUnit_Framework_TestCase
 		$counter = 0;
 		foreach($lines as $line)
 		{
+			$line = urldecode($line);
 			if ((strpos($line,'service=stats')!==false && strpos($line,'action=collect')!==false) || (strpos($line,'collectstats')!==false))
 			{
 				$counter++;
@@ -174,6 +173,7 @@ class EventTest extends PHPUnit_Framework_TestCase
 		$counter = 0;
 		foreach($lines as $line)
 		{
+			$line = urldecode($line);
 			if(strpos($line,'eventType=3')!==false)
 			{
 				$counter++;
@@ -188,11 +188,12 @@ class EventTest extends PHPUnit_Framework_TestCase
 		$entries = array();
 		foreach($lines as $line)
 		{
+			$line = urldecode($line);
 			if(preg_match($regex, $line, $matches))
 			{
 				$entry = $matches[1];
 				
-				if(!in_array($entry,$entries))
+				if(!array_key_exists($entry,$entries))
 				{
 					$entries[$entry]=0;
 				}
@@ -204,12 +205,12 @@ class EventTest extends PHPUnit_Framework_TestCase
 		
 	private function countPerEntry($file)
 	{
-		return countPerRegex($file, '/^.*entryId=([^& "]*).*/');
+		return $this->countPerRegex($file, '/^.*entryId=([^& "]*).*/');
 	}
 	
 	private function countPerPartner($file)
 	{
-		return countPerRegex($file, '/^.*partnerId=([^& "]*).*/');
+		return $this->countPerRegex($file, '/^.*partnerId=([^& "]*).*/');
 	}
 	
 	private function countDistinct($table_name,$fileId,$select)
@@ -223,6 +224,49 @@ class EventTest extends PHPUnit_Framework_TestCase
 	
 	public function testTransfer()
 	{
+		$cycleId = DWHInspector::getCycle('PROCESSED');
+		
+		$ds_events_lines = array();
+		$files = DWHInspector::getFiles($cycleId);
+		foreach($files as $fileId)
+		{
+			$ds_events_lines[$fileId] = DWHInspector::countRows('kalturadw_ds.ds_events',$fileId);
+		}
+		
+		DWHInspector::setAggregations(1);
+		
+		KettleRunner::execute($this->getTransferJob(), $this->getTransferParams());
+		$this->assertEquals($cycleId,DWHInspector::getCycle('DONE'));
+		$this->isDirExists($cycleId, false);
+		$this->isDirExists($cycleId, true, '/originals/');		
+		
+		$files = DWHInspector::getFiles($cycleId);
+		foreach($files as $fileId)
+		{
+			// compare rows in ds_events and dwh_fact_events
+			$this->assertEquals($ds_events_lines[$fileId], DWHInspector::countRows('kalturadw.dwh_fact_events',$fileId));
+			
+			// make sure ds_events was emptied
+			$this->assertEquals(0,DWHInspector::countRows('kalturadw_ds.ds_events',$fileId));		
+		}
+		
+		// make sure aggregations are reset
+		foreach(DWHInspector::getDates($cycleId) as $dateId)
+		{
+			$this->assertGreaterThan(0,count(DWHInspector::getAggregations($dateId)));
+		}
+	}
+
+	private function getTransferJob()
+	{
+		return '/cycles/transfer_cycle.kjb';
+	}
+
+	private function getTransferParams()
+	{
+		global $CONF;
+		
+		return array('ProcessID'=>$CONF->EventsProcessID);
 	}
 	
 	public function testAggregation()

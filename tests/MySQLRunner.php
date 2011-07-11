@@ -24,7 +24,7 @@ class MySQLRunner
 		self::$link=null;
 	}
 	
-	public static function execute($sql, $params=array())
+	public static function execute($sql, $params=array(), $returnResults=true)
 	{
 		MySQLRunner::connect();
 		
@@ -41,7 +41,7 @@ class MySQLRunner
 		}
 		
 		$rows = array();
-		if (mysql_num_rows($result) == 0) 
+		if (!$returnResults || mysql_num_rows($result) == 0) 
 		{
 			MySQLRunner::disconnect();
 			return $rows;

@@ -49,6 +49,35 @@ class DWHInspector
 		}
 	}
 	
+	public static function setAggregations($isCalculated)
+	{
+		MySQLRunner::execute("UPDATE kalturadw.aggr_managment SET is_calculated = ?",array(0=>$isCalculated), false);
+	}
+	
+	public static function getAggregations($dateId)
+	{
+		MySQLRunner::execute("SELECT DISTINCT aggr_name, is_calculated FROM kalturadw.aggr_managment WHERE aggr_date_int = ?",array(0=>$dateId));
+		
+		$res = array();
+		foreach ($res as $row)
+		{
+			$res[$row["aggr_name"]]=$row["is_calculated"];
+		}
+		return $res;
+	}
+	
+	public static function getDates($cycleId)
+	{
+		MySQLRunner::execute("SELECT DISTINCT date_id FROM kalturadw.dwh_fact_events WHERE cycle_id = ?",array(0=>$cycleId));
+		
+		$res = array();
+		foreach ($res as $row)
+		{
+			$res[]=$row["date_id"];
+		}
+		return $res;
+	}
+	
 	public static function cleanDB()
 	{
 		global $CONF;
