@@ -264,7 +264,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>240</xloc>
-      <yloc>99</yloc>
+      <yloc>100</yloc>
       </entry>
     <entry>
       <name>generate_cycle</name>
@@ -376,11 +376,14 @@
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
+            <parameter>            <name>ProcessID</name>
+            <stream_name/>
+            <value>${ProcessID}</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>567</xloc>
+      <xloc>560</xloc>
       <yloc>100</yloc>
       </entry>
   </entries>
