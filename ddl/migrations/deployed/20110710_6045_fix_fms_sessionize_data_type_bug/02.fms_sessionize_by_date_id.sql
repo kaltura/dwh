@@ -57,7 +57,7 @@ BEGIN
 	 
 	INSERT INTO ds_temp_fms_sessions (session_id,session_time,session_date_id, session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id, session_partner_id, bandwidth_source_id, total_bytes)
 		SELECT agg_session_id,agg_session_time,agg_session_date_id,agg_client_ip, agg_client_ip_number, agg_client_country_id, agg_client_location_id, agg_partner_id,agg_bandwidth_source_id,
-		GREATEST(dis_sc_bytes - con_sc_bytes + dis_cs_bytes -con_cs_bytes, 0)
+		GREATEST(agg_dis_sc_bytes - agg_con_sc_bytes + agg_dis_cs_bytes -agg_con_cs_bytes, 0)
 		FROM ds_temp_fms_session_aggr
 		WHERE agg_partner_id IS NOT NULL AND agg_partner_id NOT IN (100  , -1  , -2  , 0 , 99 ) AND agg_dis_cs_bytes >0 AND agg_con_cs_bytes > 0;
 	
@@ -75,4 +75,4 @@ BEGIN
 		bandwidth_source_id=VALUES(bandwidth_source_id);
 END$$
 
-DELIMITER ;;
+DELIMITER ;

@@ -61,7 +61,7 @@ SELECT session_id, MAX(event_time), MAX(event_date_id), MAX(client_ip), MAX(clie
  
   INSERT INTO ds_temp_fms_sessions (session_id,session_time,session_date_id, session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id, session_partner_id, bandwidth_source_id, total_bytes)
   SELECT agg_session_id,agg_session_time,agg_session_date_id,agg_client_ip, agg_client_ip_number, agg_client_country_id, agg_client_location_id, agg_partner_id,agg_bandwidth_source_id,
-  GREATEST(dis_sc_bytes - con_sc_bytes + dis_cs_bytes -con_cs_bytes, 0)
+  GREATEST(agg_dis_sc_bytes - agg_con_sc_bytes + agg_dis_cs_bytes - agg_con_cs_bytes, 0)
   FROM ds_temp_fms_session_aggr
   WHERE agg_partner_id IS NOT NULL AND agg_partner_id NOT IN (100  , -1  , -2  , 0 , 99 ) AND agg_dis_cs_bytes >0 AND agg_con_cs_bytes > 0;
   
@@ -88,9 +88,9 @@ SELECT session_id, MAX(event_time), MAX(event_date_id), MAX(client_ip), MAX(clie
   
   INSERT INTO ds_temp_fms_sessions (session_id,session_time,session_date_id,session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id,session_partner_id,bandwidth_source_id,total_bytes)
   SELECT session_id,session_time,session_date_id,session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id,partner_id,bandwidth_source_id,
-  CAST(CAST(dis_sc_bytes AS SIGNED)-CAST(con_sc_bytes AS SIGNED)+CAST(dis_cs_bytes AS SIGNED)-CAST(con_cs_bytes AS SIGNED) AS UNSIGNED)
+  GREATEST(dis_sc_bytes - con_sc_bytes + dis_cs_bytes -con_cs_bytes, 0)
   FROM fms_incomplete_sessions
-  WHERE partner_id IS NOT NULL AND agg_partner_id NOT IN (100  , -1  , -2  , 0 , 99 ) AND dis_cs_bytes >0 AND con_cs_bytes > 0;
+  WHERE partner_id IS NOT NULL AND partner_id NOT IN (100  , -1  , -2  , 0 , 99 ) AND dis_cs_bytes >0 AND con_cs_bytes > 0;
     
   INSERT INTO fms_stale_sessions (partner_id, bandwidth_source_id, session_id, session_time,session_date_id,session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id,con_cs_bytes,con_sc_bytes,dis_cs_bytes,dis_sc_bytes,last_update_time,purge_time)
   SELECT partner_id,bandwidth_source_id, session_id,session_time,session_date_id,session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id,con_cs_bytes,con_sc_bytes,dis_cs_bytes,dis_sc_bytes,updated_time,NOW()
@@ -113,7 +113,6 @@ SELECT session_id, MAX(event_time), MAX(event_date_id), MAX(client_ip), MAX(clie
 	session_client_country_id=VALUES(session_client_country_id),
 	session_client_location_id=VALUES(session_client_location_id),
 	bandwidth_source_id=VALUES(bandwidth_source_id);
-
 END$$
 
 DELIMITER ;
