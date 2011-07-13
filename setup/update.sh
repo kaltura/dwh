@@ -59,7 +59,7 @@ function update_all {
 }
 
 #svn up
-if [ $REGISTER_ONLY -eq 1 ]; then
+if [ $SVN -eq 1 ]; then
 	svn up $ROOT_DIR
 fi
 

@@ -159,12 +159,17 @@ class EventTest extends PHPUnit_Framework_TestCase
 		foreach($lines as $line)
 		{
 			$line = urldecode($line);
-			if ((strpos($line,'service=stats')!==false && strpos($line,'action=collect')!==false) || (strpos($line,'collectstats')!==false))
+			if ($this->validLine($line))
 			{
 				$counter++;
 			}
 		}
 		return $counter;
+	}
+	
+	private function validLine($line)
+	{
+		return (strpos($line,'service=stats')!==false && strpos($line,'action=collect')!==false) || (strpos($line,'collectstats')!==false);
 	}
 	
 	private function countPlays($file)
@@ -174,7 +179,7 @@ class EventTest extends PHPUnit_Framework_TestCase
 		foreach($lines as $line)
 		{
 			$line = urldecode($line);
-			if(strpos($line,'eventType=3')!==false)
+			if($this->validLine($line) && strpos($line,'eventType=3')!==false)
 			{
 				$counter++;
 			}
@@ -189,7 +194,7 @@ class EventTest extends PHPUnit_Framework_TestCase
 		foreach($lines as $line)
 		{
 			$line = urldecode($line);
-			if(preg_match($regex, $line, $matches))
+			if($this->validLine($line) && preg_match($regex, $line, $matches))
 			{
 				$entry = $matches[1];
 				
@@ -253,7 +258,7 @@ class EventTest extends PHPUnit_Framework_TestCase
 		// make sure aggregations are reset
 		foreach(DWHInspector::getDates($cycleId) as $dateId)
 		{
-			$this->assertGreaterThan(0,count(DWHInspector::getAggregations($dateId)));
+			$this->assertEquals(0,count(DWHInspector::getAggregations($dateId)));
 		}
 	}
 

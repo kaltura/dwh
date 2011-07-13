@@ -68,12 +68,12 @@ class DWHInspector
 	
 	public static function getDates($cycleId)
 	{
-		MySQLRunner::execute("SELECT DISTINCT date_id FROM kalturadw.dwh_fact_events WHERE cycle_id = ?",array(0=>$cycleId));
+		MySQLRunner::execute("SELECT DISTINCT event_date_id FROM kalturadw.dwh_fact_events WHERE file_id in (SELECT file_id FROM kalturadw_ds.files WHERE cycle_id = ?)",array(0=>$cycleId));
 		
 		$res = array();
 		foreach ($res as $row)
 		{
-			$res[]=$row["date_id"];
+			$res[]=$row["event_date_id"];
 		}
 		return $res;
 	}
