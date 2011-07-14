@@ -1779,12 +1779,6 @@ function is_not_numeric(s) {
         <length>20</length>
         <precision>-1</precision>
         <replace>N</replace>
-      </field>      <field>        <name>partnerID</name>
-        <rename>partnerID</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1344</xloc>
