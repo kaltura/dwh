@@ -300,7 +300,13 @@ class EventTest extends PHPUnit_Framework_TestCase
 		
 		foreach($partners as $partner=>$plays)
 		{
-			$this->assertEquals($plays,$entryPartners[$partner]);
+			if(!array_key_exists($partner,$entryPartners))
+			{
+				$this->assertEquals(0, $plays);
+			} else
+			{
+				$this->assertEquals($plays,$entryPartners[$partner]);
+			}
 		}
 	}
 	
@@ -311,7 +317,13 @@ class EventTest extends PHPUnit_Framework_TestCase
 		
 		foreach($events as $partner=>$plays)
 		{
-			$this->assertEquals($plays,$entryPartners[$partner]);
+			if(!array_key_exists($partner,$entryPartners))
+			{
+				$this->assertEquals(0, $plays);
+			} else
+			{
+				$this->assertEquals($plays,$entryPartners[$partner]);
+			}
 		}
 	}
 	
