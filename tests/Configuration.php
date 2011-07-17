@@ -38,7 +38,7 @@ class Configuration
 
   function parse()
   {
-	$KETTLE_HOME = getenv('KETTLE_HOME');
+	self::$KETTLE_HOME = getenv('KETTLE_HOME');
     $fh = fopen( self::$KETTLE_HOME.$this->configFile, 'r' );
     while( $l = fgets( $fh ) )
     {
