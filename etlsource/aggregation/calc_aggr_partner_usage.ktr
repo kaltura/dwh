@@ -293,7 +293,7 @@ ORDER BY aggr_day</sql>
     <connection>KalturaDW</connection>
     <execute_each_row>Y</execute_each_row>
     <replace_variables>N</replace_variables>
-    <sql>call kalturadw.calc_aggr_day_partner(date(&apos;?&apos;));</sql>
+    <sql>call kalturadw.recalc_aggr_day_partner(date(&apos;?&apos;));</sql>
     <insert_field/>
     <update_field/>
     <delete_field/>
