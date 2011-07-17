@@ -277,7 +277,7 @@ class EventTest extends PHPUnit_Framework_TestCase
 	public function testAggregation()
 	{
 		// fake entry media type for aggregations
-		DWHInsepector::setEntryMediaType(1);
+		DWHInspector::setEntryMediaType(1);
 		
 		KettleRunner::execute($this->getAggregationJob());
 		
