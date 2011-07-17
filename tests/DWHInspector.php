@@ -56,10 +56,10 @@ class DWHInspector
 	
 	public static function getAggregations($dateId)
 	{
-		MySQLRunner::execute("SELECT DISTINCT aggr_name, is_calculated FROM kalturadw.aggr_managment WHERE aggr_date_int = ?",array(0=>$dateId));
+		$rows = MySQLRunner::execute("SELECT DISTINCT aggr_name, is_calculated FROM kalturadw.aggr_managment WHERE aggr_day_int = ? AND is_calculated = ?",array(0=>$dateId,1=>0));
 		
 		$res = array();
-		foreach ($res as $row)
+		foreach ($rows as $row)
 		{
 			$res[$row["aggr_name"]]=$row["is_calculated"];
 		}
@@ -68,10 +68,10 @@ class DWHInspector
 	
 	public static function getDates($cycleId)
 	{
-		MySQLRunner::execute("SELECT DISTINCT event_date_id FROM kalturadw.dwh_fact_events WHERE file_id in (SELECT file_id FROM kalturadw_ds.files WHERE cycle_id = ?)",array(0=>$cycleId));
+		$rows = MySQLRunner::execute("SELECT DISTINCT event_date_id FROM kalturadw.dwh_fact_events WHERE file_id in (SELECT file_id FROM kalturadw_ds.files WHERE cycle_id = ?)",array(0=>$cycleId));
 		
 		$res = array();
-		foreach ($res as $row)
+		foreach ($rows as $row)
 		{
 			$res[]=$row["event_date_id"];
 		}
@@ -86,6 +86,18 @@ class DWHInspector
 		putenv('KETTLE_HOME='.Configuration::$KETTLE_HOME);
 		exec('sh '.$CONF->RuntimePath.'/setup/dwh_drop_databases.sh -d '.$CONF->RuntimePath.' -h '.$CONF->DbHostName);
 		exec('export KETTLE_HOME='.Configuration::$KETTLE_HOME.';sh '.$CONF->RuntimePath.'/setup/dwh_setup.sh -d '.$CONF->RuntimePath.' -h '.$CONF->DbHostName);
+	}
+	
+	public static function groupBy($field,$aggrFiled, $table)
+	{
+		$rows = MySQLRunner::execute('SELECT '.$field.', sum('.$aggrFiled.') amount FROM '.$table.' GROUP BY '.$field);
+		
+		$res = array();
+		foreach ($rows as $row)
+		{
+			$res[$row[$field]]=$row["amount"];
+		}
+		return $res;
 	}
 }
 ?>

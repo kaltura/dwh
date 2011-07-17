@@ -258,7 +258,7 @@ class EventTest extends PHPUnit_Framework_TestCase
 		// make sure aggregations are reset
 		foreach(DWHInspector::getDates($cycleId) as $dateId)
 		{
-			$this->assertEquals(0,count(DWHInspector::getAggregations($dateId)));
+			$this->assertEquals(7,count(DWHInspector::getAggregations($dateId)));
 		}
 	}
 
@@ -274,8 +274,41 @@ class EventTest extends PHPUnit_Framework_TestCase
 		return array('ProcessID'=>$CONF->EventsProcessID);
 	}
 	
-	public function testAggregation()
+	public function xxxtestAggregation()
 	{
+		KettleRunner::execute($this->getAggregationJob());
+		
+		$this->compareAggrEntryAndPartner();
+		$this->compareAggrEntryAndEvent();
 	}
+	
+	private function getAggregationJob()
+	{
+		return '/aggregation/calc_aggr_days.kjb';
+	}
+	
+	private function compareAggrEntryAndPartner()
+	{
+		$entryPartners = DWHInspector::groupBy('partner_id','count_plays','kalturadw.dwh_hourly_events_entry');
+		$partners = DWHInspector::groupBy('partner_id','count_plays','kalturadw.dwh_hourly_events_entry');
+		
+		foreach($partners as $partner=>$plays)
+		{
+			$this->assertEquals($plays,$entryPartners[$partner]);
+		}
+	}
+	
+	private function compareAggrEntryAndEvent()
+	{
+		$entryPartners = DWHInspector::groupBy('partner_id','count_plays','kalturadw.dwh_hourly_events_entry');
+		$events = DWHInspector::groupBy('partner_id','if(event_type_id=3,1,0)','kalturadw.dwh_fact_events');
+		
+		foreach($events as $partner=>$plays)
+		{
+			$this->assertEquals($plays,$entryPartners[$partner]);
+		}
+	}
+	
+
 }
 ?>

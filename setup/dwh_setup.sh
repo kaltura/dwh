@@ -29,7 +29,6 @@ $SETUP_ROOT_DIR/dwh_ddl_install.sh -u$USER -p$PW -k$KITCHEN -d$ROOT_DIR -h$HOST 
 
 # Populate time dimension
 export KETTLE_HOME=$ROOT_DIR
-sh $KITCHEN/pan.sh /file $ETL_ROOT_DIR/create_time_dim.ktr >> $INSTALLATION_LOG
 
 # Check that the command didn't fail
 ret_val=$?
