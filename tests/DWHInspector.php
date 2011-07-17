@@ -56,7 +56,7 @@ class DWHInspector
 	
 	public static function getAggregations($dateId)
 	{
-		$rows = MySQLRunner::execute("SELECT DISTINCT aggr_name, is_calculated FROM kalturadw.aggr_managment WHERE aggr_day_int = ? AND is_calculated = ?",array(0=>$dateId,1=>0));
+		$rows = MySQLRunner::execute("SELECT DISTINCT aggr_name, is_calculated FROM kalturadw.aggr_managment WHERE aggr_day_int = ? AND is_calculated = 0",array(0=>$dateId));
 		
 		$res = array();
 		foreach ($rows as $row)
@@ -98,6 +98,11 @@ class DWHInspector
 			$res[$row[$field]]=$row["amount"];
 		}
 		return $res;
+	}
+	
+	public static function setEntryMediaType($val)
+	{
+		MySQLRunner::execute('update kalturadw.dwh_fact_events set entry_media_type_id = ?',array(0=>$val),false);
 	}
 }
 ?>

@@ -258,7 +258,7 @@ class EventTest extends PHPUnit_Framework_TestCase
 		// make sure aggregations are reset
 		foreach(DWHInspector::getDates($cycleId) as $dateId)
 		{
-			$this->assertEquals(7,count(DWHInspector::getAggregations($dateId)));
+			$this->assertEquals(9,count(DWHInspector::getAggregations($dateId)));
 		}
 	}
 
@@ -274,8 +274,11 @@ class EventTest extends PHPUnit_Framework_TestCase
 		return array('ProcessID'=>$CONF->EventsProcessID);
 	}
 	
-	public function xxxtestAggregation()
+	public function testAggregation()
 	{
+		// fake entry media type for aggregations
+		DWHInsepector::setEntryMediaType(1);
+		
 		KettleRunner::execute($this->getAggregationJob());
 		
 		$this->compareAggrEntryAndPartner();

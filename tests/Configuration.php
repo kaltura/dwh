@@ -1,7 +1,7 @@
 <?php
 class Configuration
 {
-  public static $KETTLE_HOME = '/home/etl/dwh/core/trunk/';
+  public static $KETTLE_HOME = getenv('KETTLE_HOME');
   private $configFile = '.kettle/kettle.properties';
 
   private $items = array();
