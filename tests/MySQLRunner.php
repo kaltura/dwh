@@ -11,7 +11,8 @@ class MySQLRunner
 		self::$link = mysql_connect($CONF->DbHostName.':'.$CONF->DbPort, $CONF->DbUser, $CONF->DbPassword);
 		if (!self::$link) 
 		{
-			die('Could not connect: ' . mysql_error());
+			print('Could not connect: ' . mysql_error());
+			exit(1);
 		}
 	}
 
@@ -37,7 +38,8 @@ class MySQLRunner
 		if (!$result) 
 		{
 			MySQLRunner::disconnect();
-			die( "Could not successfully run query ($sql) from DB: " . mysql_error());
+			print( "Could not successfully run query ($sql) from DB: " . mysql_error());
+			exit(1);
 		}
 		
 		$rows = array();

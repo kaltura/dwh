@@ -10,7 +10,8 @@ class DWHInspector
 		
 		if(1!=count($res))
 		{
-			die("No cycle found!");
+			print("No cycle found!");
+			exit(1);
 		}
 		
 		foreach ($res as $row)

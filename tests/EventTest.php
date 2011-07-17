@@ -36,7 +36,10 @@ class EventTest extends PHPUnit_Framework_TestCase
 				}
 			}
 		} 
-		reset($objects); 
+		if($objects!=null)
+		{
+			reset($objects); 			
+		}
 	}
 		
     public function testGenereate()
