@@ -16,3 +16,4 @@ rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/MySQLInserter32/MySQLInserter
 rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/MappingFieldRunner32/MappingFieldRunner $KITCHEN/plugins/steps/
 rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/GetFTPFileNames32/GetFTPFileNames $KITCHEN/plugins/steps/
 rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/FetchFTPFile32/FetchFTPFile $KITCHEN/plugins/steps/
+rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/DimLookup32/DimLookup $KITCHEN/plugins/steps/
