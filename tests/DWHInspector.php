@@ -85,8 +85,8 @@ class DWHInspector
 		
 		$out = array();
 		putenv('KETTLE_HOME='.Configuration::$KETTLE_HOME);
-		exec('sh '.$CONF->RuntimePath.'/setup/dwh_drop_databases.sh -d '.$CONF->RuntimePath.' -h '.$CONF->DbHostName);
-		exec('export KETTLE_HOME='.Configuration::$KETTLE_HOME.';sh '.$CONF->RuntimePath.'/setup/dwh_setup.sh -d '.$CONF->RuntimePath.' -h '.$CONF->DbHostName);
+		exec($CONF->RuntimePath.'/setup/dwh_drop_databases.sh -d '.$CONF->RuntimePath.' -h '.$CONF->DbHostName);
+		exec('export KETTLE_HOME='.Configuration::$KETTLE_HOME.';'.$CONF->RuntimePath.'/setup/dwh_setup.sh -d '.$CONF->RuntimePath.' -h '.$CONF->DbHostName);
 	}
 	
 	public static function groupBy($field,$aggrFiled, $table)
