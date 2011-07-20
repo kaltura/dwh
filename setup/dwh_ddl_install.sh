@@ -66,7 +66,6 @@ mysqlexec $BISOURCE_ROOT_DIR/bisources_file_sync_object_type.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_file_sync_status.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_ready_behavior.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_creation_mode.sql
-mysqlexec $BISOURCE_ROOT_DIR/bisources_bandwidth_source.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_error_type.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_status.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_type.sql

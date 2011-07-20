@@ -32,7 +32,6 @@ INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('f
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('ready_behavior','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('asset_status','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('creation_mode',1);
-INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('bandwidth_source',1);
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('batch_job_type',1);
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('batch_job_status',1);
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('batch_job_error_type',1);
