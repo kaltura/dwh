@@ -36,6 +36,6 @@ INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('b
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('batch_job_type',1);
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('batch_job_status',1);
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('batch_job_error_type',1);
-
+INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('fms_app', 1);
 
 

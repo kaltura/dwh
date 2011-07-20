@@ -5,6 +5,7 @@ CREATE TABLE `kalturadw_ds`.`fms_stale_sessions` (
   `session_time` datetime DEFAULT NULL,
   `last_update_time` datetime DEFAULT NULL,
   `purge_time` datetime DEFAULT NULL,
+  `bandwidth_source_id` INT(11) NOT NULL DEFAULT 5,
   `session_date_id` int(11) unsigned DEFAULT NULL,
   `session_client_ip` VARCHAR(15) DEFAULT NULL,
   `session_client_ip_number` INT(10) UNSIGNED DEFAULT NULL,

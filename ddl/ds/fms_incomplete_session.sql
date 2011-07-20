@@ -13,5 +13,7 @@ CREATE TABLE `kalturadw_ds`.`fms_incomplete_sessions` (
   `con_sc_bytes` bigint(20) unsigned DEFAULT NULL,
   `dis_cs_bytes` bigint(20) unsigned DEFAULT NULL,
   `dis_sc_bytes` bigint(20) unsigned DEFAULT NULL,
-  `partner_id` int(10) unsigned DEFAULT NULL
+  `partner_id` int(10) unsigned DEFAULT NULL,
+  `bandwidth_source_id` INT(11) NOT NULL DEFAULT 5, 
+  PRIMARY KEY (session_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

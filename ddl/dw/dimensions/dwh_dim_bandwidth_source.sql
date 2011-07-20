@@ -4,4 +4,5 @@ CREATE TABLE kalturadw.dwh_dim_bandwidth_source
 dwh_creation_date DATETIME ,
 dwh_update_date DATETIME ,
 ri_ind TINYINT DEFAULT 0,
+is_live BOOL DEFAULT 0 NOT NULL,
 PRIMARY KEY(`bandwidth_source_id`));

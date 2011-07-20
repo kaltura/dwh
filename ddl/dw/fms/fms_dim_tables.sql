@@ -11,9 +11,12 @@ CREATE TABLE `dwh_dim_fms_adaptor` (
 /*Table structure for table `dwh_dim_fms_app` */
 
 CREATE TABLE `dwh_dim_fms_app` (
-  `app_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `app` varchar(45) NOT NULL,
-  PRIMARY KEY (`app_id`)
+  `fms_app_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `fms_app_name` varchar(45) NOT NULL,
+  `dwh_creation_date` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `dwh_update_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ri_ind` TINYINT(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`fms_app_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `dwh_dim_fms_app_instance` */
@@ -73,3 +76,15 @@ CREATE TABLE `dwh_dim_fms_virtual_host` (
   `virtual_host` varchar(45) NOT NULL,
   PRIMARY KEY (`virtual_host_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `dwh_dim_fms_bandwidth_source` (
+  `process_id` INT(10) NOT NULL,
+  `fms_app_id` SMALLINT(6) NOT NULL,
+  `bandwidth_source_id` INT(11) NOT NULL,
+  UNIQUE KEY (`process_id`,`fms_app_id`)
+);
+
+INSERT INTO `dwh_dim_fms_bandwidth_source`
+			(`process_id`,`fms_app_id`,`bandwidth_source_id`) 
+VALUES 		(2,5,5),(7,1,6);
+

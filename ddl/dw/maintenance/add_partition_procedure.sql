@@ -61,7 +61,6 @@ BEGIN
 	END WHILE;
 END$$
 
-
 DELIMITER $$
 
 USE `kalturadw`$$
@@ -81,7 +80,8 @@ BEGIN
 	CALL add_monthly_partition_for_table('dwh_hourly_events_widget');
 	CALL add_monthly_partition_for_table('dwh_hourly_events_uid');	
 	CALL add_monthly_partition_for_table('dwh_hourly_events_domain_referrer');	
-	CALL add_monthly_partition_for_table('dwh_hourly_partner');		
+	CALL add_monthly_partition_for_table('dwh_hourly_partner');
+	CALL add_monthly_partition_for_table('dwh_hourly_partner_usage');
 END$$
 
 DELIMITER ;

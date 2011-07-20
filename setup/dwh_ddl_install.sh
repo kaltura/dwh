@@ -70,6 +70,7 @@ mysqlexec $BISOURCE_ROOT_DIR/bisources_bandwidth_source.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_error_type.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_status.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_type.sql
+mysqlexec $BISOURCE_ROOT_DIR/sbisources_fms_app.sql
 
 #ds/
 mysqlexec $DS_ROOT_DIR/files.sql
@@ -98,6 +99,7 @@ mysqlexec $DS_ROOT_DIR/populate_repository_for_bandwidth_usage.sql
 mysqlexec $DS_ROOT_DIR/fms_incomplete_session.sql
 mysqlexec $DS_ROOT_DIR/fms_stale_sessions.sql
 mysqlexec $DS_ROOT_DIR/fms_sessionize.sql
+mysqlexec $DS_ROOT_DIR/fms_sessionize_by_date_id.sql
 mysqlexec $DS_ROOT_DIR/cycles.sql
 mysqlexec $DS_ROOT_DIR/get_error_code.sql
 mysqlexec $DS_ROOT_DIR/insert_invalid_ds_line.sql
@@ -118,7 +120,6 @@ mysqlexec $DDL_ROOT_DIR/log/etl_log.sql
 mysqlexec $DW_ROOT_DIR/batch_jobs.sql
 mysqlexec $DW_ROOT_DIR/bi_sources.sql
 mysqlexec $DW_ROOT_DIR/dw_control.sql
-mysqlexec $DW_ROOT_DIR/dw_domain.sql
 mysqlexec $DW_ROOT_DIR/dw_EDITOR_TYPE.sql
 mysqlexec $DW_ROOT_DIR/dw_ENTRY_MEDIA_SOURCE.sql
 mysqlexec $DW_ROOT_DIR/dw_ENTRY_MEDIA_TYPE.sql
@@ -156,6 +157,7 @@ mysqlexec $DW_ROOT_DIR/dwh_daily_usage_reports.sql
 mysqlexec $DW_ROOT_DIR/dwh_billing.sql
 
 #dw/dimensions
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_domain.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_asset_status.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_audio_codec.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_container_format.sql
@@ -198,6 +200,7 @@ mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_entry.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_widget.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_uid.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_partner.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_parnter_usage.sql
 mysqlexec $DW_ROOT_DIR/aggr/time_zone_helper_function.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_procedure.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner.sql
@@ -208,6 +211,7 @@ mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_usage_totals.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_widget.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/recalc_aggr_day_procedure.sql
+mysqlexec $DW_ROOT_DIR/aggr/recalc_aggr_day_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/resolve_aggr_name_function.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_aggr_events_partitions_view.sql
 mysqlexec $DW_ROOT_DIR/aggr/old_entries_table.sql
