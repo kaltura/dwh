@@ -69,7 +69,7 @@ mysqlexec $BISOURCE_ROOT_DIR/bisources_creation_mode.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_error_type.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_status.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_type.sql
-mysqlexec $BISOURCE_ROOT_DIR/sbisources_fms_app.sql
+mysqlexec $BISOURCE_ROOT_DIR/bisources_fms_app.sql
 
 #ds/
 mysqlexec $DS_ROOT_DIR/files.sql
