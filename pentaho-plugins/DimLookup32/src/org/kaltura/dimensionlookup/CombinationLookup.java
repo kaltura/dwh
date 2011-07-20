@@ -55,6 +55,7 @@ import org.pentaho.di.trans.step.StepMetaInterface;
  */
 public class CombinationLookup extends BaseStep implements StepInterface
 {
+	private final static int CREATION_METHOD_NONE  = 0;
 	private final static int CREATION_METHOD_AUTOINC  = 1;
     private final static int CREATION_METHOD_SEQUENCE = 2;
 	private final static int CREATION_METHOD_TABLEMAX = 3;
@@ -85,7 +86,11 @@ public class CombinationLookup extends BaseStep implements StepInterface
 	private void determineTechKeyCreation()
 	{
 		String keyCreation = meta.getTechKeyCreation();
-		if (meta.getDatabaseMeta().supportsAutoinc() &&
+		if(Const.isEmpty(meta.getTechnicalKeyField()))
+		{
+			setTechKeyCreation(CREATION_METHOD_NONE);
+		}
+		else if (meta.getDatabaseMeta().supportsAutoinc() &&
 			CombinationLookupMeta.CREATION_METHOD_AUTOINC.equals(keyCreation) )
 		{
 		    setTechKeyCreation(CREATION_METHOD_AUTOINC);
@@ -205,6 +210,10 @@ public class CombinationLookup extends BaseStep implements StepInterface
         if (log.isRowLevel()) logRowlevel("Cache store: key="+rowMeta.getString(row)+"    key="+tk);
     }
 
+    private boolean isSkipTechnicalKey()
+    {
+    	return techKeyCreation == CREATION_METHOD_NONE;
+    }
     
     private boolean isAutoIncrement()
     {
@@ -271,6 +280,8 @@ public class CombinationLookup extends BaseStep implements StepInterface
 						val_key=data.db.getNextSequenceValue(data.realSchemaName, meta.getSequenceFrom(), meta.getTechnicalKeyField());
 						if (val_key!=null && log.isRowLevel()) logRowlevel(Messages.getString("ConcurrentCombinationLookup.Log.FoundNextSequenceValue")+val_key.toString()); //$NON-NLS-1$
 						break;
+				    case CREATION_METHOD_NONE:
+				    	val_key = null;
 				}
 
 				val_key = combiInsert( rowMeta, row, val_key, val_hash );
@@ -279,14 +290,20 @@ public class CombinationLookup extends BaseStep implements StepInterface
                 if (log.isRowLevel()) logRowlevel(Messages.getString("ConcurrentCombinationLookup.Log.AddedDimensionEntry")+val_key); //$NON-NLS-1$
 
 				// Also store it in our Hashtable...
-				addToCache(data.hashRowMeta, hashRow, val_key);
+                if(!isSkipTechnicalKey())
+                {
+                	addToCache(data.hashRowMeta, hashRow, val_key);
+                }
 			}
 			else
 			{
-                // Entry already exists...
-                //
-				val_key = data.db.getReturnRowMeta().getInteger(add, 0); // Sometimes it's not an integer, believe it or not.
-                addToCache(data.hashRowMeta, hashRow, val_key);
+				if(!isSkipTechnicalKey())
+				{
+					// Entry already exists...
+	                //
+					val_key = data.db.getReturnRowMeta().getInteger(add, 0); // Sometimes it's not an integer, believe it or not.
+	                addToCache(data.hashRowMeta, hashRow, val_key);
+				}
 			}
 		}
 
@@ -314,9 +331,12 @@ public class CombinationLookup extends BaseStep implements StepInterface
             }
         }
 
-		// Add the technical key...
-		outputRow[outputIndex] = val_key;
-        
+		if(!isSkipTechnicalKey())
+		{
+			// Add the technical key...
+			outputRow[outputIndex] = val_key;
+		}
+		
         return outputRow;
 	}
 
@@ -436,8 +456,11 @@ public class CombinationLookup extends BaseStep implements StepInterface
          * 
          */
         
-        sql += "SELECT "+databaseMeta.quoteField(meta.getTechnicalKeyField())+Const.CR;
-        sql += "FROM "+data.schemaTable+Const.CR;
+        sql += "SELECT ";
+        
+        // we want to have a result, any result, returned if the row exists. This will not be sent to output.
+        sql += isSkipTechnicalKey()?"1":databaseMeta.quoteField(meta.getTechnicalKeyField());
+        sql += Const.CR + "FROM "+data.schemaTable+Const.CR;
         sql += "WHERE ";
         comma=false;
         
@@ -524,19 +547,22 @@ public class CombinationLookup extends BaseStep implements StepInterface
                 sql += "INSERT INTO " + data.schemaTable + ("( ");
                 boolean comma=false;
     
-                if (!isAutoIncrement()) // NO AUTOINCREMENT 
+                if(!isSkipTechnicalKey())
                 {
-                    sql += databaseMeta.quoteField(meta.getTechnicalKeyField());
-                    data.insertRowMeta.addValueMeta( new ValueMeta(meta.getTechnicalKeyField(), ValueMetaInterface.TYPE_INTEGER));
-                    comma=true;
+	                if (!isAutoIncrement()) // NO AUTOINCREMENT 
+	                {
+	                    sql += databaseMeta.quoteField(meta.getTechnicalKeyField());
+	                    data.insertRowMeta.addValueMeta( new ValueMeta(meta.getTechnicalKeyField(), ValueMetaInterface.TYPE_INTEGER));
+	                    comma=true;
+	                }
+	                else
+	                if (databaseMeta.needsPlaceHolder()) 
+	                {
+	                    sql += "0";   // placeholder on informix!  Will be replaced in table by real autoinc value.
+	                    data.insertRowMeta.addValueMeta( new ValueMeta(meta.getTechnicalKeyField(), ValueMetaInterface.TYPE_INTEGER));
+	                    comma=true;
+	                } 
                 }
-                else
-                if (databaseMeta.needsPlaceHolder()) 
-                {
-                    sql += "0";   // placeholder on informix!  Will be replaced in table by real autoinc value.
-                    data.insertRowMeta.addValueMeta( new ValueMeta(meta.getTechnicalKeyField(), ValueMetaInterface.TYPE_INTEGER));
-                    comma=true;
-                } 
                 
                 if (meta.useHash())
                 {
@@ -566,7 +592,7 @@ public class CombinationLookup extends BaseStep implements StepInterface
                 
                 comma=false;
                 
-                if (!isAutoIncrement())
+                if (!isSkipTechnicalKey() && !isAutoIncrement())
                 {
                     sql += '?';
                     comma=true;
@@ -596,7 +622,7 @@ public class CombinationLookup extends BaseStep implements StepInterface
                 try
                 {
                     debug="First: prepare statement";
-                    if (isAutoIncrement())
+                    if(!isSkipTechnicalKey() && isAutoIncrement())
                     {
                         logDetailed("SQL with return keys: "+sqlStatement);
                         data.prepStatementInsert=data.db.getConnection().prepareStatement(databaseMeta.stripCR(sqlStatement), Statement.RETURN_GENERATED_KEYS);
@@ -621,7 +647,7 @@ public class CombinationLookup extends BaseStep implements StepInterface
             Object[] insertRow=new Object[data.insertRowMeta.size()];
             int insertIndex = 0;
             
-            if (!isAutoIncrement()) 
+            if (!isSkipTechnicalKey() && isAutoIncrement()) 
             {
                 insertRow[insertIndex] = val_key;
                 insertIndex++;
@@ -654,7 +680,7 @@ public class CombinationLookup extends BaseStep implements StepInterface
             	data.db.insertRow(data.prepStatementInsert);
             	
 	            debug="Retrieve key";
-	            if (isAutoIncrement())
+	            if(!isSkipTechnicalKey() && isAutoIncrement())
 	            {
 	                ResultSet keys = null;
 	                try
@@ -699,8 +725,11 @@ public class CombinationLookup extends BaseStep implements StepInterface
 	            {
 	                hashRow[i] = row[data.keynrs[i]];
 	            }
-	            val_key = data.db.getReturnRowMeta().getInteger(reselect, 0); // Sometimes it's not an integer, believe it or not.
-                addToCache(data.hashRowMeta, hashRow, val_key);	        	
+	            if(!isSkipTechnicalKey())
+	            {
+	            	val_key = data.db.getReturnRowMeta().getInteger(reselect, 0); // Sometimes it's not an integer, believe it or not.
+	            	addToCache(data.hashRowMeta, hashRow, val_key);
+	            }
 			}
             
         }

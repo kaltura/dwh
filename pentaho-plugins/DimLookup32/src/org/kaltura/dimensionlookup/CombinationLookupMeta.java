@@ -427,12 +427,15 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 
 	public void getFields(RowMetaInterface row, String origin, RowMetaInterface[] info, StepMeta nextStep, VariableSpace space) throws KettleStepException
 	{
-		ValueMetaInterface v=new ValueMeta(technicalKeyField, ValueMetaInterface.TYPE_INTEGER);
-		v.setLength(10);
-        v.setPrecision(0);
-		v.setOrigin(origin);
-		row.addValueMeta(v);
-
+		if(!Const.isEmpty(technicalKeyField))
+		{
+			ValueMetaInterface v=new ValueMeta(technicalKeyField, ValueMetaInterface.TYPE_INTEGER);
+			v.setLength(10);
+	        v.setPrecision(0);
+			v.setOrigin(origin);
+			row.addValueMeta(v);
+		}
+		
 		if (replaceFields)
 		{
 			for (int i=0;i<keyField.length;i++)
@@ -469,7 +472,7 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 		}
 
 		retval.append("        <return>").append(Const.CR); //$NON-NLS-1$
-		retval.append("          ").append(XMLHandler.addTagValue("name", technicalKeyField)); //$NON-NLS-1$ //$NON-NLS-2$
+		retval.append("          ").append(XMLHandler.addTagValue("name", Const.isEmpty(technicalKeyField)?"":technicalKeyField)); //$NON-NLS-1$ //$NON-NLS-2$
 		retval.append("          ").append(XMLHandler.addTagValue("creation_method", techKeyCreation)); //$NON-NLS-1$ //$NON-NLS-2$
 		retval.append("          ").append(XMLHandler.addTagValue("use_autoinc", useAutoinc)); //$NON-NLS-1$ //$NON-NLS-2$
 		retval.append("        </return>").append(Const.CR); //$NON-NLS-1$
@@ -541,7 +544,7 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 				rep.saveStepAttribute(id_transformation, id_step, i, "lookup_key_field",     keyLookup[i]); //$NON-NLS-1$
 			}
 
-			rep.saveStepAttribute(id_transformation, id_step, "return_name",         technicalKeyField); //$NON-NLS-1$
+			rep.saveStepAttribute(id_transformation, id_step, "return_name",         Const.isEmpty(technicalKeyField)?"":technicalKeyField); //$NON-NLS-1$
 			rep.saveStepAttribute(id_transformation, id_step, "sequence",            sequenceFrom); //$NON-NLS-1$
 			rep.saveStepAttribute(id_transformation, id_step, "creation_method",     techKeyCreation); //$NON-NLS-1$
 
@@ -608,7 +611,7 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 						remarks.add(cr);
 
 						/* Also, check the fields: tk, version, from-to, ... */
-						if ( r.indexOfValue(technicalKeyField)<0)
+						if (!Const.isEmpty(technicalKeyField) && r.indexOfValue(technicalKeyField)<0)
 						{
 							error_message=Messages.getString("ConcurrentCombinationLookupMeta.CheckResult.TechnicalKeyNotFound",technicalKeyField)+Const.CR; //$NON-NLS-1$ //$NON-NLS-2$
 							cr = new CheckResult(CheckResultInterface.TYPE_RESULT_ERROR, error_message, stepMeta);
@@ -763,11 +766,15 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 						// OK, what do we put in the new table??
                         RowMetaInterface fields = new RowMeta();
 
-						// First, the new technical key...
-						ValueMetaInterface vkeyfield = new ValueMeta(technicalKeyField, ValueMetaInterface.TYPE_INTEGER);
-						vkeyfield.setLength(10);
-                        vkeyfield.setPrecision(0);
-
+                        ValueMetaInterface vkeyfield = null;
+                        if(!Const.isEmpty(technicalKeyField))
+                        {
+							// First, the new technical key...
+							vkeyfield = new ValueMeta(technicalKeyField, ValueMetaInterface.TYPE_INTEGER);
+							vkeyfield.setLength(10);
+	                        vkeyfield.setPrecision(0);
+                        }
+                        
 						// Then the hashcode (optional)
                         ValueMetaInterface vhashfield = null;
 						if (useHash && !Const.isEmpty(hashField))
@@ -787,8 +794,11 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 
 						if ( ! db.checkTableExists(schemaTable) )
 						{
-							// Add technical key field.
-							fields.addValueMeta(vkeyfield);				
+							if(vkeyfield!=null)
+							{
+								// Add technical key field.
+								fields.addValueMeta(vkeyfield);							
+							}
 							
 							// Add the keys only to the table
 							if ( keyField != null && keyLookup != null )
@@ -806,10 +816,13 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 									    ValueMetaInterface newValue = v.clone();
 									    newValue.setName(name);
 
-        								if ( name.equals(vkeyfield.getName()) ||
-		 		  							 (doHash == true && name.equals(vhashfield.getName())) )
-  									    {
-										    error_field+=name;
+									    if(vkeyfield!=null)
+									    {
+	        								if ( name.equals(vkeyfield.getName()) ||
+			 		  							 (doHash == true && name.equals(vhashfield.getName())) )
+	  									    {
+											    error_field+=name;
+										    }
 									    }
 									    if (error_field.length()>0)
 									    {
@@ -843,7 +856,7 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 							// Don't forget to quote these as well...
 							databaseMeta.quoteReservedWords(tabFields);
 
-							if (tabFields.searchValueMeta( vkeyfield.getName() ) == null )
+							if (vkeyfield!=null && tabFields.searchValueMeta( vkeyfield.getName() ) == null )
 							{
 								// Add technical key field if it didn't exist yet
 								fields.addValueMeta(vkeyfield);
