@@ -1,10 +1,4 @@
 
-SQLyog Community v8.3 
-MySQL - 5.1.41-3ubuntu12.6 : Database - kalturadw_ds
-*********************************************************************
-*/
-
-
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
