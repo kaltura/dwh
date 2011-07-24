@@ -1184,7 +1184,7 @@ function beforeGeneration( chart, icsc )&#xD;
 	seriesDef = yAxis.getSeriesDefinitions().get(0);&#xD;
 	runSeries = seriesDef.getRunTimeSeries()[0];&#xD;
 	chart.getBlock().getBounds().setHeight(180);&#xD;
-	chart.getBlock().getBounds().setWidth(760);&#xD;
+	chart.getBlock().getBounds().setWidth(550);&#xD;
 }&#xD;
 </Script>
   <Units>Points</Units>
@@ -2361,7 +2361,7 @@ function beforeGeneration( chart, icsc )&#xD;
 	seriesDef = yAxis.getSeriesDefinitions().get(0);&#xD;
 	runSeries = seriesDef.getRunTimeSeries()[0];&#xD;
 	chart.getBlock().getBounds().setHeight(180);&#xD;
-	chart.getBlock().getBounds().setWidth(760);&#xD;
+	chart.getBlock().getBounds().setWidth(550);&#xD;
 }&#xD;
 </Script>
   <Units>Points</Units>
@@ -3536,7 +3536,7 @@ function beforeGeneration( chart, icsc )&#xD;
 	seriesDef = yAxis.getSeriesDefinitions().get(0);&#xD;
 	runSeries = seriesDef.getRunTimeSeries()[0];&#xD;
 	chart.getBlock().getBounds().setHeight(180);&#xD;
-	chart.getBlock().getBounds().setWidth(760);&#xD;
+	chart.getBlock().getBounds().setWidth(550);&#xD;
 }&#xD;
 </Script>
   <Units>Points</Units>
@@ -4707,7 +4707,7 @@ function beforeGeneration( chart, icsc )&#xD;
 	seriesDef = yAxis.getSeriesDefinitions().get(0);&#xD;
 	runSeries = seriesDef.getRunTimeSeries()[0];&#xD;
 	chart.getBlock().getBounds().setHeight(180);&#xD;
-	chart.getBlock().getBounds().setWidth(760);&#xD;
+	chart.getBlock().getBounds().setWidth(550);&#xD;
 }&#xD;
 </Script>
   <Units>Points</Units>
@@ -5453,7 +5453,7 @@ day + month / 100</Definition>
         <Stacked>false</Stacked>
       </Series>
       <Grouping>
-        <Enabled>false</Enabled>
+        <Enabled>true</Enabled>
         <GroupingUnit>Years</GroupingUnit>
         <GroupingInterval>1.0</GroupingInterval>
         <GroupType>Text</GroupType>
@@ -5475,6 +5475,7 @@ day + month / 100</Definition>
         <Value></Value>
         <Font>
           <Alignment/>
+          <Rotation>90.0</Rotation>
         </Font>
       </Caption>
       <Background xsi:type="attribute:ColorDefinition">
@@ -5571,7 +5572,7 @@ day + month / 100</Definition>
 ]]></xml-property>
                         <property name="outputFormat">SVG</property>
                         <property name="inheritColumns">false</property>
-                        <property name="dataSet">Usage</property>
+                        <property name="dataSet">Plays</property>
                         <property name="height">266px</property>
                         <property name="width">760px</property>
                         <list-property name="boundDataColumns">
@@ -5581,19 +5582,9 @@ day + month / 100</Definition>
                                 <property name="dataType">integer</property>
                             </structure>
                             <structure>
-                                <property name="name">VOD_KB</property>
-                                <expression name="expression" type="javascript">dataSetRow["VOD_KB"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">LIVESTREAM_KB</property>
-                                <expression name="expression" type="javascript">dataSetRow["LIVESTREAM_KB"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">STOR_MB</property>
-                                <expression name="expression" type="javascript">dataSetRow["STOR_MB"]</expression>
-                                <property name="dataType">float</property>
+                                <property name="name">PLAYS</property>
+                                <expression name="expression" type="javascript">dataSetRow["PLAYS"]</expression>
+                                <property name="dataType">integer</property>
                             </structure>
                         </list-property>
                     </extended-item>
