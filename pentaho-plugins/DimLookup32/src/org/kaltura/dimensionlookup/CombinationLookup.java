@@ -647,7 +647,7 @@ public class CombinationLookup extends BaseStep implements StepInterface
             Object[] insertRow=new Object[data.insertRowMeta.size()];
             int insertIndex = 0;
             
-            if (!isSkipTechnicalKey() && isAutoIncrement()) 
+            if (!isSkipTechnicalKey() && !isAutoIncrement()) 
             {
                 insertRow[insertIndex] = val_key;
                 insertIndex++;
