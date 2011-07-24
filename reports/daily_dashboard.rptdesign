@@ -55,7 +55,7 @@
             <property name="databaseName">kalturadw</property>
             <property name="username">kaltura_read</property>
             <encrypted-property name="password" encryptionID="base64">a2FsdHVyYV9yZWFk</encrypted-property>
-            <property name="URL">jdbc:mysql://192.168.252.222:3306/kalturadw</property>
+            <property name="URL">jdbc:mysql://192.168.192.15:3306/kalturadw</property>
             <property name="driverClass">com.mysql.jdbc.Driver</property>
             <property name="jarList">C:\Users\omer\Documents\Work\Kaltura\Pentaho\PentahoSrc32\libext\JDBC\mysql-connector-java-3.1.14-bin.jar</property>
         </oda-data-source>
@@ -69,19 +69,19 @@
                     <text-property name="heading">DATE_ID</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">BW</property>
-                    <text-property name="displayName">BW</text-property>
-                    <text-property name="heading">BW</text-property>
+                    <property name="columnName">VOD_KB</property>
+                    <text-property name="displayName">VOD_KB</text-property>
+                    <text-property name="heading">VOD_KB</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">STREAM</property>
-                    <text-property name="displayName">STREAM</text-property>
-                    <text-property name="heading">STREAM</text-property>
+                    <property name="columnName">LIVESTREAM_KB</property>
+                    <text-property name="displayName">LIVESTREAM_KB</text-property>
+                    <text-property name="heading">LIVESTREAM_KB</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">STOR</property>
-                    <text-property name="displayName">STOR</text-property>
-                    <text-property name="heading">STOR</text-property>
+                    <property name="columnName">STOR_MB</property>
+                    <text-property name="displayName">STOR_MB</text-property>
+                    <text-property name="heading">STOR_MB</text-property>
                 </structure>
             </list-property>
             <list-property name="sortHints">
@@ -102,42 +102,17 @@
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">BW</property>
+                        <property name="name">VOD_KB</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">STREAM</property>
+                        <property name="name">LIVESTREAM_KB</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">STOR</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">PLAYS</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">PLAYS_25</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">PLAYS_50</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">PLAYS_75</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">9</property>
-                        <property name="name">PLAYS_100</property>
+                        <property name="name">STOR_MB</property>
                         <property name="dataType">float</property>
                     </structure>
                 </list-property>
@@ -152,65 +127,34 @@
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">BW</property>
-                    <property name="nativeName">BW</property>
+                    <property name="name">VOD_KB</property>
+                    <property name="nativeName">VOD_KB</property>
                     <property name="dataType">float</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
-                    <property name="name">STREAM</property>
-                    <property name="nativeName">STREAM</property>
+                    <property name="name">LIVESTREAM_KB</property>
+                    <property name="nativeName">LIVESTREAM_KB</property>
                     <property name="dataType">float</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
-                    <property name="name">STOR</property>
-                    <property name="nativeName">STOR</property>
-                    <property name="dataType">float</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">PLAYS</property>
-                    <property name="nativeName">PLAYS</property>
-                    <property name="dataType">float</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">PLAYS_25</property>
-                    <property name="nativeName">PLAYS_25</property>
-                    <property name="dataType">float</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">PLAYS_50</property>
-                    <property name="nativeName">PLAYS_50</property>
-                    <property name="dataType">float</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
-                    <property name="name">PLAYS_75</property>
-                    <property name="nativeName">PLAYS_75</property>
-                    <property name="dataType">float</property>
-                </structure>
-                <structure>
-                    <property name="position">9</property>
-                    <property name="name">PLAYS_100</property>
-                    <property name="nativeName">PLAYS_100</property>
+                    <property name="name">STOR_MB</property>
+                    <property name="nativeName">STOR_MB</property>
                     <property name="dataType">float</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT DATE_ID, SUM(COUNT_BANDWIDTH) AS BW, SUM(COUNT_STREAMING) AS STREAM,
-  SUM(COUNT_STORAGE) AS STOR, 
-  SUM(count_plays) as PLAYS, 
-  SUM(count_plays_25) PLAYS_25,
-  SUM(count_plays_50) PLAYS_50,
-  SUM(count_plays_75) PLAYS_75,
-  SUM(count_plays_100) PLAYS_100
-  FROM `kalturadw`.DWH_HOURLY_PARTNER
-  WHERE DATE_ID > DATE(NOW()-interval 30 day) * 1
-  GROUP BY DATE_ID
-  ORDER BY DATE_ID DESC
-]]></xml-property>
+            <xml-property name="queryText"><![CDATA[
+SELECT 	DATE_ID, 
+		SUM(IF(d.is_live=0,COUNT_BANDWIDTH_KB,0)) AS VOD_KB, 
+		SUM(IF(d.is_live=1,COUNT_BANDWIDTH_KB,0)) AS LIVESTREAM_KB,
+		SUM(COUNT_STORAGE_MB) AS STOR_MB
+FROM 		kalturadw.DWH_HOURLY_PARTNER_USAGE u, 
+		kalturadw.dwh_dim_bandwidth_source d
+WHERE 		u.bandwidth_source_id = d.bandwidth_source_id AND 
+		DATE_ID BETWEEN DATE(NOW()-INTERVAL 30 DAY)*1 AND DATE(NOW()-INTERVAL 1 DAY)*1
+GROUP BY 	DATE_ID
+ORDER BY 	DATE_ID DESC]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
@@ -736,6 +680,120 @@ GROUP BY date_id]]></xml-property>
 &lt;/SQLQueryBuilder></property>
             </structure>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="Plays" id="396">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">DATE_ID</property>
+                    <text-property name="displayName">DATE_ID</text-property>
+                    <text-property name="heading">DATE_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PLAYS</property>
+                    <text-property name="displayName">PLAYS</text-property>
+                    <text-property name="heading">PLAYS</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">DATE_ID</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">PLAYS</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">DATE_ID</property>
+                    <property name="nativeName">DATE_ID</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">PLAYS</property>
+                    <property name="nativeName">PLAYS</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT DATE_ID, SUM(COUNT_PLAYS) AS PLAYS
+  FROM `kalturadw`.DWH_HOURLY_PARTNER
+  WHERE 		DATE_ID BETWEEN DATE(NOW()-INTERVAL 30 DAY)*1 AND DATE(NOW()-INTERVAL 1 DAY)*1
+GROUP BY 	DATE_ID
+ORDER BY 	DATE_ID DESC
+]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
+&lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="Plays" version="1.0">&#13;
+&lt;SQLStatement>SELECT DATE_ID, COUNT_PLAYS AS PLAYS&amp;#x0A;  FROM `kalturadw`.DWH_HOURLY_PARTNER&amp;#x0A;  WHERE DATE_ID = 20110111&amp;#x0A;&lt;/SQLStatement>&#13;
+&lt;connInfo>Undefined:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:kalturadw:kaltura_read&lt;/connInfo>&#13;
+&lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
+&lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
+&lt;windowState height="623" version="1.0" width="990">&#13;
+&lt;control height="191" isHideable="true" isVisible="true" name="SQLSourceViewer" width="963"/>&#13;
+&lt;control height="203" isHideable="true" isVisible="true" name="DesignViewer" width="976"/>&#13;
+&lt;control height="191" isHideable="true" isVisible="true" name="GraphControl" width="968"/>&#13;
+&lt;control height="195" isHideable="true" isVisible="false" name="OutlineViewer" width="156"/>&#13;
+&lt;/windowState>&#13;
+&lt;/SQLQueryBuilder></property>
+            </structure>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="Top10Storage" id="414">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">partner_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">stor_mb</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">partner_id</property>
+                    <property name="nativeName">partner_id</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">stor_mb</property>
+                    <property name="nativeName">stor_mb</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT 1 partner_id, 1 stor_mb
+]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
+&lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="Top10Storage" version="1.0">&#13;
+&lt;SQLStatement>SELECT *&amp;#x0A;  FROM &amp;#x0A;&lt;/SQLStatement>&#13;
+&lt;connInfo>Undefined:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:kalturadw:kaltura_read&lt;/connInfo>&#13;
+&lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
+&lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
+&lt;windowState height="478" version="1.0" width="687">&#13;
+&lt;control height="145" isHideable="true" isVisible="true" name="SQLSourceViewer" width="660"/>&#13;
+&lt;control height="150" isHideable="true" isVisible="true" name="DesignViewer" width="673"/>&#13;
+&lt;control height="145" isHideable="true" isVisible="true" name="GraphControl" width="665"/>&#13;
+&lt;control height="149" isHideable="true" isVisible="false" name="OutlineViewer" width="198"/>&#13;
+&lt;/windowState>&#13;
+&lt;/SQLQueryBuilder></property>
+            </structure>
+        </oda-data-set>
     </data-sets>
     <styles>
         <style name="report" id="4">
@@ -809,14 +867,17 @@ GROUP BY date_id]]></xml-property>
         </simple-master-page>
     </page-setup>
     <body>
-        <grid id="56">
-            <column id="57"/>
-            <column id="58"/>
-            <column id="59"/>
-            <row id="84">
-                <property name="style">middle</property>
-                <cell id="85"/>
-                <cell id="86">
+        <grid id="386">
+            <property name="textAlign">center</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">Latest_LiveStream</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="387"/>
+            <row id="404">
+                <cell id="405">
                     <label id="88">
                         <property name="style">bold</property>
                         <text-property name="text">Latest Update:</text-property>
@@ -840,15 +901,14 @@ BirtStr.concat(d.toFixed(0),"/",m.toFixed(0),"/",y.toFixed(0))</expression>
                         <property name="resultSetColumn">DATE_ID</property>
                     </data>
                 </cell>
-                <cell id="87"/>
             </row>
-            <row id="60">
-                <cell id="61">
+            <row id="388">
+                <cell id="389">
                     <extended-item extensionName="Chart" id="38">
                         <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
   <Version>2.5.1</Version>
-  <Type>Line Chart</Type>
-  <SubType>Overlay</SubType>
+  <Type>Bar Chart</Type>
+  <SubType>Side-by-side</SubType>
   <Block>
     <Children xsi:type="layout:TitleBlock">
       <Bounds>
@@ -1124,7 +1184,7 @@ function beforeGeneration( chart, icsc )&#xD;
 	seriesDef = yAxis.getSeriesDefinitions().get(0);&#xD;
 	runSeries = seriesDef.getRunTimeSeries()[0];&#xD;
 	chart.getBlock().getBounds().setHeight(180);&#xD;
-	chart.getBlock().getBounds().setWidth(180);&#xD;
+	chart.getBlock().getBounds().setWidth(760);&#xD;
 }&#xD;
 </Script>
   <Units>Points</Units>
@@ -1453,7 +1513,7 @@ function beforeGeneration( chart, icsc )&#xD;
             <Blue>0</Blue>
           </Entries>
         </SeriesPalette>
-        <Series xsi:type="type:LineSeries">
+        <Series xsi:type="type:BarSeries">
           <Visible>true</Visible>
           <Label>
             <Caption>
@@ -1488,7 +1548,7 @@ function beforeGeneration( chart, icsc )&#xD;
             <Visible>false</Visible>
           </Label>
           <DataDefinition>
-            <Definition>row[&quot;BW&quot;]/1024/1024</Definition>
+            <Definition>row[&quot;VOD_KB&quot;]/1024/1024</Definition>
             <Grouping>
               <GroupType>Text</GroupType>
               <AggregateExpression>Sum</AggregateExpression>
@@ -1501,28 +1561,9 @@ function beforeGeneration( chart, icsc )&#xD;
             </Components>
             <Separator>, </Separator>
           </DataPoint>
-          <LabelPosition>Above</LabelPosition>
+          <LabelPosition>Outside</LabelPosition>
           <Stacked>false</Stacked>
-          <Markers>
-            <Type>Crosshair</Type>
-            <Size>4</Size>
-            <Visible>false</Visible>
-            <Outline>
-              <Visible>true</Visible>
-            </Outline>
-          </Markers>
-          <LineAttributes>
-            <Style>Solid</Style>
-            <Thickness>1</Thickness>
-            <Color>
-              <Transparency>255</Transparency>
-              <Red>0</Red>
-              <Green>0</Green>
-              <Blue>0</Blue>
-            </Color>
-            <Visible>true</Visible>
-          </LineAttributes>
-          <PaletteLineColor>true</PaletteLineColor>
+          <Riser>Rectangle</Riser>
         </Series>
         <Grouping>
           <GroupType>Text</GroupType>
@@ -1898,6 +1939,7 @@ day + month / 100</Definition>
         <Value></Value>
         <Font>
           <Alignment/>
+          <Rotation>90.0</Rotation>
         </Font>
       </Caption>
       <Background xsi:type="attribute:ColorDefinition">
@@ -1999,7 +2041,7 @@ day + month / 100</Definition>
                         <structure name="toc"/>
                         <property name="dataSet">Usage</property>
                         <property name="height">250px</property>
-                        <property name="width">250px</property>
+                        <property name="width">760px</property>
                         <list-property name="boundDataColumns">
                             <structure>
                                 <property name="name">DATE_ID</property>
@@ -2007,30 +2049,44 @@ day + month / 100</Definition>
                                 <property name="dataType">integer</property>
                             </structure>
                             <structure>
-                                <property name="name">BW</property>
-                                <expression name="expression" type="javascript">dataSetRow["BW"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">STREAM</property>
-                                <expression name="expression" type="javascript">dataSetRow["STREAM"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">STOR</property>
-                                <expression name="expression" type="javascript">dataSetRow["STOR"]</expression>
+                                <property name="name">VOD_KB</property>
+                                <text-property name="displayName">VOD_KB</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["VOD_KB"]</expression>
                                 <property name="dataType">float</property>
                             </structure>
                         </list-property>
                         <property name="style">left</property>
                     </extended-item>
                 </cell>
-                <cell id="62">
+            </row>
+            <row id="390">
+                <cell id="391">
+                    <label id="397">
+                        <property name="style">middle</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Latest Value:</text-property>
+                    </label>
+                    <data name="VOD_GB" id="398">
+                        <property name="style">left</property>
+                        <property name="dataSet">Usage</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">VOD_GB</property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["VOD_KB"]/1024/1024,2)</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">VOD_GB</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="392">
+                <cell id="393">
                     <extended-item extensionName="Chart" id="39">
                         <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
   <Version>2.5.1</Version>
-  <Type>Line Chart</Type>
-  <SubType>Overlay</SubType>
+  <Type>Bar Chart</Type>
+  <SubType>Side-by-side</SubType>
   <Block>
     <Children xsi:type="layout:TitleBlock">
       <Bounds>
@@ -2305,7 +2361,7 @@ function beforeGeneration( chart, icsc )&#xD;
 	seriesDef = yAxis.getSeriesDefinitions().get(0);&#xD;
 	runSeries = seriesDef.getRunTimeSeries()[0];&#xD;
 	chart.getBlock().getBounds().setHeight(180);&#xD;
-	chart.getBlock().getBounds().setWidth(180);&#xD;
+	chart.getBlock().getBounds().setWidth(760);&#xD;
 }&#xD;
 </Script>
   <Units>Points</Units>
@@ -2634,7 +2690,7 @@ function beforeGeneration( chart, icsc )&#xD;
             <Blue>0</Blue>
           </Entries>
         </SeriesPalette>
-        <Series xsi:type="type:LineSeries">
+        <Series xsi:type="type:BarSeries">
           <Visible>true</Visible>
           <Label>
             <Caption>
@@ -2669,7 +2725,7 @@ function beforeGeneration( chart, icsc )&#xD;
             <Visible>false</Visible>
           </Label>
           <DataDefinition>
-            <Definition>row[&quot;STREAM&quot;]/1024/1024</Definition>
+            <Definition>row[&quot;LIVESTREAM_KB&quot;]/1024/1024</Definition>
             <Grouping>
               <GroupType>Text</GroupType>
               <AggregateExpression>Sum</AggregateExpression>
@@ -2682,28 +2738,9 @@ function beforeGeneration( chart, icsc )&#xD;
             </Components>
             <Separator>, </Separator>
           </DataPoint>
-          <LabelPosition>Above</LabelPosition>
+          <LabelPosition>Outside</LabelPosition>
           <Stacked>false</Stacked>
-          <Markers>
-            <Type>Box</Type>
-            <Size>4</Size>
-            <Visible>false</Visible>
-            <Outline>
-              <Visible>true</Visible>
-            </Outline>
-          </Markers>
-          <LineAttributes>
-            <Style>Solid</Style>
-            <Thickness>1</Thickness>
-            <Color>
-              <Transparency>255</Transparency>
-              <Red>0</Red>
-              <Green>0</Green>
-              <Blue>0</Blue>
-            </Color>
-            <Visible>true</Visible>
-          </LineAttributes>
-          <PaletteLineColor>true</PaletteLineColor>
+          <Riser>Rectangle</Riser>
         </Series>
         <Grouping>
           <GroupType>Text</GroupType>
@@ -3079,6 +3116,7 @@ day + month / 100</Definition>
         <Value></Value>
         <Font>
           <Alignment/>
+          <Rotation>90.0</Rotation>
         </Font>
       </Caption>
       <Background xsi:type="attribute:ColorDefinition">
@@ -3179,7 +3217,7 @@ day + month / 100</Definition>
                         <property name="inheritColumns">true</property>
                         <property name="dataSet">Usage</property>
                         <property name="height">250px</property>
-                        <property name="width">250px</property>
+                        <property name="width">760px</property>
                         <list-property name="boundDataColumns">
                             <structure>
                                 <property name="name">DATE_ID</property>
@@ -3187,29 +3225,43 @@ day + month / 100</Definition>
                                 <property name="dataType">integer</property>
                             </structure>
                             <structure>
-                                <property name="name">BW</property>
-                                <expression name="expression" type="javascript">dataSetRow["BW"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">STREAM</property>
-                                <expression name="expression" type="javascript">dataSetRow["STREAM"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">STOR</property>
-                                <expression name="expression" type="javascript">dataSetRow["STOR"]</expression>
+                                <property name="name">LIVESTREAM_KB</property>
+                                <text-property name="displayName">LIVESTREAM_KB</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["LIVESTREAM_KB"]</expression>
                                 <property name="dataType">float</property>
                             </structure>
                         </list-property>
                     </extended-item>
                 </cell>
-                <cell id="63">
+            </row>
+            <row id="394">
+                <cell id="395">
+                    <label id="77">
+                        <property name="style">middle</property>
+                        <text-property name="text">Latest Value:</text-property>
+                    </label>
+                    <data id="401">
+                        <property name="style">left</property>
+                        <property name="dataSet">Usage</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">LiveStream_GB</property>
+                                <text-property name="displayName">LiveStream_GB</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["LIVESTREAM_KB"]/1024/1024,2)</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">LiveStream_GB</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="402">
+                <cell id="403">
                     <extended-item extensionName="Chart" id="40">
                         <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
   <Version>2.5.1</Version>
-  <Type>Line Chart</Type>
-  <SubType>Overlay</SubType>
+  <Type>Bar Chart</Type>
+  <SubType>Side-by-side</SubType>
   <Block>
     <Children xsi:type="layout:TitleBlock">
       <Bounds>
@@ -3484,7 +3536,7 @@ function beforeGeneration( chart, icsc )&#xD;
 	seriesDef = yAxis.getSeriesDefinitions().get(0);&#xD;
 	runSeries = seriesDef.getRunTimeSeries()[0];&#xD;
 	chart.getBlock().getBounds().setHeight(180);&#xD;
-	chart.getBlock().getBounds().setWidth(180);&#xD;
+	chart.getBlock().getBounds().setWidth(760);&#xD;
 }&#xD;
 </Script>
   <Units>Points</Units>
@@ -3813,7 +3865,7 @@ function beforeGeneration( chart, icsc )&#xD;
             <Blue>0</Blue>
           </Entries>
         </SeriesPalette>
-        <Series xsi:type="type:LineSeries">
+        <Series xsi:type="type:BarSeries">
           <Visible>true</Visible>
           <Label>
             <Caption>
@@ -3848,7 +3900,7 @@ function beforeGeneration( chart, icsc )&#xD;
             <Visible>false</Visible>
           </Label>
           <DataDefinition>
-            <Definition>row[&quot;STOR&quot;]/1024</Definition>
+            <Definition>row[&quot;STOR_MB&quot;]/1024</Definition>
             <Grouping>
               <GroupType>Text</GroupType>
               <AggregateExpression>Sum</AggregateExpression>
@@ -3861,28 +3913,9 @@ function beforeGeneration( chart, icsc )&#xD;
             </Components>
             <Separator>, </Separator>
           </DataPoint>
-          <LabelPosition>Above</LabelPosition>
+          <LabelPosition>Outside</LabelPosition>
           <Stacked>false</Stacked>
-          <Markers>
-            <Type>Box</Type>
-            <Size>4</Size>
-            <Visible>false</Visible>
-            <Outline>
-              <Visible>true</Visible>
-            </Outline>
-          </Markers>
-          <LineAttributes>
-            <Style>Solid</Style>
-            <Thickness>1</Thickness>
-            <Color>
-              <Transparency>255</Transparency>
-              <Red>0</Red>
-              <Green>0</Green>
-              <Blue>0</Blue>
-            </Color>
-            <Visible>true</Visible>
-          </LineAttributes>
-          <PaletteLineColor>true</PaletteLineColor>
+          <Riser>Rectangle</Riser>
         </Series>
         <Grouping>
           <GroupType>Text</GroupType>
@@ -4258,6 +4291,7 @@ day + month / 100</Definition>
         <Value></Value>
         <Font>
           <Alignment/>
+          <Rotation>90.0</Rotation>
         </Font>
       </Caption>
       <Background xsi:type="attribute:ColorDefinition">
@@ -4358,7 +4392,7 @@ day + month / 100</Definition>
                         <property name="inheritColumns">true</property>
                         <property name="dataSet">Usage</property>
                         <property name="height">250px</property>
-                        <property name="width">250px</property>
+                        <property name="width">760px</property>
                         <list-property name="boundDataColumns">
                             <structure>
                                 <property name="name">DATE_ID</property>
@@ -4366,18 +4400,9 @@ day + month / 100</Definition>
                                 <property name="dataType">integer</property>
                             </structure>
                             <structure>
-                                <property name="name">BW</property>
-                                <expression name="expression" type="javascript">dataSetRow["BW"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">STREAM</property>
-                                <expression name="expression" type="javascript">dataSetRow["STREAM"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">STOR</property>
-                                <expression name="expression" type="javascript">dataSetRow["STOR"]</expression>
+                                <property name="name">STOR_MB</property>
+                                <text-property name="displayName">STOR_MB</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["STOR_MB"]</expression>
                                 <property name="dataType">float</property>
                             </structure>
                         </list-property>
@@ -4385,55 +4410,8 @@ day + month / 100</Definition>
                     </extended-item>
                 </cell>
             </row>
-            <row id="64">
-                <property name="style">middle</property>
-                <cell id="65">
-                    <label id="75">
-                        <property name="style">middle</property>
-                        <text-property name="text">Latest Value:</text-property>
-                    </label>
-                    <data id="74">
-                        <property name="style">middle</property>
-                        <property name="whiteSpace">nowrap</property>
-                        <property name="dataSet">Usage</property>
-                        <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">BW</property>
-                                <text-property name="displayName">BW</text-property>
-                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["BW"]/1024/1024,2)</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                        </list-property>
-                        <structure name="toc"/>
-                        <property name="resultSetColumn">BW</property>
-                        <list-property name="action">
-                            <structure>
-                                <property name="linkType">none</property>
-                            </structure>
-                        </list-property>
-                    </data>
-                </cell>
-                <cell id="66">
-                    <label id="77">
-                        <property name="style">middle</property>
-                        <text-property name="text">Latest Value:</text-property>
-                    </label>
-                    <data id="79">
-                        <property name="style">middle</property>
-                        <property name="whiteSpace">nowrap</property>
-                        <property name="dataSet">Usage</property>
-                        <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">STREAM</property>
-                                <text-property name="displayName">STREAM</text-property>
-                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["STREAM"]/1024/1024,2)</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                        </list-property>
-                        <property name="resultSetColumn">STREAM</property>
-                    </data>
-                </cell>
-                <cell id="67">
+            <row id="406">
+                <cell id="407">
                     <label id="81">
                         <property name="style">middle</property>
                         <text-property name="text">Latest Value:</text-property>
@@ -4444,22 +4422,18 @@ day + month / 100</Definition>
                         <property name="dataSet">Usage</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">STOR</property>
-                                <text-property name="displayName">STOR</text-property>
-                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["STOR"]/1024,2)</expression>
+                                <property name="name">STOR_MB</property>
+                                <text-property name="displayName">STOR_MB</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["STOR_MB"]/1024,2)</expression>
                                 <property name="dataType">float</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">STOR</property>
+                        <property name="resultSetColumn">STOR_MB</property>
                     </data>
                 </cell>
             </row>
-        </grid>
-        <grid id="97">
-            <column id="98"/>
-            <column id="99"/>
-            <row id="100">
-                <cell id="101">
+            <row id="408">
+                <cell id="409">
                     <extended-item extensionName="Chart" id="96">
                         <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
   <Version>2.5.1</Version>
@@ -4732,8 +4706,8 @@ function beforeGeneration( chart, icsc )&#xD;
 	yAxis = chart.getOrthogonalAxes( xAxis, true )[0];&#xD;
 	seriesDef = yAxis.getSeriesDefinitions().get(0);&#xD;
 	runSeries = seriesDef.getRunTimeSeries()[0];&#xD;
-	chart.getBlock().getBounds().setHeight(275);&#xD;
-	chart.getBlock().getBounds().setWidth(275);&#xD;
+	chart.getBlock().getBounds().setHeight(180);&#xD;
+	chart.getBlock().getBounds().setWidth(760);&#xD;
 }&#xD;
 </Script>
   <Units>Points</Units>
@@ -5599,7 +5573,7 @@ day + month / 100</Definition>
                         <property name="inheritColumns">false</property>
                         <property name="dataSet">Usage</property>
                         <property name="height">266px</property>
-                        <property name="width">350px</property>
+                        <property name="width">760px</property>
                         <list-property name="boundDataColumns">
                             <structure>
                                 <property name="name">DATE_ID</property>
@@ -5607,2293 +5581,44 @@ day + month / 100</Definition>
                                 <property name="dataType">integer</property>
                             </structure>
                             <structure>
-                                <property name="name">BW</property>
-                                <expression name="expression" type="javascript">dataSetRow["BW"]</expression>
+                                <property name="name">VOD_KB</property>
+                                <expression name="expression" type="javascript">dataSetRow["VOD_KB"]</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
-                                <property name="name">STREAM</property>
-                                <expression name="expression" type="javascript">dataSetRow["STREAM"]</expression>
+                                <property name="name">LIVESTREAM_KB</property>
+                                <expression name="expression" type="javascript">dataSetRow["LIVESTREAM_KB"]</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
-                                <property name="name">STOR</property>
-                                <expression name="expression" type="javascript">dataSetRow["STOR"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">PLAYS</property>
-                                <expression name="expression" type="javascript">dataSetRow["PLAYS"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">PLAYS_25</property>
-                                <expression name="expression" type="javascript">dataSetRow["PLAYS_25"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">PLAYS_50</property>
-                                <expression name="expression" type="javascript">dataSetRow["PLAYS_50"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">PLAYS_75</property>
-                                <expression name="expression" type="javascript">dataSetRow["PLAYS_75"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">PLAYS_100</property>
-                                <expression name="expression" type="javascript">dataSetRow["PLAYS_100"]</expression>
+                                <property name="name">STOR_MB</property>
+                                <expression name="expression" type="javascript">dataSetRow["STOR_MB"]</expression>
                                 <property name="dataType">float</property>
                             </structure>
                         </list-property>
                     </extended-item>
                 </cell>
-                <cell id="102">
-                    <extended-item extensionName="Chart" id="95">
-                        <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
-  <Version>2.5.1</Version>
-  <Type>Bar Chart</Type>
-  <SubType>Side-by-side</SubType>
-  <Block>
-    <Children xsi:type="layout:TitleBlock">
-      <Bounds>
-        <Left>0.0</Left>
-        <Top>0.0</Top>
-        <Width>0.0</Width>
-        <Height>0.0</Height>
-      </Bounds>
-      <Insets>
-        <Top>3.0</Top>
-        <Left>3.0</Left>
-        <Bottom>3.0</Bottom>
-        <Right>3.0</Right>
-      </Insets>
-      <Row>-1</Row>
-      <Column>-1</Column>
-      <Rowspan>-1</Rowspan>
-      <Columnspan>-1</Columnspan>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </Outline>
-      <Visible>true</Visible>
-      <Label>
-        <Caption>
-          <Value>Playback Dropoff (Millions, 30 days back, by month)</Value>
-          <Font>
-            <Size>16.0</Size>
-            <Bold>true</Bold>
-            <Alignment>
-              <horizontalAlignment>Center</horizontalAlignment>
-              <verticalAlignment>Center</verticalAlignment>
-            </Alignment>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
-        <Visible>true</Visible>
-      </Label>
-    </Children>
-    <Children xsi:type="layout:Plot">
-      <Bounds>
-        <Left>0.0</Left>
-        <Top>0.0</Top>
-        <Width>0.0</Width>
-        <Height>0.0</Height>
-      </Bounds>
-      <Insets>
-        <Top>3.0</Top>
-        <Left>3.0</Left>
-        <Bottom>3.0</Bottom>
-        <Right>3.0</Right>
-      </Insets>
-      <Row>-1</Row>
-      <Column>-1</Column>
-      <Rowspan>-1</Rowspan>
-      <Columnspan>-1</Columnspan>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </Outline>
-      <Visible>true</Visible>
-      <HorizontalSpacing>5</HorizontalSpacing>
-      <VerticalSpacing>5</VerticalSpacing>
-      <ClientArea>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>0</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>0.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>0.0</Right>
-        </Insets>
-      </ClientArea>
-    </Children>
-    <Children xsi:type="layout:Legend">
-      <Bounds>
-        <Left>0.0</Left>
-        <Top>0.0</Top>
-        <Width>0.0</Width>
-        <Height>0.0</Height>
-      </Bounds>
-      <Anchor>South</Anchor>
-      <Stretch>Both</Stretch>
-      <Insets>
-        <Top>3.0</Top>
-        <Left>3.0</Left>
-        <Bottom>3.0</Bottom>
-        <Right>3.0</Right>
-      </Insets>
-      <Row>-1</Row>
-      <Column>-1</Column>
-      <Rowspan>-1</Rowspan>
-      <Columnspan>-1</Columnspan>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </Outline>
-      <Visible>true</Visible>
-      <ClientArea>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>0</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>2.0</Top>
-          <Left>2.0</Left>
-          <Bottom>2.0</Bottom>
-          <Right>2.0</Right>
-        </Insets>
-      </ClientArea>
-      <Text>
-        <Value></Value>
-        <Font>
-          <Alignment/>
-        </Font>
-      </Text>
-      <Orientation>Horizontal</Orientation>
-      <Direction>Left_Right</Direction>
-      <Separator>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>true</Visible>
-      </Separator>
-      <Position>Below</Position>
-      <ItemType>Series</ItemType>
-      <Title>
-        <Caption>
-          <Value></Value>
-          <Font>
-            <Alignment/>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
-        <Visible>false</Visible>
-      </Title>
-      <TitlePosition>Above</TitlePosition>
-    </Children>
-    <Bounds>
-      <Left>0.0</Left>
-      <Top>0.0</Top>
-      <Width>212.0</Width>
-      <Height>130.0</Height>
-    </Bounds>
-    <Insets>
-      <Top>3.0</Top>
-      <Left>3.0</Left>
-      <Bottom>3.0</Bottom>
-      <Right>3.0</Right>
-    </Insets>
-    <Row>-1</Row>
-    <Column>-1</Column>
-    <Rowspan>-1</Rowspan>
-    <Columnspan>-1</Columnspan>
-    <Outline>
-      <Style>Solid</Style>
-      <Thickness>1</Thickness>
-      <Color>
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>0</Green>
-        <Blue>0</Blue>
-      </Color>
-      <Visible>false</Visible>
-    </Outline>
-    <Visible>true</Visible>
-  </Block>
-  <Dimension>Two_Dimensional</Dimension>
-  <Script>&#xD;
-/**&#xD;
- * Called before generation of chart model to GeneratedChartState.&#xD;
- * &#xD;
- * @param chart&#xD;
- *            Chart&#xD;
- * @param icsc&#xD;
- *            IChartScriptContext&#xD;
- */&#xD;
-&#xD;
-function beforeGeneration( chart, icsc )&#xD;
-{&#xD;
-	xAxis = chart.getBaseAxes()[0];&#xD;
-	yAxis = chart.getOrthogonalAxes( xAxis, true )[0];&#xD;
-	seriesDef = yAxis.getSeriesDefinitions().get(0);&#xD;
-	runSeries = seriesDef.getRunTimeSeries()[0];&#xD;
-	chart.getBlock().getBounds().setHeight(275);&#xD;
-	chart.getBlock().getBounds().setWidth(275);&#xD;
-}&#xD;
-</Script>
-  <Units>Points</Units>
-  <SeriesThickness>10.0</SeriesThickness>
-  <GridColumnCount>0</GridColumnCount>
-  <ExtendedProperties>
-    <Name>enable.area.alt</Name>
-    <Value>false</Value>
-  </ExtendedProperties>
-  <SampleData>
-    <BaseSampleData>
-      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
-    </BaseSampleData>
-    <OrthogonalSampleData>
-      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
-      <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
-    </OrthogonalSampleData>
-    <OrthogonalSampleData>
-      <DataSetRepresentation>12.0,8.0,24.0,16.0,20.0</DataSetRepresentation>
-      <SeriesDefinitionIndex>1</SeriesDefinitionIndex>
-    </OrthogonalSampleData>
-    <OrthogonalSampleData>
-      <DataSetRepresentation>18.0,12.0,36.0,24.0,30.0</DataSetRepresentation>
-      <SeriesDefinitionIndex>2</SeriesDefinitionIndex>
-    </OrthogonalSampleData>
-    <OrthogonalSampleData>
-      <DataSetRepresentation>24.0,16.0,48.0,32.0,40.0</DataSetRepresentation>
-      <SeriesDefinitionIndex>3</SeriesDefinitionIndex>
-    </OrthogonalSampleData>
-    <OrthogonalSampleData>
-      <DataSetRepresentation>30.0,20.0,60.0,40.0,50.0</DataSetRepresentation>
-      <SeriesDefinitionIndex>4</SeriesDefinitionIndex>
-    </OrthogonalSampleData>
-  </SampleData>
-  <Interactivity>
-    <Enable>true</Enable>
-    <LegendBehavior>None</LegendBehavior>
-  </Interactivity>
-  <EmptyMessage>
-    <Caption>
-      <Value>This chart contains no data.</Value>
-      <Font>
-        <Alignment>
-          <horizontalAlignment>Center</horizontalAlignment>
-          <verticalAlignment>Center</verticalAlignment>
-        </Alignment>
-      </Font>
-    </Caption>
-    <Background xsi:type="attribute:ColorDefinition">
-      <Transparency>64</Transparency>
-      <Red>127</Red>
-      <Green>127</Green>
-      <Blue>127</Blue>
-    </Background>
-    <Outline>
-      <Color>
-        <Transparency>128</Transparency>
-        <Red>127</Red>
-        <Green>127</Green>
-        <Blue>127</Blue>
-      </Color>
-      <Visible>true</Visible>
-    </Outline>
-    <Insets>
-      <Top>10.0</Top>
-      <Left>10.0</Left>
-      <Bottom>10.0</Bottom>
-      <Right>10.0</Right>
-    </Insets>
-    <Visible>false</Visible>
-  </EmptyMessage>
-  <Axes>
-    <Type>Linear</Type>
-    <Title>
-      <Caption>
-        <Value>X-Axis Title</Value>
-        <Font>
-          <Size>14.0</Size>
-          <Bold>true</Bold>
-          <Alignment>
-            <horizontalAlignment>Center</horizontalAlignment>
-            <verticalAlignment>Center</verticalAlignment>
-          </Alignment>
-        </Font>
-      </Caption>
-      <Background xsi:type="attribute:ColorDefinition">
-        <Transparency>0</Transparency>
-        <Red>255</Red>
-        <Green>255</Green>
-        <Blue>255</Blue>
-      </Background>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-      </Outline>
-      <Insets>
-        <Top>0.0</Top>
-        <Left>2.0</Left>
-        <Bottom>0.0</Bottom>
-        <Right>3.0</Right>
-      </Insets>
-      <Visible>false</Visible>
-    </Title>
-    <TitlePosition>Below</TitlePosition>
-    <AssociatedAxes>
-      <Type>Linear</Type>
-      <Title>
-        <Caption>
-          <Value>Y-Axis Title</Value>
-          <Font>
-            <Size>14.0</Size>
-            <Bold>true</Bold>
-            <Alignment>
-              <horizontalAlignment>Center</horizontalAlignment>
-              <verticalAlignment>Center</verticalAlignment>
-            </Alignment>
-            <Rotation>90.0</Rotation>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
-        <Visible>false</Visible>
-      </Title>
-      <TitlePosition>Left</TitlePosition>
-      <SeriesDefinitions>
-        <Query>
-          <Definition></Definition>
-          <Grouping>
-            <GroupingInterval>100.0</GroupingInterval>
-            <GroupType>Numeric</GroupType>
-          </Grouping>
-        </Query>
-        <SeriesPalette>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>80</Red>
-            <Green>166</Green>
-            <Blue>218</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>242</Red>
-            <Green>88</Green>
-            <Blue>106</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>232</Red>
-            <Green>172</Green>
-            <Blue>57</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>255</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>64</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>170</Red>
-            <Green>85</Green>
-            <Blue>85</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>192</Red>
-            <Green>192</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>192</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>7</Red>
-            <Green>146</Green>
-            <Blue>94</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>128</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>0</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>64</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>80</Red>
-            <Green>240</Green>
-            <Blue>120</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>64</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>0</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>0</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>64</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>0</Blue>
-          </Entries>
-        </SeriesPalette>
-        <Series xsi:type="type:BarSeries">
-          <Visible>true</Visible>
-          <Label>
-            <Caption>
-              <Value></Value>
-              <Font>
-                <Alignment/>
-              </Font>
-            </Caption>
-            <Background xsi:type="attribute:ColorDefinition">
-              <Transparency>0</Transparency>
-              <Red>255</Red>
-              <Green>255</Green>
-              <Blue>255</Blue>
-            </Background>
-            <Outline>
-              <Style>Solid</Style>
-              <Thickness>1</Thickness>
-              <Color>
-                <Transparency>255</Transparency>
-                <Red>0</Red>
-                <Green>0</Green>
-                <Blue>0</Blue>
-              </Color>
-              <Visible>false</Visible>
-            </Outline>
-            <Insets>
-              <Top>0.0</Top>
-              <Left>2.0</Left>
-              <Bottom>0.0</Bottom>
-              <Right>3.0</Right>
-            </Insets>
-            <Visible>false</Visible>
-          </Label>
-          <DataDefinition>
-            <Definition>row[&quot;PLAYS&quot;]</Definition>
-            <Grouping>
-              <Enabled>true</Enabled>
-              <GroupType>Text</GroupType>
-              <AggregateExpression>Sum</AggregateExpression>
-            </Grouping>
-          </DataDefinition>
-          <SeriesIdentifier>0%</SeriesIdentifier>
-          <DataPoint>
-            <Components>
-              <Type>Orthogonal_Value</Type>
-            </Components>
-            <Separator>, </Separator>
-          </DataPoint>
-          <LabelPosition>Outside</LabelPosition>
-          <Stacked>false</Stacked>
-          <Riser>Rectangle</Riser>
-        </Series>
-        <SortKey/>
-      </SeriesDefinitions>
-      <SeriesDefinitions>
-        <Query>
-          <Definition></Definition>
-          <Grouping>
-            <GroupingInterval>100.0</GroupingInterval>
-            <GroupType>Numeric</GroupType>
-          </Grouping>
-        </Query>
-        <SeriesPalette>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>242</Red>
-            <Green>88</Green>
-            <Blue>106</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>232</Red>
-            <Green>172</Green>
-            <Blue>57</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>255</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>64</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>170</Red>
-            <Green>85</Green>
-            <Blue>85</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>192</Red>
-            <Green>192</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>192</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>7</Red>
-            <Green>146</Green>
-            <Blue>94</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>128</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>0</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>64</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>80</Red>
-            <Green>240</Green>
-            <Blue>120</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>64</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>0</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>0</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>64</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>80</Red>
-            <Green>166</Green>
-            <Blue>218</Blue>
-          </Entries>
-        </SeriesPalette>
-        <Series xsi:type="type:BarSeries">
-          <Visible>true</Visible>
-          <Label>
-            <Caption>
-              <Value></Value>
-              <Font>
-                <Alignment/>
-              </Font>
-            </Caption>
-            <Background xsi:type="attribute:ColorDefinition">
-              <Transparency>0</Transparency>
-              <Red>255</Red>
-              <Green>255</Green>
-              <Blue>255</Blue>
-            </Background>
-            <Outline>
-              <Style>Solid</Style>
-              <Thickness>1</Thickness>
-              <Color>
-                <Transparency>255</Transparency>
-                <Red>0</Red>
-                <Green>0</Green>
-                <Blue>0</Blue>
-              </Color>
-              <Visible>false</Visible>
-            </Outline>
-            <Insets>
-              <Top>0.0</Top>
-              <Left>2.0</Left>
-              <Bottom>0.0</Bottom>
-              <Right>3.0</Right>
-            </Insets>
-            <Visible>false</Visible>
-          </Label>
-          <DataDefinition>
-            <Definition>row[&quot;PLAYS_25&quot;]</Definition>
-            <Grouping>
-              <Enabled>false</Enabled>
-              <GroupType>Text</GroupType>
-              <AggregateExpression>Sum</AggregateExpression>
-            </Grouping>
-          </DataDefinition>
-          <SeriesIdentifier>25%</SeriesIdentifier>
-          <DataPoint>
-            <Components>
-              <Type>Orthogonal_Value</Type>
-            </Components>
-            <Separator>, </Separator>
-          </DataPoint>
-          <LabelPosition>Outside</LabelPosition>
-          <Stacked>false</Stacked>
-          <Riser>Rectangle</Riser>
-        </Series>
-        <Grouping>
-          <GroupType>Text</GroupType>
-          <AggregateExpression>Sum</AggregateExpression>
-        </Grouping>
-      </SeriesDefinitions>
-      <SeriesDefinitions>
-        <Query>
-          <Definition></Definition>
-          <Grouping>
-            <GroupingInterval>100.0</GroupingInterval>
-            <GroupType>Numeric</GroupType>
-          </Grouping>
-        </Query>
-        <SeriesPalette>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>232</Red>
-            <Green>172</Green>
-            <Blue>57</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>255</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>64</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>170</Red>
-            <Green>85</Green>
-            <Blue>85</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>192</Red>
-            <Green>192</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>192</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>7</Red>
-            <Green>146</Green>
-            <Blue>94</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>128</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>0</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>64</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>80</Red>
-            <Green>240</Green>
-            <Blue>120</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>64</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>0</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>0</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>64</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>80</Red>
-            <Green>166</Green>
-            <Blue>218</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>242</Red>
-            <Green>88</Green>
-            <Blue>106</Blue>
-          </Entries>
-        </SeriesPalette>
-        <Series xsi:type="type:BarSeries">
-          <Visible>true</Visible>
-          <Label>
-            <Caption>
-              <Value></Value>
-              <Font>
-                <Alignment/>
-              </Font>
-            </Caption>
-            <Background xsi:type="attribute:ColorDefinition">
-              <Transparency>0</Transparency>
-              <Red>255</Red>
-              <Green>255</Green>
-              <Blue>255</Blue>
-            </Background>
-            <Outline>
-              <Style>Solid</Style>
-              <Thickness>1</Thickness>
-              <Color>
-                <Transparency>255</Transparency>
-                <Red>0</Red>
-                <Green>0</Green>
-                <Blue>0</Blue>
-              </Color>
-              <Visible>false</Visible>
-            </Outline>
-            <Insets>
-              <Top>0.0</Top>
-              <Left>2.0</Left>
-              <Bottom>0.0</Bottom>
-              <Right>3.0</Right>
-            </Insets>
-            <Visible>false</Visible>
-          </Label>
-          <DataDefinition>
-            <Definition>row[&quot;PLAYS_50&quot;]</Definition>
-            <Grouping>
-              <Enabled>false</Enabled>
-              <GroupType>Text</GroupType>
-              <AggregateExpression>Sum</AggregateExpression>
-            </Grouping>
-          </DataDefinition>
-          <SeriesIdentifier>50%</SeriesIdentifier>
-          <DataPoint>
-            <Components>
-              <Type>Orthogonal_Value</Type>
-            </Components>
-            <Separator>, </Separator>
-          </DataPoint>
-          <LabelPosition>Outside</LabelPosition>
-          <Stacked>false</Stacked>
-          <Riser>Rectangle</Riser>
-        </Series>
-        <Grouping>
-          <GroupType>Text</GroupType>
-          <AggregateExpression>Sum</AggregateExpression>
-        </Grouping>
-      </SeriesDefinitions>
-      <SeriesDefinitions>
-        <Query>
-          <Definition></Definition>
-          <Grouping>
-            <GroupingInterval>100.0</GroupingInterval>
-            <GroupType>Numeric</GroupType>
-          </Grouping>
-        </Query>
-        <SeriesPalette>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>255</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>64</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>170</Red>
-            <Green>85</Green>
-            <Blue>85</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>192</Red>
-            <Green>192</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>192</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>7</Red>
-            <Green>146</Green>
-            <Blue>94</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>128</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>0</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>64</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>80</Red>
-            <Green>240</Green>
-            <Blue>120</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>64</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>0</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>0</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>64</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>80</Red>
-            <Green>166</Green>
-            <Blue>218</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>242</Red>
-            <Green>88</Green>
-            <Blue>106</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>232</Red>
-            <Green>172</Green>
-            <Blue>57</Blue>
-          </Entries>
-        </SeriesPalette>
-        <Series xsi:type="type:BarSeries">
-          <Visible>true</Visible>
-          <Label>
-            <Caption>
-              <Value></Value>
-              <Font>
-                <Alignment/>
-              </Font>
-            </Caption>
-            <Background xsi:type="attribute:ColorDefinition">
-              <Transparency>0</Transparency>
-              <Red>255</Red>
-              <Green>255</Green>
-              <Blue>255</Blue>
-            </Background>
-            <Outline>
-              <Style>Solid</Style>
-              <Thickness>1</Thickness>
-              <Color>
-                <Transparency>255</Transparency>
-                <Red>0</Red>
-                <Green>0</Green>
-                <Blue>0</Blue>
-              </Color>
-              <Visible>false</Visible>
-            </Outline>
-            <Insets>
-              <Top>0.0</Top>
-              <Left>2.0</Left>
-              <Bottom>0.0</Bottom>
-              <Right>3.0</Right>
-            </Insets>
-            <Visible>false</Visible>
-          </Label>
-          <DataDefinition>
-            <Definition>row[&quot;PLAYS_75&quot;]</Definition>
-            <Grouping>
-              <Enabled>false</Enabled>
-              <GroupType>Text</GroupType>
-              <AggregateExpression>Sum</AggregateExpression>
-            </Grouping>
-          </DataDefinition>
-          <SeriesIdentifier>75%</SeriesIdentifier>
-          <DataPoint>
-            <Components>
-              <Type>Orthogonal_Value</Type>
-            </Components>
-            <Separator>, </Separator>
-          </DataPoint>
-          <LabelPosition>Outside</LabelPosition>
-          <Stacked>false</Stacked>
-          <Riser>Rectangle</Riser>
-        </Series>
-        <Grouping>
-          <GroupType>Text</GroupType>
-          <AggregateExpression>Sum</AggregateExpression>
-        </Grouping>
-      </SeriesDefinitions>
-      <SeriesDefinitions>
-        <Query>
-          <Definition></Definition>
-          <Grouping>
-            <GroupingInterval>100.0</GroupingInterval>
-            <GroupType>Numeric</GroupType>
-          </Grouping>
-        </Query>
-        <SeriesPalette>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>64</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>170</Red>
-            <Green>85</Green>
-            <Blue>85</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>192</Red>
-            <Green>192</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>192</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>7</Red>
-            <Green>146</Green>
-            <Blue>94</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>128</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>0</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>64</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>80</Red>
-            <Green>240</Green>
-            <Blue>120</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>64</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>0</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>0</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>64</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>80</Red>
-            <Green>166</Green>
-            <Blue>218</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>242</Red>
-            <Green>88</Green>
-            <Blue>106</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>232</Red>
-            <Green>172</Green>
-            <Blue>57</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>255</Green>
-            <Blue>128</Blue>
-          </Entries>
-        </SeriesPalette>
-        <Series xsi:type="type:BarSeries">
-          <Visible>true</Visible>
-          <Label>
-            <Caption>
-              <Value></Value>
-              <Font>
-                <Alignment/>
-              </Font>
-            </Caption>
-            <Background xsi:type="attribute:ColorDefinition">
-              <Transparency>0</Transparency>
-              <Red>255</Red>
-              <Green>255</Green>
-              <Blue>255</Blue>
-            </Background>
-            <Outline>
-              <Style>Solid</Style>
-              <Thickness>1</Thickness>
-              <Color>
-                <Transparency>255</Transparency>
-                <Red>0</Red>
-                <Green>0</Green>
-                <Blue>0</Blue>
-              </Color>
-              <Visible>false</Visible>
-            </Outline>
-            <Insets>
-              <Top>0.0</Top>
-              <Left>2.0</Left>
-              <Bottom>0.0</Bottom>
-              <Right>3.0</Right>
-            </Insets>
-            <Visible>false</Visible>
-          </Label>
-          <DataDefinition>
-            <Definition>row[&quot;PLAYS_100&quot;]</Definition>
-            <Grouping>
-              <Enabled>false</Enabled>
-              <GroupType>Text</GroupType>
-              <AggregateExpression>Sum</AggregateExpression>
-            </Grouping>
-          </DataDefinition>
-          <SeriesIdentifier>100%</SeriesIdentifier>
-          <DataPoint>
-            <Components>
-              <Type>Orthogonal_Value</Type>
-            </Components>
-            <Separator>, </Separator>
-          </DataPoint>
-          <LabelPosition>Outside</LabelPosition>
-          <Stacked>false</Stacked>
-          <Riser>Rectangle</Riser>
-        </Series>
-        <Grouping>
-          <GroupType>Text</GroupType>
-          <AggregateExpression>Sum</AggregateExpression>
-        </Grouping>
-      </SeriesDefinitions>
-      <Orientation>Vertical</Orientation>
-      <LineAttributes>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Visible>true</Visible>
-      </LineAttributes>
-      <Label>
-        <Caption>
-          <Value></Value>
-          <Font>
-            <Alignment/>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
-        <Visible>true</Visible>
-      </Label>
-      <FormatSpecifier xsi:type="attribute:JavaNumberFormatSpecifier">
-        <Pattern>##,###.##</Pattern>
-        <Multiplier>1.0E-6</Multiplier>
-      </FormatSpecifier>
-      <LabelPosition>Left</LabelPosition>
-      <MajorGrid>
-        <LineAttributes>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>196</Red>
-            <Green>196</Green>
-            <Blue>196</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </LineAttributes>
-        <TickStyle>Across</TickStyle>
-        <TickAttributes>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>196</Red>
-            <Green>196</Green>
-            <Blue>196</Blue>
-          </Color>
-          <Visible>true</Visible>
-        </TickAttributes>
-      </MajorGrid>
-      <MinorGrid>
-        <LineAttributes>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>225</Red>
-            <Green>225</Green>
-            <Blue>225</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </LineAttributes>
-        <TickStyle>Across</TickStyle>
-        <TickAttributes>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>225</Red>
-            <Green>225</Green>
-            <Blue>225</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </TickAttributes>
-      </MinorGrid>
-      <Scale>
-        <MinorGridsPerUnit>5</MinorGridsPerUnit>
-        <AutoExpand>true</AutoExpand>
-      </Scale>
-      <Origin>
-        <Type>Value</Type>
-        <Value xsi:type="data:NumberDataElement">
-          <Value>0.0</Value>
-        </Value>
-      </Origin>
-      <PrimaryAxis>true</PrimaryAxis>
-      <Percent>false</Percent>
-    </AssociatedAxes>
-    <SeriesDefinitions>
-      <Query>
-        <Definition></Definition>
-      </Query>
-      <SeriesPalette>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>80</Red>
-          <Green>166</Green>
-          <Blue>218</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>242</Red>
-          <Green>88</Green>
-          <Blue>106</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>232</Red>
-          <Green>172</Green>
-          <Blue>57</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>255</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>64</Red>
-          <Green>128</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>128</Green>
-          <Blue>192</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>170</Red>
-          <Green>85</Green>
-          <Blue>85</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>128</Green>
-          <Blue>0</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>192</Red>
-          <Green>192</Green>
-          <Blue>192</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>192</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>7</Red>
-          <Green>146</Green>
-          <Blue>94</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>128</Green>
-          <Blue>255</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>128</Green>
-          <Blue>192</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>128</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>128</Green>
-          <Blue>192</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>128</Green>
-          <Blue>192</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>0</Green>
-          <Blue>255</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>64</Green>
-          <Blue>64</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>128</Green>
-          <Blue>64</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>80</Red>
-          <Green>240</Green>
-          <Blue>120</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>64</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>0</Green>
-          <Blue>64</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>0</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>128</Green>
-          <Blue>64</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>128</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>128</Green>
-          <Blue>255</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>64</Green>
-          <Blue>0</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>128</Green>
-          <Blue>0</Blue>
-        </Entries>
-      </SeriesPalette>
-      <Series>
-        <Visible>true</Visible>
-        <Label>
-          <Caption>
-            <Value></Value>
-            <Font>
-              <Alignment/>
-            </Font>
-          </Caption>
-          <Background xsi:type="attribute:ColorDefinition">
-            <Transparency>0</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Background>
-          <Outline>
-            <Style>Solid</Style>
-            <Thickness>1</Thickness>
-            <Color>
-              <Transparency>255</Transparency>
-              <Red>0</Red>
-              <Green>0</Green>
-              <Blue>0</Blue>
-            </Color>
-            <Visible>false</Visible>
-          </Outline>
-          <Insets>
-            <Top>0.0</Top>
-            <Left>2.0</Left>
-            <Bottom>0.0</Bottom>
-            <Right>3.0</Right>
-          </Insets>
-          <Visible>false</Visible>
-        </Label>
-        <DataDefinition>
-          <Definition>var month = BirtMath.mod(row[&quot;DATE_ID&quot;],10000);&#xD;
-var year = (row[&quot;DATE_ID&quot;]-month)/100000000;&#xD;
-month = (month - BirtMath.mod(month,100))/100;&#xD;
-month + year;</Definition>
-        </DataDefinition>
-        <SeriesIdentifier></SeriesIdentifier>
-        <DataPoint>
-          <Components>
-            <Type>Orthogonal_Value</Type>
-          </Components>
-          <Separator>, </Separator>
-        </DataPoint>
-        <LabelPosition>Outside</LabelPosition>
-        <Stacked>false</Stacked>
-      </Series>
-      <Grouping>
-        <Enabled>true</Enabled>
-        <GroupingUnit>Years</GroupingUnit>
-        <GroupingInterval>1.0</GroupingInterval>
-        <GroupType>Text</GroupType>
-        <AggregateExpression>Sum</AggregateExpression>
-      </Grouping>
-      <SortKey/>
-    </SeriesDefinitions>
-    <Orientation>Horizontal</Orientation>
-    <LineAttributes>
-      <Style>Solid</Style>
-      <Thickness>1</Thickness>
-      <Visible>true</Visible>
-    </LineAttributes>
-    <Label>
-      <Caption>
-        <Value></Value>
-        <Font>
-          <Alignment/>
-        </Font>
-      </Caption>
-      <Background xsi:type="attribute:ColorDefinition">
-        <Transparency>0</Transparency>
-        <Red>255</Red>
-        <Green>255</Green>
-        <Blue>255</Blue>
-      </Background>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-      </Outline>
-      <Insets>
-        <Top>0.0</Top>
-        <Left>2.0</Left>
-        <Bottom>0.0</Bottom>
-        <Right>3.0</Right>
-      </Insets>
-      <Visible>true</Visible>
-    </Label>
-    <LabelPosition>Below</LabelPosition>
-    <MajorGrid>
-      <LineAttributes>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>196</Red>
-          <Green>196</Green>
-          <Blue>196</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </LineAttributes>
-      <TickStyle>Across</TickStyle>
-      <TickAttributes>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>196</Red>
-          <Green>196</Green>
-          <Blue>196</Blue>
-        </Color>
-        <Visible>true</Visible>
-      </TickAttributes>
-    </MajorGrid>
-    <MinorGrid>
-      <LineAttributes>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>225</Red>
-          <Green>225</Green>
-          <Blue>225</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </LineAttributes>
-      <TickStyle>Across</TickStyle>
-      <TickAttributes>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>225</Red>
-          <Green>225</Green>
-          <Blue>225</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </TickAttributes>
-    </MinorGrid>
-    <Scale>
-      <MinorGridsPerUnit>5</MinorGridsPerUnit>
-    </Scale>
-    <Origin>
-      <Type>Min</Type>
-      <Value xsi:type="data:NumberDataElement">
-        <Value>0.0</Value>
-      </Value>
-    </Origin>
-    <PrimaryAxis>true</PrimaryAxis>
-    <CategoryAxis>true</CategoryAxis>
-    <Percent>false</Percent>
-  </Axes>
-  <Orientation>Vertical</Orientation>
-  <Rotation/>
-</model:ChartWithAxes>
-]]></xml-property>
-                        <property name="outputFormat">SVG</property>
-                        <property name="inheritColumns">false</property>
-                        <property name="dataSet">Usage</property>
-                        <property name="height">266px</property>
-                        <property name="width">350px</property>
+            </row>
+            <row id="410">
+                <cell id="411">
+                    <label id="412">
+                        <property name="style">middle</property>
+                        <text-property name="text">Latest Value:</text-property>
+                    </label>
+                    <data id="413">
+                        <property name="style">middle</property>
+                        <property name="whiteSpace">nowrap</property>
+                        <property name="dataSet">Plays</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">DATE_ID</property>
-                                <expression name="expression" type="javascript">dataSetRow["DATE_ID"]</expression>
+                                <property name="name">PLAYS</property>
+                                <text-property name="displayName">PLAYS</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["PLAYS"]</expression>
                                 <property name="dataType">integer</property>
                             </structure>
-                            <structure>
-                                <property name="name">BW</property>
-                                <expression name="expression" type="javascript">dataSetRow["BW"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">STREAM</property>
-                                <expression name="expression" type="javascript">dataSetRow["STREAM"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">STOR</property>
-                                <expression name="expression" type="javascript">dataSetRow["STOR"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">PLAYS</property>
-                                <expression name="expression" type="javascript">dataSetRow["PLAYS"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">PLAYS_25</property>
-                                <expression name="expression" type="javascript">dataSetRow["PLAYS_25"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">PLAYS_50</property>
-                                <expression name="expression" type="javascript">dataSetRow["PLAYS_50"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">PLAYS_75</property>
-                                <expression name="expression" type="javascript">dataSetRow["PLAYS_75"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
-                                <property name="name">PLAYS_100</property>
-                                <expression name="expression" type="javascript">dataSetRow["PLAYS_100"]</expression>
-                                <property name="dataType">float</property>
-                            </structure>
                         </list-property>
-                        <property name="style">left</property>
-                    </extended-item>
+                        <property name="resultSetColumn">PLAYS</property>
+                    </data>
                 </cell>
             </row>
         </grid>
@@ -14071,7 +11796,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="resultSetColumn">failed_import</property>
                                 </data>
                             </cell>
-                            <cell id="215"/>
+                            <cell id="251"/>
                         </row>
                     </grid>
                 </cell>
