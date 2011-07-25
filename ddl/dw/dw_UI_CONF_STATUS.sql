@@ -5,7 +5,7 @@ CREATE TABLE `kalturadw`.`dwh_dim_ui_conf_status` (
   `ui_conf_status_name` VARCHAR(50) DEFAULT 'missing value',
    dwh_creation_date TIMESTAMP NOT NULL DEFAULT 0,
    dwh_update_date TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-   ri_ind TINYINT NOT NULL DEFAULT '0',
+   ri_ind TINYINT NOT NULL DEFAULT '1',
   PRIMARY KEY (`ui_conf_status_id`)
 ) ENGINE=MYISAM  DEFAULT CHARSET=utf8;
 

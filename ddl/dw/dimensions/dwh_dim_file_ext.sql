@@ -19,8 +19,9 @@ USE `kalturadw`;
 DROP TABLE IF EXISTS `dwh_dim_file_ext`;
 		      
 CREATE TABLE `dwh_dim_file_ext` (`file_ext_id` INT(11) AUTO_INCREMENT,
-				   `file_ext` VARCHAR(11) DEFAULT NULL,
-				PRIMARY KEY(`file_ext_id`)
+				   `file_ext` VARCHAR(333) DEFAULT NULL,
+				PRIMARY KEY(`file_ext_id`),
+				UNIQUE KEY (`file_ext`)
 )  ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

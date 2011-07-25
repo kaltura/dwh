@@ -43,7 +43,6 @@ DDL_SETUP_ROOT_DIR=$DDL_ROOT_DIR/setup/
 mysqlexec $DDL_ROOT_DIR/db_create.sql
 
 #bisource
-mysqlexec $BISOURCE_ROOT_DIR/bisources_EDITOR_TYPE.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_ENTRY_MEDIA_SOURCE.sql 
 mysqlexec $BISOURCE_ROOT_DIR/bisources_ENTRY_MEDIA_TYPE.sql 
 mysqlexec $BISOURCE_ROOT_DIR/bisources_ENTRY_STATUS.sql 

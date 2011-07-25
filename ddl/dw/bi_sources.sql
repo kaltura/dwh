@@ -24,7 +24,6 @@ INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('w
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('widget_security_policy','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('event_type','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('control','1');
-INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('editor_type','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('gender','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('partner_group_type','1');
 INSERT INTO `kalturadw`.`bisources_tables` (`table_name`, `to_update`) VALUES('file_sync_object_type','1');

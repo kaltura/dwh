@@ -19,8 +19,9 @@ USE `kalturadw`;
 DROP TABLE IF EXISTS `dwh_dim_video_codec`;
 		      
 CREATE TABLE `dwh_dim_video_codec` (`video_codec_id` INT(11) AUTO_INCREMENT,
-				   `video_codec` VARCHAR(381) DEFAULT NULL,
-				PRIMARY KEY(`video_codec_id`)
+				   `video_codec` VARCHAR(333) DEFAULT NULL,
+				PRIMARY KEY(`video_codec_id`),
+				UNIQUE KEY (`video_codec`)
 )  ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

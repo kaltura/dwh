@@ -19,8 +19,9 @@ USE `kalturadw`;
 DROP TABLE IF EXISTS `dwh_dim_container_format`;
 		      
 CREATE TABLE `dwh_dim_container_format` (`container_format_id` INT(11) AUTO_INCREMENT,
-				   `container_format` VARCHAR(381) DEFAULT NULL,
-				PRIMARY KEY(`container_format_id`)
+				   `container_format` VARCHAR(333) DEFAULT NULL,
+				PRIMARY KEY(`container_format_id`),
+				UNIQUE KEY(`container_format`)
 )  ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

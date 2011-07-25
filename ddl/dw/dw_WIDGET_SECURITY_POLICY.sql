@@ -5,7 +5,7 @@ CREATE TABLE `kalturadw`.`dwh_dim_widget_security_policy` (
   `widget_security_policy_name` VARCHAR(50),
    dwh_creation_date TIMESTAMP NOT NULL DEFAULT 0,
    dwh_update_date TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
-   ri_ind TINYINT NOT NULL DEFAULT '0',
+   ri_ind TINYINT NOT NULL DEFAULT '1',
   PRIMARY KEY (`widget_security_policy_id`)
   
 ) ENGINE=MYISAM  DEFAULT CHARSET=utf8; 

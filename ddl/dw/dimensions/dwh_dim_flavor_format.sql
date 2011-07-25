@@ -19,8 +19,9 @@ USE `kalturadw`;
 DROP TABLE IF EXISTS `dwh_dim_flavor_format`;
 		      
 CREATE TABLE `dwh_dim_flavor_format` (`flavor_format_id` INT(11) AUTO_INCREMENT,
-				   `flavor_format` VARCHAR(60) DEFAULT NULL,
-				PRIMARY KEY(`flavor_format_id`)
+				   `flavor_format` VARCHAR(333) DEFAULT NULL,
+				PRIMARY KEY(`flavor_format_id`),
+				UNIQUE KEY (`flavor_format`)
 )  ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
