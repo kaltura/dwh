@@ -199,7 +199,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get now</from><to>Check if sub type is null</to><enabled>Y</enabled> </hop>  <hop> <from>Check if sub type is null</from><to>No sub type - do nothing</to><enabled>Y</enabled> </hop>  <hop> <from>Check if sub type is null</from><to>Create subtype unique key</to><enabled>Y</enabled> </hop>  <hop> <from>Create subtype unique key</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Unique rows</to><enabled>Y</enabled> </hop>  <hop> <from>Unique rows</from><to>Insert &#47; Update Batch Job Sub Types</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Table input</to><enabled>Y</enabled> </hop>  <hop> <from>Table input</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified batch jobs</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified batch jobs</from><to>Get now</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified batch jobs</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>set ri_ind = 1</from><to>batch_job_type Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_type Insert &#47; Update</from><to>batch_job_error_type Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_error_type Insert &#47; Update</from><to>batch_job_status Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_status Insert &#47; Update</from><to>Insert &#47; Update Batch Jobs</to><enabled>Y</enabled> </hop>  <hop> <from>Get now</from><to>Set foreign key default values</to><enabled>Y</enabled> </hop>  <hop> <from>Set foreign key default values</from><to>set ri_ind = 1</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Get now</from><to>Check if sub type is null</to><enabled>Y</enabled> </hop>  <hop> <from>Check if sub type is null</from><to>No sub type - do nothing</to><enabled>Y</enabled> </hop>  <hop> <from>Check if sub type is null</from><to>Create subtype unique key</to><enabled>Y</enabled> </hop>  <hop> <from>Create subtype unique key</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Unique rows</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Table input</to><enabled>Y</enabled> </hop>  <hop> <from>Table input</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified batch jobs</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified batch jobs</from><to>Get now</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified batch jobs</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>Get now</from><to>Set foreign key default values</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Batch Jobs</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Unique rows</from><to>Insert &#47; Update Batch Job Sub Types</to><enabled>Y</enabled> </hop>  <hop> <from>Set foreign key default values</from><to>batch_job_type Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_type Insert &#47; Update</from><to>batch_job_error_type Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_error_type Insert &#47; Update</from><to>batch_job_status Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_status Insert &#47; Update</from><to>Insert &#47; Update Batch Jobs</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Check if sub type is null</name>
     <type>FilterRows</type>
@@ -339,58 +339,6 @@ subtype_key = num2str(job_type) + &quot;_&quot; + num2str(job_sub_type)</jsScrip
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>520</xloc>
       <yloc>160</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Insert &#47; Update Batch Job Sub Types</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <commit>100</commit>
-    <update_bypassed>Y</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>dwh_dim_batch_job_sub_type</table>
-      <key>
-        <name>job_type</name>
-        <field>batch_job_type_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>job_sub_type</name>
-        <field>batch_job_sub_type_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>dwh_creation_date</name>
-        <rename>NOW</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>batch_job_type_id</name>
-        <rename>job_type</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>batch_job_sub_type_id</name>
-        <rename>job_sub_type</rename>
-        <update>N</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>515</xloc>
-      <yloc>585</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -635,8 +583,26 @@ subtype_key = num2str(job_type) + &quot;_&quot; + num2str(job_sub_type)</jsScrip
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1285</xloc>
-      <yloc>163</yloc>
+      <xloc>1079</xloc>
+      <yloc>204</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>duplicate key error</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1232</xloc>
+      <yloc>205</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -826,129 +792,6 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
     </step>
 
   <step>
-    <name>batch_job_error_type Insert &#47; Update</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <commit>100</commit>
-    <update_bypassed>Y</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>dwh_dim_batch_job_error_type</table>
-      <key>
-        <name>err_type</name>
-        <field>batch_job_error_type_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>batch_job_error_type_id</name>
-        <rename>err_type</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>ri_ind</name>
-        <rename>ri_ind</rename>
-        <update>N</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>927</xloc>
-      <yloc>162</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>batch_job_status Insert &#47; Update</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <commit>100</commit>
-    <update_bypassed>Y</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>dwh_dim_batch_job_status</table>
-      <key>
-        <name>STATUS</name>
-        <field>batch_job_status_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>batch_job_status_id</name>
-        <rename>STATUS</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>ri_ind</name>
-        <rename>ri_ind</rename>
-        <update>N</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1116</xloc>
-      <yloc>162</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>batch_job_type Insert &#47; Update</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <commit>100</commit>
-    <update_bypassed>Y</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>dwh_dim_batch_job_type</table>
-      <key>
-        <name>job_type</name>
-        <field>batch_job_type_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>batch_job_type_id</name>
-        <rename>job_type</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>ri_ind</name>
-        <rename>ri_ind</rename>
-        <update>N</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>751</xloc>
-      <yloc>161</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>filter unmodified batch jobs</name>
     <type>FilterRows</type>
     <description/>
@@ -998,8 +841,8 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
     </step>
 
   <step>
-    <name>set ri_ind = 1</name>
-    <type>Constant</type>
+    <name>Insert &#47; Update Batch Job Sub Types</name>
+    <type>ConcurrentSafeCombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -1007,28 +850,169 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>
-      <field>
-        <name>ri_ind</name>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>1</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
+      <schema/>
+      <table>dwh_dim_batch_job_sub_type</table>
+      <connection>KalturaDW</connection>
+      <commit>100</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>job_type</name>
+          <lookup>batch_job_type_id</lookup>
+        </key>
+        <key>
+          <name>job_sub_type</name>
+          <lookup>batch_job_sub_type_id</lookup>
+        </key>
+        <return>
+          <name/>
+          <creation_method>tablemax</creation_method>
+          <use_autoinc>N</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>754</xloc>
+      <xloc>516</xloc>
+      <yloc>587</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>batch_job_type Insert &#47; Update</name>
+    <type>ConcurrentSafeCombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dwh_dim_batch_job_type</table>
+      <connection>KalturaDW</connection>
+      <commit>100</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>job_type</name>
+          <lookup>batch_job_type_id</lookup>
+        </key>
+        <return>
+          <name/>
+          <creation_method>tablemax</creation_method>
+          <use_autoinc>N</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>702</xloc>
       <yloc>70</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
+  <step>
+    <name>batch_job_error_type Insert &#47; Update</name>
+    <type>ConcurrentSafeCombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dwh_dim_batch_job_error_type</table>
+      <connection>KalturaDW</connection>
+      <commit>100</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>err_type</name>
+          <lookup>batch_job_error_type_id</lookup>
+        </key>
+        <return>
+          <name/>
+          <creation_method>tablemax</creation_method>
+          <use_autoinc>N</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>884</xloc>
+      <yloc>70</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>batch_job_status Insert &#47; Update</name>
+    <type>ConcurrentSafeCombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dwh_dim_batch_job_status</table>
+      <connection>KalturaDW</connection>
+      <commit>100</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>STATUS</name>
+          <lookup>batch_job_status_id</lookup>
+        </key>
+        <return>
+          <name/>
+          <creation_method>tablemax</creation_method>
+          <use_autoinc>N</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1076</xloc>
+      <yloc>72</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step_error_handling>
+      <error>
+        <source_step>Insert &#47; Update Batch Jobs</source_step>
+        <target_step>duplicate key error</target_step>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename/>
+        <fields_valuename/>
+        <codes_valuename/>
+        <max_errors>-1</max_errors>
+        <max_pct_errors>-1</max_pct_errors>
+        <min_pct_rows>-1</min_pct_rows>
+      </error>
   </step_error_handling>
    <slave-step-copy-partition-distribution>
 </slave-step-copy-partition-distribution>
