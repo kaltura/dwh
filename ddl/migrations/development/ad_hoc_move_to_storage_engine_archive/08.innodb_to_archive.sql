@@ -4,7 +4,7 @@ CREATE TABLE innodb_to_archive
 AS
 SELECT partition_name, table_name, partition_expression column_name, partition_description date_id, 0 is_moved, 0 is_dropped
 FROM information_schema.partitions p
-WHERE partition_description < 20110101
+WHERE partition_description <= 20110101
 AND p.table_name in('dwh_fact_events' , 'dwh_fact_fms_sessions' , 'dwh_fact_fms_session_events' ,'dwh_fact_bandwidth_usage')
 ORDER BY date_id;
 
