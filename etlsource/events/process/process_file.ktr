@@ -1606,6 +1606,45 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
     </step>
 
   <step>
+    <name>domain lookup</name>
+    <type>ConcurrentSafeCombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dwh_dim_domain</table>
+      <connection>KalturaDW</connection>
+      <commit>100</commit>
+      <cache_size>9999</cache_size>
+      <replace>Y</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>domain</name>
+          <lookup>domain_name</lookup>
+        </key>
+        <return>
+          <name>domain_id</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1344</xloc>
+      <yloc>359</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>empty ps2 line</name>
     <type>Dummy</type>
     <description/>
@@ -2766,6 +2805,49 @@ Alert(getEnvironmentVar(strVarName));</jsScript_script>
     </step>
 
   <step>
+    <name>referrer lookup&#47;update</name>
+    <type>ConcurrentSafeCombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dwh_dim_domain_referrer</table>
+      <connection>KalturaDW</connection>
+      <commit>100</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>domain_id</name>
+          <lookup>domain_id</lookup>
+        </key>
+        <key>
+          <name>referrer_fixed</name>
+          <lookup>referrer</lookup>
+        </key>
+        <return>
+          <name>referrer_id</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1342</xloc>
+      <yloc>586</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>set file fullpath</name>
     <type>ScriptValueMod</type>
     <description/>
@@ -3117,88 +3199,6 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1344</xloc>
       <yloc>662</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>domain lookup</name>
-    <type>ConcurrentSafeCombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <schema/>
-      <table>dwh_dim_domain</table>
-      <connection>KalturaDW</connection>
-      <commit>100</commit>
-      <cache_size>9999</cache_size>
-      <replace>Y</replace>
-      <crc>N</crc>
-      <crcfield>hashcode</crcfield>
-      <fields>
-        <key>
-          <name>domain</name>
-          <lookup>domain_name</lookup>
-        </key>
-        <return>
-          <name>domain_id</name>
-          <creation_method>autoinc</creation_method>
-          <use_autoinc>Y</use_autoinc>
-        </return>
-      </fields>
-      <sequence/>
-      <last_update_field/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1344</xloc>
-      <yloc>359</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>referrer lookup&#47;update</name>
-    <type>ConcurrentSafeCombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <schema/>
-      <table>dwh_dim_domain_referrer</table>
-      <connection>KalturaDW</connection>
-      <commit>100</commit>
-      <cache_size>9999</cache_size>
-      <replace>Y</replace>
-      <crc>N</crc>
-      <crcfield>hashcode</crcfield>
-      <fields>
-        <key>
-          <name>domain_id</name>
-          <lookup>domain_id</lookup>
-        </key>
-        <key>
-          <name>referrer_fixed</name>
-          <lookup>referrer</lookup>
-        </key>
-        <return>
-          <name>referrer_id</name>
-          <creation_method>autoinc</creation_method>
-          <use_autoinc>Y</use_autoinc>
-        </return>
-      </fields>
-      <sequence/>
-      <last_update_field/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1342</xloc>
-      <yloc>586</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
