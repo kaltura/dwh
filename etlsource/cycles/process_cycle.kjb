@@ -13,13 +13,13 @@
     <parameters>
         <parameter>
             <name>ProcessID</name>
-            <default_value></default_value>
-            <description></description>
+            <default_value>null</default_value>
+            <description>null</description>
         </parameter>
         <parameter>
             <name>ProcessJob</name>
-            <default_value></default_value>
-            <description></description>
+            <default_value>null</default_value>
+            <description>null</description>
         </parameter>
     </parameters>
   <connection>
@@ -227,8 +227,9 @@
       <name>Get generated cycles</name>
       <description>Transformation</description>
       <type>TRANS</type>
-      <filename>${EtlBasePath}cycles&#47;read_waiting_cycle.ktr</filename>
+      <filename>${EtlBasePath}cycles&#47;read_assigned_cycles_by_status.ktr</filename>
       <transname/>
+      <directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -245,7 +246,10 @@
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
+            <parameter>            <name>CycleStatus</name>
+            <stream_name/>
+            <value>GENERATED</value>
+            </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>200</xloc>
@@ -277,8 +281,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>380</xloc>
-      <yloc>120</yloc>
+      <xloc>325</xloc>
+      <yloc>121</yloc>
       </entry>
   </entries>
   <hops>

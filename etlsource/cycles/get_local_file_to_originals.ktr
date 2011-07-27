@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Fetch local files</name>
+    <name>get_local_file_to_originals</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -49,7 +49,7 @@
     <clusterschemas>
     </clusterschemas>
   <modified_user>-</modified_user>
-  <modified_date>2011&#47;04&#47;11 16:31:22.928</modified_date>
+  <modified_date>2011&#47;07&#47;17 18:24:07.424</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -200,63 +200,9 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get rows from result</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>Create target filename</to><enabled>Y</enabled> </hop>  <hop> <from>Create target filename</from><to>Process files</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Create source filename</from><to>Copy to originals</to><enabled>Y</enabled> </hop>  <hop> <from>Mapping input specification</from><to>Create source filename</to><enabled>Y</enabled> </hop>  <hop> <from>Copy to originals</from><to>Mapping output specification</to><enabled>Y</enabled> </hop>  </order>
   <step>
-    <name>Get Variables</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>target_dir</name>
-        <variable>${TempDestination}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>285</xloc>
-      <yloc>209</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get rows from result</name>
-    <type>RowsFromResult</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>filename</name>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        </field>      </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>152</xloc>
-      <yloc>210</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Process files</name>
+    <name>Copy to originals</name>
     <type>ProcessFiles</type>
     <description/>
     <distribute>Y</distribute>
@@ -265,8 +211,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <sourcefilenamefield>filename</sourcefilenamefield>
-    <targetfilenamefield>target_filename</targetfilenamefield>
+    <sourcefilenamefield>source_filename</sourcefilenamefield>
+    <targetfilenamefield>originals_filename</targetfilenamefield>
     <operation_type>copy</operation_type>
     <addresultfilenames>N</addresultfilenames>
     <overwritetargetfile>N</overwritetargetfile>
@@ -274,14 +220,14 @@
     <simulate>N</simulate>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>534</xloc>
-      <yloc>210</yloc>
+      <xloc>323</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Create target filename</name>
+    <name>Create source filename</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -295,17 +241,100 @@
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
 
-target_filename = target_dir + &quot;&#47;&quot; + getShortFilename(filename);</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>target_filename</name>
-        <rename>target_filename</rename>
+suffix = compression_suffix ? &quot;.&quot; + compression_suffix : &apos;&apos;;
+source_filename = logs_dir + &quot;&#47;&quot; + file_name + suffix;
+</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>source_filename</name>
+        <rename>source_filename</rename>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>404</xloc>
-      <yloc>209</yloc>
+      <xloc>194</xloc>
+      <yloc>46</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Mapping input specification</name>
+    <type>MappingInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>file_name</name>
+        <type>String</type>
+        <length>0</length>
+        <precision>0</precision>
+      </field>
+      <field>
+        <name>cycle_id</name>
+        <type>Integer</type>
+        <length>0</length>
+        <precision>0</precision>
+      </field>
+      <field>
+        <name>compression_suffix</name>
+        <type>String</type>
+        <length>0</length>
+        <precision>0</precision>
+      </field>
+      <field>
+        <name>file_id</name>
+        <type>Integer</type>
+        <length>0</length>
+        <precision>0</precision>
+      </field>
+      <field>
+        <name>process_id</name>
+        <type>Integer</type>
+        <length>0</length>
+        <precision>0</precision>
+      </field>
+      <field>
+        <name>process_path</name>
+        <type>String</type>
+        <length>0</length>
+        <precision>0</precision>
+      </field>
+      <field>
+        <name>cycle_path</name>
+        <type>String</type>
+        <length>0</length>
+        <precision>0</precision>
+      </field>
+        <select_unspecified>N</select_unspecified>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>45</xloc>
+      <yloc>47</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Mapping output specification</name>
+    <type>MappingOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>465</xloc>
+      <yloc>49</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

@@ -169,11 +169,12 @@
    <shared_objects_file/>
   <entries>
     <entry>
-      <name>get waiting files</name>
+      <name>get in_cycle files</name>
       <description>Transformation</description>
       <type>TRANS</type>
-      <filename>${EtlBasePath}cycles&#47;read_waiting_files.ktr</filename>
+      <filename>${EtlBasePath}cycles&#47;read_in_cycle_files.ktr</filename>
       <transname/>
+      <directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -375,7 +376,7 @@
   </entries>
   <hops>
     <hop>
-      <from>get waiting files</from>
+      <from>get in_cycle files</from>
       <to>file_processing_job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -403,7 +404,7 @@
     </hop>
     <hop>
       <from>empty_cycle_partition</from>
-      <to>get waiting files</to>
+      <to>get in_cycle files</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

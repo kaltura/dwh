@@ -13,58 +13,58 @@
     <parameters>
         <parameter>
             <name>FetchFTPPassword</name>
-            <default_value></default_value>
-            <description></description>
+            <default_value>null</default_value>
+            <description>null</description>
         </parameter>
         <parameter>
             <name>FetchFTPPort</name>
-            <default_value></default_value>
-            <description></description>
+            <default_value>null</default_value>
+            <description>null</description>
         </parameter>
         <parameter>
             <name>FetchFTPServer</name>
-            <default_value></default_value>
-            <description></description>
+            <default_value>null</default_value>
+            <description>null</description>
         </parameter>
         <parameter>
             <name>FetchFTPUser</name>
-            <default_value></default_value>
-            <description></description>
+            <default_value>null</default_value>
+            <description>null</description>
         </parameter>
         <parameter>
             <name>FetchJob</name>
-            <default_value></default_value>
-            <description></description>
+            <default_value>null</default_value>
+            <description>null</description>
         </parameter>
         <parameter>
             <name>FetchLogsDir</name>
-            <default_value></default_value>
-            <description></description>
+            <default_value>null</default_value>
+            <description>null</description>
         </parameter>
         <parameter>
             <name>FetchMethod</name>
-            <default_value></default_value>
-            <description></description>
+            <default_value>null</default_value>
+            <description>null</description>
         </parameter>
         <parameter>
             <name>FetchWildcard</name>
-            <default_value></default_value>
-            <description></description>
+            <default_value>null</default_value>
+            <description>null</description>
         </parameter>
         <parameter>
             <name>IsArchived</name>
-            <default_value></default_value>
-            <description></description>
+            <default_value>null</default_value>
+            <description>null</description>
         </parameter>
         <parameter>
             <name>ProcessID</name>
-            <default_value></default_value>
-            <description></description>
+            <default_value>null</default_value>
+            <description>null</description>
         </parameter>
         <parameter>
             <name>TempDestination</name>
-            <default_value></default_value>
-            <description></description>
+            <default_value>null</default_value>
+            <description>null</description>
         </parameter>
     </parameters>
   <connection>
@@ -244,214 +244,6 @@
       <yloc>120</yloc>
       </entry>
     <entry>
-      <name>Generate cycle</name>
-      <description>Transformation</description>
-      <type>TRANS</type>
-      <filename>${EtlBasePath}cycles&#47;generate_cycle.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>500</xloc>
-      <yloc>120</yloc>
-      </entry>
-    <entry>
-      <name>Register files</name>
-      <description>Transformation</description>
-      <type>TRANS</type>
-      <filename>${EtlBasePath}cycles&#47;register_files.ktr</filename>
-      <transname/>
-      <arg_from_previous>Y</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1440</xloc>
-      <yloc>120</yloc>
-      </entry>
-    <entry>
-      <name>get files</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${FetchJob}</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>340</xloc>
-      <yloc>120</yloc>
-      </entry>
-    <entry>
-      <name>set cycle status generated</name>
-      <description>Transformation</description>
-      <type>TRANS</type>
-      <filename>${EtlBasePath}cycles&#47;set_cycle_status.ktr</filename>
-      <transname/>
-      <arg_from_previous>Y</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>new_status</name>
-            <stream_name/>
-            <value>&apos;GENERATED&apos;</value>
-            </parameter>      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1440</xloc>
-      <yloc>320</yloc>
-      </entry>
-    <entry>
-      <name>set cycle status generating</name>
-      <description>Transformation</description>
-      <type>TRANS</type>
-      <filename>${EtlBasePath}cycles&#47;set_cycle_status.ktr</filename>
-      <transname/>
-      <arg_from_previous>Y</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>new_status</name>
-            <stream_name/>
-            <value>&apos;GENERATING&apos;</value>
-            </parameter>      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1080</xloc>
-      <yloc>120</yloc>
-      </entry>
-    <entry>
-      <name>Create originals cycle folder</name>
-      <description>Create a folder</description>
-      <type>CREATE_FOLDER</type>
-      <foldername>${CyclePath}originals&#47;${CycleID}&#47;</foldername>
-      <fail_of_folder_exists>Y</fail_of_folder_exists>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>620</xloc>
-      <yloc>120</yloc>
-      </entry>
-    <entry>
-      <name>Success</name>
-      <description>Success</description>
-      <type>SUCCESS</type>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1440</xloc>
-      <yloc>420</yloc>
-      </entry>
-    <entry>
-      <name>split_files</name>
-      <description>Transformation</description>
-      <type>TRANS</type>
-      <filename>${EtlBasePath}&#47;cycles&#47;split_files.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1180</xloc>
-      <yloc>120</yloc>
-      </entry>
-    <entry>
-      <name>Check for files</name>
-      <description>Check if a folder is empty</description>
-      <type>FOLDER_IS_EMPTY</type>
-      <foldername>${CyclePath}generate&#47;${ProcessName}</foldername>
-      <include_subfolders>N</include_subfolders>
-      <specify_wildcard>Y</specify_wildcard>
-      <wildcard>${FetchWildcard}</wildcard>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>420</xloc>
-      <yloc>120</yloc>
-      </entry>
-    <entry>
       <name>Validate process exists in DB</name>
       <description>Transformation</description>
       <type>TRANS</type>
@@ -480,13 +272,13 @@
       <yloc>119</yloc>
       </entry>
     <entry>
-      <name>Unzip and archive</name>
+      <name>Get files for registered cycles</name>
       <description>Transformation</description>
       <type>TRANS</type>
-      <filename>${EtlBasePath}cycles&#47;unzip_files.ktr</filename>
+      <filename>${EtlBasePath}&#47;cycles&#47;get_files_for_registered_cycles.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
+      <exec_per_row>Y</exec_per_row>
       <clear_rows>N</clear_rows>
       <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
@@ -504,15 +296,16 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>749</xloc>
-      <yloc>121</yloc>
+      <xloc>770</xloc>
+      <yloc>119</yloc>
       </entry>
     <entry>
-      <name>Print Cycle ID to stream for generated</name>
+      <name>Get registered cycles</name>
       <description>Transformation</description>
       <type>TRANS</type>
-      <filename>${EtlBasePath}cycles&#47;print_cycle_id_to_stream.ktr</filename>
+      <filename>${EtlBasePath}&#47;cycles&#47;read_assigned_cycles_by_status.ktr</filename>
       <transname/>
+      <directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -529,169 +322,73 @@
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1440</xloc>
-      <yloc>220</yloc>
-      </entry>
-    <entry>
-      <name>Print Cycle ID to stream for generating</name>
-      <description>Transformation</description>
-      <type>TRANS</type>
-      <filename>${EtlBasePath}cycles&#47;print_cycle_id_to_stream.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>900</xloc>
-      <yloc>120</yloc>
-      </entry>
-    <entry>
-      <name>Print Cycle ID to stream for failed</name>
-      <description>Transformation</description>
-      <type>TRANS</type>
-      <filename>${EtlBasePath}cycles&#47;print_cycle_id_to_stream.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1180</xloc>
-      <yloc>220</yloc>
-      </entry>
-    <entry>
-      <name>set cycle status failed</name>
-      <description>Transformation</description>
-      <type>TRANS</type>
-      <filename>${EtlBasePath}cycles&#47;set_cycle_status.ktr</filename>
-      <transname/>
-      <arg_from_previous>Y</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>new_status</name>
+            <parameter>            <name>CycleStatus</name>
             <stream_name/>
-            <value>&apos;FAILED&apos;</value>
+            <value>REGISTERED</value>
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1180</xloc>
-      <yloc>320</yloc>
+      <xloc>614</xloc>
+      <yloc>118</yloc>
       </entry>
     <entry>
-      <name>Check if a generate folder is empty</name>
-      <description>Check if a folder is empty</description>
-      <type>FOLDER_IS_EMPTY</type>
-      <foldername>${CyclePath}generate&#47;${ProcessName}</foldername>
-      <include_subfolders>N</include_subfolders>
-      <specify_wildcard>Y</specify_wildcard>
-      <wildcard>(split_)?${FetchWildcard}.*</wildcard>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1300</xloc>
-      <yloc>120</yloc>
-      </entry>
-    <entry>
-      <name>Clean generate folder</name>
-      <description>Delete files</description>
-      <type>DELETE_FILES</type>
+      <name>List files from dir (Dynamic ktr load)</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename>${EtlBasePath}&#47;common&#47;list_files_from_${FetchMethod}_dir.ktr</filename>
+      <transname/>
       <arg_from_previous>N</arg_from_previous>
-      <include_subfolders>N</include_subfolders>
-      <fields>
-        <field>
-          <name>${GeneratePath}&#47;${ProcessName}</name>
-          <filemask>.*</filemask>
-        </field>
-      </fields>
-      <parallel>N</parallel>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>260</xloc>
-      <yloc>106</yloc>
+      <xloc>324</xloc>
+      <yloc>118</yloc>
+      </entry>
+    <entry>
+      <name>Register files</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename>${EtlBasePath}&#47;cycles&#47;register_files.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>476</xloc>
+      <yloc>119</yloc>
       </entry>
   </entries>
   <hops>
-    <hop>
-      <from>set cycle status generated</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>set cycle status generating</from>
-      <to>split_files</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>get files</from>
-      <to>Check for files</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Check for files</from>
-      <to>Generate cycle</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
     <hop>
       <from>START</from>
       <to>Validate process exists in DB</to>
@@ -702,89 +399,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Print Cycle ID to stream for generated</from>
-      <to>set cycle status generated</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Unzip and archive</from>
-      <to>Print Cycle ID to stream for generating</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Print Cycle ID to stream for generating</from>
-      <to>set cycle status generating</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Print Cycle ID to stream for failed</from>
-      <to>set cycle status failed</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Check if a generate folder is empty</from>
-      <to>Register files</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Check if a generate folder is empty</from>
-      <to>Print Cycle ID to stream for failed</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Generate cycle</from>
-      <to>Create originals cycle folder</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Create originals cycle folder</from>
-      <to>Unzip and archive</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Register files</from>
-      <to>Print Cycle ID to stream for generated</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>split_files</from>
-      <to>Check if a generate folder is empty</to>
+      <from>Get registered cycles</from>
+      <to>Get files for registered cycles</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -793,7 +409,7 @@
     </hop>
     <hop>
       <from>Validate process exists in DB</from>
-      <to>Clean generate folder</to>
+      <to>List files from dir (Dynamic ktr load)</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -801,8 +417,17 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Clean generate folder</from>
-      <to>get files</to>
+      <from>List files from dir (Dynamic ktr load)</from>
+      <to>Register files</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Register files</from>
+      <to>Get registered cycles</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
