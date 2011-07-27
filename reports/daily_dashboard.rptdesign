@@ -6799,6 +6799,7 @@ day + month / 100</Definition>
             <row id="822">
                 <cell id="823">
                     <grid id="824">
+                        <property name="textAlign">left</property>
                         <property name="dataSet">Usage by CDN</property>
                         <list-property name="boundDataColumns">
                             <structure>
