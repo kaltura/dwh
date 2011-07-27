@@ -2867,6 +2867,7 @@ day + month / 100</Definition>
                 </cell>
             </row>
             <row id="392">
+                <property name="pageBreakBefore">always</property>
                 <cell id="393">
                     <extended-item extensionName="Chart" id="39">
                         <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
@@ -4213,6 +4214,7 @@ day + month / 100</Definition>
                 </cell>
             </row>
             <row id="817">
+                <property name="pageBreakBefore">always</property>
                 <cell id="818">
                     <extended-item extensionName="Chart" id="819">
                         <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
@@ -6919,6 +6921,7 @@ day + month / 100</Definition>
                 </cell>
             </row>
             <row id="408">
+                <property name="pageBreakBefore">always</property>
                 <cell id="409">
                     <extended-item extensionName="Chart" id="96">
                         <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
@@ -8250,6 +8253,7 @@ day + month / 100</Definition>
                 </cell>
             </row>
             <row id="402">
+                <property name="pageBreakBefore">always</property>
                 <cell id="403">
                     <extended-item extensionName="Chart" id="40">
                         <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
@@ -9770,7 +9774,7 @@ day + month / 100</Definition>
         </Color>
         <Visible>true</Visible>
       </Separator>
-      <Position>Right</Position>
+      <Position>Below</Position>
       <ItemType>Series</ItemType>
       <Title>
         <Caption>
@@ -9852,7 +9856,7 @@ function beforeGeneration( chart, icsc )
 	yAxis = chart.getOrthogonalAxes( xAxis, true )[0];
 	seriesDef = yAxis.getSeriesDefinitions().get(0);
 	runSeries = seriesDef.getRunTimeSeries()[0];
-	chart.getBlock().getBounds().setHeight(300);
+	chart.getBlock().getBounds().setHeight(450);
 	chart.getBlock().getBounds().setWidth(550);
 }
 </Script>
@@ -12270,7 +12274,7 @@ day + month / 100</Definition>
                         <property name="pageBreakBefore">always</property>
                         <structure name="toc"/>
                         <property name="dataSet">EntryTypes</property>
-                        <property name="height">300px</property>
+                        <property name="height">450px</property>
                         <property name="width">750px</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -12797,7 +12801,7 @@ function beforeGeneration( chart, icsc )&#xD;
 	seriesDef = yAxis.getSeriesDefinitions().get(0);&#xD;
 	runSeries = seriesDef.getRunTimeSeries()[0];&#xD;
 	chart.getBlock().getBounds().setHeight(275);&#xD;
-	chart.getBlock().getBounds().setWidth(750);&#xD;
+	chart.getBlock().getBounds().setWidth(550);&#xD;
 }&#xD;
 </Script>
   <Units>Points</Units>
@@ -14571,7 +14575,7 @@ function beforeGeneration( chart, icsc )&#xD;
 	seriesDef = yAxis.getSeriesDefinitions().get(0);&#xD;
 	runSeries = seriesDef.getRunTimeSeries()[0];&#xD;
 	chart.getBlock().getBounds().setHeight(275);&#xD;
-	chart.getBlock().getBounds().setWidth(750);&#xD;
+	chart.getBlock().getBounds().setWidth(550);&#xD;
 }&#xD;
 </Script>
   <Units>Points</Units>
