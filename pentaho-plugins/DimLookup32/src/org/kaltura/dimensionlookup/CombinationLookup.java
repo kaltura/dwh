@@ -785,7 +785,14 @@ public class CombinationLookup extends BaseStep implements StepInterface
 			}
 
 			data.dbRead=new Database(meta.getDatabaseReadMeta());
-			data.dbWrite=new Database(meta.getDatabaseWriteMeta());
+			if(meta.getDatabaseReadMeta().equals(meta.getDatabaseWriteMeta()))
+			{
+				data.dbWrite = data.dbRead;
+			}
+			else
+			{
+				data.dbWrite=new Database(meta.getDatabaseWriteMeta());
+			}
 			data.dbRead.shareVariablesWith(this);
 			data.dbWrite.shareVariablesWith(this);
 			try
@@ -795,26 +802,35 @@ public class CombinationLookup extends BaseStep implements StepInterface
 					synchronized (getTrans()) 
 					{ 
 						data.dbRead.connect(getTrans().getThreadName(), getPartitionID());
-						data.dbWrite.connect(getTrans().getThreadName(), getPartitionID());
+						if(!data.dbWrite.equals(data.dbRead))
+						{
+							data.dbWrite.connect(getTrans().getThreadName(), getPartitionID());
+						}
 					}
 				} 
 				else 
 				{
 					data.dbRead.connect(getPartitionID());
-					data.dbWrite.connect(getPartitionID());
+					if(!data.dbWrite.equals(data.dbRead))
+					{
+						data.dbWrite.connect(getPartitionID());
+					}
 				}
 
 				if (log.isDetailed()) logDetailed(Messages.getString("ConcurrentCombinationLookup.Log.ConnectedToDB")); //$NON-NLS-1$
 				data.dbWrite.setCommit(meta.getCommitSize());
-				data.dbRead.setAutoCommit(true);
-				data.dbRead.setCommit(0);
-				try
+				if(!data.dbWrite.equals(data.dbRead))
 				{
-					data.dbRead.getConnection().setReadOnly(true);
-				} catch (SQLException e)
-				{
-					throw new KettleDatabaseException("Set Read Only Failed",e);
+					data.dbRead.setAutoCommit(true);
+					try
+					{
+						data.dbRead.getConnection().setReadOnly(true);
+					} catch (SQLException e)
+					{
+						throw new KettleDatabaseException("Set Read Only Failed",e);
+					}
 				}
+								
 				return true;
 			}
 			catch(KettleDatabaseException dbe)
