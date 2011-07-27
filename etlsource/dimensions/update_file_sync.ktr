@@ -212,7 +212,7 @@ to the older version and its data.</note>
     </attributes>
   </connection>
   <order>
-  <hop> <from>Table input</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get Now</from><to>Insert &#47; Update File Sync</to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>Fix file_size</to><enabled>Y</enabled> </hop>  <hop> <from>Update existing row version with new ID</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Get data of old id</to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults 2</from><to>Fix file_size 2</to><enabled>Y</enabled> </hop>  <hop> <from>Get data of old id</from><to>Set defaults 2</to><enabled>Y</enabled> </hop>  <hop> <from>Get existing file_sync combo ID</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log</from><to>Update existing row version with new ID</to><enabled>Y</enabled> </hop>  <hop> <from>Fix file_size 2</from><to>Get Now 2</to><enabled>Y</enabled> </hop>  <hop> <from>Get Now 2</from><to>Insert &#47; Update File Sync old record</to><enabled>Y</enabled> </hop>  <hop> <from>Update existing row version with new ID</from><to>Already updated</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update File Sync old record</from><to>Already updated 2</to><enabled>Y</enabled> </hop>  <hop> <from>Filter assets</from><to>Filter entries</to><enabled>Y</enabled> </hop>  <hop> <from>Filter entries</from><to> Not an asset nor entry</to><enabled>Y</enabled> </hop>  <hop> <from>Update missing flavor asset</from><to>Created new asset version</to><enabled>Y</enabled> </hop>  <hop> <from>Filter assets</from><to>Attempt to insert to flavor asset</to><enabled>Y</enabled> </hop>  <hop> <from>Filter entries</from><to>Set int_id = -1</to><enabled>Y</enabled> </hop>  <hop> <from>Set int_id = -1</from><to>Insert &#47; Update entries</to><enabled>Y</enabled> </hop>  <hop> <from>Create older flavor asset version sql</from><to>lookup latest flavor asset version</to><enabled>Y</enabled> </hop>  <hop> <from>lookup latest flavor asset version</from><to>Update missing flavor asset</to><enabled>Y</enabled> </hop>  <hop> <from>Attempt to insert to flavor asset</from><to>Create older flavor asset version sql</to><enabled>Y</enabled> </hop>  <hop> <from>Attempt to insert to flavor asset</from><to>Flavor Asset ID-Version exists</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Table input</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update entries</from><to>Lookup duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update File Sync</from><to>Switch &#47; Case</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>Existing ID</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>Get existing file_sync combo ID</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>Insert file_sync error</to><enabled>Y</enabled> </hop>  <hop> <from>Fix file_size</from><to>file_sync_object_type id</to><enabled>Y</enabled> </hop>  <hop> <from>file_sync_object_type id</from><to>file_sync_status id</to><enabled>Y</enabled> </hop>  <hop> <from>file_sync_status id</from><to>Get Now</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update File Sync</from><to>Set RI_IND 1</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI_IND 1</from><to>Filter assets</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Table input</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get Now</from><to>Insert &#47; Update File Sync</to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>Fix file_size</to><enabled>Y</enabled> </hop>  <hop> <from>Update existing row version with new ID</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Get data of old id</to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults 2</from><to>Fix file_size 2</to><enabled>Y</enabled> </hop>  <hop> <from>Get data of old id</from><to>Set defaults 2</to><enabled>Y</enabled> </hop>  <hop> <from>Get existing file_sync combo ID</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log</from><to>Update existing row version with new ID</to><enabled>Y</enabled> </hop>  <hop> <from>Fix file_size 2</from><to>Get Now 2</to><enabled>Y</enabled> </hop>  <hop> <from>Get Now 2</from><to>Insert &#47; Update File Sync old record</to><enabled>Y</enabled> </hop>  <hop> <from>Update existing row version with new ID</from><to>Already updated</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update File Sync old record</from><to>Already updated 2</to><enabled>Y</enabled> </hop>  <hop> <from>Filter assets</from><to>Filter entries</to><enabled>Y</enabled> </hop>  <hop> <from>Filter entries</from><to> Not an asset nor entry</to><enabled>Y</enabled> </hop>  <hop> <from>Filter assets</from><to>Attempt to insert to flavor asset</to><enabled>Y</enabled> </hop>  <hop> <from>Filter entries</from><to>Set int_id = -1</to><enabled>Y</enabled> </hop>  <hop> <from>Set int_id = -1</from><to>Insert &#47; Update entries</to><enabled>Y</enabled> </hop>  <hop> <from>Attempt to insert to flavor asset</from><to>Flavor Asset ID-Version exists</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Table input</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update entries</from><to>Lookup duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update File Sync</from><to>Switch &#47; Case</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>Existing ID</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>Get existing file_sync combo ID</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>Insert file_sync error</to><enabled>Y</enabled> </hop>  <hop> <from>Fix file_size</from><to>file_sync_object_type id</to><enabled>Y</enabled> </hop>  <hop> <from>file_sync_object_type id</from><to>file_sync_status id</to><enabled>Y</enabled> </hop>  <hop> <from>file_sync_status id</from><to>Get Now</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI_IND 1</from><to>Filter assets</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update File Sync</from><to>Set RI_IND 1</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name> Not an asset nor entry</name>
     <type>Dummy</type>
@@ -320,62 +320,6 @@ to the older version and its data.</note>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>804</xloc>
       <yloc>76</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Create older flavor asset version sql</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47;Script here
-
-var sqlCommand = &quot;SELECT &quot; + VERSION + &quot; none_existent_version,	flavor_params_id, id, int_id, partner_id, tags, entry_id, STATUS, description, width, height, bitrate, frame_rate, size, is_original, file_ext_id, container_format_id, video_codec_id FROM dwh_dim_flavor_asset WHERE id = &apos;&quot; + object_id + &quot;&apos; AND VERSION &lt; &quot; + VERSION + &quot; ORDER BY VERSION DESC&quot;;
-</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>sqlCommand</name>
-        <rename>sqlCommand</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>803</xloc>
-      <yloc>8</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Created new asset version</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-    <fields>
-      <field>
-        <name>id</name>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1319</xloc>
-      <yloc>7</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1709,109 +1653,6 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
     </step>
 
   <step>
-    <name>Update missing flavor asset</name>
-    <type>Update</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <skip_lookup>N</skip_lookup>
-    <commit>100</commit>
-    <error_ignored>N</error_ignored>
-    <ignore_flag_field/>
-    <lookup>
-      <schema/>
-      <table>dwh_dim_flavor_asset</table>
-      <key>
-        <name>id</name>
-        <field>id</field>
-        <condition>=</condition>
-        <name2/>
-        </key>
-      <key>
-        <name>none_existent_version</name>
-        <field>version</field>
-        <condition>=</condition>
-        <name2/>
-        </key>
-      <value>
-        <name>flavor_params_id</name>
-        <rename>flavor_params_id</rename>
-        </value>
-      <value>
-        <name>int_id</name>
-        <rename>int_id</rename>
-        </value>
-      <value>
-        <name>partner_id</name>
-        <rename>partner_id</rename>
-        </value>
-      <value>
-        <name>tags</name>
-        <rename>tags</rename>
-        </value>
-      <value>
-        <name>entry_id</name>
-        <rename>entry_id</rename>
-        </value>
-      <value>
-        <name>STATUS</name>
-        <rename>STATUS</rename>
-        </value>
-      <value>
-        <name>description</name>
-        <rename>description</rename>
-        </value>
-      <value>
-        <name>width</name>
-        <rename>width</rename>
-        </value>
-      <value>
-        <name>height</name>
-        <rename>height</rename>
-        </value>
-      <value>
-        <name>bitrate</name>
-        <rename>bitrate</rename>
-        </value>
-      <value>
-        <name>frame_rate</name>
-        <rename>frame_rate</rename>
-        </value>
-      <value>
-        <name>size</name>
-        <rename>size</rename>
-        </value>
-      <value>
-        <name>is_original</name>
-        <rename>is_original</rename>
-        </value>
-      <value>
-        <name>file_ext_id</name>
-        <rename>file_ext_id</rename>
-        </value>
-      <value>
-        <name>container_format_id</name>
-        <rename>container_format_id</rename>
-        </value>
-      <value>
-        <name>video_codec_id</name>
-        <rename>video_codec_id</rename>
-        </value>
-      </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1151</xloc>
-      <yloc>6</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Write to log</name>
     <type>WriteToLog</type>
     <description/>
@@ -1938,52 +1779,6 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
       </GUI>
     </step>
 
-  <step>
-    <name>lookup latest flavor asset version</name>
-    <type>DynamicSQLRow</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <rowlimit>1</rowlimit>
-    <sql>SELECT 
-	1 none_existent_version,
-	flavor_params_id, 
-	id,
-	int_id, 
-	partner_id, 
-	tags, 
-	entry_id, 
-	STATUS, 
-	description, 
-	width, 
-	height, 
-	bitrate, 
-	frame_rate, 
-	size, 
-	is_original, 
-	file_ext_id, 
-	container_format_id, 
-	video_codec_id
-	FROM 
-	dwh_dim_flavor_asset 
-</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>N</replace_vars>
-    <sql_fieldname>sqlCommand</sql_fieldname>
-    <query_only_on_change>Y</query_only_on_change>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>983</xloc>
-      <yloc>8</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step_error_handling>
       <error>
         <source_step>Attempt to insert to flavor asset</source_step>
@@ -2036,18 +1831,6 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
       <error>
         <source_step>Update existing row version with new ID</source_step>
         <target_step>Already updated</target_step>
-        <is_enabled>Y</is_enabled>
-        <nr_valuename/>
-        <descriptions_valuename/>
-        <fields_valuename/>
-        <codes_valuename/>
-        <max_errors>-1</max_errors>
-        <max_pct_errors>-1</max_pct_errors>
-        <min_pct_rows>-1</min_pct_rows>
-      </error>
-      <error>
-        <source_step>Update missing flavor asset</source_step>
-        <target_step>Created new asset version</target_step>
         <is_enabled>Y</is_enabled>
         <nr_valuename/>
         <descriptions_valuename/>
