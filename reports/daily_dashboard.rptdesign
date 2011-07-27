@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 2.6.2.r262_v20110209 Build &lt;2.6.2.v20110214-1523></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -2506,9 +2506,13 @@ day + month / 100</Definition>
                         <column id="509"/>
                         <column id="510"/>
                         <column id="511"/>
-                        <column id="512"/>
+                        <column id="514">
+                            <property name="repeat">1</property>
+                        </column>
                         <column id="513"/>
-                        <column id="514"/>
+                        <column id="512">
+                            <property name="repeat">1</property>
+                        </column>
                         <header>
                             <row id="476">
                                 <cell id="477">
@@ -2527,9 +2531,9 @@ day + month / 100</Definition>
                                         <text-property name="text">Paying?</text-property>
                                     </label>
                                 </cell>
-                                <cell id="483">
-                                    <label id="484">
-                                        <text-property name="text">Last seven days avg GB</text-property>
+                                <cell id="487">
+                                    <label id="488">
+                                        <text-property name="text">Yesterday GB</text-property>
                                     </label>
                                 </cell>
                                 <cell id="485">
@@ -2537,9 +2541,9 @@ day + month / 100</Definition>
                                         <text-property name="text">Two days ago GB</text-property>
                                     </label>
                                 </cell>
-                                <cell id="487">
-                                    <label id="488">
-                                        <text-property name="text">Yesterday GB</text-property>
+                                <cell id="483">
+                                    <label id="484">
+                                        <text-property name="text">Last seven days avg GB</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -2564,10 +2568,10 @@ day + month / 100</Definition>
                                         <property name="resultSetColumn">is_paying</property>
                                     </data>
                                 </cell>
-                                <cell id="496">
-                                    <data id="497">
+                                <cell id="500">
+                                    <data id="501">
                                         <property name="whiteSpace">nowrap</property>
-                                        <property name="resultSetColumn">avg_count_bandwidth_kb</property>
+                                        <property name="resultSetColumn">count_bandwidth_kb</property>
                                     </data>
                                 </cell>
                                 <cell id="498">
@@ -2576,10 +2580,10 @@ day + month / 100</Definition>
                                         <property name="resultSetColumn">2_days_ago_count_bandwidth_kb</property>
                                     </data>
                                 </cell>
-                                <cell id="500">
-                                    <data id="501">
+                                <cell id="496">
+                                    <data id="497">
                                         <property name="whiteSpace">nowrap</property>
-                                        <property name="resultSetColumn">count_bandwidth_kb</property>
+                                        <property name="resultSetColumn">avg_count_bandwidth_kb</property>
                                     </data>
                                 </cell>
                             </row>
@@ -2589,9 +2593,9 @@ day + month / 100</Definition>
                                 <cell id="503"/>
                                 <cell id="504"/>
                                 <cell id="505"/>
-                                <cell id="506"/>
-                                <cell id="507"/>
                                 <cell id="508"/>
+                                <cell id="507"/>
+                                <cell id="506"/>
                             </row>
                         </footer>
                     </table>
@@ -3825,9 +3829,13 @@ day + month / 100</Definition>
                         <column id="632"/>
                         <column id="633"/>
                         <column id="634"/>
-                        <column id="635"/>
-                        <column id="636"/>
                         <column id="637"/>
+                        <column id="636">
+                            <property name="repeat">1</property>
+                        </column>
+                        <column id="635">
+                            <property name="repeat">1</property>
+                        </column>
                         <header>
                             <row id="599">
                                 <cell id="600">
@@ -3848,10 +3856,10 @@ day + month / 100</Definition>
                                         <text-property name="text">Paying?</text-property>
                                     </label>
                                 </cell>
-                                <cell id="606">
+                                <cell id="610">
                                     <property name="textAlign">left</property>
-                                    <label id="607">
-                                        <text-property name="text">Last seven days avg MB</text-property>
+                                    <label id="611">
+                                        <text-property name="text">Yesterday MB</text-property>
                                     </label>
                                 </cell>
                                 <cell id="608">
@@ -3860,10 +3868,10 @@ day + month / 100</Definition>
                                         <text-property name="text">Two days ago MB</text-property>
                                     </label>
                                 </cell>
-                                <cell id="610">
+                                <cell id="606">
                                     <property name="textAlign">left</property>
-                                    <label id="611">
-                                        <text-property name="text">Yesterday MB</text-property>
+                                    <label id="607">
+                                        <text-property name="text">Last seven days avg MB</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -3891,11 +3899,11 @@ day + month / 100</Definition>
                                         <property name="resultSetColumn">is_paying</property>
                                     </data>
                                 </cell>
-                                <cell id="619">
+                                <cell id="623">
                                     <property name="textAlign">left</property>
-                                    <data id="620">
+                                    <data id="624">
                                         <property name="whiteSpace">nowrap</property>
-                                        <property name="resultSetColumn">avg_count_bandwidth_kb</property>
+                                        <property name="resultSetColumn">count_bandwidth_kb</property>
                                     </data>
                                 </cell>
                                 <cell id="621">
@@ -3905,11 +3913,11 @@ day + month / 100</Definition>
                                         <property name="resultSetColumn">2_days_ago_count_bandwidth_kb</property>
                                     </data>
                                 </cell>
-                                <cell id="623">
+                                <cell id="619">
                                     <property name="textAlign">left</property>
-                                    <data id="624">
+                                    <data id="620">
                                         <property name="whiteSpace">nowrap</property>
-                                        <property name="resultSetColumn">count_bandwidth_kb</property>
+                                        <property name="resultSetColumn">avg_count_bandwidth_kb</property>
                                     </data>
                                 </cell>
                             </row>
@@ -3925,13 +3933,13 @@ day + month / 100</Definition>
                                 <cell id="628">
                                     <property name="textAlign">left</property>
                                 </cell>
-                                <cell id="629">
+                                <cell id="631">
                                     <property name="textAlign">left</property>
                                 </cell>
                                 <cell id="630">
                                     <property name="textAlign">left</property>
                                 </cell>
-                                <cell id="631">
+                                <cell id="629">
                                     <property name="textAlign">left</property>
                                 </cell>
                             </row>
@@ -5173,9 +5181,13 @@ day + month / 100</Definition>
                         <column id="731"/>
                         <column id="732"/>
                         <column id="733"/>
-                        <column id="734"/>
-                        <column id="735"/>
                         <column id="736"/>
+                        <column id="735">
+                            <property name="repeat">1</property>
+                        </column>
+                        <column id="734">
+                            <property name="repeat">1</property>
+                        </column>
                         <header>
                             <row id="698">
                                 <cell id="699">
@@ -5193,9 +5205,9 @@ day + month / 100</Definition>
                                         <text-property name="text">Paying?</text-property>
                                     </label>
                                 </cell>
-                                <cell id="705">
-                                    <label id="706">
-                                        <text-property name="text">Last seven days avg</text-property>
+                                <cell id="709">
+                                    <label id="710">
+                                        <text-property name="text">Yesterday</text-property>
                                     </label>
                                 </cell>
                                 <cell id="707">
@@ -5203,9 +5215,9 @@ day + month / 100</Definition>
                                         <text-property name="text">Two days ago</text-property>
                                     </label>
                                 </cell>
-                                <cell id="709">
-                                    <label id="710">
-                                        <text-property name="text">Yesterday</text-property>
+                                <cell id="705">
+                                    <label id="706">
+                                        <text-property name="text">Last seven days avg</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -5230,6 +5242,18 @@ day + month / 100</Definition>
                                         <property name="resultSetColumn">is_paying</property>
                                     </data>
                                 </cell>
+                                <cell id="722">
+                                    <data id="723">
+                                        <property name="whiteSpace">nowrap</property>
+                                        <property name="resultSetColumn">count_plays</property>
+                                    </data>
+                                </cell>
+                                <cell id="720">
+                                    <data id="721">
+                                        <property name="whiteSpace">nowrap</property>
+                                        <property name="resultSetColumn">2_days_ago_count_plays</property>
+                                    </data>
+                                </cell>
                                 <cell id="718">
                                     <data id="719">
                                         <structure name="numberFormat">
@@ -5239,18 +5263,6 @@ day + month / 100</Definition>
                                         <property name="resultSetColumn">avg_count_plays</property>
                                     </data>
                                 </cell>
-                                <cell id="720">
-                                    <data id="721">
-                                        <property name="whiteSpace">nowrap</property>
-                                        <property name="resultSetColumn">2_days_ago_count_plays</property>
-                                    </data>
-                                </cell>
-                                <cell id="722">
-                                    <data id="723">
-                                        <property name="whiteSpace">nowrap</property>
-                                        <property name="resultSetColumn">count_plays</property>
-                                    </data>
-                                </cell>
                             </row>
                         </detail>
                         <footer>
@@ -5258,9 +5270,9 @@ day + month / 100</Definition>
                                 <cell id="725"/>
                                 <cell id="726"/>
                                 <cell id="727"/>
-                                <cell id="728"/>
-                                <cell id="729"/>
                                 <cell id="730"/>
+                                <cell id="729"/>
+                                <cell id="728"/>
                             </row>
                         </footer>
                     </table>
@@ -6497,9 +6509,13 @@ day + month / 100</Definition>
                         <column id="675"/>
                         <column id="676"/>
                         <column id="677"/>
-                        <column id="678"/>
-                        <column id="679"/>
                         <column id="680"/>
+                        <column id="679">
+                            <property name="repeat">1</property>
+                        </column>
+                        <column id="678">
+                            <property name="repeat">1</property>
+                        </column>
                         <header>
                             <row id="642">
                                 <cell id="643">
@@ -6517,9 +6533,9 @@ day + month / 100</Definition>
                                         <text-property name="text">Paying?</text-property>
                                     </label>
                                 </cell>
-                                <cell id="649">
-                                    <label id="650">
-                                        <text-property name="text">Last seven days avg GB</text-property>
+                                <cell id="653">
+                                    <label id="654">
+                                        <text-property name="text">Yesterday GB</text-property>
                                     </label>
                                 </cell>
                                 <cell id="651">
@@ -6527,9 +6543,9 @@ day + month / 100</Definition>
                                         <text-property name="text">Two days ago GB</text-property>
                                     </label>
                                 </cell>
-                                <cell id="653">
-                                    <label id="654">
-                                        <text-property name="text">Yesterday GB</text-property>
+                                <cell id="649">
+                                    <label id="650">
+                                        <text-property name="text">Last seven days avg GB</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -6554,10 +6570,10 @@ day + month / 100</Definition>
                                         <property name="resultSetColumn">is_paying</property>
                                     </data>
                                 </cell>
-                                <cell id="662">
-                                    <data id="663">
+                                <cell id="666">
+                                    <data id="667">
                                         <property name="whiteSpace">nowrap</property>
-                                        <property name="resultSetColumn">avg_count_bandwidth_kb</property>
+                                        <property name="resultSetColumn">count_bandwidth_kb</property>
                                     </data>
                                 </cell>
                                 <cell id="664">
@@ -6566,10 +6582,10 @@ day + month / 100</Definition>
                                         <property name="resultSetColumn">2_days_ago_count_bandwidth_kb</property>
                                     </data>
                                 </cell>
-                                <cell id="666">
-                                    <data id="667">
+                                <cell id="662">
+                                    <data id="663">
                                         <property name="whiteSpace">nowrap</property>
-                                        <property name="resultSetColumn">count_bandwidth_kb</property>
+                                        <property name="resultSetColumn">avg_count_bandwidth_kb</property>
                                     </data>
                                 </cell>
                             </row>
@@ -6579,9 +6595,9 @@ day + month / 100</Definition>
                                 <cell id="669"/>
                                 <cell id="670"/>
                                 <cell id="671"/>
-                                <cell id="672"/>
-                                <cell id="673"/>
                                 <cell id="674"/>
+                                <cell id="673"/>
+                                <cell id="672"/>
                             </row>
                         </footer>
                     </table>
@@ -6877,7 +6893,7 @@ function beforeGeneration( chart, icsc )
   </ExtendedProperties>
   <SampleData>
     <BaseSampleData>
-      <DataSetRepresentation>01/05/2000,02/01/2000,04/12/2000,03/12/2000,02/29/2000</DataSetRepresentation>
+      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
     </BaseSampleData>
     <OrthogonalSampleData>
       <DataSetRepresentation>5,4,12</DataSetRepresentation>
@@ -6943,7 +6959,7 @@ function beforeGeneration( chart, icsc )
     <Visible>false</Visible>
   </EmptyMessage>
   <Axes>
-    <Type>DateTime</Type>
+    <Type>Linear</Type>
     <Title>
       <Caption>
         <Value>X-Axis Title</Value>
@@ -9145,7 +9161,9 @@ function beforeGeneration( chart, icsc )
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>row[&quot;date_id&quot;]</Definition>
+          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;]);&#xD;
+var day = BirtDateTime.day(row[&quot;date_id&quot;]);&#xD;
+day + month / 100</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -9160,7 +9178,7 @@ function beforeGeneration( chart, icsc )
       <Grouping>
         <Enabled>false</Enabled>
         <GroupingUnit>Years</GroupingUnit>
-        <GroupType>DateTime</GroupType>
+        <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
       <Sorting>Ascending</Sorting>
@@ -9179,6 +9197,7 @@ function beforeGeneration( chart, icsc )
         <Value></Value>
         <Font>
           <Alignment/>
+          <Rotation>90.0</Rotation>
         </Font>
       </Caption>
       <Background xsi:type="attribute:ColorDefinition">
@@ -9818,7 +9837,7 @@ function beforeGeneration( chart, icsc )&#xD;
   </ExtendedProperties>
   <SampleData>
     <BaseSampleData>
-      <DataSetRepresentation>01/05/2000,02/01/2000,04/12/2000,03/12/2000,02/29/2000</DataSetRepresentation>
+      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
     </BaseSampleData>
     <OrthogonalSampleData>
       <DataSetRepresentation>5,4,12</DataSetRepresentation>
@@ -9868,7 +9887,7 @@ function beforeGeneration( chart, icsc )&#xD;
     <Visible>false</Visible>
   </EmptyMessage>
   <Axes>
-    <Type>DateTime</Type>
+    <Type>Linear</Type>
     <Title>
       <Caption>
         <Value>X-Axis Title</Value>
@@ -11046,7 +11065,9 @@ function beforeGeneration( chart, icsc )&#xD;
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>row[&quot;date_id&quot;]</Definition>
+          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;]);&#xD;
+var day = BirtDateTime.day(row[&quot;date_id&quot;]);&#xD;
+day + month / 100</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -11061,7 +11082,7 @@ function beforeGeneration( chart, icsc )&#xD;
       <Grouping>
         <Enabled>false</Enabled>
         <GroupingUnit>Years</GroupingUnit>
-        <GroupType>DateTime</GroupType>
+        <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
       <SortKey/>
@@ -11077,6 +11098,7 @@ function beforeGeneration( chart, icsc )&#xD;
         <Value></Value>
         <Font>
           <Alignment/>
+          <Rotation>90.0</Rotation>
         </Font>
       </Caption>
       <Background xsi:type="attribute:ColorDefinition">
@@ -11589,7 +11611,7 @@ function beforeGeneration( chart, icsc )&#xD;
   </ExtendedProperties>
   <SampleData>
     <BaseSampleData>
-      <DataSetRepresentation>01/05/2000,02/01/2000,04/12/2000,03/12/2000,02/29/2000</DataSetRepresentation>
+      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
     </BaseSampleData>
     <OrthogonalSampleData>
       <DataSetRepresentation>5,4,12</DataSetRepresentation>
@@ -11639,7 +11661,7 @@ function beforeGeneration( chart, icsc )&#xD;
     <Visible>false</Visible>
   </EmptyMessage>
   <Axes>
-    <Type>DateTime</Type>
+    <Type>Linear</Type>
     <Title>
       <Caption>
         <Value>X-Axis Title</Value>
@@ -12817,7 +12839,9 @@ function beforeGeneration( chart, icsc )&#xD;
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>row[&quot;date_id&quot;]</Definition>
+          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;]);&#xD;
+var day = BirtDateTime.day(row[&quot;date_id&quot;]);&#xD;
+day + month / 100</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -12832,7 +12856,7 @@ function beforeGeneration( chart, icsc )&#xD;
       <Grouping>
         <Enabled>false</Enabled>
         <GroupingUnit>Years</GroupingUnit>
-        <GroupType>DateTime</GroupType>
+        <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
       <SortKey/>
@@ -12848,6 +12872,7 @@ function beforeGeneration( chart, icsc )&#xD;
         <Value></Value>
         <Font>
           <Alignment/>
+          <Rotation>90.0</Rotation>
         </Font>
       </Caption>
       <Background xsi:type="attribute:ColorDefinition">
@@ -13365,7 +13390,7 @@ function beforeGeneration( chart, icsc )&#xD;
   </ExtendedProperties>
   <SampleData>
     <BaseSampleData>
-      <DataSetRepresentation>01/05/2000,02/01/2000,04/12/2000,03/12/2000,02/29/2000</DataSetRepresentation>
+      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
     </BaseSampleData>
     <OrthogonalSampleData>
       <DataSetRepresentation>5,4,12</DataSetRepresentation>
@@ -13431,7 +13456,7 @@ function beforeGeneration( chart, icsc )&#xD;
     <Visible>false</Visible>
   </EmptyMessage>
   <Axes>
-    <Type>DateTime</Type>
+    <Type>Linear</Type>
     <Title>
       <Caption>
         <Value>X-Axis Title</Value>
@@ -15633,7 +15658,9 @@ function beforeGeneration( chart, icsc )&#xD;
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>row[&quot;date_id&quot;]</Definition>
+          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;]);&#xD;
+var day = BirtDateTime.day(row[&quot;date_id&quot;]);&#xD;
+day + month / 100</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -15648,7 +15675,7 @@ function beforeGeneration( chart, icsc )&#xD;
       <Grouping>
         <Enabled>false</Enabled>
         <GroupingUnit>Years</GroupingUnit>
-        <GroupType>DateTime</GroupType>
+        <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
       <SortKey/>
@@ -15664,6 +15691,7 @@ function beforeGeneration( chart, icsc )&#xD;
         <Value></Value>
         <Font>
           <Alignment/>
+          <Rotation>90.0</Rotation>
         </Font>
       </Caption>
       <Background xsi:type="attribute:ColorDefinition">
