@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 2.6.2.r262_v20110209 Build &lt;2.6.2.v20110214-1523></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -55,7 +55,7 @@
             <property name="databaseName">kalturadw</property>
             <property name="username">kaltura_read</property>
             <encrypted-property name="password" encryptionID="base64">a2FsdHVyYV9yZWFk</encrypted-property>
-            <property name="URL">jdbc:mysql://192.168.192.15:3306/kalturadw</property>
+            <property name="URL">jdbc:mysql://192.168.252.222:3306/kalturadw</property>
             <property name="driverClass">com.mysql.jdbc.Driver</property>
             <property name="jarList">C:\Users\omer\Documents\Work\Kaltura\Pentaho\PentahoSrc32\libext\JDBC\mysql-connector-java-3.1.14-bin.jar</property>
         </oda-data-source>
@@ -6786,6 +6786,135 @@ day + month / 100</Definition>
                             </structure>
                         </list-property>
                     </extended-item>
+                </cell>
+            </row>
+            <row id="857">
+                <cell id="858">
+                    <text id="859">
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Yesterday usage by CDN (GB)]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="822">
+                <cell id="823">
+                    <grid id="824">
+                        <property name="dataSet">Usage by CDN</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">akamai_vod_rtmp_</property>
+                                <text-property name="displayName">akamai_vod_rtmp</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["akamai_vod_fms"]/1024/1024, 2)</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">akamai_live</property>
+                                <text-property name="displayName">akamai_live</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["akamai_live_fms"]/1024/1024,2)</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">akamai_vod_http_</property>
+                                <text-property name="displayName">akamai_vod_http</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["akamai_vod_http"]/1024/1024,2)</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">LLN</property>
+                                <text-property name="displayName">lln</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["LLN"]/1024/1024,2)</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">level3</property>
+                                <text-property name="displayName">level3</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["LEVEL3"]/1024/1024,2)</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">www</property>
+                                <text-property name="displayName">www</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["WWW"]/1024/1024,2)</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <column id="825"/>
+                        <column id="826"/>
+                        <column id="827"/>
+                        <column id="828"/>
+                        <column id="829"/>
+                        <column id="830"/>
+                        <row id="831">
+                            <cell id="832">
+                                <text id="845">
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Akamai VOD RTMP]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="833">
+                                <text id="846">
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Akamai Live]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="834">
+                                <text id="847">
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Akamai VOD HTTP]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="835">
+                                <text id="848">
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[LimeLight]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="836">
+                                <text id="849">
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Level3]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="837">
+                                <text id="850">
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Saas]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="838">
+                            <cell id="839">
+                                <data id="851">
+                                    <property name="resultSetColumn">akamai_vod_rtmp_</property>
+                                </data>
+                            </cell>
+                            <cell id="840">
+                                <data id="852">
+                                    <property name="resultSetColumn">akamai_live</property>
+                                </data>
+                            </cell>
+                            <cell id="841">
+                                <data id="853">
+                                    <property name="resultSetColumn">akamai_vod_http_</property>
+                                </data>
+                            </cell>
+                            <cell id="842">
+                                <data id="854">
+                                    <property name="resultSetColumn">LLN</property>
+                                </data>
+                            </cell>
+                            <cell id="843">
+                                <data id="855">
+                                    <property name="resultSetColumn">level3</property>
+                                </data>
+                            </cell>
+                            <cell id="844">
+                                <data id="856">
+                                    <property name="resultSetColumn">www</property>
+                                </data>
+                            </cell>
+                        </row>
+                    </grid>
                 </cell>
             </row>
             <row id="408">
