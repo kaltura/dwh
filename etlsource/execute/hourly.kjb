@@ -204,8 +204,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>331</xloc>
-      <yloc>129</yloc>
+      <xloc>659</xloc>
+      <yloc>128</yloc>
       </entry>
     <entry>
       <name>Execute hourly sequence</name>
@@ -230,66 +230,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>479</xloc>
-      <yloc>131</yloc>
-      </entry>
-    <entry>
-      <name>Get hourly lock</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${EtlBasePath}&#47;common&#47;get_lock.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>lock_id</name>
-            <stream_name/>
-            <value>2</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>190</xloc>
-      <yloc>49</yloc>
-      </entry>
-    <entry>
-      <name>Release hourly lock</name>
-      <description>Job</description>
-      <type>JOB</type>
-      <filename>${EtlBasePath}&#47;common&#47;release_lock.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>lock_id</name>
-            <stream_name/>
-            <value>2</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>638</xloc>
-      <yloc>208</yloc>
+      <xloc>807</xloc>
+      <yloc>130</yloc>
       </entry>
     <entry>
       <name>Success 1</name>
@@ -298,8 +240,119 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>190</xloc>
-      <yloc>207</yloc>
+      <xloc>518</xloc>
+      <yloc>206</yloc>
+      </entry>
+    <entry>
+      <name>Register etl_server</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename>${EtlBasePath}&#47;common&#47;register_etl_server.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>178</xloc>
+      <yloc>50</yloc>
+      </entry>
+    <entry>
+      <name>Seize hourly etl server lock</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename>${EtlBasePath}&#47;common&#47;seize_lock_by_name.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>LockNameMapping</name>
+            <stream_name/>
+            <value>${EtlBasePath}&#47;common&#47;get_etl_server_hourly_lock_name.ktr</value>
+            </parameter>      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>519</xloc>
+      <yloc>50</yloc>
+      </entry>
+    <entry>
+      <name>Release hourly etl server lock </name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename>${EtlBasePath}&#47;common&#47;release_lock_by_name.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>LockNameMapping</name>
+            <stream_name/>
+            <value>${EtlBasePath}&#47;common&#47;get_etl_server_hourly_lock_name.ktr</value>
+            </parameter>      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>943</xloc>
+      <yloc>206</yloc>
+      </entry>
+    <entry>
+      <name>Check if daily_lock is seized</name>
+      <description>Evaluate rows number in a table</description>
+      <type>EVAL_TABLE_CONTENT</type>
+      <connection>kalturadw_ds</connection>
+      <schemaname/>
+      <tablename>locks</tablename>
+      <success_condition>rows_count_greater</success_condition>
+      <limit>0</limit>
+      <is_custom_sql>Y</is_custom_sql>
+      <is_usevars>N</is_usevars>
+      <custom_sql>SELECT * FROM locks
+WHERE lock_name = &apos;daily_lock&apos; AND lock_state = 0</custom_sql>
+      <add_rows_result>N</add_rows_result>
+      <clear_result_rows>N</clear_result_rows>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>341</xloc>
+      <yloc>50</yloc>
       </entry>
   </entries>
   <hops>
@@ -313,7 +366,25 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Get hourly lock</from>
+      <from>START</from>
+      <to>Register etl_server</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Seize hourly etl server lock</from>
+      <to>Success 1</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Seize hourly etl server lock</from>
       <to>Set jobs sequence file name</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -323,38 +394,47 @@
     </hop>
     <hop>
       <from>Execute hourly sequence</from>
-      <to>Release hourly lock</to>
+      <to>Release hourly etl server lock </to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
+      <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>START</from>
-      <to>Get hourly lock</to>
+      <from>Release hourly etl server lock </from>
+      <to>Success 1</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
+      <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Get hourly lock</from>
+      <from>Register etl_server</from>
+      <to>Check if daily_lock is seized</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Check if daily_lock is seized</from>
+      <to>Seize hourly etl server lock</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Check if daily_lock is seized</from>
       <to>Success 1</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Release hourly lock</from>
-      <to>Success 1</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
