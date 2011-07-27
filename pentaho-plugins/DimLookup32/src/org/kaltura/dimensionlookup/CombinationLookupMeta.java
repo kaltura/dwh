@@ -62,7 +62,8 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 	private String  tablename;
 
 	/** database connection */
-	private DatabaseMeta  databaseMeta;
+	private DatabaseMeta  databaseReadMeta;
+	private DatabaseMeta  databaseWriteMeta;
 
 	/**	replace fields with technical key? */
 	private boolean replaceFields;
@@ -111,19 +112,30 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 	/**
 	 * @return Returns the database.
 	 */
-	public DatabaseMeta getDatabaseMeta()
+	public DatabaseMeta getDatabaseReadMeta()
 	{
-		return databaseMeta;
+		return databaseReadMeta;
+	}
+
+	public DatabaseMeta getDatabaseWriteMeta()
+	{
+		return databaseWriteMeta;
 	}
 
 	/**
 	 * @param database The database to set.
 	 */
-	public void setDatabaseMeta(DatabaseMeta database)
+	public void setDatabaseReadMeta(DatabaseMeta database)
 	{
-		this.databaseMeta = database;
+		this.databaseReadMeta = database;
 	}
 
+	public void setDatabaseWriteMeta(DatabaseMeta database)
+	{
+		this.databaseWriteMeta = database;
+	}
+
+	
 	/**
 	 * Set the way how the technical key field should be created.
 	 *
@@ -358,8 +370,10 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 
             schemaName  = XMLHandler.getTagValue(stepnode, "schema"); //$NON-NLS-1$
 			tablename  = XMLHandler.getTagValue(stepnode, "table"); //$NON-NLS-1$
-			String con = XMLHandler.getTagValue(stepnode, "connection"); //$NON-NLS-1$
-			databaseMeta = DatabaseMeta.findDatabase(databases, con);
+			String con = XMLHandler.getTagValue(stepnode, "connectionRead"); //$NON-NLS-1$
+			databaseReadMeta = DatabaseMeta.findDatabase(databases, con);
+			con = XMLHandler.getTagValue(stepnode, "connectionWrite"); //$NON-NLS-1$
+			databaseWriteMeta = DatabaseMeta.findDatabase(databases, con);
 			commit     = XMLHandler.getTagValue(stepnode, "commit"); //$NON-NLS-1$
 			commitSize = Const.toInt(commit, 0);
 			csize      = XMLHandler.getTagValue(stepnode, "cache_size"); //$NON-NLS-1$
@@ -404,7 +418,8 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 	{
         schemaName    = ""; //$NON-NLS-1$
 		tablename     = Messages.getString("ConcurrentCombinationLookupMeta.DimensionTableName.Label"); //$NON-NLS-1$
-		databaseMeta      = null;
+		databaseReadMeta      = null;
+		databaseWriteMeta      = null;
 		commitSize    = 100;
 		cacheSize     = DEFAULT_CACHE_SIZE;
 		replaceFields = false;
@@ -455,7 +470,8 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 
         retval.append("      ").append(XMLHandler.addTagValue("schema", schemaName)); //$NON-NLS-1$ //$NON-NLS-2$
 		retval.append("      ").append(XMLHandler.addTagValue("table", tablename)); //$NON-NLS-1$ //$NON-NLS-2$
-		retval.append("      ").append(XMLHandler.addTagValue("connection", databaseMeta==null?"":databaseMeta.getName())); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		retval.append("      ").append(XMLHandler.addTagValue("connectionRead", databaseReadMeta==null?"":databaseReadMeta.getName())); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		retval.append("      ").append(XMLHandler.addTagValue("connectionWrite", databaseWriteMeta==null?"":databaseWriteMeta.getName())); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$		
 		retval.append("      ").append(XMLHandler.addTagValue("commit", commitSize)); //$NON-NLS-1$ //$NON-NLS-2$
 		retval.append("      ").append(XMLHandler.addTagValue("cache_size", cacheSize)); //$NON-NLS-1$ //$NON-NLS-2$
 		retval.append("      ").append(XMLHandler.addTagValue("replace", replaceFields)); //$NON-NLS-1$ //$NON-NLS-2$
@@ -490,8 +506,10 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 	{
 		try
 		{
-			long id_connection =   rep.getStepAttributeInteger(id_step, "id_connection");  //$NON-NLS-1$
-			databaseMeta = DatabaseMeta.findDatabase( databases, id_connection);
+			long id_connection =   rep.getStepAttributeInteger(id_step, "id_connection_read");  //$NON-NLS-1$
+			databaseReadMeta = DatabaseMeta.findDatabase( databases, id_connection);
+			id_connection =   rep.getStepAttributeInteger(id_step, "id_connection_write");  //$NON-NLS-1$
+			databaseWriteMeta = DatabaseMeta.findDatabase( databases, id_connection);
 
             schemaName       =      rep.getStepAttributeString (id_step, "schema"); //$NON-NLS-1$
 			tablename        =      rep.getStepAttributeString (id_step, "table"); //$NON-NLS-1$
@@ -530,8 +548,8 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 		{
             rep.saveStepAttribute(id_transformation, id_step, "schema",         schemaName); //$NON-NLS-1$
 			rep.saveStepAttribute(id_transformation, id_step, "table",          tablename); //$NON-NLS-1$
-			rep.saveStepAttribute(id_transformation, id_step, "id_connection",  databaseMeta==null?-1:databaseMeta.getID()); //$NON-NLS-1$
-			rep.saveStepAttribute(id_transformation, id_step, "commit",         commitSize); //$NON-NLS-1$
+			rep.saveStepAttribute(id_transformation, id_step, "id_connection_read",  databaseReadMeta==null?-1:databaseReadMeta.getID()); //$NON-NLS-1$
+			rep.saveStepAttribute(id_transformation, id_step, "id_connection_write",  databaseWriteMeta==null?-1:databaseWriteMeta.getID()); //$NON-NLS-1$			rep.saveStepAttribute(id_transformation, id_step, "commit",         commitSize); //$NON-NLS-1$
 			rep.saveStepAttribute(id_transformation, id_step, "cache_size",     cacheSize); //$NON-NLS-1$
 			rep.saveStepAttribute(id_transformation, id_step, "replace",        replaceFields); //$NON-NLS-1$
 
@@ -554,7 +572,8 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 			rep.saveStepAttribute(id_transformation, id_step, "last_update_field",         lastUpdateField); //$NON-NLS-1$
 
 			// Also, save the step-database relationship!
-			if (databaseMeta!=null) rep.insertStepDatabase(id_transformation, id_step, databaseMeta.getID());
+			if (databaseReadMeta!=null) rep.insertStepDatabase(id_transformation, id_step, databaseReadMeta.getID());
+			if (databaseWriteMeta!=null) rep.insertStepDatabase(id_transformation, id_step, databaseWriteMeta.getID());
 		}
 		catch(Exception e)
 		{
@@ -564,12 +583,17 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 
 	public void check(List<CheckResultInterface> remarks, TransMeta transMeta, StepMeta stepMeta, RowMetaInterface prev, String input[], String output[], RowMetaInterface info)
 	{
-		CheckResult cr;
-		String error_message = ""; //$NON-NLS-1$
+		check(remarks, stepMeta, prev, input, databaseReadMeta);
+		check(remarks, stepMeta, prev, input, databaseWriteMeta);
+	}
 
-		if (databaseMeta!=null)
+	private void check(List<CheckResultInterface> remarks, StepMeta stepMeta, RowMetaInterface prev, String[] input, DatabaseMeta daMeta)
+	{
+		CheckResult cr;
+		String error_message;
+		if (daMeta!=null)
 		{
-			Database db = new Database(databaseMeta);
+			Database db = new Database(daMeta);
 			try
 			{
 				db.connect();
@@ -580,7 +604,7 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 					boolean error_found=false;
 					error_message = ""; //$NON-NLS-1$
 
-                    String schemaTable = databaseMeta.getQuotedSchemaTableCombination(schemaName, tablename);
+                    String schemaTable = daMeta.getQuotedSchemaTableCombination(schemaName, tablename);
 					RowMetaInterface r = db.getTableFields(schemaTable);
 					if (r!=null)
 					{
@@ -670,7 +694,7 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 				}
 
 				// Check sequence
-    			if (databaseMeta.supportsSequences() && CREATION_METHOD_SEQUENCE.equals(getTechKeyCreation()) )
+    			if (daMeta.supportsSequences() && CREATION_METHOD_SEQUENCE.equals(getTechKeyCreation()) )
 				{
     				if ( Const.isEmpty(sequenceFrom) )
     				{
@@ -744,18 +768,18 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 
 	public SQLStatement getSQLStatements(TransMeta transMeta, StepMeta stepMeta, RowMetaInterface prev)
 	{
-		SQLStatement retval = new SQLStatement(stepMeta.getName(), databaseMeta, null); // default: nothing to do!
+		SQLStatement retval = new SQLStatement(stepMeta.getName(), databaseWriteMeta, null); // default: nothing to do!
 
 		int i;
 
-		if (databaseMeta!=null)
+		if (databaseWriteMeta!=null)
 		{
 			if (prev!=null && prev.size()>0)
 			{
 				if (!Const.isEmpty(tablename))
 				{
-                    String schemaTable = databaseMeta.getQuotedSchemaTableCombination(schemaName, tablename);
-					Database db = new Database(databaseMeta);
+                    String schemaTable = databaseWriteMeta.getQuotedSchemaTableCombination(schemaName, tablename);
+					Database db = new Database(databaseWriteMeta);
 					try
 					{
 						boolean doHash = false;
@@ -854,7 +878,7 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 							RowMetaInterface tabFields = db.getTableFields(schemaTable);
 
 							// Don't forget to quote these as well...
-							databaseMeta.quoteReservedWords(tabFields);
+							databaseWriteMeta.quoteReservedWords(tabFields);
 
 							if (vkeyfield!=null && tabFields.searchValueMeta( vkeyfield.getName() ) == null )
 							{
@@ -940,7 +964,7 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 							if (!Const.isEmpty(keyLookup))
 							{
 								int nrfields = keyLookup.length;
-								if (nrfields>32 && databaseMeta.getDatabaseType()==DatabaseMeta.TYPE_DATABASE_ORACLE)
+								if (nrfields>32 && databaseWriteMeta.getDatabaseType()==DatabaseMeta.TYPE_DATABASE_ORACLE)
 								{
 									nrfields=32;  // Oracle indexes are limited to 32 fields...
 								}
@@ -980,7 +1004,7 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 						// Don't forget the sequence (optional)
 						//
 						String cr_seq=""; //$NON-NLS-1$
-						if ( databaseMeta.supportsSequences() && !Const.isEmpty(sequenceFrom) )
+						if ( databaseWriteMeta.supportsSequences() && !Const.isEmpty(sequenceFrom) )
 						{
 							if (!db.checkSequenceExists(schemaName, sequenceFrom))
 							{
@@ -1032,7 +1056,7 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 			DatabaseImpact ii = new DatabaseImpact( DatabaseImpact.TYPE_IMPACT_READ_WRITE,
 											transMeta.getName(),
 											stepMeta.getName(),
-											databaseMeta.getDatabaseName(),
+											databaseWriteMeta.getDatabaseName(),
 											tablename,
 											keyLookup[i],
 											keyField[i],
@@ -1049,7 +1073,7 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 			DatabaseImpact ii = new DatabaseImpact( DatabaseImpact.TYPE_IMPACT_READ_WRITE,
 											transMeta.getName(),
 											stepMeta.getName(),
-											databaseMeta.getDatabaseName(),
+											databaseWriteMeta.getDatabaseName(),
 											tablename,
 											hashField,
 											"", //$NON-NLS-1$
@@ -1063,9 +1087,17 @@ public class CombinationLookupMeta extends BaseStepMeta implements StepMetaInter
 
     public DatabaseMeta[] getUsedDatabaseConnections()
     {
-        if (databaseMeta!=null)
+        if (databaseWriteMeta!=null && databaseReadMeta!=null)
         {
-            return new DatabaseMeta[] { databaseMeta };
+            return new DatabaseMeta[] { databaseReadMeta, databaseWriteMeta };
+        }
+        else if(databaseWriteMeta!=null)
+        {
+        	 return new DatabaseMeta[] { databaseWriteMeta };	
+        }
+        else if(databaseReadMeta!=null)
+        {
+        	 return new DatabaseMeta[] { databaseReadMeta };
         }
         else
         {

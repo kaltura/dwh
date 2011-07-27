@@ -29,7 +29,8 @@ import org.pentaho.di.trans.step.StepDataInterface;
  */
 public class CombinationLookupData extends BaseStepData implements StepDataInterface
 {
-	public Database db;
+	public Database dbRead;
+	public Database dbWrite;
 	public int keynrs[];      // nrs in row of the keys
 
 	public Map<RowMetaAndData, Long> cache;
@@ -44,7 +45,8 @@ public class CombinationLookupData extends BaseStepData implements StepDataInter
     
     public String schemaTable;
     
-    public PreparedStatement prepStatementLookup;
+    public PreparedStatement prepStatementLookupFromRead;
+    public PreparedStatement prepStatementLookupFromWrite;
     public PreparedStatement prepStatementInsert;
     public long smallestCacheKey;
 
@@ -54,7 +56,8 @@ public class CombinationLookupData extends BaseStepData implements StepDataInter
 	public CombinationLookupData()
 	{
 		super();
-		db=null;
+		dbRead=null;
+		dbWrite=null;
 		realTableName=null;
 		realSchemaName=null;
 	}

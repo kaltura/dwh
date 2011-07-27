@@ -38,6 +38,8 @@ import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
@@ -58,6 +60,7 @@ import org.pentaho.di.trans.TransMeta;
 import org.pentaho.di.trans.step.BaseStepMeta;
 import org.pentaho.di.trans.step.StepDialogInterface;
 import org.pentaho.di.trans.step.StepMeta;
+import org.pentaho.di.ui.core.database.dialog.DatabaseDialog;
 import org.pentaho.di.ui.core.database.dialog.DatabaseExplorerDialog;
 import org.pentaho.di.ui.core.database.dialog.SQLEditor;
 import org.pentaho.di.ui.core.dialog.ErrorDialog;
@@ -69,7 +72,8 @@ import org.pentaho.di.ui.trans.step.TableItemInsertListener;
 
 public class CombinationLookupDialog extends BaseStepDialog implements StepDialogInterface
 {
-	private CCombo       wConnection;
+	private CCombo       wReadConnection;
+	private CCombo       wWriteConnection;
 
     private Label        wlSchema;
     private TextVar       wSchema;
@@ -122,7 +126,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 
 	private CombinationLookupMeta input;
 
-	private DatabaseMeta ci;
+	private DatabaseMeta cWrite;
 	
     private Map<String, Integer> inputFields;
     
@@ -170,7 +174,8 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 			}
 		};
 		backupChanged = input.hasChanged();
-		ci = input.getDatabaseMeta();
+		input.getDatabaseReadMeta();
+		cWrite = input.getDatabaseWriteMeta();
 
 		// Stepname line
 		wlStepname=new Label(shell, SWT.RIGHT);
@@ -193,15 +198,28 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		wStepname.setLayoutData(fdStepname);
 
 		// Connection line
-		wConnection = addConnectionLine(shell, wStepname, middle, margin);
-		if (input.getDatabaseMeta()==null && transMeta.nrDatabases()==1) wConnection.select(0);
-		wConnection.addModifyListener(lsMod);
-		wConnection.addModifyListener(new ModifyListener()
+		wReadConnection = addConnectionLine(shell, wStepname, middle, margin,"ConcurrentCombinationLookupDialog.Database.ReadLabel");
+		if (input.getDatabaseReadMeta()==null && transMeta.nrDatabases()==1) wReadConnection.select(0);
+		wReadConnection.addModifyListener(lsMod);
+		wReadConnection.addModifyListener(new ModifyListener()
+			{
+				public void modifyText(ModifyEvent e)
+				{
+					input.setChanged();
+				}
+			}
+		);
+		
+		// Connection line
+		wWriteConnection = addConnectionLine(shell, wReadConnection, middle, margin,"ConcurrentCombinationLookupDialog.Database.WriteLabel");
+		if (input.getDatabaseWriteMeta()==null && transMeta.nrDatabases()==1) wWriteConnection.select(0);
+		wWriteConnection.addModifyListener(lsMod);
+		wWriteConnection.addModifyListener(new ModifyListener()
 			{
 				public void modifyText(ModifyEvent e)
 				{
 					// We have new content: change ci connection:
-					ci = transMeta.findDatabase(wConnection.getText());
+					cWrite = transMeta.findDatabase(wWriteConnection.getText());
 					setAutoincUse();
 					setSequence();
 					input.setChanged();
@@ -216,7 +234,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
         FormData fdlSchema = new FormData();
         fdlSchema.left = new FormAttachment(0, 0);
         fdlSchema.right= new FormAttachment(middle, -margin);
-        fdlSchema.top  = new FormAttachment(wConnection, margin);
+        fdlSchema.top  = new FormAttachment(wWriteConnection, margin);
         wlSchema.setLayoutData(fdlSchema);
 
         wSchema=new TextVar(transMeta, shell, SWT.SINGLE | SWT.LEFT | SWT.BORDER);
@@ -225,7 +243,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
         wSchema.addFocusListener(lsFocusLost);
         FormData fdSchema = new FormData();
         fdSchema.left = new FormAttachment(middle, 0);
-        fdSchema.top  = new FormAttachment(wConnection, margin);
+        fdSchema.top  = new FormAttachment(wWriteConnection, margin);
         fdSchema.right= new FormAttachment(100, 0);
         wSchema.setLayoutData(fdSchema);
 
@@ -631,7 +649,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 					colInfo.setComboValues(new String[] {});
 				}
 				if (!Const.isEmpty(wTable.getText())) {
-					DatabaseMeta ci = transMeta.findDatabase(wConnection.getText());
+					DatabaseMeta ci = transMeta.findDatabase(wReadConnection.getText());
 					if (ci != null) {
 						Database db = new Database(ci);
 						try {
@@ -665,7 +683,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 	}
 	public void setAutoincUse()
 	{
-		boolean enable = (ci == null) || ci.supportsAutoinc();
+		boolean enable = (cWrite == null) || cWrite.supportsAutoinc();
 		wlAutoinc.setEnabled(enable);
 		wAutoinc.setEnabled(enable);
 		if ( enable == false && 
@@ -685,7 +703,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 	
 	public void setSequence()
 	{
-		boolean seq = (ci == null) || ci.supportsSequences();
+		boolean seq = (cWrite == null) || cWrite.supportsSequences();
 		wSeq.setEnabled(seq);
 		wlSeqButton.setEnabled(seq);
 		wSeqButton.setEnabled(seq);
@@ -725,7 +743,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		    // Determine the creation of the technical key for
 			// backwards compatibility. Can probably be removed at
 			// version 3.x or so (Sven Boden).
-		    DatabaseMeta database = input.getDatabaseMeta(); 
+		    DatabaseMeta database = input.getDatabaseWriteMeta(); 
 		    if ( database == null || ! database.supportsAutoinc() )  
 		    {
  			    input.setUseAutoinc(false);			
@@ -777,10 +795,11 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
   		if (input.getTablename()!=null)         wTable.setText( input.getTablename() );
 		if (input.getTechnicalKeyField()!=null) wTk.setText(input.getTechnicalKeyField());
 
-		if (input.getDatabaseMeta()!=null) wConnection.setText(input.getDatabaseMeta().getName());
+		if (input.getDatabaseReadMeta()!=null) wReadConnection.setText(input.getDatabaseReadMeta().getName());
+		if (input.getDatabaseWriteMeta()!=null) wWriteConnection.setText(input.getDatabaseWriteMeta().getName());
 		else if (transMeta.nrDatabases()==1)
 		{
-			wConnection.setText( transMeta.getDatabase(0).getName() );
+			wReadConnection.setText( transMeta.getDatabase(0).getName() );
 		}
 		if (input.getHashField()!=null)    wHashfield.setText(input.getHashField());
 
@@ -811,7 +830,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		getInfo(input);
 		stepname = wStepname.getText(); // return value
 
-		if (transMeta.findDatabase(wConnection.getText())==null)
+		if (transMeta.findDatabase(wReadConnection.getText())==null)
 		{
 			MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR );
 			mb.setMessage(Messages.getString("ConcurrentCombinationLookupDialog.NoValidConnection.DialogMessage")); //$NON-NLS-1$
@@ -865,7 +884,8 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 			in.setSequenceFrom( null );
 		}
 		
-		in.setDatabaseMeta( transMeta.findDatabase(wConnection.getText()) );
+		in.setDatabaseReadMeta( transMeta.findDatabase(wReadConnection.getText()) );
+		in.setDatabaseWriteMeta( transMeta.findDatabase(wWriteConnection.getText()) );
 
 		in.setCommitSize( Const.toInt(wCommit.getText(), 0) );
 		in.setCacheSize( Const.toInt(wCachesize.getText(), 0) );
@@ -877,7 +897,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 	{
 		DatabaseMeta inf = null;
 		// New class: SelectTableDialog
-		int connr = wConnection.getSelectionIndex();
+		int connr = wReadConnection.getSelectionIndex();
 		if (connr >= 0) inf = transMeta.getDatabase(connr);
 
 		if (inf != null)
@@ -946,7 +966,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 			{
 				if (sql.hasSQL())
 				{
-					SQLEditor sqledit = new SQLEditor(shell, SWT.NONE, info.getDatabaseMeta(), transMeta.getDbCache(), sql.getSQL());
+					SQLEditor sqledit = new SQLEditor(shell, SWT.NONE, info.getDatabaseReadMeta(), transMeta.getDbCache(), sql.getSQL());
 					sqledit.open();
 				}
 				else
@@ -975,4 +995,97 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 	{
 		return this.getClass().getName();
 	}
+	
+	public CCombo addConnectionLine(Composite parent, Control previous, int middle, int margin, String label) 
+	{
+			Label wlConnection = new Label(parent, SWT.RIGHT); 
+			Button wbnConnection = new Button(parent,SWT.PUSH);
+			Button wbeConnection = new Button(parent, SWT.PUSH);
+		 	final int databaseType = -1;
+		    final CCombo wConnection;
+		    final FormData fdlConnection, fdbConnection, fdeConnection, fdConnection;
+
+		    wConnection = new CCombo(parent, SWT.BORDER | SWT.READ_ONLY);
+		    props.setLook(wConnection);
+
+		    addDatabases(wConnection);
+
+		    wlConnection.setText(Messages.getString(label)); //$NON-NLS-1$
+		    props.setLook(wlConnection);
+		    fdlConnection = new FormData();
+		    fdlConnection.left = new FormAttachment(0, 0);
+		    fdlConnection.right = new FormAttachment(middle, -margin);
+		    if (previous != null)
+		      fdlConnection.top = new FormAttachment(previous, margin);
+		    else
+		      fdlConnection.top = new FormAttachment(0, 0);
+		    wlConnection.setLayoutData(fdlConnection);
+
+		    // 
+		    // NEW button
+		    //
+		    wbnConnection.setText(Messages.getString("ConcurrentCombinationLookupDialog.NewConnectionButton.Label")); //$NON-NLS-1$
+		    wbnConnection.addSelectionListener(new SelectionAdapter() {
+		      public void widgetSelected(SelectionEvent e) {
+		        DatabaseMeta databaseMeta = new DatabaseMeta();
+		        databaseMeta.shareVariablesWith(transMeta);
+		        DatabaseDialog cid = new DatabaseDialog(shell, databaseMeta);
+		        cid.setModalDialog(true);
+		        if (cid.open() != null) {
+		          transMeta.addDatabase(databaseMeta);
+		          wConnection.removeAll();
+		          addDatabases(wConnection, databaseType);
+		          selectDatabase(wConnection, databaseMeta.getName());
+		        }
+		      }
+		    });
+		    fdbConnection = new FormData();
+		    fdbConnection.right = new FormAttachment(100, 0);
+		    if (previous != null)
+		      fdbConnection.top = new FormAttachment(previous, margin);
+		    else
+		      fdbConnection.top = new FormAttachment(0, 0);
+		    wbnConnection.setLayoutData(fdbConnection);
+
+		    //
+		    // Edit button
+		    //
+		    wbeConnection.setText(Messages.getString("ConcurrentCombinationLookupDialog.EditConnectionButton.Label")); //$NON-NLS-1$
+		    wbeConnection.addSelectionListener(new SelectionAdapter() {
+		      public void widgetSelected(SelectionEvent e) {
+		        DatabaseMeta databaseMeta = transMeta.findDatabase(wConnection.getText());
+		        if (databaseMeta != null) {
+		          databaseMeta.shareVariablesWith(transMeta);
+		          DatabaseDialog cid = new DatabaseDialog(shell, databaseMeta);
+		          cid.setModalDialog(true);
+		          if (cid.open() != null) {
+		            wConnection.removeAll();
+		            addDatabases(wConnection);
+		            selectDatabase(wConnection, databaseMeta.getName());
+		          }
+		        }
+		      }
+		    });
+		    fdeConnection = new FormData();
+		    fdeConnection.right = new FormAttachment(wbnConnection, -margin);
+		    if (previous != null)
+		      fdeConnection.top = new FormAttachment(previous, margin);
+		    else
+		      fdeConnection.top = new FormAttachment(0, 0);
+		    wbeConnection.setLayoutData(fdeConnection);
+
+		    //
+		    // what's left of the line: combo box
+		    //
+		    fdConnection = new FormData();
+		    fdConnection.left = new FormAttachment(middle, 0);
+		    if (previous != null)
+		      fdConnection.top = new FormAttachment(previous, margin);
+		    else
+		      fdConnection.top = new FormAttachment(0, 0);
+		    fdConnection.right = new FormAttachment(wbeConnection, -margin);
+		    wConnection.setLayoutData(fdConnection);
+
+		    return wConnection;
+		  }
 }

@@ -11,6 +11,7 @@
 
 package org.kaltura.dimensionlookup;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -90,12 +91,12 @@ public class CombinationLookup extends BaseStep implements StepInterface
 		{
 			setTechKeyCreation(CREATION_METHOD_NONE);
 		}
-		else if (meta.getDatabaseMeta().supportsAutoinc() &&
+		else if (meta.getDatabaseWriteMeta().supportsAutoinc() &&
 			CombinationLookupMeta.CREATION_METHOD_AUTOINC.equals(keyCreation) )
 		{
 		    setTechKeyCreation(CREATION_METHOD_AUTOINC);
 		}
-		else if (meta.getDatabaseMeta().supportsSequences() &&
+		else if (meta.getDatabaseWriteMeta().supportsSequences() &&
 		  	     CombinationLookupMeta.CREATION_METHOD_SEQUENCE.equals(keyCreation) )
 		{
 		    setTechKeyCreation(CREATION_METHOD_SEQUENCE);
@@ -222,46 +223,23 @@ public class CombinationLookup extends BaseStep implements StepInterface
 
 	@SuppressWarnings("deprecation")
     private Object[] lookupValues(RowMetaInterface rowMeta, Object[] row) throws KettleException
-	{
-		Long val_key  = null;
-        Long val_hash = null;
-        Object[] hashRow = null;
-        
-        Object[] lookupRow = new Object[data.lookupRowMeta.size()];
-        int lookupIndex = 0;
-        
-		if (meta.useHash() || meta.getCacheSize()>=0)
-		{
-            hashRow = new Object[data.hashRowMeta.size()];
-            for (int i=0;i<meta.getKeyField().length;i++)
-            {
-                hashRow[i] = row[data.keynrs[i]];
-            }
-
-			
-            if (meta.useHash())
-            {
-                val_hash = new Long( data.hashRowMeta.oldXORHashCode(hashRow) );
-                lookupRow[lookupIndex] = val_hash;
-                lookupIndex++;
-            }
-		}
-
-		for (int i=0;i<meta.getKeyField().length;i++)
-		{
-			lookupRow[lookupIndex] = row[data.keynrs[i]]; // KEYi = ?
-            lookupIndex++;
-
-            lookupRow[lookupIndex] = row[data.keynrs[i]]; // KEYi IS NULL or ? IS NULL
-            lookupIndex++;
-		}
-
+	{       
+        Object[] hashRow = getHashRow(row);
+		       
 		// Before doing the actual lookup in the database, see if it's not in the cache...
-		val_key = lookupInCache(data.hashRowMeta, hashRow);
+        Long val_key = lookupInCache(data.hashRowMeta, hashRow);
 		if (val_key==null)
 		{
-			data.db.setValues(data.lookupRowMeta, lookupRow, data.prepStatementLookup);
-			Object[] add = data.db.getLookup(data.prepStatementLookup);
+			Long val_hash = null;
+			if (hashRow!=null && meta.useHash())
+	        {
+	            val_hash = new Long( data.hashRowMeta.oldXORHashCode(hashRow) );
+	        }
+	        
+	        Object[] lookupRow = calcLookupRow(row, val_hash);
+
+			data.dbRead.setValues(data.lookupRowMeta, lookupRow, data.prepStatementLookupFromRead);
+			Object[] add = data.dbRead.getLookup(data.prepStatementLookupFromRead);
             incrementLinesInput();
 
 			if (add==null) // The dimension entry was not found, we need to add it!
@@ -271,13 +249,13 @@ public class CombinationLookup extends BaseStep implements StepInterface
 				{
 				    case CREATION_METHOD_TABLEMAX:
 				    	//  Use our own counter: what's the next value for the technical key?
-				        val_key = data.db.getNextValue(getTransMeta().getCounters(), data.realSchemaName, data.realTableName, meta.getTechnicalKeyField());
+				        val_key = data.dbRead.getNextValue(getTransMeta().getCounters(), data.realSchemaName, data.realTableName, meta.getTechnicalKeyField());
                         break;
 				    case CREATION_METHOD_AUTOINC:
 						val_key=new Long(0); // value to accept new key...
 						break;
 				    case CREATION_METHOD_SEQUENCE:
-						val_key=data.db.getNextSequenceValue(data.realSchemaName, meta.getSequenceFrom(), meta.getTechnicalKeyField());
+						val_key=data.dbRead.getNextSequenceValue(data.realSchemaName, meta.getSequenceFrom(), meta.getTechnicalKeyField());
 						if (val_key!=null && log.isRowLevel()) logRowlevel(Messages.getString("ConcurrentCombinationLookup.Log.FoundNextSequenceValue")+val_key.toString()); //$NON-NLS-1$
 						break;
 				    case CREATION_METHOD_NONE:
@@ -301,7 +279,7 @@ public class CombinationLookup extends BaseStep implements StepInterface
 				{
 					// Entry already exists...
 	                //
-					val_key = data.db.getReturnRowMeta().getInteger(add, 0); // Sometimes it's not an integer, believe it or not.
+					val_key = data.dbRead.getReturnRowMeta().getInteger(add, 0); // Sometimes it's not an integer, believe it or not.
 	                addToCache(data.hashRowMeta, hashRow, val_key);
 				}
 			}
@@ -340,6 +318,42 @@ public class CombinationLookup extends BaseStep implements StepInterface
         return outputRow;
 	}
 
+	private Object[] calcLookupRow(Object[] row, Long val_hash)
+	{
+		Object[] lookupRow = new Object[data.lookupRowMeta.size()];
+		int lookupIndex = 0;
+	       
+		if(val_hash!=null)
+        {
+            lookupRow[lookupIndex] = val_hash;
+            lookupIndex++;
+        }
+
+		for (int i=0;i<meta.getKeyField().length;i++)
+		{
+			lookupRow[lookupIndex] = row[data.keynrs[i]]; // KEYi = ?
+            lookupIndex++;
+
+            lookupRow[lookupIndex] = row[data.keynrs[i]]; // KEYi IS NULL or ? IS NULL
+            lookupIndex++;
+		}
+		return lookupRow;
+	}
+
+	private Object[] getHashRow(Object[] row)
+	{
+		Object[] hashRow = null;
+		if (meta.useHash() || meta.getCacheSize()>=0)
+		{
+            hashRow = new Object[data.hashRowMeta.size()];
+            for (int i=0;i<meta.getKeyField().length;i++)
+            {
+                hashRow[i] = row[data.keynrs[i]];
+            }
+		}
+		return hashRow;
+	}
+
 	public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
 	{
 		Object[] r=getRow();       // Get row from input rowset & set row busy!
@@ -357,7 +371,7 @@ public class CombinationLookup extends BaseStep implements StepInterface
             data.outputRowMeta = getInputRowMeta().clone();
             meta.getFields(data.outputRowMeta, getStepname(), null, null, this);
             
-            data.schemaTable = meta.getDatabaseMeta().getQuotedSchemaTableCombination(data.realSchemaName, data.realTableName);
+            data.schemaTable = meta.getDatabaseReadMeta().getQuotedSchemaTableCombination(data.realSchemaName, data.realTableName);
             
             determineTechKeyCreation();
 
@@ -396,7 +410,8 @@ public class CombinationLookup extends BaseStep implements StepInterface
                 data.hashRowMeta.addValueMeta( getInputRowMeta().getValueMeta(data.keynrs[i]) ); // KEYi = ?
             }
             
-            setCombiLookup(getInputRowMeta());
+            data.prepStatementLookupFromRead = setCombiLookup(getInputRowMeta(), data.dbRead);
+            data.prepStatementLookupFromWrite = setCombiLookup(getInputRowMeta(), data.dbWrite);
         }
 
 
@@ -427,10 +442,12 @@ public class CombinationLookup extends BaseStep implements StepInterface
      * table: dimension table
      * keys[]: which dim-fields do we use to look up key?
      * retval: name of the key to return
+     * @param database 
+     * @return 
      */
-    public void setCombiLookup(RowMetaInterface inputRowMeta) throws KettleDatabaseException
+    public PreparedStatement setCombiLookup(RowMetaInterface inputRowMeta, Database database) throws KettleDatabaseException
     {
-        DatabaseMeta databaseMeta = meta.getDatabaseMeta();
+        DatabaseMeta databaseMeta = meta.getDatabaseReadMeta();
         
         String sql = "";
         boolean comma;
@@ -508,11 +525,12 @@ public class CombinationLookup extends BaseStep implements StepInterface
         try
         {
             if (log.isDebug()) logDebug("preparing combi-lookup statement:"+Const.CR+sql);
-            data.prepStatementLookup=data.db.getConnection().prepareStatement(databaseMeta.stripCR(sql));
+            PreparedStatement prepStatementLookup=database.getConnection().prepareStatement(databaseMeta.stripCR(sql));
             if (databaseMeta.supportsSetMaxRows())
             {
-                data.prepStatementLookup.setMaxRows(1); // alywas get only 1 line back!
+                prepStatementLookup.setMaxRows(1); // alywas get only 1 line back!
             }
+            return prepStatementLookup;
         }
         catch(SQLException ex) 
         {
@@ -523,10 +541,11 @@ public class CombinationLookup extends BaseStep implements StepInterface
     /**
      * This inserts new record into a junk dimension
      */
-    public Long combiInsert( RowMetaInterface rowMeta, Object[] row, Long val_key, Long val_crc ) throws KettleDatabaseException
+    @SuppressWarnings("deprecation")
+	public Long combiInsert( RowMetaInterface rowMeta, Object[] row, Long val_key, Long val_crc ) throws KettleDatabaseException
     {
         String debug="Combination insert";
-        DatabaseMeta databaseMeta = meta.getDatabaseMeta();
+        DatabaseMeta databaseMeta = meta.getDatabaseWriteMeta();
         try
         {
             if (data.prepStatementInsert==null) // first time: construct prepared statement
@@ -625,12 +644,12 @@ public class CombinationLookup extends BaseStep implements StepInterface
                     if(!isSkipTechnicalKey() && isAutoIncrement())
                     {
                         logDetailed("SQL with return keys: "+sqlStatement);
-                        data.prepStatementInsert=data.db.getConnection().prepareStatement(databaseMeta.stripCR(sqlStatement), Statement.RETURN_GENERATED_KEYS);
+                        data.prepStatementInsert=data.dbWrite.getConnection().prepareStatement(databaseMeta.stripCR(sqlStatement), Statement.RETURN_GENERATED_KEYS);
                     }
                     else
                     {
                         logDetailed("SQL without return keys: "+sqlStatement);
-                        data.prepStatementInsert=data.db.getConnection().prepareStatement(databaseMeta.stripCR(sqlStatement));
+                        data.prepStatementInsert=data.dbWrite.getConnection().prepareStatement(databaseMeta.stripCR(sqlStatement));
                     }
                 }
                 catch(SQLException ex) 
@@ -672,12 +691,12 @@ public class CombinationLookup extends BaseStep implements StepInterface
             
             debug="Set values on insert";
             // INSERT NEW VALUE!
-            data.db.setValues(data.insertRowMeta, insertRow, data.prepStatementInsert);
+            data.dbWrite.setValues(data.insertRowMeta, insertRow, data.prepStatementInsert);
             
             debug="Insert row";
             try
             {
-            	data.db.insertRow(data.prepStatementInsert);
+            	data.dbWrite.insertRow(data.prepStatementInsert);
             	
 	            debug="Retrieve key";
 	            if(!isSkipTechnicalKey() && isAutoIncrement())
@@ -711,8 +730,19 @@ public class CombinationLookup extends BaseStep implements StepInterface
             } catch (KettleDatabaseException e) 
             {
             	// most likely, duplicate unique key, due to another thread doing the same insert
-            	data.db.commit();
-            	Object[] reselect= data.db.getLookup(data.prepStatementLookup);          	
+            	data.dbWrite.commit();
+            	Object[] hashRow = getHashRow(row);
+ 		       
+    			Long val_hash = null;
+    			if (hashRow!=null && meta.useHash())
+    	        {
+    	            val_hash = new Long( data.hashRowMeta.oldXORHashCode(hashRow) );
+    	        }
+    	        
+    	        Object[] lookupRow = calcLookupRow(row, val_hash);
+
+            	data.dbWrite.setValues(data.lookupRowMeta, lookupRow, data.prepStatementLookupFromWrite);
+            	Object[] reselect= data.dbWrite.getLookup(data.prepStatementLookupFromWrite);          	
             	
             	// If not, throw the exception.
 	            if(reselect==null)
@@ -720,14 +750,9 @@ public class CombinationLookup extends BaseStep implements StepInterface
 	            	throw e;
             	}
 	            
-	            Object[] hashRow = new Object[data.hashRowMeta.size()];
-	            for (int i=0;i<meta.getKeyField().length;i++)
-	            {
-	                hashRow[i] = row[data.keynrs[i]];
-	            }
 	            if(!isSkipTechnicalKey())
 	            {
-	            	val_key = data.db.getReturnRowMeta().getInteger(reselect, 0); // Sometimes it's not an integer, believe it or not.
+	            	val_key = data.dbWrite.getReturnRowMeta().getInteger(reselect, 0); // Sometimes it's not an integer, believe it or not.
 	            	addToCache(data.hashRowMeta, hashRow, val_key);
 	            }
 			}
@@ -759,22 +784,37 @@ public class CombinationLookup extends BaseStep implements StepInterface
 				data.cache=new HashMap<RowMetaAndData, Long>();
 			}
 
-			data.db=new Database(meta.getDatabaseMeta());
-			data.db.shareVariablesWith(this);
+			data.dbRead=new Database(meta.getDatabaseReadMeta());
+			data.dbWrite=new Database(meta.getDatabaseWriteMeta());
+			data.dbRead.shareVariablesWith(this);
+			data.dbWrite.shareVariablesWith(this);
 			try
 			{
 				if (getTransMeta().isUsingUniqueConnections()) 
 				{
-					synchronized (getTrans()) { data.db.connect(getTrans().getThreadName(), getPartitionID()); }
+					synchronized (getTrans()) 
+					{ 
+						data.dbRead.connect(getTrans().getThreadName(), getPartitionID());
+						data.dbWrite.connect(getTrans().getThreadName(), getPartitionID());
+					}
 				} 
 				else 
 				{
-					data.db.connect(getPartitionID()); 
+					data.dbRead.connect(getPartitionID());
+					data.dbWrite.connect(getPartitionID());
 				}
 
 				if (log.isDetailed()) logDetailed(Messages.getString("ConcurrentCombinationLookup.Log.ConnectedToDB")); //$NON-NLS-1$
-				data.db.setCommit(meta.getCommitSize());
-
+				data.dbWrite.setCommit(meta.getCommitSize());
+				data.dbRead.setAutoCommit(true);
+				data.dbRead.setCommit(0);
+				try
+				{
+					data.dbRead.getConnection().setReadOnly(true);
+				} catch (SQLException e)
+				{
+					throw new KettleDatabaseException("Set Read Only Failed",e);
+				}
 				return true;
 			}
 			catch(KettleDatabaseException dbe)
@@ -792,15 +832,15 @@ public class CombinationLookup extends BaseStep implements StepInterface
 
         try
         {
-            if (!data.db.isAutoCommit())
+            if (!data.dbWrite.isAutoCommit())
             {
                 if (getErrors()==0)
                 {
-                    data.db.commit();
+                    data.dbWrite.commit();
                 }
                 else
                 {
-                    data.db.rollback();
+                    data.dbWrite.rollback();
                 }
             }
         }
@@ -810,8 +850,11 @@ public class CombinationLookup extends BaseStep implements StepInterface
         }
         finally 
         {
-        	if (data.db!=null) {
-            	data.db.disconnect();
+        	if (data.dbWrite!=null) {
+            	data.dbWrite.disconnect();
+        	}
+        	if (data.dbRead!=null) {
+            	data.dbRead.disconnect();
         	}
         }
 
