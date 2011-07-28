@@ -25,6 +25,7 @@ CREATE TABLE `cycles` (
   `run_time` DATETIME DEFAULT NULL,
   `transfer_time` DATETIME DEFAULT NULL,
   `process_id` INT(11) DEFAULT '1',
+  `assigned_server_id` INT(11),
   PRIMARY KEY (`cycle_id`)
 ) ENGINE=MYISAM DEFAULT CHARSET=latin1;
 

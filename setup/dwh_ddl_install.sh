@@ -81,6 +81,7 @@ mysqlexec $DS_ROOT_DIR/empty_cycle_partition_procedure.sql
 mysqlexec $DS_ROOT_DIR/add_cycle_partition_procedure.sql
 mysqlexec $DS_ROOT_DIR/drop_cycle_partition_procedure.sql
 mysqlexec $DS_ROOT_DIR/transfer_cycle_partition_procedure.sql
+mysqlexec $DS_ROOT_DIR/register_file_procedure.sql
 mysqlexec $DS_ROOT_DIR/get_ip_country_location_function.sql
 mysqlexec $DS_ROOT_DIR/restore_file_status_procedure.sql
 mysqlexec $DS_ROOT_DIR/set_file_status_full_procedure.sql
@@ -109,6 +110,7 @@ mysqlexec $DS_ROOT_DIR/locks.sql
 mysqlexec $DS_ROOT_DIR/populate_locks.sql
 mysqlexec $DS_ROOT_DIR/pentaho_sequences.sql
 mysqlexec $DS_ROOT_DIR/version_table.sql
+mysqlexec $DS_ROOT_DIR/etl_servers.sql
 
 #etl_log
 mysqlexec $DDL_ROOT_DIR/log/etl_log.sql
