@@ -175,6 +175,30 @@
     </attributes>
   </connection>
   <connection>
+    <name>KalturaDW_read</name>
+    <server>${ReadDbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw</database>
+    <port>${DbPort}</port>
+    <username>${ReadDbUser}</username>
+    <password>${ReadDbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
     <name>KalturaLogs</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
@@ -222,6 +246,39 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>550</xloc>
       <yloc>186</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Create source filename</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+suffix = &quot;&quot;;
+if (compression_suffix!=null &amp;&amp; compression_suffix.length &gt; 0) {
+	suffix = &quot;.&quot; + compression_suffix;
+}
+source_filename = remote_input_dir + &quot;&#47;&quot; + subdir + &quot;&#47;&quot; + file_name + suffix;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>source_filename</name>
+        <rename>source_filename</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>171</xloc>
+      <yloc>189</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -393,6 +450,12 @@ tmp_filename = temp_destination + &quot;&#47;&quot; + file_name + suffix;
         <length>0</length>
         <precision>0</precision>
       </field>
+      <field>
+        <name>subdir</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
         <select_unspecified>N</select_unspecified>
     </fields>
      <cluster_schema/>
@@ -417,39 +480,6 @@ tmp_filename = temp_destination + &quot;&#47;&quot; + file_name + suffix;
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>685</xloc>
       <yloc>187</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Create source filename</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47;Script here
-suffix = &quot;&quot;;
-if (compression_suffix!=null &amp;&amp; compression_suffix.length &gt; 0) {
-	suffix = &quot;.&quot; + compression_suffix;
-}
-source_filename = remote_input_dir + &quot;&#47;&quot; + file_name + suffix;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>source_filename</name>
-        <rename>source_filename</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>171</xloc>
-      <yloc>189</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

@@ -175,6 +175,30 @@
     </attributes>
   </connection>
   <connection>
+    <name>KalturaDW_read</name>
+    <server>${ReadDbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw</database>
+    <port>${DbPort}</port>
+    <username>${ReadDbUser}</username>
+    <password>${ReadDbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
     <name>KalturaLogs</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
@@ -241,8 +265,11 @@
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
 
-suffix = compression_suffix ? &quot;.&quot; + compression_suffix : &apos;&apos;;
-source_filename = logs_dir + &quot;&#47;&quot; + file_name + suffix;
+suffix = &quot;&quot;;
+if (compression_suffix!=null &amp;&amp; compression_suffix.length &gt; 0) {
+	suffix = &quot;.&quot; + compression_suffix;
+}
+source_filename = logs_dir + &quot;&#47;&quot; + subdir + &quot;&#47;&quot; + file_name + suffix;
 </jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>source_filename</name>
         <rename>source_filename</rename>
@@ -310,6 +337,12 @@ source_filename = logs_dir + &quot;&#47;&quot; + file_name + suffix;
         <type>String</type>
         <length>0</length>
         <precision>0</precision>
+      </field>
+      <field>
+        <name>subdir</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
       </field>
         <select_unspecified>N</select_unspecified>
     </fields>
