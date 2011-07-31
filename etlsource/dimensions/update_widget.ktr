@@ -654,8 +654,9 @@ and  id &lt;&gt; &apos;&apos;
            </partitioning>
       <schema/>
       <table>dwh_dim_widget_security_policy</table>
-      <connection>KalturaDW</connection>
-      <commit>100</commit>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
       <crc>N</crc>
@@ -693,8 +694,9 @@ and  id &lt;&gt; &apos;&apos;
            </partitioning>
       <schema/>
       <table>dwh_dim_widget_security_type</table>
-      <connection>KalturaDW</connection>
-      <commit>100</commit>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
       <crc>N</crc>

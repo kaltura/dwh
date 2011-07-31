@@ -1617,8 +1617,9 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
            </partitioning>
       <schema/>
       <table>dwh_dim_domain</table>
-      <connection>KalturaDW</connection>
-      <commit>100</commit>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>Y</replace>
       <crc>N</crc>
@@ -2816,8 +2817,9 @@ Alert(getEnvironmentVar(strVarName));</jsScript_script>
            </partitioning>
       <schema/>
       <table>dwh_dim_domain_referrer</table>
-      <connection>KalturaDW</connection>
-      <commit>100</commit>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
       <crc>N</crc>

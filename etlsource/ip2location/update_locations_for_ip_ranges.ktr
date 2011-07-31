@@ -357,8 +357,9 @@ FROM kalturadw.dwh_dim_ip_ranges_raw</sql>
            </partitioning>
       <schema/>
       <table>dwh_dim_locations</table>
-      <connection>KalturaDW</connection>
-      <commit>100</commit>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
       <crc>N</crc>
@@ -404,8 +405,9 @@ FROM kalturadw.dwh_dim_ip_ranges_raw</sql>
            </partitioning>
       <schema/>
       <table>dwh_dim_locations</table>
-      <connection>KalturaDW</connection>
-      <commit>100</commit>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
       <crc>N</crc>

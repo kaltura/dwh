@@ -662,8 +662,9 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
            </partitioning>
       <schema/>
       <table>dwh_dim_asset_status</table>
-      <connection>KalturaDW</connection>
-      <commit>100</commit>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
       <crc>N</crc>
@@ -701,8 +702,9 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
            </partitioning>
       <schema/>
       <table>dwh_dim_container_format</table>
-      <connection>KalturaDW</connection>
-      <commit>100</commit>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
       <crc>N</crc>
@@ -740,8 +742,9 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
            </partitioning>
       <schema/>
       <table>dwh_dim_file_ext</table>
-      <connection>KalturaDW</connection>
-      <commit>100</commit>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
       <crc>N</crc>
@@ -828,8 +831,9 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
            </partitioning>
       <schema/>
       <table>dwh_dim_video_codec</table>
-      <connection>KalturaDW</connection>
-      <commit>100</commit>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
       <crc>N</crc>

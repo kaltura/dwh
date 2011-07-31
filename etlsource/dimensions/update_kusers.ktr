@@ -950,8 +950,9 @@ The update was done with another transformation &quot;UpdateLocations&quot;</des
            </partitioning>
       <schema/>
       <table>dwh_dim_user_status</table>
-      <connection>KalturaDW</connection>
-      <commit>100</commit>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
       <crc>N</crc>
