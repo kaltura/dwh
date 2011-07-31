@@ -244,8 +244,8 @@
     <simulate>N</simulate>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>323</xloc>
-      <yloc>48</yloc>
+      <xloc>353</xloc>
+      <yloc>39</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -279,8 +279,8 @@ source_filename = logs_dir + &quot;&#47;&quot; + subdir + &quot;&#47;&quot; + fi
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>194</xloc>
-      <yloc>46</yloc>
+      <xloc>233</xloc>
+      <yloc>39</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -348,8 +348,8 @@ source_filename = logs_dir + &quot;&#47;&quot; + subdir + &quot;&#47;&quot; + fi
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>45</xloc>
-      <yloc>47</yloc>
+      <xloc>73</xloc>
+      <yloc>39</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -366,8 +366,8 @@ source_filename = logs_dir + &quot;&#47;&quot; + subdir + &quot;&#47;&quot; + fi
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>465</xloc>
-      <yloc>49</yloc>
+      <xloc>493</xloc>
+      <yloc>39</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
