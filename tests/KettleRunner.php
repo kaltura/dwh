@@ -7,6 +7,14 @@ class KettleRunner
 	{
 		global $CONF;
 		
+		$exec = 'kitchen.sh';
+		
+		#find if file ends with '.ktr' - so we need pan and not kitchen:
+		if(substr($job, -4) === '.ktr')
+		{
+			$exec = 'pan.sh';
+		}
+		
 		$args = ' /file ' .$CONF->EtlBasePath.$job;		
 		foreach ($params as $k => $v)
 		{
@@ -15,7 +23,7 @@ class KettleRunner
 		
 		$out = array();
 		putenv('KETTLE_HOME='.Configuration::$KETTLE_HOME);
-		exec('export KETTLE_HOME='.Configuration::$KETTLE_HOME.';/usr/local/pentaho/pdi/kitchen.sh'.$args, $out);
+		exec('export KETTLE_HOME='.Configuration::$KETTLE_HOME.';/usr/local/pentaho/pdi/'.$exec.$args, $out);
 		print_r($out);
 	}
 }
