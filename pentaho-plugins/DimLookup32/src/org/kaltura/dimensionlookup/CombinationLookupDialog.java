@@ -837,6 +837,14 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 			mb.setText(Messages.getString("ConcurrentCombinationLookupDialog.NoValidConnection.DialogTitle")); //$NON-NLS-1$
 			mb.open();
 		}
+		if (transMeta.findDatabase(wWriteConnection.getText())==null)
+		{
+			MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR );
+			mb.setMessage(Messages.getString("ConcurrentCombinationLookupDialog.NoValidConnection.DialogMessage")); //$NON-NLS-1$
+			mb.setText(Messages.getString("ConcurrentCombinationLookupDialog.NoValidConnection.DialogTitle")); //$NON-NLS-1$
+			mb.open();
+		}
+		
 		if ( ! input.equals(oldMetaState) )  
 		{
 			input.setChanged();

@@ -22,7 +22,7 @@ class DWHInspector
 	
 	public static function getFiles($cycleId)
 	{
-		$res = MySQLRunner::execute("SELECT file_id FROM kalturadw_ds.files WHERE cycle_id = ?",array(0=>$cycleId));
+		$res = MySQLRunner::execute("SELECT file_id FROM kalturadw_ds.files WHERE cycle_id = ? AND file_status = 'IN_CYCLE'",array(0=>$cycleId));
 		$files = array();
 		foreach ($res as $row)
 		{
@@ -69,7 +69,7 @@ class DWHInspector
 	
 	public static function getDates($cycleId)
 	{
-		$rows = MySQLRunner::execute("SELECT DISTINCT event_date_id FROM kalturadw.dwh_fact_events WHERE file_id in (SELECT file_id FROM kalturadw_ds.files WHERE cycle_id = ?)",array(0=>$cycleId));
+		$rows = MySQLRunner::execute("SELECT DISTINCT event_date_id FROM kalturadw.dwh_fact_events WHERE file_id in (SELECT file_id FROM kalturadw_ds.files WHERE cycle_id = ? AND file_status = 'IN_CYCLE')",array(0=>$cycleId));
 		
 		$res = array();
 		foreach ($rows as $row)
