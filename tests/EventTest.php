@@ -11,11 +11,12 @@ class EventTest extends PHPUnit_Framework_TestCase
 		global $CONF;
 		
 		DWHInspector::cleanDB();
-		self::rrmdir($CONF->CyclePath.'/generate/events/');
 		self::rrmdir($CONF->CyclePath.'/process/');
 		self::rrmdir($CONF->CyclePath.'/originals/');
+		
+		self::register();
 	}
-
+	
 	private static function rrmdir($dir) 
 	{ 
 		if (is_dir($dir)) 
@@ -42,6 +43,11 @@ class EventTest extends PHPUnit_Framework_TestCase
 		} 		
 	}
 		
+	public static function register()
+	{
+		KettleRunner::execute('/common/register_etl_server.ktr');
+	}
+	
     public function testGenereate()
     {
 		KettleRunner::execute($this->getGenereateJob(), $this->getFetchParams());
