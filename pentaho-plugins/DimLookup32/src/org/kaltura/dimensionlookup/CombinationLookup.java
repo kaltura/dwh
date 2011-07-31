@@ -802,7 +802,7 @@ public class CombinationLookup extends BaseStep implements StepInterface
 					synchronized (getTrans()) 
 					{ 
 						data.dbRead.connect(getTrans().getThreadName(), getPartitionID());
-						if(!data.dbWrite.equals(data.dbRead))
+						if(!data.dbWrite.getDatabaseMeta().equals(data.dbRead.getDatabaseMeta()))
 						{
 							data.dbWrite.connect(getTrans().getThreadName(), getPartitionID());
 						}
@@ -811,7 +811,7 @@ public class CombinationLookup extends BaseStep implements StepInterface
 				else 
 				{
 					data.dbRead.connect(getPartitionID());
-					if(!data.dbWrite.equals(data.dbRead))
+					if(!data.dbWrite.getDatabaseMeta().equals(data.dbRead.getDatabaseMeta()))
 					{
 						data.dbWrite.connect(getPartitionID());
 					}
