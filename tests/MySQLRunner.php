@@ -3,31 +3,49 @@ require_once 'Configuration.php';
 
 class MySQLRunner
 {
-	public static $link = null;
-	
-	public static function connect()
+	public static function execute($sql, $params=array(), $returnResults=true)
 	{
 		global $CONF;
-		self::$link = mysql_connect($CONF->DbHostName.':'.$CONF->DbPort, $CONF->DbUser, $CONF->DbPassword);
-		if (!self::$link) 
+		$db = new MySQLRunner($CONF->DbHostName,$CONF->DbPort, $CONF->DbUser, $CONF->DbPassword);
+		return $db->run($sql, $params, $returnResults);
+	}
+
+	public function __construct($host, $port, $user, $password)
+	{
+		$this->host = $host;
+		$this->port = $port;
+		$this->user = $user;
+		$this->password = $password;
+	}
+	
+	private $link = null;
+	private $host = 'localhost';
+	private $port = 3306;
+	private $user = '';
+	private $password = '';
+	
+	private function connect()
+	{
+		$this->link = mysql_connect($this->host.':'.$this->port, $this->user, $this->password);
+		if (!$this->link) 
 		{
 			print('Could not connect: ' . mysql_error());
 			exit(1);
 		}
 	}
 
-	public static function disconnect()
+	private function disconnect()
 	{
-		if (self::$link) 
+		if ($this->link) 
 		{
-			mysql_close(self::$link);
+			mysql_close($this->link);
 		}
-		self::$link=null;
+		$this->link=null;
 	}
 	
-	public static function execute($sql, $params=array(), $returnResults=true)
+	public function run($sql, $params=array(), $returnResults=true)
 	{
-		MySQLRunner::connect();
+		$this->connect();
 		
 		foreach ($params as $param)
 		{
@@ -37,7 +55,7 @@ class MySQLRunner
 		$result = mysql_query($sql);		
 		if (!$result) 
 		{
-			MySQLRunner::disconnect();
+			$this->disconnect();
 			print( "Could not successfully run query ($sql) from DB: " . mysql_error());
 			exit(1);
 		}
@@ -45,7 +63,7 @@ class MySQLRunner
 		$rows = array();
 		if (!$returnResults || mysql_num_rows($result) == 0) 
 		{
-			MySQLRunner::disconnect();
+			$this->disconnect();
 			return $rows;
 		}		
 		
@@ -55,7 +73,7 @@ class MySQLRunner
 		}		
 		
 		mysql_free_result($result);		
-		MySQLRunner::disconnect();
+		$this->disconnect();
 		return $rows;
 	}	
 }
