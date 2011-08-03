@@ -4,7 +4,7 @@ CREATE TABLE innodb_to_archive
 AS
 SELECT partition_name, table_name, partition_expression column_name, partition_description date_id, 0 is_moved, 0 is_dropped
 FROM information_schema.partitions p
-WHERE partition_description <= 20110101
+WHERE partition_description <= 	(SELECT max(date_value) FROM kalturadw_ds.parameters WHERE parameter_name = 'aggr_archive_cutoff_date')
 AND p.table_name in('dwh_fact_events' , 'dwh_fact_fms_sessions' , 'dwh_fact_fms_session_events' ,'dwh_fact_bandwidth_usage')
 ORDER BY date_id;
 
@@ -20,7 +20,7 @@ BEGIN
 	DECLARE v_dropped int;
 	declare v_partition varchar(256);
 	declare v_column varchar(256);
-
+	
 	SELECT is_moved, is_dropped, partition_name, column_name
 	INTO v_moved, v_dropped, v_partition, v_column
 	FROM innodb_to_archive

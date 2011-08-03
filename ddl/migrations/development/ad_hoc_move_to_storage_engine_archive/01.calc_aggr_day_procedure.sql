@@ -11,8 +11,19 @@ BEGIN
 	DECLARE v_aggr_id_field_str VARCHAR(100);
 	DECLARE v_aggr_join_stmt VARCHAR(200);
 	DECLARE extra VARCHAR(100);
+	DECLARE v_cutoff DATE;
+	DECLARE v_table_name VARCHAR(100);
 	
-	if (p_date_val >= date(20110201)) then -- do not re-aggregate anything older than 6 months
+	SELECT date_value
+	INTO v_cutoff
+	FROM kalturadw_ds.parameters
+	WHERE parameter_name = 'aggr_archive_cutoff_date';
+		
+	if (p_date_val >= v_cutoff) then 
+		SET v_table_name = 'dwh_fact_events';
+	else
+		SET v_table_name = 'dwh_fact_events_archive';
+	end if;
 	
 	SELECT aggr_table, aggr_id_field, aggr_join_stmt
 	INTO  v_aggr_table, v_aggr_id_field, v_aggr_join_stmt
@@ -117,7 +128,7 @@ BEGIN
 		SUM(IF(ev.event_type_id = 38, 1,NULL)) count_postroll_25,
 		SUM(IF(ev.event_type_id = 39, 1,NULL)) count_postroll_50,
 		SUM(IF(ev.event_type_id = 40, 1,NULL)) count_postroll_75
-		FROM dwh_fact_events as ev ',v_aggr_join_stmt,' 
+		FROM ',v_table_name,' as ev ',v_aggr_join_stmt,' 
 		WHERE ev.event_type_id BETWEEN 2 AND 40 
 			AND ev.event_date_id  = DATE(''',p_date_val,''')*1
 			AND ev.event_hour_id = ',p_hour_id,'
@@ -147,7 +158,7 @@ BEGIN
 				COUNT(DISTINCT IF(ev.event_type_id IN (6),1,NULL)) v_75,
 				COUNT(DISTINCT IF(ev.event_type_id IN (7),1,NULL)) v_100,
 				MAX(IF(event_type_id IN (3),session_id,NULL)) s_play
-			FROM dwh_fact_events as ev ',v_aggr_join_stmt,' 
+			FROM ',v_table_name,' as ev ',v_aggr_join_stmt,' 
 			WHERE ev.event_date_id  = DATE(''',p_date_val,''')*1
 				AND ev.event_hour_id = ',p_hour_id,'
 				AND ev.entry_media_type_id IN (1,5,6)  /* allow only video & audio & mix */
@@ -169,16 +180,13 @@ BEGIN
 			DEALLOCATE PREPARE stmt1;
 		END IF ;
 	END IF;
-    
+	
 	
 	SET @s = CONCAT('UPDATE aggr_managment SET is_calculated = 1,end_time = NOW()
 	WHERE aggr_name = ''',p_aggr_name,''' AND aggr_day = ''',p_date_val,''' AND hour_id =',p_hour_id);
 	PREPARE stmt FROM  @s;
 	EXECUTE stmt;
 	DEALLOCATE PREPARE stmt;
-	
-	end if; -- end skip old aggregations
-
 		
 END$$
 		
