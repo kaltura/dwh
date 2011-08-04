@@ -567,21 +567,16 @@ GROUP BY date_id desc]]></xml-property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">mixs</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
                         <property name="name">documents</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">7</property>
+                        <property name="position">6</property>
                         <property name="name">playlists</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
+                        <property name="position">7</property>
                         <property name="name">other</property>
                         <property name="dataType">integer</property>
                     </structure>
@@ -615,24 +610,18 @@ GROUP BY date_id desc]]></xml-property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
-                    <property name="name">mixs</property>
-                    <property name="nativeName">mixs</property>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
                     <property name="name">documents</property>
                     <property name="nativeName">documents</property>
                     <property name="dataType">integer</property>
                 </structure>
                 <structure>
-                    <property name="position">7</property>
+                    <property name="position">6</property>
                     <property name="name">playlists</property>
                     <property name="nativeName">playlists</property>
                     <property name="dataType">integer</property>
                 </structure>
                 <structure>
-                    <property name="position">8</property>
+                    <property name="position">7</property>
                     <property name="name">other</property>
                     <property name="nativeName">other</property>
                     <property name="dataType">integer</property>
@@ -643,10 +632,9 @@ DATE(created_at) date_id,
 SUM(IF(entry_type_name = 'MEDIACLIP' AND entry_media_type_name = 'VIDEO', 1,0)) videos,
 SUM(IF(entry_type_name = 'MEDIACLIP' AND entry_media_type_name = 'IMAGE', 1,0)) images,
 SUM(IF(entry_type_name = 'MEDIACLIP' AND entry_media_type_name = 'AUDIO', 1,0)) audios,
-SUM(IF(entry_type_name = 'SHOW', 1, 0)) mixs,
 SUM(IF(entry_type_name = 'DOCUMENT', 1, 0)) documents,
 SUM(IF(entry_type_name = 'PLAYLIST', 1, 0)) playlists,
-SUM(IF(entry_type_name IN ('SHOW', 'DOCUMENT', 'PLAYLIST') OR (entry_type_name = 'MEDIACLIP' AND entry_media_type_name IN ('VIDEO','IMAGE', 'AUDIO')), 0, 1)) other,
+SUM(IF(entry_type_name IN ('DOCUMENT', 'PLAYLIST') OR (entry_type_name = 'MEDIACLIP' AND entry_media_type_name IN ('VIDEO','IMAGE', 'AUDIO')), 0, 1)) other,
 COUNT(*) tot
  FROM kalturadw.dwh_dim_entries e, kalturadw.dwh_dim_entry_media_type mt, kalturadw.dwh_dim_entry_type t
 WHERE created_at BETWEEN DATE(NOW()) - INTERVAL 30 DAY AND DATE(NOW()) - INTERVAL 1 SECOND
@@ -9883,20 +9871,16 @@ function beforeGeneration( chart, icsc )
       <SeriesDefinitionIndex>2</SeriesDefinitionIndex>
     </OrthogonalSampleData>
     <OrthogonalSampleData>
-      <DataSetRepresentation>20.0,16.0,48.0</DataSetRepresentation>
+      <DataSetRepresentation>25.0,20.0,60.0</DataSetRepresentation>
       <SeriesDefinitionIndex>3</SeriesDefinitionIndex>
     </OrthogonalSampleData>
     <OrthogonalSampleData>
-      <DataSetRepresentation>25.0,20.0,60.0</DataSetRepresentation>
+      <DataSetRepresentation>30.0,24.0,72.0</DataSetRepresentation>
       <SeriesDefinitionIndex>4</SeriesDefinitionIndex>
     </OrthogonalSampleData>
     <OrthogonalSampleData>
-      <DataSetRepresentation>30.0,24.0,72.0</DataSetRepresentation>
-      <SeriesDefinitionIndex>5</SeriesDefinitionIndex>
-    </OrthogonalSampleData>
-    <OrthogonalSampleData>
       <DataSetRepresentation>35.0,28.0,84.0</DataSetRepresentation>
-      <SeriesDefinitionIndex>6</SeriesDefinitionIndex>
+      <SeriesDefinitionIndex>5</SeriesDefinitionIndex>
     </OrthogonalSampleData>
   </SampleData>
   <Interactivity/>
@@ -11012,262 +10996,6 @@ function beforeGeneration( chart, icsc )
             <Visible>false</Visible>
           </Label>
           <DataDefinition>
-            <Definition>row[&quot;mixs&quot;]</Definition>
-            <Grouping>
-              <Enabled>false</Enabled>
-              <GroupType>Text</GroupType>
-              <AggregateExpression>Sum</AggregateExpression>
-            </Grouping>
-          </DataDefinition>
-          <SeriesIdentifier>Mixs</SeriesIdentifier>
-          <DataPoint>
-            <Components>
-              <Type>Orthogonal_Value</Type>
-            </Components>
-            <Separator>, </Separator>
-          </DataPoint>
-          <LabelPosition>Inside</LabelPosition>
-          <Stacked>true</Stacked>
-          <Riser>Rectangle</Riser>
-        </Series>
-        <Grouping>
-          <GroupType>Text</GroupType>
-          <AggregateExpression>Sum</AggregateExpression>
-        </Grouping>
-      </SeriesDefinitions>
-      <SeriesDefinitions>
-        <Query>
-          <Definition></Definition>
-        </Query>
-        <SeriesPalette>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>64</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>170</Red>
-            <Green>85</Green>
-            <Blue>85</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>192</Red>
-            <Green>192</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>192</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>7</Red>
-            <Green>146</Green>
-            <Blue>94</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>128</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>0</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>64</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>80</Red>
-            <Green>240</Green>
-            <Blue>120</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>64</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>0</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>0</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>64</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>64</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>255</Red>
-            <Green>128</Green>
-            <Blue>0</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>80</Red>
-            <Green>166</Green>
-            <Blue>218</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>242</Red>
-            <Green>88</Green>
-            <Blue>106</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>232</Red>
-            <Green>172</Green>
-            <Blue>57</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>255</Green>
-            <Blue>128</Blue>
-          </Entries>
-        </SeriesPalette>
-        <Series xsi:type="type:BarSeries">
-          <Visible>true</Visible>
-          <Label>
-            <Caption>
-              <Value></Value>
-              <Font>
-                <Alignment/>
-              </Font>
-            </Caption>
-            <Background xsi:type="attribute:ColorDefinition">
-              <Transparency>0</Transparency>
-              <Red>255</Red>
-              <Green>255</Green>
-              <Blue>255</Blue>
-            </Background>
-            <Outline>
-              <Style>Solid</Style>
-              <Thickness>1</Thickness>
-              <Color>
-                <Transparency>255</Transparency>
-                <Red>0</Red>
-                <Green>0</Green>
-                <Blue>0</Blue>
-              </Color>
-              <Visible>false</Visible>
-            </Outline>
-            <Insets>
-              <Top>0.0</Top>
-              <Left>2.0</Left>
-              <Bottom>0.0</Bottom>
-              <Right>3.0</Right>
-            </Insets>
-            <Visible>false</Visible>
-          </Label>
-          <DataDefinition>
             <Definition>row[&quot;documents&quot;]</Definition>
             <Grouping>
               <Enabled>false</Enabled>
@@ -11298,6 +11026,12 @@ function beforeGeneration( chart, icsc )
         <SeriesPalette>
           <Entries xsi:type="attribute:ColorDefinition">
             <Transparency>255</Transparency>
+            <Red>64</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
             <Red>128</Red>
             <Green>128</Green>
             <Blue>192</Blue>
@@ -11480,12 +11214,6 @@ function beforeGeneration( chart, icsc )
             <Transparency>255</Transparency>
             <Red>128</Red>
             <Green>255</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>64</Red>
-            <Green>128</Green>
             <Blue>128</Blue>
           </Entries>
         </SeriesPalette>
@@ -11554,6 +11282,12 @@ function beforeGeneration( chart, icsc )
         <SeriesPalette>
           <Entries xsi:type="attribute:ColorDefinition">
             <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
             <Red>170</Red>
             <Green>85</Green>
             <Blue>85</Blue>
@@ -11737,12 +11471,6 @@ function beforeGeneration( chart, icsc )
             <Red>64</Red>
             <Green>128</Green>
             <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>192</Blue>
           </Entries>
         </SeriesPalette>
         <Series xsi:type="type:BarSeries">
@@ -12298,11 +12026,6 @@ day + month / 100</Definition>
                                 <property name="dataType">integer</property>
                             </structure>
                             <structure>
-                                <property name="name">mixs</property>
-                                <expression name="expression" type="javascript">dataSetRow["mixs"]</expression>
-                                <property name="dataType">integer</property>
-                            </structure>
-                            <structure>
                                 <property name="name">other</property>
                                 <expression name="expression" type="javascript">dataSetRow["other"]</expression>
                                 <property name="dataType">integer</property>
@@ -12339,7 +12062,6 @@ day + month / 100</Definition>
                         <column id="771"/>
                         <column id="772"/>
                         <column id="773"/>
-                        <column id="774"/>
                         <column id="775"/>
                         <column id="776"/>
                         <column id="777"/>
@@ -12363,12 +12085,6 @@ day + month / 100</Definition>
                                 </label>
                             </cell>
                             <cell id="782">
-                                <label id="190">
-                                    <property name="style">middle</property>
-                                    <text-property name="text">Mixs</text-property>
-                                </label>
-                            </cell>
-                            <cell id="783">
                                 <label id="191">
                                     <property name="style">middle</property>
                                     <text-property name="text">Documents</text-property>
@@ -12443,22 +12159,6 @@ day + month / 100</Definition>
                                 </data>
                             </cell>
                             <cell id="791">
-                                <data id="196">
-                                    <property name="style">middle</property>
-                                    <property name="whiteSpace">nowrap</property>
-                                    <property name="dataSet">EntryTypes</property>
-                                    <list-property name="boundDataColumns">
-                                        <structure>
-                                            <property name="name">videos</property>
-                                            <text-property name="displayName">mixs</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["mixs"]</expression>
-                                            <property name="dataType">integer</property>
-                                        </structure>
-                                    </list-property>
-                                    <property name="resultSetColumn">videos</property>
-                                </data>
-                            </cell>
-                            <cell id="792">
                                 <data id="197">
                                     <property name="style">middle</property>
                                     <property name="whiteSpace">nowrap</property>
@@ -16117,7 +15817,7 @@ day + month / 100</Definition>
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>New User Registration</Value>
+          <Value>New Partner Registration</Value>
           <Font>
             <Size>16.0</Size>
             <Bold>true</Bold>
