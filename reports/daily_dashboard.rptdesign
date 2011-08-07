@@ -22,46 +22,31 @@
         </scalar-parameter>
     </parameters>
     <data-sources>
-        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile" name="Data Source" id="7">
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="860">
             <list-property name="privateDriverProperties">
                 <ex-property>
-                    <name>org.eclipse.datatools.connectivity.db.connectionProperties</name>
+                    <name>disabledMetadataBidiFormatStr</name>
                 </ex-property>
                 <ex-property>
-                    <name>org.eclipse.datatools.connectivity.oda.profile.db.provider.id</name>
-                    <value>org.eclipse.datatools.enablement.mysql.connectionProfile</value>
+                    <name>disabledContentBidiFormatStr</name>
                 </ex-property>
                 <ex-property>
-                    <name>org.eclipse.datatools.connectivity.db.savePWD</name>
-                    <value>true</value>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
                 </ex-property>
                 <ex-property>
-                    <name>org.eclipse.datatools.connectivity.drivers.defnType</name>
-                    <value>org.eclipse.datatools.enablement.mysql.5_1.driverTemplate</value>
-                </ex-property>
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.driverDefinitionID</name>
-                    <value>DriverDefn.org.eclipse.datatools.enablement.mysql.5_1.driverTemplate.MySQL JDBC Driver</value>
-                </ex-property>
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.db.version</name>
-                    <value>5.1</value>
-                </ex-property>
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.db.vendor</name>
-                    <value>MySql</value>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
                 </ex-property>
             </list-property>
-            <property name="databaseName">kalturadw</property>
-            <property name="username">kaltura_read</property>
-            <encrypted-property name="password" encryptionID="base64">a2FsdHVyYV9yZWFk</encrypted-property>
-            <property name="URL">jdbc:mysql://192.168.252.222:3306/kalturadw</property>
-            <property name="driverClass">com.mysql.jdbc.Driver</property>
-            <property name="jarList">C:\Users\omer\Documents\Work\Kaltura\Pentaho\PentahoSrc32\libext\JDBC\mysql-connector-java-3.1.14-bin.jar</property>
+            <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
+            <property name="odaURL">jdbc:mysql://192.168.252.222:3306/kalturadw</property>
+            <property name="odaUser">kaltura_read</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">a2FsdHVyYV9yZWFk</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="Usage" id="8">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Usage" id="8">
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">DATE_ID</property>
@@ -277,7 +262,7 @@ ORDER BY 	DATE_ID DESC]]></xml-property>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="Usage by CDN" id="816">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Usage by CDN" id="816">
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">DATE_ID</property>
@@ -542,7 +527,7 @@ GROUP BY date_id desc]]></xml-property>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="EntryTypes" id="91">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="EntryTypes" id="91">
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -658,7 +643,7 @@ GROUP BY date_id desc]]></xml-property>
 &lt;/SQLQueryBuilder></property>
             </structure>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="Deleted" id="106">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Deleted" id="106">
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -698,7 +683,7 @@ GROUP BY date_id desc]]></xml-property>
 &lt;/SQLQueryBuilder></property>
             </structure>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="Registries" id="139">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Registries" id="139">
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -822,7 +807,7 @@ GROUP BY date_id]]></xml-property>
 &lt;/SQLQueryBuilder></property>
             </structure>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="Ingestion" id="140">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Ingestion" id="140">
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -937,7 +922,7 @@ GROUP BY date_id]]></xml-property>
 &lt;/SQLQueryBuilder></property>
             </structure>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="Plays" id="396">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Plays" id="396">
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">DATE_ID</property>
@@ -1002,7 +987,7 @@ ORDER BY 	DATE_ID DESC
 &lt;/SQLQueryBuilder></property>
             </structure>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="Top10Bandwidth" id="416">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Top10Bandwidth" id="416">
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -1106,7 +1091,7 @@ ORDER BY count_bandwidth_kb DESC) a
 &lt;/SQLQueryBuilder></property>
             </structure>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="Top10Streaming" id="515">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Top10Streaming" id="515">
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -1211,7 +1196,7 @@ ORDER BY count_bandwidth_kb DESC) a
 &lt;/SQLQueryBuilder></property>
             </structure>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="Top10Plays" id="681">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Top10Plays" id="681">
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -1315,7 +1300,7 @@ ORDER BY count_plays DESC) a
 &lt;/SQLQueryBuilder></property>
             </structure>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="Top10Storage" id="638">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Top10Storage" id="638">
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
