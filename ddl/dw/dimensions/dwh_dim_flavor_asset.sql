@@ -37,4 +37,4 @@ create table `dwh_dim_flavor_asset` (
 	PRIMARY KEY (`dwh_id`) ,
 	UNIQUE KEY `id_version` (`id`,`version`),
 	KEY deleted_at (deleted_at)
-); 
+) ENGINE=MYISAM; 

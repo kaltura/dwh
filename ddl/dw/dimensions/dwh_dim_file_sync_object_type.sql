@@ -15,5 +15,4 @@ CREATE TABLE `dwh_dim_file_sync_object_type` (
   `dwh_update_date` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
   `ri_ind` TINYINT(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`file_sync_object_type_id`)
-)
-
+) ENGINE=MYISAM;

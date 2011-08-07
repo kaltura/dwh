@@ -15,5 +15,4 @@ CREATE TABLE `dwh_dim_batch_job_status` (
   `dwh_update_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ri_ind` TINYINT(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`batch_job_status_id`)
-)
-
+) ENGINE=MYISAM;

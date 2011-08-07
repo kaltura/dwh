@@ -15,5 +15,4 @@ CREATE TABLE `dwh_dim_ready_behavior` (
   `dwh_update_date` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
   `ri_ind` TINYINT(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`ready_behavior_id`)
-)
-
+) ENGINE=MYISAM;

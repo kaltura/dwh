@@ -15,4 +15,4 @@ CREATE TABLE `dwh_dim_batch_job_error_type` (
   `dwh_update_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ri_ind` TINYINT(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`batch_job_error_type_id`)
-);
+) ENGINE=MYISAM;

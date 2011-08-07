@@ -16,7 +16,7 @@ CREATE TABLE `dwh_dim_batch_job_sub_type` (
   `dwh_update_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ri_ind` TINYINT(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`batch_job_type_id`, `batch_job_sub_type_id`)
-);
+) ENGINE=MYISAM;
 
 INSERT INTO `dwh_dim_batch_job_sub_type` (batch_job_type_id, batch_job_sub_type_id, batch_job_type_name, dwh_creation_date, ri_ind)
 VALUES	(0, 0, 'KALTURA_COM', NOW(), 0),

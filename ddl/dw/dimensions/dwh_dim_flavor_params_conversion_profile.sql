@@ -19,4 +19,4 @@ create table `dwh_dim_flavor_params_conversion_profile` (
 	`dwh_update_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`ri_ind` TINYINT(4) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`)	
-); 
+) ENGINE=MYISAM; 

@@ -48,4 +48,4 @@ CREATE TABLE `dwh_dim_flavor_params` (
 	`ri_ind` TINYINT(4) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`dwh_id`),
 	UNIQUE KEY `id_version` (`id`,`version`)
-); 
+) ENGINE=MYISAM; 
