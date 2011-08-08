@@ -123,5 +123,5 @@ SELECT 	`partner_id`,
 	FROM 
 	`kalturadw`.`dwh_hourly_partner`;
 
-rename table dwh_hourly_partner to dwh_hourly_partner_old;
+drop table dwh_hourly_partner;
 rename table dwh_hourly_partner_new to dwh_hourly_partner;
