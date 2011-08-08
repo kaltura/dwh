@@ -206,8 +206,6 @@ mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_procedure.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_bandwidth.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_storage.sql
-mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_streaming.sql
-mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_usage_totals.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_widget.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/recalc_aggr_day_procedure.sql

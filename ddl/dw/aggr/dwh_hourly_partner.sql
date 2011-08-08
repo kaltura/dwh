@@ -23,14 +23,10 @@ CREATE TABLE kalturadw.`dwh_hourly_partner` (
   `count_mix`  INT DEFAULT NULL,
   `count_mix_non_empty`  INT DEFAULT NULL,
   `count_playlist`  INT DEFAULT NULL,
-  `count_bandwidth`  BIGINT DEFAULT NULL,
-  `count_storage`  BIGINT DEFAULT NULL,
   `count_users`  INT DEFAULT NULL,  
   `count_widgets`  INT DEFAULT NULL,
   `flag_active_site` TINYINT(4) DEFAULT '0',
   `flag_active_publisher` TINYINT(4) DEFAULT '0',
-  `aggr_storage` BIGINT(20) DEFAULT NULL,
-  `aggr_bandwidth` BIGINT(20) DEFAULT NULL,
   `count_buf_start` INT DEFAULT NULL,
   `count_buf_end` INT DEFAULT NULL,
   `count_open_full_screen` INT DEFAULT NULL,
@@ -60,8 +56,6 @@ CREATE TABLE kalturadw.`dwh_hourly_partner` (
   `count_postroll_25` INT DEFAULT NULL,
   `count_postroll_50` INT DEFAULT NULL,
   `count_postroll_75` INT DEFAULT NULL,
-  `count_streaming` bigint(20) DEFAULT '0',
-  `aggr_streaming` bigint(20) DEFAULT '0',
   PRIMARY KEY `partner_id` (`partner_id`,`date_id`, `hour_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 PARTITION BY RANGE (date_id)

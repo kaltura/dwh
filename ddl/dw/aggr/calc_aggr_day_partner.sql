@@ -11,9 +11,7 @@ BEGIN
 		
 	CALL calc_aggr_day_partner_bandwidth(date_val);
 	CALL calc_aggr_day_partner_storage(date_val);
-	CALL calc_aggr_day_partner_streaming(date_val);
-	CALL calc_aggr_day_partner_usage_totals(date_val);
-	
+
 	UPDATE aggr_managment SET is_calculated = 1,end_time = NOW()
 	WHERE aggr_name = 'partner_usage' AND aggr_day = date_val;
 END$$

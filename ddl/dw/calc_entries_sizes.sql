@@ -46,7 +46,7 @@ BEGIN
 	
 	INSERT INTO today_sizes 
 		SELECT DISTINCT f.partner_id, f.entry_id, f.id, s.object_type, s.object_sub_type, 0 file_size
-		FROM kalturadw.dwh_dim_flavor_asset f, kalturadw.dwh_dim_file_sync s
+		FROM kalturadw.dwh_dim_flavor_asset f FORCE INDEX (deleted_at), kalturadw.dwh_dim_file_sync s
 		WHERE f.STATUS = 3
 		AND f.deleted_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
 		AND f.id = s.object_id
