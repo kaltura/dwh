@@ -18,7 +18,7 @@ CREATE TABLE  `kalturadw`.`dwh_fact_fms_session_events` (
   `server_memory_load` SMALLINT(5) UNSIGNED NOT NULL,
   `adaptor_id` SMALLINT(5) UNSIGNED NOT NULL,
   `virtual_host_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `app_id` TINYINT(3) UNSIGNED NOT NULL,
+  `fms_app_id` TINYINT(3) UNSIGNED NOT NULL,
   `app_instance_id` TINYINT(3) UNSIGNED NOT NULL,
   `duration_secs` INT(10) UNSIGNED NOT NULL,
   `status_id` SMALLINT(3) UNSIGNED DEFAULT NULL,
