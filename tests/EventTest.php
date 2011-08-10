@@ -68,7 +68,7 @@ class EventTest extends KalturaTestCase
 		
 		KettleRunner::execute($this->getProcessJob(), $this->getProcessParams());
 
-		$this->assertEquals($cycleId,DWHInspector::getCycle('PROCESSED'));
+		$this->assertEquals($cycleId,DWHInspector::getCycle('LOADED'));
 		$this->isDirExists($cycleId);
 		
 		$files = DWHInspector::getFiles($cycleId);
@@ -197,7 +197,7 @@ class EventTest extends KalturaTestCase
 	
 	public function testTransfer()
 	{
-		$cycleId = DWHInspector::getCycle('PROCESSED');
+		$cycleId = DWHInspector::getCycle('LOADED');
 		
 		$ds_events_lines = array();
 		$files = DWHInspector::getFiles($cycleId);
