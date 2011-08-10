@@ -11,12 +11,12 @@
         <parameter>
             <name>LastUpdatedAt</name>
             <default_value>2001/01/01 00:00:00</default_value>
-            <description></description>
+            <description>null</description>
         </parameter>
         <parameter>
             <name>TransformationName</name>
-            <default_value></default_value>
-            <description></description>
+            <default_value>null</default_value>
+            <description>null</description>
         </parameter>
     </parameters>
     <log>
@@ -290,6 +290,7 @@
       <output>
       </output>
           <parameters>       <variablemapping><variable>TransformationName</variable><input>${TransformationName}</input></variablemapping>
+       <variablemapping><variable>LastUpdatedAt</variable><input>${LastUpdatedAt}</input></variablemapping>
     <inherit_all_vars>Y</inherit_all_vars>
     </parameters>
     </mappings>
