@@ -53,7 +53,7 @@ class EventTest extends KalturaTestCase
 		if($exists)
 		{
 			$files = scandir($dir);
-			$this->assertEquals(3, count($files)); // ., .. and file
+			$this->assertEquals(5, count($files)); // ., .., orig file, events csv and bandwidth csv
 		} else
 		{
 			$this->assertFalse(is_dir($dir));
