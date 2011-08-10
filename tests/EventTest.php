@@ -13,7 +13,7 @@ class EventTest extends KalturaTestCase
 
 		$cycleId = DWHInspector::getCycle('GENERATED');
 		$this->isFileRegistered($cycleId);
-		$this->isDirExists($cycleId);
+		$this->isDirExists($cycleId, true, '/process/', 3);
     }
 	
 	private function getGenereateJob()
@@ -45,7 +45,7 @@ class EventTest extends KalturaTestCase
         $this->assertEquals(1, $fileCount);
 	}
 	
-	private function isDirExists($cycleId, $exists = true, $path = '/process/')
+	private function isDirExists($cycleId, $exists = true, $path = '/process/', $childcount=5)
 	{
 		global $CONF;
 				
@@ -53,7 +53,7 @@ class EventTest extends KalturaTestCase
 		if($exists)
 		{
 			$files = scandir($dir);
-			$this->assertEquals(5, count($files)); // ., .., orig file, events csv and bandwidth csv
+			$this->assertEquals($childcount, count($files)); // ., .., orig file, events csv and bandwidth csv
 		} else
 		{
 			$this->assertFalse(is_dir($dir));
@@ -211,7 +211,7 @@ class EventTest extends KalturaTestCase
 		KettleRunner::execute($this->getTransferJob(), $this->getTransferParams());
 		$this->assertEquals($cycleId,DWHInspector::getCycle('DONE'));
 		$this->isDirExists($cycleId, false);
-		$this->isDirExists($cycleId, true, '/originals/');		
+		$this->isDirExists($cycleId, true, '/originals/', 3);		
 		
 		$files = DWHInspector::getFiles($cycleId);
 		foreach($files as $fileId)
