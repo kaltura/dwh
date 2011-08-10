@@ -71,16 +71,17 @@ class DimensionsTest extends KalturaTestCase
 	{
 		global $CONF;
 		
-		$d = new DateTime(date("Y-m-d"));
-                $d->sub(new DateInterval("P30D"));
+		$before = new DateTime(date("Y-m-d"));
+		$start = new DateTime(date("Y-m-d"));
+                $start->sub(new DateInterval("P30D"));
 
-		KettleRunner::execute('/../tests/execute_dim.ktr', array('TransformationName'=>$CONF->EtlBasePath.$job,'LastUpdatedAt'=>$d->format('Y/m/d')." 00:00:00"));
+		KettleRunner::execute('/../tests/execute_dim.ktr', array('TransformationName'=>$CONF->EtlBasePath.$job,'LastUpdatedAt'=>$start->format('Y/m/d')." 00:00:00"));
 		
 		$sourceDB = new MySQLRunner($CONF->OpDbHostName,$CONF->OpDbPort, $CONF->OpDbUser, $CONF->OpDbPassword);		
-		$sourceRows = $sourceDB ->run("SELECT count(*) amount FROM kaltura.".$source." where updated_at>='".$d->format('Y-m-d')."'");
+		$sourceRows = $sourceDB ->run("SELECT count(*) amount FROM kaltura.".$source." where updated_at>='".$start->format('Y-m-d')."' and created_at<='".$before->format('Y-m-d')."'");
 		
 		$targetDB = new MySQLRunner($CONF->DbHostName,$CONF->DbPort, $CONF->DbUser, $CONF->DbPassword);
-		$targetRows = $targetDB->run("SELECT count(*) amount FROM kalturadw.".$target." where updated_at>='".$d->format('Y-m-d')."'");		
+		$targetRows = $targetDB->run("SELECT count(*) amount FROM kalturadw.".$target." where updated_at>='".$start->format('Y-m-d')."' and created_at<='".$before->format('Y-m-d')."'");		
 		
 		$this->assertGreaterThan(0, $targetRows[0]['amount']);
 		$this->assertEquals($sourceRows[0]['amount'], $targetRows[0]['amount']);
