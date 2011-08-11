@@ -249,7 +249,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath + output file creation command</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Trim URL</to><enabled>Y</enabled> </hop>  <hop> <from>Mapping (sub-transformation)</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>Text file input</from><to>Mapping (sub-transformation)</to><enabled>Y</enabled> </hop>  <hop> <from>Filter vaild rows</from><to>Enable parallelization vaild lines</to><enabled>Y</enabled> </hop>  <hop> <from>Enable parallelization vaild lines</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Filter vaild rows</from><to>Enable parallelization invaild lines</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Enrich rows</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich rows</from><to>Filter vaild rows</to><enabled>Y</enabled> </hop>  <hop> <from>Trim URL</from><to>Get bandwidth_source_name</to><enabled>Y</enabled> </hop>  <hop> <from>Enable parallelization invaild lines</from><to>Find ignored lines</to><enabled>Y</enabled> </hop>  <hop> <from>Filter ignored lines</from><to>Ignored line</to><enabled>Y</enabled> </hop>  <hop> <from>Filter ignored lines</from><to>Trim Line and Error reason</to><enabled>Y</enabled> </hop>  <hop> <from>Find ignored lines</from><to>Filter ignored lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file for enrichment</from><to>Enrich rows</to><enabled>Y</enabled> </hop>  <hop> <from>Trim Line and Error reason</from><to>Get Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get Process ID</from><to>Insert invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>ip to location lookup error</to><enabled>Y</enabled> </hop>  <hop> <from>Get numeric IP - BW</from><to>Get IP location - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get bandwidth_source_name</from><to>Get numeric IP - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path</from><to>create output file_name</to><enabled>Y</enabled> </hop>  <hop> <from>create output file_name</from><to>Bandwdith Text file output</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>Get Cycles Path</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath + output file creation command</from><to>create output file</to><enabled>Y</enabled> </hop>  <hop> <from>create output file</from><to>Text file input</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath + output file creation command</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Trim URL</to><enabled>Y</enabled> </hop>  <hop> <from>Mapping (sub-transformation)</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>Text file input</from><to>Mapping (sub-transformation)</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Enrich rows</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich rows</from><to>Filter vaild rows</to><enabled>Y</enabled> </hop>  <hop> <from>Trim URL</from><to>Get bandwidth_source_name</to><enabled>Y</enabled> </hop>  <hop> <from>Filter ignored lines</from><to>Ignored line</to><enabled>Y</enabled> </hop>  <hop> <from>Filter ignored lines</from><to>Trim Line and Error reason</to><enabled>Y</enabled> </hop>  <hop> <from>Find ignored lines</from><to>Filter ignored lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file for enrichment</from><to>Enrich rows</to><enabled>Y</enabled> </hop>  <hop> <from>Trim Line and Error reason</from><to>Get Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get Process ID</from><to>Insert invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>ip to location lookup error</to><enabled>Y</enabled> </hop>  <hop> <from>Get numeric IP - BW</from><to>Get IP location - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get bandwidth_source_name</from><to>Get numeric IP - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path</from><to>create output file_name</to><enabled>Y</enabled> </hop>  <hop> <from>create output file_name</from><to>Bandwdith Text file output</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>Get Cycles Path</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath + output file creation command</from><to>create output file</to><enabled>Y</enabled> </hop>  <hop> <from>create output file</from><to>Text file input</to><enabled>Y</enabled> </hop>  <hop> <from>Filter vaild rows</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Filter vaild rows</from><to>Find ignored lines</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Bandwdith Text file output</name>
     <type>TextFileOutput</type>
@@ -459,7 +459,7 @@
     <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
-    <copies>3</copies>
+    <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
@@ -496,47 +496,11 @@
     </step>
 
   <step>
-    <name>Enable parallelization invaild lines</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>738</xloc>
-      <yloc>360</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Enable parallelization vaild lines</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>875</xloc>
-      <yloc>178</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Enrich rows</name>
     <type>JoinRows</type>
     <description/>
     <distribute>Y</distribute>
-    <copies>3</copies>
+    <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
@@ -583,8 +547,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>737</xloc>
-      <yloc>545</yloc>
+      <xloc>731</xloc>
+      <yloc>371</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -593,14 +557,14 @@
     <name>Filter vaild rows</name>
     <type>FilterRows</type>
     <description/>
-    <distribute>N</distribute>
-    <copies>3</copies>
+    <distribute>Y</distribute>
+    <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Enable parallelization vaild lines</send_true_to>
-<send_false_to>Enable parallelization invaild lines</send_false_to>
+<send_true_to>Select values</send_true_to>
+<send_false_to>Find ignored lines</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -622,7 +586,7 @@
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
-    <copies>3</copies>
+    <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
@@ -650,8 +614,8 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai&ap
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>736</xloc>
-      <yloc>432</yloc>
+      <xloc>730</xloc>
+      <yloc>258</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -739,8 +703,8 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai&ap
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>740</xloc>
-      <yloc>723</yloc>
+      <xloc>734</xloc>
+      <yloc>549</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -794,7 +758,7 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai&ap
     <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
-    <copies>3</copies>
+    <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
@@ -815,8 +779,8 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai&ap
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1244</xloc>
-      <yloc>181</yloc>
+      <xloc>1073</xloc>
+      <yloc>180</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -946,8 +910,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>601</xloc>
-      <yloc>548</yloc>
+      <xloc>595</xloc>
+      <yloc>374</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -988,8 +952,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     </mappings>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>743</xloc>
-      <yloc>807</yloc>
+      <xloc>737</xloc>
+      <yloc>633</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1046,7 +1010,7 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
-    <copies>3</copies>
+    <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
@@ -1056,8 +1020,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
       </remove>      <remove>        <name>error_reason</name>
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1013</xloc>
-      <yloc>180</yloc>
+      <xloc>842</xloc>
+      <yloc>179</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1177,8 +1141,8 @@ error_reason = substr(error_reason, 0, 255);</jsScript_script>
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>736</xloc>
-      <yloc>635</yloc>
+      <xloc>730</xloc>
+      <yloc>461</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1188,7 +1152,7 @@ error_reason = substr(error_reason, 0, 255);</jsScript_script>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
-    <copies>3</copies>
+    <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
@@ -1207,8 +1171,28 @@ var url = substr(url, 0, 200);</jsScript_script>
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1128</xloc>
-      <yloc>183</yloc>
+      <xloc>957</xloc>
+      <yloc>182</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>create output file</name>
+    <type>ExecProcess</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <processfield>create_output_file_command</processfield>
+    <resultfieldname>result</resultfieldname>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>345</xloc>
+      <yloc>113</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1390,7 +1374,7 @@ else {
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
-    <copies>3</copies>
+    <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
@@ -1424,26 +1408,6 @@ var error_reason=null;
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>726</xloc>
       <yloc>33</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>create output file</name>
-    <type>ExecProcess</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <processfield>create_output_file_command</processfield>
-    <resultfieldname>result</resultfieldname>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>345</xloc>
-      <yloc>113</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
