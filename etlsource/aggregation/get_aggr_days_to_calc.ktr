@@ -200,6 +200,30 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
+  <connection>
+    <name>KalturaReadDW</name>
+    <server>${DbReadHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw</database>
+    <port>${DbReadPort}</port>
+    <username>${DbReadUser}</username>
+    <password>${DbReadPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbReadPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
   <hop> <from>Read days to calc</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>  </order>
   <step>
@@ -238,7 +262,7 @@ the ones of type &quot;partner&quot; that are 3 days old - this will allow fixin
 *&#47;
 SELECT 	aggr_name,aggr_day, hour_id aggr_hour 
 FROM kalturadw.aggr_managment 
-WHERE 	aggr_day + INTERVAL hour_id HOUR &lt; NOW() - INTERVAL 1 HOUR
+WHERE 	aggr_day + INTERVAL hour_id HOUR &lt; NOW() - INTERVAL ${AggregationHoursBack} HOUR
 		AND 
 		is_calculated = 0 AND 
 		aggr_name in (select aggr_name from kalturadw_ds.aggr_name_resolver)
@@ -247,7 +271,7 @@ order by aggr_day, hour_id, aggr_name
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
