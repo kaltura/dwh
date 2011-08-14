@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="7">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
+            <property name="odaURL">jdbc:mysql://192.168.252.222:3306/kalturadw</property>
+            <property name="odaUser">kaltura_read</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">a2FsdHVyYV9yZWFk</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.SPSelectDataSet" name="Billing" id="8">
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">p_month_id</property>
+                    <property name="nativeName">p_month_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">BirtMath.roundDown(BirtDateTime.today() / 100)</expression>
+                    <property name="allowNull">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">parent_partner_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">parent_partner_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">partner_group_type_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">publisher_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">publisher_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">partner_class_of_service_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">partner_vertical_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">included_bandwidth_kb</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">actual_bandwidth_kb</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">charge_overage_bandwidth_kb</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">included_storage_mb</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">actual_storage_mb</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">charge_overage_storage_mb</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">included_total_usage_mb</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">actual_total_usage_mb</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">charge_overage_total_usage_mb</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">included_entries</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">actual_entries</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">charge_overage_entries</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">included_plays</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">actual_plays</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">charge_overage_plays</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">parent_partner_id</property>
+                    <property name="nativeName">parent_partner_id</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">parent_partner_name</property>
+                    <property name="nativeName">parent_partner_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">partner_group_type_name</property>
+                    <property name="nativeName">partner_group_type_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">publisher_id</property>
+                    <property name="nativeName">publisher_id</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">publisher_name</property>
+                    <property name="nativeName">publisher_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">partner_class_of_service_name</property>
+                    <property name="nativeName">partner_class_of_service_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">partner_vertical_name</property>
+                    <property name="nativeName">partner_vertical_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">included_bandwidth_kb</property>
+                    <property name="nativeName">included_bandwidth_kb</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">actual_bandwidth_kb</property>
+                    <property name="nativeName">actual_bandwidth_kb</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">charge_overage_bandwidth_kb</property>
+                    <property name="nativeName">charge_overage_bandwidth_kb</property>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">included_storage_mb</property>
+                    <property name="nativeName">included_storage_mb</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">actual_storage_mb</property>
+                    <property name="nativeName">actual_storage_mb</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">charge_overage_storage_mb</property>
+                    <property name="nativeName">charge_overage_storage_mb</property>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">included_total_usage_mb</property>
+                    <property name="nativeName">included_total_usage_mb</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">actual_total_usage_mb</property>
+                    <property name="nativeName">actual_total_usage_mb</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">charge_overage_total_usage_mb</property>
+                    <property name="nativeName">charge_overage_total_usage_mb</property>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">included_entries</property>
+                    <property name="nativeName">included_entries</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">actual_entries</property>
+                    <property name="nativeName">actual_entries</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">charge_overage_entries</property>
+                    <property name="nativeName">charge_overage_entries</property>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">included_plays</property>
+                    <property name="nativeName">included_plays</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">actual_plays</property>
+                    <property name="nativeName">actual_plays</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">charge_overage_plays</property>
+                    <property name="nativeName">charge_overage_plays</property>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{CALL calc_partner_overage(?)}]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>p_month_id</design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>11</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>NotNullable</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="BillingQuery" id="101">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <xml-property name="queryText"><![CDATA[		SELECT 	IF(children.partner_group_type_id=3,children.partner_id,parents.partner_id) parent_partner_id,
+			IF(children.partner_group_type_id=3,children.partner_name,parents.partner_name) parent_partner_name,
+			group_types.partner_group_type_name,
+			IF(children.partner_group_type_id=3,NULL,children.partner_id) publisher_id,
+			IF(children.partner_group_type_id=3,NULL,children.partner_name) publisher_name,
+			d_cos.partner_class_of_service_name,
+			d_vertical.partner_vertical_name,
+			included_bandwidth_kb,
+			actual_bandwidth_kb,
+			charge_overage_bandwidth_kb,
+			included_storage_mb, 
+			actual_storage_mb, 
+			charge_overage_storage_mb, 
+			included_total_usage_mb, 
+			actual_total_usage_mb, 
+			charge_overage_total_usage_mb,
+			included_entries, 
+			actual_entries, 
+			charge_overage_entries,
+			included_plays, 
+			actual_plays, 
+			charge_overage_plays			
+		FROM partner_overages po 
+		INNER JOIN kalturadw.dwh_dim_partners children ON (po.partner_id = children.partner_id)
+		LEFT OUTER JOIN kalturadw.dwh_dim_partners parents ON (children.partner_parent_id = parents.partner_id)
+		INNER JOIN kalturadw.dwh_dim_partner_group_type group_types ON (IF(parents.partner_id IS NOT NULL, parents.partner_group_type_id,children.partner_group_type_id) = group_types.partner_group_type_id)
+		LEFT OUTER JOIN kalturadw.dwh_dim_partner_class_of_service d_cos ON (children.class_of_service_id = d_cos.partner_class_of_service_id)
+		LEFT OUTER JOIN kalturadw.dwh_dim_partner_vertical d_vertical ON (children.vertical_id = d_vertical.partner_vertical_id)
+		WHERE parents.partner_group_type_id <> 3 OR parents.partner_group_type_id IS NULL;]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="9">
+            <property name="dataSet">Billing</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">parent_partner_id</property>
+                    <text-property name="displayName">parent_partner_id</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["parent_partner_id"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">parent_partner_name</property>
+                    <text-property name="displayName">parent_partner_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["parent_partner_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">partner_group_type_name</property>
+                    <text-property name="displayName">partner_group_type_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["partner_group_type_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">publisher_id</property>
+                    <text-property name="displayName">publisher_id</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["publisher_id"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">publisher_name</property>
+                    <text-property name="displayName">publisher_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["publisher_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">partner_class_of_service_name</property>
+                    <text-property name="displayName">partner_class_of_service_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["partner_class_of_service_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">partner_vertical_name</property>
+                    <text-property name="displayName">partner_vertical_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["partner_vertical_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">included_bandwidth_kb</property>
+                    <text-property name="displayName">included_bandwidth_kb</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["included_bandwidth_kb"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">actual_bandwidth_kb</property>
+                    <text-property name="displayName">actual_bandwidth_kb</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["actual_bandwidth_kb"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">charge_overage_bandwidth_kb</property>
+                    <text-property name="displayName">charge_overage_bandwidth_kb</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["charge_overage_bandwidth_kb"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">included_storage_mb</property>
+                    <text-property name="displayName">included_storage_mb</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["included_storage_mb"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">actual_storage_mb</property>
+                    <text-property name="displayName">actual_storage_mb</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["actual_storage_mb"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">charge_overage_storage_mb</property>
+                    <text-property name="displayName">charge_overage_storage_mb</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["charge_overage_storage_mb"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">included_total_usage_mb</property>
+                    <text-property name="displayName">included_total_usage_mb</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["included_total_usage_mb"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">actual_total_usage_mb</property>
+                    <text-property name="displayName">actual_total_usage_mb</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["actual_total_usage_mb"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">charge_overage_total_usage_mb</property>
+                    <text-property name="displayName">charge_overage_total_usage_mb</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["charge_overage_total_usage_mb"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">included_entries</property>
+                    <text-property name="displayName">included_entries</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["included_entries"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">actual_entries</property>
+                    <text-property name="displayName">actual_entries</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["actual_entries"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">charge_overage_entries</property>
+                    <text-property name="displayName">charge_overage_entries</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["charge_overage_entries"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">included_plays</property>
+                    <text-property name="displayName">included_plays</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["included_plays"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">actual_plays</property>
+                    <text-property name="displayName">actual_plays</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["actual_plays"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">charge_overage_plays</property>
+                    <text-property name="displayName">charge_overage_plays</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["charge_overage_plays"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <column id="79"/>
+            <column id="80"/>
+            <column id="81"/>
+            <column id="82"/>
+            <column id="83"/>
+            <column id="84"/>
+            <column id="85"/>
+            <column id="86"/>
+            <column id="87"/>
+            <column id="88"/>
+            <column id="89"/>
+            <column id="90"/>
+            <column id="91"/>
+            <column id="92"/>
+            <column id="93"/>
+            <column id="94"/>
+            <column id="95"/>
+            <column id="96"/>
+            <column id="97"/>
+            <column id="98"/>
+            <column id="99"/>
+            <column id="100"/>
+            <header>
+                <row id="10">
+                    <cell id="11"/>
+                    <cell id="12"/>
+                    <cell id="13"/>
+                    <cell id="14"/>
+                    <cell id="15"/>
+                    <cell id="16"/>
+                    <cell id="17"/>
+                    <cell id="18"/>
+                    <cell id="19"/>
+                    <cell id="20"/>
+                    <cell id="21"/>
+                    <cell id="22"/>
+                    <cell id="23"/>
+                    <cell id="24"/>
+                    <cell id="25"/>
+                    <cell id="26"/>
+                    <cell id="27"/>
+                    <cell id="28"/>
+                    <cell id="29"/>
+                    <cell id="30"/>
+                    <cell id="31"/>
+                    <cell id="32"/>
+                </row>
+            </header>
+            <detail>
+                <row id="33">
+                    <cell id="34"/>
+                    <cell id="35"/>
+                    <cell id="36"/>
+                    <cell id="37"/>
+                    <cell id="38"/>
+                    <cell id="39"/>
+                    <cell id="40"/>
+                    <cell id="41"/>
+                    <cell id="42"/>
+                    <cell id="43"/>
+                    <cell id="44"/>
+                    <cell id="45"/>
+                    <cell id="46"/>
+                    <cell id="47"/>
+                    <cell id="48"/>
+                    <cell id="49"/>
+                    <cell id="50"/>
+                    <cell id="51"/>
+                    <cell id="52"/>
+                    <cell id="53"/>
+                    <cell id="54"/>
+                    <cell id="55"/>
+                </row>
+            </detail>
+            <footer>
+                <row id="56">
+                    <cell id="57"/>
+                    <cell id="58"/>
+                    <cell id="59"/>
+                    <cell id="60"/>
+                    <cell id="61"/>
+                    <cell id="62"/>
+                    <cell id="63"/>
+                    <cell id="64"/>
+                    <cell id="65"/>
+                    <cell id="66"/>
+                    <cell id="67"/>
+                    <cell id="68"/>
+                    <cell id="69"/>
+                    <cell id="70"/>
+                    <cell id="71"/>
+                    <cell id="72"/>
+                    <cell id="73"/>
+                    <cell id="74"/>
+                    <cell id="75"/>
+                    <cell id="76"/>
+                    <cell id="77"/>
+                    <cell id="78"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>
