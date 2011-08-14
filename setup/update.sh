@@ -72,10 +72,25 @@ if [ $SITE_SPECIFIC_DIR ]; then
 fi
 
 #cp pentaho plugins
-sh $ROOT_DIR/setup/copy_pentaho_plugins.sh -d $ROOT_DIR -k $KITCHEN 
+/bin/bash $ROOT_DIR/setup/copy_pentaho_plugins.sh -d $ROOT_DIR -k $KITCHEN 
+
 
 # get ver
 version=$(mysql -u$USER -p$PW -h$HOST -P$PORT -se"SELECT max(version) version FROM kalturadw_ds.version_management" | head -2 | tail -1)
 echo "current version $version"
 
 update_all $version
+
+OS_CRONTAB_DIR=/etc/cron.d
+
+#cp crontab file
+if [ "$(whoami)" != 'root' ]; then
+        su root -c /bin/bash $ROOT_DIR/setup/deploy_crontab -d $ROOT_DIR -c /etc/cron.d
+        if [ ! $? == "0" ]; then
+                echo "Not root. exiting"
+		echo "To retry - Execute as root /bin/bash $ROOT_DIR/setup/deploy_crontab -d $ROOT_DIR -c $OS_CRONTAB_DIR"
+        fi
+else
+	/bin/bash $ROOT_DIR/setup/deploy_crontab -d $ROOT_DIR -c $OS_CRONTAB_DIR
+fi
+~               

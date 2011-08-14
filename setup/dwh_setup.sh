@@ -38,7 +38,6 @@ if [ $ret_val -ne 0 ];then
        	exit
 fi
 
-$SETUP_ROOT_DIR/copy_pentaho_plugins.sh -d $ROOT_DIR -k $KITCHEN
-
 # Note that setup skips svn update and registers all files from migrations as if they were run (the changes are already incorporated in ddl).
 $SETUP_ROOT_DIR/update.sh -k $KITCHEN -d $ROOT_DIR -u $USER -p $PW -h $HOST -P $PORT -r 1 -v 0
+
