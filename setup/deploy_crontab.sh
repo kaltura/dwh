@@ -3,7 +3,7 @@
 CRONTAB_OS_DIR=/etc/cron.d/
 ROOT_DIR=/opt/kaltura/dwh
 
-while getopts "k:d:" o
+while getopts "c:d:" o
 do      case "$o" in
         d)  ROOT_DIR="$OPTARG";;
         c)  CRONTAB_OS_DIR="$OPTARG";;

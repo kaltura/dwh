@@ -85,12 +85,15 @@ OS_CRONTAB_DIR=/etc/cron.d
 
 #cp crontab file
 if [ "$(whoami)" != 'root' ]; then
-        su root -c /bin/bash $ROOT_DIR/setup/deploy_crontab -d $ROOT_DIR -c /etc/cron.d
+        echo "Installtion finished." 
+	echo "You must have root priveleges to configure cron."
+        su root -c "/bin/bash $ROOT_DIR/setup/deploy_crontab.sh -d $ROOT_DIR -c $OS_CRONTAB_DIR"
         if [ ! $? == "0" ]; then
-                echo "Not root. exiting"
-		echo "To retry - Execute as root /bin/bash $ROOT_DIR/setup/deploy_crontab -d $ROOT_DIR -c $OS_CRONTAB_DIR"
+		echo "Not root. exiting"
+		echo "To retry configuring cron - Execute as root /bin/bash $ROOT_DIR/setup/deploy_crontab.sh -d $ROOT_DIR -c $OS_CRONTAB_DIR"
+	else
+		echo "Deployed cron successfully"
         fi
 else
-	/bin/bash $ROOT_DIR/setup/deploy_crontab -d $ROOT_DIR -c $OS_CRONTAB_DIR
+	/bin/bash $ROOT_DIR/setup/deploy_crontab.sh -d $ROOT_DIR -c $OS_CRONTAB_DIR
 fi
-~               
