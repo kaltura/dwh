@@ -20,4 +20,4 @@ END$$
 
 DELIMITER ;
 
-CALL populate_time_dim('2010-01-01 00:00:00', '2020-12-31 00:00:00');
+CALL populate_time_dim(date_format(now() - interval 30 day,'%Y-%m-%d 00:00:00'), date_format(now() + interval 10 year,'%Y-%m-%d 00:00:00'));
