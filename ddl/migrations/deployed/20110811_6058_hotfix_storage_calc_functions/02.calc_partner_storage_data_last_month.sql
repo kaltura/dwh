@@ -2,20 +2,18 @@ DELIMITER $$
 
 USE `kalturadw`$$
 
-DROP FUNCTION IF EXISTS `calc_partner_storage_data_time_range`$$
+DROP FUNCTION IF EXISTS `calc_partner_storage_data_last_month`$$
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `calc_partner_storage_data_time_range`(start_date_id INT, end_date_id INT ,partner_id INT ) RETURNS DECIMAL(19,4)
+CREATE DEFINER=`root`@`localhost` FUNCTION `calc_partner_storage_data_last_month`(month_id INT ,partner_id INT ) RETURNS DECIMAL(19,4)
     DETERMINISTIC
-BEGIN	
-	DECLARE avg_cont_aggr_storage DECIMAL (19,4);
-	SET @current_partner_id=partner_id;
-	SET @current_start_date_id=start_date_id;
-	SET @current_end_date_id=LEAST(end_date_id, DATE(NOW())*1);
+BEGIN
+	DECLARE avg_cont_aggr_storage DECIMAL(19,4);
 	
+	SET @current_month_id=month_id;
+	SET @current_partner_id=partner_id;
 	SELECT	SUM(continuous_aggr_storage/DAY(LAST_DAY(continuous_partner_storage.date_id))) avg_continuous_aggr_storage_mb
 	INTO avg_cont_aggr_storage
-	FROM (SELECT * FROM (
-			SELECT 	all_times.day_id date_id,
+	FROM (		SELECT 	all_times.day_id date_id,
 				IF(SUM(aggr_p.aggr_storage_mb) IS NOT NULL, SUM(aggr_p.aggr_storage_mb),
                                 (SELECT aggr_storage_mb FROM dwh_hourly_partner_usage inner_a_p 
                                  WHERE  inner_a_p.partner_id=@current_partner_id AND 
@@ -29,10 +27,11 @@ BEGIN
 					AND aggr_p.bandwidth_source_id = 1 
 					AND aggr_p.hour_id = 0 
 					AND aggr_p.partner_id=@current_partner_id)
-			WHERE 	all_times.day_id BETWEEN 20081230 AND all_times.day_id<=@current_end_date_id
-			GROUP BY all_times.day_id) results
-			WHERE date_id >= @current_start_date_id AND date_id <=@current_end_date_id
-		) continuous_partner_storage;
+			WHERE 	all_times.day_id BETWEEN 20081230 AND LAST_DAY(@current_month_id*100+1)*1
+			GROUP BY day_id
+		) continuous_partner_storage
+	WHERE kalturadw.calc_month_id(continuous_partner_storage.date_id)=@current_month_id
+	GROUP BY kalturadw.calc_month_id(continuous_partner_storage.date_id);
 	RETURN avg_cont_aggr_storage;
 END$$
 
