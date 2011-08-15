@@ -1,3 +1,4 @@
+create_partitions.kjb
 storage_usage/calc_storage_usage.kjb
 aggregation/calc_aggr_days.kjb
 aggregation/plays_views_sync_operational.kjb
