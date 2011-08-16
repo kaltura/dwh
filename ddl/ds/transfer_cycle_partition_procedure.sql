@@ -15,9 +15,6 @@ BEGIN
 	DECLARE aggr_date VARCHAR(400);
 	DECLARE aggr_hour VARCHAR(400);
 	DECLARE aggr_names VARCHAR(4000);
-	DECLARE reset_aggr_sql VARCHAR(4000);
-	DECLARE insert_to_fact_sql VARCHAR(4000);
-	DECLARE post_transfer_sp_sql VARCHAR(4000);
 	
 	DECLARE done INT DEFAULT 0;
 	DECLARE staging_areas_cursor CURSOR FOR SELECT 	source_table, target_table, IFNULL(on_duplicate_clause,''),	staging_partition_field, post_transfer_sp, aggr_date_field, hour_id_field, post_transfer_aggregations
@@ -35,7 +32,7 @@ BEGIN
 		
 		IF ((LENGTH(AGGR_DATE) > 0) && (LENGTH(aggr_names) > 0)) THEN
 		
-			SET reset_aggr_sql = CONCAT(
+			SET @s = CONCAT(
 				'INSERT INTO kalturadw.aggr_managment(aggr_name, aggr_day, aggr_day_int, hour_id, is_calculated)
 				SELECT aggr_name, date(aggr_date), aggr_date, aggr_hour, 0
 				FROM (SELECT DISTINCT aggr_name FROM kalturadw.aggr_managment) a, 
@@ -45,7 +42,7 @@ BEGIN
 				WHERE aggr_name in ', aggr_names,'
 				ON DUPLICATE KEY UPDATE is_calculated = 0');
 			
-			PREPARE stmt FROM reset_aggr_sql;
+			PREPARE stmt FROM @s;
 			EXECUTE stmt;
 			DEALLOCATE PREPARE stmt;
 		END IF;
@@ -55,20 +52,20 @@ BEGIN
 		FROM information_schema.COLUMNS
 		WHERE CONCAT(table_schema,'.',table_name) = tgt_table;
 			
-		SET insert_to_fact_sql = CONCAT(	'insert into ',tgt_table, ' (',select_fields,') ',
+		SET @s = CONCAT(	'insert into ',tgt_table, ' (',select_fields,') ',
 						' select ',select_fields,
 						' from ',src_table,
 						' where ',partition_field,'  = ',p_cycle_id,
 						' ',dup_clause );
 
-		PREPARE stmt FROM insert_to_fact_sql;
+		PREPARE stmt FROM @s;
 		EXECUTE stmt;
 		DEALLOCATE PREPARE stmt;
 			
 		IF LENGTH(POST_TRANSFER_SP_VAL)>0 THEN
-				SET post_transfer_sp_sql = CONCAT('call ',post_transfer_sp_val,'(',p_cycle_id,')');
+				SET @s = CONCAT('call ',post_transfer_sp_val,'(',p_cycle_id,')');
 				
-				PREPARE stmt FROM  post_transfer_sp_sql;
+				PREPARE stmt FROM  @s;
 				EXECUTE stmt;
 				DEALLOCATE PREPARE stmt;
 		END IF;
