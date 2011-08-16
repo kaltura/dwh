@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>calc_aggr_partner_usage</name>
+    <name>calc_aggr_bandwidth_usage</name>
     <description/>
     <extended_description/>
     <trans_version/>
+    <trans_status>0</trans_status>
     <directory>&#47;</directory>
     <parameters>
     </parameters>
@@ -198,8 +199,32 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
+  <connection>
+    <name>KalturaReadDW</name>
+    <server>${DbReadHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw</database>
+    <port>${DbReadPort}</port>
+    <username>${DbReadUser}</username>
+    <password>${DbReadPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbReadPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
-  <hop> <from>Write to log - before calc</from><to>aggregate partner usage</to><enabled>Y</enabled> </hop>  <hop> <from>aggregate partner usage</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  <hop> <from>Read days to calc</from><to>Write to log - before calc</to><enabled>Y</enabled> </hop>  <hop> <from>reset partner usage aggregation</from><to>Read days to calc</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Write to log - before calc</from><to>aggregate bandwidth usage</to><enabled>Y</enabled> </hop>  <hop> <from>aggregate bandwidth usage</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  <hop> <from>Read days to calc</from><to>Write to log - before calc</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Read days to calc</name>
     <type>TableInput</type>
@@ -213,7 +238,7 @@
     <connection>KalturaDW</connection>
     <sql>SELECT distinct aggr_day	 
 FROM kalturadw.aggr_managment 
-WHERE aggr_name=&apos;partner_usage&apos;
+WHERE aggr_name=&apos;bandwidth_usage&apos;
 AND aggr_day + INTERVAL hour_id HOUR &lt; NOW() - INTERVAL 1 HOUR 
 and is_calculated = 0
 ORDER BY aggr_day</sql>
@@ -281,7 +306,7 @@ ORDER BY aggr_day</sql>
     </step>
 
   <step>
-    <name>aggregate partner usage</name>
+    <name>aggregate bandwidth usage</name>
     <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
@@ -293,7 +318,7 @@ ORDER BY aggr_day</sql>
     <connection>KalturaDW</connection>
     <execute_each_row>Y</execute_each_row>
     <replace_variables>N</replace_variables>
-    <sql>call kalturadw.recalc_aggr_day_partner(date(&apos;?&apos;));</sql>
+    <sql>call kalturadw.calc_aggr_day_partner_bandwidth(date(&apos;?&apos;));</sql>
     <insert_field/>
     <update_field/>
     <delete_field/>
@@ -304,42 +329,6 @@ ORDER BY aggr_day</sql>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>588</xloc>
-      <yloc>129</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>reset partner usage aggregation</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <execute_each_row>Y</execute_each_row>
-    <replace_variables>N</replace_variables>
-    <sql>UPDATE kalturadw.aggr_managment, 
-	       (SELECT MIN(aggr_day_int) aggr_day_int FROM kalturadw.aggr_managment
-			WHERE aggr_name = &apos;partner_usage&apos;
-			AND is_calculated = 0) earliest_aggr
-SET 
-	aggr_managment.is_calculated = 0 
-WHERE 
-	aggr_managment.aggr_day_int BETWEEN earliest_aggr.aggr_day_int AND DATE(NOW())*1
-	AND aggr_managment.aggr_name = &apos;partner_usage&apos;;</sql>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>114</xloc>
       <yloc>129</yloc>
       <draw>Y</draw>
       </GUI>

@@ -158,6 +158,30 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
+  <connection>
+    <name>KalturaReadDW</name>
+    <server>${DbReadHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw</database>
+    <port>${DbReadPort}</port>
+    <username>${DbReadUser}</username>
+    <password>${DbReadPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbReadPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
     <slaveservers>
          <slaveserver><name>local</name><hostname>localhost</hostname><port>8080</port><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
     </slaveservers>
@@ -223,7 +247,6 @@
       <type>TRANS</type>
       <filename>file:&#47;&#47;&#47;${EtlBasePath}aggregation&#47;calc_aggr_day.ktr</filename>
       <transname/>
-      <directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -247,11 +270,12 @@
       <yloc>120</yloc>
       </entry>
     <entry>
-      <name>calc_aggr_partner_usage</name>
+      <name>calc_aggr_bandwidth_usage</name>
       <description>Transformation</description>
       <type>TRANS</type>
-      <filename>file:&#47;&#47;&#47;${EtlBasePath}aggregation&#47;calc_aggr_partner_usage.ktr</filename>
+      <filename>file:&#47;&#47;&#47;${EtlBasePath}aggregation&#47;calc_aggr_bandwidth_usage.ktr</filename>
       <transname/>
+      <directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -296,7 +320,7 @@
     </hop>
     <hop>
       <from>calc_aggr_day</from>
-      <to>calc_aggr_partner_usage</to>
+      <to>calc_aggr_bandwidth_usage</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
