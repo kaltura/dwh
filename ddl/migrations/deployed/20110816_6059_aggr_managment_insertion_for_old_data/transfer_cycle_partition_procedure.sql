@@ -42,7 +42,7 @@ BEGIN
 					(select distinct ',aggr_date, ' aggr_date,' ,aggr_hour,' aggr_hour 
 					 from ',src_table,
 					' where ',partition_field,' = ',p_cycle_id,') ds
-				WHERE aggr_name in', aggr_names,')
+				WHERE aggr_name in', aggr_names,'
 				ON DUPLICATE KEY UPDATE is_calculated = 0');
 			
 			PREPARE stmt FROM  @reset_aggr_sql;

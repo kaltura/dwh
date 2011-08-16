@@ -31,8 +31,10 @@ BEGIN
 			DEALLOCATE PREPARE stmt;	
 		END IF;
 		
-		SET @s = CONCAT('UPDATE aggr_managment SET is_calculated = 0 
-		WHERE aggr_name = ''',p_aggr_name,''' AND aggr_day = ''',p_date_id,''' AND hour_id=',p_hour_id);
+		SET @s = CONCAT('INSERT INTO aggr_managment(aggr_name, aggr_day, aggr_day_int, hour_id, is_calculated)
+		VALUES(''',p_aggr_name,''',''',p_date_id,''',''',p_date_id*1,''',',p_hour_id,',0)
+		ON DUPLICATE KEY UPDATE is_calculated = 0');
+
 		PREPARE stmt FROM  @s;
 		EXECUTE stmt;
 		DEALLOCATE PREPARE stmt;
