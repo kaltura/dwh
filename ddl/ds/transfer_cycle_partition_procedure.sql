@@ -35,17 +35,17 @@ BEGIN
 		
 		IF ((LENGTH(AGGR_DATE) > 0) && (LENGTH(aggr_names) > 0)) THEN
 		
-			SET @reset_aggr_sql = CONCAT(
+			SET reset_aggr_sql = CONCAT(
 				'INSERT INTO kalturadw.aggr_managment(aggr_name, aggr_day, aggr_day_int, hour_id, is_calculated)
 				SELECT aggr_name, date(aggr_date), aggr_date, aggr_hour, 0
 				FROM (SELECT DISTINCT aggr_name FROM kalturadw.aggr_managment) a, 
 					(select distinct ',aggr_date, ' aggr_date,' ,aggr_hour,' aggr_hour 
 					 from ',src_table,
 					' where ',partition_field,' = ',p_cycle_id,') ds
-				WHERE aggr_name in', aggr_names,')
+				WHERE aggr_name in ', aggr_names,'
 				ON DUPLICATE KEY UPDATE is_calculated = 0');
 			
-			PREPARE stmt FROM  @reset_aggr_sql;
+			PREPARE stmt FROM reset_aggr_sql;
 			EXECUTE stmt;
 			DEALLOCATE PREPARE stmt;
 		END IF;
@@ -55,22 +55,20 @@ BEGIN
 		FROM information_schema.COLUMNS
 		WHERE CONCAT(table_schema,'.',table_name) = tgt_table;
 			
-		SELECT CONCAT(	'insert into ',tgt_table, ' (',select_fields,') ',
+		SET insert_to_fact_sql = CONCAT(	'insert into ',tgt_table, ' (',select_fields,') ',
 						' select ',select_fields,
 						' from ',src_table,
 						' where ',partition_field,'  = ',p_cycle_id,
-						' ',dup_clause ) INTO insert_to_fact_sql;
-			
-		SET @insert_to_fact_sql = insert_to_fact_sql;
+						' ',dup_clause );
 
-		PREPARE stmt FROM  @insert_to_fact_sql;
+		PREPARE stmt FROM insert_to_fact_sql;
 		EXECUTE stmt;
 		DEALLOCATE PREPARE stmt;
 			
 		IF LENGTH(POST_TRANSFER_SP_VAL)>0 THEN
-				SET @post_transfer_sp_sql = CONCAT('call ',post_transfer_sp_val,'(',p_cycle_id,')');
+				SET post_transfer_sp_sql = CONCAT('call ',post_transfer_sp_val,'(',p_cycle_id,')');
 				
-				PREPARE stmt FROM  @post_transfer_sp_sql;
+				PREPARE stmt FROM  post_transfer_sp_sql;
 				EXECUTE stmt;
 				DEALLOCATE PREPARE stmt;
 		END IF;
