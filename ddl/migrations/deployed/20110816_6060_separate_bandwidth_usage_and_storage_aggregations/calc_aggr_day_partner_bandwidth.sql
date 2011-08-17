@@ -24,7 +24,7 @@ BEGIN
 	GROUP BY session_partner_id, bandwidth_source_id
 	ON DUPLICATE KEY UPDATE	count_bandwidth_kb=VALUES(count_bandwidth_kb);
 	
-        UPDATE aggr_managment SET is_calculated = 1, end_time = NOW() WHERE aggr_name = 'bandwidth_usage' AND aggr_day_int = p_date_id;
+        UPDATE aggr_managment SET is_calculated = 1, end_time = NOW() WHERE aggr_name = 'bandwidth_usage' AND aggr_day_int = DATE(p_date_val)*1;
 END$$
 
 DELIMITER ;
