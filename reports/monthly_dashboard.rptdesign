@@ -625,7 +625,7 @@ GROUP BY LAST_DAY(DATE(date_id))*1 DESC]]></xml-property>
                     <structure>
                         <property name="position">1</property>
                         <property name="name">date_id</property>
-                        <property name="dataType">date</property>
+                        <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
@@ -670,8 +670,8 @@ GROUP BY LAST_DAY(DATE(date_id))*1 DESC]]></xml-property>
                     <property name="position">1</property>
                     <property name="name">date_id</property>
                     <property name="nativeName">date_id</property>
-                    <property name="dataType">date</property>
-                    <property name="nativeDataType">91</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
@@ -724,7 +724,7 @@ GROUP BY LAST_DAY(DATE(date_id))*1 DESC]]></xml-property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT 
-Last_day(created_at) date_id, 
+Last_day(created_at)*1 date_id, 
 SUM(IF(entry_type_name = 'MEDIACLIP' AND entry_media_type_name = 'VIDEO', 1,0)) videos,
 SUM(IF(entry_type_name = 'MEDIACLIP' AND entry_media_type_name = 'IMAGE', 1,0)) images,
 SUM(IF(entry_type_name = 'MEDIACLIP' AND entry_media_type_name = 'AUDIO', 1,0)) audios,
@@ -793,7 +793,7 @@ GROUP BY date_id desc]]></xml-property>
                     <structure>
                         <property name="position">1</property>
                         <property name="name">date_id</property>
-                        <property name="dataType">date</property>
+                        <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
@@ -823,8 +823,8 @@ GROUP BY date_id desc]]></xml-property>
                     <property name="position">1</property>
                     <property name="name">date_id</property>
                     <property name="nativeName">date_id</property>
-                    <property name="dataType">date</property>
-                    <property name="nativeDataType">91</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
@@ -860,7 +860,7 @@ COUNT(IF(entry_media_source_id=1,1,NULL)) uploads,
 COUNT(IF(entry_media_source_id=2,1,NULL)) webcam,
 COUNT(IF(entry_media_source_id NOT IN (1,2),1,NULL)) imported,
 count(*) total
-FROM (SELECT  LAST_DAY(created_at) date_id, 
+FROM (SELECT  LAST_DAY(created_at)*1 date_id, 
 entry_media_source_id
 FROM kalturadw.dwh_dim_entries
 WHERE created_at BETWEEN (LAST_DAY(NOW()) - INTERVAL 13 MONTH + INTERVAL 1 DAY) AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)) p
@@ -3290,7 +3290,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="484">
-                                        <text-property name="text">Last year avg GB</text-property>
+                                        <text-property name="text">Last 12 months avg GB</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -3686,7 +3686,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="965">
-                                        <text-property name="text">Last year avg GB</text-property>
+                                        <text-property name="text">Last 12 months avg GB</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -4070,7 +4070,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1010">
-                                        <text-property name="text">Last year avg GB</text-property>
+                                        <text-property name="text">Last 12 months avg GB</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -5617,7 +5617,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopWidth">1px</property>
                                     <property name="textAlign">left</property>
                                     <label id="607">
-                                        <text-property name="text">Last year avg GB</text-property>
+                                        <text-property name="text">Last 12 months avg GB</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -5710,7 +5710,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <data id="624">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.0000</property>
+                                            <property name="pattern">###,##0.00</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">count_bandwidth_kb</property>
@@ -5755,7 +5755,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <data id="622">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.0000</property>
+                                            <property name="pattern">###,##0.00</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">2_months_ago_count_bandwidth_kb</property>
@@ -5778,7 +5778,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <data id="620">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.0000</property>
+                                            <property name="pattern">###,##0.00</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">avg_count_bandwidth_kb</property>
@@ -6016,7 +6016,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopWidth">1px</property>
                                     <property name="textAlign">left</property>
                                     <label id="876">
-                                        <text-property name="text">Last year avg GB</text-property>
+                                        <text-property name="text">Last 12 months avg GB</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -6106,7 +6106,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <data id="885">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.0000</property>
+                                            <property name="pattern">###,##0.00</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">count_bandwidth_kb</property>
@@ -6151,7 +6151,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <data id="887">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.0000</property>
+                                            <property name="pattern">###,##0.00</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">2_months_ago_count_bandwidth_kb</property>
@@ -6174,7 +6174,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <data id="889">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.0000</property>
+                                            <property name="pattern">###,##0.00</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">avg_count_bandwidth_kb</property>
@@ -6412,7 +6412,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopWidth">1px</property>
                                     <property name="textAlign">left</property>
                                     <label id="924">
-                                        <text-property name="text">Last year avg GB</text-property>
+                                        <text-property name="text">Last 12 months avg GB</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -10914,7 +10914,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="706">
-                                        <text-property name="text">Last year avg</text-property>
+                                        <text-property name="text">Last 12 months avg GB</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -11299,7 +11299,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1096">
-                                        <text-property name="text">Last year avg</text-property>
+                                        <text-property name="text">Last 12 months avg GB</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -11672,7 +11672,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1142">
-                                        <text-property name="text">Last year avg</text-property>
+                                        <text-property name="text">Last 12 months avg GB</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -13211,7 +13211,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="650">
-                                        <text-property name="text">Last year avg GB</text-property>
+                                        <text-property name="text">Last 12 months avg GB</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -13597,7 +13597,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1192">
-                                        <text-property name="text">Last year avg GB</text-property>
+                                        <text-property name="text">Last 12 months avg GB</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -13970,7 +13970,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1238">
-                                        <text-property name="text">Last year avg GB</text-property>
+                                        <text-property name="text">Last 12 months avg GB</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -16562,7 +16562,7 @@ function beforeGeneration( chart, icsc )
                             <structure>
                                 <property name="name">date_id</property>
                                 <expression name="expression" type="javascript">dataSetRow["date_id"]</expression>
-                                <property name="dataType">date</property>
+                                <property name="dataType">integer</property>
                             </structure>
                             <structure>
                                 <property name="name">videos</property>
@@ -18647,7 +18647,7 @@ function beforeGeneration( chart, icsc )&#xD;
                             <structure>
                                 <property name="name">date_id</property>
                                 <expression name="expression" type="javascript">dataSetRow["date_id"]</expression>
-                                <property name="dataType">date</property>
+                                <property name="dataType">integer</property>
                             </structure>
                             <structure>
                                 <property name="name">uploads</property>
