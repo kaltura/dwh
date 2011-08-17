@@ -3154,11 +3154,17 @@ day + month / 100</Definition>
                                 <expression name="expression" type="javascript">dataSetRow["count_bandwidth_kb"]/dataSetRow["total"]</expression>
                                 <property name="dataType">float</property>
                             </structure>
+                            <structure>
+                                <property name="name">rank</property>
+                                <text-property name="displayName">rank</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["rank"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
                         </list-property>
                         <list-property name="filter">
                             <structure>
                                 <property name="operator">le</property>
-                                <expression name="expr" type="javascript">row["__rownum"]</expression>
+                                <expression name="expr" type="javascript">row["rank"]</expression>
                                 <simple-property-list name="value1">
                                     <value>20</value>
                                 </simple-property-list>
@@ -5481,11 +5487,17 @@ day + month / 100</Definition>
                                 <expression name="expression" type="javascript">dataSetRow["count_bandwidth_kb"]/dataSetRow["total"]</expression>
                                 <property name="dataType">float</property>
                             </structure>
+                            <structure>
+                                <property name="name">rank</property>
+                                <text-property name="displayName">rank</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["rank"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
                         </list-property>
                         <list-property name="filter">
                             <structure>
                                 <property name="operator">le</property>
-                                <expression name="expr" type="javascript">row["__rownum"]</expression>
+                                <expression name="expr" type="javascript">row["rank"]</expression>
                                 <simple-property-list name="value1">
                                     <value>5</value>
                                 </simple-property-list>
@@ -10783,11 +10795,17 @@ day + month / 100</Definition>
                                 <expression name="expression" type="javascript">dataSetRow["count_plays"]/dataSetRow["total"]</expression>
                                 <property name="dataType">float</property>
                             </structure>
+                            <structure>
+                                <property name="name">rank</property>
+                                <text-property name="displayName">rank</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["rank"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
                         </list-property>
                         <list-property name="filter">
                             <structure>
                                 <property name="operator">le</property>
-                                <expression name="expr" type="javascript">row["__rownum"]</expression>
+                                <expression name="expr" type="javascript">row["rank"]</expression>
                                 <simple-property-list name="value1">
                                     <value>20</value>
                                 </simple-property-list>
@@ -13077,11 +13095,17 @@ day + month / 100</Definition>
                                 <expression name="expression" type="javascript">dataSetRow["count_storage_mb"]/dataSetRow["total"]</expression>
                                 <property name="dataType">float</property>
                             </structure>
+                            <structure>
+                                <property name="name">rank</property>
+                                <text-property name="displayName">rank</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["rank"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
                         </list-property>
                         <list-property name="filter">
                             <structure>
                                 <property name="operator">le</property>
-                                <expression name="expr" type="javascript">row["__rownum"]</expression>
+                                <expression name="expr" type="javascript">row["rank"]</expression>
                                 <simple-property-list name="value1">
                                     <value>20</value>
                                 </simple-property-list>
