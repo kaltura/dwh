@@ -2889,7 +2889,7 @@ function beforeGeneration( chart, icsc )&#xD;
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>Formatter.format(BirtMath.roundDown(row[&quot;DATE_ID&quot;]/100)/100,'###,##0.00');</Definition>
+          <Definition>BirtMath.roundDown(row[&quot;DATE_ID&quot;]/100)/100</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -5223,7 +5223,7 @@ function beforeGeneration( chart, icsc )&#xD;
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>Formatter.format(BirtMath.roundDown(row[&quot;DATE_ID&quot;]/100)/100,'###,##0.00');</Definition>
+          <Definition>BirtMath.roundDown(row[&quot;DATE_ID&quot;]/100)/100</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -8972,7 +8972,7 @@ function beforeGeneration( chart, icsc )&#xD;
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>Formatter.format(BirtMath.roundDown(row[&quot;date_id&quot;]/100)/100,'###,##0.00');</Definition>
+          <Definition>BirtMath.roundDown(row[&quot;date_id&quot;]/100)/100</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -12825,7 +12825,7 @@ function beforeGeneration( chart, icsc )&#xD;
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>Formatter.format(BirtMath.roundDown(row[&quot;DATE_ID&quot;]/100)/100,'###,##0.00');</Definition>
+          <Definition>BirtMath.roundDown(row[&quot;DATE_ID&quot;]/100)/100</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -16420,7 +16420,7 @@ function beforeGeneration( chart, icsc )
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>BirtDateTime.month(row[&quot;date_id&quot;]);</Definition>
+          <Definition>BirtMath.roundDown(row[&quot;date_id&quot;]/100)/100</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -18511,7 +18511,7 @@ function beforeGeneration( chart, icsc )&#xD;
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>BirtDateTime.month(row[&quot;date_id&quot;]);</Definition>
+          <Definition>BirtMath.roundDown(row[&quot;date_id&quot;]/100)/100</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
