@@ -10530,7 +10530,7 @@ function beforeGeneration( chart, icsc )&#xD;
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>Formatter.format(BirtMath.roundDown(row[&quot;DATE_ID&quot;]/100)/100,'###,##0.00');</Definition>
+          <Definition>BirtMath.roundDown(row[&quot;DATE_ID&quot;]/100)/100</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
