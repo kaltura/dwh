@@ -25,9 +25,7 @@ CREATE TABLE kalturadw_ds.ds_events
 	, control_id VARCHAR(15)
 	, seek INT
 	, new_point INT
-#	, domain VARCHAR(255)
 	, domain_id INT
-	, referrer VARCHAR(255)
 	, entry_media_type_id INT
 	, entry_partner_id INT
 	, referrer_id INT(11)
