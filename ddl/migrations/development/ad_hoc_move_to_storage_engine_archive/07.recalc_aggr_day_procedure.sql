@@ -10,7 +10,7 @@ BEGIN
 	DECLARE v_aggr_id_field VARCHAR(100);
 	DECLARE v_ignore DATE;
 		
-	SELECT date(now() - interval archive_delete_days_back month)
+	SELECT date(now() - interval archive_delete_days_back day)
 	INTO v_ignore
 	FROM kalturadw_ds.retention_policy
 	WHERE table_name = 'dwh_fact_events';	

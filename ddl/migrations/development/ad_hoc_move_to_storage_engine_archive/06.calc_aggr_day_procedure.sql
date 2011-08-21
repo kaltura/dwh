@@ -15,23 +15,18 @@ BEGIN
 	DECLARE v_ignore DATE;
 	DECLARE v_table_name VARCHAR(100);
 		
-	SELECT date(now() - interval archive_delete_days_back month)
-	INTO v_ignore
+	SELECT date(now() - interval archive_delete_days_back day), date(archive_last_partition)
+	INTO v_ignore, v_from_archive
 	FROM kalturadw_ds.retention_policy
 	WHERE table_name = 'dwh_fact_events';	
 	
 	IF (p_date_val >= v_ignore) THEN -- not so old that we don't have any data
 	
-		SELECT date(archive_last_partition)
-		INTO v_from_archive
-		FROM kalturadw_ds.retention_policy
-		WHERE table_name = 'dwh_fact_events';	
-		
-		if (p_date_val >= v_from_archive) then -- aggr from archive or from events
+		IF (p_date_val >= v_from_archive) THEN -- aggr from archive or from events
 			SET v_table_name = 'dwh_fact_events';
-		else
+		ELSE
 			SET v_table_name = 'dwh_fact_events_archive';
-		end if;
+		END IF;
 		
 		SELECT aggr_table, aggr_id_field, aggr_join_stmt
 		INTO  v_aggr_table, v_aggr_id_field, v_aggr_join_stmt
