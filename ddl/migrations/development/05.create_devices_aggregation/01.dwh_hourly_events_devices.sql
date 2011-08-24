@@ -53,8 +53,7 @@ CREATE TABLE kalturadw.`dwh_hourly_events_devices` (
   `count_postroll_50` INT DEFAULT NULL,
   `count_postroll_75` INT DEFAULT NULL,
   `count_bandwidth_kb` INT DEFAULT NULL,
-  `total_kusers` INT DEFAULT NULL,
-  `total_end_users` INT DEFAULT NULL,
+  `total_admins` INT DEFAULT NULL,
   `total_media_entries` INT DEFAULT NULL,
   PRIMARY KEY `partner_id` (`partner_id`,`date_id`,`hour_id`,`location_id`,`country_id`,`os_id`,`browser_id`,`ui_conf_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
