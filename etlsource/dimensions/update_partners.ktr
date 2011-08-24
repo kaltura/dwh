@@ -824,8 +824,7 @@
 	 
 	FROM 
 	kaltura.partner 
-WHERE -- updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
-id = 495905
+WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
 </sql>
     <limit>0</limit>
     <lookup/>
