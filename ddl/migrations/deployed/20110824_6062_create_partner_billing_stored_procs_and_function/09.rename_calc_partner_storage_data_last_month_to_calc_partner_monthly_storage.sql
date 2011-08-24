@@ -11,6 +11,7 @@ BEGIN
 
         SELECT  calc_partner_storage_data_time_range (date(p_month_id*100+1),last_day(p_month_id*100+1),p_partner_id)
 	INTO avg_cont_aggr_storage;
+        RETURN avg_cont_aggr_storage;
 END$$
 
 DELIMITER ;
