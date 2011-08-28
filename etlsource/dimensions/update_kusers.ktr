@@ -549,6 +549,11 @@
         <rename>indexed_partner_data_string</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>is_admin</name>
+        <rename>is_admin</rename>
+        <update>Y</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -578,6 +583,7 @@
 , upper(country) country
 , upper(state) state
 , upper(city) city
+, nullif(is_admin, 0) is_admin,
 , zip
 , url_list
 , picture
@@ -950,7 +956,7 @@ The update was done with another transformation &quot;UpdateLocations&quot;</des
            </partitioning>
       <schema/>
       <table>dwh_dim_user_status</table>
-      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionRead/>
       <connectionWrite>KalturaDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
