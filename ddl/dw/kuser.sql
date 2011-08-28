@@ -51,6 +51,7 @@ CREATE TABLE `kalturadw`.`dwh_dim_kusers` (
    admin_tags text,
    indexed_partner_data_int INT,
    indexed_partner_data_string varchar(64),
+   is_admin TINYINT(4),
   PRIMARY KEY (`kuser_id`),
   KEY `screen_name_index` (`screen_name`),
   KEY `full_name_index` (`full_name`),
