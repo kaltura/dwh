@@ -72,7 +72,7 @@ BEGIN
     		SELECT partner_id,en.created_date_id date_id,HOUR(en.created_at) hour_id,
 				COUNT(1) deleted_media_entries
     		FROM dwh_dim_entries  en 
-    		WHERE (en.entry_media_type_id IN (1,2,5,6) OR en.entry_type_id IN (5) and entry_status_id = 3) 
+    		WHERE (en.entry_type_id IN (1,7) and entry_status_id = 3) 
     			AND en.modified_at between DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' HOUR ',' 
 					   AND DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' + 1 HOUR ','
     		GROUP BY partner_id, en.created_date_id, en.created_hour_id
