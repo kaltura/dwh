@@ -558,7 +558,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1068</xloc>
-      <yloc>85</yloc>
+      <yloc>84</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -583,7 +583,7 @@
 , upper(country) country
 , upper(state) state
 , upper(city) city
-, nullif(is_admin, 0) is_admin,
+, nullif(is_admin, 0) is_admin
 , zip
 , url_list
 , picture
@@ -807,7 +807,7 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>53</xloc>
-      <yloc>14</yloc>
+      <yloc>13</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
