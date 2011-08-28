@@ -155,8 +155,8 @@ mysqlexec $DW_ROOT_DIR/generate_daily_usage_report.sql
 mysqlexec $DW_ROOT_DIR/dwh_daily_usage_reports.sql
 
 #dw/dimensions
-mysqlexec $DW_ROOT_DIR/dimnesions/dwh_dim_partners.sql
-mysqlexec $DW_ROOT_DIR/dimnesions/dwh_dim_partner_vertical.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_partners.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_partner_vertical.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_partner_class_of_service.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_domain.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_asset_status.sql
