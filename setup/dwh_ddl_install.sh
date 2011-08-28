@@ -222,7 +222,7 @@ mysqlexec $DS_ROOT_DIR/create_updated_kusers_storage_usage.sql
 #dw/functions/
 mysqlexec $DW_ROOT_DIR/functions/calc_month_id_function.sql
 mysqlexec $DW_ROOT_DIR/functions/calc_time_shift.sql
-mysqlexec $DW_ROOT_DIR/functions/calc_partner_storage_data.sql
+mysqlexec $DW_ROOT_DIR/functions/calc_partner_monthly_storage.sql
 mysqlexec $DW_ROOT_DIR/functions/calc_partner_storage_data_time_range.sql
 mysqlexec $DW_ROOT_DIR/functions/get_overage_charge.sql
 mysqlexec $DW_ROOT_DIR/functions/calc_partner_overage.sql
