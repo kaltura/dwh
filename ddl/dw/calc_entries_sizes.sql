@@ -11,8 +11,7 @@ BEGIN
 	UPDATE aggr_managment SET start_time = NOW() WHERE aggr_name = 'storage_usage' AND aggr_day_int = p_date_id;
 	
 	
-	DELETE FROM kalturadw.dwh_fact_entries_sizes
-	WHERE entry_size_date_id = p_date_id;
+	DELETE FROM kalturadw.dwh_fact_entries_sizes WHERE entry_size_date_id = p_date_id;
 	
 	DROP TABLE IF EXISTS today_file_sync_subset; 
 	
@@ -56,13 +55,16 @@ BEGIN
 	ON DUPLICATE KEY UPDATE
 		file_size = VALUES(file_size);
 	
-	DELETE today_sizes FROM today_sizes, kalturadw.dwh_dim_entries e USE INDEX (modified_at)
-		WHERE today_sizes.entry_id = e.entry_id 
-		AND e.modified_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
-		AND e.partner_id NOT IN (100  , -1  , -2  , 0 , 99 )
-		AND e.entry_type_id = 1
-		AND e.entry_status_id = 3;
-		
+	DROP TABLE IF EXISTS today_deleted_entries;
+	CREATE TEMPORARY TABLE today_deleted_entries AS 
+	SELECT entry_id FROM kalturadw.dwh_dim_entries
+	WHERE modified_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
+	AND partner_id NOT IN (100  , -1  , -2  , 0 , 99 )
+	AND entry_status_id = 3
+	AND entry_type_id = 1;	
+	
+	DELETE today_sizes FROM today_sizes, today_deleted_entries e 
+		WHERE today_sizes.entry_id = e.entry_id;
 	
 	ALTER TABLE today_sizes DROP INDEX unique_key;
 	
@@ -124,12 +126,8 @@ BEGIN
 	ON DUPLICATE KEY UPDATE 
 		entry_additional_size_kb = VALUES(entry_additional_size_kb);
 	
+	CALL kalturadw.calc_aggr_day_partner_storage(v_date);
 	UPDATE aggr_managment SET is_calculated = 1, end_time = NOW() WHERE aggr_name = 'storage_usage' AND aggr_day_int = p_date_id;
-	INSERT INTO aggr_managment(aggr_name, aggr_day, aggr_day_int, hour_id, is_calculated)
-	SELECT 'partner_usage', aggr_day, aggr_day_int, hour_id, 0 
-	FROM aggr_managment
-	WHERE aggr_name = 'storage_usage' AND aggr_day_int >= p_date_id
-	ON DUPLICATE KEY UPDATE is_calculated = 0;
 END$$
 
 DELIMITER ;
