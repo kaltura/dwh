@@ -152,7 +152,7 @@ mysqlexec $DW_ROOT_DIR/dwh_fact_bandwidth_usage.sql
 mysqlexec $DW_ROOT_DIR/dwh_fact_entries_sizes.sql
 mysqlexec $DW_ROOT_DIR/calc_entries_sizes.sql
 mysqlexec $DW_ROOT_DIR/generate_daily_usage_report.sql
-mysqlexec $DW_ROOT_DIR/dwh_daily_usage_reports.sqls
+mysqlexec $DW_ROOT_DIR/dwh_daily_usage_reports.sql
 
 #dw/dimensions
 mysqlexec $DW_ROOT_DIR/dimnesions/dwh_dim_partners.sql
