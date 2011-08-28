@@ -69,7 +69,8 @@ mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_error_type.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_status.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_type.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_fms_app.sql
-
+mysqlexec $BISOURCE_ROOT_DIR/bisources_partner_vertical.sql
+mysqlexec $BISOURCE_ROOT_DIR/bisources_partner_class_of_service.sql
 #ds/
 mysqlexec $DS_ROOT_DIR/files.sql
 mysqlexec $DS_ROOT_DIR/events.sql
@@ -142,7 +143,6 @@ mysqlexec $DW_ROOT_DIR/ip_ranges.sql
 mysqlexec $DW_ROOT_DIR/kuser.sql
 mysqlexec $DW_ROOT_DIR/locations.sql
 mysqlexec $DW_ROOT_DIR/locations_init.sql
-mysqlexec $DW_ROOT_DIR/partner.sql
 mysqlexec $DW_ROOT_DIR/time.sql
 mysqlexec $DW_ROOT_DIR/ui_conf.sql
 mysqlexec $DW_ROOT_DIR/widget.sql
@@ -151,12 +151,13 @@ mysqlexec $DW_ROOT_DIR/countries_view.sql
 mysqlexec $DW_ROOT_DIR/dwh_fact_bandwidth_usage.sql
 mysqlexec $DW_ROOT_DIR/dwh_fact_entries_sizes.sql
 mysqlexec $DW_ROOT_DIR/calc_entries_sizes.sql
-mysqlexec $DW_ROOT_DIR/calc_monthly_billing.sql
 mysqlexec $DW_ROOT_DIR/generate_daily_usage_report.sql
-mysqlexec $DW_ROOT_DIR/dwh_daily_usage_reports.sql
-mysqlexec $DW_ROOT_DIR/dwh_billing.sql
+mysqlexec $DW_ROOT_DIR/dwh_daily_usage_reports.sqls
 
 #dw/dimensions
+mysqlexec $DW_ROOT_DIR/dimnesions/dwh_dim_partners.sql
+mysqlexec $DW_ROOT_DIR/dimnesions/dwh_dim_partner_vertical.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_partner_class_of_service.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_domain.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_asset_status.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_audio_codec.sql
@@ -220,18 +221,11 @@ mysqlexec $DS_ROOT_DIR/create_updated_kusers_storage_usage.sql
 
 #dw/functions/
 mysqlexec $DW_ROOT_DIR/functions/calc_month_id_function.sql
-mysqlexec $DW_ROOT_DIR/functions/calc_prev_date_id_function.sql
-mysqlexec $DW_ROOT_DIR/functions/primary_partner_functions.sql
-mysqlexec $DW_ROOT_DIR/functions/top_activities_procedure.sql
 mysqlexec $DW_ROOT_DIR/functions/calc_time_shift.sql
-mysqlexec $DW_ROOT_DIR/functions/calc_partner_storage_data_last_month.sql
+mysqlexec $DW_ROOT_DIR/functions/calc_partner_storage_data.sql
 mysqlexec $DW_ROOT_DIR/functions/calc_partner_storage_data_time_range.sql
-
-
-#dw/op_services/
-mysqlexec $DW_ROOT_DIR/op_services/calc_partner_billing_data_procedure.sql
-mysqlexec $DW_ROOT_DIR/op_services/monthly_non_paying_billing_report_procedure.sql
-mysqlexec $DW_ROOT_DIR/op_services/monthly_partner_billing_report_procedure.sql
+mysqlexec $DW_ROOT_DIR/functions/get_overage_charge.sql
+mysqlexec $DW_ROOT_DIR/functions/calc_partner_overage.sql
 
 #dw/ri/ 
 mysqlexec $DW_ROOT_DIR/ri/ri_defaults.sql
