@@ -6,6 +6,8 @@ DROP PROCEDURE IF EXISTS `calc_aggr_day_partner_storage`$$
 
 CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day_partner_storage`(date_val DATE)
 BEGIN
+	DELETE FROM kalturadw.dwh_hourly_partner_usage WHERE date_id = date(date_val)*1 and IFNULL(count_bandwidth_kb,0) = 0 and (ifnull(count_storage_mb,0) > 0 or ifnull(aggr_storage_mb,0) > 0);
+        UPDATE kalturadw.dwh_hourly_partner_usage SET count_storage_mb = null, aggr_storage_mb=null WHERE date_id = date(date_val)*1 and IFNULL(count_bandwidth_kb,0) > 0;
 	
 	DROP TABLE IF EXISTS temp_aggr_storage;
 	CREATE TEMPORARY TABLE temp_aggr_storage(
