@@ -54,22 +54,32 @@ BEGIN
 				  ) ENGINE = MEMORY;
 	
 		INSERT INTO partner_overages (partner_id, included_bandwidth_kb, actual_bandwidth_kb, charge_overage_bandwidth_kb, included_storage_mb, actual_storage_mb, charge_overage_storage_mb, included_total_usage_mb, actual_total_usage_mb, charge_overage_total_usage_mb)
-			SELECT pq.partner_id, 
+			SELECT partner_id,
+				included_bandwidth_kb,actual_bandwidth_kb,
+				get_overage_charge(included_bandwidth_kb, actual_bandwidth_kb, charge_monthly_bandwidth_kb_unit, charge_monthly_bandwidth_kb_usd) charge_overage_bandwidth_kb,
+				included_storage_mb, actual_storage_mb,
+				get_overage_charge(included_storage_mb, actual_storage_mb, charge_monthly_storage_mb_unit, charge_monthly_storage_mb_usd) charge_overage_storage_mb, 
+				included_total_usage_mb, actual_bandwidth_kb/1024+actual_storage_mb actual_total_usage_mb,
+				get_overage_charge(included_total_usage_mb, actual_bandwidth_kb/1024+actual_storage_mb , charge_monthly_total_usage_mb_unit, charge_monthly_total_usage_mb_usd) charge_overage_total_usage_mb
+			FROM
+			(SELECT pq.partner_id, 
 				MAX(max_monthly_bandwidth_kb) included_bandwidth_kb,
-				@BANDWIDTH:=IFNULL(SUM(count_bandwidth_kb),0) actual_bandwidth_kb,
-				get_overage_charge(MAX(max_monthly_bandwidth_kb), @BANDWIDTH, MAX(charge_monthly_bandwidth_kb_unit), MAX(charge_monthly_bandwidth_kb_usd)) charge_overage_bandwidth_kb,
+				IFNULL(SUM(count_bandwidth_kb),0) actual_bandwidth_kb,
+				MAX(charge_monthly_bandwidth_kb_unit) charge_monthly_bandwidth_kb_unit,
+				MAX(charge_monthly_bandwidth_kb_usd) charge_monthly_bandwidth_kb_usd,	
 				MAX(max_monthly_storage_mb) included_storage_mb,
-				@STORAGE:=calc_partner_monthly_storage(p_month_id , pq.partner_id) actual_storage_mb,
-				get_overage_charge(MAX(max_monthly_storage_mb), @STORAGE, MAX(charge_monthly_storage_mb_unit), MAX(charge_monthly_storage_mb_usd)) charge_overage_storage_mb, 
+				IFNULL(calc_partner_monthly_storage(p_month_id , pq.partner_id),0) actual_storage_mb,
+				MAX(charge_monthly_storage_mb_unit) charge_monthly_storage_mb_unit,
+				MAX(charge_monthly_storage_mb_usd) charge_monthly_storage_mb_usd,
 				MAX(max_monthly_total_usage_mb) included_total_usage_mb,
-				@BANDWIDTH + @STORAGE actual_total_usage_mb,
-				get_overage_charge(MAX(max_monthly_total_usage_mb), @BANDWIDTH + @STORAGE, MAX(charge_monthly_total_usage_mb_unit), MAX(charge_monthly_total_usage_mb_usd)) charge_overage_total_usage_mb
+				MAX(charge_monthly_total_usage_mb_unit) charge_monthly_total_usage_mb_unit,
+				MAX(charge_monthly_total_usage_mb_usd) charge_monthly_total_usage_mb_usd
 			FROM partner_quotas pq LEFT OUTER JOIN kalturadw.dwh_hourly_partner_usage partner_usage 
 					ON (pq.usage_partner_id = partner_usage.partner_id AND partner_usage.date_id BETWEEN p_month_id*100 AND p_month_id*100+31)
-			GROUP BY pq.partner_id
-			HAVING 	actual_bandwidth_kb > included_bandwidth_kb OR 
+			GROUP BY pq.partner_id) inner_q
+			WHERE actual_bandwidth_kb > included_bandwidth_kb OR 
 				actual_storage_mb > included_storage_mb OR 
-				(actual_bandwidth_kb+actual_storage_mb) > included_total_usage_mb
+				actual_bandwidth_kb/1024+actual_storage_mb > included_total_usage_mb
 		ON DUPLICATE KEY UPDATE 
 			included_bandwidth_kb=VALUES(included_bandwidth_kb),
 			actual_bandwidth_kb=VALUES(actual_bandwidth_kb),
@@ -89,8 +99,8 @@ BEGIN
 			FROM partner_quotas pq, kalturadw.dwh_dim_entries entries
 			WHERE 	pq.usage_partner_id = entries.partner_id AND 
 				entries.created_at < LAST_DAY(DATE(p_month_id*100+1)) + INTERVAL 1 DAY AND
-				entries.entry_type_id IN (1,7) /*Media and Live streams*/
-				AND entry_status_id NOT IN (-2,-1,3) /*Remove failed and deleted*/
+				entries.entry_type_id IN (1,7) 
+				AND entry_status_id NOT IN (-2,-1,3) 
 			GROUP BY pq.partner_id
 			HAVING actual_entries > included_entries
 		ON DUPLICATE KEY UPDATE 
