@@ -16,17 +16,3 @@ LOGFILE=$ROOT_DIR/logs/etl_daily-${WHEN}.log
 
 export KETTLE_HOME=$ROOT_DIR
 sh $KITCHEN /file $ROOT_DIR/etlsource/execute/daily.kjb >> $LOGFILE 2>&1
-
-if [ $? == "0" ]; then
-        notify_mail_subject="Dev Daily succeeded"
-else
-        notify_mail_subject="Dev Daily failed"
-        rm -f $LOGFILE.gz
-        gzip -c $LOGFILE > $LOGFILE.gz
-        attachment=$LOGFILE.gz
-fi
- 
-recipients=dor.porat@kaltura.com
- 
-/usr/bin/php $ROOT_DIR/etlsource/scripts/reporting/sendMail.php dwh@kaltura.com $recipients "$notify_mail_subject" $attachment < /dev/null
- 

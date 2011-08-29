@@ -16,14 +16,3 @@ LOGFILE=$ROOT_DIR/logs/etl_hourly-${WHEN}.log
 
 export KETTLE_HOME=$ROOT_DIR
 sh $KITCHEN /file $ROOT_DIR/etlsource/execute/hourly.kjb >> $LOGFILE 2>&1
-
-if [ $? == "0" ]; then
-        notify_mail_subject="Hourly succeeded"
-else
-        notify_mail_subject="Hourly failed"
-        rm -f $LOGFILE.gz
-        gzip -c $LOGFILE > $LOGFILE.gz
-        attachment=$LOGFILE.gz
-	recipients=dor.porat@kaltura.com
-	/usr/bin/php $ROOT_DIR/etlsource/scripts/reporting/sendMail.php dwh@kaltura.com $recipients "$notify_mail_subject" $attachment < /dev/null
-fi
