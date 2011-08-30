@@ -224,6 +224,7 @@ mysqlexec $DW_ROOT_DIR/functions/calc_partner_monthly_storage.sql
 mysqlexec $DW_ROOT_DIR/functions/calc_partner_storage_data_time_range.sql
 mysqlexec $DW_ROOT_DIR/functions/get_overage_charge.sql
 mysqlexec $DW_ROOT_DIR/functions/calc_partner_overage.sql
+mysqlexec $DW_ROOT_DIR/functions/calc_partner_billing_data_procedure.sql
 
 #dw/ri/ 
 mysqlexec $DW_ROOT_DIR/ri/ri_defaults.sql
