@@ -10,6 +10,6 @@ CREATE TABLE `kalturadw_bisources`.`bisources_partner_group_type` (
 
 INSERT INTO `kalturadw_bisources`.`bisources_partner_group_type`  
 	VALUES
-	(1,'PARTNER_GROUP_TYPE_PUBLISHER'),
-	(2,'PARTNER_GROUP_TYPE_VAR'),
-	(3,'PARTNER_GROUP_TYPE_GROUP');
+	(1,'Publisher'),
+	(2,'VAR'),
+	(3,'Group');
