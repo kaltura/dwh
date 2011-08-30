@@ -1359,8 +1359,8 @@ year*100+month</expression>
                         <property name="borderTopColor">#000000</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">1px</property>
-                        <data id="181">
-                            <property name="resultSetColumn">included_entries</property>
+                        <data id="187">
+                            <property name="resultSetColumn">included_plays</property>
                         </data>
                     </cell>
                     <cell id="182">
@@ -1377,70 +1377,12 @@ year*100+month</expression>
                         <property name="borderTopColor">#000000</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">1px</property>
-                        <data id="183">
-                            <property name="resultSetColumn">actual_entries</property>
-                        </data>
-                    </cell>
-                    <cell id="184">
-                        <property name="backgroundColor">#CCFFFF</property>
-                        <property name="borderBottomColor">#000000</property>
-                        <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">1px</property>
-                        <property name="borderLeftColor">#000000</property>
-                        <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">1px</property>
-                        <property name="borderRightColor">#000000</property>
-                        <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">1px</property>
-                        <property name="borderTopColor">#000000</property>
-                        <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">1px</property>
-                        <data id="185">
-                            <structure name="numberFormat">
-                                <property name="category">Currency</property>
-                                <property name="pattern">#,##0.00 ${RoundingMode=HALF_UP}</property>
-                            </structure>
-                            <property name="resultSetColumn">charge_overage_entries</property>
-                        </data>
-                    </cell>
-                    <cell id="186">
-                        <property name="backgroundColor">#D1D1A5</property>
-                        <property name="borderBottomColor">#000000</property>
-                        <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">1px</property>
-                        <property name="borderLeftColor">#000000</property>
-                        <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">1px</property>
-                        <property name="borderRightColor">#000000</property>
-                        <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">1px</property>
-                        <property name="borderTopColor">#000000</property>
-                        <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">1px</property>
-                        <data id="187">
-                            <property name="resultSetColumn">included_plays</property>
-                        </data>
-                    </cell>
-                    <cell id="188">
-                        <property name="backgroundColor">#D1D1A5</property>
-                        <property name="borderBottomColor">#000000</property>
-                        <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">1px</property>
-                        <property name="borderLeftColor">#000000</property>
-                        <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">1px</property>
-                        <property name="borderRightColor">#000000</property>
-                        <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">1px</property>
-                        <property name="borderTopColor">#000000</property>
-                        <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">1px</property>
                         <data id="189">
                             <property name="resultSetColumn">actual_plays</property>
                         </data>
                     </cell>
-                    <cell id="190">
-                        <property name="backgroundColor">#D1D1A5</property>
+                    <cell id="184">
+                        <property name="backgroundColor">#CCFFFF</property>
                         <property name="borderBottomColor">#000000</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">1px</property>
@@ -1459,6 +1401,64 @@ year*100+month</expression>
                                 <property name="pattern">#,##0.00 ${RoundingMode=HALF_UP}</property>
                             </structure>
                             <property name="resultSetColumn">charge_overage_plays</property>
+                        </data>
+                    </cell>
+                    <cell id="186">
+                        <property name="backgroundColor">#D1D1A5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <data id="181">
+                            <property name="resultSetColumn">included_entries</property>
+                        </data>
+                    </cell>
+                    <cell id="188">
+                        <property name="backgroundColor">#D1D1A5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <data id="183">
+                            <property name="resultSetColumn">actual_entries</property>
+                        </data>
+                    </cell>
+                    <cell id="190">
+                        <property name="backgroundColor">#D1D1A5</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <data id="185">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00 ${RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="resultSetColumn">charge_overage_entries</property>
                         </data>
                     </cell>
                 </row>
