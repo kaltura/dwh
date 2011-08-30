@@ -204,13 +204,11 @@ mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_parnter_usage.sql
 mysqlexec $DW_ROOT_DIR/aggr/time_zone_helper_function.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_procedure.sql
-mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_bandwidth.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_storage.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_widget.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/recalc_aggr_day_procedure.sql
-mysqlexec $DW_ROOT_DIR/aggr/recalc_aggr_day_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/resolve_aggr_name_function.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_aggr_events_partitions_view.sql
 mysqlexec $DW_ROOT_DIR/aggr/old_entries_table.sql
