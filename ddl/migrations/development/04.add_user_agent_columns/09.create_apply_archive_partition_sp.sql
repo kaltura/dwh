@@ -34,3 +34,10 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+CALL apply_partitions_to_new_archive('dwh_fact_events_archive');
+CALL apply_partitions_to_new_archive('dwh_fact_fms_session_events_archive');
+CALL apply_partitions_to_new_archive('dwh_fact_fms_sessions_archive');
+CALL apply_partitions_to_new_archive('dwh_fact_bandwidth_usage_archive');
+
+DROP PROCEDURE IF EXISTS `apply_partitions_to_new_archive`;
