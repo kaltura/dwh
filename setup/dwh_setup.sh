@@ -25,7 +25,7 @@ ETL_ROOT_DIR=$ROOT_DIR/etlsource
 INSTALLATION_LOG=$SETUP_ROOT_DIR/installation_log.log
 
 # Create the DWH
-$SETUP_ROOT_DIR/dwh_ddl_install.sh -u$USER -p$PW -k$KITCHEN -d$ROOT_DIR -h$HOST -P$PORT >> $INSTALLATION_LOG
+$SETUP_ROOT_DIR/dwh_ddl_install.sh -u$USER -p$PW -k$KITCHEN -d$ROOT_DIR -h$HOST -P$PORT | tee -a $INSTALLATION_LOG
 
 # Populate time dimension
 export KETTLE_HOME=$ROOT_DIR
