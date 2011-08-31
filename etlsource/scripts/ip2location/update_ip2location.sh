@@ -14,13 +14,14 @@ do      case "$o" in
         esac
 done
 
+LOGFILE=$ROOT_DIR/logs/ip2location-`date +%Y%m%d`.log
 
 mkdir -p $ROOT_DIR/etlsource/scripts/ip2location/`date +%b%y`
 cd $ROOT_DIR/etlsource/scripts/ip2location/`date +%b%y`
-perl $ROOT_DIR/etlsource/scripts/ip2location/download.pl -package DB7 -login -password 
+perl $ROOT_DIR/etlsource/scripts/ip2location/download.pl -package DB7 -login -password >> $LOGFILE 2>&1
 
-unzip IP-COUNTRY-REGION-CITY-ISP-DOMAIN-FULL.ZIP
+unzip IP-COUNTRY-REGION-CITY-ISP-DOMAIN-FULL.ZIP >> $LOGFILE 2>&1
 
-mv IP-COUNTRY-REGION-CITY-ISP-DOMAIN.CSV $TMP_DIR/IP-COUNTRY-REGION-CITY-ISP-DOMAIN.CSV
-
-$KITCHEN -file $ROOT_DIR/etlsource/ip2location/load_ip2location.kjb -param:ExportPath=$TMP_DIR
+mv IP-COUNTRY-REGION-CITY-ISP-DOMAIN.CSV $TMP_DIR/IP-COUNTRY-REGION-CITY-ISP-DOMAIN.CSV  >> $LOGFILE 2>&1
+export KETTLE_HOME=$ROOT_DIR
+$KITCHEN -file $ROOT_DIR/etlsource/ip2location/load_ip2location.kjb -param:ExportPath=$TMP_DIR  >> $LOGFILE 2>&1
