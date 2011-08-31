@@ -1,10 +1,10 @@
 #!/bin/bash
 MONDIR=/opt/kaltura/dwh/monitoring
 COLOR=green
-#BBTMP=/home/xymon/client/tmp
+BBTMP=/home/xymon/client/tmp
 OUTFILE=$BBTMP/outfile.$$
-#BB=/home/xymon/client/bin/bb
-#BBDISP="208.122.58.141"
+BB=/home/xymon/client/bin/bb
+BBDISP="208.122.58.141"
 MACHINE=`hostname`
 for mycheck in `ls $MONDIR | grep ^find`
     do
@@ -33,3 +33,4 @@ $BB $BBDISP "status $MACHINE.etlmon $COLOR `date`
 "
 
 rm -f $OUTFILE
+
