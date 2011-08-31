@@ -1,3 +1,4 @@
+/*Find if no new files have been processed by the system for a certain process*/
 SELECT 'No EVENTS file processed yesterday!' stat
 FROM (
 SELECT COUNT(*) amount
@@ -33,7 +34,15 @@ UNION
 SELECT 'No Level3 BW file processed yesterday!' stat
 FROM (
 SELECT COUNT(*) amount
-FROM kalturadw_ds.files f, kalturadw_ds.cycles c WHERE c.process_id = 4
+FROM kalturadw_ds.files f, kalturadw_ds.cycles c WHERE c.process_id = 6
+AND f.cycle_id = c.cycle_id
+AND c.STATUS='DONE' AND f.insert_time > DATE(NOW())-INTERVAL 1 DAY) a
+WHERE amount = 0
+UNION
+SELECT 'No RTMP AKAMAI file processed yesterday!' stat
+FROM (
+SELECT COUNT(*) amount
+FROM kalturadw_ds.files f, kalturadw_ds.cycles c WHERE c.process_id = 7
 AND f.cycle_id = c.cycle_id
 AND c.STATUS='DONE' AND f.insert_time > DATE(NOW())-INTERVAL 1 DAY) a
 WHERE amount = 0

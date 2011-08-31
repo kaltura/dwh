@@ -1,4 +1,4 @@
-
+/* Find aggregations from aggr_managment that have been running for more than an hour*/
 SELECT 	
 	aggr_name, 
 	aggr_day, 

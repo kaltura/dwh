@@ -1,3 +1,4 @@
+/*Find if no new data has been added to the facts the day before yesterday*/
 SELECT 'No new events loaded to dwh_fact_events' stat, (DATE(NOW())-INTERVAL 2 DAY)*1 DAY
 FROM 
 (
