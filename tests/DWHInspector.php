@@ -41,14 +41,34 @@ class DWHInspector
 		}
 	}
 	
-	public static function countRows($table_name, $fileId, $extra='')
+	public static function countRows($tableName, $fileID, $extra='')
 	{
-		$res = MySQLRunner::execute("SELECT count(*) amount FROM ".$table_name." WHERE file_id = ? ".$extra,array(0=>$fileId));
+		return self::aggregateRows($tableName, $fileID, "count", "*", $extra);
+	}
+
+        public static function sumRows($tableName, $fileID, $aggregatedColumn, $extra='')
+        {
+                return self::aggregateRows($tableName, $fileID, "sum", $aggregatedColumn, $extra);
+        }
+	
+        public static function countDistinct($table_name,$fileId,$select)
+        {
+                $res = MySQLRunner::execute("SELECT count(distinct ".$select.") amount FROM ".$table_name." WHERE file_id = ? ",array(0=>$fileId));
+                foreach($res as $row)
+                {
+                        return (int) $row["amount"];
+                }
+        }
+
+
+	public static function aggregateRows($table_name, $fileID, $aggregateFunction, $aggregatedColumn, $extra='')
+	{
+		$res = MySQLRunner::execute("SELECT ".$aggregateFunction."(".$aggregatedColumn.") amount FROM ".$table_name." WHERE file_id = ? ".$extra,array(0=>$fileID));
 		foreach ($res as $row)
 		{
 			return $row["amount"];
 		}
-	}
+	}	
 	
 	public static function setAggregations($isCalculated)
 	{
@@ -83,10 +103,9 @@ class DWHInspector
 	{
 		global $CONF;
 		
-		$out = array();
 		putenv('KETTLE_HOME='.Configuration::$KETTLE_HOME);
-		exec($CONF->RuntimePath.'/setup/dwh_drop_databases.sh -d '.$CONF->RuntimePath.' -h '.$CONF->DbHostName);
-		exec('export KETTLE_HOME='.Configuration::$KETTLE_HOME.';'.$CONF->RuntimePath.'/setup/dwh_setup.sh -d '.$CONF->RuntimePath.' -h '.$CONF->DbHostName);
+		passthru($CONF->RuntimePath.'/setup/dwh_drop_databases.sh -d '.$CONF->RuntimePath.' -h '.$CONF->DbHostName);
+		passthru('export KETTLE_HOME='.Configuration::$KETTLE_HOME.';'.$CONF->RuntimePath.'/setup/dwh_setup.sh -d '.$CONF->RuntimePath.' -h '.$CONF->DbHostName);
 	}
 	
 	public static function groupBy($field,$aggrFiled, $table)

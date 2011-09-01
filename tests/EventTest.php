@@ -7,8 +7,12 @@ require_once 'KalturaTestCase.php';
 
 class EventTest extends KalturaTestCase
 {
+	const BW_REGEX = '/^.* "GET \/p\/(\d+)\/.*" 200 (\d+) .*$/';
+
     public function testGenereate()
     {
+		global $CONF;
+		passthru("cp ".$CONF->RuntimePath.'/tests/source/* '.$CONF->EventsLogsDir);
 		KettleRunner::execute($this->getGenereateJob(), $this->getFetchParams());
 
 		$cycleId = DWHInspector::getCycle('GENERATED');
@@ -42,7 +46,7 @@ class EventTest extends KalturaTestCase
 	{
 		$files = DWHInspector::getFiles($cycleId);
 		$fileCount = count($files);
-        $this->assertEquals(1, $fileCount);
+	        $this->assertEquals(1, $fileCount);
 	}
 	
 	private function isDirExists($cycleId, $exists = true, $path = '/process/', $childcount=5)
@@ -77,33 +81,49 @@ class EventTest extends KalturaTestCase
 			$filename =  $CONF->CyclePath.'/process/'.$cycleId.'/'.DWHInspector::getFileName($fileId);
 		
 			// compare rows in ds_events to rows in file
-			$this->assertEquals(DWHInspector::countRows('kalturadw_ds.ds_events',$fileId),$this->countRows($filename));
-			
-			// compare plays in ds_events to plays in file
-			$this->assertEquals(DWHInspector::countRows('kalturadw_ds.ds_events',$fileId,' and event_type_id=3'),$this->countPlays($filename));
-			
-			// compare per entry
-			$entries = $this->countPerEntry($filename);		
-			$this->assertEquals(count($entries), $this->countDistinct('kalturadw_ds.ds_events',$fileId,'entry_id'));
-			
-			foreach($entries as $entry=>$val)
-			{
-				$res = DWHInspector::countRows('kalturadw_ds.ds_events',$fileId," and entry_id='".$entry."'");
-				$this->assertEquals($res, $val);
-			}						
-			
-			// compare per partner
-			$partners = $this->countPerPartner($filename);		
-			$this->assertEquals(count($partners), $this->countDistinct('kalturadw_ds.ds_events',$fileId,'partner_id'));
-			
-			foreach($partners as $partner=>$val)
-			{
-				$res = DWHInspector::countRows('kalturadw_ds.ds_events',$fileId," and partner_id='".$partner."'");
-				$this->assertEquals($res, $val);
-			}									
-			
+                        $this->assertEquals(DWHInspector::countRows('kalturadw_ds.ds_events',$fileId),$this->countRows($filename,'validKDPLine'));
+
+                        // compare plays in ds_events to plays in file
+                        $this->assertEquals(DWHInspector::countRows('kalturadw_ds.ds_events',$fileId,' and event_type_id=3'),$this->countPlays($filename));
+						
+                        // compare per entry
+                        $entries = $this->countPerEntry($filename);
+                        $this->assertEquals(count($entries), DWHInspector::countDistinct('kalturadw_ds.ds_events',$fileId,'entry_id'));
+
+                        foreach($entries as $entry=>$val)
+                        {
+                                $res = DWHInspector::countRows('kalturadw_ds.ds_events',$fileId," and entry_id='".$entry."'");
+                                $this->assertEquals($res, $val);
+                        }
+
+                        // compare kdp events per partner
+                        $kdpEventsPartners = $this->countKDPEventsPerPartner($filename);     
+                        $this->assertEquals(count($kdpEventsPartners), DWHInspector::countDistinct('kalturadw_ds.ds_events',$fileId,'partner_id'));
+
+                        foreach($kdpEventsPartners as $partner=>$val)
+                        {
+                                $res = DWHInspector::countRows('kalturadw_ds.ds_events',$fileId," and partner_id='".$partner."'");
+                                $this->assertEquals($res, $val);
+                        }
+
+			// compare rows in ds_bandwidth_usage to rows in file
+                        $this->assertEquals(DWHInspector::countRows('kalturadw_ds.ds_bandwidth_usage',$fileId),$this->countRows($filename,'validBWLine'));
+
+                        // compare bandwidth_bytes in ds_bandwidth_usage to bandwidth bytes consumed in file
+                        $this->assertEquals(DWHInspector::sumRows('kalturadw_ds.ds_bandwidth_usage',$fileId,"bandwidth_bytes"),$this->sumBytes($filename));
+
+			// compare bw consumption per partner
+                        $bwPartners = $this->countBWEventsPerPartner($filename); 
+                        $this->assertEquals(count($bwPartners), DWHInspector::countDistinct('kalturadw_ds.ds_bandwidth_usage',$fileId,'partner_id'));
+
+                        foreach($bwPartners as $partner=>$val)
+                        {
+                                $res = DWHInspector::sumRows('kalturadw_ds.ds_bandwidth_usage',$fileId,'bandwidth_bytes', ' and partner_id=\''.$partner.'\'');
+                                $this->assertEquals($res, $val);
+                        }	
+
 			// make sure there are very little invalid lines
-			$this->assertEquals(0, DWHInspector::countRows('kalturadw_ds.invalid_event_lines',$fileId));
+			$this->assertEquals(0, DWHInspector::countRows('kalturadw_ds.invalid_ds_lines',$fileId));
 		}
 	}
 	
@@ -120,25 +140,47 @@ class EventTest extends KalturaTestCase
 					 'ProcessJob'=>$CONF->EtlBasePath.'/events/process/process_events.kjb');
 	}
 	
-	private function countRows($file)
+	private function countRows($file, $validateFunction)
 	{
 		$lines = file($file);
 		$counter = 0;
 		foreach($lines as $line)
 		{
 			$line = urldecode($line);
-			if ($this->validLine($line))
+			if ($this->$validateFunction($line))
 			{
 				$counter++;
 			}
 		}
 		return $counter;
 	}
+
+        private function sumBytes($file)
+        {
+                $lines = file($file);
+                $sum = 0;
+                foreach($lines as $line)
+                {
+                        $line = urldecode($line);
+                        if ($this->validBWLine($line))
+                        {
+				preg_match(self::BW_REGEX, $line, $matches);
+                                $sum+=$matches[2];
+                        }
+                }
+                return $sum;
+        }
+
 	
-	private function validLine($line)
+	private function validKDPLine($line)
 	{
 		return (strpos($line,'service=stats')!==false && strpos($line,'action=collect')!==false) || (strpos($line,'collectstats')!==false);
 	}
+
+	private function validBWLine($line)
+        {
+                return (preg_match(self::BW_REGEX, $line) > 0);
+        }	
 	
 	private function countPlays($file)
 	{
@@ -147,7 +189,7 @@ class EventTest extends KalturaTestCase
 		foreach($lines as $line)
 		{
 			$line = urldecode($line);
-			if($this->validLine($line) && strpos($line,'eventType=3')!==false)
+			if($this->validKDPLine($line) && strpos($line,'eventType=3')!==false)
 			{
 				$counter++;
 			}
@@ -155,46 +197,48 @@ class EventTest extends KalturaTestCase
 		return $counter;
 	}
 	
-	private function countPerRegex($file, $regex)
+	private function countPerRegex($file, $regex, $validateFunction)
 	{
 		$lines = file($file);
-		$entries = array();
+		$items = array();
 		foreach($lines as $line)
 		{
 			$line = urldecode($line);
-			if($this->validLine($line) && preg_match($regex, $line, $matches))
+			if($this->$validateFunction($line) && preg_match($regex, $line, $matches))
 			{
-				$entry = $matches[1];
-				
-				if(!array_key_exists($entry,$entries))
+				$item = $matches[1];
+				if(!array_key_exists($item,$items))
 				{
-					$entries[$entry]=0;
+					$items[$item]=0;
 				}
-				$entries[$entry]++;
+				if (count($matches)>2) 
+				{
+					$items[$item]+=$matches[2];	
+				}
+				else
+				{
+					$items[$item]++;
+				}
 			}
 		}
-		return $entries;
+		return $items;
 	}
 		
 	private function countPerEntry($file)
 	{
-		return $this->countPerRegex($file, '/^.*entryId=([^& "]*).*/');
+		return $this->countPerRegex($file, '/^.*entryId=([^& "]*).*/','validKDPLine');
 	}
 	
-	private function countPerPartner($file)
+	private function countKDPEventsPerPartner($file)
 	{
-		return $this->countPerRegex($file, '/^.*partnerId=([^& "]*).*/');
+		return $this->countPerRegex($file, '/^.*partnerId=([^& "]*).*/','validKDPLine');
 	}
 	
-	private function countDistinct($table_name,$fileId,$select)
-	{
-		$res = MySQLRunner::execute("SELECT count(distinct ".$select.") amount FROM ".$table_name." WHERE file_id = ? ",array(0=>$fileId));
-		foreach($res as $row)
-		{
-			return (int) $row["amount"];
-		}
-	}
-	
+	private function countBWEventsPerPartner($file)
+        {
+                return $this->countPerRegex($file, self::BW_REGEX,'validBWLine');
+        }
+
 	public function testTransfer()
 	{
 		$cycleId = DWHInspector::getCycle('LOADED');

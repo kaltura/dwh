@@ -18,13 +18,10 @@ class KettleRunner
 		$args = ' /file ' .$CONF->EtlBasePath.$job;		
 		foreach ($params as $k => $v)
 		{
-			$args=$args.' -param:'.$k.'='.$v;
+			$args=$args.' -param:'.$k.'=\''.$v.'\'';
 		}
-		
-		$out = array();
 		putenv('KETTLE_HOME='.Configuration::$KETTLE_HOME);
-		exec('export KETTLE_HOME='.Configuration::$KETTLE_HOME.';/usr/local/pentaho/pdi/'.$exec.$args, $out);
-		print_r($out);
+		passthru('export KETTLE_HOME='.Configuration::$KETTLE_HOME.';/usr/local/pentaho/pdi/'.$exec.$args);
 	}
 }
 ?>

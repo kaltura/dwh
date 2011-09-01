@@ -39,7 +39,7 @@ class Configuration
   function parse()
   {
 	self::$KETTLE_HOME = getenv('KETTLE_HOME');
-    $fh = fopen( self::$KETTLE_HOME.$this->configFile, 'r' );
+    $fh = fopen( self::$KETTLE_HOME.'/'.$this->configFile, 'r' );
     while( $l = fgets( $fh ) )
     {
       if ( preg_match( '/^#/', $l ) == false )
