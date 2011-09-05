@@ -7,7 +7,7 @@ require_once 'KalturaTestCase.php';
 require_once 'CycleProcessTestCase.php';
 require_once 'CDNBandwidthHttpTestCase.php';
 
-class Level3Test extends CDNBandwidthHttpTestCase
+class LLNTest extends CDNBandwidthHttpTestCase
 {
 	protected function getFetchParams()
 	{
