@@ -78,7 +78,6 @@ class DWHInspector
 	public static function getAggregations($dateId, $hourId, $isCalculated = 0)
 	{
 		$rows = MySQLRunner::execute("SELECT DISTINCT aggr_name FROM kalturadw.aggr_managment WHERE aggr_day_int = ? AND hour_id = ? AND is_calculated = ?",array(0=>$dateId,1=>$hourId, 2=>$isCalculated));
-		print_r(array(0=>$dateId,1=>$hourId, 2=>$isCalculated));
 		
 		$res = array();
 		foreach ($rows as $row)
