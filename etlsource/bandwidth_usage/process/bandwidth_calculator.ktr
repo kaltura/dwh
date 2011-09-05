@@ -596,7 +596,7 @@
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
 var ignoredLine = false;
-if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai&apos;) {
+if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai_vod_http&apos;) {
 	var junkData = [&quot;.kaltura.com&#47;flash&#47;kae&#47;&quot;,&quot;.kaltura.com&#47;crossdomain.xml&quot;,&quot;.kaltura.com&#47;content&#47;uiconf&quot;,&quot;.kaltura.com&#47;swf&#47;plugins&quot;];
 	for (i=0;i&lt;junkData.length;i++) { 
 		if (indexOf(row, junkData[i]) &gt; -1) {

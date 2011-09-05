@@ -49,7 +49,8 @@ class MySQLRunner
 		
 		foreach ($params as $param)
 		{
-			$sql = str_replace('?',$param,$sql);
+			$sql = preg_replace('/\?/', $param, $sql, 1);
+			#$sql = str_replace('?', $param, $sql, 1);
 		}
 		
 		$result = mysql_query($sql);		
