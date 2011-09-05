@@ -9,9 +9,9 @@ abstract class KalturaTestCase extends PHPUnit_Framework_TestCase
 	public static function setUpBeforeClass()
 	{
 		global $CONF;
-		DWHInspector::cleanDB();
-		self::rrmdir($CONF->CyclePath.'/process/');
-		self::rrmdir($CONF->CyclePath.'/originals/');
+		#DWHInspector::cleanDB();
+		#self::rrmdir($CONF->CyclePath.'/process/');
+		#self::rrmdir($CONF->CyclePath.'/originals/');
 		
 		self::register();
 	}
