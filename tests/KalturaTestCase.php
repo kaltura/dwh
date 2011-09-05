@@ -8,13 +8,17 @@ abstract class KalturaTestCase extends PHPUnit_Framework_TestCase
 {
 	public static function setUpBeforeClass()
 	{
-		global $CONF;
-		#DWHInspector::cleanDB();
-		#self::rrmdir($CONF->CyclePath.'/process/');
-		#self::rrmdir($CONF->CyclePath.'/originals/');
-		
+		self::cleanOldCycles();	
 		self::register();
 	}
+
+	private static function cleanOldCycles()
+        {
+                global $CONF;
+                self::rrmdir($CONF->CyclePath.'/process/');
+                self::rrmdir($CONF->CyclePath.'/originals/');
+                DWHInspector::purgeCycles();    
+        }
 	
 	private static function rrmdir($dir) 
 	{ 

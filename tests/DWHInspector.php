@@ -145,5 +145,11 @@ class DWHInspector
 	{
 		MySQLRunner::execute('update kalturadw.dwh_fact_events set entry_media_type_id = ?',array(0=>$val),false);
 	}
+
+	public static function purgeCycles()
+	{
+		MySQLRunner::execute('DELETE FROM kalturadw_ds.cycles', array(), false);
+	}
+
 }
 ?>
