@@ -17,6 +17,11 @@
             <description>null</description>
         </parameter>
         <parameter>
+            <name>FMSYieldMapping</name>
+            <default_value>null</default_value>
+            <description>null</description>
+        </parameter>
+        <parameter>
             <name>ProcessID</name>
             <default_value>null</default_value>
             <description>null</description>
