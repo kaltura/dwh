@@ -129,9 +129,9 @@ class DWHInspector
 		passthru('export KETTLE_HOME='.Configuration::$KETTLE_HOME.';'.$CONF->RuntimePath.'/setup/dwh_setup.sh -d '.$CONF->RuntimePath.' -h '.$CONF->DbHostName);
 	}
 	
-	public static function groupBy($field,$aggrField, $table)
+	public static function groupBy($field,$aggrField, $table, $filter = '1=1')
 	{
-		$rows = MySQLRunner::execute('SELECT '.$field.', sum('.$aggrField.') amount FROM '.$table.' GROUP BY '.$field);
+		$rows = MySQLRunner::execute('SELECT '.$field.', sum('.$aggrField.') amount FROM '.$table.' WHERE '. $filter .' GROUP BY '.$field);
 		
 		$res = array();
 		foreach ($rows as $row)
@@ -149,6 +149,51 @@ class DWHInspector
 	public static function purgeCycles()
 	{
 		MySQLRunner::execute('DELETE FROM kalturadw_ds.cycles', array(), false);
+	}
+	
+	public static function getEntryIDByFlavorID($flavorID)
+	{
+		$rows = MySQLRunner::execute('select max(entry_id) entry_id from kalturadw.dwh_dim_flavor_asset where id = \'?\'', array(0=>$flavorID));
+		if (count($rows) > 0)
+		{
+			return $rows[0]["entry_id"];
+		}
+	}
+	
+	public static function getFullDSFMSSessions($fileID,$illegalPartnersCSV)
+	{
+		$rows = MySQLRunner::execute("SELECT session_id, partner_id, (cs_dis_bytes - cs_con_bytes + sc_dis_bytes - sc_con_bytes) total_bytes FROM ( ".
+						"SELECT session_id, MAX(partner_id) partner_id, ".
+						"SUM(IF(event_type='connect', client_to_server_bytes, 0)) cs_con_bytes, ".
+						"SUM(IF(event_type='disconnect', client_to_server_bytes, 0)) cs_dis_bytes, ".
+						"SUM(IF(event_type='connect', server_to_client_bytes, 0)) sc_con_bytes, ".
+						"SUM(IF(event_type='disconnect', server_to_client_bytes, 0)) sc_dis_bytes ".
+						"FROM kalturadw_ds.ds_fms_session_events f, kalturadw.dwh_dim_fms_event_type dim ".
+						"WHERE f.event_type_id = dim.event_type_id and file_id = ? ".
+						"GROUP BY session_id ".
+						"HAVING MAX(IF(event_type = 'connect', 1, 0))+MAX(IF(event_type = 'disconnect', 1, 0))+MAX(IF(partner_id NOT IN (?),1,0))=3) a ".
+						"WHERE (cs_dis_bytes - cs_con_bytes + sc_dis_bytes - sc_con_bytes) > 0 ", array(0=>$fileID,1=>$illegalPartnersCSV));
+		$res = array();
+                foreach ($rows as $row)
+                {
+			$res[$row["session_id"]]["partnerID"] = $row["partner_id"];
+                        $res[$row["session_id"]]["totalBytes"] = $row["total_bytes"];
+                }
+                return $res;
+	}
+
+	public static function getFactFMSSessions($fileID)
+	{
+		$rows = MySQLRunner::execute("SELECT DISTINCT s.session_id, s.session_partner_id, s.total_bytes ".
+					     "FROM kalturadw.dwh_fact_fms_session_events e, kalturadw.dwh_fact_fms_sessions s ".
+					     "WHERE e.session_id = s.session_id AND file_id = ?", array(0=>$fileID));
+		$res = array();
+                foreach ($rows as $row)
+                {
+                        $res[$row["session_id"]]["partnerID"] = $row["session_partner_id"];
+			$res[$row["session_id"]]["totalBytes"] = $row["total_bytes"];
+                }
+                return $res;
 	}
 
 }

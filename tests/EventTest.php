@@ -168,15 +168,15 @@ class EventTest extends CycleProcessTestCase
 
 		parent::testAggregation();
 		
-		$this->compareAggregation('partner_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)', 'kalturadw.dwh_hourly_partner', 'ifnull(count_plays, 0)');
-		$this->compareAggregation('entry_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)', 'kalturadw.dwh_hourly_events_entry', 'ifnull(count_plays, 0)');
-		$this->compareAggregation('domain_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)', 'kalturadw.dwh_hourly_events_domain', 'ifnull(count_plays, 0)');
-		$this->compareAggregation('referrer_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)', 'kalturadw.dwh_hourly_events_domain_referrer', 'ifnull(count_plays, 0)');
-		$this->compareAggregation('location_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)', 'kalturadw.dwh_hourly_events_country', 'ifnull(count_plays, 0)');
-		$this->compareAggregation('widget_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)', 'kalturadw.dwh_hourly_events_widget', 'ifnull(count_plays, 0)');
+		$this->compareAggregation('partner_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)', 'partner_id', 'kalturadw.dwh_hourly_partner', 'ifnull(count_plays, 0)');
+		$this->compareAggregation('entry_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)', 'entry_id', 'kalturadw.dwh_hourly_events_entry', 'ifnull(count_plays, 0)');
+		$this->compareAggregation('domain_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)', 'domain_id', 'kalturadw.dwh_hourly_events_domain', 'ifnull(count_plays, 0)');
+		$this->compareAggregation('referrer_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)', 'referrer_id', 'kalturadw.dwh_hourly_events_domain_referrer', 'ifnull(count_plays, 0)');
+		$this->compareAggregation('location_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)', 'location_id', 'kalturadw.dwh_hourly_events_country', 'ifnull(count_plays, 0)');
+		$this->compareAggregation('widget_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)', 'widget_id', 'kalturadw.dwh_hourly_events_widget', 'ifnull(count_plays, 0)');
 
-                $this->compareAggregation('partner_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)');
-                $this->compareAggregation('bandwidth_source_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)');
+                $this->compareAggregation('partner_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)', 'partner_id', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)');
+                $this->compareAggregation('bandwidth_source_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)', 'bandwidth_source_id', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)');
 	}	
 
 }

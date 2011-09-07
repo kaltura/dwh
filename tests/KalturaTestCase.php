@@ -51,6 +51,13 @@ abstract class KalturaTestCase extends PHPUnit_Framework_TestCase
                 KettleRunner::execute('/common/register_etl_server.ktr');
         }
 
+	public static function refreshBISourcesTables()
+	{
+		global $CONF;
+		$start = new DateTime(date("Y-m-d"));
+		KettleRunner::execute('/../tests/execute_dim.ktr', array('TransformationName'=>$CONF->EtlBasePath.'dimensions/refresh_bisources_tables.ktr','LastUpdatedAt'=>$start->format('Y/m/d')." 00:00:00"));
+	}
+
 	public function countPerRegex($file, $regex, $validationCallback)
         {
                 $lines = file($file);
@@ -78,10 +85,10 @@ abstract class KalturaTestCase extends PHPUnit_Framework_TestCase
                 return $items;
         }
 
-	public function compareAggregation($groupByColumn, $fact, $factMeasure, $aggr, $aggrMeasure)
+	public function compareAggregation($factGroupByColumn, $fact, $factMeasure, $aggrGroupByColumn, $aggr, $aggrMeasure, $filter = '1=1')
         {
-                $aggrGroups = DWHInspector::groupBy($groupByColumn, $aggrMeasure, $aggr);
-                $factGroups = DWHInspector::groupBy($groupByColumn, $factMeasure, $fact);
+                $aggrGroups = DWHInspector::groupBy($aggrGroupByColumn, $aggrMeasure, $aggr, $filter);
+                $factGroups = DWHInspector::groupBy($factGroupByColumn, $factMeasure, $fact, $filter);
 
                 foreach($factGroups as $id=>$measure)
                 {

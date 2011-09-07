@@ -91,8 +91,8 @@ abstract class CDNBandwidthHttpTestCase extends CycleProcessTestCase
 	{
 		parent::testAggregation();
 		
-                $this->compareAggregation('partner_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)');
-                $this->compareAggregation('bandwidth_source_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)');
+                $this->compareAggregation('partner_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)', 'partner_id', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)');
+                $this->compareAggregation('bandwidth_source_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)', 'partner_id', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)');
 	}	
 
 }
