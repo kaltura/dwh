@@ -46,7 +46,9 @@ class MySQLRunner
 	public function run($sql, $params=array(), $returnResults=true)
 	{
 		$this->connect();
-		
+		mysql_query("SET query_cache_type=0");		
+
+
 		foreach ($params as $param)
 		{
 			$sql = preg_replace('/\?/', $param, $sql, 1);
