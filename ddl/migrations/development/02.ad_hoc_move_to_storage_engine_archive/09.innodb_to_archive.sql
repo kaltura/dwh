@@ -64,7 +64,7 @@ BEGIN
 		DEALLOCATE PREPARE stmt;
 		
 		UPDATE kalturadw_ds.retention_policy
-		SET archive_last_partition = v_date_val
+		SET archive_last_partition = DATE(v_date_val)
 		WHERE table_name = v_table_name;
 		
 	END LOOP;
