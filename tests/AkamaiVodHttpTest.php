@@ -11,6 +11,12 @@ class AkamaiVodHttpTest extends CDNBandwidthHttpTestCase
 {
 	private $invalidIgnoredStrings = array(".kaltura.com/flash/kae/",".kaltura.com/crossdomain.xml",".kaltura.com/content/uiconf",".kaltura.com/swf/plugins");
 
+	public static function setUpBeforeClass()
+	{
+		parent::setUpBeforeClass();
+	}
+	
+
 	protected function getFetchParams()
 	{
 		global $CONF;
@@ -78,7 +84,7 @@ class AkamaiVodHttpTest extends CDNBandwidthHttpTestCase
 
 	public function testAggregation()
 	{
-		parent::testAggregation();
+		parent::testAggregation(4);
 	}	
 
 }

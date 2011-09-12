@@ -8,6 +8,11 @@ require_once 'CycleProcessTestCase.php';
 
 abstract class CDNBandwidthHttpTestCase extends CycleProcessTestCase
 {
+	public static function setUpBeforeClass()
+	{
+		parent::setUpBeforeClass();
+	}
+	
 	protected function getDSTablesToFactTables()
         {
                 $dsTableToFactTables = array();
@@ -87,11 +92,10 @@ abstract class CDNBandwidthHttpTestCase extends CycleProcessTestCase
 		parent::testTransfer();
 	}
 
-	public function testAggregation()
+	public function testAggregation($sourceId)
 	{
 		parent::testAggregation();
-		
-                $this->compareAggregation('partner_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)', 'partner_id', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)');
+		$this->compareAggregation('partner_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)', 'partner_id', 'kalturadw.dwh_hourly_partner_usage', 'if(bandwidth_source_id='.$sourceId.', ifnull(count_bandwidth_kb, 0),0)');
                 $this->compareAggregation('bandwidth_source_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)', 'bandwidth_source_id', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)');
 	}	
 

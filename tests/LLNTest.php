@@ -69,7 +69,7 @@ class LLNTest extends CDNBandwidthHttpTestCase
 
 	public function testAggregation()
 	{
-		parent::testAggregation();
+		parent::testAggregation(2);
 	}	
 
 }

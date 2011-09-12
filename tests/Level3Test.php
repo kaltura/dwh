@@ -62,14 +62,14 @@ class Level3Test extends CDNBandwidthHttpTestCase
 		parent::testProcess();
 	}
 	
-	public function xtestTransfer()
+	public function testTransfer()
 	{
 		parent::testTransfer();
 	}
 
-	public function xtestAggregation()
+	public function testAggregation()
 	{
-		parent::testAggregation();
+		parent::testAggregation(3);
 	}	
 
 }
