@@ -115,7 +115,6 @@ BEGIN
 		AND e.entry_id = es.entry_id 
 		AND e.partner_id = es.partner_id 
 		AND e.partner_id NOT IN (100  , -1  , -2  , 0 , 99 )
-		AND e.entry_type_id = 1
 		AND e.entry_status_id = 3
 		AND es.entry_size_date_id < p_date_id
 		GROUP BY es.partner_id, es.entry_id

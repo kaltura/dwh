@@ -71,9 +71,9 @@ mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_type.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_fms_app.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_partner_vertical.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_partner_class_of_service.sql
+
 #ds/
 mysqlexec $DS_ROOT_DIR/files.sql
-mysqlexec $DS_ROOT_DIR/events.sql
 mysqlexec $DS_ROOT_DIR/invalid_event_lines.sql
 mysqlexec $DS_ROOT_DIR/ds_fms_sessions_events.sql
 mysqlexec $DS_ROOT_DIR/invalid_fms_event_lines.sql
@@ -112,10 +112,10 @@ mysqlexec $DS_ROOT_DIR/populate_locks.sql
 mysqlexec $DS_ROOT_DIR/pentaho_sequences.sql
 mysqlexec $DS_ROOT_DIR/version_table.sql
 mysqlexec $DS_ROOT_DIR/etl_servers.sql
+mysqlexec $DS_ROOT_DIR/retention_policy.sql
 
 #etl_log
 mysqlexec $DDL_ROOT_DIR/log/etl_log.sql
-#mysqlexec $DDL_ROOT_DIR/log/create_monitor_status.sql
 
 #dw
 mysqlexec $DW_ROOT_DIR/batch_jobs.sql
@@ -148,11 +148,20 @@ mysqlexec $DW_ROOT_DIR/ui_conf.sql
 mysqlexec $DW_ROOT_DIR/widget.sql
 mysqlexec $DW_ROOT_DIR/countries_states_view.sql
 mysqlexec $DW_ROOT_DIR/countries_view.sql
-mysqlexec $DW_ROOT_DIR/dwh_fact_bandwidth_usage.sql
-mysqlexec $DW_ROOT_DIR/dwh_fact_entries_sizes.sql
 mysqlexec $DW_ROOT_DIR/calc_entries_sizes.sql
 mysqlexec $DW_ROOT_DIR/generate_daily_usage_report.sql
 mysqlexec $DW_ROOT_DIR/dwh_daily_usage_reports.sql
+
+#dw/facts
+mysqlexec $DS_ROOT_DIR/facts/dwh_fact_events.sql
+mysqlexec $DS_ROOT_DIR/facts/dwh_fact_events_archive.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_bandwidth_usage.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_bandwidth_usage_archive.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_fms_sessions.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_fms_sessions_archive.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_fms_session_events.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_fms_session_events_archive.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_entries_sizes.sql
 
 #dw/dimensions
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_partners.sql
@@ -186,11 +195,9 @@ mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_status.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_sub_type.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_type.sql
 
-#dw/events
-mysqlexec $DW_ROOT_DIR/events/dwh_fact_events_partitions_view.sql
-
 #dw/maintenance
 mysqlexec $DW_ROOT_DIR/maintenance/add_partition_procedure.sql
+mysqlexec $DW_ROOT_DIR/maintenance/move_innodb_to_archive.sql
 
 #dw/aggr
 mysqlexec $DW_ROOT_DIR/aggr/aggr_managment.sql
@@ -236,12 +243,9 @@ mysqlexec $DW_ROOT_DIR/ri/ri_mapping_and_defaults_view.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_dim_entries_v.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_dim_partners_v.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_dim_uiconf_v.sql
-#mysqlexec $DW_ROOT_DIR/views/dwh_fact_events_v.sql
 
 #dw/fms/
 mysqlexec $DW_ROOT_DIR/fms/fms_dim_tables.sql
-mysqlexec $DW_ROOT_DIR/fms/dwh_fact_fms_sessions.sql
-mysqlexec $DW_ROOT_DIR/fms/dwh_fact_fms_session_events.sql
  
 mysqlexec $DW_ROOT_DIR/maintenance/populate_table_partitions.sql
 mysqlexec $DDL_SETUP_ROOT_DIR/populate_time_dim.sql
