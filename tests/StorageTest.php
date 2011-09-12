@@ -84,8 +84,10 @@ class StorageTest extends KalturaTestCase
 			$rows = MySQLRunner::execute("SELECT sum(entry_additional_size_kb) size FROM kalturadw.dwh_fact_entries_sizes WHERE entry_id = '?'",array(0=>$entryId));
 			$size = floatval($rows[0]["size"]);
 
+			echo "delete " .$entryId . " with size " . $size . "\n";
+
 			MySQLRunner::execute("UPDATE kalturadw.dwh_dim_entries SET entry_status_id = 3, modified_at=DATE(?) WHERE entry_id = '?'", array(0=>$dateId,1=>$entryId), false);
-			$this->expected[$entryId] -= $size*1024;
+			$this->expected[$entryId] = 0;
 			$this->delta = -$size*1024;
 			return;
 		}
@@ -117,12 +119,15 @@ class StorageTest extends KalturaTestCase
 			$this->expected[$entryId] += $size;
 			$this->delta = $size;
 			$fileSyncId++;
+
+			MySQLRunner::execute("UPDATE kalturadw.dwh_dim_flavor_asset SET updated_at = DATE(?) WHERE id = '?'", array(0=>$dateId, 1=>$flavorId), false);
 			return;
 		}
 	}
 	
 	private function compare($dateId)
 	{
+		echo "Partner : ".$this->partnerId." Date : ".$dateId."\n";
 		$rows = MySQLRunner::execute("SELECT entry_id, sum(entry_additional_size_kb) size FROM kalturadw.dwh_fact_entries_sizes WHERE entry_size_date_id <= ? AND partner_id = ? GROUP BY entry_id" , array(0=>$dateId, 1=>$this->partnerId));
 		
 		$this->assertEquals(count($this->expected), count($rows));
@@ -131,7 +136,7 @@ class StorageTest extends KalturaTestCase
 		foreach($rows as $row)
 		{
 			$size = floatval($row["size"]);
-			echo "x:" .$this->expected[$row["entry_id"]]/1024 ." " .$size . "\n";
+			echo "x:" .$row["entry_id"]." ".$this->expected[$row["entry_id"]]/1024 ." " .$size . "\n";
 			$this->assertLessThan(0.01,abs($this->expected[$row["entry_id"]]/1024 - $size));
 			$expectedTotal += $size;			
 		}
