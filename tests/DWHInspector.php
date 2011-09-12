@@ -148,12 +148,13 @@ class DWHInspector
 
 	public static function purgeCycles()
 	{
+		MySQLRunner::execute('DELETE FROM kalturadw_ds.files', array(), false);		
 		MySQLRunner::execute('DELETE FROM kalturadw_ds.cycles', array(), false);
 	}
 	
 	public static function getEntryIDByFlavorID($flavorID)
 	{
-		$rows = MySQLRunner::execute('select max(entry_id) entry_id from kalturadw.dwh_dim_flavor_asset where id = \'?\'', array(0=>$flavorID));
+		$rows = MySQLRunner::execute("select max(entry_id) entry_id from kalturadw.dwh_dim_flavor_asset where id = '?'", array(0=>$flavorID));
 		if (count($rows) > 0)
 		{
 			return $rows[0]["entry_id"];
