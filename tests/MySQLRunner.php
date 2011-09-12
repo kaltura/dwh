@@ -26,7 +26,7 @@ class MySQLRunner
 	
 	private function connect()
 	{
-		$this->link = mysql_connect($this->host.':'.$this->port, $this->user, $this->password);
+		$this->link = mysql_pconnect($this->host.':'.$this->port, $this->user, $this->password);
 		if (!$this->link) 
 		{
 			print('Could not connect: ' . mysql_error());

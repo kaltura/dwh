@@ -154,7 +154,7 @@ class DWHInspector
 	
 	public static function getEntryIDByFlavorID($flavorID)
 	{
-		$rows = MySQLRunner::execute("select max(entry_id) entry_id from kalturadw.dwh_dim_flavor_asset where id = '?'", array(0=>$flavorID));
+		$rows = MySQLRunner::execute("select entry_id from kalturadw.dwh_dim_flavor_asset where id = '?' limit 1", array(0=>$flavorID));
 		if (count($rows) > 0)
 		{
 			return $rows[0]["entry_id"];
