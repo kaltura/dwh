@@ -74,6 +74,7 @@ mysqlexec $BISOURCE_ROOT_DIR/bisources_partner_class_of_service.sql
 
 #ds/
 mysqlexec $DS_ROOT_DIR/files.sql
+mysqlexec $DS_ROOT_DIR/events.sql
 mysqlexec $DS_ROOT_DIR/invalid_event_lines.sql
 mysqlexec $DS_ROOT_DIR/ds_fms_sessions_events.sql
 mysqlexec $DS_ROOT_DIR/invalid_fms_event_lines.sql
@@ -138,7 +139,6 @@ mysqlexec $DW_ROOT_DIR/dw_user_status.sql
 mysqlexec $DW_ROOT_DIR/dw_WIDGET_SECURITY_POLICY.sql
 mysqlexec $DW_ROOT_DIR/dw_widget_security_type.sql
 mysqlexec $DW_ROOT_DIR/entries.sql
-mysqlexec $DW_ROOT_DIR/events.sql
 mysqlexec $DW_ROOT_DIR/ip_ranges.sql
 mysqlexec $DW_ROOT_DIR/kuser.sql
 mysqlexec $DW_ROOT_DIR/locations.sql
@@ -153,8 +153,8 @@ mysqlexec $DW_ROOT_DIR/generate_daily_usage_report.sql
 mysqlexec $DW_ROOT_DIR/dwh_daily_usage_reports.sql
 
 #dw/facts
-mysqlexec $DS_ROOT_DIR/facts/dwh_fact_events.sql
-mysqlexec $DS_ROOT_DIR/facts/dwh_fact_events_archive.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_events.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_events_archive.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_bandwidth_usage.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_bandwidth_usage_archive.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_fms_sessions.sql
