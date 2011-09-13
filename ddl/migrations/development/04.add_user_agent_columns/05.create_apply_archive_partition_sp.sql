@@ -2,8 +2,8 @@ USE kalturadw;
 
 DELIMITER $$
 
-DROP PROCEDURE IF EXISTS `apply_partitions_to_new_archive`$$
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `apply_partitions_to_new_archive`(p_table_name VARCHAR(255))
+DROP PROCEDURE IF EXISTS `apply_table_partitions_to_target_table`$$
+CREATE DEFINER=`etl`@`localhost` PROCEDURE `apply_table_partitions_to_target_table`(p_table_name VARCHAR(255))
 BEGIN
         DECLARE done INT DEFAULT 0;
         DECLARE v_partition_statement VARCHAR(255);
@@ -35,9 +35,7 @@ END$$
 
 DELIMITER ;
 
-CALL apply_partitions_to_new_archive('dwh_fact_events_archive');
-CALL apply_partitions_to_new_archive('dwh_fact_fms_session_events_archive');
-CALL apply_partitions_to_new_archive('dwh_fact_fms_sessions_archive');
-CALL apply_partitions_to_new_archive('dwh_fact_bandwidth_usage_archive');
-
-DROP PROCEDURE IF EXISTS `apply_partitions_to_new_archive`;
+CALL apply_table_partitions_to_target_table('dwh_fact_events_archive');
+CALL apply_table_partitions_to_target_table('dwh_fact_events');
+CALL apply_table_partitions_to_target_table('dwh_fact_bandwidth_usage_archive');
+CALL apply_table_partitions_to_target_table('dwh_fact_bandwidth_usage');

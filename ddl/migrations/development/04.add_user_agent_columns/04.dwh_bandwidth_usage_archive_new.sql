@@ -19,5 +19,3 @@ CREATE TABLE `dwh_fact_bandwidth_usage_archive_new` (
 ) ENGINE=ARCHIVE DEFAULT CHARSET=utf8
 /*!50100 PARTITION BY RANGE (activity_date_id)
 (PARTITION p_0 VALUES LESS THAN (1) ENGINE = ARCHIVE)*/;
-
-CALL apply_partitions_to_new_archive('dwh_fact_bandwidth_usage_archive');
