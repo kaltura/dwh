@@ -29,7 +29,9 @@ CREATE TABLE `dwh_fact_events_archive` (
   `domain_id` int(11) DEFAULT NULL,
   `entry_media_type_id` int(11) DEFAULT NULL,
   `entry_partner_id` int(11) DEFAULT NULL,
-  `referrer_id` int(11) DEFAULT NULL
+  `referrer_id` int(11) DEFAULT NULL,
+  `os_id` int(11),
+  `browser_id` int(11)
 ) ENGINE=ARCHIVE DEFAULT CHARSET=utf8
 /*!50100 PARTITION BY RANGE (event_date_id)
 (PARTITION p_0 VALUES LESS THAN (1) ENGINE = ARCHIVE)*/

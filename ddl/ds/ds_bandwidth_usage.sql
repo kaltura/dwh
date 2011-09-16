@@ -28,7 +28,9 @@ CREATE TABLE `ds_bandwidth_usage` (
   `user_ip` VARCHAR(15) DEFAULT NULL,
   `user_ip_number` INT(10) UNSIGNED DEFAULT NULL,
   `country_id` INT(11) DEFAULT NULL,
-  `location_id` INT(11) DEFAULT NULL
+  `location_id` INT(11) DEFAULT NULL,
+  `os_id` int(11),
+  `browser_id` int(11)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 PARTITION BY LIST (cycle_id)
 (PARTITION p_0 VALUES IN (0) ENGINE = INNODB);

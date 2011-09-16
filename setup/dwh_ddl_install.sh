@@ -194,10 +194,13 @@ mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_error_type.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_status.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_sub_type.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_type.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_browser.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_os.sql
 
 #dw/maintenance
 mysqlexec $DW_ROOT_DIR/maintenance/add_partition_procedure.sql
 mysqlexec $DW_ROOT_DIR/maintenance/move_innodb_to_archive.sql
+mysqlexec $DW_ROOT_DIR/maintenance/table_data_migration_procedures.sql
 
 #dw/aggr
 mysqlexec $DW_ROOT_DIR/aggr/aggr_managment.sql

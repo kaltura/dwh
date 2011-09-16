@@ -28,6 +28,8 @@ CREATE TABLE kalturadw.dwh_fact_events
 	, entry_media_type_id INT
 	, entry_partner_id INT
 	, referrer_id INT(11)
+	, os_id INT(11)
+	, browser_id INT(11)
 	,PRIMARY KEY (file_id,event_id,event_date_id)
 	,KEY Entry_id (Entry_id)
 	,KEY `event_hour_id_event_date_id_partner_id` (event_hour_id, event_date_id, partner_id)

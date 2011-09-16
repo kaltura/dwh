@@ -12,7 +12,9 @@ CREATE TABLE `dwh_fact_bandwidth_usage_archive` (
   `user_ip` VARCHAR(15) DEFAULT NULL,
   `user_ip_number` INT(10) UNSIGNED DEFAULT NULL,
   `country_id` INT(11) DEFAULT NULL,
-  `location_id` INT(11) DEFAULT NULL
-) ENGINE=ARCHIVE DEFAULT CHARSET=utf8
+  `location_id` INT(11) DEFAULT NULL,
+  `os_id` int(11),
+  `browser_id` int(11)
+  ) ENGINE=ARCHIVE DEFAULT CHARSET=utf8
 /*!50100 PARTITION BY RANGE (activity_date_id)
 (PARTITION p_0 VALUES LESS THAN (1) ENGINE = ARCHIVE)*/

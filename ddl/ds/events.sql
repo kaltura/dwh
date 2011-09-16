@@ -29,7 +29,9 @@ CREATE TABLE kalturadw_ds.ds_events
 	, entry_media_type_id INT
 	, entry_partner_id INT
 	, referrer_id INT(11)
-     ) ENGINE=INNODB  DEFAULT CHARSET=utf8  
+	, os_id int(11)
+	, browser_id int(11)
+    ) ENGINE=INNODB  DEFAULT CHARSET=utf8  
      PARTITION BY 	LIST(cycle_id) (
 	PARTITION p_0 VALUES IN (0)
 

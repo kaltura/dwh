@@ -31,6 +31,8 @@ CREATE TABLE `dwh_fact_bandwidth_usage` (
   `user_ip_number` INT(10) UNSIGNED DEFAULT NULL,
   `country_id` INT(11) DEFAULT NULL,
   `location_id` INT(11) DEFAULT NULL,
+  `os_id` int(11),
+  `browser_id` int(11),
   UNIQUE KEY (`file_id`,`line_number`,`activity_date_id`),
   KEY `partner_id` (`partner_id`)  
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
