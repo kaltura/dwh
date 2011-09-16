@@ -295,17 +295,17 @@ var activity_date_id = 20990101;
 var activity_hour_id = 0;
 var user_ip = null;
 var iplong = 0;
-&#47;&#47;var user_agent = null;
+var user_agent = null;
 
 var ip_field = 0;
 var complex_date_field = 3;
 var url_field = 5;
 var bandwidth_field = 9;
-&#47;&#47;var user_agent_field = 11;
+var user_agent_field = 11;
 
 var url_regex1 = &quot;http:&#47;&#47;[^\.]+\.kaltura\.com&#47;p&#47;([0-9]+)&#47;.*&quot;;
 
-if (resArr!=null &amp;&amp; resArr.length &gt;= bandwidth_field + 1)
+if (resArr!=null &amp;&amp; resArr.length &gt;= user_agent_field + 1)
 {
 	url = unescape(resArr[url_field]);
 	
@@ -324,6 +324,7 @@ if (resArr!=null &amp;&amp; resArr.length &gt;= bandwidth_field + 1)
 	activity_hour_id = date.getHours();
 
 	user_ip = resArr[ip_field];
+	user_agent = resArr[user_agent_field];
 }
 
 function is_not_numeric(s) {
@@ -433,6 +434,12 @@ Alert(date2str(dValue,&quot;dd.MM.yyyy HH:mm:ss&quot;,&quot;EN&quot;, &quot;EST&
         <replace>N</replace>
       </field>      <field>        <name>user_ip</name>
         <rename>user_ip</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>user_agent</name>
+        <rename>user_agent</rename>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>

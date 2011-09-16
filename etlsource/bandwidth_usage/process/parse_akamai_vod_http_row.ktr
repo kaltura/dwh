@@ -294,19 +294,19 @@ var activity_date_id = 20990101;
 var activity_hour_id = 0;
 var user_ip = null;
 var iplong = 0;
-&#47;&#47;var user_agent = null;
+var user_agent = null;
 
 var date_field = 0;
 var hour_field = 1;
 var ip_field = 2;
 var url_field = 4;
 var bandwidth_field = 6;
-&#47;&#47;var user_agent_field = 9;
+var user_agent_field = 9;
 
-var url_regex1 = &quot;&#47;[^\.]+\.kaltura\.com.*&#47;p&#47;([0-9]+)&#47;.*&quot;;
+var url_regex1 = &quot;&#47;[^\.]*\.kaltura\.com.*&#47;p&#47;([0-9]+)&#47;.*&quot;;
 
 var resArr = line.split(&quot;\t&quot;);
-if (resArr!=null &amp;&amp; resArr.length &gt;= bandwidth_field + 1)
+if (resArr!=null &amp;&amp; resArr.length &gt;= user_agent_field + 1)
 {
 	url = unescape(resArr[url_field]);
 	var urlArr = str2RegExp(url, url_regex1);
@@ -324,7 +324,7 @@ if (resArr!=null &amp;&amp; resArr.length &gt;= bandwidth_field + 1)
 	activity_hour_id = date.getHours();
 
 	user_ip = resArr[ip_field];
-	&#47;&#47;user_agent = resArr[user_agent_field];
+	user_agent = resArr[user_agent_field];
 }
 
 
@@ -439,6 +439,12 @@ Alert(month(d1));
         <replace>N</replace>
       </field>      <field>        <name>user_ip</name>
         <rename>user_ip</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>user_agent</name>
+        <rename>user_agent</rename>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>

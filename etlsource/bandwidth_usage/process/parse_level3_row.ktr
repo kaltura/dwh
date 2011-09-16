@@ -224,6 +224,30 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
+  <connection>
+    <name>KalturaReadDW</name>
+    <server>${DbReadHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw</database>
+    <port>${DbReadPort}</port>
+    <username>${DbReadUser}</username>
+    <password>${DbReadPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbReadPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
   <hop> <from>input</from><to>Regex split row</to><enabled>Y</enabled> </hop>  <hop> <from>Regex split row</from><to>Mapping output specification</to><enabled>Y</enabled> </hop>  </order>
   <step>
@@ -272,18 +296,18 @@ var activity_hour_id = 0;
 var user_ip = null;
 var iplong = 0;
 
-&#47;&#47;var user_agent = null;
+var user_agent = null;
 
 var date_field = 0;
 var time_field = 1;
 var url_field = 3;
 var ip_field = 5;
 var bandwidth_field = 8;
-&#47;&#47;var user_agent_field = 11;
+var user_agent_field = 11;
 
 var url_regex1 = &quot;&#47;p&#47;([0-9]+)&#47;.*&quot;;
 
-if (resArr!=null &amp;&amp; resArr.length &gt;= bandwidth_field + 1)
+if (resArr!=null &amp;&amp; resArr.length &gt;= user_agent_field + 1)
 {
 	url = unescape(resArr[url_field]);
 	
@@ -302,7 +326,7 @@ if (resArr!=null &amp;&amp; resArr.length &gt;= bandwidth_field + 1)
 	activity_hour_id = date.getHours();
 	
 	user_ip = resArr[ip_field];
-	&#47;&#47;user_agent = resArr[user_agent_field];
+	user_agent = resArr[user_agent_field];
 }
 
 
@@ -448,6 +472,12 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
         <replace>N</replace>
       </field>      <field>        <name>user_ip</name>
         <rename>user_ip</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>user_agent</name>
+        <rename>user_agent</rename>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
