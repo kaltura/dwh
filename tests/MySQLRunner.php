@@ -26,8 +26,7 @@ class MySQLRunner
 	
 	private function connect()
 	{
-		$this->link = new mysqli($this->host, $this->user, $this->password, null, $this->port ); 
-        $thits->link->max_links = 10;
+		$this->link = new mysqli("p:".$this->host, $this->user, $this->password, null, $this->port ); 
 		if ($this->link->connect_error) 
 		{
 			print('Could not connect: ' . $this->link->connect_error);
