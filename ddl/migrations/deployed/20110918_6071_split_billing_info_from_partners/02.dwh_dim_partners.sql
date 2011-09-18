@@ -23,7 +23,7 @@ INSERT INTO kalturadw.dwh_dim_partners_billing
 	max_publishers ,
 	charge_publishers_usd ,
 	charge_publishers_unit,
-	max_end_users BIGINT,
+	max_end_users,
 	charge_end_users_usd ,
     charge_end_users_unit ,
 	class_of_service_id ,
