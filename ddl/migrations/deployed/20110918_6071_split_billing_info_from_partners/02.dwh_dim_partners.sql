@@ -1,7 +1,7 @@
 INSERT INTO kalturadw.dwh_dim_partners_billing 
 (`partner_id` ,
     `partner_group_type_id`,
-    updated_at updated_at,
+    updated_at,
 	max_monthly_bandwidth_kb ,
 	charge_monthly_bandwidth_kb_usd ,
 	charge_monthly_bandwidth_kb_unit,
