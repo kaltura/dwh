@@ -16,24 +16,15 @@ class StorageTest extends KalturaTestCase
 	{
 		$this->expected = array();
 		$this->delta = 0;
-		$this->partnerId = $this->createNewPartner();
+		$this->partnerId = DWHInspector::createNewPartner();
 		$this->createNewEntry($this->partnerId);
 	}
-	
-	private function createNewPartner()
-    {
-		$rows = MySQLRunner::execute("SELECT ifnull(MIN(partner_id),0) - 10 as id FROM kalturadw.dwh_dim_partners");
-		$partnerId = $rows[0]["id"];
-		MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_partners (partner_id, partner_name) VALUES(?, 'TEST_PARTNER') ", array(0=>$partnerId),false);
-		return $partnerId;
-    }
 
 	private function createNewEntry($partnerId, $count=10)
 	{
 		for($i = 0;$i<$count;$i++)
 		{
-			$entryId = "TEST_".$partnerId."_".$i;
-			MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_entries (partner_id, entry_id, entry_name, entry_status_id, updated_at) VALUES(?,'?','?',2, DATE(?))", array(0=>$partnerId,1=>$entryId,2=>$entryId,3=>self::DATE_ID), false);
+			$entryId = DWHInspector::createNewEntry($this->partnerId, $i, self::DATE_ID);
 			$this->createNewFlavor($partnerId, $entryId);
 		}
 	}
@@ -46,12 +37,12 @@ class StorageTest extends KalturaTestCase
 		for($i = 0;$i<$count;$i++)
 		{
 			$flavorId = $entryId."_".$i;
-			MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_flavor_asset (partner_id, entry_id, id, updated_at) VALUES(?,'?','?', DATE(?))", array(0=>$partnerId,1=>$entryId,2=>$flavorId, 3=>self::DATE_ID), false);
+			MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_flavor_asset (partner_id, entry_id, id, updated_at) VALUES(?,'?','?', DATE(?))", array(0=>$partnerId,1=>$entryId,2=>$flavorId, 3=>self::DATE_ID));
 			
 			$fileSize = rand(100,10000);
 
 			MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_file_sync (partner_id, object_type, object_sub_type, object_id, file_size, id, updated_at, original, status, version) 
-						VALUES(?,4,1,'?',?, ?, DATE(?), 1, 2, 1)", array(0=>$partnerId,1=>$flavorId, 2=>$fileSize, 3=>($fileSyncId + $i), 4=>self::DATE_ID), false);
+						VALUES(?,4,1,'?',?, ?, DATE(?), 1, 2, 1)", array(0=>$partnerId,1=>$flavorId, 2=>$fileSize, 3=>($fileSyncId + $i), 4=>self::DATE_ID));
 			
 			if(!array_key_exists($entryId,$this->expected))
 			{
@@ -64,16 +55,16 @@ class StorageTest extends KalturaTestCase
 	
 	public function testCalcEntrySizes()
 	{
-		MySQLRunner::execute("CALL kalturadw.calc_entries_sizes(?)",array(0=>self::DATE_ID), false);
+		MySQLRunner::execute("CALL kalturadw.calc_entries_sizes(?)",array(0=>self::DATE_ID));
 		$this->compare(self::DATE_ID);
 	}
 	
 	public function testDeleteEntry()
 	{
-		MySQLRunner::execute("CALL kalturadw.calc_entries_sizes(?)",array(0=>self::DATE_ID), false);
+		MySQLRunner::execute("CALL kalturadw.calc_entries_sizes(?)",array(0=>self::DATE_ID));
 		$this->deleteEntry(self::DATE_ID+1);
 		
-		MySQLRunner::execute("CALL kalturadw.calc_entries_sizes(?)",array(0=>self::DATE_ID+1), false);
+		MySQLRunner::execute("CALL kalturadw.calc_entries_sizes(?)",array(0=>self::DATE_ID+1));
 		$this->compare(self::DATE_ID+1);		
 	}
 	
@@ -86,7 +77,7 @@ class StorageTest extends KalturaTestCase
 
 			echo "delete " .$entryId . " with size " . $size . "\n";
 
-			MySQLRunner::execute("UPDATE kalturadw.dwh_dim_entries SET entry_status_id = 3, modified_at=DATE(?) WHERE entry_id = '?'", array(0=>$dateId,1=>$entryId), false);
+			MySQLRunner::execute("UPDATE kalturadw.dwh_dim_entries SET entry_status_id = 3, modified_at=DATE(?) WHERE entry_id = '?'", array(0=>$dateId,1=>$entryId));
 			$this->expected[$entryId] = 0;
 			$this->delta = -$size*1024;
 			return;
@@ -95,10 +86,10 @@ class StorageTest extends KalturaTestCase
 	
 	public function testUpdateEntrySize()
 	{
-		MySQLRunner::execute("CALL kalturadw.calc_entries_sizes(?)",array(0=>self::DATE_ID), false);		
+		MySQLRunner::execute("CALL kalturadw.calc_entries_sizes(?)",array(0=>self::DATE_ID));		
 		$this->updateEntrySize(self::DATE_ID+2);
 		
-		MySQLRunner::execute("CALL kalturadw.calc_entries_sizes(?)",array(0=>self::DATE_ID+2), false);
+		MySQLRunner::execute("CALL kalturadw.calc_entries_sizes(?)",array(0=>self::DATE_ID+2));
 		$this->compare(self::DATE_ID+2);
 
 	}
@@ -115,12 +106,12 @@ class StorageTest extends KalturaTestCase
 			
 			MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_file_sync (partner_id, object_type, object_sub_type, object_id, file_size, id, updated_at, original, status, version) 
 						SELECT partner_id, object_type, object_sub_type, object_id, file_size + ? , ?, DATE(?), original, status, 2 FROM kalturadw.dwh_dim_file_sync
-						WHERE object_id = '?'", array(0=>$size, 1=>$fileSyncId, 2=>$dateId, 3=>$flavorId), false);
+						WHERE object_id = '?'", array(0=>$size, 1=>$fileSyncId, 2=>$dateId, 3=>$flavorId));
 			$this->expected[$entryId] += $size;
 			$this->delta = $size;
 			$fileSyncId++;
 
-			MySQLRunner::execute("UPDATE kalturadw.dwh_dim_flavor_asset SET updated_at = DATE(?) WHERE id = '?'", array(0=>$dateId, 1=>$flavorId), false);
+			MySQLRunner::execute("UPDATE kalturadw.dwh_dim_flavor_asset SET updated_at = DATE(?) WHERE id = '?'", array(0=>$dateId, 1=>$flavorId));
 			return;
 		}
 	}

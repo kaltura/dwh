@@ -24,9 +24,16 @@ class MySQLRunner
 	private $user = '';
 	private $password = '';
 	
-	private function connect()
+	private function connect($new=false)
 	{
-		$this->link = mysql_pconnect($this->host.':'.$this->port, $this->user, $this->password);
+		if($new)
+		{
+			$this->link = mysql_connect($this->host.':'.$this->port, $this->user, $this->password, true ); 
+		}
+		else
+		{
+			$this->link = mysql_pconnect($this->host.':'.$this->port, $this->user, $this->password ); 
+		}
 		if (!$this->link) 
 		{
 			print('Could not connect: ' . mysql_error());
@@ -43,34 +50,39 @@ class MySQLRunner
 		$this->link=null;
 	}
 	
-	public function run($sql, $params=array(), $returnResults=true)
+	public function run($sql, $params=array())
 	{
-		$this->connect();
-		mysql_query("SET query_cache_type=0");		
-
-
+		if(strpos("CALL",$sql)===false)
+		{
+			$this->connect(true);
+		} else
+		{
+			$this->connect();
+		}
+		mysql_query("SET query_cache_type=0",$this->link);		
+		
 		foreach ($params as $param)
 		{
 			$sql = preg_replace('/\?/', $param, $sql, 1);
 			#$sql = str_replace('?', $param, $sql, 1);
 		}
 		
-		$result = mysql_query($sql);		
+		$result = mysql_query($sql,$this->link);		
 		if (!$result) 
 		{
-			$this->disconnect();
 			print( "Could not successfully run query ($sql) from DB: " . mysql_error());
+			$this->disconnect();
 			exit(1);
 		}
 		
 		$rows = array();
-		if (!$returnResults || mysql_num_rows($result) == 0) 
+		if (is_bool($result) || mysql_num_rows($result) == 0)
 		{
 			$this->disconnect();
 			return $rows;
 		}		
 		
-		while ($row = mysql_fetch_assoc ($result)) 
+		while (($row = mysql_fetch_assoc ($result))!==false) 
 		{
 			$rows[]=$row;
 		}		

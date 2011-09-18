@@ -72,7 +72,7 @@ class DWHInspector
 	
 	public static function setAggregations($isCalculated)
 	{
-		MySQLRunner::execute("UPDATE kalturadw.aggr_managment SET is_calculated = ?",array(0=>$isCalculated), false);
+		MySQLRunner::execute("UPDATE kalturadw.aggr_managment SET is_calculated = ?",array(0=>$isCalculated));
 	}
 	
 	public static function getAggregations($dateId, $hourId, $isCalculated = 0)
@@ -143,13 +143,13 @@ class DWHInspector
 	
 	public static function setEntryMediaType($val)
 	{
-		MySQLRunner::execute('update kalturadw.dwh_fact_events set entry_media_type_id = ?',array(0=>$val),false);
+		MySQLRunner::execute('update kalturadw.dwh_fact_events set entry_media_type_id = ?',array(0=>$val));
 	}
 
 	public static function purgeCycles()
 	{
-		MySQLRunner::execute('DELETE FROM kalturadw_ds.files', array(), false);		
-		MySQLRunner::execute('DELETE FROM kalturadw_ds.cycles', array(), false);
+		MySQLRunner::execute('DELETE FROM kalturadw_ds.files', array());		
+		MySQLRunner::execute('DELETE FROM kalturadw_ds.cycles', array());
 	}
 	
 	public static function getEntryIDByFlavorID($flavorID)
@@ -195,6 +195,22 @@ class DWHInspector
 			$res[$row["session_id"]]["totalBytes"] = $row["total_bytes"];
                 }
                 return $res;
+	}
+
+	public static function createNewPartner()
+    	{
+		$rows = MySQLRunner::execute("SELECT ifnull(MIN(partner_id),0) - 10 as id FROM kalturadw.dwh_dim_partners");
+		$partnerId = $rows[0]["id"];
+		MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_partners (partner_id, partner_name) VALUES(?, 'TEST_PARTNER') ", array(0=>$partnerId));
+		return $partnerId;
+    	}
+
+	public static function createNewEntry($partnerId, $entryIndex, $dateId)
+	{
+		$entryId = "TEST_".$partnerId."_".$entryIndex;
+		MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_entries (partner_id, entry_id, entry_name, entry_status_id, entry_type_id, created_at, updated_at) VALUES(?,'?','?',2, 1, DATE(?), DATE(?))", 
+					array(0=>$partnerId,1=>$entryId,2=>$entryId,3=>$dateId, 4=>$dateId));
+		return $entryId;
 	}
 
 }

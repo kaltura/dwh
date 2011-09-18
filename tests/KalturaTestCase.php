@@ -49,6 +49,7 @@ abstract class KalturaTestCase extends PHPUnit_Framework_TestCase
         public static function register()
         {
                 KettleRunner::execute('/common/register_etl_server.ktr');
+		MySQLRunner::execute("CALL kalturadw.populate_time_dim('2011-01-01 00:00:00','2011-08-01 00:00:00')");
         }
 
 	public static function refreshBISourcesTables()
