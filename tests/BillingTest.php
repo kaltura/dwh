@@ -17,7 +17,7 @@ class BillingTest extends KalturaTestCase
 
 	public function setUp()
 	{
-        parent::refreshBISourcesTables();
+	        parent::refreshBISourcesTables();
 		$this->partnerId = DWHInspector::createNewPartner();
 		$this->createBilling();
 		$this->simulateUsage();
