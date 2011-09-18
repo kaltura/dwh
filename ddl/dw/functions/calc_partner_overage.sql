@@ -25,13 +25,15 @@ BEGIN
 			q.max_monthly_entries,
 			q.charge_monthly_entries_usd,
 			q.charge_monthly_entries_unit
-		FROM kalturadw.dwh_dim_partners q LEFT OUTER JOIN kalturadw.dwh_dim_partners p ON (q.partner_id = p.partner_parent_id AND q.partner_group_type_id = 3)
-		WHERE (q.max_monthly_bandwidth_kb IS NOT NULL AND q.charge_monthly_bandwidth_kb_usd IS NOT NULL AND q.charge_monthly_bandwidth_kb_unit IS NOT NULL)
-		OR (q.max_monthly_storage_mb IS NOT NULL AND q.charge_monthly_storage_mb_usd IS NOT NULL AND q.charge_monthly_storage_mb_unit IS NOT NULL)
-		OR (q.max_monthly_total_usage_mb IS NOT NULL AND q.charge_monthly_total_usage_mb_usd IS NOT NULL AND q.charge_monthly_total_usage_mb_unit IS NOT NULL)
-		OR (q.max_monthly_entries IS NOT NULL AND q.charge_monthly_entries_usd IS NOT NULL AND q.charge_monthly_entries_unit IS NOT NULL)
-		OR (q.max_monthly_plays IS NOT NULL AND q.charge_monthly_plays_usd IS NOT NULL AND q.charge_monthly_plays_unit IS NOT NULL);
-	
+		FROM (SELECT partner_id, MAX(updated_at) max_date 		
+            FROM kalturadw.dwh_dim_partners_billing
+            WHERE updated_at < DATE(p_month_id * 100 + 1) + INTERVAL 1 MONTH
+            GROUP BY partner_id) d 
+        LEFT JOIN kalturadw.dwh_dim_partners_billing q ON (q.updated_at = d.max_date AND q.partner_id = d.partner_id AND q.is_active = 1)
+		LEFT OUTER JOIN kalturadw.dwh_dim_partners p ON (q.partner_id = p.partner_parent_id AND q.partner_group_type_id = 3)
+        GROUP BY partner_id, usage_partner_id;
+        
+
 		DROP TABLE IF EXISTS partner_overages;
 		CREATE TEMPORARY TABLE partner_overages (
 				    partner_id       			INT(11),

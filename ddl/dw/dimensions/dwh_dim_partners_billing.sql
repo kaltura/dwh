@@ -37,7 +37,7 @@ CREATE TABLE `kalturadw`.`dwh_dim_partners_billing` (
     PRIMARY KEY (`partner_id`, updated_at)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
-CREATE TRIGGER `kalturadw`.`dwh_dim_partners__billing_setcreationtime_oninsert` BEFORE INSERT
+CREATE TRIGGER `kalturadw`.`dwh_dim_partners_billing_setcreationtime_oninsert` BEFORE INSERT
     ON `kalturadw`.`dwh_dim_partners_billing`
     FOR EACH ROW 
 	SET new.dwh_creation_date = NOW();
