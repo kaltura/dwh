@@ -23,10 +23,9 @@ BEGIN
 			FROM 	dwh_hourly_partner_usage aggr_p RIGHT JOIN
 				dwh_dim_time all_times
 				ON (all_times.day_id=aggr_p.date_id 
-					AND aggr_p.bandwidth_source_id = 1 
 					AND aggr_p.hour_id = 0 
 					AND aggr_p.partner_id=p_partner_id)
-			WHERE 	all_times.day_id BETWEEN 20081230 AND all_times.day_id<=p_end_date_id
+			WHERE 	all_times.day_id BETWEEN 20081230 AND p_end_date_id
 			GROUP BY all_times.day_id) results
 			WHERE date_id between p_start_date_id AND p_end_date_id
 		) continuous_partner_storage;

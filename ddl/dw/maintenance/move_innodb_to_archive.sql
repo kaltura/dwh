@@ -18,7 +18,9 @@ BEGIN
 	CURSOR FOR 
 	SELECT partition_name, p.table_name, CONCAT(p.table_name,'_archive') archive_name, partition_expression column_name, DATE(partition_description)*1 date_val
 	FROM information_schema.PARTITIONS p, kalturadw_ds.retention_policy r
-	WHERE partition_description <= DATE(NOW() - INTERVAL r.archive_start_days_back DAY)*1
+	WHERE LENGTH(partition_description) = 8 
+    AND DATE(partition_description)*1 IS NOT NULL
+    AND partition_description <= DATE(NOW() - INTERVAL r.archive_start_days_back DAY)*1
 	AND p.table_name = r.table_name
 	ORDER BY date_val;
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
