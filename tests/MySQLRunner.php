@@ -6,7 +6,6 @@ class MySQLRunner
 	public static function execute($sql, $params=array(), $returnResults=true)
 	{
 		global $CONF;
-        mysqli.max_links = 10;
 		$db = new MySQLRunner($CONF->DbHostName,$CONF->DbPort, $CONF->DbUser, $CONF->DbPassword);
 		return $db->run($sql, $params, $returnResults);
 	}
@@ -28,6 +27,7 @@ class MySQLRunner
 	private function connect()
 	{
 		$this->link = new mysqli($this->host, $this->user, $this->password, null, $this->port ); 
+        $thits->link->max_links = 10;
 		if ($this->link->connect_error) 
 		{
 			print('Could not connect: ' . $this->link->connect_error);
