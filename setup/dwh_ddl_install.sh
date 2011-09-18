@@ -165,6 +165,7 @@ mysqlexec $DW_ROOT_DIR/facts/dwh_fact_entries_sizes.sql
 
 #dw/dimensions
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_partners.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_partners_billing.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_partner_vertical.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_partner_class_of_service.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_domain.sql
