@@ -6,6 +6,7 @@ class MySQLRunner
 	public static function execute($sql, $params=array(), $returnResults=true)
 	{
 		global $CONF;
+        mysqli.max_links = 10;
 		$db = new MySQLRunner($CONF->DbHostName,$CONF->DbPort, $CONF->DbUser, $CONF->DbPassword);
 		return $db->run($sql, $params, $returnResults);
 	}
