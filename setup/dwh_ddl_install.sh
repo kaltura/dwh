@@ -202,6 +202,7 @@ mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_os.sql
 mysqlexec $DW_ROOT_DIR/maintenance/add_partition_procedure.sql
 mysqlexec $DW_ROOT_DIR/maintenance/move_innodb_to_archive.sql
 mysqlexec $DW_ROOT_DIR/maintenance/table_data_migration_procedures.sql
+mysqlexec $DW_ROOT_DIR/maintenance/apply_partitions_to_target_table.sql
 
 #dw/aggr
 mysqlexec $DW_ROOT_DIR/aggr/aggr_managment.sql
