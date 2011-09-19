@@ -224,7 +224,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Write to log</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Get PS2 lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Irrelevant line</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Set line type = 3</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 3</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Set line type = 2</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 2</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>decode http string</from><to>Get API_V_3 lines</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>empty ps2 line</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Cycles Path</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle_id and file_id</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - events</from><to>ip to location lookup error  - events</to><enabled>Y</enabled> </hop>  <hop> <from>convert IP and domain- events</from><to>Get IP location - events</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>Write to log on error</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>fix invalid values</to><enabled>Y</enabled> </hop>  <hop> <from>format events errornouse line</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>parse bandwidth lines</from><to>Filter BW rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>Not a bandwidth match</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>validate bandwidth raw input</to><enabled>Y</enabled> </hop>  <hop> <from>Calc bandwidth day and hour ids</from><to>check bandwidth valid line</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Calc day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids</from><to>check events valid line </to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>format events errornouse line</to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>format BW errornous line</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source = WWW</from><to>Bandwidth Source lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich bandwidth rows</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich file_id</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append file_id</from><to>Get Events Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>validate bandwidth raw input</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Get Events Process ID</from><to>Insert events invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle and file to bandwidth</from><to>Calc bandwidth day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>format BW errornous line</from><to>Get BW Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get BW Process ID</from><to>Insert bw invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>ip to location lookup error - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get numeric IP - BW</from><to>Get IP location - BW</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>Get numeric IP - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - events</from><to>referrer -&gt; domain</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>filter bad lines</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>domain lookup</to><enabled>Y</enabled> </hop>  <hop> <from>domain lookup</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>fix invalid values</from><to>referrer lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>create events output file_name</from><to>Events Text file output</to><enabled>Y</enabled> </hop>  <hop> <from>referrer lookup&#47;update</from><to>Get Cycles Path events</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path events</from><to>create events output file_name</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path BW</from><to>create BW output file_name</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source lookup</from><to>Get Cycles Path BW</to><enabled>Y</enabled> </hop>  <hop> <from>create BW output file_name</from><to>Bandwdith Text file output</to><enabled>Y</enabled> </hop>  <hop> <from>set IO file path vars</from><to>create output file</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path</from><to>set IO file path vars</to><enabled>Y</enabled> </hop>  <hop> <from>create output file</from><to>iterate file</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - same line number</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - events</from><to>decode http string</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>Parse user agent - events</to><enabled>Y</enabled> </hop>  <hop> <from>Parse user agent - events</from><to>convert IP and domain- events</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - same line number</from><to>Enable Parallel - events</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - same line number</from><to>Enable Parallel - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - bandwidth</from><to>parse bandwidth lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>Trim BW URL</to><enabled>Y</enabled> </hop>  <hop> <from>Trim BW URL</from><to>Parse user agent - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Parse user agent - BW</from><to>Bandwidth Source = WWW</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Write to log</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Get PS2 lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Irrelevant line</to><enabled>Y</enabled> </hop>  <hop> <from>Get API_V_3 lines</from><to>Set line type = 3</to><enabled>Y</enabled> </hop>  <hop> <from>Get PS2 lines</from><to>Set line type = 2</to><enabled>Y</enabled> </hop>  <hop> <from>decode http string</from><to>Get API_V_3 lines</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>empty ps2 line</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Cycles Path</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle_id and file_id</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - events</from><to>ip to location lookup error  - events</to><enabled>Y</enabled> </hop>  <hop> <from>convert IP and domain- events</from><to>Get IP location - events</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>Write to log on error</to><enabled>Y</enabled> </hop>  <hop> <from>filter bad lines</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>fix invalid values</to><enabled>Y</enabled> </hop>  <hop> <from>format events errornouse line</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>parse bandwidth lines</from><to>Filter BW rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>Not a bandwidth match</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Calc day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc day and hour ids</from><to>check events valid line </to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>format events errornouse line</to><enabled>Y</enabled> </hop>  <hop> <from>check events valid line </from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>format BW errornous line</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source = WWW</from><to>Bandwidth Source lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich bandwidth rows</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich file_id</from><to>Append file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Append file_id</from><to>Get Events Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>validate bandwidth raw input</from><to>Append cycle and file to bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Get Events Process ID</from><to>Insert events invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>format BW errornous line</from><to>Get BW Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get BW Process ID</from><to>Insert bw invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>ip to location lookup error - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get numeric IP - BW</from><to>Get IP location - BW</to><enabled>Y</enabled> </hop>  <hop> <from>check bandwidth valid line</from><to>Get numeric IP - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - events</from><to>referrer -&gt; domain</to><enabled>Y</enabled> </hop>  <hop> <from>parse line</from><to>filter bad lines</to><enabled>Y</enabled> </hop>  <hop> <from>referrer -&gt; domain</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>domain lookup</to><enabled>Y</enabled> </hop>  <hop> <from>domain lookup</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>fix invalid values</from><to>referrer lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>create events output file_name</from><to>Events Text file output</to><enabled>Y</enabled> </hop>  <hop> <from>referrer lookup&#47;update</from><to>Get Cycles Path events</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path events</from><to>create events output file_name</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path BW</from><to>create BW output file_name</to><enabled>Y</enabled> </hop>  <hop> <from>Bandwidth Source lookup</from><to>Get Cycles Path BW</to><enabled>Y</enabled> </hop>  <hop> <from>create BW output file_name</from><to>Bandwdith Text file output</to><enabled>Y</enabled> </hop>  <hop> <from>set IO file path vars</from><to>create output file</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path</from><to>set IO file path vars</to><enabled>Y</enabled> </hop>  <hop> <from>create output file</from><to>iterate file</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Enable Parallel - same line number</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - events</from><to>decode http string</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>Parse user agent - events</to><enabled>Y</enabled> </hop>  <hop> <from>Parse user agent - events</from><to>convert IP and domain- events</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - same line number</from><to>Enable Parallel - events</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - same line number</from><to>Enable Parallel - bandwidth</to><enabled>Y</enabled> </hop>  <hop> <from>Enable Parallel - bandwidth</from><to>parse bandwidth lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>Trim BW URL</to><enabled>Y</enabled> </hop>  <hop> <from>Trim BW URL</from><to>Parse user agent - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Parse user agent - BW</from><to>Bandwidth Source = WWW</to><enabled>Y</enabled> </hop>  <hop> <from>parse events datetime</from><to>parse line</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 3</from><to>parse events datetime</to><enabled>Y</enabled> </hop>  <hop> <from>Set line type = 2</from><to>parse events datetime</to><enabled>Y</enabled> </hop>  <hop> <from>Filter BW rows</from><to>parse bw datetime</to><enabled>Y</enabled> </hop>  <hop> <from>parse bw datetime</from><to>validate bandwidth raw input</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle and file to bandwidth</from><to>Calc bandwidth day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc bandwidth day and hour ids</from><to>check bandwidth valid line</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Abort</name>
     <type>Abort</type>
@@ -240,8 +240,8 @@
       <always_log_rows>Y</always_log_rows>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>619</xloc>
-      <yloc>269</yloc>
+      <xloc>694</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -632,38 +632,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>791</xloc>
       <yloc>411</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Calc bandwidth day and hour ids</name>
-    <type>Formula</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <formula><field_name>hour</field_name>
-<formula_string>hour([activityDate])</formula_string>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-       <formula><field_name>day_id</field_name>
-<formula_string>10000*year([activityDate])+100*month([activityDate])+day([activityDate])</formula_string>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>261</xloc>
-      <yloc>665</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1266,7 +1234,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>validate bandwidth raw input</send_true_to>
+<send_true_to>parse bw datetime</send_true_to>
 <send_false_to>Not a bandwidth match</send_false_to>
     <compare>
 <condition>
@@ -1965,7 +1933,7 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>519</xloc>
+      <xloc>504</xloc>
       <yloc>149</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1996,7 +1964,7 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>519</xloc>
+      <xloc>512</xloc>
       <yloc>69</yloc>
       <draw>Y</draw>
       </GUI>
@@ -2048,8 +2016,8 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>619</xloc>
-      <yloc>189</yloc>
+      <xloc>694</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2482,7 +2450,7 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>750</xloc>
+      <xloc>768</xloc>
       <yloc>194</yloc>
       <draw>Y</draw>
       </GUI>
@@ -2510,7 +2478,7 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>752</xloc>
+      <xloc>770</xloc>
       <yloc>111</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3525,8 +3493,8 @@ Alert(getEnvironmentVar(strVarName));</jsScript_script>
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>617</xloc>
-      <yloc>109</yloc>
+      <xloc>692</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3725,8 +3693,8 @@ else if ( year(eventTime)&lt;2009 ) { &#47;&#47; validate event time is more tha
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>73</xloc>
-      <yloc>584</yloc>
+      <xloc>72</xloc>
+      <yloc>603</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3838,6 +3806,129 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>759</xloc>
       <yloc>29</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>parse events datetime</name>
+    <type>Mapping</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <trans_name/>
+    <filename>${EtlBasePath}&#47;common&#47;parse_date_to_dwh_timezone.ktr</filename>
+    <directory_path/>
+    <mappings>
+      <input>
+    <mapping>    <input_step>Set line type = 2</input_step>
+    <output_step>Mapping input specification</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+       <connector><parent>raw_datetime</parent><child>raw_datetime</child></connector>
+       <connector><parent>timezone_offset</parent><child>timezone_offset</child></connector>
+    </mapping>    <mapping>    <input_step>Set line type = 3</input_step>
+    <output_step>Mapping input specification</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+       <connector><parent>raw_datetime</parent><child>raw_datetime</child></connector>
+       <connector><parent>timezone_offset</parent><child>timezone_offset</child></connector>
+    </mapping>      </input>
+      <output>
+    <mapping>    <input_step>Mapping output specification</input_step>
+    <output_step>parse line</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+       <connector><parent>event_time</parent><child>event_time</child></connector>
+    </mapping>      </output>
+          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    </mappings>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>591</xloc>
+      <yloc>111</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>parse bw datetime</name>
+    <type>Mapping</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <trans_name/>
+    <filename>${EtlBasePath}&#47;common&#47;parse_date_to_dwh_timezone.ktr</filename>
+    <directory_path/>
+    <mappings>
+      <input>
+    <mapping>    <input_step>Filter BW rows</input_step>
+    <output_step>Mapping input specification</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+       <connector><parent>raw_datetime</parent><child>raw_datetime</child></connector>
+       <connector><parent>timezone_offset</parent><child>timezone_offset</child></connector>
+    </mapping>      </input>
+      <output>
+    <mapping>    <input_step>Mapping output specification</input_step>
+    <output_step>validate bandwidth raw input</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+       <connector><parent>event_time</parent><child>event_time</child></connector>
+    </mapping>      </output>
+          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    </mappings>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>71</xloc>
+      <yloc>550</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calc bandwidth day and hour ids</name>
+    <type>Formula</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <formula><field_name>hour</field_name>
+<formula_string>hour([eventTime])</formula_string>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
+       <formula><field_name>day_id</field_name>
+<formula_string>10000*year([eventTime])+100*month([eventTime])+day([eventTime])</formula_string>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>262</xloc>
+      <yloc>664</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
