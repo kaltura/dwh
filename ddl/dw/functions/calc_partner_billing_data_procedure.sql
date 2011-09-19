@@ -4,11 +4,8 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_partner_billing_data`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `calc_partner_billing_data`(p_date_id INT(11),p_partner_id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `calc_partner_billing_data`(p_date_id INT(11),p_partner_id INT)
 BEGIN
-    DECLARE v_current_date INT(11);
-    SET v_current_date=LEAST(p_date_id,DATE(NOW())*1);
-
     SELECT
         FLOOR(continuous_partner_storage.date_id/100) month_id,
         SUM(continuous_aggr_storage/DAY(LAST_DAY(continuous_partner_storage.date_id))) avg_continuous_aggr_storage_mb,
@@ -32,7 +29,7 @@ BEGIN
                                 AND aggr_p.partner_id=p_partner_id
                                 AND aggr_p.hour_id = 0
                                 )
-                WHERE   all_times.day_id>=20081230 AND all_times.day_id <= @current_date_id
+                WHERE   all_times.day_id>=20081230 AND all_times.day_id <= LEAST(p_date_id,DATE(NOW())*1)
         GROUP BY day_id
     ) continuous_partner_storage
 	GROUP BY month_id
