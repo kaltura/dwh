@@ -69,18 +69,8 @@ CREATE TABLE `dwh_dim_batch_job` (
   `ri_ind` TINYINT(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`dwh_id`),
   UNIQUE KEY(`id`),
-  KEY `entry_id_index_id` (`entry_id`,`id`),
-  KEY `status_job_type_index` (`status_id`,`job_type_id`),
-  KEY `created_at_job_type_status_index` (`created_at`,`job_type_id`,`status_id`),
-  KEY `partner_type_index` (`partner_id`,`job_type_id`),
-  KEY `partner_id_index` (`partner_id`),
-  KEY `work_group_id_index_priority` (`work_group_id`,`priority`),
-  KEY `twin_job_id_index` (`twin_job_id`),
-  KEY `bulk_job_id_index` (`bulk_job_id`),
-  KEY `root_job_id_index` (`root_job_id`),
-  KEY `parent_job_id_index` (`parent_job_id`),
-  KEY `duplication_status_created_index` (`duplication_key`,`status_id`,`created_at`)
-) ENGINE=MYISAM AUTO_INCREMENT=160030683 DEFAULT CHARSET=utf8;
+  KEY `dwh_update_date` (`dwh_update_date`)
+) ENGINE=MYISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

@@ -47,5 +47,6 @@ create table dwh_dim_media_info (
 	dwh_creation_date TIMESTAMP  NOT NULL DEFAULT '0000-00-00 00:00:00',
 	dwh_update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	ri_ind TINYINT(4)  NOT NULL DEFAULT 0 ,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	KEY dwh_update_date (dwh_update_date)
 ) ENGINE=MYISAM; 

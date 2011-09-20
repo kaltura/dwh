@@ -89,10 +89,10 @@ CREATE TABLE `dwh_dim_fms_bandwidth_source` (
   `process_id` INT(10) NOT NULL,
   `fms_app_id` SMALLINT(6) NOT NULL,
   `bandwidth_source_id` INT(11) NOT NULL,
-  UNIQUE KEY (`process_id`,`fms_app_id`)
+  `file_regex` VARCHAR(100) NOT NULL DEFAULT '.*',
+  UNIQUE KEY (`process_id`,`fms_app_id`, `file_regex`)
 );
 
 INSERT INTO `dwh_dim_fms_bandwidth_source`
-			(`process_id`,`fms_app_id`,`bandwidth_source_id`) 
-VALUES 		(2,5,5),(7,1,6);
-
+			(`process_id`,`fms_app_id`,`bandwidth_source_id`,`file_regex`) 
+VALUES 		(2,5,5,'.*'),(7,1,6,'_77658\\.|_86593\\.'),(7,1,7,'_105515\\.');

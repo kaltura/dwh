@@ -47,5 +47,6 @@ CREATE TABLE `dwh_dim_flavor_params` (
 	`dwh_update_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`ri_ind` TINYINT(4) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`dwh_id`),
-	UNIQUE KEY `id_version` (`id`,`version`)
+	UNIQUE KEY `id_version` (`id`,`version`),
+	KEY dwh_update_date (dwh_update_date)
 ) ENGINE=MYISAM; 
