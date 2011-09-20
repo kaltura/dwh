@@ -1,4 +1,4 @@
-/*ALTER TABLE kalturadw.ri_mapping ADD COLUMN date_column_name VARCHAR(50) AFTER date_id_column_name;*/
+ALTER TABLE kalturadw.ri_mapping ADD COLUMN date_column_name VARCHAR(50) AFTER date_id_column_name;
 
 TRUNCATE TABLE kalturadw.ri_mapping;
 
