@@ -17,7 +17,7 @@ WHERE table_name = 'dwh_dim_domains' AND default_field = 'domain_name';
 
 INSERT INTO ri_defaults (table_name, default_field, default_value)  
 VALUES ('dwh_dim_referrer', 'referrer', 'CONCAT(a.referrer_id, "-Missing Value")'),
-VALUES 	('dwh_dim_locations', 'location_type_name', '"Missing Value"'),
+ 	('dwh_dim_locations', 'location_type_name', '"Missing Value"'),
 		('dwh_dim_locations', 'location_name', 'CONCAT(a.location_id, " - Missing Value")'),
 		('dwh_dim_locations', 'country', '"Missing Value"'),
 		('dwh_dim_locations', 'country_id', '"-1"'),
