@@ -11,6 +11,7 @@ CREATE TABLE kalturadw.`dwh_hourly_events_devices` (
   `os_id` INT NOT NULL DEFAULT -1,
   `browser_id` INT NOT NULL DEFAULT -1,
   `ui_conf_id` INT NOT NULL DEFAULT -1,
+  `entry_id` VARCHAR(20) NOT NULL DEFAULT -1,
   `sum_time_viewed` DECIMAL(20,3) DEFAULT NULL,
   `count_time_viewed` INT DEFAULT NULL,
   `count_plays` INT DEFAULT NULL,
@@ -55,7 +56,7 @@ CREATE TABLE kalturadw.`dwh_hourly_events_devices` (
   `count_bandwidth_kb` INT DEFAULT NULL,
   `total_admins` INT DEFAULT NULL,
   `total_media_entries` INT DEFAULT NULL,
-  PRIMARY KEY `partner_id` (`partner_id`,`date_id`,`hour_id`,`location_id`,`country_id`,`os_id`,`browser_id`,`ui_conf_id`)
+  PRIMARY KEY `partner_id` (`partner_id`,`date_id`,`hour_id`,`location_id`,`country_id`,`os_id`,`browser_id`,`ui_conf_id`,`entry_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 PARTITION BY RANGE (date_id)
 (PARTITION p_201001 VALUES LESS THAN (20100201) ENGINE = INNODB,
@@ -69,3 +70,5 @@ PARTITION BY RANGE (date_id)
  PARTITION p_201009 VALUES LESS THAN (20101001) ENGINE = INNODB,
  PARTITION p_201010 VALUES LESS THAN (20101101) ENGINE = INNODB,
  PARTITION p_201011 VALUES LESS THAN (20101201) ENGINE = INNODB);
+
+CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_events_devices');
