@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>Perform referential integrity</name>
+  <name>Perform Referencial Integrity</name>
     <description/>
     <extended_description/>
     <job_version/>
-    <job_status>1</job_status>
+    <job_status>0</job_status>
   <directory>&#47;</directory>
-  <created_user>admin</created_user>
-  <created_date>2009&#47;06&#47;02 11:59:44.000</created_date>
-  <modified_user>admin</modified_user>
-  <modified_date>2009&#47;06&#47;02 11:59:44.000</modified_date>
+  <created_user>-</created_user>
+  <created_date>2011&#47;03&#47;13 11:40:16.637</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2011&#47;03&#47;13 11:40:16.637</modified_date>
     <parameters>
     </parameters>
   <connection>
@@ -37,11 +37,36 @@
     </attributes>
   </connection>
   <connection>
+    <name>Kaltura_Writable</name>
+    <server>${OpWritableDbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kaltura</database>
+    <port>${OpDbPort}</port>
+    <username>${OpWritableDbUser}</username>
+    <password>${OpWritableDbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>SET SESSION sql_log_bin=0</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
     <name>KalturaDW</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturaDW</database>
+    <database>kalturadw</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -133,6 +158,30 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
+  <connection>
+    <name>KalturaReadDW</name>
+    <server>${DbReadHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw</database>
+    <port>${DbReadPort}</port>
+    <username>${DbReadUser}</username>
+    <password>${DbReadPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbReadPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
     <slaveservers>
     </slaveservers>
   <logconnection>KalturaLogs</logconnection>
@@ -160,14 +209,14 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>56</xloc>
-      <yloc>94</yloc>
+      <xloc>20</xloc>
+      <yloc>60</yloc>
       </entry>
     <entry>
-      <name>Perform referential integrity</name>
+      <name>get_last_updated_at</name>
       <description>Transformation</description>
       <type>TRANS</type>
-      <filename>file:&#47;&#47;&#47;${EtlBasePath}perform_referential_integrity.ktr</filename>
+      <filename>${EtlBasePath}&#47;dimensions&#47;get_last_updated_at.ktr</filename>
       <transname/>
       <directory/>
       <arg_from_previous>N</arg_from_previous>
@@ -175,33 +224,118 @@
       <clear_rows>N</clear_rows>
       <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
-      <logfile>${LogPath}\log ${Internal.Job.Name}</logfile>
-      <logext>log</logext>
+      <logfile/>
+      <logext/>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
+      <loglevel>Nothing</loglevel>
       <cluster>N</cluster>
       <slave_server_name/>
-      <set_append_logfile>Y</set_append_logfile>
+      <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
+            <parameter>            <name>ParameterID</name>
+            <stream_name/>
+            <value>${ReferencialIntegrityLastUpdatedParameterID}</value>
+            </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>198</xloc>
-      <yloc>95</yloc>
+      <xloc>127</xloc>
+      <yloc>61</yloc>
+      </entry>
+    <entry>
+      <name>set_last_updated_at</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename>${EtlBasePath}&#47;dimensions&#47;set_last_updated_at.ktr</filename>
+      <transname/>
+      <directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>ParameterID</name>
+            <stream_name/>
+            <value>${ReferencialIntegrityLastUpdatedParameterID}</value>
+            </parameter>      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>441</xloc>
+      <yloc>63</yloc>
+      </entry>
+    <entry>
+      <name>perform referential integrity</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename>${EtlBasePath}&#47;perform_referential_integrity.ktr</filename>
+      <transname/>
+      <directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>ParameterID</name>
+            <stream_name/>
+            <value>${ReferencialIntegrityLastUpdatedParameterID}</value>
+            </parameter>      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>279</xloc>
+      <yloc>63</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>Perform referential integrity</to>
+      <to>get_last_updated_at</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>get_last_updated_at</from>
+      <to>perform referential integrity</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>perform referential integrity</from>
+      <to>set_last_updated_at</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>

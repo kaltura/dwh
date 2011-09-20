@@ -103,11 +103,36 @@
     </attributes>
   </connection>
   <connection>
+    <name>Kaltura_Writable</name>
+    <server>${OpWritableDbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kaltura</database>
+    <port>${OpDbPort}</port>
+    <username>${OpWritableDbUser}</username>
+    <password>${OpWritableDbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>SET SESSION sql_log_bin=0</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
     <name>KalturaDW</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturaDW</database>
+    <database>kalturadw</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -199,6 +224,30 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
+  <connection>
+    <name>KalturaReadDW</name>
+    <server>${DbReadHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw</database>
+    <port>${DbReadPort}</port>
+    <username>${DbReadUser}</username>
+    <password>${DbReadPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbReadPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
   <hop> <from>Insert new rows</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Read Table Names</from><to>create Sqls</to><enabled>Y</enabled> </hop>  <hop> <from>create Sqls</from><to>ri sql</to><enabled>Y</enabled> </hop>  <hop> <from>ri sql</from><to>Insert new rows</to><enabled>Y</enabled> </hop>  </order>
   <step>
@@ -241,6 +290,7 @@
   table_name
 , column_name
 , date_id_column_name
+, date_column_name
 , reference_table
 , reference_column
 , default_fields
@@ -280,6 +330,12 @@ where perform_check = 1</sql>
         <name>reference_table</name>
         </field>
       <field>
+        <name>column_name</name>
+        </field>
+      <field>
+        <name>reference_column</name>
+        </field>
+      <field>
         <name>rows_inserted</name>
         </field>
       </fields>
@@ -307,21 +363,18 @@ where perform_check = 1</sql>
         <jsScript_script>&#47;&#47;Script here
 var insertSql;
 
-var days_back = getEnvironmentVar(&quot;UpdateDaysInterval&quot;)
-var datetime_str = &quot;now() - interval &quot;+ days_back +&quot; day&quot;;
-var date_id_str = &quot;(DATE_FORMAT(now() - interval &quot;+ days_back +&quot; day,\&quot;%Y%m%d\&quot;))*1&quot;;
-insertSql = &quot;insert into &quot;+reference_table+&quot; (&quot;+reference_column+&quot;,&quot;+default_fields
-		+&quot;,ri_ind) SELECT distinct a.&quot;+column_name+&quot;,&quot;+default_values+&quot;,1  FROM kalturadw.&quot;
-		+table_name+&quot; a LEFT OUTER JOIN kalturadw.&quot;+reference_table+&quot; b ON a.&quot;
-		+column_name+&quot; = b.&quot;+reference_column+
-		&quot; WHERE (a.&quot;+date_id_column_name+&quot;&gt;=&quot;;
-if ( indexOf (date_id_column_name,&quot;_date_id&quot; ) &gt; 0 )
-	insertSql += date_id_str;	&#47;&#47; compare date ids (integers)
-else
-	insertSql += datetime_str; 	&#47;&#47; compare dates
-insertSql += &quot;) AND b.&quot;+reference_column
-		+&quot; IS NULL AND a.&quot;+column_name+&quot; IS NOT null;&quot;;
-</jsScript_script>
+lastUpdatedAt = &apos;STR_TO_DATE(\&apos;&apos;+getEnvironmentVar(&apos;LastUpdatedAt&apos;)+&apos;\&apos;, \&apos;%Y&#47;%m&#47;%d %H:%i:%S.%f\&apos;)&apos;;
+
+var dateFilter = date_column_name == &apos;&apos; || date_column_name == null ? 
+					&apos;a.&apos;+date_id_column_name+&apos;&gt;=DATE(&apos;+lastUpdatedAt+&apos;)*1&apos; :
+					&apos;a.&apos;+date_column_name+&apos;&gt;=&apos;+lastUpdatedAt;
+	
+insertSql = &quot;INSERT INTO &quot; + reference_table + &quot; (&quot; + reference_column + &quot;,&quot; + default_fields + &quot;,ri_ind) &quot; +
+			&quot;SELECT DISTINCT a.&quot; + column_name + &quot;,&quot; + default_values + &quot;,1 &quot; + 
+			&quot;FROM kalturadw.&quot; + table_name + &quot; a LEFT OUTER JOIN kalturadw.&quot; + reference_table + &quot; b &quot; + 
+			&quot;ON a.&quot;	+ column_name+&quot; = b.&quot; + reference_column +
+			&quot; WHERE &quot; + dateFilter + &quot; AND b.&quot; + reference_column + &quot; IS NULL &quot; + 
+			&quot;AND a.&quot; + column_name + &quot; IS NOT NULL;&quot;;</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>indexOf_Sample</jsScript_name>
         <jsScript_script>&#47;&#47; Perform the indexOf function
