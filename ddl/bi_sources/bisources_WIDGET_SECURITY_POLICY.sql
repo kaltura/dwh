@@ -7,5 +7,5 @@ CREATE TABLE `kalturadw_bisources`.`bisources_widget_security_policy` (
   
 ) ENGINE=MYISAM  DEFAULT CHARSET=utf8;
 
-INSERT INTO kalturadw_bisources.bisources_WIDGET_SECURITY_POLICY (WIDGET_SECURITY_POLICY_id,WIDGET_SECURITY_POLICY_name) VALUES(1,'NONE'); 
-INSERT INTO kalturadw_bisources.bisources_WIDGET_SECURITY_POLICY (WIDGET_SECURITY_POLICY_id,WIDGET_SECURITY_POLICY_name) VALUES(2,'ROOT'); 
+INSERT INTO kalturadw_bisources.bisources_widget_security_policy (widget_security_policy_id,widget_security_policy_name) VALUES(1,'NONE'); 
+INSERT INTO kalturadw_bisources.bisources_widget_security_policy (widget_security_policy_id,widget_security_policy_name) VALUES(2,'ROOT'); 

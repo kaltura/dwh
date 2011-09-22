@@ -9,9 +9,9 @@ CREATE TABLE `kalturadw_bisources`.`bisources_ui_conf_type` (
 
 
 	
-INSERT INTO kalturadw_bisources.bisources_UI_CONF_TYPE (UI_CONF_TYPE_id,UI_CONF_TYPE_name) VALUES(1,'WIDGET'); 
-INSERT INTO kalturadw_bisources.bisources_UI_CONF_TYPE (UI_CONF_TYPE_id,UI_CONF_TYPE_name) VALUES(2,'CW'); 
-INSERT INTO kalturadw_bisources.bisources_UI_CONF_TYPE (UI_CONF_TYPE_id,UI_CONF_TYPE_name) VALUES(3,'EDITOR'); 
-INSERT INTO kalturadw_bisources.bisources_UI_CONF_TYPE (UI_CONF_TYPE_id,UI_CONF_TYPE_name) VALUES(4,'ADVANCED_EDITOR'); 
-INSERT INTO kalturadw_bisources.bisources_UI_CONF_TYPE (UI_CONF_TYPE_id,UI_CONF_TYPE_name) VALUES(5,'PLAYLIST'); 
-INSERT INTO kalturadw_bisources.bisources_UI_CONF_TYPE (UI_CONF_TYPE_id,UI_CONF_TYPE_name) VALUES(6,'APP_STUDIO'); 
+INSERT INTO kalturadw_bisources.bisources_ui_conf_type (ui_conf_type_id,ui_conf_type_name) VALUES(1,'WIDGET'); 
+INSERT INTO kalturadw_bisources.bisources_ui_conf_type (ui_conf_type_id,ui_conf_type_name) VALUES(2,'CW'); 
+INSERT INTO kalturadw_bisources.bisources_ui_conf_type (ui_conf_type_id,ui_conf_type_name) VALUES(3,'EDITOR'); 
+INSERT INTO kalturadw_bisources.bisources_ui_conf_type (ui_conf_type_id,ui_conf_type_name) VALUES(4,'ADVANCED_EDITOR'); 
+INSERT INTO kalturadw_bisources.bisources_ui_conf_type (ui_conf_type_id,ui_conf_type_name) VALUES(5,'PLAYLIST'); 
+INSERT INTO kalturadw_bisources.bisources_ui_conf_type (ui_conf_type_id,ui_conf_type_name) VALUES(6,'APP_STUDIO'); 

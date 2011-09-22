@@ -1,1 +1,1 @@
-INSERT INTO kalturadw_ds.LOCKS (lock_name, lock_state) VALUES ('daily_lock', FALSE);
+INSERT INTO kalturadw_ds.locks (lock_name, lock_state) VALUES ('daily_lock', FALSE);

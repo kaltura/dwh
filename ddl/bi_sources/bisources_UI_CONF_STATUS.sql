@@ -7,6 +7,6 @@ CREATE TABLE `kalturadw_bisources`.`bisources_ui_conf_status` (
 ) ENGINE=MYISAM  DEFAULT CHARSET=utf8;
 
 	
-INSERT INTO kalturadw_bisources.bisources_UI_CONF_STATUS(UI_CONF_STATUS_id,UI_CONF_STATUS_name) VALUES(1,'PENDING'); 
-INSERT INTO kalturadw_bisources.bisources_UI_CONF_STATUS(UI_CONF_STATUS_id,UI_CONF_STATUS_name) VALUES(2,'READY'); 
-INSERT INTO kalturadw_bisources.bisources_UI_CONF_STATUS(UI_CONF_STATUS_id,UI_CONF_STATUS_name) VALUES(3,'DELETED'); 
+INSERT INTO kalturadw_bisources.bisources_ui_conf_status(ui_conf_status_id,ui_conf_status_name) VALUES(1,'PENDING'); 
+INSERT INTO kalturadw_bisources.bisources_ui_conf_status(ui_conf_status_id,ui_conf_status_name) VALUES(2,'READY'); 
+INSERT INTO kalturadw_bisources.bisources_ui_conf_status(ui_conf_status_id,ui_conf_status_name) VALUES(3,'DELETED'); 

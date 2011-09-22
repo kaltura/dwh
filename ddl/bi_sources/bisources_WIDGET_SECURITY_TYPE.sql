@@ -7,7 +7,7 @@ CREATE TABLE `kalturadw_bisources`.`bisources_widget_security_type` (
   
 ) ENGINE=MYISAM  DEFAULT CHARSET=utf8;
 
-INSERT INTO kalturadw_bisources.bisources_WIDGET_SECURITY_TYPE (WIDGET_SECURITY_TYPE_id,WIDGET_SECURITY_TYPE_name) VALUES(1,'NONE'); 
-INSERT INTO kalturadw_bisources.bisources_WIDGET_SECURITY_TYPE (WIDGET_SECURITY_TYPE_id,WIDGET_SECURITY_TYPE_name) VALUES(2,'TIMEHASH'); 
-INSERT INTO kalturadw_bisources.bisources_WIDGET_SECURITY_TYPE (WIDGET_SECURITY_TYPE_id,WIDGET_SECURITY_TYPE_name) VALUES(3,'MATCH_IP'); 
-INSERT INTO kalturadw_bisources.bisources_WIDGET_SECURITY_TYPE (WIDGET_SECURITY_TYPE_id,WIDGET_SECURITY_TYPE_name) VALUES(4,'FORCE_KS'); 
+INSERT INTO kalturadw_bisources.bisources_widget_security_type (widget_security_type_id,widget_security_type_name) VALUES(1,'NONE'); 
+INSERT INTO kalturadw_bisources.bisources_widget_security_type (widget_security_type_id,widget_security_type_name) VALUES(2,'TIMEHASH'); 
+INSERT INTO kalturadw_bisources.bisources_widget_security_type (widget_security_type_id,widget_security_type_name) VALUES(3,'MATCH_IP'); 
+INSERT INTO kalturadw_bisources.bisources_widget_security_type (widget_security_type_id,widget_security_type_name) VALUES(4,'FORCE_KS'); 
