@@ -213,6 +213,30 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
+  <connection>
+    <name>KalturaReadDW</name>
+    <server>${DbReadHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw</database>
+    <port>${DbReadPort}</port>
+    <username>${DbReadUser}</username>
+    <password>${DbReadPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbReadPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
     <slaveservers>
     </slaveservers>
   <logconnection/>
@@ -268,8 +292,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>138</xloc>
-      <yloc>119</yloc>
+      <xloc>140</xloc>
+      <yloc>120</yloc>
       </entry>
     <entry>
       <name>Get files for registered cycles</name>
@@ -296,8 +320,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>770</xloc>
-      <yloc>119</yloc>
+      <xloc>960</xloc>
+      <yloc>120</yloc>
       </entry>
     <entry>
       <name>Get registered cycles</name>
@@ -305,7 +329,6 @@
       <type>TRANS</type>
       <filename>${EtlBasePath}&#47;cycles&#47;read_assigned_cycles_by_status.ktr</filename>
       <transname/>
-      <directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -328,8 +351,8 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>614</xloc>
-      <yloc>118</yloc>
+      <xloc>800</xloc>
+      <yloc>120</yloc>
       </entry>
     <entry>
       <name>List files from dir (Dynamic ktr load)</name>
@@ -356,8 +379,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>324</xloc>
-      <yloc>118</yloc>
+      <xloc>320</xloc>
+      <yloc>120</yloc>
       </entry>
     <entry>
       <name>Register files</name>
@@ -384,8 +407,40 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>476</xloc>
-      <yloc>119</yloc>
+      <xloc>660</xloc>
+      <yloc>120</yloc>
+      </entry>
+    <entry>
+      <name>Create the temp destination</name>
+      <description>Create a folder</description>
+      <type>CREATE_FOLDER</type>
+      <foldername>${TempDestination}</foldername>
+      <fail_of_folder_exists>N</fail_of_folder_exists>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>600</xloc>
+      <yloc>240</yloc>
+      </entry>
+    <entry>
+      <name>FetchMethod = &quot;remote&quot;</name>
+      <description>Simple evaluation</description>
+      <type>SIMPLE_EVAL</type>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${FetchMethod}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>remote</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>equal</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>500</xloc>
+      <yloc>120</yloc>
       </entry>
   </entries>
   <hops>
@@ -417,7 +472,16 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>List files from dir (Dynamic ktr load)</from>
+      <from>Register files</from>
+      <to>Get registered cycles</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create the temp destination</from>
       <to>Register files</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -426,12 +490,30 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Register files</from>
-      <to>Get registered cycles</to>
+      <from>List files from dir (Dynamic ktr load)</from>
+      <to>FetchMethod = &quot;remote&quot;</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>FetchMethod = &quot;remote&quot;</from>
+      <to>Create the temp destination</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>FetchMethod = &quot;remote&quot;</from>
+      <to>Register files</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
