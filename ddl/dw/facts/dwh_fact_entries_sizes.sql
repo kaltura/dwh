@@ -26,7 +26,7 @@ CREATE TABLE `dwh_fact_entries_sizes` (
 `entry_size_date` DATETIME NOT NULL,
 `entry_size_date_id` INT(11) NOT NULL,
 `entry_additional_size_kb` DECIMAL(15,3) NOT NULL,
-PRIMARY KEY (`entry_size_date_id`, `partner_id`,`entry_id`),
+PRIMARY KEY (`partner_id`, `entry_id`, `entry_size_date_id`),
 KEY entry_id (`entry_id`))
 ENGINE=MYISAM DEFAULT CHARSET=utf8
 PARTITION BY RANGE (entry_size_date_id)
