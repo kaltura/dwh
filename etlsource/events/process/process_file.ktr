@@ -240,8 +240,8 @@
       <always_log_rows>Y</always_log_rows>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>694</xloc>
-      <yloc>272</yloc>
+      <xloc>700</xloc>
+      <yloc>280</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -270,8 +270,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>74</xloc>
-      <yloc>665</yloc>
+      <xloc>80</xloc>
+      <yloc>660</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -300,8 +300,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1328</xloc>
-      <yloc>392</yloc>
+      <xloc>1320</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -330,8 +330,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>999</xloc>
-      <yloc>189</yloc>
+      <xloc>1000</xloc>
+      <yloc>180</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -558,8 +558,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>916</xloc>
-      <yloc>550</yloc>
+      <xloc>920</xloc>
+      <yloc>540</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -589,8 +589,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>644</xloc>
-      <yloc>412</yloc>
+      <xloc>640</xloc>
+      <yloc>420</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -630,8 +630,40 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>791</xloc>
-      <yloc>411</yloc>
+      <xloc>800</xloc>
+      <yloc>420</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calc bandwidth day and hour ids</name>
+    <type>Formula</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <formula><field_name>hour</field_name>
+<formula_string>hour([eventTime])</formula_string>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
+       <formula><field_name>day_id</field_name>
+<formula_string>10000*year([eventTime])+100*month([eventTime])+day([eventTime])</formula_string>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>260</xloc>
+      <yloc>660</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -662,8 +694,8 @@
 </formula>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>879</xloc>
-      <yloc>29</yloc>
+      <xloc>880</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -680,8 +712,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>71</xloc>
-      <yloc>365</yloc>
+      <xloc>80</xloc>
+      <yloc>360</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -698,8 +730,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>268</xloc>
-      <yloc>218</yloc>
+      <xloc>260</xloc>
+      <yloc>220</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -716,8 +748,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>205</xloc>
-      <yloc>309</yloc>
+      <xloc>200</xloc>
+      <yloc>300</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -742,7 +774,7 @@
         <precision>-1</precision>
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>75</xloc>
+      <xloc>80</xloc>
       <yloc>740</yloc>
       <draw>Y</draw>
       </GUI>
@@ -773,7 +805,7 @@
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1180</xloc>
-      <yloc>392</yloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -799,7 +831,7 @@
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>900</xloc>
-      <yloc>188</yloc>
+      <yloc>180</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1218,8 +1250,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1046</xloc>
-      <yloc>623</yloc>
+      <xloc>1040</xloc>
+      <yloc>620</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1246,8 +1278,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>71</xloc>
-      <yloc>494</yloc>
+      <xloc>80</xloc>
+      <yloc>500</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1292,8 +1324,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>419</xloc>
-      <yloc>69</yloc>
+      <xloc>420</xloc>
+      <yloc>60</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1324,8 +1356,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>702</xloc>
-      <yloc>662</yloc>
+      <xloc>700</xloc>
+      <yloc>660</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1356,8 +1388,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>81</xloc>
-      <yloc>87</yloc>
+      <xloc>80</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1388,8 +1420,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>913</xloc>
-      <yloc>412</yloc>
+      <xloc>920</xloc>
+      <yloc>420</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1420,8 +1452,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1192</xloc>
-      <yloc>539</yloc>
+      <xloc>1200</xloc>
+      <yloc>540</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1452,8 +1484,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>999</xloc>
-      <yloc>259</yloc>
+      <xloc>1000</xloc>
+      <yloc>260</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1468,7 +1500,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>KalturaReadDW</connection>
     <rowlimit>0</rowlimit>
     <sql>select 1 country_id, 2 location_id</sql>
     <outer_join>N</outer_join>
@@ -1477,7 +1509,7 @@
     <query_only_on_change>Y</query_only_on_change>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>422</xloc>
+      <xloc>420</xloc>
       <yloc>500</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1493,7 +1525,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>KalturaReadDW</connection>
     <rowlimit>0</rowlimit>
     <sql>select 1 country_id, 2 location_id</sql>
     <outer_join>N</outer_join>
@@ -1502,8 +1534,8 @@
     <query_only_on_change>Y</query_only_on_change>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1318</xloc>
-      <yloc>101</yloc>
+      <xloc>1320</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1535,8 +1567,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>419</xloc>
-      <yloc>149</yloc>
+      <xloc>420</xloc>
+      <yloc>140</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1618,8 +1650,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>426</xloc>
-      <yloc>584</yloc>
+      <xloc>420</xloc>
+      <yloc>580</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1660,7 +1692,7 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     </mappings>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>829</xloc>
+      <xloc>820</xloc>
       <yloc>660</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1702,8 +1734,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     </mappings>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>997</xloc>
-      <yloc>353</yloc>
+      <xloc>1000</xloc>
+      <yloc>360</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1720,8 +1752,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>419</xloc>
-      <yloc>229</yloc>
+      <xloc>420</xloc>
+      <yloc>220</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1738,8 +1770,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>185</xloc>
-      <yloc>493</yloc>
+      <xloc>180</xloc>
+      <yloc>500</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1777,8 +1809,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     </mappings>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>509</xloc>
-      <yloc>413</yloc>
+      <xloc>500</xloc>
+      <yloc>420</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1816,8 +1848,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     </mappings>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1282</xloc>
-      <yloc>30</yloc>
+      <xloc>1280</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1902,8 +1934,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1321</xloc>
-      <yloc>244</yloc>
+      <xloc>1320</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1933,8 +1965,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>504</xloc>
-      <yloc>149</yloc>
+      <xloc>500</xloc>
+      <yloc>140</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1964,8 +1996,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>512</xloc>
-      <yloc>69</yloc>
+      <xloc>520</xloc>
+      <yloc>60</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1994,8 +2026,8 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>417</xloc>
-      <yloc>413</yloc>
+      <xloc>420</xloc>
+      <yloc>420</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2016,8 +2048,8 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>694</xloc>
-      <yloc>192</yloc>
+      <xloc>700</xloc>
+      <yloc>200</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2116,8 +2148,8 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1477</xloc>
-      <yloc>168</yloc>
+      <xloc>1480</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2144,8 +2176,8 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>427</xloc>
-      <yloc>665</yloc>
+      <xloc>420</xloc>
+      <yloc>660</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2172,8 +2204,8 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>999</xloc>
-      <yloc>29</yloc>
+      <xloc>1000</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2233,8 +2265,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1165</xloc>
-      <yloc>102</yloc>
+      <xloc>1160</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2261,8 +2293,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>914</xloc>
-      <yloc>475</yloc>
+      <xloc>920</xloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2289,8 +2321,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1043</xloc>
-      <yloc>539</yloc>
+      <xloc>1040</xloc>
+      <yloc>540</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2309,8 +2341,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     <resultfieldname>result</resultfieldname>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>76</xloc>
-      <yloc>246</yloc>
+      <xloc>80</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2393,7 +2425,7 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>340</xloc>
-      <yloc>143</yloc>
+      <yloc>140</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2432,8 +2464,8 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1324</xloc>
-      <yloc>326</yloc>
+      <xloc>1320</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2450,8 +2482,8 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>768</xloc>
-      <yloc>194</yloc>
+      <xloc>760</xloc>
+      <yloc>200</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2478,8 +2510,8 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>770</xloc>
-      <yloc>111</yloc>
+      <xloc>760</xloc>
+      <yloc>120</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2575,8 +2607,8 @@ function is_not_numeric(s) {
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1328</xloc>
-      <yloc>465</yloc>
+      <xloc>1320</xloc>
+      <yloc>460</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2608,8 +2640,8 @@ errornous_line = substr (errornous_line, 0 , 1023);</jsScript_script>
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>584</xloc>
-      <yloc>663</yloc>
+      <xloc>580</xloc>
+      <yloc>660</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2641,8 +2673,8 @@ errornous_line = substr (errornous_line, 0 , 1023);</jsScript_script>
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>999</xloc>
-      <yloc>109</yloc>
+      <xloc>1000</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2726,7 +2758,7 @@ errornous_line = substr (errornous_line, 0 , 1023);</jsScript_script>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1475</xloc>
+      <xloc>1480</xloc>
       <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
@@ -2811,8 +2843,8 @@ errornous_line = substr (errornous_line, 0 , 1023);</jsScript_script>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>563</xloc>
-      <yloc>499</yloc>
+      <xloc>560</xloc>
+      <yloc>500</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3060,8 +3092,8 @@ errornous_line = substr (errornous_line, 0 , 1023);</jsScript_script>
     <date_format_locale>en</date_format_locale>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>73</xloc>
-      <yloc>309</yloc>
+      <xloc>80</xloc>
+      <yloc>300</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3107,8 +3139,8 @@ errornous_line = substr (errornous_line, 0 , 1023);</jsScript_script>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1163</xloc>
-      <yloc>29</yloc>
+      <xloc>1160</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3168,8 +3200,99 @@ function is_not_numeric(s) {
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>71</xloc>
-      <yloc>430</yloc>
+      <xloc>80</xloc>
+      <yloc>420</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>parse bw datetime</name>
+    <type>Mapping</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <trans_name/>
+    <filename>${EtlBasePath}&#47;common&#47;parse_date_to_dwh_timezone.ktr</filename>
+    <directory_path/>
+    <mappings>
+      <input>
+    <mapping>    <input_step>Filter BW rows</input_step>
+    <output_step>Mapping input specification</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+       <connector><parent>raw_datetime</parent><child>raw_datetime</child></connector>
+       <connector><parent>timezone_offset</parent><child>timezone_offset</child></connector>
+    </mapping>      </input>
+      <output>
+    <mapping>    <input_step>Mapping output specification</input_step>
+    <output_step>validate bandwidth raw input</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+       <connector><parent>event_time</parent><child>event_time</child></connector>
+    </mapping>      </output>
+          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    </mappings>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>80</xloc>
+      <yloc>540</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>parse events datetime</name>
+    <type>Mapping</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <trans_name/>
+    <filename>${EtlBasePath}&#47;common&#47;parse_date_to_dwh_timezone.ktr</filename>
+    <directory_path/>
+    <mappings>
+      <input>
+    <mapping>    <input_step>Set line type = 2</input_step>
+    <output_step>Mapping input specification</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+       <connector><parent>raw_datetime</parent><child>raw_datetime</child></connector>
+       <connector><parent>timezone_offset</parent><child>timezone_offset</child></connector>
+    </mapping>    <mapping>    <input_step>Set line type = 3</input_step>
+    <output_step>Mapping input specification</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+       <connector><parent>raw_datetime</parent><child>raw_datetime</child></connector>
+       <connector><parent>timezone_offset</parent><child>timezone_offset</child></connector>
+    </mapping>      </input>
+      <output>
+    <mapping>    <input_step>Mapping output specification</input_step>
+    <output_step>parse line</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+       <connector><parent>event_time</parent><child>event_time</child></connector>
+    </mapping>      </output>
+          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    </mappings>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>600</xloc>
+      <yloc>120</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3493,8 +3616,8 @@ Alert(getEnvironmentVar(strVarName));</jsScript_script>
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>692</xloc>
-      <yloc>112</yloc>
+      <xloc>700</xloc>
+      <yloc>120</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3549,7 +3672,7 @@ Alert(getEnvironmentVar(strVarName));</jsScript_script>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1320</xloc>
-      <yloc>167</yloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3592,8 +3715,8 @@ Alert(getEnvironmentVar(strVarName));</jsScript_script>
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1326</xloc>
-      <yloc>536</yloc>
+      <xloc>1320</xloc>
+      <yloc>540</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3651,8 +3774,8 @@ else {
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>77</xloc>
-      <yloc>166</yloc>
+      <xloc>80</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3693,8 +3816,8 @@ else if ( year(eventTime)&lt;2009 ) { &#47;&#47; validate event time is more tha
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>72</xloc>
-      <yloc>603</yloc>
+      <xloc>80</xloc>
+      <yloc>600</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3804,131 +3927,8 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>759</xloc>
-      <yloc>29</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>parse events datetime</name>
-    <type>Mapping</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <trans_name/>
-    <filename>${EtlBasePath}&#47;common&#47;parse_date_to_dwh_timezone.ktr</filename>
-    <directory_path/>
-    <mappings>
-      <input>
-    <mapping>    <input_step>Set line type = 2</input_step>
-    <output_step>Mapping input specification</output_step>
-    <main_path>Y</main_path>
-    <rename_on_output>N</rename_on_output>
-    <description/>
-       <connector><parent>raw_datetime</parent><child>raw_datetime</child></connector>
-       <connector><parent>timezone_offset</parent><child>timezone_offset</child></connector>
-    </mapping>    <mapping>    <input_step>Set line type = 3</input_step>
-    <output_step>Mapping input specification</output_step>
-    <main_path>Y</main_path>
-    <rename_on_output>N</rename_on_output>
-    <description/>
-       <connector><parent>raw_datetime</parent><child>raw_datetime</child></connector>
-       <connector><parent>timezone_offset</parent><child>timezone_offset</child></connector>
-    </mapping>      </input>
-      <output>
-    <mapping>    <input_step>Mapping output specification</input_step>
-    <output_step>parse line</output_step>
-    <main_path>Y</main_path>
-    <rename_on_output>N</rename_on_output>
-    <description/>
-       <connector><parent>event_time</parent><child>event_time</child></connector>
-    </mapping>      </output>
-          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
-    </parameters>
-    </mappings>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>591</xloc>
-      <yloc>111</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>parse bw datetime</name>
-    <type>Mapping</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <trans_name/>
-    <filename>${EtlBasePath}&#47;common&#47;parse_date_to_dwh_timezone.ktr</filename>
-    <directory_path/>
-    <mappings>
-      <input>
-    <mapping>    <input_step>Filter BW rows</input_step>
-    <output_step>Mapping input specification</output_step>
-    <main_path>Y</main_path>
-    <rename_on_output>N</rename_on_output>
-    <description/>
-       <connector><parent>raw_datetime</parent><child>raw_datetime</child></connector>
-       <connector><parent>timezone_offset</parent><child>timezone_offset</child></connector>
-    </mapping>      </input>
-      <output>
-    <mapping>    <input_step>Mapping output specification</input_step>
-    <output_step>validate bandwidth raw input</output_step>
-    <main_path>Y</main_path>
-    <rename_on_output>N</rename_on_output>
-    <description/>
-       <connector><parent>event_time</parent><child>event_time</child></connector>
-    </mapping>      </output>
-          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
-    </parameters>
-    </mappings>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>71</xloc>
-      <yloc>550</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Calc bandwidth day and hour ids</name>
-    <type>Formula</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <formula><field_name>hour</field_name>
-<formula_string>hour([eventTime])</formula_string>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-       <formula><field_name>day_id</field_name>
-<formula_string>10000*year([eventTime])+100*month([eventTime])+day([eventTime])</formula_string>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>262</xloc>
-      <yloc>664</yloc>
+      <xloc>760</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
