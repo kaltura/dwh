@@ -138,7 +138,6 @@ mysqlexec $DW_ROOT_DIR/dw_UI_CONF_TYPE.sql
 mysqlexec $DW_ROOT_DIR/dw_user_status.sql
 mysqlexec $DW_ROOT_DIR/dw_WIDGET_SECURITY_POLICY.sql
 mysqlexec $DW_ROOT_DIR/dw_widget_security_type.sql
-mysqlexec $DW_ROOT_DIR/entries.sql
 mysqlexec $DW_ROOT_DIR/ip_ranges.sql
 mysqlexec $DW_ROOT_DIR/kuser.sql
 mysqlexec $DW_ROOT_DIR/locations.sql
@@ -164,6 +163,7 @@ mysqlexec $DW_ROOT_DIR/facts/dwh_fact_fms_session_events_archive.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_entries_sizes.sql
 
 #dw/dimensions
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_entries.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_partners.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_partners_billing.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_partner_vertical.sql
