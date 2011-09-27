@@ -13,7 +13,7 @@ create table `dwh_dim_tags` (
     `tag_name` varchar(50) NOT NULL,
 	`dwh_creation_date` TIMESTAMP  NOT NULL DEFAULT '0000-00-00 00:00:00',
 	`dwh_update_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY (`tag_id`), UNIQUE(tag_name)
+	PRIMARY KEY (`tag_id`), UNIQUE KEY (tag_name)
 ) ENGINE=MYISAM; 
 
 CREATE TRIGGER `kalturadw`.`dwh_dim_tags_oninsert` BEFORE INSERT
