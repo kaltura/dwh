@@ -20,9 +20,9 @@ DELIMITER $$
 
 USE `kalturadw`$$
 
-DROP VIEW IF EXISTS `dwh_dim_entry_type_display_v`$$
+DROP VIEW IF EXISTS `dwh_view_entry_type_display`$$
 
-CREATE VIEW `kalturadw`.`dwh_dim_entry_type_display_v` AS 
+CREATE VIEW `kalturadw`.`dwh_view_entry_type_display` AS 
 SELECT
   t.entry_type_id, t.entry_type_name, m.entry_media_type_id, m.entry_media_type_name,
     ifnull(d.display, concat(t.entry_type_name,'-',m.entry_media_type_name)) as display
