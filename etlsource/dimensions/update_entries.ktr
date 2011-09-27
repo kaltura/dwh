@@ -227,23 +227,22 @@
   </connection>
   <connection>
     <name>KalturaReadDW</name>
-    <server>localhost</server>
+    <server>${DbReadHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
     <database>kalturadw</database>
-    <port>3306</port>
-    <username>root</username>
-    <password>Encrypted </password>
+    <port>${DbReadPort}</port>
+    <username>${DbReadUser}</username>
+    <password>${DbReadPassword}</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbReadPort}</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
@@ -1001,6 +1000,95 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
     </step>
 
   <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>id</name>
+      </remove>      <remove>        <name>kshow_id</name>
+      </remove>      <remove>        <name>kuser_id</name>
+      </remove>      <remove>        <name>name</name>
+      </remove>      <remove>        <name>data</name>
+      </remove>      <remove>        <name>thumbnail</name>
+      </remove>      <remove>        <name>views</name>
+      </remove>      <remove>        <name>votes</name>
+      </remove>      <remove>        <name>comments</name>
+      </remove>      <remove>        <name>favorites</name>
+      </remove>      <remove>        <name>total_rank</name>
+      </remove>      <remove>        <name>rank</name>
+      </remove>      <remove>        <name>tags</name>
+      </remove>      <remove>        <name>anonymous</name>
+      </remove>      <remove>        <name>status</name>
+      </remove>      <remove>        <name>source</name>
+      </remove>      <remove>        <name>source_id</name>
+      </remove>      <remove>        <name>source_link</name>
+      </remove>      <remove>        <name>license_type</name>
+      </remove>      <remove>        <name>credit</name>
+      </remove>      <remove>        <name>length_in_msecs</name>
+      </remove>      <remove>        <name>created_at</name>
+      </remove>      <remove>        <name>updated_at</name>
+      </remove>      <remove>        <name>partner_id</name>
+      </remove>      <remove>        <name>display_in_search</name>
+      </remove>      <remove>        <name>subp_id</name>
+      </remove>      <remove>        <name>custom_data</name>
+      </remove>      <remove>        <name>search_text</name>
+      </remove>      <remove>        <name>screen_name</name>
+      </remove>      <remove>        <name>site_url</name>
+      </remove>      <remove>        <name>permissions</name>
+      </remove>      <remove>        <name>group_id</name>
+      </remove>      <remove>        <name>plays</name>
+      </remove>      <remove>        <name>partner_data</name>
+      </remove>      <remove>        <name>int_id</name>
+      </remove>      <remove>        <name>indexed_custom_data_1</name>
+      </remove>      <remove>        <name>description</name>
+      </remove>      <remove>        <name>media_date</name>
+      </remove>      <remove>        <name>admin_tags</name>
+      </remove>      <remove>        <name>moderation_status</name>
+      </remove>      <remove>        <name>moderation_count</name>
+      </remove>      <remove>        <name>modified_at</name>
+      </remove>      <remove>        <name>search_text_discrete</name>
+      </remove>      <remove>        <name>categories</name>
+      </remove>      <remove>        <name>categories_ids</name>
+      </remove>      <remove>        <name>current_updated_at</name>
+      </remove>      <remove>        <name>modified_hour_id</name>
+      </remove>      <remove>        <name>modified_date_id</name>
+      </remove>      <remove>        <name>created_hour_id</name>
+      </remove>      <remove>        <name>created_date_id</name>
+      </remove>      <remove>        <name>updated_hour_id</name>
+      </remove>      <remove>        <name>updated_date_id</name>
+      </remove>      <remove>        <name>res</name>
+      </remove>      <remove>        <name>height</name>
+      </remove>      <remove>        <name>res_1</name>
+      </remove>      <remove>        <name>width</name>
+      </remove>      <remove>        <name>res_2</name>
+      </remove>      <remove>        <name>storage_size</name>
+      </remove>      <remove>        <name>res_3</name>
+      </remove>      <remove>        <name>conversion_quality</name>
+      </remove>      <remove>        <name>fixed_conversion_quality</name>
+      </remove>      <remove>        <name>res_4</name>
+      </remove>      <remove>        <name>editor_type</name>
+      </remove>      <remove>        <name>res_5</name>
+      </remove>      <remove>        <name>puser_id</name>
+      </remove>      <remove>        <name>is_admin_content</name>
+      </remove>      <remove>        <name>fixed_height</name>
+      </remove>      <remove>        <name>fixed_width</name>
+      </remove>      <remove>        <name>RI_IND_0</name>
+      </remove>      <remove>        <name>editor_type_id</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>338</xloc>
+      <yloc>301</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Set RI_IND 0</name>
     <type>Constant</type>
     <description/>
@@ -1153,6 +1241,43 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
     </step>
 
   <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>%%java.io.tmpdir%%</directory>
+      <prefix>out</prefix>
+      <sort_size/>
+      <free_memory>25</free_memory>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>Y</unique_rows>
+    <fields>
+      <field>
+        <name>type</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+      <field>
+        <name>media_type</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>338</xloc>
+      <yloc>360</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>editor_type text</name>
     <type>ConcurrentSafeCombinationLookup</type>
     <description/>
@@ -1220,6 +1345,16 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
         <condition>=</condition>
         <name2/>
       </key>
+      <value>
+        <name>entry_type_id</name>
+        <rename>type</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>entry_media_type_id</name>
+        <rename>media_type</rename>
+        <update>N</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -1617,60 +1752,6 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1040</xloc>
       <yloc>160</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Sort rows</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <directory>%%java.io.tmpdir%%</directory>
-      <prefix>out</prefix>
-      <sort_size/>
-      <free_memory>25</free_memory>
-      <compress>N</compress>
-      <compress_variable/>
-      <unique_rows>Y</unique_rows>
-    <fields>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>340</xloc>
-      <yloc>360</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>type</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>media_type</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>340</xloc>
-      <yloc>300</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

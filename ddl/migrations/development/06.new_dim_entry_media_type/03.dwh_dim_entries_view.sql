@@ -11,7 +11,7 @@ SELECT 	`entry_id`,
 	`kshow_id`, 
 	`kuser_id`, 
 	`entry_name`, 
-	`d.display` as `entry_type`, 
+	`d`.`display` as `entry_type`, 
 	`data`, 
 	`thumbnail`, 
 	`views`, 
@@ -80,4 +80,4 @@ SELECT 	`entry_id`,
 	`end_hour_id`
 	 
 	FROM 
-	`kalturadw`.`dwh_dim_entries` e outer join kalturadw.dwh_dim_entry_type_display d on (e.entry_type_id = d.entry_type_id and e.entry_media_type_id = d.entry_media_type_id);
+	`kalturadw`.`dwh_dim_entries` e left outer join kalturadw.dwh_dim_entry_type_display_v d on (e.entry_type_id = d.entry_type_id and e.entry_media_type_id = d.entry_media_type_id);
