@@ -198,8 +198,33 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
+  <connection>
+    <name>KalturaReadDW</name>
+    <server>${DbReadHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw</database>
+    <port>${DbReadPort}</port>
+    <username>${DbReadUser}</username>
+    <password>${DbReadPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbReadPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
-  <hop> <from>Read Flavor Asset</from><to>Set Defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get Now</from><to>Insert &#47; Update Flavor Asset</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Flavor Asset</to><enabled>Y</enabled> </hop>  <hop> <from>Set Defaults</from><to>Set RI IND 0</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Flavor Asset</from><to>Flavor asset dim lookup error</to><enabled>Y</enabled> </hop>  <hop> <from>container format text</from><to>video codec text</to><enabled>Y</enabled> </hop>  <hop> <from>video codec text</from><to>Get Now</to><enabled>Y</enabled> </hop>  <hop> <from>asset status id</from><to>file extension text</to><enabled>Y</enabled> </hop>  <hop> <from>file extension text</from><to>container format text</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI IND 0</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>asset status id</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Read Flavor Asset</from><to>Set Defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get Now</from><to>Insert &#47; Update Flavor Asset</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Flavor Asset</to><enabled>Y</enabled> </hop>  <hop> <from>Set Defaults</from><to>Set RI IND 0</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Flavor Asset</from><to>Flavor asset dim lookup error</to><enabled>Y</enabled> </hop>  <hop> <from>container format text</from><to>video codec text</to><enabled>Y</enabled> </hop>  <hop> <from>video codec text</from><to>Get Now</to><enabled>Y</enabled> </hop>  <hop> <from>asset status id</from><to>file extension text</to><enabled>Y</enabled> </hop>  <hop> <from>file extension text</from><to>container format text</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI IND 0</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>asset status id</to><enabled>Y</enabled> </hop>  <hop> <from>asset status id</from><to>split tags</to><enabled>Y</enabled> </hop>  <hop> <from>split tags</from><to>tag dimension</to><enabled>Y</enabled> </hop>  <hop> <from>tag dimension</from><to>tag insert</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Database lookup</name>
     <type>DBLookup</type>
@@ -654,7 +679,7 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
     <name>asset status id</name>
     <type>ConcurrentSafeCombinationLookup</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
@@ -662,7 +687,7 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
            </partitioning>
       <schema/>
       <table>dwh_dim_asset_status</table>
-      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionRead/>
       <connectionWrite>KalturaDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
@@ -702,7 +727,7 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
            </partitioning>
       <schema/>
       <table>dwh_dim_container_format</table>
-      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionRead/>
       <connectionWrite>KalturaDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
@@ -742,7 +767,7 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
            </partitioning>
       <schema/>
       <table>dwh_dim_file_ext</table>
-      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionRead/>
       <connectionWrite>KalturaDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
@@ -831,7 +856,7 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
            </partitioning>
       <schema/>
       <table>dwh_dim_video_codec</table>
-      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionRead/>
       <connectionWrite>KalturaDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
@@ -855,6 +880,122 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>937</xloc>
       <yloc>104</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>split tags</name>
+    <type>SplitFieldToRows3</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+   <splitfield>tags</splitfield>
+   <delimiter>,</delimiter>
+   <newfield>tag</newfield>
+   <rownum>N</rownum>
+   <rownum_field/>
+   <resetrownumber>N</resetrownumber>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>679</xloc>
+      <yloc>206</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>tag dimension</name>
+    <type>ConcurrentSafeCombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema>kalturadw</schema>
+      <table>dwh_dim_flavor_asset_tag</table>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>tag</name>
+          <lookup>tag_name</lookup>
+        </key>
+        <return>
+          <name>tag_id</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>678</xloc>
+      <yloc>287</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>tag insert</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>kalturadw</schema>
+      <table>dwh_dim_flavor_asset_tags</table>
+      <key>
+        <name>tag_id</name>
+        <field>tag_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id</name>
+        <field>id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>tag_id</name>
+        <rename>tag_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>id</name>
+        <rename>id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>updated_at</name>
+        <rename>updated_at</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>679</xloc>
+      <yloc>365</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
