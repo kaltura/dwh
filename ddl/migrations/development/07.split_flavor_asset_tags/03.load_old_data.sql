@@ -14,14 +14,14 @@ BEGIN
     DECLARE v_tags_idx INT;
     DECLARE done INT DEFAULT 0;
     DECLARE assets CURSOR FOR
-    SELECT dwh_id, tags 
+    SELECT id, tags 
     FROM dwh_dim_flavor_asset;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
     
     OPEN assets;
     
     read_loop: LOOP
-        FETCH assets INTO v_dwh_id, v_tags;
+        FETCH assets INTO v_id, v_tags;
         IF done THEN
             LEAVE read_loop:
         END IF;
@@ -43,12 +43,12 @@ BEGIN
                 set v_tags_idx = v_tags_idx + length(v_tag_name) + 1;
 
                 -- add the tag if it doesnt already exist
-                insert ignore into dwh_dim_falvor_asset_tag (tag_name) values (v_tag_name);
+                insert ignore into dwh_dim_tags (tag_name) values (v_tag_name);
 
                 select tag_id into v_tag_id from dwh_dim_falvor_asset_tag where tag_name = v_tag_name;
 
                 -- add the flavor_asset tag
-                insert ignore into dwh_dim_flavor_asset_tags (dwh_id, tag_id) values (v_dwh_id, v_tag_id);
+                insert ignore into dwh_dim_flavor_asset_tags (id, tag_id) values (v_id, v_tag_id);
 
             else
                 set v_tags_done = 1;

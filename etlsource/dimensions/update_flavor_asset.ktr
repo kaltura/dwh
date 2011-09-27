@@ -224,7 +224,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Read Flavor Asset</from><to>Set Defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get Now</from><to>Insert &#47; Update Flavor Asset</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Flavor Asset</to><enabled>Y</enabled> </hop>  <hop> <from>Set Defaults</from><to>Set RI IND 0</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Flavor Asset</from><to>Flavor asset dim lookup error</to><enabled>Y</enabled> </hop>  <hop> <from>container format text</from><to>video codec text</to><enabled>Y</enabled> </hop>  <hop> <from>video codec text</from><to>Get Now</to><enabled>Y</enabled> </hop>  <hop> <from>asset status id</from><to>file extension text</to><enabled>Y</enabled> </hop>  <hop> <from>file extension text</from><to>container format text</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI IND 0</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>asset status id</to><enabled>Y</enabled> </hop>  <hop> <from>asset status id</from><to>split tags</to><enabled>Y</enabled> </hop>  <hop> <from>split tags</from><to>tag dimension</to><enabled>Y</enabled> </hop>  <hop> <from>tag dimension</from><to>tag insert</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Read Flavor Asset</from><to>Set Defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get Now</from><to>Insert &#47; Update Flavor Asset</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Flavor Asset</to><enabled>Y</enabled> </hop>  <hop> <from>Set Defaults</from><to>Set RI IND 0</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Flavor Asset</from><to>Flavor asset dim lookup error</to><enabled>Y</enabled> </hop>  <hop> <from>container format text</from><to>video codec text</to><enabled>Y</enabled> </hop>  <hop> <from>video codec text</from><to>Get Now</to><enabled>Y</enabled> </hop>  <hop> <from>asset status id</from><to>file extension text</to><enabled>Y</enabled> </hop>  <hop> <from>file extension text</from><to>container format text</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI IND 0</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>split tags</from><to>tag dimension</to><enabled>Y</enabled> </hop>  <hop> <from>tag dimension</from><to>tag insert</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - split stream</to><enabled>Y</enabled> </hop>  <hop> <from>Dummy - split stream</from><to>asset status id</to><enabled>Y</enabled> </hop>  <hop> <from>Dummy - split stream</from><to>split tags</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Database lookup</name>
     <type>DBLookup</type>
@@ -266,8 +266,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>353</xloc>
-      <yloc>104</yloc>
+      <xloc>360</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -284,8 +284,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>487</xloc>
-      <yloc>206</yloc>
+      <xloc>480</xloc>
+      <yloc>200</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -302,8 +302,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1197</xloc>
-      <yloc>223</yloc>
+      <xloc>1200</xloc>
+      <yloc>220</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -327,8 +327,8 @@
 </formula>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1071</xloc>
-      <yloc>104</yloc>
+      <xloc>1080</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -484,8 +484,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1194</xloc>
-      <yloc>106</yloc>
+      <xloc>1200</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -532,8 +532,8 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>59</xloc>
-      <yloc>106</yloc>
+      <xloc>60</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -638,8 +638,8 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>159</xloc>
-      <yloc>106</yloc>
+      <xloc>160</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -669,8 +669,8 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>248</xloc>
-      <yloc>107</yloc>
+      <xloc>240</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -709,8 +709,8 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>601</xloc>
-      <yloc>102</yloc>
+      <xloc>680</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -749,8 +749,8 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>815</xloc>
-      <yloc>103</yloc>
+      <xloc>860</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -789,8 +789,8 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>704</xloc>
-      <yloc>102</yloc>
+      <xloc>760</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -805,7 +805,7 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>asset status id</send_true_to>
+<send_true_to>Dummy - split stream</send_true_to>
 <send_false_to>Dummy - unmodified</send_false_to>
     <compare>
 <condition>
@@ -817,8 +817,8 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>486</xloc>
-      <yloc>105</yloc>
+      <xloc>480</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -838,48 +838,8 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>59</xloc>
-      <yloc>26</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>video codec text</name>
-    <type>ConcurrentSafeCombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <schema/>
-      <table>dwh_dim_video_codec</table>
-      <connectionRead/>
-      <connectionWrite>KalturaDW</connectionWrite>
-      <commit>1</commit>
-      <cache_size>9999</cache_size>
-      <replace>N</replace>
-      <crc>N</crc>
-      <crcfield>hashcode</crcfield>
-      <fields>
-        <key>
-          <name>video_codec</name>
-          <lookup>video_codec</lookup>
-        </key>
-        <return>
-          <name>video_codec_id</name>
-          <creation_method>autoinc</creation_method>
-          <use_autoinc>Y</use_autoinc>
-        </return>
-      </fields>
-      <sequence/>
-      <last_update_field/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>937</xloc>
-      <yloc>104</yloc>
+      <xloc>60</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -902,8 +862,8 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
    <resetrownumber>N</resetrownumber>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>679</xloc>
-      <yloc>206</yloc>
+      <xloc>580</xloc>
+      <yloc>200</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -942,8 +902,8 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>678</xloc>
-      <yloc>287</yloc>
+      <xloc>660</xloc>
+      <yloc>200</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -979,12 +939,12 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
       <value>
         <name>tag_id</name>
         <rename>tag_id</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>id</name>
         <rename>id</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>updated_at</name>
@@ -994,8 +954,66 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>679</xloc>
-      <yloc>365</yloc>
+      <xloc>747</xloc>
+      <yloc>199</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>video codec text</name>
+    <type>ConcurrentSafeCombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dwh_dim_video_codec</table>
+      <connectionRead/>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>video_codec</name>
+          <lookup>video_codec</lookup>
+        </key>
+        <return>
+          <name>video_codec_id</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>980</xloc>
+      <yloc>100</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Dummy - split stream</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>N</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>580</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
