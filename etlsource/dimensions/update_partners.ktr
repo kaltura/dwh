@@ -205,7 +205,7 @@
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturaLog</database>
+    <database>kalturalog</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -570,6 +570,11 @@
       <value>
         <name>vertical_id</name>
         <rename>vertical_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>internal_use</name>
+        <rename>internal_use</rename>
         <update>Y</update>
       </value>
     </lookup>
