@@ -6,7 +6,7 @@ DELIMITER $$
 
 CREATE PROCEDURE load_tags()
 BEGIN
-    DECLARE v_dwh_id INT;
+    DECLARE v_id INT;
     DECLARE v_tags VARCHAR(256);
     DECLARE v_tag_name VARCHAR(256);
     DECLARE v_tag_id int;
