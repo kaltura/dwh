@@ -949,7 +949,7 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
       </key>
       <key>
         <name>id</name>
-        <field>flavor_asset_it</field>
+        <field>flavor_asset_id</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -959,7 +959,7 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
         <update>N</update>
       </value>
       <value>
-        <name>flavor_asset_it</name>
+        <name>flavor_asset_id</name>
         <rename>id</rename>
         <update>N</update>
       </value>
@@ -973,6 +973,34 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>845</xloc>
       <yloc>192</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>tags is not null</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to/>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>tags</leftvalue>
+ <function>IS NOT NULL</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>584</xloc>
+      <yloc>195</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1013,34 +1041,6 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>980</xloc>
       <yloc>100</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>tags is not null</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to/>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>tags</leftvalue>
- <function>IS NOT NULL</function>
- <rightvalue/>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>584</xloc>
-      <yloc>195</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
