@@ -1,4 +1,4 @@
-CREATE TABLE `kalturadw`.`Dwh_Dim_Widget` (                                     
+CREATE TABLE `kalturadw`.`dwh_dim_widget` (                                     
     `widget_id` VARCHAR(32) NOT NULL,                                
     `widget_int_id` INT NOT NULL,                 
     `source_widget_id` VARCHAR(32) DEFAULT NULL,              
@@ -35,7 +35,7 @@ CREATE TABLE `kalturadw`.`Dwh_Dim_Widget` (
     KEY `dwh_update_date` (`dwh_update_date`)                                              
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8  ;
                 
-CREATE TRIGGER `kalturadw`.`Dwh_Dim_Widget_setcreationtime_oninsert` BEFORE INSERT
-    ON `kalturadw`.`Dwh_Dim_Widget`
+CREATE TRIGGER `kalturadw`.`dwh_dim_widget_setcreationtime_oninsert` BEFORE INSERT
+    ON `kalturadw`.`dwh_dim_widget`
     FOR EACH ROW 
 	SET new.dwh_creation_date = NOW();  
