@@ -23,8 +23,8 @@ BEGIN
     read_loop: LOOP
         FETCH assets INTO v_id, v_tags;
         IF done THEN
-            LEAVE read_loop:
-        END IF;
+			LEAVE read_loop;
+		END IF;
         
         set v_tags_done = 0;       
         set v_tags_idx = 1;
@@ -56,7 +56,7 @@ BEGIN
 
         end while;
         
-        INSERT INTO dwh_dim_flavor_asset_tag
+        INSERT INTO dwh_dim_flavor_asset_tag;
     END LOOP;
 END$$
 
