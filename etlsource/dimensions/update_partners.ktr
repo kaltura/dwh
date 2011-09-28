@@ -250,7 +250,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Read Table Partners</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>partner status lookup</from><to>partner type lookup</to><enabled>Y</enabled> </hop>  <hop> <from>partner type lookup</from><to>Main insert&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>Calc date and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Main insert&#47;update</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>partner_group_type id</from><to>partner_status id</to><enabled>Y</enabled> </hop>  <hop> <from>partner_status id</from><to>partner_type id</to><enabled>Y</enabled> </hop>  <hop> <from>partner_type id</from><to>partner status lookup</to><enabled>Y</enabled> </hop>  <hop> <from>lookup partner</from><to>filter unmodified partners</to><enabled>Y</enabled> </hop>  <hop> <from>Calc date and hour ids</from><to>lookup partner</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified partners</from><to>Dummy (do nothing)</to><enabled>Y</enabled> </hop>  <hop> <from>class of service is not null</from><to>partner_class_of_service id</to><enabled>Y</enabled> </hop>  <hop> <from>vertical is not null</from><to>partner_vertical id</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified partners</from><to>Parse custom data</to><enabled>Y</enabled> </hop>  <hop> <from>Parse custom data</from><to>class of service is not null</to><enabled>Y</enabled> </hop>  <hop> <from>Parse custom data</from><to>partner_group_type id</to><enabled>Y</enabled> </hop>  <hop> <from>Parse custom data</from><to>vertical is not null</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Table Partners</to><enabled>Y</enabled> </hop>  <hop> <from>Parse custom data</from><to>filter billing info</to><enabled>Y</enabled> </hop>  <hop> <from>filter billing info</from><to>was_active</to><enabled>Y</enabled> </hop>  <hop> <from>filter billing info</from><to>active</to><enabled>Y</enabled> </hop>  <hop> <from>active</from><to>Update partner billing</to><enabled>Y</enabled> </hop>  <hop> <from>not_active</from><to>Update partner billing</to><enabled>Y</enabled> </hop>  <hop> <from>was_active</from><to>filter active</to><enabled>Y</enabled> </hop>  <hop> <from>filter active</from><to>not_active</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Read Table Partners</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>partner status lookup</from><to>partner type lookup</to><enabled>Y</enabled> </hop>  <hop> <from>partner type lookup</from><to>Main insert&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>Calc date and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>partner_group_type id</from><to>partner_status id</to><enabled>Y</enabled> </hop>  <hop> <from>partner_status id</from><to>partner_type id</to><enabled>Y</enabled> </hop>  <hop> <from>partner_type id</from><to>partner status lookup</to><enabled>Y</enabled> </hop>  <hop> <from>lookup partner</from><to>filter unmodified partners</to><enabled>Y</enabled> </hop>  <hop> <from>Calc date and hour ids</from><to>lookup partner</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified partners</from><to>Dummy (do nothing)</to><enabled>Y</enabled> </hop>  <hop> <from>class of service is not null</from><to>partner_class_of_service id</to><enabled>Y</enabled> </hop>  <hop> <from>vertical is not null</from><to>partner_vertical id</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified partners</from><to>Parse custom data</to><enabled>Y</enabled> </hop>  <hop> <from>Parse custom data</from><to>class of service is not null</to><enabled>Y</enabled> </hop>  <hop> <from>Parse custom data</from><to>partner_group_type id</to><enabled>Y</enabled> </hop>  <hop> <from>Parse custom data</from><to>vertical is not null</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Table Partners</to><enabled>Y</enabled> </hop>  <hop> <from>Parse custom data</from><to>filter billing info</to><enabled>Y</enabled> </hop>  <hop> <from>filter billing info</from><to>was_active</to><enabled>Y</enabled> </hop>  <hop> <from>filter billing info</from><to>active</to><enabled>Y</enabled> </hop>  <hop> <from>active</from><to>Update partner billing</to><enabled>Y</enabled> </hop>  <hop> <from>not_active</from><to>Update partner billing</to><enabled>Y</enabled> </hop>  <hop> <from>was_active</from><to>filter active</to><enabled>Y</enabled> </hop>  <hop> <from>filter active</from><to>not_active</to><enabled>Y</enabled> </hop>  <hop> <from>Main insert&#47;update</from><to>Filter duplicate key errors</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>Write to log on upsert error</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Calc date and hour ids</name>
     <type>Formula</type>
@@ -1072,8 +1072,8 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1080</xloc>
-      <yloc>460</yloc>
+      <xloc>945</xloc>
+      <yloc>428</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1812,10 +1812,60 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
       </GUI>
     </step>
 
+  <step>
+    <name>Write to log on upsert error</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+    <fields>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1203</xloc>
+      <yloc>425</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter duplicate key errors</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>duplicate key error</send_true_to>
+<send_false_to>Write to log on upsert error</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>desc</leftvalue>
+ <function>CONTAINS</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>duplica</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1079</xloc>
+      <yloc>426</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step_error_handling>
       <error>
         <source_step>Main insert&#47;update</source_step>
-        <target_step>duplicate key error</target_step>
+        <target_step>Filter duplicate key errors</target_step>
         <is_enabled>Y</is_enabled>
         <nr_valuename/>
         <descriptions_valuename>desc</descriptions_valuename>
