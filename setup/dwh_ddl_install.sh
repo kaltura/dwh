@@ -197,6 +197,9 @@ mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_sub_type.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_type.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_browser.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_os.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_entry_type_display.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_tags.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_flavor_asset_tags.sql
 
 #dw/maintenance
 mysqlexec $DW_ROOT_DIR/maintenance/add_partition_procedure.sql
@@ -248,6 +251,7 @@ mysqlexec $DW_ROOT_DIR/ri/ri_mapping_and_defaults_view.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_dim_entries_v.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_dim_partners_v.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_dim_uiconf_v.sql
+mysqlexec $DW_ROOT_DIR/views/dwh_view_entry_type.sql
 
 #dw/fms/
 mysqlexec $DW_ROOT_DIR/fms/fms_dim_tables.sql

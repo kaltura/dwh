@@ -53,6 +53,7 @@ CREATE TABLE `kalturadw`.`dwh_dim_partners` (
 	`monitor_usage` int(11) DEFAULT NULL,
 	class_of_service_id INT(11),
 	vertical_id INT(11),
+	internal_use BOOLEAN NOT NULL DEFAULT 0,
     PRIMARY KEY (`partner_id`),
     KEY `partner_alias_index` (`partner_alias`),
     KEY `Partner_Status_ID` (`Partner_Status_ID`),

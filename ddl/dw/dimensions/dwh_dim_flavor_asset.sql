@@ -9,11 +9,9 @@ use kalturadw;
 drop table if exists `dwh_dim_flavor_asset`;
 
 create table `dwh_dim_flavor_asset` (
-	`dwh_id` int(11) NOT NULL AUTO_INCREMENT,
 	`id` varchar (60) NOT NULL DEFAULT '',
 	`int_id` int (11),
 	`partner_id` int (11),
-	`tags` blob ,
 	`created_at` datetime ,
 	`updated_at` datetime ,
 	`deleted_at` datetime ,
@@ -34,8 +32,7 @@ create table `dwh_dim_flavor_asset` (
 	`dwh_creation_date` TIMESTAMP  NOT NULL DEFAULT '0000-00-00 00:00:00',
 	`dwh_update_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	`ri_ind` TINYINT(4)  NOT NULL DEFAULT 0 ,
-	PRIMARY KEY (`dwh_id`) ,
-	UNIQUE KEY `id_version` (`id`,`version`),
+	PRIMARY KEY (`id`) ,
 	KEY deleted_at (deleted_at),
 	KEY dwh_update_date (dwh_update_date),
 	KEY updated_at (updated_at)
