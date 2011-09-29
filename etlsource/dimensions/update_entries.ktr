@@ -1796,7 +1796,7 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
  <leftvalue>desc</leftvalue>
  <function>CONTAINS</function>
  <rightvalue/>
- <value><name>constant</name><type>String</type><text>duplica</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+ <value><name>constant</name><type>String</type><text>Duplicate</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
