@@ -52,15 +52,6 @@
   <modified_date>2009&#47;07&#47;08 10:34:50.328</modified_date>
   </info>
   <notepads>
-    <notepad>
-      <note>We create a different step for partner calculations because we need it to aggregate chrnologically 
-(2011&#47;01&#47;01, 2011&#47;01&#47;02, 2011&#47;01&#47;03 etc.), whereas in other aggregations the order does not matter 
-and then parallel execution of two instances of the same aggregation (such as entry) is possible.</note>
-      <xloc>315</xloc>
-      <yloc>280</yloc>
-      <width>549</width>
-      <heigth>49</heigth>
-    </notepad>
   </notepads>
   <connection>
     <name>Kaltura</name>
@@ -209,7 +200,7 @@ and then parallel execution of two instances of the same aggregation (such as en
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get rows from result</from><to>Write to log - before calc</to><enabled>Y</enabled> </hop>  <hop> <from>aggregate</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log - before calc</from><to>aggregate</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Get rows from result</from><to>Write to log - before calc</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case aggr_name</from><to>aggregate country</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log - before calc</from><to>Switch &#47; Case aggr_name</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case aggr_name</from><to>aggregate domain</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case aggr_name</from><to>aggregate domain_referrer</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case aggr_name</from><to>aggregate entry</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case aggr_name</from><to>aggregate partner</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case aggr_name</from><to>aggregate uid</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case aggr_name</from><to>aggregate widget</to><enabled>Y</enabled> </hop>  <hop> <from>aggregate country</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  <hop> <from>aggregate domain</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  <hop> <from>aggregate domain_referrer</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  <hop> <from>aggregate entry</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  <hop> <from>aggregate partner</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  <hop> <from>aggregate uid</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  <hop> <from>aggregate widget</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Get rows from result</name>
     <type>RowsFromResult</type>
@@ -265,8 +256,8 @@ and then parallel execution of two instances of the same aggregation (such as en
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>479</xloc>
-      <yloc>145</yloc>
+      <xloc>614</xloc>
+      <yloc>141</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -296,18 +287,18 @@ and then parallel execution of two instances of the same aggregation (such as en
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>270</xloc>
+      <xloc>254</xloc>
       <yloc>145</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>aggregate</name>
+    <name>aggregate country</name>
     <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
-    <copies>6</copies>
+    <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
@@ -327,8 +318,233 @@ and then parallel execution of two instances of the same aggregation (such as en
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>375</xloc>
-      <yloc>145</yloc>
+      <xloc>462</xloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Switch &#47; Case aggr_name</name>
+    <type>SwitchCase</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<fieldname>aggr_name</fieldname>
+<use_contains>N</use_contains>
+<case_value_type>String</case_value_type>
+<case_value_format/>
+<case_value_decimal/>
+<case_value_group/>
+<default_target_step>aggregate country</default_target_step>
+<cases><case><value>country</value>
+<target_step>aggregate country</target_step>
+</case><case><value>domain</value>
+<target_step>aggregate domain</target_step>
+</case><case><value>domain_referrer</value>
+<target_step>aggregate domain_referrer</target_step>
+</case><case><value>entry</value>
+<target_step>aggregate entry</target_step>
+</case><case><value>partner</value>
+<target_step>aggregate partner</target_step>
+</case><case><value>uid</value>
+<target_step>aggregate uid</target_step>
+</case><case><value>widget</value>
+<target_step>aggregate widget</target_step>
+</case></cases>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>352</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>aggregate domain</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <execute_each_row>Y</execute_each_row>
+    <replace_variables>N</replace_variables>
+    <sql>call kalturadw.recalc_aggr_day(date(&apos;?&apos;),?,&apos;?&apos;);</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>aggr_day</name></argument>
+       <argument><name>aggr_hour</name></argument>
+       <argument><name>aggr_name</name></argument>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>463</xloc>
+      <yloc>74</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>aggregate entry</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <execute_each_row>Y</execute_each_row>
+    <replace_variables>N</replace_variables>
+    <sql>call kalturadw.recalc_aggr_day(date(&apos;?&apos;),?,&apos;?&apos;);</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>aggr_day</name></argument>
+       <argument><name>aggr_hour</name></argument>
+       <argument><name>aggr_name</name></argument>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>468</xloc>
+      <yloc>205</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>aggregate partner</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <execute_each_row>Y</execute_each_row>
+    <replace_variables>N</replace_variables>
+    <sql>call kalturadw.recalc_aggr_day(date(&apos;?&apos;),?,&apos;?&apos;);</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>aggr_day</name></argument>
+       <argument><name>aggr_hour</name></argument>
+       <argument><name>aggr_name</name></argument>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>471</xloc>
+      <yloc>268</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>aggregate domain_referrer</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <execute_each_row>Y</execute_each_row>
+    <replace_variables>N</replace_variables>
+    <sql>call kalturadw.recalc_aggr_day(date(&apos;?&apos;),?,&apos;?&apos;);</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>aggr_day</name></argument>
+       <argument><name>aggr_hour</name></argument>
+       <argument><name>aggr_name</name></argument>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>468</xloc>
+      <yloc>138</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>aggregate widget</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <execute_each_row>Y</execute_each_row>
+    <replace_variables>N</replace_variables>
+    <sql>call kalturadw.recalc_aggr_day(date(&apos;?&apos;),?,&apos;?&apos;);</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>aggr_day</name></argument>
+       <argument><name>aggr_hour</name></argument>
+       <argument><name>aggr_name</name></argument>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>475</xloc>
+      <yloc>407</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>aggregate uid</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <execute_each_row>Y</execute_each_row>
+    <replace_variables>N</replace_variables>
+    <sql>call kalturadw.recalc_aggr_day(date(&apos;?&apos;),?,&apos;?&apos;);</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>aggr_day</name></argument>
+       <argument><name>aggr_hour</name></argument>
+       <argument><name>aggr_name</name></argument>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>473</xloc>
+      <yloc>338</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
