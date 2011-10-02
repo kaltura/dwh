@@ -301,6 +301,12 @@ ORDER BY 	DATE_ID DESC]]></xml-property>
                     <text-property name="heading">WWW</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">akamai_vod_fms_HD</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">akamai_vod_fms_HD</text-property>
+                    <text-property name="heading">akamai_vod_fms_HD</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">total</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">total</text-property>
@@ -356,6 +362,11 @@ ORDER BY 	DATE_ID DESC]]></xml-property>
                     </structure>
                     <structure>
                         <property name="position">8</property>
+                        <property name="name">akamai_vod_fms_HD</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
                         <property name="name">total</property>
                         <property name="dataType">decimal</property>
                     </structure>
@@ -414,6 +425,13 @@ ORDER BY 	DATE_ID DESC]]></xml-property>
                 </structure>
                 <structure>
                     <property name="position">8</property>
+                    <property name="name">akamai_vod_fms_HD</property>
+                    <property name="nativeName">akamai_vod_fms_HD</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
                     <property name="name">total</property>
                     <property name="nativeName">total</property>
                     <property name="dataType">decimal</property>
@@ -427,6 +445,7 @@ ORDER BY 	DATE_ID DESC]]></xml-property>
 	SUM(IF (bandwidth_source_name='LLN',count_bandwidth_kb,0)) LLN,
 	SUM(IF (bandwidth_source_name='LEVEL3',count_bandwidth_kb,0)) LEVEL3,
 	SUM(IF (bandwidth_source_name='WWW',count_bandwidth_kb,0)) WWW,
+	SUM(IF (bandwidth_source_name='akamai_vod_fms_HD',count_bandwidth_kb,0)) akamai_vod_fms_HD,
 	SUM(count_bandwidth_kb) total
 FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d
 WHERE u.bandwidth_source_id = d.bandwidth_source_id
@@ -7054,7 +7073,7 @@ day + month / 100</Definition>
       </Title>
       <TitlePosition>Above</TitlePosition>
       <ShowValue>false</ShowValue>
-      <MaxPercent>0.4</MaxPercent>
+      <MaxPercent>0.45</MaxPercent>
       <TitlePercent>0.65</TitlePercent>
     </Children>
     <Bounds>
@@ -7121,6 +7140,10 @@ day + month / 100</Definition>
     <OrthogonalSampleData>
       <DataSetRepresentation>08,36,28,92,63</DataSetRepresentation>
       <SeriesDefinitionIndex>5</SeriesDefinitionIndex>
+    </OrthogonalSampleData>
+    <OrthogonalSampleData>
+      <DataSetRepresentation>42.0,28.0,84.0,56.0,70.0</DataSetRepresentation>
+      <SeriesDefinitionIndex>6</SeriesDefinitionIndex>
     </OrthogonalSampleData>
     <AncillarySampleData>
       <DataSetRepresentation>Series 1</DataSetRepresentation>
@@ -8892,6 +8915,282 @@ day + month / 100</Definition>
           <AggregateExpression>Sum</AggregateExpression>
         </Grouping>
       </SeriesDefinitions>
+      <SeriesDefinitions>
+        <Query>
+          <Definition></Definition>
+        </Query>
+        <SeriesPalette>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>170</Red>
+            <Green>85</Green>
+            <Blue>85</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>192</Red>
+            <Green>192</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>192</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>7</Red>
+            <Green>146</Green>
+            <Blue>94</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>128</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>0</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>64</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>80</Red>
+            <Green>240</Green>
+            <Blue>120</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>64</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>0</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>0</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>64</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>80</Red>
+            <Green>166</Green>
+            <Blue>218</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>242</Red>
+            <Green>88</Green>
+            <Blue>106</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>232</Red>
+            <Green>172</Green>
+            <Blue>57</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>255</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>64</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+        </SeriesPalette>
+        <Series xsi:type="type:LineSeries">
+          <Visible>true</Visible>
+          <Label>
+            <Caption>
+              <Value></Value>
+              <Font>
+                <Alignment/>
+              </Font>
+            </Caption>
+            <Background xsi:type="attribute:ColorDefinition">
+              <Transparency>0</Transparency>
+              <Red>255</Red>
+              <Green>255</Green>
+              <Blue>255</Blue>
+            </Background>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </Outline>
+            <Insets>
+              <Top>0.0</Top>
+              <Left>2.0</Left>
+              <Bottom>0.0</Bottom>
+              <Right>3.0</Right>
+            </Insets>
+            <Visible>false</Visible>
+          </Label>
+          <DataDefinition>
+            <Definition>row[&quot;akamai_vod_fms_HD&quot;]</Definition>
+            <Grouping>
+              <Enabled>false</Enabled>
+              <GroupType>Text</GroupType>
+              <AggregateExpression>Min</AggregateExpression>
+            </Grouping>
+          </DataDefinition>
+          <SeriesIdentifier>Akamai VOD HD</SeriesIdentifier>
+          <DataPoint>
+            <Components>
+              <Type>Orthogonal_Value</Type>
+            </Components>
+            <Separator>, </Separator>
+          </DataPoint>
+          <LabelPosition>Above</LabelPosition>
+          <Stacked>false</Stacked>
+          <Markers>
+            <Type>Box</Type>
+            <Size>4</Size>
+            <Visible>false</Visible>
+            <Outline>
+              <Visible>true</Visible>
+            </Outline>
+          </Markers>
+          <LineAttributes>
+            <Style>Solid</Style>
+            <Thickness>2</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>true</Visible>
+          </LineAttributes>
+          <PaletteLineColor>true</PaletteLineColor>
+          <Curve>false</Curve>
+        </Series>
+        <Grouping>
+          <GroupType>Text</GroupType>
+          <AggregateExpression>Sum</AggregateExpression>
+        </Grouping>
+      </SeriesDefinitions>
       <Orientation>Vertical</Orientation>
       <LineAttributes>
         <Style>Solid</Style>
@@ -9397,6 +9696,11 @@ day + month / 100</Definition>
                                 <expression name="expression" type="javascript">dataSetRow["DATE_ID"]</expression>
                                 <property name="dataType">integer</property>
                             </structure>
+                            <structure>
+                                <property name="name">akamai_vod_fms_HD</property>
+                                <expression name="expression" type="javascript">dataSetRow["akamai_vod_fms_HD"]/1024/1024</expression>
+                                <property name="dataType">float</property>
+                            </structure>
                         </list-property>
                     </extended-item>
                 </cell>
@@ -9511,10 +9815,20 @@ Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
                                 <expression name="expression" type="javascript">dataSetRow["total"]/1024/1024</expression>
                                 <property name="dataType">string</property>
                             </structure>
+                            <structure>
+                                <property name="name">akamai_vod_fms_HD</property>
+                                <text-property name="displayName">akamai_vod_fms_HD</text-property>
+                                <expression name="expression" type="javascript">var bw = dataSetRow["akamai_vod_fms_HD"]/1024/1024;&#13;
+var total = dataSetRow["total"]/1024/1024;&#13;
+var percent = Formatter.format(bw/total,"###,##0.00%");&#13;
+Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
+                                <property name="dataType">string</property>
+                            </structure>
                         </list-property>
                         <column id="825"/>
                         <column id="826"/>
                         <column id="827"/>
+                        <column id="1530"/>
                         <column id="828"/>
                         <column id="829"/>
                         <column id="830"/>
@@ -9572,6 +9886,24 @@ Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
                                 <text id="847">
                                     <property name="contentType">auto</property>
                                     <text-property name="content"><![CDATA[Akamai VOD HTTP]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1528">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">1px</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">1px</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">1px</property>
+                                <text id="1531">
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Akamai vod HD]]></text-property>
                                 </text>
                             </cell>
                             <cell id="835">
@@ -9702,6 +10034,23 @@ Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
                                 <property name="borderTopWidth">1px</property>
                                 <data id="1351">
                                     <property name="resultSetColumn">akami_vod_http_percent</property>
+                                </data>
+                            </cell>
+                            <cell id="1529">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">1px</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">1px</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">1px</property>
+                                <data id="1533">
+                                    <property name="resultSetColumn">akamai_vod_fms_HD</property>
                                 </data>
                             </cell>
                             <cell id="842">
