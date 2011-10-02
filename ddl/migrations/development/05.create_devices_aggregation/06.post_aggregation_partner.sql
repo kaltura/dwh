@@ -111,3 +111,36 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+DELIMITER $$
+
+USE `kalturadw`$$
+
+DROP PROCEDURE IF EXISTS `reaggregate_post_data_partner`$$
+
+CREATE DEFINER=`etl`@`localhost` PROCEDURE `reaggregate_post_data_partner`()
+BEGIN
+    DECLARE v_date INT;
+    DECLARE v_hour_id INT;
+    
+    DECLARE done INT DEFAULT 0;
+    DECLARE aggrs CURSOR FOR SELECT aggr_day, hour_id FROM aggr_managment WHERE aggr_name = 'partner' AND is_calculated = 1;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+    OPEN aggrs;
+    read_loop: LOOP
+        FETCH aggrs INTO v_date, v_hour_id;
+        IF done THEN
+             LEAVE read_loop;
+	END IF;
+        
+	CALL post_aggregation_partner(v_date, v_hour_id);
+	
+    END LOOP;
+END$$
+
+DELIMITER ;
+
+
+CALL reaggregate_post_data_partner();
+
+DROP PROCEDURE reaggregate_post_data_partner;
