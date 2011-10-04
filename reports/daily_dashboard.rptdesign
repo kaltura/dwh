@@ -2859,6 +2859,9 @@ function beforeGeneration( chart, icsc )&#xD;
         </Insets>
         <Visible>true</Visible>
       </Label>
+      <FormatSpecifier xsi:type="attribute:JavaNumberFormatSpecifier">
+        <Pattern>##,###</Pattern>
+      </FormatSpecifier>
       <LabelPosition>Left</LabelPosition>
       <MajorGrid>
         <LineAttributes>
@@ -3322,7 +3325,7 @@ day + month / 100</Definition>
                         <property name="style">left</property>
                         <structure name="numberFormat">
                             <property name="category">Custom</property>
-                            <property name="pattern">###,##0.00</property>
+                            <property name="pattern">###,##0.##</property>
                         </structure>
                         <property name="dataSet">Usage</property>
                         <list-property name="boundDataColumns">
@@ -3373,19 +3376,34 @@ day + month / 100</Definition>
                             <structure>
                                 <property name="name">avg_count_bandwidth_kb</property>
                                 <text-property name="displayName">avg_count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["avg_count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["avg_count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">2_days_ago_count_bandwidth_kb</property>
                                 <text-property name="displayName">2_days_ago_count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["2_days_ago_count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["2_days_ago_count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">count_bandwidth_kb</property>
                                 <text-property name="displayName">count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
@@ -3647,7 +3665,7 @@ day + month / 100</Definition>
                                     <data id="501">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">count_bandwidth_kb</property>
@@ -3690,7 +3708,7 @@ day + month / 100</Definition>
                                     <data id="499">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">2_days_ago_count_bandwidth_kb</property>
@@ -3712,7 +3730,7 @@ day + month / 100</Definition>
                                     <data id="497">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">avg_count_bandwidth_kb</property>
@@ -3760,19 +3778,34 @@ day + month / 100</Definition>
                             <structure>
                                 <property name="name">avg_count_bandwidth_kb</property>
                                 <text-property name="displayName">avg_count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["avg_count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["avg_count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">2_days_ago_count_bandwidth_kb</property>
                                 <text-property name="displayName">2_days_ago_count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["2_days_ago_count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["2_days_ago_count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">count_bandwidth_kb</property>
                                 <text-property name="displayName">count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
@@ -4031,7 +4064,7 @@ day + month / 100</Definition>
                                     <data id="974">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">count_bandwidth_kb</property>
@@ -4074,7 +4107,7 @@ day + month / 100</Definition>
                                     <data id="976">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">2_days_ago_count_bandwidth_kb</property>
@@ -4096,7 +4129,7 @@ day + month / 100</Definition>
                                     <data id="978">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">avg_count_bandwidth_kb</property>
@@ -4144,19 +4177,34 @@ day + month / 100</Definition>
                             <structure>
                                 <property name="name">avg_count_bandwidth_kb</property>
                                 <text-property name="displayName">avg_count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["avg_count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["avg_count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">2_days_ago_count_bandwidth_kb</property>
                                 <text-property name="displayName">2_days_ago_count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["2_days_ago_count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["2_days_ago_count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">count_bandwidth_kb</property>
                                 <text-property name="displayName">count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
@@ -4415,7 +4463,7 @@ day + month / 100</Definition>
                                     <data id="1019">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">count_bandwidth_kb</property>
@@ -4458,7 +4506,7 @@ day + month / 100</Definition>
                                     <data id="1021">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">2_days_ago_count_bandwidth_kb</property>
@@ -4480,7 +4528,7 @@ day + month / 100</Definition>
                                     <data id="1023">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">avg_count_bandwidth_kb</property>
@@ -5196,6 +5244,9 @@ function beforeGeneration( chart, icsc )&#xD;
         </Insets>
         <Visible>true</Visible>
       </Label>
+      <FormatSpecifier xsi:type="attribute:JavaNumberFormatSpecifier">
+        <Pattern>##,###</Pattern>
+      </FormatSpecifier>
       <LabelPosition>Left</LabelPosition>
       <MajorGrid>
         <LineAttributes>
@@ -5656,7 +5707,7 @@ day + month / 100</Definition>
                         <property name="style">left</property>
                         <structure name="numberFormat">
                             <property name="category">Custom</property>
-                            <property name="pattern">###,##0.00</property>
+                            <property name="pattern">###,##0.##</property>
                         </structure>
                         <property name="dataSet">Usage</property>
                         <list-property name="boundDataColumns">
@@ -5706,19 +5757,34 @@ day + month / 100</Definition>
                             <structure>
                                 <property name="name">avg_count_bandwidth_kb</property>
                                 <text-property name="displayName">avg_count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["avg_count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["avg_count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">2_days_ago_count_bandwidth_kb</property>
                                 <text-property name="displayName">2_days_ago_count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["2_days_ago_count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["2_days_ago_count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">count_bandwidth_kb</property>
                                 <text-property name="displayName">count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
@@ -5982,7 +6048,7 @@ day + month / 100</Definition>
                                     <data id="624">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.0000</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">count_bandwidth_kb</property>
@@ -6027,7 +6093,7 @@ day + month / 100</Definition>
                                     <data id="622">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.0000</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">2_days_ago_count_bandwidth_kb</property>
@@ -6050,7 +6116,7 @@ day + month / 100</Definition>
                                     <data id="620">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.0000</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">avg_count_bandwidth_kb</property>
@@ -6096,19 +6162,34 @@ day + month / 100</Definition>
                             <structure>
                                 <property name="name">avg_count_bandwidth_kb</property>
                                 <text-property name="displayName">avg_count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["avg_count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["avg_count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">2_days_ago_count_bandwidth_kb</property>
                                 <text-property name="displayName">2_days_ago_count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["2_days_ago_count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["2_days_ago_count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">count_bandwidth_kb</property>
                                 <text-property name="displayName">count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
@@ -6378,7 +6459,7 @@ day + month / 100</Definition>
                                     <data id="885">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.0000</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">count_bandwidth_kb</property>
@@ -6423,7 +6504,7 @@ day + month / 100</Definition>
                                     <data id="887">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.0000</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">2_days_ago_count_bandwidth_kb</property>
@@ -6446,7 +6527,7 @@ day + month / 100</Definition>
                                     <data id="889">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.0000</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">avg_count_bandwidth_kb</property>
@@ -6492,19 +6573,34 @@ day + month / 100</Definition>
                             <structure>
                                 <property name="name">avg_count_bandwidth_kb</property>
                                 <text-property name="displayName">avg_count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["avg_count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["avg_count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">2_days_ago_count_bandwidth_kb</property>
                                 <text-property name="displayName">2_days_ago_count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["2_days_ago_count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["2_days_ago_count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">count_bandwidth_kb</property>
                                 <text-property name="displayName">count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count_bandwidth_kb"]/1024/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["count_bandwidth_kb"]/1024/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
@@ -6764,7 +6860,7 @@ day + month / 100</Definition>
                                     <data id="931">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.0000</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">count_bandwidth_kb</property>
@@ -6809,7 +6905,7 @@ day + month / 100</Definition>
                                     <data id="933">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.0000</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">2_days_ago_count_bandwidth_kb</property>
@@ -6832,7 +6928,7 @@ day + month / 100</Definition>
                                     <data id="935">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.0000</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">avg_count_bandwidth_kb</property>
@@ -9228,6 +9324,9 @@ day + month / 100</Definition>
         </Insets>
         <Visible>true</Visible>
       </Label>
+      <FormatSpecifier xsi:type="attribute:JavaNumberFormatSpecifier">
+        <Pattern>##,###</Pattern>
+      </FormatSpecifier>
       <LabelPosition>Left</LabelPosition>
       <MajorGrid>
         <LineAttributes>
@@ -9760,8 +9859,8 @@ day + month / 100</Definition>
                                 <text-property name="displayName">akamai_rtmp_vod_percent</text-property>
                                 <expression name="expression" type="javascript">var bw = dataSetRow["akamai_vod_fms"]/1024/1024;&#13;
 var total = dataSetRow["total"]/1024/1024;&#13;
-var percent = Formatter.format(bw/total,"###,##0.00%");&#13;
-Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
+var percent = Formatter.format(bw/total,"###,##0.##%");&#13;
+Formatter.format(bw, "###,##0.##") + " (" + percent + ")";</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
@@ -9769,8 +9868,8 @@ Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
                                 <text-property name="displayName">akamai_live_percent</text-property>
                                 <expression name="expression" type="javascript">var bw = dataSetRow["akamai_live_fms"]/1024/1024;&#13;
 var total = dataSetRow["total"]/1024/1024;&#13;
-var percent = Formatter.format(bw/total,"###,##0.00%");&#13;
-Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
+var percent = Formatter.format(bw/total,"###,##0.##%");&#13;
+Formatter.format(bw, "###,##0.##") + " (" + percent + ")";</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
@@ -9778,8 +9877,8 @@ Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
                                 <text-property name="displayName">akami_vod_http_percent</text-property>
                                 <expression name="expression" type="javascript">var bw = dataSetRow["akamai_vod_http"]/1024/1024;&#13;
 var total = dataSetRow["total"]/1024/1024;&#13;
-var percent = Formatter.format(bw/total,"###,##0.00%");&#13;
-Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
+var percent = Formatter.format(bw/total,"###,##0.##%");&#13;
+Formatter.format(bw, "###,##0.##") + " (" + percent + ")";</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
@@ -9787,8 +9886,8 @@ Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
                                 <text-property name="displayName">lln_percent</text-property>
                                 <expression name="expression" type="javascript">var bw = dataSetRow["LLN"]/1024/1024;&#13;
 var total = dataSetRow["total"]/1024/1024;&#13;
-var percent = Formatter.format(bw/total,"###,##0.00%");&#13;
-Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
+var percent = Formatter.format(bw/total,"###,##0.##%");&#13;
+Formatter.format(bw, "###,##0.##") + " (" + percent + ")";</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
@@ -9796,8 +9895,8 @@ Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
                                 <text-property name="displayName">level3_percent</text-property>
                                 <expression name="expression" type="javascript">var bw = dataSetRow["LEVEL3"]/1024/1024;&#13;
 var total = dataSetRow["total"]/1024/1024;&#13;
-var percent = Formatter.format(bw/total,"###,##0.00%");&#13;
-Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
+var percent = Formatter.format(bw/total,"###,##0.##%");&#13;
+Formatter.format(bw, "###,##0.##") + " (" + percent + ")";</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
@@ -9805,8 +9904,8 @@ Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
                                 <text-property name="displayName">www_percent</text-property>
                                 <expression name="expression" type="javascript">var bw = dataSetRow["WWW"]/1024/1024;&#13;
 var total = dataSetRow["total"]/1024/1024;&#13;
-var percent = Formatter.format(bw/total,"###,##0.00%");&#13;
-Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
+var percent = Formatter.format(bw/total,"###,##0.##%");&#13;
+Formatter.format(bw, "###,##0.##") + " (" + percent + ")";</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
@@ -9820,8 +9919,8 @@ Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
                                 <text-property name="displayName">akamai_vod_fms_HD</text-property>
                                 <expression name="expression" type="javascript">var bw = dataSetRow["akamai_vod_fms_HD"]/1024/1024;&#13;
 var total = dataSetRow["total"]/1024/1024;&#13;
-var percent = Formatter.format(bw/total,"###,##0.00%");&#13;
-Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
+var percent = Formatter.format(bw/total,"###,##0.##%");&#13;
+Formatter.format(bw, "###,##0.##") + " (" + percent + ")";</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
@@ -10120,7 +10219,7 @@ Formatter.format(bw, "###,##0.00") + " (" + percent + ")";</expression>
                                 <data id="1360">
                                     <structure name="numberFormat">
                                         <property name="category">Custom</property>
-                                        <property name="pattern">###,##0.00</property>
+                                        <property name="pattern">###,##0.##</property>
                                     </structure>
                                     <property name="resultSetColumn">total_gb</property>
                                 </data>
@@ -10835,7 +10934,7 @@ function beforeGeneration( chart, icsc )&#xD;
         <Visible>true</Visible>
       </Label>
       <FormatSpecifier xsi:type="attribute:JavaNumberFormatSpecifier">
-        <Pattern>##,###.##</Pattern>
+        <Pattern>##,###</Pattern>
         <Multiplier>1.0E-6</Multiplier>
       </FormatSpecifier>
       <LabelPosition>Left</LabelPosition>
@@ -13141,7 +13240,7 @@ function beforeGeneration( chart, icsc )&#xD;
         <Visible>true</Visible>
       </Label>
       <FormatSpecifier xsi:type="attribute:JavaNumberFormatSpecifier">
-        <Pattern>##,###.##</Pattern>
+        <Pattern>##,###</Pattern>
         <Multiplier>1.0E-6</Multiplier>
       </FormatSpecifier>
       <LabelPosition>Left</LabelPosition>
@@ -15419,6 +15518,9 @@ function beforeGeneration( chart, icsc )&#xD;
         </Insets>
         <Visible>true</Visible>
       </Label>
+      <FormatSpecifier xsi:type="attribute:JavaNumberFormatSpecifier">
+        <Pattern>##,###</Pattern>
+      </FormatSpecifier>
       <LabelPosition>Left</LabelPosition>
       <MajorGrid>
         <LineAttributes>
@@ -15880,7 +15982,7 @@ day + month / 100</Definition>
                         <property name="style">middle</property>
                         <structure name="numberFormat">
                             <property name="category">Custom</property>
-                            <property name="pattern">###,##0.00</property>
+                            <property name="pattern">###,##0.##</property>
                         </structure>
                         <property name="whiteSpace">nowrap</property>
                         <property name="dataSet">Usage</property>
@@ -15932,19 +16034,34 @@ day + month / 100</Definition>
                             <structure>
                                 <property name="name">avg_count_bandwidth_kb</property>
                                 <text-property name="displayName">avg_count_storage_mb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["avg_count_storage_mb"]/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["avg_count_storage_mb"]/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">2_days_ago_count_bandwidth_kb</property>
                                 <text-property name="displayName">2_days_ago_count_storage_gb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["2_days_ago_count_storage_mb"]/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["2_days_ago_count_storage_mb"]/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">count_bandwidth_kb</property>
                                 <text-property name="displayName">count_storage_gb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count_storage_mb"]/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["count_storage_mb"]/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
@@ -16193,7 +16310,7 @@ day + month / 100</Definition>
                                     <data id="667">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">count_bandwidth_kb</property>
@@ -16236,7 +16353,7 @@ day + month / 100</Definition>
                                     <data id="665">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">2_days_ago_count_bandwidth_kb</property>
@@ -16258,7 +16375,7 @@ day + month / 100</Definition>
                                     <data id="663">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">avg_count_bandwidth_kb</property>
@@ -16305,19 +16422,34 @@ day + month / 100</Definition>
                             <structure>
                                 <property name="name">avg_count_bandwidth_kb</property>
                                 <text-property name="displayName">avg_count_storage_mb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["avg_count_storage_mb"]/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["avg_count_storage_mb"]/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">2_days_ago_count_bandwidth_kb</property>
                                 <text-property name="displayName">2_days_ago_count_storage_gb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["2_days_ago_count_storage_mb"]/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["2_days_ago_count_storage_mb"]/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">count_bandwidth_kb</property>
                                 <text-property name="displayName">count_storage_gb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count_storage_mb"]/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["count_storage_mb"]/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
@@ -16566,7 +16698,7 @@ day + month / 100</Definition>
                                     <data id="1201">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">count_bandwidth_kb</property>
@@ -16609,7 +16741,7 @@ day + month / 100</Definition>
                                     <data id="1203">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">2_days_ago_count_bandwidth_kb</property>
@@ -16631,7 +16763,7 @@ day + month / 100</Definition>
                                     <data id="1205">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">avg_count_bandwidth_kb</property>
@@ -16678,19 +16810,34 @@ day + month / 100</Definition>
                             <structure>
                                 <property name="name">avg_count_bandwidth_kb</property>
                                 <text-property name="displayName">avg_count_storage_mb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["avg_count_storage_mb"]/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["avg_count_storage_mb"]/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">2_days_ago_count_bandwidth_kb</property>
                                 <text-property name="displayName">2_days_ago_count_storage_gb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["2_days_ago_count_storage_mb"]/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["2_days_ago_count_storage_mb"]/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
                                 <property name="name">count_bandwidth_kb</property>
                                 <text-property name="displayName">count_storage_gb</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count_storage_mb"]/1024</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["count_storage_mb"]/1024;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
@@ -16939,7 +17086,7 @@ day + month / 100</Definition>
                                     <data id="1247">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">count_bandwidth_kb</property>
@@ -16982,7 +17129,7 @@ day + month / 100</Definition>
                                     <data id="1249">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">2_days_ago_count_bandwidth_kb</property>
@@ -17004,7 +17151,7 @@ day + month / 100</Definition>
                                     <data id="1251">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
-                                            <property name="pattern">###,##0.00</property>
+                                            <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">avg_count_bandwidth_kb</property>
@@ -19017,6 +19164,9 @@ function beforeGeneration( chart, icsc )
         </Insets>
         <Visible>true</Visible>
       </Label>
+      <FormatSpecifier xsi:type="attribute:JavaNumberFormatSpecifier">
+        <Pattern>##,###</Pattern>
+      </FormatSpecifier>
       <LabelPosition>Left</LabelPosition>
       <MajorGrid>
         <LineAttributes>
@@ -19671,7 +19821,7 @@ day + month / 100</Definition>
                                             <text-property name="displayName">videos</text-property>
                                             <expression name="expression" type="javascript">var entries = dataSetRow["videos"];&#13;
 var total = dataSetRow["total"];&#13;
-var percent = Formatter.format(entries/total,"###,##0.00%");&#13;
+var percent = Formatter.format(entries/total,"###,##0.##%");&#13;
 Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <property name="dataType">string</property>
                                         </structure>
@@ -19706,7 +19856,7 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <text-property name="displayName">audios</text-property>
                                             <expression name="expression" type="javascript">var entries = dataSetRow["audios"];&#13;
 var total = dataSetRow["total"];&#13;
-var percent = Formatter.format(entries/total,"###,##0.00%");&#13;
+var percent = Formatter.format(entries/total,"###,##0.##%");&#13;
 Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <property name="dataType">string</property>
                                         </structure>
@@ -19741,7 +19891,7 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <text-property name="displayName">images</text-property>
                                             <expression name="expression" type="javascript">var entries = dataSetRow["images"];&#13;
 var total = dataSetRow["total"];&#13;
-var percent = Formatter.format(entries/total,"###,##0.00%");&#13;
+var percent = Formatter.format(entries/total,"###,##0.##%");&#13;
 Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <property name="dataType">string</property>
                                         </structure>
@@ -19776,7 +19926,7 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <text-property name="displayName">Documents</text-property>
                                             <expression name="expression" type="javascript">var entries = dataSetRow["documents"];&#13;
 var total = dataSetRow["total"];&#13;
-var percent = Formatter.format(entries/total,"###,##0.00%");&#13;
+var percent = Formatter.format(entries/total,"###,##0.##%");&#13;
 Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <property name="dataType">string</property>
                                         </structure>
@@ -19811,7 +19961,7 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <text-property name="displayName">playlists</text-property>
                                             <expression name="expression" type="javascript">var entries = dataSetRow["playlists"];&#13;
 var total = dataSetRow["total"];&#13;
-var percent = Formatter.format(entries/total,"###,##0.00%");&#13;
+var percent = Formatter.format(entries/total,"###,##0.##%");&#13;
 Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <property name="dataType">string</property>
                                         </structure>
@@ -19846,7 +19996,7 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <text-property name="displayName">others</text-property>
                                             <expression name="expression" type="javascript">var entries = dataSetRow["other"];&#13;
 var total = dataSetRow["total"];&#13;
-var percent = Formatter.format(entries/total,"###,##0.00%");&#13;
+var percent = Formatter.format(entries/total,"###,##0.##%");&#13;
 Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <property name="dataType">string</property>
                                         </structure>
@@ -21108,6 +21258,9 @@ function beforeGeneration( chart, icsc )&#xD;
         </Insets>
         <Visible>true</Visible>
       </Label>
+      <FormatSpecifier xsi:type="attribute:JavaNumberFormatSpecifier">
+        <Pattern>##,###</Pattern>
+      </FormatSpecifier>
       <LabelPosition>Left</LabelPosition>
       <MajorGrid>
         <LineAttributes>
@@ -21682,7 +21835,7 @@ day + month / 100</Definition>
                                             <text-property name="displayName">uploads</text-property>
                                             <expression name="expression" type="javascript">var entries = dataSetRow["uploads"];&#13;
 var total = dataSetRow["total"];&#13;
-var percent = Formatter.format(entries/total,"###,##0.00%");&#13;
+var percent = Formatter.format(entries/total,"###,##0.##%");&#13;
 Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <property name="dataType">string</property>
                                         </structure>
@@ -21716,7 +21869,7 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <text-property name="displayName">webcam</text-property>
                                             <expression name="expression" type="javascript">var entries = dataSetRow["webcam"];&#13;
 var total = dataSetRow["total"];&#13;
-var percent = Formatter.format(entries/total,"###,##0.00%");&#13;
+var percent = Formatter.format(entries/total,"###,##0.##%");&#13;
 Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <property name="dataType">string</property>
                                         </structure>
@@ -21750,7 +21903,7 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <text-property name="displayName">imported</text-property>
                                             <expression name="expression" type="javascript">var entries = dataSetRow["imported"];&#13;
 var total = dataSetRow["total"];&#13;
-var percent = Formatter.format(entries/total,"###,##0.00%");&#13;
+var percent = Formatter.format(entries/total,"###,##0.##%");&#13;
 Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                             <property name="dataType">string</property>
                                         </structure>
