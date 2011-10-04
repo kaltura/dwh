@@ -1,3 +1,5 @@
+USE kalturadw;
+
 DROP TABLE IF EXISTS kalturadw.dwh_dim_ui_conf_swf_interfaces;
 CREATE TABLE kalturadw.dwh_dim_ui_conf_swf_interfaces (
 	id INT NOT NULL AUTO_INCREMENT,
