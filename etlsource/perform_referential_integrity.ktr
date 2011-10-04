@@ -249,7 +249,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Insert new rows</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Read Table Names</from><to>create Sqls</to><enabled>Y</enabled> </hop>  <hop> <from>create Sqls</from><to>ri sql</to><enabled>Y</enabled> </hop>  <hop> <from>ri sql</from><to>Insert new rows</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Insert new rows</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>create Sqls</from><to>ri sql</to><enabled>Y</enabled> </hop>  <hop> <from>ri sql</from><to>Insert new rows</to><enabled>Y</enabled> </hop>  <hop> <from>Read Table Names</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>create Sqls</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Insert new rows</name>
     <type>ExecSQLRow</type>
@@ -269,8 +269,8 @@
     <read_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>367</xloc>
-      <yloc>73</yloc>
+      <xloc>492</xloc>
+      <yloc>79</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -341,8 +341,8 @@ where perform_check = 1</sql>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>463</xloc>
-      <yloc>73</yloc>
+      <xloc>588</xloc>
+      <yloc>79</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -363,7 +363,7 @@ where perform_check = 1</sql>
         <jsScript_script>&#47;&#47;Script here
 var insertSql;
 
-lastUpdatedAt = &apos;STR_TO_DATE(\&apos;&apos;+getEnvironmentVar(&apos;LastUpdatedAt&apos;)+&apos;\&apos;, \&apos;%Y&#47;%m&#47;%d %H:%i:%S.%f\&apos;)&apos;;
+lastUpdatedAt = &apos;STR_TO_DATE(\&apos;&apos;+last_updated_at+&apos;\&apos;, \&apos;%Y&#47;%m&#47;%d %H:%i:%S.%f\&apos;)&apos;;
 
 var dateFilter = date_column_name == &apos;&apos; || date_column_name == null ? 
 					&apos;a.&apos;+date_id_column_name+&apos;&gt;=DATE(&apos;+lastUpdatedAt+&apos;)*1&apos; :
@@ -400,8 +400,8 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>175</xloc>
-      <yloc>73</yloc>
+      <xloc>300</xloc>
+      <yloc>79</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -425,8 +425,40 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>271</xloc>
-      <yloc>73</yloc>
+      <xloc>396</xloc>
+      <yloc>79</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>last_updated_at</name>
+        <variable>${LastUpdatedAt}</variable>
+        <type>-</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>187</xloc>
+      <yloc>77</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
