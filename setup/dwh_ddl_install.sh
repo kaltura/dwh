@@ -143,7 +143,6 @@ mysqlexec $DW_ROOT_DIR/kuser.sql
 mysqlexec $DW_ROOT_DIR/locations.sql
 mysqlexec $DW_ROOT_DIR/locations_init.sql
 mysqlexec $DW_ROOT_DIR/time.sql
-mysqlexec $DW_ROOT_DIR/ui_conf.sql
 mysqlexec $DW_ROOT_DIR/widget.sql
 mysqlexec $DW_ROOT_DIR/countries_states_view.sql
 mysqlexec $DW_ROOT_DIR/countries_view.sql
@@ -200,6 +199,8 @@ mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_os.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_entry_type_display.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_tags.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_flavor_asset_tags.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_ui_conf.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_ui_conf_swf_interfaces.sql
 
 #dw/maintenance
 mysqlexec $DW_ROOT_DIR/maintenance/add_partition_procedure.sql

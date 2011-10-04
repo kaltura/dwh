@@ -10,7 +10,6 @@ BEGIN
 	SET v_date = DATE(p_date_id);
 	UPDATE aggr_managment SET start_time = NOW() WHERE aggr_name = 'storage_usage' AND aggr_day_int = p_date_id;
 	
-	
 	DELETE FROM kalturadw.dwh_fact_entries_sizes WHERE entry_size_date_id = p_date_id;
 	
 	DROP TABLE IF EXISTS today_file_sync_subset; 
@@ -42,18 +41,39 @@ BEGIN
 	
 	ALTER TABLE today_sizes ADD UNIQUE INDEX unique_key (`partner_id`, `entry_id`, `object_id`, `object_type`, `object_sub_type`);
 	
+	DROP TABLE IF EXISTS deleted_flavors;
+	CREATE TEMPORARY TABLE deleted_flavors AS 
+	SELECT DISTINCT partner_id, entry_id, id
+	FROM kalturadw.dwh_dim_flavor_asset FORCE INDEX (deleted_at)
+	WHERE STATUS = 3 AND deleted_at BETWEEN v_date AND v_date + INTERVAL 1 DAY;
+		
+	BEGIN
+		DECLARE v_deleted_flavor_partner_id INT;
+		DECLARE v_deleted_flavor_entry_id VARCHAR(60);
+		DECLARE v_deleted_flavor_id VARCHAR(60);
+		DECLARE done INT DEFAULT 0;
+		DECLARE deleted_flavors_cursor CURSOR FOR 
+		SELECT partner_id, entry_id, id	FROM deleted_flavors;
+		DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+		
+		OPEN deleted_flavors_cursor;
 	
-	INSERT INTO today_sizes 
-		SELECT DISTINCT f.partner_id, f.entry_id, f.id, s.object_type, s.object_sub_type, 0 file_size
-		FROM kalturadw.dwh_dim_flavor_asset f FORCE INDEX (deleted_at), kalturadw.dwh_dim_file_sync s
-		WHERE f.STATUS = 3
-		AND f.deleted_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
-		AND f.id = s.object_id
-		AND s.object_type = 4
-		AND s.updated_at < v_date
-		AND s.file_size > 0
-	ON DUPLICATE KEY UPDATE
-		file_size = VALUES(file_size);
+		read_loop: LOOP
+			FETCH deleted_flavors_cursor INTO v_deleted_flavor_partner_id, v_deleted_flavor_entry_id, v_deleted_flavor_id;
+			IF done THEN
+				LEAVE read_loop;
+			END IF;
+			INSERT INTO today_sizes
+				SELECT partner_id, v_deleted_flavor_entry_id, object_id, object_type, object_sub_type, 0 file_size
+				FROM kalturadw.dwh_dim_file_sync
+				WHERE object_id = v_deleted_flavor_id AND object_type = 4 AND updated_at < v_date AND file_size > 0
+			ON DUPLICATE KEY UPDATE
+				file_size = VALUES(file_size);
+		END LOOP;
+		CLOSE deleted_flavors_cursor;
+	END;
+	
+	
 	
 	DROP TABLE IF EXISTS today_deleted_entries;
 	CREATE TEMPORARY TABLE today_deleted_entries AS 

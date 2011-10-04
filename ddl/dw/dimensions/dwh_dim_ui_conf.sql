@@ -27,6 +27,8 @@ CREATE TABLE kalturadw.`dwh_dim_ui_conf` (
             dwh_creation_date TIMESTAMP NOT NULL DEFAULT 0,
 	    dwh_update_date TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
  	    ri_ind TINYINT NOT NULL DEFAULT '0',                                       
+	    version varchar(60), 
+	    swf_interface_id INT(11),
            PRIMARY KEY (`ui_conf_id`),
            KEY ui_conf_type_id (ui_conf_type_id),                                          
            KEY ui_conf_status_id (ui_conf_status_id),                                          
