@@ -573,7 +573,7 @@
     <connection>KalturaReadDW</connection>
     <rowlimit>1</rowlimit>
     <sql>select id swf_interface_id from dwh_dim_ui_conf_swf_interfaces</sql>
-    <outer_join>N</outer_join>
+    <outer_join>Y</outer_join>
     <replace_vars>N</replace_vars>
     <sql_fieldname>lookupSQL</sql_fieldname>
     <query_only_on_change>N</query_only_on_change>
