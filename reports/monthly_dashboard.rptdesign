@@ -20,6 +20,22 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <scalar-parameter name="months_back" id="1566">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">0</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
     </parameters>
     <data-sources>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="860">
@@ -47,33 +63,24 @@
     </data-sources>
     <data-sets>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Usage" id="8">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">DATE_ID</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">DATE_ID</text-property>
-                    <text-property name="heading">DATE_ID</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">VOD_KB</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">VOD_KB</text-property>
-                    <text-property name="heading">VOD_KB</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">LIVESTREAM_KB</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">LIVESTREAM_KB</text-property>
-                    <text-property name="heading">LIVESTREAM_KB</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">STOR_MB</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">STOR_MB</text-property>
-                    <text-property name="heading">STOR_MB</text-property>
+                    <property name="name">param_2</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <list-property name="parameters"/>
             <list-property name="sortHints">
                 <structure>
                     <property name="columnName">DATE_ID</property>
@@ -88,22 +95,22 @@
                     <structure>
                         <property name="position">1</property>
                         <property name="name">DATE_ID</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
                         <property name="name">VOD_KB</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
                         <property name="name">LIVESTREAM_KB</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
                         <property name="name">STOR_MB</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
             </structure>
@@ -113,29 +120,25 @@
                     <property name="position">1</property>
                     <property name="name">DATE_ID</property>
                     <property name="nativeName">DATE_ID</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">8</property>
+                    <property name="dataType">float</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
                     <property name="name">VOD_KB</property>
                     <property name="nativeName">VOD_KB</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
                     <property name="name">LIVESTREAM_KB</property>
                     <property name="nativeName">LIVESTREAM_KB</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
                     <property name="name">STOR_MB</property>
                     <property name="nativeName">STOR_MB</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT 	LAST_DAY(DATE(DATE_ID))*1 DATE_ID, 
@@ -145,7 +148,7 @@
 FROM 		kalturadw.DWH_HOURLY_PARTNER_USAGE u, 
 		kalturadw.dwh_dim_bandwidth_source d
 WHERE 		u.bandwidth_source_id = d.bandwidth_source_id AND 
-		DATE_ID BETWEEN (LAST_DAY(NOW()) - INTERVAL 13 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1
+		DATE_ID BETWEEN (LAST_DAY(NOW()) - INTERVAL (13+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1
 GROUP BY 	LAST_DAY(DATE(DATE_ID))*1
 ORDER BY 	LAST_DAY(DATE(DATE_ID))*1 DESC]]></xml-property>
             <structure name="designerState">
@@ -271,63 +274,29 @@ ORDER BY 	LAST_DAY(DATE(DATE_ID))*1 DESC]]></xml-property>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Usage by CDN" id="816">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">date_id</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">date_id</text-property>
-                    <text-property name="heading">date_id</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">akamai_vod_fms</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">akamai_vod_fms</text-property>
-                    <text-property name="heading">akamai_vod_fms</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">akamai_live_fms</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">akamai_live_fms</text-property>
-                    <text-property name="heading">akamai_live_fms</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">akamai_vod_http</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">akamai_vod_http</text-property>
-                    <text-property name="heading">akamai_vod_http</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">LLN</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">LLN</text-property>
-                    <text-property name="heading">LLN</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">LEVEL3</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">LEVEL3</text-property>
-                    <text-property name="heading">LEVEL3</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">WWW</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">WWW</text-property>
-                    <text-property name="heading">WWW</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">akamai_vod_fms_HD</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">akamai_vod_fms_HD</text-property>
-                    <text-property name="heading">akamai_vod_fms_HD</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">total</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">total</text-property>
-                    <text-property name="heading">total</text-property>
+                    <property name="name">param_2</property>
+                    <property name="paramName">months_back</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <list-property name="parameters"/>
             <list-property name="sortHints">
                 <structure>
                     <property name="columnName">DATE_ID</property>
@@ -347,32 +316,32 @@ ORDER BY 	LAST_DAY(DATE(DATE_ID))*1 DESC]]></xml-property>
                     <structure>
                         <property name="position">2</property>
                         <property name="name">akamai_vod_fms</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
                         <property name="name">akamai_live_fms</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
                         <property name="name">akamai_vod_http</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
                         <property name="name">LLN</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
                         <property name="name">LEVEL3</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
                         <property name="name">WWW</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">8</property>
@@ -393,63 +362,54 @@ ORDER BY 	LAST_DAY(DATE(DATE_ID))*1 DESC]]></xml-property>
                     <property name="name">date_id</property>
                     <property name="nativeName">date_id</property>
                     <property name="dataType">float</property>
-                    <property name="nativeDataType">8</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
                     <property name="name">akamai_vod_fms</property>
                     <property name="nativeName">akamai_vod_fms</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
                     <property name="name">akamai_live_fms</property>
                     <property name="nativeName">akamai_live_fms</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
                     <property name="name">akamai_vod_http</property>
                     <property name="nativeName">akamai_vod_http</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
                     <property name="name">LLN</property>
                     <property name="nativeName">LLN</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">6</property>
                     <property name="name">LEVEL3</property>
                     <property name="nativeName">LEVEL3</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">7</property>
                     <property name="name">WWW</property>
                     <property name="nativeName">WWW</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">8</property>
                     <property name="name">akamai_vod_fms_HD</property>
                     <property name="nativeName">akamai_vod_fms_HD</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
                     <property name="position">9</property>
                     <property name="name">total</property>
                     <property name="nativeName">total</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT 	LAST_DAY(DATE(date_id))*1 date_id, 
@@ -463,7 +423,7 @@ ORDER BY 	LAST_DAY(DATE(DATE_ID))*1 DESC]]></xml-property>
 	SUM(count_bandwidth_kb) total
 FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d
 WHERE u.bandwidth_source_id = d.bandwidth_source_id
-AND date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 13 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1
+AND date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (13+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1
 GROUP BY LAST_DAY(DATE(date_id))*1 DESC]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
@@ -484,6 +444,28 @@ GROUP BY LAST_DAY(DATE(date_id))*1 DESC]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
   <design:ResultSets derivedMetaData="true">
     <design:resultSetDefinitions>
       <design:resultSetColumns>
@@ -588,57 +570,24 @@ GROUP BY LAST_DAY(DATE(date_id))*1 DESC]]></xml-property>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="EntryTypes" id="91">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">date_id</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">date_id</text-property>
-                    <text-property name="heading">date_id</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">videos</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">videos</text-property>
-                    <text-property name="heading">videos</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">images</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">images</text-property>
-                    <text-property name="heading">images</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">audios</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">audios</text-property>
-                    <text-property name="heading">audios</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">documents</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">documents</text-property>
-                    <text-property name="heading">documents</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">playlists</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">playlists</text-property>
-                    <text-property name="heading">playlists</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">other</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">other</text-property>
-                    <text-property name="heading">other</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">total</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">total</text-property>
-                    <text-property name="heading">total</text-property>
+                    <property name="name">param_2</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -649,7 +598,7 @@ GROUP BY LAST_DAY(DATE(date_id))*1 DESC]]></xml-property>
                     <structure>
                         <property name="position">2</property>
                         <property name="name">videos</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
@@ -664,17 +613,17 @@ GROUP BY LAST_DAY(DATE(date_id))*1 DESC]]></xml-property>
                     <structure>
                         <property name="position">5</property>
                         <property name="name">documents</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
                         <property name="name">playlists</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
                         <property name="name">other</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">8</property>
@@ -690,56 +639,48 @@ GROUP BY LAST_DAY(DATE(date_id))*1 DESC]]></xml-property>
                     <property name="name">date_id</property>
                     <property name="nativeName">date_id</property>
                     <property name="dataType">float</property>
-                    <property name="nativeDataType">8</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
                     <property name="name">videos</property>
                     <property name="nativeName">videos</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
                     <property name="name">images</property>
                     <property name="nativeName">images</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
                     <property name="name">audios</property>
                     <property name="nativeName">audios</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
                     <property name="name">documents</property>
                     <property name="nativeName">documents</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">6</property>
                     <property name="name">playlists</property>
                     <property name="nativeName">playlists</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">7</property>
                     <property name="name">other</property>
                     <property name="nativeName">other</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">8</property>
                     <property name="name">total</property>
                     <property name="nativeName">total</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT 
@@ -752,7 +693,7 @@ SUM(IF(entry_type_name = 'PLAYLIST', 1, 0)) playlists,
 SUM(IF(entry_type_name IN ('DOCUMENT', 'PLAYLIST') OR (entry_type_name = 'MEDIACLIP' AND entry_media_type_name IN ('VIDEO','IMAGE', 'AUDIO')), 0, 1)) other,
 count(*) total
  FROM kalturadw.dwh_dim_entries e, kalturadw.dwh_dim_entry_media_type mt, kalturadw.dwh_dim_entry_type t
-WHERE created_at BETWEEN LAST_DAY(NOW()) - INTERVAL 13 MONTH + INTERVAL 1 DAY AND LAST_DAY(NOW()) - INTERVAL 1 MONTH
+WHERE created_at BETWEEN LAST_DAY(NOW()) - INTERVAL (13+?) MONTH + INTERVAL 1 DAY AND LAST_DAY(NOW()) - INTERVAL (1+?) MONTH
 AND e.entry_media_type_id = mt.entry_media_type_id
 AND e.entry_type_id = t.entry_type_id
 GROUP BY date_id desc]]></xml-property>
@@ -774,39 +715,24 @@ GROUP BY date_id desc]]></xml-property>
             </structure>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Ingestion" id="140">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">date_id</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">date_id</text-property>
-                    <text-property name="heading">date_id</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">uploads</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">uploads</text-property>
-                    <text-property name="heading">uploads</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">webcam</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">webcam</text-property>
-                    <text-property name="heading">webcam</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">imported</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">imported</text-property>
-                    <text-property name="heading">imported</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">total</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">total</text-property>
-                    <text-property name="heading">total</text-property>
+                    <property name="name">param_2</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -817,7 +743,7 @@ GROUP BY date_id desc]]></xml-property>
                     <structure>
                         <property name="position">2</property>
                         <property name="name">uploads</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
@@ -843,35 +769,30 @@ GROUP BY date_id desc]]></xml-property>
                     <property name="name">date_id</property>
                     <property name="nativeName">date_id</property>
                     <property name="dataType">float</property>
-                    <property name="nativeDataType">8</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
                     <property name="name">uploads</property>
                     <property name="nativeName">uploads</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">-5</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
                     <property name="name">webcam</property>
                     <property name="nativeName">webcam</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
                     <property name="name">imported</property>
                     <property name="nativeName">imported</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
                     <property name="name">total</property>
                     <property name="nativeName">total</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT date_id, 
@@ -882,7 +803,7 @@ count(*) total
 FROM (SELECT  LAST_DAY(created_at)*1 date_id, 
 entry_media_source_id
 FROM kalturadw.dwh_dim_entries
-WHERE created_at BETWEEN (LAST_DAY(NOW()) - INTERVAL 13 MONTH + INTERVAL 1 DAY) AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)) p
+WHERE created_at BETWEEN (LAST_DAY(NOW()) - INTERVAL (13+?) MONTH + INTERVAL 1 DAY) AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)) p
 GROUP BY date_id]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
@@ -903,38 +824,35 @@ GROUP BY date_id]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="PlaysViews" id="396">
             <property name="nullsOrdering">nulls lowest</property>
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">DATE_ID</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">DATE_ID</text-property>
-                    <text-property name="heading">DATE_ID</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">PLAYS</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">PLAYS</text-property>
-                    <text-property name="heading">PLAYS</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">LOADS</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">LOADS</text-property>
-                    <text-property name="heading">LOADS</text-property>
+                    <property name="name">param_2</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
                         <property name="name">DATE_ID</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
                         <property name="name">PLAYS</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
@@ -949,27 +867,24 @@ GROUP BY date_id]]></xml-property>
                     <property name="position">1</property>
                     <property name="name">DATE_ID</property>
                     <property name="nativeName">DATE_ID</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">8</property>
+                    <property name="dataType">float</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
                     <property name="name">PLAYS</property>
                     <property name="nativeName">PLAYS</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
                     <property name="name">LOADS</property>
                     <property name="nativeName">LOADS</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT LAST_DAY(DATE(DATE_ID))*1 DATE_ID, SUM(COUNT_PLAYS) AS PLAYS, SUM(COUNT_LOADS) AS LOADS
   FROM `kalturadw`.DWH_HOURLY_PARTNER
-  WHERE 		DATE_ID BETWEEN (LAST_DAY(NOW()) - INTERVAL 13 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1
+  WHERE 		DATE_ID BETWEEN (LAST_DAY(NOW()) - INTERVAL (13+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1
 GROUP BY 	LAST_DAY(DATE(DATE_ID))*1
 ORDER BY 	LAST_DAY(DATE(DATE_ID))*1 DESC]]></xml-property>
             <structure name="designerState">
@@ -990,63 +905,108 @@ ORDER BY 	LAST_DAY(DATE(DATE_ID))*1 DESC]]></xml-property>
             </structure>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DetailedBandwidth" id="416">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">partner_id</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">partner_id</text-property>
-                    <text-property name="heading">partner_id</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">avg_count_bandwidth_kb</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">avg_count_bandwidth_kb</text-property>
-                    <text-property name="heading">avg_count_bandwidth_kb</text-property>
+                    <property name="name">param_2</property>
+                    <property name="paramName">months_back</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue" type="javascript">0</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">2_months_ago_count_bandwidth_kb</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">2_months_ago_count_bandwidth_kb</text-property>
-                    <text-property name="heading">2_months_ago_count_bandwidth_kb</text-property>
+                    <property name="name">param_3</property>
+                    <property name="paramName">months_back</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">3</property>
+                    <expression name="defaultValue" type="javascript">0</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">count_bandwidth_kb</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">count_bandwidth_kb</text-property>
-                    <text-property name="heading">count_bandwidth_kb</text-property>
+                    <property name="name">param_4</property>
+                    <property name="paramName">months_back</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">4</property>
+                    <expression name="defaultValue" type="javascript">0</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">partner_name</property>
-                    <property name="analysis">attribute</property>
-                    <text-property name="displayName">partner_name</text-property>
-                    <text-property name="heading">partner_name</text-property>
+                    <property name="name">param_5</property>
+                    <property name="paramName">months_back</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">5</property>
+                    <expression name="defaultValue" type="javascript">0</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">is_paying</property>
-                    <property name="analysis">attribute</property>
-                    <text-property name="displayName">is_paying</text-property>
-                    <text-property name="heading">is_paying</text-property>
+                    <property name="name">param_6</property>
+                    <property name="paramName">months_back</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">6</property>
+                    <expression name="defaultValue" type="javascript">0</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">is_paying_rank</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">is_paying_rank</text-property>
-                    <text-property name="heading">is_paying_rank</text-property>
+                    <property name="name">param_7</property>
+                    <property name="paramName">months_back</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">7</property>
+                    <expression name="defaultValue" type="javascript">0</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">rank</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">rank</text-property>
-                    <text-property name="heading">rank</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">total</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">total</text-property>
-                    <text-property name="heading">total</text-property>
+                    <property name="name">param_8</property>
+                    <property name="paramName">months_back</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">8</property>
+                    <expression name="defaultValue" type="javascript">0</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -1087,7 +1047,7 @@ ORDER BY 	LAST_DAY(DATE(DATE_ID))*1 DESC]]></xml-property>
                     <structure>
                         <property name="position">8</property>
                         <property name="name">rank</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
@@ -1103,63 +1063,54 @@ ORDER BY 	LAST_DAY(DATE(DATE_ID))*1 DESC]]></xml-property>
                     <property name="name">partner_id</property>
                     <property name="nativeName">partner_id</property>
                     <property name="dataType">integer</property>
-                    <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
                     <property name="name">avg_count_bandwidth_kb</property>
                     <property name="nativeName">avg_count_bandwidth_kb</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
                     <property name="name">2_months_ago_count_bandwidth_kb</property>
                     <property name="nativeName">2_months_ago_count_bandwidth_kb</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
                     <property name="name">count_bandwidth_kb</property>
                     <property name="nativeName">count_bandwidth_kb</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
                     <property name="name">partner_name</property>
                     <property name="nativeName">partner_name</property>
                     <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">6</property>
                     <property name="name">is_paying</property>
                     <property name="nativeName">is_paying</property>
                     <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">7</property>
                     <property name="name">is_paying_rank</property>
                     <property name="nativeName">is_paying_rank</property>
                     <property name="dataType">float</property>
-                    <property name="nativeDataType">8</property>
                 </structure>
                 <structure>
                     <property name="position">8</property>
                     <property name="name">rank</property>
                     <property name="nativeName">rank</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">8</property>
+                    <property name="dataType">float</property>
                 </structure>
                 <structure>
                     <property name="position">9</property>
                     <property name="name">total</property>
                     <property name="nativeName">total</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT partner_id, avg_count_bandwidth_kb, 2_months_ago_count_bandwidth_kb,count_bandwidth_kb, partner_name, is_paying,is_paying_rank, @rownum_vod:=IFNULL(@rownum_vod+1,1) AS rank, total FROM (
@@ -1168,14 +1119,14 @@ SELECT partner_id, avg_count_bandwidth_kb, 2_months_ago_count_bandwidth_kb,count
 	@is_paying_vod:=is_paying AS is_paying, total
 	FROM (
 SELECT u.partner_id, SUM(count_bandwidth_kb)/12 avg_count_bandwidth_kb, 
-SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 3 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 2 MONTH)*1,count_bandwidth_kb,0)) 2_months_ago_count_bandwidth_kb, 
-SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 2 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1,count_bandwidth_kb,0)) count_bandwidth_kb,
+SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (3+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH)*1,count_bandwidth_kb,0)) 2_months_ago_count_bandwidth_kb, 
+SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1,count_bandwidth_kb,0)) count_bandwidth_kb,
 p.partner_name, IF(partner_package>1,'yes','no') is_paying, total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d, kalturadw.dwh_dim_partners p,
 (SELECT SUM(count_bandwidth_kb) total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d WHERE u.bandwidth_source_id = d.bandwidth_source_id AND d.is_live = 0 AND 
-date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 2 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1) total
+date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1) total
 WHERE u.bandwidth_source_id = d.bandwidth_source_id AND d.is_live = 0
 AND u.partner_id = p.partner_id
-AND date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 13 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1
+AND date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (13+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1
 GROUP BY partner_id
 ORDER BY is_paying, count_bandwidth_kb DESC
 ) a
@@ -1197,65 +1148,221 @@ ORDER BY count_bandwidth_kb DESC]]></xml-property>
 &lt;/windowState>&#13;
 &lt;/SQLQueryBuilder></property>
             </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>4</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>5</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>6</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>7</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>8</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+</model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DetailedStreaming" id="515">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">partner_id</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">partner_id</text-property>
-                    <text-property name="heading">partner_id</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">avg_count_bandwidth_kb</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">avg_count_bandwidth_kb</text-property>
-                    <text-property name="heading">avg_count_bandwidth_kb</text-property>
+                    <property name="name">param_2</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">2_months_ago_count_bandwidth_kb</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">2_months_ago_count_bandwidth_kb</text-property>
-                    <text-property name="heading">2_months_ago_count_bandwidth_kb</text-property>
+                    <property name="name">param_3</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">count_bandwidth_kb</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">count_bandwidth_kb</text-property>
-                    <text-property name="heading">count_bandwidth_kb</text-property>
+                    <property name="name">param_4</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">4</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">partner_name</property>
-                    <property name="analysis">attribute</property>
-                    <text-property name="displayName">partner_name</text-property>
-                    <text-property name="heading">partner_name</text-property>
+                    <property name="name">param_5</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">5</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">is_paying</property>
-                    <property name="analysis">attribute</property>
-                    <text-property name="displayName">is_paying</text-property>
-                    <text-property name="heading">is_paying</text-property>
+                    <property name="name">param_6</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">6</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">is_paying_rank</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">is_paying_rank</text-property>
-                    <text-property name="heading">is_paying_rank</text-property>
+                    <property name="name">param_7</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">7</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">rank</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">rank</text-property>
-                    <text-property name="heading">rank</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">total</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">total</text-property>
-                    <text-property name="heading">total</text-property>
+                    <property name="name">param_8</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">8</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -1296,7 +1403,7 @@ ORDER BY count_bandwidth_kb DESC]]></xml-property>
                     <structure>
                         <property name="position">8</property>
                         <property name="name">rank</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
@@ -1312,63 +1419,54 @@ ORDER BY count_bandwidth_kb DESC]]></xml-property>
                     <property name="name">partner_id</property>
                     <property name="nativeName">partner_id</property>
                     <property name="dataType">integer</property>
-                    <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
                     <property name="name">avg_count_bandwidth_kb</property>
                     <property name="nativeName">avg_count_bandwidth_kb</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
                     <property name="name">2_months_ago_count_bandwidth_kb</property>
                     <property name="nativeName">2_months_ago_count_bandwidth_kb</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
                     <property name="name">count_bandwidth_kb</property>
                     <property name="nativeName">count_bandwidth_kb</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
                     <property name="name">partner_name</property>
                     <property name="nativeName">partner_name</property>
                     <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">6</property>
                     <property name="name">is_paying</property>
                     <property name="nativeName">is_paying</property>
                     <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">7</property>
                     <property name="name">is_paying_rank</property>
                     <property name="nativeName">is_paying_rank</property>
                     <property name="dataType">float</property>
-                    <property name="nativeDataType">8</property>
                 </structure>
                 <structure>
                     <property name="position">8</property>
                     <property name="name">rank</property>
                     <property name="nativeName">rank</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">8</property>
+                    <property name="dataType">float</property>
                 </structure>
                 <structure>
                     <property name="position">9</property>
                     <property name="name">total</property>
                     <property name="nativeName">total</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT partner_id, avg_count_bandwidth_kb, 2_months_ago_count_bandwidth_kb,count_bandwidth_kb, partner_name, is_paying,is_paying_rank, @rownum_live:=IFNULL(@rownum_live+1,1) AS rank, total FROM (
@@ -1377,14 +1475,14 @@ SELECT partner_id, avg_count_bandwidth_kb, 2_months_ago_count_bandwidth_kb,count
 	@is_paying_live:=is_paying AS is_paying, total
 	FROM (
 SELECT u.partner_id, SUM(count_bandwidth_kb)/12 avg_count_bandwidth_kb, 
-SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 3 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 2 MONTH)*1,count_bandwidth_kb,0)) 2_months_ago_count_bandwidth_kb, 
-SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 2 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1,count_bandwidth_kb,0)) count_bandwidth_kb,
+SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (3+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH)*1,count_bandwidth_kb,0)) 2_months_ago_count_bandwidth_kb, 
+SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1,count_bandwidth_kb,0)) count_bandwidth_kb,
 p.partner_name, IF(partner_package>1,'yes','no') is_paying, total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d, kalturadw.dwh_dim_partners p,
 (SELECT SUM(count_bandwidth_kb) total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d WHERE u.bandwidth_source_id = d.bandwidth_source_id AND d.is_live = 1 AND 
-date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 2 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1) total
+date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1) total
 WHERE u.bandwidth_source_id = d.bandwidth_source_id AND d.is_live = 1
 AND u.partner_id = p.partner_id
-AND date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 13 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1
+AND date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (13+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1
 GROUP BY partner_id
 ORDER BY is_paying, count_bandwidth_kb DESC
 ) a
@@ -1408,63 +1506,73 @@ ORDER BY count_bandwidth_kb DESC;]]></xml-property>
             </structure>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DetailedPlays" id="681">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">partner_id</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">partner_id</text-property>
-                    <text-property name="heading">partner_id</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">partner_name</property>
-                    <property name="analysis">attribute</property>
-                    <text-property name="displayName">partner_name</text-property>
-                    <text-property name="heading">partner_name</text-property>
+                    <property name="name">param_2</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">is_paying</property>
-                    <property name="analysis">attribute</property>
-                    <text-property name="displayName">is_paying</text-property>
-                    <text-property name="heading">is_paying</text-property>
+                    <property name="name">param_3</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">avg_count_plays</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">avg_count_plays</text-property>
-                    <text-property name="heading">avg_count_plays</text-property>
+                    <property name="name">param_4</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">4</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">2_months_ago_count_plays</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">2_months_ago_count_plays</text-property>
-                    <text-property name="heading">2_months_ago_count_plays</text-property>
+                    <property name="name">param_5</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">5</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">count_plays</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">count_plays</text-property>
-                    <text-property name="heading">count_plays</text-property>
+                    <property name="name">param_6</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">6</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">is_paying_rank</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">is_paying_rank</text-property>
-                    <text-property name="heading">is_paying_rank</text-property>
+                    <property name="name">param_7</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">7</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">rank</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">rank</text-property>
-                    <text-property name="heading">rank</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">total</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">total</text-property>
-                    <text-property name="heading">total</text-property>
+                    <property name="name">param_8</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">8</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -1485,7 +1593,7 @@ ORDER BY count_bandwidth_kb DESC;]]></xml-property>
                     <structure>
                         <property name="position">4</property>
                         <property name="name">avg_count_plays</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
@@ -1495,7 +1603,7 @@ ORDER BY count_bandwidth_kb DESC;]]></xml-property>
                     <structure>
                         <property name="position">6</property>
                         <property name="name">count_plays</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
@@ -1505,7 +1613,7 @@ ORDER BY count_bandwidth_kb DESC;]]></xml-property>
                     <structure>
                         <property name="position">8</property>
                         <property name="name">rank</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
@@ -1521,75 +1629,66 @@ ORDER BY count_bandwidth_kb DESC;]]></xml-property>
                     <property name="name">partner_id</property>
                     <property name="nativeName">partner_id</property>
                     <property name="dataType">integer</property>
-                    <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
                     <property name="name">partner_name</property>
                     <property name="nativeName">partner_name</property>
                     <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
                     <property name="name">is_paying</property>
                     <property name="nativeName">is_paying</property>
                     <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
                     <property name="name">avg_count_plays</property>
                     <property name="nativeName">avg_count_plays</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
                     <property name="name">2_months_ago_count_plays</property>
                     <property name="nativeName">2_months_ago_count_plays</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
                     <property name="position">6</property>
                     <property name="name">count_plays</property>
                     <property name="nativeName">count_plays</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">7</property>
                     <property name="name">is_paying_rank</property>
                     <property name="nativeName">is_paying_rank</property>
                     <property name="dataType">float</property>
-                    <property name="nativeDataType">8</property>
                 </structure>
                 <structure>
                     <property name="position">8</property>
                     <property name="name">rank</property>
                     <property name="nativeName">rank</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">8</property>
+                    <property name="dataType">float</property>
                 </structure>
                 <structure>
                     <property name="position">9</property>
                     <property name="name">total</property>
                     <property name="nativeName">total</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT partner_id, partner_name, is_paying, avg_count_plays, 2_months_ago_count_plays,count_plays, is_paying_rank, @rownum_plays:=IFNULL(@rownum_plays+1,1) AS rank, total FROM (
 SELECT partner_id, partner_name, avg_count_plays, 2_months_ago_count_plays,count_plays, @rownum_plays_is_paying:=IFNULL(IF(@is_paying_plays=is_paying,@rownum_plays_is_paying+1,1),1) AS is_paying_rank,
 	@is_paying_plays:=is_paying AS is_paying, total FROM (
 SELECT u.partner_id, SUM(count_plays)/12 avg_count_plays, 
-SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 3 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 2 MONTH)*1,count_plays,0)) 2_months_ago_count_plays, 
-SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 2 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1,count_plays,0)) count_plays,
+SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (3+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH)*1,count_plays,0)) 2_months_ago_count_plays, 
+SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1,count_plays,0)) count_plays,
 p.partner_name, IF(partner_package>1,'yes','no') is_paying,total FROM kalturadw.dwh_hourly_partner u, kalturadw.dwh_dim_partners p,
-(SELECT SUM(count_plays) total FROM kalturadw.dwh_hourly_partner WHERE date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 2 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1) total
+(SELECT SUM(count_plays) total FROM kalturadw.dwh_hourly_partner WHERE date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1) total
 WHERE u.partner_id = p.partner_id
-AND date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 13 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1
+AND date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (13+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1
 GROUP BY partner_id
 ORDER BY is_paying, count_plays DESC
 ) a
@@ -1613,63 +1712,56 @@ ORDER BY count_plays DESC]]></xml-property>
             </structure>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DetailedViews" id="1375">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">partner_id</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">partner_id</text-property>
-                    <text-property name="heading">partner_id</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">partner_name</property>
-                    <property name="analysis">attribute</property>
-                    <text-property name="displayName">partner_name</text-property>
-                    <text-property name="heading">partner_name</text-property>
+                    <property name="name">param_2</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">is_paying</property>
-                    <property name="analysis">attribute</property>
-                    <text-property name="displayName">is_paying</text-property>
-                    <text-property name="heading">is_paying</text-property>
+                    <property name="name">param_3</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">avg_count_loads</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">avg_count_loads</text-property>
-                    <text-property name="heading">avg_count_loads</text-property>
+                    <property name="name">param_4</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">4</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">2_months_ago_count_loads</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">2_months_ago_count_loads</text-property>
-                    <text-property name="heading">2_months_ago_count_loads</text-property>
+                    <property name="name">param_5</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">5</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">count_loads</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">count_loads</text-property>
-                    <text-property name="heading">count_loads</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">is_paying_rank</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">is_paying_rank</text-property>
-                    <text-property name="heading">is_paying_rank</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">rank</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">rank</text-property>
-                    <text-property name="heading">rank</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">total</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">total</text-property>
-                    <text-property name="heading">total</text-property>
+                    <property name="name">param_6</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">6</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -1710,7 +1802,7 @@ ORDER BY count_plays DESC]]></xml-property>
                     <structure>
                         <property name="position">8</property>
                         <property name="name">rank</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
@@ -1726,75 +1818,66 @@ ORDER BY count_plays DESC]]></xml-property>
                     <property name="name">partner_id</property>
                     <property name="nativeName">partner_id</property>
                     <property name="dataType">integer</property>
-                    <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
                     <property name="name">partner_name</property>
                     <property name="nativeName">partner_name</property>
                     <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
                     <property name="name">is_paying</property>
                     <property name="nativeName">is_paying</property>
                     <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
                     <property name="name">avg_count_loads</property>
                     <property name="nativeName">avg_count_loads</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
                     <property name="name">2_months_ago_count_loads</property>
                     <property name="nativeName">2_months_ago_count_loads</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
                     <property name="position">6</property>
                     <property name="name">count_loads</property>
                     <property name="nativeName">count_loads</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
                     <property name="position">7</property>
                     <property name="name">is_paying_rank</property>
                     <property name="nativeName">is_paying_rank</property>
                     <property name="dataType">float</property>
-                    <property name="nativeDataType">8</property>
                 </structure>
                 <structure>
                     <property name="position">8</property>
                     <property name="name">rank</property>
                     <property name="nativeName">rank</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">8</property>
+                    <property name="dataType">float</property>
                 </structure>
                 <structure>
                     <property name="position">9</property>
                     <property name="name">total</property>
                     <property name="nativeName">total</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT partner_id, partner_name, is_paying, avg_count_loads, 2_months_ago_count_loads,count_loads, is_paying_rank, @rownum_loads:=IFNULL(@rownum_loads+1,1) AS rank, total FROM (
 SELECT partner_id, partner_name, avg_count_loads, 2_months_ago_count_loads,count_loads, @rownum_loads_is_paying:=IFNULL(IF(@is_paying_loads=is_paying,@rownum_loads_is_paying+1,1),1) AS is_paying_rank,
 	@is_paying_loads:=is_paying AS is_paying, total FROM (
 SELECT u.partner_id, SUM(count_loads)/12 avg_count_loads, 
-SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 3 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 2 MONTH)*1,count_loads,0)) 2_months_ago_count_loads, 
-SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 2 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1,count_loads,0)) count_loads,
+SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (3+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 2 MONTH)*1,count_loads,0)) 2_months_ago_count_loads, 
+SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1,count_loads,0)) count_loads,
 p.partner_name, IF(partner_package>1,'yes','no') is_paying,total FROM kalturadw.dwh_hourly_partner u, kalturadw.dwh_dim_partners p,
-(SELECT SUM(count_loads) total FROM kalturadw.dwh_hourly_partner WHERE date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 2 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1) total
+(SELECT SUM(count_loads) total FROM kalturadw.dwh_hourly_partner WHERE date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1) total
 WHERE u.partner_id = p.partner_id
-AND date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 13 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1
+AND date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (13+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1
 GROUP BY partner_id
 ORDER BY is_paying, count_loads DESC
 ) a
@@ -1818,63 +1901,73 @@ ORDER BY count_loads DESC]]></xml-property>
             </structure>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DetailedStorage" id="638">
-            <list-property name="columnHints">
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">partner_id</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">partner_id</text-property>
-                    <text-property name="heading">partner_id</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">partner_name</property>
-                    <property name="analysis">attribute</property>
-                    <text-property name="displayName">partner_name</text-property>
-                    <text-property name="heading">partner_name</text-property>
+                    <property name="name">param_2</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">is_paying</property>
-                    <property name="analysis">attribute</property>
-                    <text-property name="displayName">is_paying</text-property>
-                    <text-property name="heading">is_paying</text-property>
+                    <property name="name">param_3</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">avg_count_storage_mb</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">avg_count_storage_mb</text-property>
-                    <text-property name="heading">avg_count_storage_mb</text-property>
+                    <property name="name">param_4</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">4</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">2_months_ago_count_storage_mb</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">2_months_ago_count_storage_mb</text-property>
-                    <text-property name="heading">2_months_ago_count_storage_mb</text-property>
+                    <property name="name">param_5</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">5</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">count_storage_mb</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">count_storage_mb</text-property>
-                    <text-property name="heading">count_storage_mb</text-property>
+                    <property name="name">param_6</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">6</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">is_paying_rank</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">is_paying_rank</text-property>
-                    <text-property name="heading">is_paying_rank</text-property>
+                    <property name="name">param_7</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">7</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">rank</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">rank</text-property>
-                    <text-property name="heading">rank</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">total</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">total</text-property>
-                    <text-property name="heading">total</text-property>
+                    <property name="name">param_8</property>
+                    <property name="paramName">months_back</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">8</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -1895,7 +1988,7 @@ ORDER BY count_loads DESC]]></xml-property>
                     <structure>
                         <property name="position">4</property>
                         <property name="name">avg_count_storage_mb</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
@@ -1905,7 +1998,7 @@ ORDER BY count_loads DESC]]></xml-property>
                     <structure>
                         <property name="position">6</property>
                         <property name="name">count_storage_mb</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
@@ -1915,7 +2008,7 @@ ORDER BY count_loads DESC]]></xml-property>
                     <structure>
                         <property name="position">8</property>
                         <property name="name">rank</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
@@ -1931,63 +2024,54 @@ ORDER BY count_loads DESC]]></xml-property>
                     <property name="name">partner_id</property>
                     <property name="nativeName">partner_id</property>
                     <property name="dataType">integer</property>
-                    <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
                     <property name="name">partner_name</property>
                     <property name="nativeName">partner_name</property>
                     <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
                     <property name="name">is_paying</property>
                     <property name="nativeName">is_paying</property>
                     <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
                     <property name="name">avg_count_storage_mb</property>
                     <property name="nativeName">avg_count_storage_mb</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
                     <property name="name">2_months_ago_count_storage_mb</property>
                     <property name="nativeName">2_months_ago_count_storage_mb</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
                     <property name="position">6</property>
                     <property name="name">count_storage_mb</property>
                     <property name="nativeName">count_storage_mb</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="position">7</property>
                     <property name="name">is_paying_rank</property>
                     <property name="nativeName">is_paying_rank</property>
                     <property name="dataType">float</property>
-                    <property name="nativeDataType">8</property>
                 </structure>
                 <structure>
                     <property name="position">8</property>
                     <property name="name">rank</property>
                     <property name="nativeName">rank</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">8</property>
+                    <property name="dataType">float</property>
                 </structure>
                 <structure>
                     <property name="position">9</property>
                     <property name="name">total</property>
                     <property name="nativeName">total</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT partner_id, partner_name, is_paying, avg_count_storage_mb, 2_months_ago_count_storage_mb,count_storage_mb,is_paying_rank, @rownum_storage:=IFNULL(@rownum_storage+1,1) AS rank, total  FROM (
@@ -1995,13 +2079,13 @@ SELECT partner_id, partner_name, avg_count_storage_mb, 2_months_ago_count_storag
 	@rownum_storage_is_paying:=IFNULL(IF(@is_paying_storage=is_paying,@rownum_storage_is_paying+1,1),1) AS is_paying_rank,
 	@is_paying_storage:=is_paying AS is_paying, total FROM (
 SELECT u.partner_id, SUM(count_storage_mb)/12 avg_count_storage_mb, 
-SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 3 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 2 MONTH)*1,count_storage_mb,0)) 2_months_ago_count_storage_mb, 
-SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 2 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1,count_storage_mb,0)) count_storage_mb,
+SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (3+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH)*1,count_storage_mb,0)) 2_months_ago_count_storage_mb, 
+SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1,count_storage_mb,0)) count_storage_mb,
 p.partner_name, IF(partner_package>1,'yes','no') is_paying, total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d, kalturadw.dwh_dim_partners p,
-(SELECT SUM(count_storage_mb) total FROM kalturadw.dwh_hourly_partner_usage WHERE date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 2 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1) total
+(SELECT SUM(count_storage_mb) total FROM kalturadw.dwh_hourly_partner_usage WHERE date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1) total
 WHERE u.bandwidth_source_id = d.bandwidth_source_id
 AND u.partner_id = p.partner_id
-AND date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL 13 MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL 1 MONTH)*1
+AND date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (13+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1
 GROUP BY partner_id
 ORDER BY is_paying, count_storage_mb DESC) a
 ) b 
