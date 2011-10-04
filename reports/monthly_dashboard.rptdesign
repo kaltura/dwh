@@ -1047,7 +1047,7 @@ ORDER BY 	LAST_DAY(DATE(DATE_ID))*1 DESC]]></xml-property>
                     <structure>
                         <property name="position">8</property>
                         <property name="name">rank</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
@@ -1104,7 +1104,7 @@ ORDER BY 	LAST_DAY(DATE(DATE_ID))*1 DESC]]></xml-property>
                     <property name="position">8</property>
                     <property name="name">rank</property>
                     <property name="nativeName">rank</property>
-                    <property name="dataType">float</property>
+                    <property name="dataType">integer</property>
                 </structure>
                 <structure>
                     <property name="position">9</property>
@@ -1403,7 +1403,7 @@ ORDER BY count_bandwidth_kb DESC]]></xml-property>
                     <structure>
                         <property name="position">8</property>
                         <property name="name">rank</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
@@ -1460,7 +1460,7 @@ ORDER BY count_bandwidth_kb DESC]]></xml-property>
                     <property name="position">8</property>
                     <property name="name">rank</property>
                     <property name="nativeName">rank</property>
-                    <property name="dataType">float</property>
+                    <property name="dataType">integer</property>
                 </structure>
                 <structure>
                     <property name="position">9</property>
@@ -1613,7 +1613,7 @@ ORDER BY count_bandwidth_kb DESC;]]></xml-property>
                     <structure>
                         <property name="position">8</property>
                         <property name="name">rank</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
@@ -1670,7 +1670,7 @@ ORDER BY count_bandwidth_kb DESC;]]></xml-property>
                     <property name="position">8</property>
                     <property name="name">rank</property>
                     <property name="nativeName">rank</property>
-                    <property name="dataType">float</property>
+                    <property name="dataType">integer</property>
                 </structure>
                 <structure>
                     <property name="position">9</property>
@@ -1802,7 +1802,7 @@ ORDER BY count_plays DESC]]></xml-property>
                     <structure>
                         <property name="position">8</property>
                         <property name="name">rank</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
@@ -1859,7 +1859,7 @@ ORDER BY count_plays DESC]]></xml-property>
                     <property name="position">8</property>
                     <property name="name">rank</property>
                     <property name="nativeName">rank</property>
-                    <property name="dataType">float</property>
+                    <property name="dataType">integer</property>
                 </structure>
                 <structure>
                     <property name="position">9</property>
@@ -2008,7 +2008,7 @@ ORDER BY count_loads DESC]]></xml-property>
                     <structure>
                         <property name="position">8</property>
                         <property name="name">rank</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
@@ -2065,7 +2065,7 @@ ORDER BY count_loads DESC]]></xml-property>
                     <property name="position">8</property>
                     <property name="name">rank</property>
                     <property name="nativeName">rank</property>
-                    <property name="dataType">float</property>
+                    <property name="dataType">integer</property>
                 </structure>
                 <structure>
                     <property name="position">9</property>
