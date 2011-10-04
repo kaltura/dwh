@@ -11,6 +11,19 @@ create table `kalturadw`.`ri_defaults` (
 	`default_value` varchar (3000)
 );
 
+/*
+SQLyog Community Edition- MySQL Gui
+MySQL - 5.1.34-community 
+*********************************************************************
+*/
+/*!40101 SET nameS utf8 */;
+
+create table `kalturadw`.`ri_defaults` (
+	`table_name` varchar (300),
+	`default_field` varchar (3000),
+	`default_value` varchar (3000)
+);
+
 insert into `kalturadw`.`ri_defaults` (`table_name`, `default_field`, `default_value`) 
 	values
 	('dwh_dim_domains','domain_name','CONCAT(a.domain_id, "-Missing Value")'),
@@ -100,7 +113,7 @@ insert into `kalturadw`.`ri_defaults` (`table_name`, `default_field`, `default_v
 	('dwh_dim_widget','updated_hour_id','"-1"'),
 	('dwh_dim_widget_security_policy','widget_security_policy_name','"Missing Value"'),
 	('dwh_dim_widget','widget_int_id','"-1"'),
-	('dwh_dim_asset_status', 'asset_status_name"', 'Missing Value"'),
+	('dwh_dim_asset_status', 'asset_status_name', '"Missing Value"'),
 	('dwh_dim_flavor_pararms','version', '"-1"'),
 	('dwh_dim_flavor_pararms','partner_id','"-1"'),
 	('dwh_dim_flavor_pararms','name','"Missing Value"'),
@@ -133,10 +146,10 @@ insert into `kalturadw`.`ri_defaults` (`table_name`, `default_field`, `default_v
 	('dwh_dim_flavor_pararms','updated_at','"2099-01-01 00:00:00"'),
 	('dwh_dim_flavor_pararms','deleted_at','"2099-01-01 00:00:00"'),
 	('dwh_dim_conversion_profile', 'partner_id', '"-1"'),
-	('dwh_dim_conversion_profile', 'name"', 'Missing Value"'),
-	('dwh_dim_conversion_profile', 'created_at"', '2099-01-01 00:00:00"'),
-	('dwh_dim_conversion_profile', 'updated_at"', '2099-01-01 00:00:00"'),
-	('dwh_dim_conversion_profile', 'deleted_at"', '2099-01-01 00:00:00"'),
+	('dwh_dim_conversion_profile', 'name', '"Missing Value"'),
+	('dwh_dim_conversion_profile', 'created_at', '"2099-01-01 00:00:00"'),
+	('dwh_dim_conversion_profile', 'updated_at', '"2099-01-01 00:00:00"'),
+	('dwh_dim_conversion_profile', 'deleted_at', '"2099-01-01 00:00:00"'),
 	('dwh_dim_conversion_profile', 'clip_start', '"-1"'),
 	('dwh_dim_conversion_profile', 'clip_duration', '"-1"'),
 	('dwh_dim_conversion_profile', 'creation_mode', '"-1"'),
