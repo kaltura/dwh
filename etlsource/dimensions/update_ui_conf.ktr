@@ -194,7 +194,7 @@
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturaLog</database>
+    <database>kalturalog</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -214,8 +214,32 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
+  <connection>
+    <name>KalturaReadDW</name>
+    <server>${DbReadHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw</database>
+    <port>${DbReadPort}</port>
+    <username>${DbReadUser}</username>
+    <password>${DbReadPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbReadPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
-  <hop> <from>Set defaults</from><to>Calc date and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Table UI Conf</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>ui_conf_status id</from><to>ui_conf_object_type id</to><enabled>Y</enabled> </hop>  <hop> <from>ui_conf_object_type id</from><to>Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>Calc date and hour ids</from><to>ui_conf_status id</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Read Table UI Conf</from><to>Database lookup</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Set defaults</from><to>Calc date and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Table UI Conf</to><enabled>Y</enabled> </hop>  <hop> <from>ui_conf_status id</from><to>ui_conf_object_type id</to><enabled>Y</enabled> </hop>  <hop> <from>Calc date and hour ids</from><to>ui_conf_status id</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Read Table UI Conf</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>ui_conf_object_type id</from><to>Yield swf version and create swf interface lookup SQL</to><enabled>Y</enabled> </hop>  <hop> <from>Yield swf version and create swf interface lookup SQL</from><to>Lookup swf_interface</to><enabled>Y</enabled> </hop>  <hop> <from>Lookup swf_interface</from><to>If swf_interface is null then set -1</to><enabled>Y</enabled> </hop>  <hop> <from>If swf_interface is null then set -1</from><to>Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>Write to log on upsert error</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update</from><to>Filter duplicate key errors</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Calc date and hour ids</name>
     <type>Formula</type>
@@ -258,6 +282,124 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>503</xloc>
       <yloc>97</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Database lookup</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>dwh_dim_ui_conf</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>id</name>
+        <field>ui_conf_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>updated_at</name>
+        <rename>current_updated_at</rename>
+        <default/>
+        <type>Date</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>160</xloc>
+      <yloc>95</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Dummy - unmodified</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>294</xloc>
+      <yloc>197</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter duplicate key errors</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>duplicate key error</send_true_to>
+<send_false_to>Write to log on upsert error</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>desc</leftvalue>
+ <function>CONTAINS</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>Duplicate</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>725</xloc>
+      <yloc>492</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>If swf_interface is null then set -1</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <replaceAllByValue/>
+      <replaceAllMask/>
+      <selectFields>Y</selectFields>
+      <selectValuesType>N</selectValuesType>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>swf_interface_id</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>725</xloc>
+      <yloc>317</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -399,11 +541,46 @@
         <rename>obj_type</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>version</name>
+        <rename>version</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>swf_interface_id</name>
+        <rename>swf_interface_id</rename>
+        <update>Y</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>837</xloc>
-      <yloc>97</yloc>
+      <xloc>726</xloc>
+      <yloc>404</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Lookup swf_interface</name>
+    <type>DynamicSQLRow</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaReadDW</connection>
+    <rowlimit>1</rowlimit>
+    <sql>select id swf_interface_id from dwh_dim_ui_conf_swf_interfaces</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <sql_fieldname>lookupSQL</sql_fieldname>
+    <query_only_on_change>N</query_only_on_change>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>725</xloc>
+      <yloc>247</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -516,6 +693,71 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
     </step>
 
   <step>
+    <name>Write to log on upsert error</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+    <fields>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>849</xloc>
+      <yloc>491</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Yield swf version and create swf interface lookup SQL</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+swf_file = null;
+version = null;
+
+if (swf_url) {
+	swfPathArray = swf_url.split(&apos;&#47;&apos;);
+	swf_file = swfPathArray[swfPathArray.length-1];
+	version = swfPathArray[swfPathArray.length-2];
+}
+lookupSQL = &quot;SELECT id swf_interface_id FROM kalturadw.dwh_dim_ui_conf_swf_interfaces WHERE swf_file = &apos;&quot; + swf_file + &quot;&apos; and &apos;&quot; + tags + &quot;&apos;like CONCAT(&apos;%&apos;, tags_search_string, &apos;%&apos;)&quot;;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>version</name>
+        <rename>version</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>lookupSQL</name>
+        <rename>lookupSQL</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>724</xloc>
+      <yloc>173</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>duplicate key error</name>
     <type>Dummy</type>
     <description/>
@@ -527,8 +769,36 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>961</xloc>
-      <yloc>98</yloc>
+      <xloc>591</xloc>
+      <yloc>494</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>filter unmodified</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Set defaults</send_true_to>
+<send_false_to>Dummy - unmodified</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>updated_at</leftvalue>
+ <function>&lt;&gt;</function>
+ <rightvalue>current_updated_at</rightvalue>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>293</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -634,97 +904,10 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
       </GUI>
     </step>
 
-  <step>
-    <name>Database lookup</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema/>
-      <table>dwh_dim_ui_conf</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>id</name>
-        <field>ui_conf_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>updated_at</name>
-        <rename>current_updated_at</rename>
-        <default/>
-        <type>Date</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
-      <yloc>95</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Dummy - unmodified</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>294</xloc>
-      <yloc>197</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>filter unmodified</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Set defaults</send_true_to>
-<send_false_to>Dummy - unmodified</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>updated_at</leftvalue>
- <function>&lt;&gt;</function>
- <rightvalue>current_updated_at</rightvalue>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>293</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step_error_handling>
       <error>
         <source_step>Insert &#47; Update</source_step>
-        <target_step>duplicate key error</target_step>
+        <target_step>Filter duplicate key errors</target_step>
         <is_enabled>Y</is_enabled>
         <nr_valuename/>
         <descriptions_valuename/>
