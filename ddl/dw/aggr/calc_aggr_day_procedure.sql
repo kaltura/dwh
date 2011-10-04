@@ -15,7 +15,7 @@ BEGIN
 	DECLARE v_ignore DATE;
 	DECLARE v_table_name VARCHAR(100);
 		
-	SELECT date(now() - interval archive_delete_days_back day), date(archive_last_partition)
+	SELECT DATE(NOW() - INTERVAL archive_delete_days_back DAY), DATE(archive_last_partition)
 	INTO v_ignore, v_from_archive
 	FROM kalturadw_ds.retention_policy
 	WHERE table_name = 'dwh_fact_events';	
@@ -135,7 +135,7 @@ BEGIN
 			WHERE ev.event_type_id BETWEEN 2 AND 40 
 				AND ev.event_date_id  = DATE(''',p_date_val,''')*1
 				AND ev.event_hour_id = ',p_hour_id,'
-				AND ev.entry_media_type_id IN (1,5,6)  /* allow only video & audio & mix */
+				AND ev.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
 			GROUP BY partner_id,event_date_id, event_hour_id',v_aggr_id_field_str,';');
 		
 		PREPARE stmt FROM  @s;
@@ -163,7 +163,7 @@ BEGIN
 				FROM ',v_table_name,' as ev ',v_aggr_join_stmt,' 
 				WHERE ev.event_date_id  = DATE(''',p_date_val,''')*1
 					AND ev.event_hour_id = ',p_hour_id,'
-					AND ev.entry_media_type_id IN (1,5,6)  /* allow only video & audio & mix */
+					AND ev.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
 					AND ev.event_type_id IN(3,4,5,6,7) /* time viewed only when player reaches 25,50,75,100 */
 				GROUP BY ev.partner_id, ev.event_date_id, ev.event_hour_id , ev.entry_id',v_aggr_id_field_str,',ev.session_id) e
 				GROUP BY partner_id, event_date_id, event_hour_id',v_aggr_id_field_str,'
@@ -193,5 +193,5 @@ BEGIN
 	DEALLOCATE PREPARE stmt;
 		
 END$$
-		
+
 DELIMITER ;
