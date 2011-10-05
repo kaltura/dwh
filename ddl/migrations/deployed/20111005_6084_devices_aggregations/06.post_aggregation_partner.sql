@@ -33,7 +33,7 @@ BEGIN
 			SUM(IF(entry_type_id NOT IN (1,5,7,10) or (entry_type_id = 1 and entry_media_type_id NOT IN (1,2,5)), 1, 0)) new_other_entries
     		FROM dwh_dim_entries  en 
     		WHERE en.created_at between DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' HOUR ',' 
-					   AND DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' + 1 HOUR ','
+					   AND DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' + 1 HOUR - INTERVAL 1 SECOND ','
     	
 		GROUP BY partner_id
     	ON DUPLICATE KEY UPDATE
@@ -73,7 +73,7 @@ BEGIN
 		FROM 	dwh_dim_entries  en 
     		WHERE 	entry_status_id = 3
     			AND en.modified_at between DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' HOUR ',' 
-					   AND DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' + 1 HOUR ','
+					   AND DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' + 1 HOUR - INTERVAL 1 SECOND ','
     		GROUP BY partner_id
 		ON DUPLICATE KEY UPDATE
 			deleted_videos=VALUES(deleted_videos),
@@ -98,7 +98,7 @@ BEGIN
     	SELECT  partner_id, DATE(''',date_val,''')*1 date_id, ', p_hour_id, ' hour_id, count(*) new_admins
     	FROM dwh_dim_kusers  ku
     	WHERE ku.created_at between DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' HOUR ',' 
-					   AND DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' + 1 HOUR ','
+					   AND DATE(''',date_val,''') + INTERVAL ', p_hour_id, ' + 1 HOUR - INTERVAL 1 SECOND ','
 		and is_admin = 1
    		GROUP BY partner_id
     	ON DUPLICATE KEY UPDATE
