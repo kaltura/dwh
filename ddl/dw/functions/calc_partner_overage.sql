@@ -25,12 +25,9 @@ BEGIN
 			q.max_monthly_entries,
 			q.charge_monthly_entries_usd,
 			q.charge_monthly_entries_unit
-		FROM (SELECT partner_id, MAX(updated_at) max_date 		
-            FROM kalturadw.dwh_dim_partners_billing
-            WHERE updated_at < DATE(p_month_id * 100 + 1) + INTERVAL 1 MONTH
-            GROUP BY partner_id) d 
-        LEFT JOIN kalturadw.dwh_dim_partners_billing q ON (q.updated_at = d.max_date AND q.partner_id = d.partner_id AND q.is_active = 1)
-		LEFT OUTER JOIN kalturadw.dwh_dim_partners p ON (q.partner_id = p.partner_parent_id AND q.partner_group_type_id = 3)
+		FROM dwh_view_partners_monthly_billing q 
+			LEFT OUTER JOIN kalturadw.dwh_dim_partners p ON (q.partner_id = p.partner_parent_id AND q.partner_group_type_id = 3)
+		WHERE is_active = 1 AND q.month_id = p_month_id
         GROUP BY partner_id, usage_partner_id;
         
 
