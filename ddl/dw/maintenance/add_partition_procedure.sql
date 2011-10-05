@@ -82,6 +82,7 @@ BEGIN
 	CALL add_monthly_partition_for_table('dwh_hourly_events_domain_referrer');	
 	CALL add_monthly_partition_for_table('dwh_hourly_partner');
 	CALL add_monthly_partition_for_table('dwh_hourly_partner_usage');
+	CALL add_monthly_partition_for_table('dwh_hourly_events_devices');
 END$$
 
 DELIMITER ;
