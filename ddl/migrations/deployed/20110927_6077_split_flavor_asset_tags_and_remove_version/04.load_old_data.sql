@@ -57,4 +57,4 @@ DELIMITER ;
 
 CALL load_tags();
 
-DROP PROCEDURE load_tags();
+DROP PROCEDURE load_tags;
