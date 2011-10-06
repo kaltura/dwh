@@ -23,7 +23,7 @@ CREATE TABLE `dwh_dim_entries` (
   `entry_id` varchar(20) NOT NULL DEFAULT '',
   `kshow_id` varchar(20) DEFAULT NULL,
   `kuser_id` int(11) DEFAULT '-1',
-  `entry_name` varchar(60) DEFAULT NULL,
+  `entry_name` varchar(256) DEFAULT NULL,
   `entry_type_id` smallint(6) DEFAULT NULL,
   `entry_media_type_id` smallint(6) DEFAULT NULL,
   `data` varchar(48) DEFAULT NULL,
