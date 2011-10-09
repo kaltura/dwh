@@ -652,7 +652,7 @@
     <rename_on_output>N</rename_on_output>
     <description/>
     </mapping>    <mapping>    <input_step>Mapping output specification</input_step>
-    <output_step>filter billing info</output_step>
+    <output_step>Null if...</output_step>
     <main_path>Y</main_path>
     <rename_on_output>N</rename_on_output>
     <description/>
