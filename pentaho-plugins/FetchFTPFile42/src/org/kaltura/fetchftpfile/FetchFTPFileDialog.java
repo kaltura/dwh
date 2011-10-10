@@ -47,6 +47,7 @@ import org.pentaho.di.core.Const;
 import org.pentaho.di.core.exception.KettleException;
 import org.pentaho.di.core.row.RowMetaInterface;
 import org.pentaho.di.core.util.StringUtil;
+import org.pentaho.di.i18n.BaseMessages;
 import org.pentaho.di.trans.TransMeta;
 import org.pentaho.di.trans.step.BaseStepMeta;
 import org.pentaho.di.trans.step.StepDialogInterface;
@@ -58,6 +59,9 @@ import com.enterprisedt.net.ftp.FTPClient;
 
 public class FetchFTPFileDialog extends BaseStepDialog implements
 		StepDialogInterface {
+	
+	private static Class<?> PKG = FetchFTPFileDialog.class;
+	
 	private CTabFolder wTabFolder;
 
 	private FetchFTPFileMeta input;
@@ -175,14 +179,14 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 		formLayout.marginHeight = Const.FORM_MARGIN;
 
 		shell.setLayout(formLayout);
-		shell.setText(Messages.getString("FetchFTPFileDialog.DialogTitle"));
+		shell.setText(BaseMessages.getString(PKG, "FetchFTPFileDialog.DialogTitle"));
 
 		middle = props.getMiddlePct();
 		margin = Const.MARGIN;
 
 		// Stepname line
 		wlStepname = new Label(shell, SWT.RIGHT);
-		wlStepname.setText(Messages.getString("System.Label.StepName"));
+		wlStepname.setText(BaseMessages.getString(PKG, "System.Label.StepName"));
 		props.setLook(wlStepname);
 		fdlStepname = new FormData();
 		fdlStepname.left = new FormAttachment(0, 0);
@@ -204,8 +208,7 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 		// /
 		wServerSettings = new Group(shell, SWT.SHADOW_NONE);
 		props.setLook(wServerSettings);
-		wServerSettings.setText(Messages
-				.getString("FetchFTPFileDialog.ServerSettings.Group.Label"));
+		wServerSettings.setText(BaseMessages.getString(PKG, "FetchFTPFileDialog.ServerSettings.Group.Label"));
 
 		FormLayout ServerSettingsgroupLayout = new FormLayout();
 		ServerSettingsgroupLayout.marginWidth = 10;
@@ -216,8 +219,8 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 
 		// ServerName line
 		wServerName = new LabelTextVar(transMeta, wServerSettings,
-				Messages.getString("FetchFTPFileDialog.Server.Label"),
-				Messages.getString("FetchFTPFileDialog.Server.Tooltip"));
+				BaseMessages.getString(PKG, "FetchFTPFileDialog.Server.Label"),
+				BaseMessages.getString(PKG, "FetchFTPFileDialog.Server.Tooltip"));
 		props.setLook(wServerName);
 		wServerName.addModifyListener(lsMod);
 		fdServerName = new FormData();
@@ -228,8 +231,8 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 
 		// Server port line
 		wPort = new LabelTextVar(transMeta, wServerSettings,
-				Messages.getString("FetchFTPFileDialog.Port.Label"),
-				Messages.getString("FetchFTPFileDialog.Port.Tooltip"));
+				BaseMessages.getString(PKG, "FetchFTPFileDialog.Port.Label"),
+				BaseMessages.getString(PKG, "FetchFTPFileDialog.Port.Tooltip"));
 		props.setLook(wPort);
 		wPort.addModifyListener(lsMod);
 		fdPort = new FormData();
@@ -240,8 +243,8 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 
 		// UserName line
 		wUserName = new LabelTextVar(transMeta, wServerSettings,
-				Messages.getString("FetchFTPFileDialog.User.Label"),
-				Messages.getString("FetchFTPFileDialog.User.Tooltip"));
+				BaseMessages.getString(PKG, "FetchFTPFileDialog.User.Label"),
+				BaseMessages.getString(PKG, "FetchFTPFileDialog.User.Tooltip"));
 		props.setLook(wUserName);
 		wUserName.addModifyListener(lsMod);
 		fdUserName = new FormData();
@@ -252,8 +255,8 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 
 		// Password line
 		wPassword = new LabelTextVar(transMeta, wServerSettings,
-				Messages.getString("FetchFTPFileDialog.Password.Label"),
-				Messages.getString("FetchFTPFileDialog.Password.Tooltip"));
+				BaseMessages.getString(PKG, "FetchFTPFileDialog.Password.Label"),
+				BaseMessages.getString(PKG, "FetchFTPFileDialog.Password.Tooltip"));
 		props.setLook(wPassword);
 		wPassword.setEchoChar('*');
 		wPassword.addModifyListener(lsMod);
@@ -272,11 +275,10 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 		});
 		// Test connection button
 		wTest = new Button(wServerSettings, SWT.PUSH);
-		wTest.setText(Messages.getString("FetchFTPFileDialog.TestConnection.Label"));
+		wTest.setText(BaseMessages.getString(PKG, "FetchFTPFileDialog.TestConnection.Label"));
 		props.setLook(wTest);
 		fdTest = new FormData();
-		wTest.setToolTipText(Messages
-				.getString("FetchFTPFileDialog.TestConnection.Tooltip"));
+		wTest.setToolTipText(BaseMessages.getString(PKG, "FetchFTPFileDialog.TestConnection.Tooltip"));
 		// fdTest.left = new FormAttachment(middle, 0);
 		fdTest.top = new FormAttachment(wPassword, margin);
 		fdTest.right = new FormAttachment(100, 0);
@@ -296,8 +298,7 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 		// /
 		wAdvancedSettings = new Group(shell, SWT.SHADOW_NONE);
 		props.setLook(wAdvancedSettings);
-		wAdvancedSettings.setText(Messages
-				.getString("FetchFTPFileDialog.AdvancedSettings.Group.Label"));
+		wAdvancedSettings.setText(BaseMessages.getString(PKG, "FetchFTPFileDialog.AdvancedSettings.Group.Label"));
 		FormLayout AdvancedSettingsgroupLayout = new FormLayout();
 		AdvancedSettingsgroupLayout.marginWidth = 10;
 		AdvancedSettingsgroupLayout.marginHeight = 10;
@@ -305,7 +306,7 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 
 		// Binary mode selection...
 		wlBinaryMode = new Label(wAdvancedSettings, SWT.RIGHT);
-		wlBinaryMode.setText(Messages.getString("FetchFTPFileDialog.BinaryMode.Label"));
+		wlBinaryMode.setText(BaseMessages.getString(PKG, "FetchFTPFileDialog.BinaryMode.Label"));
 		props.setLook(wlBinaryMode);
 		fdlBinaryMode = new FormData();
 		fdlBinaryMode.left = new FormAttachment(0, 0);
@@ -314,8 +315,7 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 		wlBinaryMode.setLayoutData(fdlBinaryMode);
 		wBinaryMode = new Button(wAdvancedSettings, SWT.CHECK);
 		props.setLook(wBinaryMode);
-		wBinaryMode.setToolTipText(Messages
-				.getString("FetchFTPFileDialog.BinaryMode.Tooltip"));
+		wBinaryMode.setToolTipText(BaseMessages.getString(PKG, "FetchFTPFileDialog.BinaryMode.Tooltip"));
 		fdBinaryMode = new FormData();
 		fdBinaryMode.left = new FormAttachment(middle, margin);
 		fdBinaryMode.top = new FormAttachment(wServerSettings, margin);
@@ -324,8 +324,8 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 
 		// Timeout line
 		wTimeout = new LabelTextVar(transMeta, wAdvancedSettings,
-				Messages.getString("FetchFTPFileDialog.Timeout.Label"),
-				Messages.getString("FetchFTPFileDialog.Timeout.Tooltip"));
+				BaseMessages.getString(PKG, "FetchFTPFileDialog.Timeout.Label"),
+				BaseMessages.getString(PKG, "FetchFTPFileDialog.Timeout.Tooltip"));
 		props.setLook(wTimeout);
 		wTimeout.addModifyListener(lsMod);
 		fdTimeout = new FormData();
@@ -336,7 +336,7 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 
 		// active connection?
 		wlActive = new Label(wAdvancedSettings, SWT.RIGHT);
-		wlActive.setText(Messages.getString("FetchFTPFileDialog.ActiveConns.Label"));
+		wlActive.setText(BaseMessages.getString(PKG, "FetchFTPFileDialog.ActiveConns.Label"));
 		props.setLook(wlActive);
 		fdlActive = new FormData();
 		fdlActive.left = new FormAttachment(0, 0);
@@ -344,7 +344,7 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 		fdlActive.right = new FormAttachment(middle, 0);
 		wlActive.setLayoutData(fdlActive);
 		wActive = new Button(wAdvancedSettings, SWT.CHECK);
-		wActive.setToolTipText(Messages.getString("FetchFTPFileDialog.ActiveConns.Tooltip"));
+		wActive.setToolTipText(BaseMessages.getString(PKG, "FetchFTPFileDialog.ActiveConns.Tooltip"));
 		props.setLook(wActive);
 		fdActive = new FormData();
 		fdActive.left = new FormAttachment(middle, margin);
@@ -359,8 +359,7 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 		// on one machine, but you may want to use it on your execution server
 		//
 		wlControlEncoding = new Label(wAdvancedSettings, SWT.RIGHT);
-		wlControlEncoding.setText(Messages
-				.getString("FetchFTPFileDialog.ControlEncoding.Label"));
+		wlControlEncoding.setText(BaseMessages.getString(PKG, "FetchFTPFileDialog.ControlEncoding.Label"));
 		props.setLook(wlControlEncoding);
 		fdlControlEncoding = new FormData();
 		fdlControlEncoding.left = new FormAttachment(0, 0);
@@ -369,8 +368,7 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 		wlControlEncoding.setLayoutData(fdlControlEncoding);
 		wControlEncoding = new Combo(wAdvancedSettings, SWT.SINGLE | SWT.LEFT
 				| SWT.BORDER);
-		wControlEncoding.setToolTipText(Messages
-				.getString("FetchFTPFileDialog.ControlEncoding.Tooltip"));
+		wControlEncoding.setToolTipText(BaseMessages.getString(PKG, "FetchFTPFileDialog.ControlEncoding.Tooltip"));
 		wControlEncoding.setItems(encodings);
 		props.setLook(wControlEncoding);
 		fdControlEncoding = new FormData();
@@ -390,8 +388,7 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 
 		// Filename field
 		wlFilenameField = new Label(shell, SWT.RIGHT);
-		wlFilenameField.setText(Messages
-				.getString("FetchFTPFileDialog.wlFilenameField.Label"));
+		wlFilenameField.setText(BaseMessages.getString(PKG, "FetchFTPFileDialog.wlFilenameField.Label"));
 		props.setLook(wlFilenameField);
 		fdlFilenameField = new FormData();
 		fdlFilenameField.left = new FormAttachment(0, margin);
@@ -411,8 +408,8 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 
 		// Destination dir
 		wDestinationDir = new LabelTextVar(transMeta, shell,
-				Messages.getString("FetchFTPFileDialog.DestinationDir.Label"),
-				Messages.getString("FetchFTPFileDialog.DestinationDir.Tooltip"));
+				BaseMessages.getString(PKG, "FetchFTPFileDialog.DestinationDir.Label"),
+				BaseMessages.getString(PKG, "FetchFTPFileDialog.DestinationDir.Tooltip"));
 		props.setLook(wDestinationDir);
 		wDestinationDir.addModifyListener(lsMod);
 		fdDestinationDir = new FormData();
@@ -422,10 +419,10 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 		wDestinationDir.setLayoutData(fdDestinationDir);
 	
 		wOK = new Button(shell, SWT.PUSH);
-		wOK.setText(Messages.getString("System.Button.OK"));
+		wOK.setText(BaseMessages.getString(PKG, "System.Button.OK"));
 
 		wCancel = new Button(shell, SWT.PUSH);
-		wCancel.setText(Messages.getString("System.Button.Cancel"));
+		wCancel.setText(BaseMessages.getString(PKG, "System.Button.Cancel"));
 
 		setButtonPositions(new Button[] { wOK, wCancel}, margin,
 				wTabFolder);
@@ -478,22 +475,22 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 			    	if(ftp.connected())
 			    	{
 						MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_INFORMATION );
-						mb.setMessage(Messages.getString("FetchFTPFileDialog.Connected.OK",host) +Const.CR);
-						mb.setText(Messages.getString("FetchFTPFileDialog.Connected.Title.Ok"));
+						mb.setMessage(BaseMessages.getString(PKG, "FetchFTPFileDialog.Connected.OK",host) +Const.CR);
+						mb.setText(BaseMessages.getString(PKG, "FetchFTPFileDialog.Connected.Title.Ok"));
 						mb.open();
 						ftp.quit();
 					}else
 					{
 						MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR );
-						mb.setMessage(Messages.getString("FetchFTPFileDialog.Connected.NOK.ConnectionBad",host) +Const.CR);
-						mb.setText(Messages.getString("FetchFTPFileDialog.Connected.Title.Bad"));
+						mb.setMessage(BaseMessages.getString(PKG, "FetchFTPFileDialog.Connected.NOK.ConnectionBad",host) +Const.CR);
+						mb.setText(BaseMessages.getString(PKG, "FetchFTPFileDialog.Connected.Title.Bad"));
 						mb.open(); 
 				    }
 				} catch(Exception e1)
 				{
 					MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR );
 					mb.setMessage(e1.getMessage());
-					mb.setText(Messages.getString("FetchFTPFileDialog.Connected.Title.Bad"));
+					mb.setText(BaseMessages.getString(PKG, "FetchFTPFileDialog.Connected.Title.Bad"));
 					mb.open(); 
 				}
 			}
@@ -538,7 +535,7 @@ public class FetchFTPFileDialog extends BaseStepDialog implements
 		} catch (KettleException ke) {
 			new ErrorDialog(
 					shell,
-					Messages.getString("FetchFTPFileDialog.FailedToGetFields.DialogTitle"), Messages.getString("FetchFTPFileDialog.FailedToGetFields.DialogMessage"), ke); //$NON-NLS-1$ //$NON-NLS-2$
+					BaseMessages.getString(PKG, "FetchFTPFileDialog.FailedToGetFields.DialogTitle"), BaseMessages.getString(PKG, "FetchFTPFileDialog.FailedToGetFields.DialogMessage"), ke); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 

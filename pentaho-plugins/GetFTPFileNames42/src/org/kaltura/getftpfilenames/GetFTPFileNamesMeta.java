@@ -34,6 +34,8 @@ import org.pentaho.di.core.row.ValueMeta;
 import org.pentaho.di.core.row.ValueMetaInterface;
 import org.pentaho.di.core.variables.VariableSpace;
 import org.pentaho.di.core.xml.XMLHandler;
+import org.pentaho.di.i18n.BaseMessages;
+import org.pentaho.di.repository.ObjectId;
 import org.pentaho.di.repository.Repository;
 import org.pentaho.di.resource.ResourceReference;
 import org.pentaho.di.trans.Trans;
@@ -49,6 +51,7 @@ import com.enterprisedt.net.ftp.FTPClient;
 
 public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterface
 {
+	private static Class<?> PKG = GetFTPFileNamesMeta.class;
 	private static final String NO = "N";
 
 	private static final String YES = "Y";
@@ -284,7 +287,7 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 		}
 	}
 
-	public void readRep(Repository rep, long id_step, List<DatabaseMeta> databases, Map<String, Counter> counters) throws KettleException
+	public void readRep(Repository rep, ObjectId id_step, List<DatabaseMeta> databases, Map<String, Counter> counters) throws KettleException
 	{
 		try
 		{
@@ -320,7 +323,7 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 		}
 	}
 
-	public void saveRep(Repository rep, long id_transformation, long id_step) throws KettleException
+	public void saveRep(Repository rep, ObjectId id_transformation, ObjectId id_step) throws KettleException
 	{
 		try
 		{
@@ -369,18 +372,18 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 		{
 			if (input.length > 0)
 				cr = new CheckResult(CheckResultInterface.TYPE_RESULT_OK,
-						Messages.getString("GetFTPFileNamesMeta.CheckResult.InputOk"), stepinfo);
+						BaseMessages.getString(PKG, "GetFTPFileNamesMeta.CheckResult.InputOk"), stepinfo);
 			else
 				cr = new CheckResult(CheckResultInterface.TYPE_RESULT_ERROR,
-						Messages.getString("GetFTPFileNamesMeta.CheckResult.InputErrorKo"), stepinfo);
+						BaseMessages.getString(PKG, "GetFTPFileNamesMeta.CheckResult.InputErrorKo"), stepinfo);
 			remarks.add(cr);
 
 			if (Const.isEmpty(dynamicFilenameField))
 				cr = new CheckResult(CheckResultInterface.TYPE_RESULT_ERROR,
-						Messages.getString("GetFTPFileNamesMeta.CheckResult.FolderFieldnameMissing"), stepinfo);
+						BaseMessages.getString(PKG, "GetFTPFileNamesMeta.CheckResult.FolderFieldnameMissing"), stepinfo);
 			else
 				cr = new CheckResult(CheckResultInterface.TYPE_RESULT_OK,
-						Messages.getString("GetFTPFileNamesMeta.CheckResult.FolderFieldnameOk"), stepinfo);
+						BaseMessages.getString(PKG, "GetFTPFileNamesMeta.CheckResult.FolderFieldnameOk"), stepinfo);
 			remarks.add(cr);
 
 		} else
@@ -388,10 +391,10 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 
 			if (input.length > 0)
 				cr = new CheckResult(CheckResultInterface.TYPE_RESULT_ERROR,
-						Messages.getString("GetFTPFileNamesMeta.CheckResult.NoInputError"), stepinfo);
+						BaseMessages.getString(PKG, "GetFTPFileNamesMeta.CheckResult.NoInputError"), stepinfo);
 			else
 				cr = new CheckResult(CheckResultInterface.TYPE_RESULT_OK,
-						Messages.getString("GetFTPFileNamesMeta.CheckResult.NoInputOk"), stepinfo);
+						BaseMessages.getString(PKG, "GetFTPFileNamesMeta.CheckResult.NoInputOk"), stepinfo);
 
 			remarks.add(cr);
 
@@ -403,11 +406,11 @@ public class GetFTPFileNamesMeta extends BaseStepMeta implements StepMetaInterfa
 			// FTPFileInputList fileList = getFileList(transMeta);
 			// if (fileList.nrOfFiles() == 0)
 			// cr = new CheckResult(CheckResultInterface.TYPE_RESULT_ERROR,
-			// Messages.getString("GetFTPFileNamesMeta.CheckResult.ExpectedFilesError"),
+			// BaseMessages.getString(PKG, "GetFTPFileNamesMeta.CheckResult.ExpectedFilesError"),
 			// stepinfo);
 			// else
 			// cr = new CheckResult(CheckResultInterface.TYPE_RESULT_OK,
-			// Messages.getString("GetFTPFileNamesMeta.CheckResult.ExpectedFilesOk",
+			// BaseMessages.getString(PKG, "GetFTPFileNamesMeta.CheckResult.ExpectedFilesOk",
 			// ""+fileList.nrOfFiles()), stepinfo);
 			// remarks.add(cr);
 		}

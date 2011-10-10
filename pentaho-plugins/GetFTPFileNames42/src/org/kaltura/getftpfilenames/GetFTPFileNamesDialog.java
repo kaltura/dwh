@@ -52,6 +52,7 @@ import org.pentaho.di.core.Props;
 import org.pentaho.di.core.exception.KettleException;
 import org.pentaho.di.core.row.RowMetaInterface;
 import org.pentaho.di.core.util.StringUtil;
+import org.pentaho.di.i18n.BaseMessages;
 import org.pentaho.di.trans.Trans;
 import org.pentaho.di.trans.TransMeta;
 import org.pentaho.di.trans.TransPreviewFactory;
@@ -72,6 +73,8 @@ import com.enterprisedt.net.ftp.FTPClient;
 
 public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		StepDialogInterface {
+	
+	private static Class<?> PKG = GetFTPFileNamesDialog.class;
 	private CTabFolder wTabFolder;
 
 	private FormData fdTabFolder;
@@ -254,14 +257,14 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		formLayout.marginHeight = Const.FORM_MARGIN;
 
 		shell.setLayout(formLayout);
-		shell.setText(Messages.getString("GetFTPFileNamesDialog.DialogTitle"));
+		shell.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.DialogTitle"));
 
 		middle = props.getMiddlePct();
 		margin = Const.MARGIN;
 
 		// Stepname line
 		wlStepname = new Label(shell, SWT.RIGHT);
-		wlStepname.setText(Messages.getString("System.Label.StepName"));
+		wlStepname.setText(BaseMessages.getString(PKG, "System.Label.StepName"));
 		props.setLook(wlStepname);
 		fdlStepname = new FormData();
 		fdlStepname.left = new FormAttachment(0, 0);
@@ -285,8 +288,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		// START OF FTP TAB ///
 		// ////////////////////////
 		wFTPTab = new CTabItem(wTabFolder, SWT.NONE);
-		wFTPTab.setText(Messages
-				.getString("GetFTPFileNamesDialog.FTPTab.TabTitle"));
+		wFTPTab.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FTPTab.TabTitle"));
 
 		wFTPComp = new Composite(wTabFolder, SWT.NONE);
 		props.setLook(wFTPComp);
@@ -301,8 +303,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		// /
 		wServerSettings = new Group(wFTPComp, SWT.SHADOW_NONE);
 		props.setLook(wServerSettings);
-		wServerSettings.setText(Messages
-				.getString("GetFTPFileNamesDialog.ServerSettings.Group.Label"));
+		wServerSettings.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.ServerSettings.Group.Label"));
 
 		FormLayout ServerSettingsgroupLayout = new FormLayout();
 		ServerSettingsgroupLayout.marginWidth = 10;
@@ -312,8 +313,8 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		// ServerName line
 		wServerName = new LabelTextVar(transMeta, wServerSettings,
-				Messages.getString("GetFTPFileNamesDialog.Server.Label"),
-				Messages.getString("GetFTPFileNamesDialog.Server.Tooltip"));
+				BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Server.Label"),
+				BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Server.Tooltip"));
 		props.setLook(wServerName);
 		wServerName.addModifyListener(lsMod);
 		fdServerName = new FormData();
@@ -324,8 +325,8 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		// Server port line
 		wPort = new LabelTextVar(transMeta, wServerSettings,
-				Messages.getString("GetFTPFileNamesDialog.Port.Label"),
-				Messages.getString("GetFTPFileNamesDialog.Port.Tooltip"));
+				BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Port.Label"),
+				BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Port.Tooltip"));
 		props.setLook(wPort);
 		wPort.addModifyListener(lsMod);
 		fdPort = new FormData();
@@ -336,8 +337,8 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		// UserName line
 		wUserName = new LabelTextVar(transMeta, wServerSettings,
-				Messages.getString("GetFTPFileNamesDialog.User.Label"),
-				Messages.getString("GetFTPFileNamesDialog.User.Tooltip"));
+				BaseMessages.getString(PKG, "GetFTPFileNamesDialog.User.Label"),
+				BaseMessages.getString(PKG, "GetFTPFileNamesDialog.User.Tooltip"));
 		props.setLook(wUserName);
 		wUserName.addModifyListener(lsMod);
 		fdUserName = new FormData();
@@ -348,8 +349,8 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		// Password line
 		wPassword = new LabelTextVar(transMeta, wServerSettings,
-				Messages.getString("GetFTPFileNamesDialog.Password.Label"),
-				Messages.getString("GetFTPFileNamesDialog.Password.Tooltip"));
+				BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Password.Label"),
+				BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Password.Tooltip"));
 		props.setLook(wPassword);
 		wPassword.setEchoChar('*');
 		wPassword.addModifyListener(lsMod);
@@ -368,11 +369,10 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		});
 		// Test connection button
 		wTest = new Button(wServerSettings, SWT.PUSH);
-		wTest.setText(Messages.getString("GetFTPFileNamesDialog.TestConnection.Label"));
+		wTest.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.TestConnection.Label"));
 		props.setLook(wTest);
 		fdTest = new FormData();
-		wTest.setToolTipText(Messages
-				.getString("GetFTPFileNamesDialog.TestConnection.Tooltip"));
+		wTest.setToolTipText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.TestConnection.Tooltip"));
 		// fdTest.left = new FormAttachment(middle, 0);
 		fdTest.top = new FormAttachment(wPassword, margin);
 		fdTest.right = new FormAttachment(100, 0);
@@ -392,8 +392,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		// /
 		wAdvancedSettings = new Group(wFTPComp, SWT.SHADOW_NONE);
 		props.setLook(wAdvancedSettings);
-		wAdvancedSettings.setText(Messages
-				.getString("GetFTPFileNamesDialog.AdvancedSettings.Group.Label"));
+		wAdvancedSettings.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.AdvancedSettings.Group.Label"));
 		FormLayout AdvancedSettingsgroupLayout = new FormLayout();
 		AdvancedSettingsgroupLayout.marginWidth = 10;
 		AdvancedSettingsgroupLayout.marginHeight = 10;
@@ -401,7 +400,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		// Binary mode selection...
 		wlBinaryMode = new Label(wAdvancedSettings, SWT.RIGHT);
-		wlBinaryMode.setText(Messages.getString("GetFTPFileNamesDialog.BinaryMode.Label"));
+		wlBinaryMode.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.BinaryMode.Label"));
 		props.setLook(wlBinaryMode);
 		fdlBinaryMode = new FormData();
 		fdlBinaryMode.left = new FormAttachment(0, 0);
@@ -410,8 +409,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		wlBinaryMode.setLayoutData(fdlBinaryMode);
 		wBinaryMode = new Button(wAdvancedSettings, SWT.CHECK);
 		props.setLook(wBinaryMode);
-		wBinaryMode.setToolTipText(Messages
-				.getString("GetFTPFileNamesDialog.BinaryMode.Tooltip"));
+		wBinaryMode.setToolTipText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.BinaryMode.Tooltip"));
 		fdBinaryMode = new FormData();
 		fdBinaryMode.left = new FormAttachment(middle, margin);
 		fdBinaryMode.top = new FormAttachment(wServerSettings, margin);
@@ -420,8 +418,8 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		// Timeout line
 		wTimeout = new LabelTextVar(transMeta, wAdvancedSettings,
-				Messages.getString("GetFTPFileNamesDialog.Timeout.Label"),
-				Messages.getString("GetFTPFileNamesDialog.Timeout.Tooltip"));
+				BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Timeout.Label"),
+				BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Timeout.Tooltip"));
 		props.setLook(wTimeout);
 		wTimeout.addModifyListener(lsMod);
 		fdTimeout = new FormData();
@@ -432,7 +430,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		// active connection?
 		wlActive = new Label(wAdvancedSettings, SWT.RIGHT);
-		wlActive.setText(Messages.getString("GetFTPFileNamesDialog.ActiveConns.Label"));
+		wlActive.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.ActiveConns.Label"));
 		props.setLook(wlActive);
 		fdlActive = new FormData();
 		fdlActive.left = new FormAttachment(0, 0);
@@ -440,7 +438,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		fdlActive.right = new FormAttachment(middle, 0);
 		wlActive.setLayoutData(fdlActive);
 		wActive = new Button(wAdvancedSettings, SWT.CHECK);
-		wActive.setToolTipText(Messages.getString("GetFTPFileNamesDialog.ActiveConns.Tooltip"));
+		wActive.setToolTipText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.ActiveConns.Tooltip"));
 		props.setLook(wActive);
 		fdActive = new FormData();
 		fdActive.left = new FormAttachment(middle, margin);
@@ -455,8 +453,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		// on one machine, but you may want to use it on your execution server
 		//
 		wlControlEncoding = new Label(wAdvancedSettings, SWT.RIGHT);
-		wlControlEncoding.setText(Messages
-				.getString("GetFTPFileNamesDialog.ControlEncoding.Label"));
+		wlControlEncoding.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.ControlEncoding.Label"));
 		props.setLook(wlControlEncoding);
 		fdlControlEncoding = new FormData();
 		fdlControlEncoding.left = new FormAttachment(0, 0);
@@ -465,8 +462,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		wlControlEncoding.setLayoutData(fdlControlEncoding);
 		wControlEncoding = new Combo(wAdvancedSettings, SWT.SINGLE | SWT.LEFT
 				| SWT.BORDER);
-		wControlEncoding.setToolTipText(Messages
-				.getString("GetFTPFileNamesDialog.ControlEncoding.Tooltip"));
+		wControlEncoding.setToolTipText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.ControlEncoding.Tooltip"));
 		wControlEncoding.setItems(encodings);
 		props.setLook(wControlEncoding);
 		fdControlEncoding = new FormData();
@@ -502,8 +498,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		// START OF FILE TAB ///
 		// ////////////////////////
 		wFileTab = new CTabItem(wTabFolder, SWT.NONE);
-		wFileTab.setText(Messages
-				.getString("GetFTPFileNamesDialog.FileTab.TabTitle"));
+		wFileTab.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FileTab.TabTitle"));
 
 		wFileComp = new Composite(wTabFolder, SWT.NONE);
 		props.setLook(wFileComp);
@@ -519,8 +514,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		wOriginFiles = new Group(wFileComp, SWT.SHADOW_NONE);
 		props.setLook(wOriginFiles);
-		wOriginFiles.setText(Messages
-				.getString("GetFTPFileNamesDialog.wOriginFiles.Label"));
+		wOriginFiles.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.wOriginFiles.Label"));
 
 		FormLayout OriginFilesgroupLayout = new FormLayout();
 		OriginFilesgroupLayout.marginWidth = 10;
@@ -529,8 +523,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		// Is Filename defined in a Field
 		wlFileField = new Label(wOriginFiles, SWT.RIGHT);
-		wlFileField.setText(Messages
-				.getString("GetFTPFileNamesDialog.FileField.Label"));
+		wlFileField.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FileField.Label"));
 		props.setLook(wlFileField);
 		fdlFileField = new FormData();
 		fdlFileField.left = new FormAttachment(0, -margin);
@@ -540,8 +533,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		wFileField = new Button(wOriginFiles, SWT.CHECK);
 		props.setLook(wFileField);
-		wFileField.setToolTipText(Messages
-				.getString("GetFTPFileNamesDialog.FileField.Tooltip"));
+		wFileField.setToolTipText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FileField.Tooltip"));
 		fdFileField = new FormData();
 		fdFileField.left = new FormAttachment(middle, -margin);
 		fdFileField.top = new FormAttachment(0, margin);
@@ -557,8 +549,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		// Filename field
 		wlFilenameField = new Label(wOriginFiles, SWT.RIGHT);
-		wlFilenameField.setText(Messages
-				.getString("GetFTPFileNamesDialog.wlFilenameField.Label"));
+		wlFilenameField.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.wlFilenameField.Label"));
 		props.setLook(wlFilenameField);
 		fdlFilenameField = new FormData();
 		fdlFilenameField.left = new FormAttachment(0, -margin);
@@ -578,8 +569,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		// Wildcard field
 		wlWildcardField = new Label(wOriginFiles, SWT.RIGHT);
-		wlWildcardField.setText(Messages
-				.getString("GetFTPFileNamesDialog.wlWildcardField.Label"));
+		wlWildcardField.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.wlWildcardField.Label"));
 		props.setLook(wlWildcardField);
 		fdlWildcardField = new FormData();
 		fdlWildcardField.left = new FormAttachment(0, -margin);
@@ -609,8 +599,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		// Filename line
 		wlFilename = new Label(wFileComp, SWT.RIGHT);
-		wlFilename.setText(Messages
-				.getString("GetFTPFileNamesDialog.Filename.Label"));
+		wlFilename.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Filename.Label"));
 		props.setLook(wlFilename);
 		fdlFilename = new FormData();
 		fdlFilename.left = new FormAttachment(0, 0);
@@ -620,9 +609,8 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		wbbFilename = new Button(wFileComp, SWT.PUSH | SWT.CENTER);
 		props.setLook(wbbFilename);
-		wbbFilename.setText(Messages.getString("System.Button.Browse"));
-		wbbFilename.setToolTipText(Messages
-				.getString("System.Tooltip.BrowseForFileOrDirAndAdd"));
+		wbbFilename.setText(BaseMessages.getString(PKG, "System.Button.Browse"));
+		wbbFilename.setToolTipText(BaseMessages.getString(PKG, "System.Tooltip.BrowseForFileOrDirAndAdd"));
 		fdbFilename = new FormData();
 		fdbFilename.right = new FormAttachment(100, 0);
 		fdbFilename.top = new FormAttachment(wOriginFiles, margin);
@@ -630,10 +618,8 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		wbaFilename = new Button(wFileComp, SWT.PUSH | SWT.CENTER);
 		props.setLook(wbaFilename);
-		wbaFilename.setText(Messages
-				.getString("GetFTPFileNamesDialog.FilenameAdd.Button"));
-		wbaFilename.setToolTipText(Messages
-				.getString("GetFTPFileNamesDialog.FilenameAdd.Tooltip"));
+		wbaFilename.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FilenameAdd.Button"));
+		wbaFilename.setToolTipText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FilenameAdd.Tooltip"));
 		fdbaFilename = new FormData();
 		fdbaFilename.right = new FormAttachment(wbbFilename, -margin);
 		fdbaFilename.top = new FormAttachment(wOriginFiles, margin);
@@ -650,8 +636,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		wFilename.setLayoutData(fdFilename);
 
 		wlFilemask = new Label(wFileComp, SWT.RIGHT);
-		wlFilemask.setText(Messages
-				.getString("GetFTPFileNamesDialog.Filemask.Label"));
+		wlFilemask.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Filemask.Label"));
 		props.setLook(wlFilemask);
 		fdlFilemask = new FormData();
 		fdlFilemask.left = new FormAttachment(0, 0);
@@ -670,8 +655,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		// Filename list line
 		wlFilenameList = new Label(wFileComp, SWT.RIGHT);
-		wlFilenameList.setText(Messages
-				.getString("GetFTPFileNamesDialog.FilenameList.Label"));
+		wlFilenameList.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FilenameList.Label"));
 		props.setLook(wlFilenameList);
 		fdlFilenameList = new FormData();
 		fdlFilenameList.left = new FormAttachment(0, 0);
@@ -682,10 +666,8 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		// Buttons to the right of the screen...
 		wbdFilename = new Button(wFileComp, SWT.PUSH | SWT.CENTER);
 		props.setLook(wbdFilename);
-		wbdFilename.setText(Messages
-				.getString("GetFTPFileNamesDialog.FilenameDelete.Button"));
-		wbdFilename.setToolTipText(Messages
-				.getString("GetFTPFileNamesDialog.FilenameDelete.Tooltip"));
+		wbdFilename.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FilenameDelete.Button"));
+		wbdFilename.setToolTipText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FilenameDelete.Tooltip"));
 		fdbdFilename = new FormData();
 		fdbdFilename.right = new FormAttachment(100, 0);
 		fdbdFilename.top = new FormAttachment(wFilemask, 40);
@@ -693,10 +675,8 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		wbeFilename = new Button(wFileComp, SWT.PUSH | SWT.CENTER);
 		props.setLook(wbeFilename);
-		wbeFilename.setText(Messages
-				.getString("GetFTPFileNamesDialog.FilenameEdit.Button"));
-		wbeFilename.setToolTipText(Messages
-				.getString("GetFTPFileNamesDialog.FilenameEdit.Tooltip"));
+		wbeFilename.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FilenameEdit.Button"));
+		wbeFilename.setToolTipText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FilenameEdit.Tooltip"));
 		fdbeFilename = new FormData();
 		fdbeFilename.right = new FormAttachment(100, 0);
 		fdbeFilename.left = new FormAttachment(wbdFilename, 0, SWT.LEFT);
@@ -705,8 +685,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		wbShowFiles = new Button(wFileComp, SWT.PUSH | SWT.CENTER);
 		props.setLook(wbShowFiles);
-		wbShowFiles.setText(Messages
-				.getString("GetFTPFileNamesDialog.ShowFiles.Button"));
+		wbShowFiles.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.ShowFiles.Button"));
 		fdbShowFiles = new FormData();
 		fdbShowFiles.left = new FormAttachment(middle, 0);
 		fdbShowFiles.bottom = new FormAttachment(100, 0);
@@ -714,16 +693,15 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		ColumnInfo[] colinfo = new ColumnInfo[] {
 				new ColumnInfo(
-						Messages.getString("GetFTPFileNamesDialog.FileDirColumn.Column"),
+						BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FileDirColumn.Column"),
 						ColumnInfo.COLUMN_TYPE_TEXT, false),
 				new ColumnInfo(
-						Messages.getString("GetFTPFileNamesDialog.WildcardColumn.Column"),
+						BaseMessages.getString(PKG, "GetFTPFileNamesDialog.WildcardColumn.Column"),
 						ColumnInfo.COLUMN_TYPE_TEXT, false), };
 
 		colinfo[0].setUsingVariables(true);
 		colinfo[1].setUsingVariables(true);
-		colinfo[1].setToolTip(Messages
-				.getString("GetFTPFileNamesDialog.RegExpColumn.Column"));
+		colinfo[1].setToolTip(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.RegExpColumn.Column"));
 
 		wFilenameList = new TableView(transMeta, wFileComp, SWT.FULL_SELECTION
 				| SWT.SINGLE | SWT.BORDER, colinfo, colinfo.length, lsMod,
@@ -761,8 +739,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		// START OF Filter TAB ///
 		// ////////////////////////
 		wFilterTab = new CTabItem(wTabFolder, SWT.NONE);
-		wFilterTab.setText(Messages
-				.getString("GetFTPFileNamesDialog.FilterTab.TabTitle"));
+		wFilterTab.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FilterTab.TabTitle"));
 
 		wFilterComp = new Composite(wTabFolder, SWT.NONE);
 		props.setLook(wFilterComp);
@@ -774,8 +751,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		// Filter File Type
 		wlRecursiveSearch = new Label(wFilterComp, SWT.RIGHT);
-		wlRecursiveSearch.setText(Messages
-				.getString("GetFTPFileNamesDialog.FilterTab.RecursiveSearch.Label"));
+		wlRecursiveSearch.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FilterTab.RecursiveSearch.Label"));
 		props.setLook(wlRecursiveSearch);
 		fdlRecursiveSearch = new FormData();
 		fdlRecursiveSearch.left = new FormAttachment(0, 0);
@@ -784,8 +760,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		wlRecursiveSearch.setLayoutData(fdlRecursiveSearch);
 		
 		wRecursiveSearch = new Button(wFilterComp, SWT.CHECK);
-		wRecursiveSearch.setToolTipText(Messages
-				.getString("GetFTPFileNamesDialog.FilterTab.RecursiveSearch.CheckBox"));
+		wRecursiveSearch.setToolTipText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FilterTab.RecursiveSearch.CheckBox"));
 		// wFilterFileType.select(0); // +1: starts at -1
 		props.setLook(wRecursiveSearch);
 		fdRecursiveSearch = new FormData();
@@ -800,9 +775,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		wAdditionalGroup = new Group(wFilterComp, SWT.SHADOW_NONE);
 		props.setLook(wAdditionalGroup);
-		wAdditionalGroup
-				.setText(Messages
-						.getString("GetFTPFileNamesDialog.Group.AdditionalGroup.Label"));
+		wAdditionalGroup.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Group.AdditionalGroup.Label"));
 
 		FormLayout additionalgroupLayout = new FormLayout();
 		additionalgroupLayout.marginWidth = 10;
@@ -810,8 +783,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		wAdditionalGroup.setLayout(additionalgroupLayout);
 
 		wlInclRownum = new Label(wAdditionalGroup, SWT.RIGHT);
-		wlInclRownum.setText(Messages
-				.getString("GetFTPFileNamesDialog.InclRownum.Label"));
+		wlInclRownum.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.InclRownum.Label"));
 		props.setLook(wlInclRownum);
 		fdlInclRownum = new FormData();
 		fdlInclRownum.left = new FormAttachment(0, 0);
@@ -820,16 +792,14 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		wlInclRownum.setLayoutData(fdlInclRownum);
 		wInclRownum = new Button(wAdditionalGroup, SWT.CHECK);
 		props.setLook(wInclRownum);
-		wInclRownum.setToolTipText(Messages
-				.getString("GetFTPFileNamesDialog.InclRownum.Tooltip"));
+		wInclRownum.setToolTipText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.InclRownum.Tooltip"));
 		fdRownum = new FormData();
 		fdRownum.left = new FormAttachment(middle, 0);
 		fdRownum.top = new FormAttachment(wRecursiveSearch, 2 * margin);
 		wInclRownum.setLayoutData(fdRownum);
 
 		wlInclRownumField = new Label(wAdditionalGroup, SWT.RIGHT);
-		wlInclRownumField.setText(Messages
-				.getString("GetFTPFileNamesDialog.InclRownumField.Label"));
+		wlInclRownumField.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.InclRownumField.Label"));
 		props.setLook(wlInclRownumField);
 		fdlInclRownumField = new FormData();
 		fdlInclRownumField.left = new FormAttachment(wInclRownum, margin);
@@ -856,7 +826,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		// ///////////////////////////////////////////////////////////
 
 		wlLimit = new Label(wFilterComp, SWT.RIGHT);
-		wlLimit.setText(Messages.getString("GetFTPFileNamesDialog.Limit.Label"));
+		wlLimit.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Limit.Label"));
 		props.setLook(wlLimit);
 		fdlLimit = new FormData();
 		fdlLimit.left = new FormAttachment(0, 0);
@@ -878,8 +848,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 
 		wAddFileResult = new Group(wFilterComp, SWT.SHADOW_NONE);
 		props.setLook(wAddFileResult);
-		wAddFileResult.setText(Messages
-				.getString("GetFTPFileNamesDialog.wAddFileResult.Label"));
+		wAddFileResult.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.wAddFileResult.Label"));
 
 		FormLayout AddFileResultgroupLayout = new FormLayout();
 		AddFileResultgroupLayout.marginWidth = 10;
@@ -887,8 +856,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		wAddFileResult.setLayout(AddFileResultgroupLayout);
 
 		wlAddResult = new Label(wAddFileResult, SWT.RIGHT);
-		wlAddResult.setText(Messages
-				.getString("GetFTPFileNamesDialog.AddResult.Label"));
+		wlAddResult.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.AddResult.Label"));
 		props.setLook(wlAddResult);
 		fdlAddResult = new FormData();
 		fdlAddResult.left = new FormAttachment(0, 0);
@@ -897,8 +865,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		wlAddResult.setLayoutData(fdlAddResult);
 		wAddResult = new Button(wAddFileResult, SWT.CHECK);
 		props.setLook(wAddResult);
-		wAddResult.setToolTipText(Messages
-				.getString("GetFTPFileNamesDialog.AddResult.Tooltip"));
+		wAddResult.setToolTipText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.AddResult.Tooltip"));
 		fdAddResult = new FormData();
 		fdAddResult.left = new FormAttachment(middle, 0);
 		fdAddResult.top = new FormAttachment(wLimit, margin);
@@ -929,14 +896,13 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		// ///////////////////////////////////////////////////////////
 
 		wOK = new Button(shell, SWT.PUSH);
-		wOK.setText(Messages.getString("System.Button.OK"));
+		wOK.setText(BaseMessages.getString(PKG, "System.Button.OK"));
 
 		wPreview = new Button(shell, SWT.PUSH);
-		wPreview.setText(Messages
-				.getString("GetFTPFileNamesDialog.Preview.Button"));
+		wPreview.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Preview.Button"));
 
 		wCancel = new Button(shell, SWT.PUSH);
-		wCancel.setText(Messages.getString("System.Button.Cancel"));
+		wCancel.setText(BaseMessages.getString(PKG, "System.Button.Cancel"));
 
 		setButtonPositions(new Button[] { wOK, wCancel, wPreview }, margin,
 				wTabFolder);
@@ -1026,7 +992,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 							| SWT.ICON_ERROR);
 					mb.setMessage(Messages
 							.getString("GetFTPFileNamesDialog.NoFilesFound.DialogMessage"));
-					mb.setText(Messages.getString("System.Dialog.Error.Title"));
+					mb.setText(BaseMessages.getString(PKG, "System.Dialog.Error.Title"));
 					mb.open();
 				}
 			}
@@ -1064,10 +1030,10 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 					}
 
 					dialog.setFilterNames(new String[] {
-							Messages.getString("GetFTPFileNamesDialog.FileType.TextAndCSVFiles"),
-							Messages.getString("System.FileType.CSVFiles"),
-							Messages.getString("System.FileType.TextFiles"),
-							Messages.getString("System.FileType.AllFiles") });
+							BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FileType.TextAndCSVFiles"),
+							BaseMessages.getString(PKG, "System.FileType.CSVFiles"),
+							BaseMessages.getString(PKG, "System.FileType.TextFiles"),
+							BaseMessages.getString(PKG, "System.FileType.AllFiles") });
 
 					if (dialog.open() != null) {
 						String str = dialog.getFilterPath()
@@ -1102,22 +1068,22 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 			    	if(ftp.connected())
 			    	{
 						MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_INFORMATION );
-						mb.setMessage(Messages.getString("GetFTPFileNamesDialog.Connected.OK",host) +Const.CR);
-						mb.setText(Messages.getString("GetFTPFileNamesDialog.Connected.Title.Ok"));
+						mb.setMessage(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Connected.OK",host) +Const.CR);
+						mb.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Connected.Title.Ok"));
 						mb.open();
 						ftp.quit();
 					}else
 					{
 						MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR );
-						mb.setMessage(Messages.getString("GetFTPFileNamesDialog.Connected.NOK.ConnectionBad",host) +Const.CR);
-						mb.setText(Messages.getString("GetFTPFileNamesDialog.Connected.Title.Bad"));
+						mb.setMessage(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Connected.NOK.ConnectionBad",host) +Const.CR);
+						mb.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Connected.Title.Bad"));
 						mb.open(); 
 				    }
 				} catch(Exception e1)
 				{
 					MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR );
 					mb.setMessage(e1.getMessage());
-					mb.setText(Messages.getString("GetFTPFileNamesDialog.Connected.Title.Bad"));
+					mb.setText(BaseMessages.getString(PKG, "GetFTPFileNamesDialog.Connected.Title.Bad"));
 					mb.open(); 
 				}
 			}
@@ -1167,7 +1133,7 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		} catch (KettleException ke) {
 			new ErrorDialog(
 					shell,
-					Messages.getString("GetFTPFileNamesDialog.FailedToGetFields.DialogTitle"), Messages.getString("GetFTPFileNamesDialog.FailedToGetFields.DialogMessage"), ke); //$NON-NLS-1$ //$NON-NLS-2$
+					BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FailedToGetFields.DialogTitle"), BaseMessages.getString(PKG, "GetFTPFileNamesDialog.FailedToGetFields.DialogMessage"), ke); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -1348,8 +1314,8 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 		EnterNumberDialog numberDialog = new EnterNumberDialog(
 				shell,
 				props.getDefaultPreviewSize(),
-				Messages.getString("GetFTPFileNamesDialog.PreviewSize.DialogTitle"),
-				Messages.getString("GetFTPFileNamesDialog.PreviewSize.DialogMessage"));
+				BaseMessages.getString(PKG, "GetFTPFileNamesDialog.PreviewSize.DialogTitle"),
+				BaseMessages.getString(PKG, "GetFTPFileNamesDialog.PreviewSize.DialogMessage"));
 		int previewSize = numberDialog.open();
 		if (previewSize > 0) {
 			TransPreviewProgressDialog progressDialog = new TransPreviewProgressDialog(
@@ -1365,8 +1331,8 @@ public class GetFTPFileNamesDialog extends BaseStepDialog implements
 						&& trans.getResult().getNrErrors() > 0) {
 					EnterTextDialog etd = new EnterTextDialog(
 							shell,
-							Messages.getString("System.Dialog.Error.Title"),
-							Messages.getString("GetFTPFileNamesDialog.ErrorInPreview.DialogMessage"),
+							BaseMessages.getString(PKG, "System.Dialog.Error.Title"),
+							BaseMessages.getString(PKG, "GetFTPFileNamesDialog.ErrorInPreview.DialogMessage"),
 							loggingText, true);
 					etd.setReadOnly();
 					etd.open();

@@ -4,6 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="resources/swt.jar"/>
 	<classpathentry kind="lib" path="resources/edtftpj-2.0.2.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Kettle trunk"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Kettle 4.2.0"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

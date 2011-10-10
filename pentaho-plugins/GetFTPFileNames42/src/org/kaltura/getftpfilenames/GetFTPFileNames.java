@@ -16,7 +16,7 @@ import org.pentaho.di.core.exception.KettleException;
 import org.pentaho.di.core.exception.KettleStepException;
 import org.pentaho.di.core.row.RowDataUtil;
 import org.pentaho.di.core.row.RowMeta;
-import org.pentaho.di.job.entries.ftp.Messages;
+import org.pentaho.di.i18n.BaseMessages;
 import org.pentaho.di.trans.Trans;
 import org.pentaho.di.trans.TransMeta;
 import org.pentaho.di.trans.step.BaseStep;
@@ -35,6 +35,7 @@ import com.enterprisedt.net.ftp.FTPClient;
  */
 public class GetFTPFileNames extends BaseStep implements StepInterface
 {
+	private static Class<?> PKG = GetFTPFileNames.class;
     private GetFTPFileNamesMeta meta;
     private GetFTPFileNamesData data;
     
@@ -95,8 +96,8 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
 	        	// Check is filename field is provided
 				if (Const.isEmpty(meta.getDynamicFilenameField()))
 				{
-					logError(Messages.getString("GetFTPFileNames.Log.NoField"));
-					throw new KettleException(Messages.getString("GetFTPFileNames.Log.NoField"));
+					logError(BaseMessages.getString(PKG, "GetFTPFileNames.Log.NoField"));
+					throw new KettleException(BaseMessages.getString(PKG, "GetFTPFileNames.Log.NoField"));
 				}
 				
 	            
@@ -107,8 +108,8 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
 					if (data.indexOfFilenameField<0)
 					{
 						// The field is unreachable !
-						logError(Messages.getString("GetFTPFileNames.Log.ErrorFindingField",meta.getDynamicFilenameField())); //$NON-NLS-1$ //$NON-NLS-2$
-						throw new KettleException(Messages.getString("GetFTPFileNames.Exception.CouldnotFindField",meta.getDynamicFilenameField())); //$NON-NLS-1$ //$NON-NLS-2$
+						logError(BaseMessages.getString(PKG, "GetFTPFileNames.Log.ErrorFindingField",meta.getDynamicFilenameField())); //$NON-NLS-1$ //$NON-NLS-2$
+						throw new KettleException(BaseMessages.getString(PKG, "GetFTPFileNames.Exception.CouldnotFindField",meta.getDynamicFilenameField())); //$NON-NLS-1$ //$NON-NLS-2$
 					}
 				}  
 				
@@ -121,8 +122,8 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
 						if (data.indexOfWildcardField<0)
 						{
 							// The field is unreachable !
-							logError(Messages.getString("GetFTPFileNames.Log.ErrorFindingField")+ "[" + meta.getDynamicWildcardField()+"]"); //$NON-NLS-1$ //$NON-NLS-2$
-							throw new KettleException(Messages.getString("GetFTPFileNames.Exception.CouldnotFindField",meta.getDynamicWildcardField())); //$NON-NLS-1$ //$NON-NLS-2$
+							logError(BaseMessages.getString(PKG, "GetFTPFileNames.Log.ErrorFindingField")+ "[" + meta.getDynamicWildcardField()+"]"); //$NON-NLS-1$ //$NON-NLS-2$
+							throw new KettleException(BaseMessages.getString(PKG, "GetFTPFileNames.Exception.CouldnotFindField",meta.getDynamicWildcardField())); //$NON-NLS-1$ //$NON-NLS-2$
 						}
 					}
 				}
@@ -206,7 +207,7 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
 
         if (checkFeedback(getLinesInput())) 	
         {
-        	if(log.isBasic()) logBasic(Messages.getString("GetFTPFileNames.Log.NrLine",""+getLinesInput()));
+        	if(log.isBasic()) logBasic(BaseMessages.getString(PKG, "GetFTPFileNames.Log.NrLine",""+getLinesInput()));
         }
 
         return true;
@@ -289,11 +290,5 @@ public class GetFTPFileNames extends BaseStep implements StepInterface
 			}
 		}	 
     }
-    
-    //
-    // Run is were the action happens!
-    public void run()
-    {
-    	BaseStep.runStepThread(this, meta, data);
-    }
+
 }

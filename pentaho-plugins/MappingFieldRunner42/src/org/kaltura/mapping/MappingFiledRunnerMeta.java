@@ -23,11 +23,12 @@ import org.pentaho.di.core.database.DatabaseMeta;
 import org.pentaho.di.core.exception.KettleException;
 import org.pentaho.di.core.exception.KettleStepException;
 import org.pentaho.di.core.exception.KettleXMLException;
-import org.pentaho.di.core.logging.LogWriter;
 import org.pentaho.di.core.row.RowMetaInterface;
 import org.pentaho.di.core.row.ValueMetaInterface;
 import org.pentaho.di.core.variables.VariableSpace;
 import org.pentaho.di.core.xml.XMLHandler;
+import org.pentaho.di.i18n.BaseMessages;
+import org.pentaho.di.repository.ObjectId;
 import org.pentaho.di.repository.Repository;
 import org.pentaho.di.resource.ResourceDefinition;
 import org.pentaho.di.resource.ResourceEntry;
@@ -60,6 +61,8 @@ import org.w3c.dom.Node;
 
 public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInterface
 {
+	private static Class<?> PKG = MappingFiledRunnerMeta.class;
+	
     private String fieldName;
     private boolean executeForEachRow;
     
@@ -91,7 +94,7 @@ public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInte
         }
         catch(KettleException e)
         {
-            throw new KettleXMLException(Messages.getString("MappingFieldRunnerMeta.Exception.ErrorLoadingTransformationStepFromXML"), e); //$NON-NLS-1$
+            throw new KettleXMLException(BaseMessages.getString(PKG, "MappingFieldRunnerMeta.Exception.ErrorLoadingTransformationStepFromXML"), e); //$NON-NLS-1$
         }
 	}
 
@@ -203,7 +206,7 @@ public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInte
         return retval.toString();
     }
     
-    public void readRep(Repository rep, long id_step, List<DatabaseMeta> databases, Map<String, Counter> counters) throws KettleException
+    public void readRep(Repository rep, ObjectId id_step, List<DatabaseMeta> databases, Map<String, Counter> counters) throws KettleException
 	{
     	fieldName         = rep.getStepAttributeString(id_step, "fieldname"); //$NON-NLS-1$
         executeForEachRow        = rep.getStepAttributeBoolean(id_step, "for_each_row"); //$NON-NLS-1$
@@ -259,7 +262,7 @@ public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInte
         
 	}
     
-    public void saveRep(Repository rep, long id_transformation, long id_step) throws KettleException
+    public void saveRep(Repository rep, ObjectId id_transformation, ObjectId id_step) throws KettleException
     {
         rep.saveStepAttribute(id_transformation, id_step, "fieldname", fieldName); //$NON-NLS-1$
         rep.saveStepAttribute(id_transformation, id_step, "for_each_row", executeForEachRow); //$NON-NLS-1$
@@ -297,7 +300,7 @@ public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInte
         }
         catch(KettleException e)
         {
-            throw new KettleStepException(Messages.getString("MappingFieldRunnerMeta.Exception.UnableToLoadMappingTransformation"), e);
+            throw new KettleStepException(BaseMessages.getString(PKG, "MappingFieldRunnerMeta.Exception.UnableToLoadMappingTransformation"), e);
         }
         
         // Keep track of all the fields that need renaming...
@@ -320,7 +323,7 @@ public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInte
         		for (MappingValueRename valueRename : definition.getValueRenames()) {
         			ValueMetaInterface valueMeta = inputRowMeta.searchValueMeta(valueRename.getSourceValueName());
         			if (valueMeta==null) {
-        				throw new KettleStepException(Messages.getString("MappingFieldRunnerMeta.Exception.UnableToFindField", valueRename.getSourceValueName()));
+        				throw new KettleStepException(BaseMessages.getString(PKG, "MappingFieldRunnerMeta.Exception.UnableToFindField", valueRename.getSourceValueName()));
         			}
         			valueMeta.setName(valueRename.getTargetValueName());
         		}
@@ -332,7 +335,7 @@ public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInte
         		String[] infoSteps = getInfoSteps();
         		int infoStepIndex = Const.indexOfString(definition.getInputStepname(), infoSteps);
         	    if (infoStepIndex<0) {
-        	    	throw new KettleStepException(Messages.getString("MappingFieldRunnerMeta.Exception.UnableToFindMetadataInfo", definition.getInputStepname()));
+        	    	throw new KettleStepException(BaseMessages.getString(PKG, "MappingFieldRunnerMeta.Exception.UnableToFindMetadataInfo", definition.getInputStepname()));
         	    }
         	    inputRowMeta = info[infoStepIndex].clone();
         	}
@@ -400,7 +403,7 @@ public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInte
     	}
     	
     	if (mappingOutputDefinition==null) {
-    		throw new KettleStepException(Messages.getString("MappingFieldRunnerMeta.Exception.UnableToFindMappingDefinition"));
+    		throw new KettleStepException(BaseMessages.getString(PKG, "MappingFieldRunnerMeta.Exception.UnableToFindMappingDefinition"));
     	}
     		
 		// OK, now find the mapping output step in the mapping...
@@ -428,22 +431,12 @@ public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInte
 		row.addRowMeta(mappingOutputRowMeta);
     }
     
-    @Override
     public String[] getInfoSteps() {
-
-    	List<String> infoSteps = new ArrayList<String>();
-    	// The infosteps are those steps that are specified in the input mappings
-    	for (MappingIODefinition definition : inputMappings) {
-    		if (!definition.isMainDataPath() && !Const.isEmpty(definition.getInputStepname())) {
-    			infoSteps.add(definition.getInputStepname());
-    		}
-    	}
-    	if (infoSteps.isEmpty()) return null;
-
-    	return infoSteps.toArray(new String[infoSteps.size()]);
-    }
+        String[] infoSteps = getStepIOMeta().getInfoStepnames();
+        // Return null instead of empty array to preserve existing behavior
+        return infoSteps.length == 0 ? null : infoSteps;
+      }
     
-    @Override
     public String[] getTargetSteps() {
 
     	List<String> targetSteps = new ArrayList<String>();
@@ -467,7 +460,7 @@ public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInte
         {
         	// OK, load the meta-data from file...
             mappingTransMeta = new TransMeta( realFilename, false ); // don't set internal variables: they belong to the parent thread!
-            LogWriter.getInstance().logDetailed("Loading Mapping from repository", "Mapping transformation was loaded from XML file ["+realFilename+"]");
+            mappingTransMeta.getLogChannel().logDetailed("Loading Mapping from repository", "Mapping transformation was loaded from XML file ["+realFilename+"]");
             // mappingTransMeta.setFilename(fileName);
        }
         catch(Exception e)
@@ -475,7 +468,7 @@ public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInte
             // LogWriter.getInstance().logError("Loading Mapping from XML", "Unable to load transformation ["+realFilename+"] : "+e.toString());
             // LogWriter.getInstance().logError("Loading Mapping from XML", Const.getStackTracker(e));
         	
-            throw new KettleException(Messages.getString("MappingFieldRunnerMeta.Exception.UnableToLoadMapping"), e);
+            throw new KettleException(BaseMessages.getString(PKG, "MappingFieldRunnerMeta.Exception.UnableToLoadMapping"), e);
         }     
         
         return mappingTransMeta;
@@ -487,24 +480,24 @@ public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInte
 		CheckResult cr;
 		if (prev==null || prev.size()==0)
 		{
-			cr = new CheckResult(CheckResultInterface.TYPE_RESULT_WARNING, Messages.getString("MappingFieldRunnerMeta.CheckResult.NotReceivingAnyFields"), stepinfo); //$NON-NLS-1$
+			cr = new CheckResult(CheckResultInterface.TYPE_RESULT_WARNING, BaseMessages.getString(PKG, "MappingFieldRunnerMeta.CheckResult.NotReceivingAnyFields"), stepinfo); //$NON-NLS-1$
 			remarks.add(cr);
 		}
 		else
 		{
-			cr = new CheckResult(CheckResultInterface.TYPE_RESULT_OK, Messages.getString("MappingFieldRunnerMeta.CheckResult.StepReceivingFields",prev.size()+""), stepinfo); //$NON-NLS-1$ //$NON-NLS-2$
+			cr = new CheckResult(CheckResultInterface.TYPE_RESULT_OK, BaseMessages.getString(PKG, "MappingFieldRunnerMeta.CheckResult.StepReceivingFields",prev.size()+""), stepinfo); //$NON-NLS-1$ //$NON-NLS-2$
 			remarks.add(cr);
 		}
 
 		// See if we have input streams leading to this step!
 		if (input.length>0)
 		{
-			cr = new CheckResult(CheckResultInterface.TYPE_RESULT_OK, Messages.getString("MappingFieldRunnerMeta.CheckResult.StepReceivingFieldsFromOtherSteps"), stepinfo); //$NON-NLS-1$
+			cr = new CheckResult(CheckResultInterface.TYPE_RESULT_OK, BaseMessages.getString(PKG, "MappingFieldRunnerMeta.CheckResult.StepReceivingFieldsFromOtherSteps"), stepinfo); //$NON-NLS-1$
 			remarks.add(cr);
 		}
 		else
 		{
-			cr = new CheckResult(CheckResultInterface.TYPE_RESULT_ERROR, Messages.getString("MappingFieldRunnerMeta.CheckResult.NoInputReceived"), stepinfo); //$NON-NLS-1$
+			cr = new CheckResult(CheckResultInterface.TYPE_RESULT_ERROR, BaseMessages.getString(PKG, "MappingFieldRunnerMeta.CheckResult.NoInputReceived"), stepinfo); //$NON-NLS-1$
 			remarks.add(cr);
 		}
 	}
@@ -641,7 +634,7 @@ public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInte
 
 			return proposedNewFilename;
 		} catch (Exception e) {
-			throw new KettleException(Messages.getString("MappingFieldRunnerMeta.Exception.UnableToLoadTransformation", fieldName)); //$NON-NLS-1$
+			throw new KettleException(BaseMessages.getString(PKG, "MappingFieldRunnerMeta.Exception.UnableToLoadTransformation", fieldName)); //$NON-NLS-1$
 		}
 	}
 

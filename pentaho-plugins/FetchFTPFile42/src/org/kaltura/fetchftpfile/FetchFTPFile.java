@@ -14,7 +14,7 @@ package org.kaltura.fetchftpfile;
 import org.pentaho.di.core.Const;
 import org.pentaho.di.core.exception.KettleException;
 import org.pentaho.di.core.row.RowMeta;
-import org.pentaho.di.job.entries.ftp.Messages;
+import org.pentaho.di.i18n.BaseMessages;
 import org.pentaho.di.trans.Trans;
 import org.pentaho.di.trans.TransMeta;
 import org.pentaho.di.trans.step.BaseStep;
@@ -33,6 +33,7 @@ import com.enterprisedt.net.ftp.FTPClient;
  */
 public class FetchFTPFile extends BaseStep implements StepInterface
 {
+	private static Class<?> PKG = FetchFTPFile.class;
     private FetchFTPFileMeta meta;
     private FetchFTPFileData data;
     
@@ -62,8 +63,8 @@ public class FetchFTPFile extends BaseStep implements StepInterface
     	// Check is filename field is provided
 		if (Const.isEmpty(meta.getDynamicFilenameField()))
 		{
-			logError(Messages.getString("FetchFTPFile.Log.NoField"));
-			throw new KettleException(Messages.getString("FetchFTPFile.Log.NoField"));
+			logError(BaseMessages.getString(PKG, "FetchFTPFile.Log.NoField"));
+			throw new KettleException(BaseMessages.getString(PKG, "FetchFTPFile.Log.NoField"));
 		}
 		
         
@@ -74,8 +75,8 @@ public class FetchFTPFile extends BaseStep implements StepInterface
 			if (data.indexOfFilenameField<0)
 			{
 				// The field is unreachable !
-				logError(Messages.getString("GetFTPFileNames.Log.ErrorFindingField",meta.getDynamicFilenameField())); //$NON-NLS-1$ //$NON-NLS-2$
-				throw new KettleException(Messages.getString("GetFTPFileNames.Exception.CouldnotFindField",meta.getDynamicFilenameField())); //$NON-NLS-1$ //$NON-NLS-2$
+				logError(BaseMessages.getString(PKG, "GetFTPFileNames.Log.ErrorFindingField",meta.getDynamicFilenameField())); //$NON-NLS-1$ //$NON-NLS-2$
+				throw new KettleException(BaseMessages.getString(PKG, "GetFTPFileNames.Exception.CouldnotFindField",meta.getDynamicFilenameField())); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}   
 
@@ -170,12 +171,5 @@ public class FetchFTPFile extends BaseStep implements StepInterface
 				log.logBasic("Error","Failed to cleanly disconnect from ftp");
 			}
 		}	 
-    }
-    
-    //
-    // Run is were the action happens!
-    public void run()
-    {
-    	BaseStep.runStepThread(this, meta, data);
     }
 }
