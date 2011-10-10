@@ -56,6 +56,7 @@ import org.pentaho.di.core.database.DatabaseMeta;
 import org.pentaho.di.core.exception.KettleException;
 import org.pentaho.di.core.row.RowMetaInterface;
 import org.pentaho.di.core.row.ValueMetaInterface;
+import org.pentaho.di.i18n.BaseMessages;
 import org.pentaho.di.trans.TransMeta;
 import org.pentaho.di.trans.step.BaseStepMeta;
 import org.pentaho.di.trans.step.StepDialogInterface;
@@ -72,6 +73,8 @@ import org.pentaho.di.ui.trans.step.TableItemInsertListener;
 
 public class CombinationLookupDialog extends BaseStepDialog implements StepDialogInterface
 {
+	private static Class<?> PKG = CombinationLookupDialog.class;
+	
 	private CCombo       wReadConnection;
 	private CCombo       wWriteConnection;
 
@@ -156,7 +159,8 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		formLayout.marginHeight = Const.FORM_MARGIN;
 
 		shell.setLayout(formLayout);
-		shell.setText(Messages.getString("ConcurrentCombinationLookupDialog.Shell.Title")); //$NON-NLS-1$
+		
+		shell.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Shell.Title"));
 
 		int middle = props.getMiddlePct();
 		int margin = Const.MARGIN;
@@ -179,7 +183,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 
 		// Stepname line
 		wlStepname=new Label(shell, SWT.RIGHT);
-		wlStepname.setText(Messages.getString("ConcurrentCombinationLookupDialog.Stepname.Label")); //$NON-NLS-1$
+		wlStepname.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Stepname.Label"));
  		props.setLook(wlStepname);
 
 		fdlStepname=new FormData();
@@ -229,7 +233,8 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		
         // Schema line...
         wlSchema=new Label(shell, SWT.RIGHT);
-        wlSchema.setText(Messages.getString("ConcurrentCombinationLookupDialog.TargetSchema.Label")); //$NON-NLS-1$
+        
+        wlSchema.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.TargetSchema.Label")); //$NON-NLS-1$
         props.setLook(wlSchema);
         FormData fdlSchema = new FormData();
         fdlSchema.left = new FormAttachment(0, 0);
@@ -250,7 +255,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 
         // Table line...
 		wlTable = new Label(shell, SWT.RIGHT);
-		wlTable.setText(Messages.getString("ConcurrentCombinationLookupDialog.Target.Label")); //$NON-NLS-1$
+		wlTable.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Target.Label")); //$NON-NLS-1$
  		props.setLook(wlTable);
 		FormData fdlTable = new FormData();
 		fdlTable.left = new FormAttachment(0, 0);
@@ -260,7 +265,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 
 		wbTable = new Button(shell, SWT.PUSH | SWT.CENTER);
  		props.setLook(wbTable);
- 		wbTable.setText(Messages.getString("ConcurrentCombinationLookupDialog.BrowseTable.Button"));
+ 		wbTable.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.BrowseTable.Button"));
 		FormData fdbTable = new FormData();
 		fdbTable.right = new FormAttachment(100, 0);
 		fdbTable.top = new FormAttachment(wSchema, margin);
@@ -278,7 +283,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		
 		// Commit size ...
 		wlCommit=new Label(shell, SWT.RIGHT);
-		wlCommit.setText(Messages.getString("ConcurrentCombinationLookupDialog.Commitsize.Label")); //$NON-NLS-1$
+		wlCommit.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Commitsize.Label")); //$NON-NLS-1$
  		props.setLook(wlCommit);
 		FormData fdlCommit = new FormData();
 		fdlCommit.left = new FormAttachment(0, 0);
@@ -296,7 +301,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 
 		// Cache size
 		wlCachesize=new Label(shell, SWT.RIGHT);
-		wlCachesize.setText(Messages.getString("ConcurrentCombinationLookupDialog.Cachesize.Label")); //$NON-NLS-1$
+		wlCachesize.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Cachesize.Label")); //$NON-NLS-1$
  		props.setLook(wlCachesize); 		
 		FormData fdlCachesize=new FormData();
 		fdlCachesize.top   = new FormAttachment(wTable, margin);
@@ -311,13 +316,13 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		fdCachesize.left  = new FormAttachment(wlCachesize, margin);
 		fdCachesize.right = new FormAttachment(100, 0);
 		wCachesize.setLayoutData(fdCachesize);
-		wCachesize.setToolTipText(Messages.getString("ConcurrentCombinationLookupDialog.Cachesize.ToolTip")); //$NON-NLS-1$		
+		wCachesize.setToolTipText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Cachesize.ToolTip")); //$NON-NLS-1$		
 			
 		//
 		// The Lookup fields: usually the (business) key
 		//
 		wlKey=new Label(shell, SWT.NONE);
-		wlKey.setText(Messages.getString("ConcurrentCombinationLookupDialog.Keyfields.Label")); //$NON-NLS-1$
+		wlKey.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Keyfields.Label")); //$NON-NLS-1$
  		props.setLook(wlKey);
 		FormData fdlKey = new FormData();
 		fdlKey.left  = new FormAttachment(0, 0);
@@ -329,8 +334,8 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		int nrKeyRows=(input.getKeyField()!=null?input.getKeyField().length:1);
 
 		ciKey=new ColumnInfo[nrKeyCols];
-		ciKey[0]=new ColumnInfo(Messages.getString("ConcurrentCombinationLookupDialog.ColumnInfo.DimensionField"),   ColumnInfo.COLUMN_TYPE_CCOMBO, new String[] { "" }, false); //$NON-NLS-1$
-		ciKey[1]=new ColumnInfo(Messages.getString("ConcurrentCombinationLookupDialog.ColumnInfo.FieldInStream"),   ColumnInfo.COLUMN_TYPE_CCOMBO, new String[] { "" }, false); //$NON-NLS-1$
+		ciKey[0]=new ColumnInfo(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.ColumnInfo.DimensionField"),   ColumnInfo.COLUMN_TYPE_CCOMBO, new String[] { "" }, false); //$NON-NLS-1$
+		ciKey[1]=new ColumnInfo(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.ColumnInfo.FieldInStream"),   ColumnInfo.COLUMN_TYPE_CCOMBO, new String[] { "" }, false); //$NON-NLS-1$
 		tableFieldColumns.add(ciKey[0]);
 		wKey=new TableView(transMeta, shell,
 						      SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL,
@@ -342,19 +347,19 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 
 		// THE BUTTONS
 		wOK=new Button(shell, SWT.PUSH);
-		wOK.setText(Messages.getString("System.Button.OK")); //$NON-NLS-1$
+		wOK.setText(BaseMessages.getString(PKG, "System.Button.OK")); //$NON-NLS-1$
 		wGet=new Button(shell, SWT.PUSH);
-		wGet.setText(Messages.getString("ConcurrentCombinationLookupDialog.GetFields.Button")); //$NON-NLS-1$
+		wGet.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.GetFields.Button")); //$NON-NLS-1$
 		wCreate=new Button(shell, SWT.PUSH);
-		wCreate.setText(Messages.getString("ConcurrentCombinationLookupDialog.SQL.Button")); //$NON-NLS-1$
+		wCreate.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.SQL.Button")); //$NON-NLS-1$
 		wCancel=new Button(shell, SWT.PUSH);
-		wCancel.setText(Messages.getString("System.Button.Cancel")); //$NON-NLS-1$
+		wCancel.setText(BaseMessages.getString(PKG, "System.Button.Cancel")); //$NON-NLS-1$
 
 		setButtonPositions(new Button[] { wOK, wCancel , wGet, wCreate}, margin, null);
 
 		// Last update field:
 		wlLastUpdateField=new Label(shell, SWT.RIGHT);
-		wlLastUpdateField.setText(Messages.getString("ConcurrentCombinationLookupDialog.LastUpdateField.Label")); //$NON-NLS-1$
+		wlLastUpdateField.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.LastUpdateField.Label")); //$NON-NLS-1$
  		props.setLook(wlLastUpdateField);
 		FormData fdlLastUpdateField = new FormData();
 		fdlLastUpdateField.left  = new FormAttachment(0, 0);
@@ -372,7 +377,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 
 		// Hash field:
 		wlHashfield=new Label(shell, SWT.RIGHT);
-		wlHashfield.setText(Messages.getString("ConcurrentCombinationLookupDialog.Hashfield.Label")); //$NON-NLS-1$
+		wlHashfield.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Hashfield.Label")); //$NON-NLS-1$
  		props.setLook(wlHashfield);
 		FormData fdlHashfield = new FormData();
 		fdlHashfield.left  = new FormAttachment(0, 0);
@@ -390,7 +395,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 
 		// Output the input rows or one (1) log-record?
 		wlHashcode=new Label(shell, SWT.RIGHT);
-		wlHashcode.setText(Messages.getString("ConcurrentCombinationLookupDialog.Hashcode.Label")); //$NON-NLS-1$
+		wlHashcode.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Hashcode.Label")); //$NON-NLS-1$
  		props.setLook(wlHashcode);
 		FormData fdlHashcode = new FormData();
 		fdlHashcode.left  = new FormAttachment(0, 0);
@@ -415,7 +420,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 
 		// Replace lookup fields in the output stream?
 		wlReplace=new Label(shell, SWT.RIGHT);
-		wlReplace.setText(Messages.getString("ConcurrentCombinationLookupDialog.Replace.Label")); //$NON-NLS-1$
+		wlReplace.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Replace.Label")); //$NON-NLS-1$
  		props.setLook(wlReplace);
 		FormData fdlReplace = new FormData();
 		fdlReplace.left  = new FormAttachment(0, 0);
@@ -439,7 +444,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		);
 
 		gTechGroup = new Group(shell, SWT.SHADOW_ETCHED_IN);
-		gTechGroup.setText(Messages.getString("ConcurrentCombinationLookupDialog.TechGroup.Label")); //$NON-NLS-1$;
+		gTechGroup.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.TechGroup.Label")); //$NON-NLS-1$;
 		GridLayout gridLayout = new GridLayout(3, false);
 		gTechGroup.setLayout(gridLayout);
 		fdTechGroup=new FormData();
@@ -455,9 +460,9 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
  		wTableMax.setSelection(false);
 		GridData gdTableMax = new GridData();
 		wTableMax.setLayoutData(gdTableMax);
-		wTableMax.setToolTipText(Messages.getString("ConcurrentCombinationLookupDialog.TableMaximum.Tooltip",Const.CR)); //$NON-NLS-1$ //$NON-NLS-2$
+		wTableMax.setToolTipText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.TableMaximum.Tooltip",Const.CR)); //$NON-NLS-1$ //$NON-NLS-2$
 		wlTableMax=new Label(gTechGroup, SWT.LEFT);
-		wlTableMax.setText(Messages.getString("ConcurrentCombinationLookupDialog.TableMaximum.Label")); //$NON-NLS-1$
+		wlTableMax.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.TableMaximum.Label")); //$NON-NLS-1$
  		props.setLook(wlTableMax);
 		GridData gdlTableMax = new GridData(GridData.FILL_BOTH);
 		gdlTableMax.horizontalSpan = 2; gdlTableMax.verticalSpan = 1;
@@ -469,9 +474,9 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
  		wSeqButton.setSelection(false);
 		GridData gdSeqButton = new GridData();
 		wSeqButton.setLayoutData(gdSeqButton);
-		wSeqButton.setToolTipText(Messages.getString("ConcurrentCombinationLookupDialog.Sequence.Tooltip",Const.CR)); //$NON-NLS-1$ //$NON-NLS-2$		
+		wSeqButton.setToolTipText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Sequence.Tooltip",Const.CR)); //$NON-NLS-1$ //$NON-NLS-2$		
 		wlSeqButton=new Label(gTechGroup, SWT.LEFT);
-		wlSeqButton.setText(Messages.getString("ConcurrentCombinationLookupDialog.Sequence.Label")); //$NON-NLS-1$
+		wlSeqButton.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Sequence.Label")); //$NON-NLS-1$
  		props.setLook(wlSeqButton); 	
 		GridData gdlSeqButton = new GridData();
 		wlSeqButton.setLayoutData(gdlSeqButton);
@@ -499,9 +504,9 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
  		wAutoinc.setSelection(false);
 		GridData gdAutoinc = new GridData();
 		wAutoinc.setLayoutData(gdAutoinc);
-		wAutoinc.setToolTipText(Messages.getString("ConcurrentCombinationLookupDialog.AutoincButton.Tooltip",Const.CR)); //$NON-NLS-1$ //$NON-NLS-2$
+		wAutoinc.setToolTipText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.AutoincButton.Tooltip",Const.CR)); //$NON-NLS-1$ //$NON-NLS-2$
 		wlAutoinc=new Label(gTechGroup, SWT.LEFT);
-		wlAutoinc.setText(Messages.getString("ConcurrentCombinationLookupDialog.Autoincrement.Label")); //$NON-NLS-1$
+		wlAutoinc.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Autoincrement.Label")); //$NON-NLS-1$
  		props.setLook(wlAutoinc);
 		GridData gdlAutoinc = new GridData();
 		wlAutoinc.setLayoutData(gdlAutoinc);
@@ -512,7 +517,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		
 		// Technical key field:
 		wlTk=new Label(shell, SWT.RIGHT);
-		wlTk.setText(Messages.getString("ConcurrentCombinationLookupDialog.TechnicalKey.Label")); //$NON-NLS-1$
+		wlTk.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.TechnicalKey.Label")); //$NON-NLS-1$
  		props.setLook(wlTk);
 		FormData fdlTk = new FormData();
 		fdlTk.left   = new FormAttachment(0, 0);
@@ -559,7 +564,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
                     }
                     catch(KettleException e)
                     {
-                        log.logError(toString(),Messages.getString("System.Dialog.GetFieldsFailed.Message"));
+                        log.logError(toString(),BaseMessages.getString(PKG, "System.Dialog.GetFieldsFailed.Message"));
                     }
                 }
             }
@@ -651,7 +656,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 				if (!Const.isEmpty(wTable.getText())) {
 					DatabaseMeta ci = transMeta.findDatabase(wReadConnection.getText());
 					if (ci != null) {
-						Database db = new Database(ci);
+						Database db = new Database(BaseStepMeta.loggingObject, ci);
 						try {
 							db.connect();
 
@@ -722,7 +727,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 	public void getData()
 	{
 		int i;
-		log.logDebug(toString(), Messages.getString("ConcurrentCombinationLookupDialog.Log.GettingKeyInfo")); //$NON-NLS-1$
+		log.logDebug(toString(), BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Log.GettingKeyInfo")); //$NON-NLS-1$
 
 		if (input.getKeyField()!=null)
 		for (i=0;i<input.getKeyField().length;i++)
@@ -833,15 +838,15 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		if (transMeta.findDatabase(wReadConnection.getText())==null)
 		{
 			MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR );
-			mb.setMessage(Messages.getString("ConcurrentCombinationLookupDialog.NoValidConnection.DialogMessage")); //$NON-NLS-1$
-			mb.setText(Messages.getString("ConcurrentCombinationLookupDialog.NoValidConnection.DialogTitle")); //$NON-NLS-1$
+			mb.setMessage(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.NoValidConnection.DialogMessage")); //$NON-NLS-1$
+			mb.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.NoValidConnection.DialogTitle")); //$NON-NLS-1$
 			mb.open();
 		}
 		if (transMeta.findDatabase(wWriteConnection.getText())==null)
 		{
 			MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR );
-			mb.setMessage(Messages.getString("ConcurrentCombinationLookupDialog.NoValidConnection.DialogMessage")); //$NON-NLS-1$
-			mb.setText(Messages.getString("ConcurrentCombinationLookupDialog.NoValidConnection.DialogTitle")); //$NON-NLS-1$
+			mb.setMessage(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.NoValidConnection.DialogMessage")); //$NON-NLS-1$
+			mb.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.NoValidConnection.DialogTitle")); //$NON-NLS-1$
 			mb.open();
 		}
 		
@@ -858,7 +863,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 
 		in.allocate(nrkeys);
 
-		log.logDebug(toString(), Messages.getString("ConcurrentCombinationLookupDialog.Log.SomeKeysFound",String.valueOf(nrkeys))); //$NON-NLS-1$ //$NON-NLS-2$
+		log.logDebug(toString(), BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Log.SomeKeysFound",String.valueOf(nrkeys))); //$NON-NLS-1$ //$NON-NLS-2$
 		for (int i=0;i<nrkeys;i++)
 		{
 			TableItem item = wKey.getNonEmpty(i);
@@ -910,13 +915,11 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 
 		if (inf != null)
 		{
-			log.logDebug(toString(), Messages.getString("ConcurrentCombinationLookupDialog.Log.LookingAtConnection", inf.toString()));
+			log.logDebug(toString(), BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.Log.LookingAtConnection", inf.toString()));
 
 			DatabaseExplorerDialog std = new DatabaseExplorerDialog(shell, SWT.NONE, inf, transMeta.getDatabases());
-            std.setSelectedSchema(wSchema.getText());
-			std.setSelectedTable(wTable.getText());
-            std.setSplitSchemaAndTable(true);
-			if (std.open() != null)
+            std.setSelectedSchemaAndTable(wSchema.getText(), wTable.getText());
+            if (std.open())
 			{
                 wSchema.setText(Const.NVL(std.getSchemaName(), ""));
 				wTable.setText(Const.NVL(std.getTableName(), ""));
@@ -925,8 +928,8 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		else
 		{
 			MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR);
-			mb.setMessage(Messages.getString("ConcurrentCombinationLookupDialog.ConnectionError2.DialogMessage"));
-			mb.setText(Messages.getString("System.Dialog.Error.Title"));
+			mb.setMessage(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.ConnectionError2.DialogMessage"));
+			mb.setText(BaseMessages.getString(PKG, "System.Dialog.Error.Title"));
 			mb.open();
 		}
 	}	
@@ -951,7 +954,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		}
 		catch(KettleException ke)
 		{
-			new ErrorDialog(shell, Messages.getString("ConcurrentCombinationLookupDialog.UnableToGetFieldsError.DialogTitle"), Messages.getString("ConcurrentCombinationLookupDialog.UnableToGetFieldsError.DialogMessage"), ke); //$NON-NLS-1$ //$NON-NLS-2$
+			new ErrorDialog(shell, BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.UnableToGetFieldsError.DialogTitle"), BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.UnableToGetFieldsError.DialogMessage"), ke); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -966,7 +969,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 			CombinationLookupMeta info = new CombinationLookupMeta();
 			getInfo(info);
 			String name = stepname;  // new name might not yet be linked to other steps!
-			StepMeta stepMeta = new StepMeta(Messages.getString("ConcurrentCombinationLookupDialog.StepMeta.Title"), name, info); //$NON-NLS-1$
+			StepMeta stepMeta = new StepMeta(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.StepMeta.Title"), name, info); //$NON-NLS-1$
 			RowMetaInterface prev = transMeta.getPrevStepFields(stepname);
 
 			SQLStatement sql = info.getSQLStatements(transMeta, stepMeta, prev);
@@ -980,8 +983,8 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 				else
 				{
 					MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_INFORMATION );
-					mb.setMessage(Messages.getString("ConcurrentCombinationLookupDialog.NoSQLNeeds.DialogMessage")); //$NON-NLS-1$
-					mb.setText(Messages.getString("ConcurrentCombinationLookupDialog.NoSQLNeeds.DialogTitle")); //$NON-NLS-1$
+					mb.setMessage(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.NoSQLNeeds.DialogMessage")); //$NON-NLS-1$
+					mb.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.NoSQLNeeds.DialogTitle")); //$NON-NLS-1$
 					mb.open();
 				}
 			}
@@ -989,13 +992,13 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 			{
 				MessageBox mb = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR );
 				mb.setMessage(sql.getError());
-				mb.setText(Messages.getString("ConcurrentCombinationLookupDialog.SQLError.DialogTitle")); //$NON-NLS-1$
+				mb.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.SQLError.DialogTitle")); //$NON-NLS-1$
 				mb.open();
 			}
 		}
 		catch(KettleException ke)
 		{
-			new ErrorDialog(shell, Messages.getString("ConcurrentCombinationLookupDialog.UnableToCreateSQL.DialogTitle"), Messages.getString("ConcurrentCombinationLookupDialog.UnableToCreateSQL.DialogMessage"), ke); //$NON-NLS-1$ //$NON-NLS-2$
+			new ErrorDialog(shell, BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.UnableToCreateSQL.DialogTitle"), BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.UnableToCreateSQL.DialogMessage"), ke); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -1009,7 +1012,6 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 			Label wlConnection = new Label(parent, SWT.RIGHT); 
 			Button wbnConnection = new Button(parent,SWT.PUSH);
 			Button wbeConnection = new Button(parent, SWT.PUSH);
-		 	final int databaseType = -1;
 		    final CCombo wConnection;
 		    final FormData fdlConnection, fdbConnection, fdeConnection, fdConnection;
 
@@ -1018,7 +1020,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 
 		    addDatabases(wConnection);
 
-		    wlConnection.setText(Messages.getString(label)); //$NON-NLS-1$
+		    wlConnection.setText(BaseMessages.getString(PKG, label)); //$NON-NLS-1$
 		    props.setLook(wlConnection);
 		    fdlConnection = new FormData();
 		    fdlConnection.left = new FormAttachment(0, 0);
@@ -1032,7 +1034,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		    // 
 		    // NEW button
 		    //
-		    wbnConnection.setText(Messages.getString("ConcurrentCombinationLookupDialog.NewConnectionButton.Label")); //$NON-NLS-1$
+		    wbnConnection.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.NewConnectionButton.Label")); //$NON-NLS-1$
 		    wbnConnection.addSelectionListener(new SelectionAdapter() {
 		      public void widgetSelected(SelectionEvent e) {
 		        DatabaseMeta databaseMeta = new DatabaseMeta();
@@ -1042,7 +1044,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		        if (cid.open() != null) {
 		          transMeta.addDatabase(databaseMeta);
 		          wConnection.removeAll();
-		          addDatabases(wConnection, databaseType);
+		          addDatabases(wConnection);
 		          selectDatabase(wConnection, databaseMeta.getName());
 		        }
 		      }
@@ -1058,7 +1060,7 @@ public class CombinationLookupDialog extends BaseStepDialog implements StepDialo
 		    //
 		    // Edit button
 		    //
-		    wbeConnection.setText(Messages.getString("ConcurrentCombinationLookupDialog.EditConnectionButton.Label")); //$NON-NLS-1$
+		    wbeConnection.setText(BaseMessages.getString(PKG, "ConcurrentCombinationLookupDialog.EditConnectionButton.Label")); //$NON-NLS-1$
 		    wbeConnection.addSelectionListener(new SelectionAdapter() {
 		      public void widgetSelected(SelectionEvent e) {
 		        DatabaseMeta databaseMeta = transMeta.findDatabase(wConnection.getText());
