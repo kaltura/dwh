@@ -198,6 +198,21 @@ abstract class CycleProcessTestCase extends KalturaTestCase
                 return $counter;
         }
 
+	protected function countInvalidLines($file, $validationCallback, $ignoreInvalidLineCallback)
+	{
+		$lines = file($file);
+                $counter = 0;
+                foreach($lines as $line)
+                {
+                        $line = urldecode($line);
+                        if (!call_user_func($validationCallback, $line) && !call_user_func($ignoreInvalidLineCallback, $line))
+                        {
+                                $counter++;
+                        }
+                }
+                return $counter;
+	}
+
         protected function sumBytes($file, $validationCallback, $regex)
         {
                 $lines = file($file);

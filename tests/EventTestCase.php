@@ -6,50 +6,9 @@ require_once 'MySQLRunner.php';
 require_once 'KalturaTestCase.php';
 require_once 'CycleProcessTestCase.php';
 
-class EventTest extends CycleProcessTestCase
+abstract class EventTestCase extends CycleProcessTestCase
 {
 	const BW_REGEX = '/^.* "GET \/p\/(\d+)\/.*" 200 (\d+) .*$/';
-
-	protected function getFetchParams()
-	{
-		global $CONF;
-		
-		return array(self::GENERATE_PARAM_FETCH_LOGS_DIR=>$CONF->EventsLogsDir,
-					self::GENERATE_PARAM_FETCH_WILD_CARD=>$CONF->EventsWildcard,
-					'FetchMethod' =>$CONF->EventsFetchMethod,
-					'ProcessID'=>$CONF->EventsProcessID,
-					'FetchJob'=>$CONF->EtlBasePath.'/common/fetch_files.kjb',
-					'FetchFTPServer'=>$CONF->EventsFTPServer,
-					'FetchFTPPort'=>$CONF->EventsFTPPort,
-					'FetchFTPUser'=>$CONF->EventsFTPUser,
-					'FetchFTPPassword'=>$CONF->EventsFTPPassword,
-					'TempDestination'=>$CONF->ExportPath.'/dwh_inbound/events',
-					self::GENERATE_PARAM_IS_ARCHIVED=>'True');
-	}
-
-        protected function getProcessParams()
-        {
-                global $CONF;
-
-                return array('ProcessID'=>$CONF->EventsProcessID,
-                             'ProcessJob'=>$CONF->EtlBasePath.'/events/process/process_events.kjb');
-        }
-
-        protected function getTransferParams()
-        {
-                global $CONF;
-
-                return array(self::TRANSFER_PARAM_PROCESS_ID=>$CONF->EventsProcessID);
-        }
-
-	 protected function getDSTablesToFactTables()
-        {
-                $dsTableToFactTables = array();
-                $dsTablesToFactTables["ds_events"]="dwh_fact_events";
-                $dsTablesToFactTables["ds_bandwidth_usage"]="dwh_fact_bandwidth_usage";
-                return $dsTableToFactTables;
-        }
-
 
 	public function testGenerate()
 	{
@@ -99,7 +58,8 @@ class EventTest extends CycleProcessTestCase
                         $this->assertEquals(DWHInspector::countRows('kalturadw_ds.ds_bandwidth_usage',$fileID),$this->countRows($filename, array($this, 'validBWLine')));
 
                         // compare bandwidth_bytes in ds_bandwidth_usage to bandwidth bytes consumed in file
-                        $this->assertEquals(DWHInspector::sumRows('kalturadw_ds.ds_bandwidth_usage',$fileID,"bandwidth_bytes"),$this->sumBytes($filename, array($this, 'validBWLine'), self::BW_REGEX));
+			$dbBytes = DWHInspector::sumRows('kalturadw_ds.ds_bandwidth_usage',$fileID,"bandwidth_bytes");
+                        $this->assertEquals(is_null($dbBytes) ? 0 : $dbBytes, $this->sumBytes($filename, array($this, 'validBWLine'), self::BW_REGEX));
 
 			// compare bw consumption per partner
                         $bwPartners = $this->countBWEventsPerPartner($filename); 
@@ -112,14 +72,34 @@ class EventTest extends CycleProcessTestCase
                         }	
 
 			// make sure there are very little invalid lines
-			$this->assertEquals(0, DWHInspector::countRows('kalturadw_ds.invalid_ds_lines',$fileID));
+			$this->assertEquals($this->countInvalidLines($filename, 
+									array($this, 'validKDPLine'), 
+									array($this, 'ignoredInvalidKDPLine'))+
+					    $this->countInvalidLines($filename, 
+									array($this, 'validBWLine'), 
+									array($this, 'ignoredInvalidBWLine')),
+					DWHInspector::countRows('kalturadw_ds.invalid_ds_lines',$fileID));
 		}
 	}
 	
 	public function validKDPLine($line)
 	{
-		return (strpos($line,'service=stats')!==false && strpos($line,'action=collect')!==false) || (strpos($line,'collectstats')!==false);
+		return (strpos($line,'service=stats')!==false && 
+			strpos($line,'action=collect')!==false && 
+			(strpos($line,'event%3AentryId=')!==false || strpos($line,'event:entryId=')!==false)) 
+			|| 
+			(strpos($line,'collectstats')!==false);
 	}
+
+	public function ignoredInvalidKDPLine($line)
+	{
+		return (strpos($line,'service=stats')==false || strpos($line,'action=collect')==false);
+	}
+
+	public function ignoredInvalidBWLine($line)
+        {
+		return !$this->validBWLine($line);	
+        }
 
 	public function validBWLine($line)
         {
@@ -133,7 +113,7 @@ class EventTest extends CycleProcessTestCase
 		foreach($lines as $line)
 		{
 			$line = urldecode($line);
-			if($this->validKDPLine($line) && strpos($line,'eventType=3')!==false)
+			if($this->validKDPLine($line) && preg_match('/eventType\=3[ \&]/', $line) > 0)
 			{
 				$counter++;
 			}
