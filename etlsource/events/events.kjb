@@ -138,7 +138,7 @@
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturalog</database>
+    <database>kalturaLog</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -306,7 +306,7 @@
         <field>
           <variable_name>TextFileInputMappingName</variable_name>
           <variable_value>read_events_input_file.ktr</variable_value>
-          <variable_type>JVM</variable_type>
+          <variable_type>CURRENT_JOB</variable_type>
         </field>
       </fields>
       <parallel>N</parallel>
