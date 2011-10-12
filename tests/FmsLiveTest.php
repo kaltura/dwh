@@ -16,13 +16,27 @@ class FmsLiveTest extends FmsTestCase
 		self::loadLiveEntries();
         }
 
+	public static function tearDownAfterClass()
+	{
+		self::deleteLiveEntries();	
+	}
+
 	private static function loadLiveEntries()
 	{
-		$lines = file('source/live_entries.sql');
+		$lines = file('source/insert_live_entries.sql');
 		foreach ($lines as $line)
 		{
 			MySQLRunner::execute($line);
 		}
+	}
+
+	private static function deleteLiveEntries()
+	{
+		$lines = file('source/delete_live_entries.sql');
+                foreach ($lines as $line)
+                {
+                        MySQLRunner::execute($line);
+                }
 	}
 
 	protected function getFetchParams()
