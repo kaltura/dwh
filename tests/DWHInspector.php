@@ -160,6 +160,15 @@ class DWHInspector
 			return $rows[0]["entry_id"];
 		}
 	}
+
+	public static function getPartnerIDByEntryID($entryID)
+        {
+                $rows = MySQLRunner::execute("select partner_id from kalturadw.dwh_dim_entries where entry_id = '?' limit 1", array(0=>$entryID));
+                if (count($rows) > 0)
+                {
+                        return $rows[0]["partner_id"];
+                }
+        }
 	
 	public static function getFullDSFMSSessions($fileID,$illegalPartnersCSV)
 	{

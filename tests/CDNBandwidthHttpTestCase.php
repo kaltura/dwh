@@ -55,7 +55,7 @@ abstract class CDNBandwidthHttpTestCase extends CycleProcessTestCase
                         }	
 
 			// make sure there are very little invalid lines
-			$this->assertEquals($this->countInvalidLines($filename), DWHInspector::countRows('kalturadw_ds.invalid_ds_lines',$fileID));
+			$this->assertEquals($this->countInvalidLines($filename, array($this, 'validBWLine'), array($this, 'ignoredInvalidBWLine')), DWHInspector::countRows('kalturadw_ds.invalid_ds_lines',$fileID));
 		}
 	}
 	
@@ -67,21 +67,6 @@ abstract class CDNBandwidthHttpTestCase extends CycleProcessTestCase
                 return (preg_match($this->getBWRegex(), $line) > 0);
         }
 
-	protected function countInvalidLines($file)
-        {
-                $lines = file($file);
-                $counter = 0;
-                foreach($lines as $line)
-                {
-                        $line = urldecode($line);
-                        if (!$this->validBWLine($line) && !$this->ignoredInvalidBWLine($line))
-                        {
-                                $counter++;
-                        }
-                }
-                return $counter;
-	}
-	
 	private function countBWEventsPerPartner($file)
         {
                 return $this->countPerRegex($file, $this->getBWRegex(),array($this, 'validBWLine'));
