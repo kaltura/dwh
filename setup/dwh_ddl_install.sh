@@ -257,6 +257,7 @@ mysqlexec $DW_ROOT_DIR/views/dwh_dim_uiconf_v.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_view_entry_type.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_view_partners_monthly_billing_last_updated_at.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_view_partners_monthly_billing.sql
+mysqlexec $DW_ROOT_DIR/views/dwh_view_monthly_active_partners.sql
 
 #dw/fms/
 mysqlexec $DW_ROOT_DIR/fms/fms_dim_tables.sql
