@@ -76,52 +76,53 @@ public class MappingFieldRunner extends BaseStep implements StepInterface
 				int index = getInputRowMeta().indexOfValue(meta.getFieldName());
 				String transName = r[index].toString();
 	
-				if (!data.mappingTransMeta.containsKey(transName))
+				TransMeta transMeta = data.mappingTransMeta.get(transName); 
+				if (transMeta == null)
 				{
-					TransMeta transMeta = MappingFieldRunnerMeta.loadMappingMeta(transName, this);
-					if (transMeta != null) // Do we have a mapping at all?
-					{
-	
-						// OK, now prepare the execution of the mapping.
-						// This includes the allocation of RowSet buffers, the
-						// creation of the
-						// sub-transformation threads, etc.
-						//
-						data.mappingTransMeta.put(transName, transMeta);
-						prepareMappingExecution(transMeta);
-						lookupStatusStepNumbers(transMeta);
-
-						// Start the mapping/sub-transformation threads
-						//
-						data.mappingTrans.get(transMeta).startThreads();
-			
-						MappingInput[] mappingInputs = data.mappingTrans.get(transMeta).findMappingInput();
-						
-						// Pass this rowset down to a mapping input step in the
-						// sub-transformation...
-						//
-						if (mappingInputs.length == 1)
-						{
-							// Simple case: only one input mapping. Move the
-							// RowSet over
-							RowSet rowset = new BlockingRowSet(transMeta.getSizeRowset());
-		     				data.rowSets.put(transName, rowset);
-		     				mappingInputs[0].getInputRowSets().clear();
-		     				mappingInputs[0].getInputRowSets().add(rowset);
-						} else
-						{
-							// Difficult to see what's going on here.
-							// TODO: figure out where this RowSet needs to go
-							// and where it
-							// comes from.
-							//
-							throw new KettleException(
-									"Unsupported situation detected where more than one Mapping Input step needs to be handled.  To solve it, insert a dummy step before the mapping step.");
-						}
-					} else
+					transMeta = MappingFieldRunnerMeta.loadMappingMeta(transName, this);
+					if (transMeta == null) // Do we have a mapping at all?
 					{
 						logError("No valid mapping was specified!");
 						return false;
+					}
+					data.mappingTransMeta.put(transName, transMeta);
+				}
+				
+				Trans trans = data.mappingTrans.get(transMeta);
+				if(trans == null)
+				{
+					// OK, now prepare the execution of the mapping.
+					// This includes the allocation of RowSet buffers, the
+					// creation of the
+					// sub-transformation threads, etc.
+					//
+					prepareMappingExecution(transMeta);
+					lookupStatusStepNumbers(transMeta);
+
+					// Start the mapping/sub-transformation threads
+					data.mappingTrans.get(transMeta).startThreads();
+		
+					MappingInput[] mappingInputs = data.mappingTrans.get(transMeta).findMappingInput();
+					
+					// Pass this rowset down to a mapping input step in the
+					// sub-transformation...
+					if (mappingInputs.length == 1)
+					{
+						// Simple case: only one input mapping. Move the
+						// RowSet over
+						RowSet rowset = new BlockingRowSet(transMeta.getSizeRowset());
+	     				data.rowSets.put(transName, rowset);
+	     				mappingInputs[0].getInputRowSets().clear();
+	     				mappingInputs[0].getInputRowSets().add(rowset);
+					} else
+					{
+						// Difficult to see what's going on here.
+						// TODO: figure out where this RowSet needs to go
+						// and where it
+						// comes from.
+						//
+						throw new KettleException(
+								"Unsupported situation detected where more than one Mapping Input step needs to be handled.  To solve it, insert a dummy step before the mapping step.");
 					}
 				}
 	
@@ -129,7 +130,8 @@ public class MappingFieldRunner extends BaseStep implements StepInterface
 				if(meta.getExecuteForEachRow())
 	            {
 	            	data.rowSets.get(transName).setDone();
-	            	data.mappingTrans.get(data.mappingTransMeta.get(transName)).waitUntilFinished();
+	            	data.mappingTrans.get(transMeta).waitUntilFinished();
+	            	data.mappingTrans.remove(transMeta);
 	            }
 				return true;
 				
