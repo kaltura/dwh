@@ -67,11 +67,11 @@ import org.pentaho.di.ui.core.widget.ComboVar;
 import org.pentaho.di.ui.core.widget.TableView;
 import org.pentaho.di.ui.trans.step.BaseStepDialog;
 
-public class MappingFiledRunnerDialog extends BaseStepDialog implements StepDialogInterface
+public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDialogInterface
 {
-	private static Class<?> PKG = MappingFiledRunnerDialog.class;
+	private static Class<?> PKG = MappingFieldRunnerDialog.class;
 	
-	private MappingFiledRunnerMeta mappingMeta;
+	private MappingFieldRunnerMeta mappingMeta;
 
 	private Group gTransGroup;
 
@@ -196,10 +196,10 @@ public class MappingFiledRunnerDialog extends BaseStepDialog implements StepDial
 
 	private boolean gotPreviousFields;
 
-	public MappingFiledRunnerDialog(Shell parent, Object in, TransMeta tr, String sname)
+	public MappingFieldRunnerDialog(Shell parent, Object in, TransMeta tr, String sname)
 	{
 		super(parent, (BaseStepMeta) in, tr, sname);
-		mappingMeta = (MappingFiledRunnerMeta) in;
+		mappingMeta = (MappingFieldRunnerMeta) in;
 		transModified = false;
 
 		// Make a copy for our own purposes...

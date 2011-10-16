@@ -13,9 +13,14 @@
 package org.kaltura.mapping;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
+import org.pentaho.di.core.RowSet;
 import org.pentaho.di.core.row.RowMetaInterface;
+import org.pentaho.di.trans.SingleThreadedTransExecutor;
+import org.pentaho.di.trans.Trans;
+import org.pentaho.di.trans.TransMeta;
 import org.pentaho.di.trans.step.BaseStepData;
 import org.pentaho.di.trans.step.StepDataInterface;
 import org.pentaho.di.trans.steps.mapping.MappingValueRename;
@@ -29,8 +34,12 @@ import org.pentaho.di.trans.steps.mappingoutput.MappingOutput;
  * @since 24-jan-2005
  *
  */
-public class MappingData extends BaseStepData implements StepDataInterface
+public class MappingFieldRunnerData extends BaseStepData implements StepDataInterface
 {
+	public Hashtable<TransMeta, Trans> mappingTrans = new Hashtable<TransMeta, Trans>();
+	public Hashtable<String, TransMeta> mappingTransMeta = new Hashtable<String, TransMeta>();
+	public Hashtable<String, RowSet> rowSets = new Hashtable<String, RowSet>();
+	
     public MappingInput  mappingInput;
     public MappingOutput mappingOutput;
 	public List<Integer> renameFieldIndexes;
@@ -44,11 +53,12 @@ public class MappingData extends BaseStepData implements StepDataInterface
     protected int linesOutputStepNr = -1;
     protected int linesUpdatedStepNr = -1;
     protected int linesRejectedStepNr = -1;
+    public SingleThreadedTransExecutor singleThreadedTransExcecutor;
     
 	/**
 	 * 
 	 */
-	public MappingData()
+	public MappingFieldRunnerData()
 	{
 		super();
         wasStarted = false;

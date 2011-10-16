@@ -59,9 +59,9 @@ import org.w3c.dom.Node;
  *
  */
 
-public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInterface
+public class MappingFieldRunnerMeta extends BaseStepMeta implements StepMetaInterface
 {
-	private static Class<?> PKG = MappingFiledRunnerMeta.class;
+	private static Class<?> PKG = MappingFieldRunnerMeta.class;
 	
     private String fieldName;
     private boolean executeForEachRow;
@@ -76,7 +76,7 @@ public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInte
      */
     private Repository repository;
 
-	public MappingFiledRunnerMeta()
+	public MappingFieldRunnerMeta()
 	{
 		super(); // allocate BaseStepMeta
 		
@@ -358,7 +358,7 @@ public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInte
     		
     		// Keep a list of the input rename values that need to be changed back at the output
     		// 
-    		if (definition.isRenamingOnOutput()) MappingFiledRunner.addInputRenames(inputRenameList, definition.getValueRenames());
+    		if (definition.isRenamingOnOutput()) MappingFieldRunner.addInputRenames(inputRenameList, definition.getValueRenames());
         }
         
         // All the mapping steps now know what they will be receiving.
@@ -504,12 +504,12 @@ public class MappingFiledRunnerMeta extends BaseStepMeta implements StepMetaInte
 	
 	public StepInterface getStep(StepMeta stepMeta, StepDataInterface stepDataInterface, int cnr, TransMeta tr, Trans trans)
 	{
-		return new MappingFiledRunner(stepMeta, stepDataInterface, cnr, tr, trans);
+		return new MappingFieldRunner(stepMeta, stepDataInterface, cnr, tr, trans);
 	}
 	
 	public StepDataInterface getStepData()
 	{
-		return new MappingData();
+		return new MappingFieldRunnerData();
 	}
 
     /**

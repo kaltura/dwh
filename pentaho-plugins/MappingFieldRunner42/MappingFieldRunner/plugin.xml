@@ -5,7 +5,7 @@
    description="Mapping With Field Input"
    tooltip="This is a mapping that accepts fields."
    category="Mapping"
-   classname="org.kaltura.mapping.MappingFiledRunnerMeta">
+   classname="org.kaltura.mapping.MappingFieldRunnerMeta">
    <libraries>
     <library name="mappingfieldrunner.jar"/>
     </libraries>
