@@ -5,6 +5,7 @@ require_once 'DWHInspector.php';
 require_once 'MySQLRunner.php';
 require_once 'KalturaTestCase.php';
 require_once 'CycleProcessTestCase.php';
+require_once 'ComparedTable.php';
 
 abstract class FMSTestCase extends CycleProcessTestCase
 {
@@ -90,8 +91,10 @@ abstract class FMSTestCase extends CycleProcessTestCase
 	public function testAggregation()
 	{
 		parent::testAggregation();
-                $this->compareAggregation('bandwidth_source_id', 'kalturadw.dwh_fact_fms_sessions', '(total_bytes/1024)', 'bandwidth_source_id', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)','bandwidth_source_id = 6');
-                $this->compareAggregation('session_partner_id', 'kalturadw.dwh_fact_fms_sessions', '(total_bytes/1024)', 'partner_id', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)','bandwidth_source_id = 6');
+                $this->compareAggregation(array(new ComparedTable('bandwidth_source_id', 'kalturadw.dwh_fact_fms_sessions', '(total_bytes/1024)')), 
+					  array(new ComparedTable('bandwidth_source_id', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)')));
+                $this->compareAggregation(array(new ComparedTable('session_partner_id', 'kalturadw.dwh_fact_fms_sessions', '(total_bytes/1024)')),
+					  array(new ComparedTable('partner_id', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)')));
 	}	
 
 	public function validFMSLine($line)

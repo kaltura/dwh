@@ -3,6 +3,7 @@ require_once 'Configuration.php';
 require_once 'KettleRunner.php';
 require_once 'DWHInspector.php';
 require_once 'MySQLRunner.php';
+require_once 'ComparedTable.php';
 
 abstract class KalturaTestCase extends PHPUnit_Framework_TestCase
 {
@@ -86,10 +87,10 @@ abstract class KalturaTestCase extends PHPUnit_Framework_TestCase
                 return $items;
         }
 
-	public function compareAggregation($factGroupByColumn, $fact, $factMeasure, $aggrGroupByColumn, $aggr, $aggrMeasure, $filter = '1=1')
+	public function compareAggregation($factTables, $aggrTables, $filter = '1=1')
         {
-                $aggrGroups = DWHInspector::groupBy($aggrGroupByColumn, $aggrMeasure, $aggr, $filter);
-                $factGroups = DWHInspector::groupBy($factGroupByColumn, $factMeasure, $fact, $filter);
+                $aggrGroups = DWHInspector::groupBy($aggrTables, $filter);
+                $factGroups = DWHInspector::groupBy($factTables, $filter);
 
                 foreach($factGroups as $id=>$measure)
                 {

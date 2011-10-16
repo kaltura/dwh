@@ -5,6 +5,7 @@ require_once 'DWHInspector.php';
 require_once 'MySQLRunner.php';
 require_once 'KalturaTestCase.php';
 require_once 'CycleProcessTestCase.php';
+require_once 'ComparedTable.php';
 
 abstract class CDNBandwidthHttpTestCase extends CycleProcessTestCase
 {
@@ -80,9 +81,11 @@ abstract class CDNBandwidthHttpTestCase extends CycleProcessTestCase
 	public function testAggregation($sourceId)
 	{
 		parent::testAggregation();
-		$this->compareAggregation('partner_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)', 'partner_id', 'kalturadw.dwh_hourly_partner_usage', 'if(bandwidth_source_id='.$sourceId.', ifnull(count_bandwidth_kb, 0),0)');
-        $this->compareAggregation('bandwidth_source_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)', 'bandwidth_source_id', 'kalturadw.dwh_hourly_partner_usage', 'if(bandwidth_source_id='.$sourceId.', ifnull(count_bandwidth_kb, 0),0)');
-	}	
+		$this->compareAggregation(array(new ComparedTable('partner_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)')), 
+					  array(new ComparedTable('partner_id', 'kalturadw.dwh_hourly_partner_usage', 'if(bandwidth_source_id='.$sourceId.', ifnull(count_bandwidth_kb, 0),0)')));
 
+		$this->compareAggregation(array(new ComparedTable('bandwidth_source_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)')),
+                                          array(new ComparedTable('bandwidth_source_id', 'kalturadw.dwh_hourly_partner_usage', 'if(bandwidth_source_id='.$sourceId.', ifnull(count_bandwidth_kb, 0),0)')));
+	}	
 }
 ?>

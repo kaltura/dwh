@@ -129,15 +129,19 @@ class DWHInspector
 		passthru('export KETTLE_HOME='.Configuration::$KETTLE_HOME.';'.$CONF->RuntimePath.'/setup/dwh_setup.sh -d '.$CONF->RuntimePath.' -h '.$CONF->DbHostName);
 	}
 	
-	public static function groupBy($field,$aggrField, $table, $filter = '1=1')
+	public static function groupBy($tables, $filter = '1=1')
 	{
-		$rows = MySQLRunner::execute('SELECT '.$field.', sum('.$aggrField.') amount FROM '.$table.' WHERE '. $filter .' GROUP BY '.$field);
-		
 		$res = array();
-		foreach ($rows as $row)
+
+		foreach ($tables as $table)
 		{
-			$res[$row[$field]]=$row["amount"];
-		}
+			$rows = MySQLRunner::execute('SELECT '.$table->getTableKey().', sum('.$table->getTableMeasure().') amount FROM '.$table->getTableName().' WHERE '. $filter .' GROUP BY '.$table->getTableKey());
+		
+			foreach ($rows as $row)
+			{
+				$res[$row[$table->getTableKey()]]=$row["amount"];
+			}
+		}		
 		return $res;
 	}
 	
