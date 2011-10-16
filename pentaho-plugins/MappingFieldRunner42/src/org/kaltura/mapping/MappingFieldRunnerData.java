@@ -24,10 +24,6 @@ import org.pentaho.di.trans.TransMeta;
 import org.pentaho.di.trans.step.BaseStepData;
 import org.pentaho.di.trans.step.StepDataInterface;
 import org.pentaho.di.trans.steps.mapping.MappingValueRename;
-import org.pentaho.di.trans.steps.mappinginput.MappingInput;
-import org.pentaho.di.trans.steps.mappingoutput.MappingOutput;
-
-
 
 /**
  * @author Matt
@@ -40,9 +36,7 @@ public class MappingFieldRunnerData extends BaseStepData implements StepDataInte
 	public Hashtable<String, TransMeta> mappingTransMeta = new Hashtable<String, TransMeta>();
 	public Hashtable<String, RowSet> rowSets = new Hashtable<String, RowSet>();
 	
-    public MappingInput  mappingInput;
-    public MappingOutput mappingOutput;
-	public List<Integer> renameFieldIndexes;
+    public List<Integer> renameFieldIndexes;
 	public List<String>  renameFieldNames;
     public boolean wasStarted;
     public RowMetaInterface outputRowMeta;

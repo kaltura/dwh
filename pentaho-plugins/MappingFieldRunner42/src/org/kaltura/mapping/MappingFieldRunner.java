@@ -491,11 +491,6 @@ public class MappingFieldRunner extends BaseStep implements StepInterface
 			mappingOutputSource.setDistributed(isDistributed());
 		}
 
-		// Finally, add the mapping transformation to the active
-		// sub-transformations
-		// map in the parent transformation
-		//
-		getTrans().getActiveSubtransformations().put(getStepname(), data.mappingTrans.get(transMeta));
 	}
 
 	public static void addInputRenames(List<MappingValueRename> renameList, List<MappingValueRename> addRenameList)
@@ -544,10 +539,6 @@ public class MappingFieldRunner extends BaseStep implements StepInterface
 			{
 				trans.waitUntilFinished();
 			}
-
-			// Remove it from the list of active sub-transformations...
-			//
-			getTrans().getActiveSubtransformations().remove(getStepname());
 
 			// See if there was an error in the sub-transformation, in that
 			// case, flag error etc.
