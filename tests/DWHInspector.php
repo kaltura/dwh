@@ -139,7 +139,14 @@ class DWHInspector
 		
 			foreach ($rows as $row)
 			{
-				$res[$row[$table->getTableKey()]]=$row["amount"];
+				if (array_key_exists($row[$table->getTableKey()],  $res))
+                                {
+                                         $res[$row[$table->getTableKey()]]+=$row["amount"];
+                                }
+                                else
+                                {
+                                        $res[$row[$table->getTableKey()]]=$row["amount"];
+                                }
 			}
 		}		
 		return $res;
