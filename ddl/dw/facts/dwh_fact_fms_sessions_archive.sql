@@ -8,8 +8,8 @@ CREATE TABLE `dwh_fact_fms_sessions_archive` (
   `bandwidth_source_id` int(11) NOT NULL,
   `session_client_ip` varchar(15) DEFAULT NULL,
   `session_client_ip_number` int(10) unsigned DEFAULT NULL,
-  `session_client_country_id` int(10) unsigned DEFAULT NULL,
-  `session_client_location_id` int(10) unsigned DEFAULT NULL,
+  `country_id` int(10) unsigned DEFAULT NULL,
+  `location_id` int(10) unsigned DEFAULT NULL,
   `session_partner_id` int(10) unsigned DEFAULT NULL,
   `total_bytes` bigint(20) unsigned DEFAULT NULL
 ) ENGINE=ARCHIVE DEFAULT CHARSET=latin1
