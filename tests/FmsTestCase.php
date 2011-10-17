@@ -95,6 +95,13 @@ abstract class FMSTestCase extends CycleProcessTestCase
 					  array(new ComparedTable('bandwidth_source_id', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)')));
                 $this->compareAggregation(array(new ComparedTable('session_partner_id', 'kalturadw.dwh_fact_fms_sessions', '(total_bytes/1024)')),
 					  array(new ComparedTable('partner_id', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)')));
+		$this->compareAggregation(array(new ComparedTable('location_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)'),
+                                                new ComparedTable('location_id', 'kalturadw.dwh_fact_fms_sessions', '(total_bytes/1024)')),
+                                          array(new ComparedTable('location_id', 'kalturadw.dwh_hourly_events_devices', 'ifnull(count_bandwidth_kb, 0)')));
+                $this->compareAggregation(array(new ComparedTable('country_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)'),
+                                                new ComparedTable('country_id', 'kalturadw.dwh_fact_fms_sessions', '(total_bytes/1024)')),
+                                          array(new ComparedTable('country_id', 'kalturadw.dwh_hourly_events_devices', 'ifnull(count_bandwidth_kb, 0)')));
+
 	}	
 
 	public function validFMSLine($line)
