@@ -31,8 +31,8 @@ values  ('entry','dwh_hourly_events_entry','entry_id','','events'),
         ('uid','dwh_hourly_events_uid','kuser_id','USE INDEX (event_hour_id_event_date_id_partner_id) inner join kalturadw.dwh_dim_entries as entry on(ev.entry_id = entry.entry_id)','events'),
 	('domain_referrer', 'dwh_hourly_events_domain_referrer', 'domain_id, referrer_id', '','events'),
 	('devices', 'dwh_hourly_events_devices', 'country_id,location_id,os_id,browser_id,ui_conf_id, entry_id','','events'),
-	('bandwidth_usage', 'dwh_hourly_partner_usage', 'bandwidth_source_id', 'bandwidth'),
-	('devices_bandwidth_usage', 'dwh_hourly_events_devices', 'country_id, location_id','bandwidth');
+	('bandwidth_usage', 'dwh_hourly_partner_usage', 'bandwidth_source_id', '', 'bandwidth'),
+	('devices_bandwidth_usage', 'dwh_hourly_events_devices', 'country_id, location_id', '', 'bandwidth');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
