@@ -21,7 +21,7 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
          NULL,
          'cycle_id',
          NULL,
-	'(\'bandwidth_usage\',\'devices\')',
+	'(\'bandwidth_usage\',\'devices_bandwidth_usage\')',
 	'activity_date_id',
 	'activity_hour_id'
         );
@@ -46,7 +46,7 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
          NULL,
          'cycle_id',
          NULL,
-	'(\'bandwidth_usage\',\'devices\')',
+	'(\'bandwidth_usage\',\'devices_bandwidth_usage\')',
 	'activity_date_id',
 	'activity_hour_id'
         );
@@ -70,7 +70,7 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
          NULL,
          'cycle_id',
          NULL,
-	'(\'bandwidth_usage\',\'devices\')',
+	'(\'bandwidth_usage\',\'devices_bandwidth_usage\')',
 	'activity_date_id',
 	'activity_hour_id'
         );
@@ -94,7 +94,7 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
          NULL,
          'cycle_id',
          NULL,
-	'(\'bandwidth_usage\',\'devices\')',
+	'(\'bandwidth_usage\',\'devices_bandwidth_usage\')',
 	'activity_date_id',
 	'activity_hour_id'
         );

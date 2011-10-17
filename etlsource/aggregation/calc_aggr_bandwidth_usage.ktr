@@ -179,7 +179,7 @@
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturaLog</database>
+    <database>kalturalog</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -194,6 +194,31 @@
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>KalturaMonitoring</name>
+    <server>${MonitoringDbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>monmon</database>
+    <port>${OpDbPort}</port>
+    <username>${MonitoringDbUser}</username>
+    <password>${MonitoringDbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>SET SESSION sql_log_bin=0</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
@@ -224,7 +249,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Write to log - before calc</from><to>aggregate bandwidth usage</to><enabled>Y</enabled> </hop>  <hop> <from>aggregate bandwidth usage</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  <hop> <from>Read days to calc</from><to>Write to log - before calc</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>aggregate bandwidth usage</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  <hop> <from>Read days to calc</from><to>Write to log - before calc</to><enabled>Y</enabled> </hop>  <hop> <from>aggregate devices bandwidth usage</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log - before calc</from><to>Switch &#47; Case</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>aggregate bandwidth usage</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>aggregate devices bandwidth usage</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>aggregate default bandwidth usage</to><enabled>Y</enabled> </hop>  <hop> <from>aggregate default bandwidth usage</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Read days to calc</name>
     <type>TableInput</type>
@@ -236,11 +261,14 @@
            <schema_name/>
            </partitioning>
     <connection>KalturaDW</connection>
-    <sql>SELECT distinct aggr_day	 
+    <sql>SELECT distinct aggr_day,aggr_name	 
 FROM kalturadw.aggr_managment 
-WHERE aggr_name=&apos;bandwidth_usage&apos;
-AND aggr_day + INTERVAL hour_id HOUR &lt; NOW() - INTERVAL 1 HOUR 
+WHERE aggr_day + INTERVAL hour_id HOUR &lt; NOW() - INTERVAL 1 HOUR 
 and is_calculated = 0
+and aggr_name in
+	(select aggr_name 
+	 from kalturadw_ds.aggr_name_resolver 
+	 where aggr_type = &apos;bandwidth&apos;)
 ORDER BY aggr_day</sql>
     <limit>0</limit>
     <lookup/>
@@ -249,8 +277,37 @@ ORDER BY aggr_day</sql>
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>264</xloc>
-      <yloc>128</yloc>
+      <xloc>197</xloc>
+      <yloc>127</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Switch &#47; Case</name>
+    <type>SwitchCase</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<fieldname>aggr_name</fieldname>
+<use_contains>N</use_contains>
+<case_value_type>String</case_value_type>
+<case_value_format/>
+<case_value_decimal/>
+<case_value_group/>
+<default_target_step>aggregate default bandwidth usage</default_target_step>
+<cases><case><value>bandwidth_usage</value>
+<target_step>aggregate bandwidth usage</target_step>
+</case><case><value>devices_bandwidth_usage</value>
+<target_step>aggregate devices bandwidth usage</target_step>
+</case></cases>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>445</xloc>
+      <yloc>131</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -270,6 +327,9 @@ ORDER BY aggr_day</sql>
     <fields>
       <field>
         <name>aggr_day</name>
+        </field>
+      <field>
+        <name>aggr_name</name>
         </field>
       </fields>
      <cluster_schema/>
@@ -299,8 +359,8 @@ ORDER BY aggr_day</sql>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>416</xloc>
-      <yloc>127</yloc>
+      <xloc>316</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -318,18 +378,79 @@ ORDER BY aggr_day</sql>
     <connection>KalturaDW</connection>
     <execute_each_row>Y</execute_each_row>
     <replace_variables>N</replace_variables>
-    <sql>call kalturadw.calc_aggr_day_partner_bandwidth(date(&apos;?&apos;));</sql>
+    <sql>call kalturadw.calc_aggr_day_bandwidth(date(&apos;?&apos;), &apos;?&apos;);</sql>
     <insert_field/>
     <update_field/>
     <delete_field/>
     <read_field/>
     <arguments>
        <argument><name>aggr_day</name></argument>
+       <argument><name>aggr_name</name></argument>
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>588</xloc>
-      <yloc>129</yloc>
+      <xloc>608</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>aggregate default bandwidth usage</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <execute_each_row>Y</execute_each_row>
+    <replace_variables>N</replace_variables>
+    <sql>call kalturadw.calc_aggr_day_bandwidth(date(&apos;?&apos;), &apos;?&apos;);</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>aggr_day</name></argument>
+       <argument><name>aggr_name</name></argument>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>611</xloc>
+      <yloc>200</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>aggregate devices bandwidth usage</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <execute_each_row>Y</execute_each_row>
+    <replace_variables>N</replace_variables>
+    <sql>call kalturadw.calc_aggr_day_bandwidth(date(&apos;?&apos;), &apos;?&apos;);</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>aggr_day</name></argument>
+       <argument><name>aggr_name</name></argument>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>608</xloc>
+      <yloc>136</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

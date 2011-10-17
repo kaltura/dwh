@@ -180,7 +180,7 @@
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturaLog</database>
+    <database>kalturalog</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -195,6 +195,31 @@
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>KalturaMonitoring</name>
+    <server>${MonitoringDbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>monmon</database>
+    <port>${OpDbPort}</port>
+    <username>${MonitoringDbUser}</username>
+    <password>${MonitoringDbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>SET SESSION sql_log_bin=0</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
@@ -263,9 +288,11 @@ the ones of type &quot;partner&quot; that are 3 days old - this will allow fixin
 SELECT 	aggr_name,aggr_day, hour_id aggr_hour 
 FROM kalturadw.aggr_managment 
 WHERE 	aggr_day + INTERVAL hour_id HOUR &lt; NOW() - INTERVAL ${AggregationHoursBack} HOUR
-		AND 
-		is_calculated = 0 AND 
-		aggr_name in (select aggr_name from kalturadw_ds.aggr_name_resolver)
+		AND is_calculated = 0 
+		AND aggr_name in 
+		(select aggr_name 
+		 from kalturadw_ds.aggr_name_resolver 
+		 where aggr_type = &apos;events&apos;)
 order by aggr_day, hour_id, aggr_name
 </sql>
     <limit>0</limit>
@@ -275,7 +302,7 @@ order by aggr_day, hour_id, aggr_name
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>165</xloc>
+      <xloc>166</xloc>
       <yloc>117</yloc>
       <draw>Y</draw>
       </GUI>
