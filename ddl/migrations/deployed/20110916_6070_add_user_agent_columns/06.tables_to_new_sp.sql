@@ -39,7 +39,7 @@ BEGIN
 		EXECUTE stmt;
 		DEALLOCATE PREPARE stmt;
 
-		UPDATE tables_to_new SET is_copied = 1 
+		UPDATE kalturadw_ds.tables_to_new SET is_copied = 1 
 		WHERE greater_than_or_equal_date_id = p_greater_than_or_equal_date_id AND
                 less_than_date_id = p_less_than_date_id AND
                 table_name = p_table_name;
