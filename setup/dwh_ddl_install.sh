@@ -217,7 +217,7 @@ mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_entry.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_widget.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_uid.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_partner.sql
-mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_parnter_usage.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_partner_usage.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_devices.sql
 mysqlexec $DW_ROOT_DIR/aggr/time_zone_helper_function.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_procedure.sql

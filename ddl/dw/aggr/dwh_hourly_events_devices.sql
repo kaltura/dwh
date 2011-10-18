@@ -56,7 +56,8 @@ CREATE TABLE kalturadw.`dwh_hourly_events_devices` (
   `count_bandwidth_kb` INT DEFAULT NULL,
   `total_admins` INT DEFAULT NULL,
   `total_media_entries` INT DEFAULT NULL,
-  PRIMARY KEY `partner_id` (`partner_id`,`date_id`,`hour_id`,`location_id`,`country_id`,`os_id`,`browser_id`,`ui_conf_id`,`entry_id`)
+  PRIMARY KEY `partner_id` (`partner_id`,`date_id`,`hour_id`,`location_id`,`country_id`,`os_id`,`browser_id`,`ui_conf_id`,`entry_id`),
+  KEY (`date_id`, `hour_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 PARTITION BY RANGE (date_id)
 (PARTITION p_201001 VALUES LESS THAN (20100201) ENGINE = INNODB,

@@ -48,7 +48,8 @@ CREATE TABLE `dwh_hourly_events_entry_new` (
   `count_postroll_50` int(11) DEFAULT NULL,
   `count_postroll_75` int(11) DEFAULT NULL,
   PRIMARY KEY (`partner_id`,`date_id`,`hour_id`,`entry_id`),
-  KEY (`date_id`, `hour_id`)
+  KEY (`date_id`, `hour_id`),
+  KEY `entry_id` (`entry_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 /*!50100 PARTITION BY RANGE (date_id)
 (PARTITION p_0 VALUES LESS THAN (1) ENGINE = InnoDB)*/;

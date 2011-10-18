@@ -10,7 +10,8 @@ CREATE TABLE kalturadw.`dwh_hourly_partner_usage` (
   `count_bandwidth_kb`  DECIMAL(19,4) DEFAULT 0,
   `count_storage_mb`  DECIMAL(19,4) DEFAULT 0,
   `aggr_storage_mb` DECIMAL(19,4),
-  PRIMARY KEY (`partner_id`,`date_id`, `hour_id`, `bandwidth_source_id`)
+  PRIMARY KEY (`partner_id`,`date_id`, `hour_id`, `bandwidth_source_id`),
+  KEY (`date_id`, `hour_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 PARTITION BY RANGE (date_id)
 (PARTITION p_201001 VALUES LESS THAN (20100201) ENGINE = INNODB,
