@@ -47,7 +47,7 @@ CREATE TABLE kalturadw.`dwh_hourly_events_entry` (
   `count_postroll_50` INT DEFAULT NULL,
   `count_postroll_75` INT DEFAULT NULL,
   PRIMARY KEY `partner_id` (`partner_id`,`date_id`,`hour_id`,`entry_id`),
-  KEY (`date_id`,`hour_id),
+  KEY (`date_id`,`hour_id`),
   KEY `entry_id` (`entry_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 PARTITION BY RANGE (date_id)
