@@ -2,9 +2,11 @@
 SELECT 'No EVENTS file processed yesterday!' stat
 FROM (
 SELECT COUNT(*) amount
-FROM kalturadw_ds.files f, kalturadw_ds.cycles c WHERE c.process_id = 1
+FROM kalturadw_ds.files f, kalturadw_ds.cycles c WHERE c.process_id in (1,3)
 AND f.cycle_id = c.cycle_id
-AND c.STATUS='DONE' AND f.insert_time > NOW()-INTERVAL 12 HOUR) a
+AND ((c.process_id = 1 and c.STATUS='DONE' AND f.insert_time > NOW()-INTERVAL 24 HOUR)
+or 
+(c.process_id = 3 and c.STATUS='DONE' AND f.insert_time > NOW()-INTERVAL 12 HOUR))) a
 WHERE amount = 0
 UNION
 SELECT 'No FMS file processed yesterday!' stat

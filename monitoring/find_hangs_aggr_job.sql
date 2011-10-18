@@ -9,6 +9,6 @@ SELECT
 	FROM 
 	kalturadw.aggr_managment 
 	WHERE  aggr_day < DATE(NOW())
-	       AND start_time < NOW() - INTERVAL 1 HOUR
+	       AND start_time < NOW() - INTERVAL if(aggr_name='plays_views', 2.5, 1) HOUR
 		AND (end_time  < start_time OR end_time IS NULL)
 	       AND is_calculated = 0
