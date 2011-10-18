@@ -48,7 +48,6 @@ CREATE TABLE `dwh_hourly_events_country_new` (
   `count_postroll_25` int(11) DEFAULT NULL,
   `count_postroll_50` int(11) DEFAULT NULL,
   `count_postroll_75` int(11) DEFAULT NULL,
-  `count_bandwidth_kb` int(11) DEFAULT NULL,
   PRIMARY KEY (`partner_id`,`date_id`,`hour_id`,`country_id`,`location_id`),
   KEY (`date_id`, `hour_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
