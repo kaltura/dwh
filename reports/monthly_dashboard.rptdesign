@@ -11680,7 +11680,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="706">
-                                        <text-property name="text">Last 12 months avg GB</text-property>
+                                        <text-property name="text">Last 12 months avg</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -12065,7 +12065,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1096">
-                                        <text-property name="text">Last 12 months avg GB</text-property>
+                                        <text-property name="text">Last 12 months avg</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -12438,7 +12438,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1142">
-                                        <text-property name="text">Last 12 months avg GB</text-property>
+                                        <text-property name="text">Last 12 months avg</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -13966,7 +13966,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1406">
-                                        <text-property name="text">Last 12 months avg GB</text-property>
+                                        <text-property name="text">Last 12 months avg</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -14363,7 +14363,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1485">
-                                        <text-property name="text">Last 12 months avg GB</text-property>
+                                        <text-property name="text">Last 12 months avg</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -14748,7 +14748,7 @@ function beforeGeneration( chart, icsc )&#xD;
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1533">
-                                        <text-property name="text">Last 12 months avg GB</text-property>
+                                        <text-property name="text">Last 12 months avg</text-property>
                                     </label>
                                 </cell>
                             </row>

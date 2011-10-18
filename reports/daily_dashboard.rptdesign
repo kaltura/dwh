@@ -14087,7 +14087,7 @@ day + month / 100</Definition>
                     <label id="1434">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top views-count non-billable partners</text-property>
+                        <text-property name="text">Yesterday 20 top views-count billable partners</text-property>
                     </label>
                 </cell>
             </row>
