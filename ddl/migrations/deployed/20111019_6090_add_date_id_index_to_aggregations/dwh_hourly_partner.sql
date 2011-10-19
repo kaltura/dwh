@@ -75,7 +75,7 @@ INSERT INTO dwh_hourly_partner_new
 SELECT * FROM dwh_hourly_partner;
 
 
-DROP TABLE IF EXISTS `dwh_hourly_partner_new_old`;
+DROP TABLE IF EXISTS `dwh_hourly_partner_old`;
 
 RENAME TABLE dwh_hourly_partner TO dwh_hourly_partner_old;
 RENAME TABLE dwh_hourly_partner_new TO dwh_hourly_partner;
