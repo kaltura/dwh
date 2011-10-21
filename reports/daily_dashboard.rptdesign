@@ -14015,6 +14015,10 @@ day + month / 100</Definition>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <data id="1429">
+                                        <structure name="numberFormat">
+                                            <property name="category">Custom</property>
+                                            <property name="pattern">###,##0</property>
+                                        </structure>
                                         <property name="resultSetColumn">count_loads</property>
                                     </data>
                                 </cell>
@@ -14053,6 +14057,10 @@ day + month / 100</Definition>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <data id="1430">
+                                        <structure name="numberFormat">
+                                            <property name="category">Custom</property>
+                                            <property name="pattern">###,##0</property>
+                                        </structure>
                                         <property name="resultSetColumn">2_days_ago_count_loads</property>
                                     </data>
                                 </cell>
@@ -14388,6 +14396,10 @@ day + month / 100</Definition>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <data id="1460">
+                                        <structure name="numberFormat">
+                                            <property name="category">Custom</property>
+                                            <property name="pattern">###,##0</property>
+                                        </structure>
                                         <property name="resultSetColumn">count_loads</property>
                                     </data>
                                 </cell>
@@ -14426,6 +14438,10 @@ day + month / 100</Definition>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <data id="1464">
+                                        <structure name="numberFormat">
+                                            <property name="category">Custom</property>
+                                            <property name="pattern">###,##0</property>
+                                        </structure>
                                         <property name="resultSetColumn">2_days_ago_count_loads</property>
                                     </data>
                                 </cell>
@@ -14762,6 +14778,10 @@ day + month / 100</Definition>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <data id="1498">
+                                        <structure name="numberFormat">
+                                            <property name="category">Custom</property>
+                                            <property name="pattern">###,##0</property>
+                                        </structure>
                                         <property name="resultSetColumn">count_loads</property>
                                     </data>
                                 </cell>
@@ -14800,6 +14820,10 @@ day + month / 100</Definition>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <data id="1502">
+                                        <structure name="numberFormat">
+                                            <property name="category">Custom</property>
+                                            <property name="pattern">###,##0</property>
+                                        </structure>
                                         <property name="resultSetColumn">2_days_ago_count_loads</property>
                                     </data>
                                 </cell>
