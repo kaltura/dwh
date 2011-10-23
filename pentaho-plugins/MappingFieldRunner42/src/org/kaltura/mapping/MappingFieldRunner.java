@@ -105,7 +105,6 @@ public class MappingFieldRunner extends BaseStep implements StepInterface
 				
 					// Start the mapping/sub-transformation threads
 					mappingTrans.get(transMeta).startThreads();
-					mappingTrans.get(transMeta).setLog(log);
 					
 					MappingInput[] mappingInputs = mappingTrans.get(transMeta).findMappingInput();
 					
