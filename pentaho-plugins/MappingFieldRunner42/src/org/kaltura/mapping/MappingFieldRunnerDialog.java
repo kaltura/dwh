@@ -37,6 +37,7 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
@@ -52,6 +53,7 @@ import org.pentaho.di.core.SourceToTargetMapping;
 import org.pentaho.di.core.exception.KettleException;
 import org.pentaho.di.core.row.RowMetaInterface;
 import org.pentaho.di.i18n.BaseMessages;
+import org.pentaho.di.repository.RepositoryElementMetaInterface;
 import org.pentaho.di.trans.TransMeta;
 import org.pentaho.di.trans.step.BaseStepMeta;
 import org.pentaho.di.trans.step.StepDialogInterface;
@@ -65,12 +67,13 @@ import org.pentaho.di.ui.core.dialog.ErrorDialog;
 import org.pentaho.di.ui.core.widget.ColumnInfo;
 import org.pentaho.di.ui.core.widget.ComboVar;
 import org.pentaho.di.ui.core.widget.TableView;
+import org.pentaho.di.ui.repository.dialog.SelectObjectDialog;
 import org.pentaho.di.ui.trans.step.BaseStepDialog;
 
 public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDialogInterface
 {
-	private static Class<?> PKG = MappingFieldRunnerDialog.class;
-	
+	private static Class<?> PKG = MappingFieldRunnerMeta.class; // for i18n purposes, needed by Translator2!!   $NON-NLS-1$
+
 	private MappingFieldRunnerMeta mappingMeta;
 
 	private Group gTransGroup;
@@ -81,7 +84,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
  
 	private CTabFolder wTabFolder;
 
-	TransMeta mappingTransMeta = null;
+	private TransMeta mappingTransMeta = null;
 
 	protected boolean transModified;
 
@@ -100,6 +103,11 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 	private Button wAddInput;
 
 	private Button wAddOutput;
+
+
+	private boolean gotPreviousFields;
+	
+  private Button wMultiInput, wMultiOutput;
 
 	private interface ApplyChanges
 	{
@@ -194,8 +202,6 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 
 	private List<ApplyChanges> changeList;
 
-	private boolean gotPreviousFields;
-
 	public MappingFieldRunnerDialog(Shell parent, Object in, TransMeta tr, String sname)
 	{
 		super(parent, (BaseStepMeta) in, tr, sname);
@@ -264,7 +270,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		fdStepname.top = new FormAttachment(0, margin);
 		fdStepname.right = new FormAttachment(100, 0);
 		wStepname.setLayoutData(fdStepname);
-
+	
 		// Show a group with 2 main options: a transformation in the repository
 		// or on file
 		//
@@ -312,6 +318,37 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		fdTransGroup.right = new FormAttachment(100, 0);
 		// fdTransGroup.bottom = new FormAttachment(wStepname, 350);
 		gTransGroup.setLayoutData(fdTransGroup);
+		Control lastControl = gTransGroup;
+		
+		wMultiInput = new Button(shell, SWT.CHECK);
+		props.setLook(wMultiInput);
+		wMultiInput.setText(BaseMessages.getString(PKG, "MappingFieldRunnerDialog.AllowMultipleInputs.Label"));
+		FormData fdMultiInput = new FormData();
+		fdMultiInput.left = new FormAttachment(0,0);
+    fdMultiInput.right = new FormAttachment(100,0);
+    fdMultiInput.top = new FormAttachment(lastControl, margin*2);
+    wMultiInput.setLayoutData(fdMultiInput);
+    wMultiInput.addSelectionListener(new SelectionAdapter() {
+      public void widgetSelected(SelectionEvent event) {
+        setFlags();
+      }
+    });
+    lastControl = wMultiInput;
+    
+    wMultiOutput = new Button(shell, SWT.CHECK);
+    props.setLook(wMultiOutput);
+    wMultiOutput.setText(BaseMessages.getString(PKG, "MappingFieldRunnerDialog.AllowMultipleOutputs.Label"));
+    FormData fdMultiOutput = new FormData();
+    fdMultiOutput.left = new FormAttachment(0,0);
+    fdMultiOutput.right = new FormAttachment(100,0);
+    fdMultiOutput.top = new FormAttachment(lastControl, margin);
+    wMultiOutput.setLayoutData(fdMultiOutput);
+    wMultiOutput.addSelectionListener(new SelectionAdapter() {
+      public void widgetSelected(SelectionEvent event) {
+        setFlags();
+      }
+    });
+    lastControl = wMultiOutput;
 
 		// 
 		// Add a tab folder for the parameters and various input and output
@@ -325,7 +362,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		FormData fdTabFolder = new FormData();
 		fdTabFolder.left = new FormAttachment(0, 0);
 		fdTabFolder.right = new FormAttachment(100, 0);
-		fdTabFolder.top = new FormAttachment(gTransGroup, margin * 2);
+		fdTabFolder.top = new FormAttachment(lastControl, margin * 2);
 		fdTabFolder.bottom = new FormAttachment(100, -75);
 		wTabFolder.setLayoutData(fdTabFolder);
 
@@ -344,9 +381,12 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 				// Simply add a new MappingIODefinition object to the
 				// inputMappings
 				MappingIODefinition definition = new MappingIODefinition();
+				definition.setRenamingOnOutput(true);
 				inputMappings.add(definition);
 				int index = inputMappings.size() - 1;
 				addInputMappingDefinitionTab(definition, index);
+				
+				setFlags();
 			}
 
 		});
@@ -368,6 +408,8 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 				outputMappings.add(definition);
 				int index = outputMappings.size() - 1;
 				addOutputMappingDefinitionTab(definition, index);
+
+        setFlags();
 			}
 
 		});
@@ -430,7 +472,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		
 		mappingMeta.setChanged(changed);
 		wTabFolder.setSelection(0);
-		
+
 		shell.open();
 		while (!shell.isDisposed())
 		{
@@ -439,6 +481,25 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		}
 		return stepname;
 	}
+
+  protected void selectTransformationByReference() {
+    if (repository != null) {
+      SelectObjectDialog sod = new SelectObjectDialog(shell, repository, true, false);
+      sod.open();
+      RepositoryElementMetaInterface repositoryObject = sod.getRepositoryObject();
+      if (repositoryObject != null) {
+        getByReferenceData(repositoryObject);
+      }
+    }
+  }
+
+ 	 	  
+   private void getByReferenceData(RepositoryElementMetaInterface transInf) {
+    String path = transInf.getRepositoryDirectory().getPath();
+    if (!path.endsWith("/"))
+      path += "/";
+    path += transInf.getName();
+  }
 
 	/**
 	 * Copy information from the meta-data input to the dialog fields.
@@ -454,6 +515,9 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		addParametersTab(mappingParameters);
 		wTabFolder.setSelection(0);
 
+		wMultiInput.setSelection(mappingMeta.isAllowingMultipleInputs());
+		wMultiOutput.setSelection(mappingMeta.isAllowingMultipleOutputs());
+
 		// Now add the input stream tabs: where is our data coming from?
 		for (int i = 0; i < inputMappings.size(); i++)
 		{
@@ -466,6 +530,8 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 			addOutputMappingDefinitionTab(outputMappings.get(i), i);
 		}
 
+		
+    setFlags();
 	}
 
 	private void addOutputMappingDefinitionTab(MappingIODefinition definition, int index)
@@ -676,7 +742,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 			}
 		}
 	}
-
+	
 	private void addMappingDefinitionTab(final MappingIODefinition definition, int index,
 			final String tabTitle, final String tabTooltip, String inputStepLabel, String outputStepLabel,
 			String descriptionLabel, String sourceColumnLabel, String targetColumnLabel, final boolean input)
@@ -702,7 +768,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 
 		// What's the stepname to read from? (empty is OK too)
 		//
-		Button wbInputStep = new Button(wInputComposite, SWT.PUSH);
+		final Button wbInputStep = new Button(wInputComposite, SWT.PUSH);
 		props.setLook(wbInputStep);
 		wbInputStep.setText(BaseMessages.getString(PKG, "MappingFieldRunnerDialog.button.SourceStepName"));
 		FormData fdbInputStep = new FormData();
@@ -711,7 +777,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		// left top corner
 		wbInputStep.setLayoutData(fdbInputStep);
 
-		Label wlInputStep = new Label(wInputComposite, SWT.RIGHT);
+		final Label wlInputStep = new Label(wInputComposite, SWT.RIGHT);
 		props.setLook(wlInputStep);
 		wlInputStep.setText(inputStepLabel); //$NON-NLS-1$
 		FormData fdlInputStep = new FormData();
@@ -757,7 +823,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 
 		// What's the step name to read from? (empty is OK too)
 		//
-		Button wbOutputStep = new Button(wInputComposite, SWT.PUSH);
+		final Button wbOutputStep = new Button(wInputComposite, SWT.PUSH);
 		props.setLook(wbOutputStep);
 		wbOutputStep.setText(BaseMessages.getString(PKG, "MappingFieldRunnerDialog.button.SourceStepName"));
 		FormData fdbOutputStep = new FormData();
@@ -765,7 +831,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		fdbOutputStep.right = new FormAttachment(100, 0);
 		wbOutputStep.setLayoutData(fdbOutputStep);
 
-		Label wlOutputStep = new Label(wInputComposite, SWT.RIGHT);
+		final Label wlOutputStep = new Label(wInputComposite, SWT.RIGHT);
 		props.setLook(wlOutputStep);
 		wlOutputStep.setText(outputStepLabel); //$NON-NLS-1$
 		FormData fdlOutputStep = new FormData();
@@ -788,7 +854,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		// Add a checkbox to indicate the main step to read from, the main data
 		// path...
 		//
-		Label wlMainPath = new Label(wInputComposite, SWT.RIGHT);
+		final Label wlMainPath = new Label(wInputComposite, SWT.RIGHT);
 		props.setLook(wlMainPath);
 		wlMainPath.setText(BaseMessages.getString(PKG, "MappingFieldRunnerDialog.input.MainDataPath")); //$NON-NLS-1$
 		FormData fdlMainPath = new FormData();
@@ -797,7 +863,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		fdlMainPath.right = new FormAttachment(middle, -margin);
 		wlMainPath.setLayoutData(fdlMainPath);
 
-		Button wMainPath = new Button(wInputComposite, SWT.CHECK);
+		final Button wMainPath = new Button(wInputComposite, SWT.CHECK);
 		props.setLook(wMainPath);
 		FormData fdMainPath = new FormData();
 		fdMainPath.top = new FormAttachment(wbOutputStep, margin);
@@ -819,41 +885,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 			}
 
 		});
-
-		// Add a checkbox to indicate that all output mappings need to rename
-		// the values back...
-		//
-		Label wlRenameOutput = new Label(wInputComposite, SWT.RIGHT);
-		props.setLook(wlRenameOutput);
-		wlRenameOutput.setText(BaseMessages.getString(PKG, "MappingFieldRunnerDialog.input.RenamingOnOutput")); //$NON-NLS-1$
-		FormData fdlRenameOutput = new FormData();
-		fdlRenameOutput.top = new FormAttachment(wMainPath, margin);
-		fdlRenameOutput.left = new FormAttachment(0, 0);
-		fdlRenameOutput.right = new FormAttachment(middle, -margin);
-		wlRenameOutput.setLayoutData(fdlRenameOutput);
-
-		Button wRenameOutput = new Button(wInputComposite, SWT.CHECK);
-		props.setLook(wRenameOutput);
-		FormData fdRenameOutput = new FormData();
-		fdRenameOutput.top = new FormAttachment(wMainPath, margin);
-		fdRenameOutput.left = new FormAttachment(middle, 0);
-		// fdRenameOutput.right = new FormAttachment(100, 0); // who cares, it's
-		// a check box
-		wRenameOutput.setLayoutData(fdRenameOutput);
-
-		wRenameOutput.setSelection(definition.isRenamingOnOutput());
-		wRenameOutput.addSelectionListener(new SelectionAdapter()
-		{
-
-			@Override
-			public void widgetSelected(SelectionEvent event)
-			{
-				definition.setRenamingOnOutput(!definition.isRenamingOnOutput()); // flip
-				// the
-				// switch
-			}
-
-		});
+		Control lastControl = wMainPath;
 
 		// Allow for a small description
 		//
@@ -861,7 +893,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		props.setLook(wlDescription);
 		wlDescription.setText(descriptionLabel); //$NON-NLS-1$
 		FormData fdlDescription = new FormData();
-		fdlDescription.top = new FormAttachment(wRenameOutput, margin);
+		fdlDescription.top = new FormAttachment(lastControl, margin);
 		fdlDescription.left = new FormAttachment(0, 0); // First one in the left
 		// top corner
 		fdlDescription.right = new FormAttachment(middle, -margin);
@@ -873,8 +905,8 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		wDescription.setText(Const.NVL(definition.getDescription(), ""));
 		wDescription.addModifyListener(lsMod);
 		FormData fdDescription = new FormData();
-		fdDescription.top = new FormAttachment(wRenameOutput, margin);
-		fdDescription.bottom = new FormAttachment(wRenameOutput, 100 + margin);
+		fdDescription.top = new FormAttachment(lastControl, margin);
+		fdDescription.bottom = new FormAttachment(lastControl, 100 + margin);
 		fdDescription.left = new FormAttachment(middle, 0); // To the right of
 		// the label
 		fdDescription.right = new FormAttachment(wbOutputStep, -margin);
@@ -887,6 +919,8 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 				definition.setDescription(wDescription.getText());
 			}
 		});
+		lastControl=wDescription;
+		
 
 		// Now add a table view with the 2 columns to specify: input and output
 		// fields for the source and target steps.
@@ -895,10 +929,11 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		props.setLook(wbEnterMapping);
 		wbEnterMapping.setText(BaseMessages.getString(PKG, "MappingFieldRunnerDialog.button.EnterMapping"));
 		FormData fdbEnterMapping = new FormData();
-		fdbEnterMapping.top = new FormAttachment(wDescription, margin * 2);
+		fdbEnterMapping.top = new FormAttachment(lastControl, margin * 2);
 		fdbEnterMapping.right = new FormAttachment(100, 0); // First one in the
 		// left top corner
 		wbEnterMapping.setLayoutData(fdbEnterMapping);
+		wbEnterMapping.setEnabled(input);
 
 		ColumnInfo[] colinfo = new ColumnInfo[] {
 				new ColumnInfo(sourceColumnLabel, ColumnInfo.COLUMN_TYPE_TEXT, false, false), //$NON-NLS-1$
@@ -910,9 +945,10 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		FormData fdMappings = new FormData();
 		fdMappings.left = new FormAttachment(0, 0);
 		fdMappings.right = new FormAttachment(wbEnterMapping, -margin);
-		fdMappings.top = new FormAttachment(wDescription, margin * 2);
-		fdMappings.bottom = new FormAttachment(100, -20);
+		fdMappings.top = new FormAttachment(lastControl, margin * 2);
+		fdMappings.bottom = new FormAttachment(100, -50);
 		wFieldMappings.setLayoutData(fdMappings);
+		lastControl = wFieldMappings;
 
 		for (MappingValueRename valueRename : definition.getValueRenames())
 		{
@@ -1010,6 +1046,46 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 				}
 			}
 		});
+		
+    if (input) {
+      // Add a checkbox to indicate that all output mappings need to rename
+      // the values back...
+      //
+      Label wlRenameOutput = new Label(wInputComposite, SWT.RIGHT);
+      props.setLook(wlRenameOutput);
+      wlRenameOutput.setText(BaseMessages.getString(PKG, "MappingFieldRunnerDialog.input.RenamingOnOutput")); //$NON-NLS-1$
+      FormData fdlRenameOutput = new FormData();
+      fdlRenameOutput.top = new FormAttachment(lastControl, margin);
+      fdlRenameOutput.left = new FormAttachment(0, 0);
+      fdlRenameOutput.right = new FormAttachment(middle, -margin);
+      wlRenameOutput.setLayoutData(fdlRenameOutput);
+  
+      Button wRenameOutput = new Button(wInputComposite, SWT.CHECK);
+      props.setLook(wRenameOutput);
+      FormData fdRenameOutput = new FormData();
+      fdRenameOutput.top = new FormAttachment(lastControl, margin);
+      fdRenameOutput.left = new FormAttachment(middle, 0);
+      // fdRenameOutput.right = new FormAttachment(100, 0); // who cares, it's
+      // a check box
+      wRenameOutput.setLayoutData(fdRenameOutput);
+  
+      wRenameOutput.setSelection(definition.isRenamingOnOutput());
+      wRenameOutput.addSelectionListener(new SelectionAdapter()
+      {
+  
+        @Override
+        public void widgetSelected(SelectionEvent event)
+        {
+          definition.setRenamingOnOutput(!definition.isRenamingOnOutput()); // flip
+          // the
+          // switch
+        }
+  
+      });
+      
+      lastControl=wRenameOutput;
+    }
+
 
 		FormData fdParametersComposite = new FormData();
 		fdParametersComposite.left = new FormAttachment(0, 0);
@@ -1058,16 +1134,72 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 						// 
 						changeList.remove(applyChanges);
 					}
+					
+					setFlags();
 				}
 			}
 
 		});
-
+		
+		wMultiInput.addSelectionListener(new SelectionAdapter() { public void widgetSelected(SelectionEvent arg0) {
+		  setTabFlags(input, wlMainPath, wMainPath, wlInputStep, wInputStep, wbInputStep, wlOutputStep, wOutputStep, wbOutputStep);
+		}});
+    wMultiOutput.addSelectionListener(new SelectionAdapter() { public void widgetSelected(SelectionEvent arg0) {
+      setTabFlags(input, wlMainPath, wMainPath, wlInputStep, wInputStep, wbInputStep, wlOutputStep, wOutputStep, wbOutputStep);
+    }});
+    wMainPath.addSelectionListener(new SelectionAdapter() { public void widgetSelected(SelectionEvent arg0) {
+      setTabFlags(input, wlMainPath, wMainPath, wlInputStep, wInputStep, wbInputStep, wlOutputStep, wOutputStep, wbOutputStep);
+    }});
+		
+		setTabFlags(input, wlMainPath, wMainPath, wlInputStep, wInputStep, wbInputStep, wlOutputStep, wOutputStep, wbOutputStep);
+				
 		wTabFolder.setSelection(wTab);
 
 	}
 
-	/**
+	private void setTabFlags(boolean input, Label wlMainPath, Button wMainPath, Label wlInputStep, Text wInputStep, Button wbInputStep, Label wlOutputStep, Text wOutputStep, Button wbOutputStep) {
+	  
+	  boolean multiInput = wMultiInput.getSelection(); 
+    boolean multiOutput = wMultiOutput.getSelection();
+    
+	  if (multiInput) {
+      wlMainPath.setEnabled(true);
+      wMainPath.setEnabled(true);
+	  } else {
+      wMainPath.setSelection(true);
+      wMainPath.setEnabled(false);
+      wlMainPath.setEnabled(false);
+	  }
+	  
+	  boolean mainPath = wMainPath.getSelection();
+    if (input) {
+      wlInputStep.setEnabled(!mainPath);
+      wInputStep.setEnabled(!mainPath);
+      wbInputStep.setEnabled(!mainPath);
+      wlOutputStep.setEnabled(multiInput);
+      wOutputStep.setEnabled(multiInput);
+      wbOutputStep.setEnabled(multiInput);
+    } else {
+      wlInputStep.setEnabled(multiOutput);
+      wInputStep.setEnabled(multiOutput);
+      wbInputStep.setEnabled(multiOutput);
+      wlOutputStep.setEnabled(!mainPath);
+      wOutputStep.setEnabled(!mainPath);
+      wbOutputStep.setEnabled(!mainPath);
+    }
+  }
+
+  private void setFlags() {
+	   // Enable/disable fields...
+    //
+    boolean allowMultiInput = wMultiInput.getSelection();
+    boolean allowMultiOutput = wMultiOutput.getSelection();
+    
+    wAddInput.setEnabled(allowMultiInput || inputMappings.size()==0);
+    wAddOutput.setEnabled(allowMultiOutput || outputMappings.size()==0);
+  }
+
+  /**
 	 * Enables or disables the mapping button. We can only enable it if the
 	 * target steps allows a mapping to be made against it.
 	 * 
@@ -1140,6 +1272,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		wTab.setToolTipText(tooltip); //$NON-NLS-1$
 	}
 
+
 	private void cancel()
 	{
 		stepname = null;
@@ -1153,17 +1286,23 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 
 		stepname = wStepname.getText(); // return value
 
-		mappingMeta.setFieldName(wFieldname.getText());
-		mappingMeta.setExecuteEachRow(wExecuteForEachRow.getSelection());
 		// Load the information on the tabs, optionally do some
 		// verifications...
 		// 
 		collectInformation();
 
+		mappingMeta.setFieldName(wFieldname.getText());
+		mappingMeta.setExecuteEachRow(wExecuteForEachRow.getSelection());
+		
 		mappingMeta.setMappingParameters(mappingParameters);
 		mappingMeta.setInputMappings(inputMappings);
+		// Set the input steps for input mappings
+		mappingMeta.searchInfoAndTargetSteps(transMeta.getSteps());
 		mappingMeta.setOutputMappings(outputMappings);
 
+		mappingMeta.setAllowingMultipleInputs(wMultiInput.getSelection());
+    mappingMeta.setAllowingMultipleOutputs(wMultiOutput.getSelection());
+		
 		mappingMeta.setChanged(true);
 
 		dispose();
@@ -1178,6 +1317,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 		}
 	}
 	
+	
 	private void getFields()
 	 {
 		if(!gotPreviousFields)
@@ -1191,7 +1331,7 @@ public class MappingFieldRunnerDialog extends BaseStepDialog implements StepDial
 			  }
 			 if(field!=null) wFieldname.setText(field);
 		 	}catch(KettleException ke){
-				new ErrorDialog(shell, BaseMessages.getString(PKG, "TableOutputDialog.FailedToGetFields.DialogTitle"), BaseMessages.getString(PKG, "TableOutputDialog.FailedToGetFields.DialogMessage"), ke);
+				new ErrorDialog(shell, BaseMessages.getString("TableOutputDialog.FailedToGetFields.DialogTitle"), BaseMessages.getString("TableOutputDialog.FailedToGetFields.DialogMessage"), ke);
 			}
 		 	gotPreviousFields=true;
 		}
