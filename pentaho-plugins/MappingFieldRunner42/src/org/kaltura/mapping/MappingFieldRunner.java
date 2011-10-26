@@ -21,6 +21,7 @@ import org.pentaho.di.core.RowSet;
 import org.pentaho.di.core.exception.KettleException;
 import org.pentaho.di.core.logging.LogTableField;
 import org.pentaho.di.core.logging.TransLogTable;
+import org.pentaho.di.core.parameters.DuplicateParamException;
 import org.pentaho.di.i18n.BaseMessages;
 import org.pentaho.di.trans.SingleThreadedTransExecutor;
 import org.pentaho.di.trans.Trans;
@@ -182,42 +183,35 @@ public class MappingFieldRunner extends BaseStep implements StepInterface
 		MappingParameters mappingParameters = meta.getMappingParameters();
 		if (mappingParameters != null)
 		{
-
-			String[] parameters;
-			String[] parameterValues;
-
-			if (mappingParameters.isInheritingAllVariables())
-			{
-				// We pass the values for all the parameters from the parent
-				// transformation
-				//
-				parameters = transMeta.listParameters();
-				parameterValues = new String[parameters.length];
-				for (int i = 0; i < parameters.length; i++)
-				{
-					parameterValues[i] = getVariable(parameters[i]);
-				}
-			} else
-			{
-				// We pass down the listed variables with the specified
-				// values...
-				//
-				parameters = mappingParameters.getVariable();
-				parameterValues = new String[parameters.length];
-				for (int i = 0; i < parameters.length; i++)
-				{
-					parameterValues[i] = environmentSubstitute(mappingParameters.getInputField()[i]);
+			// See if we need to pass all variables from the parent or not...
+			//
+			
+			Trans trans = mappingTrans.get(transMeta);
+			if (mappingParameters.isInheritingAllVariables()) {
+				transMeta.copyVariablesFrom(getTransMeta());
+				trans.copyParametersFrom(getTrans());
+			}
+			
+			// Just set the variables in the transformation statically.
+			// This just means: set a number of variables:
+			//
+			for (int i=0;i<mappingParameters.getVariable().length;i++) {
+				String name = mappingParameters.getVariable()[i];
+				String value = environmentSubstitute(mappingParameters.getInputField()[i]);
+				if (!Const.isEmpty(name) && !Const.isEmpty(value)) {
+					try
+					{
+						transMeta.addParameterDefinition(name, value, "");
+						trans.addParameterDefinition(name, value, "");
+					} catch(DuplicateParamException e)
+					{
+						transMeta.setParameterValue(name, value);
+						trans.setParameterValue(name, value);
+					}
+					transMeta.setVariable(name, value);
+					trans.setVariable(name, value);
 				}
 			}
-
-			for (int i = 0; i < parameters.length; i++)
-			{
-				String value = Const.NVL(parameterValues[i], "");
-
-				mappingTrans.get(transMeta).setParameterValue(parameters[i], value);
-			}
-
-			mappingTrans.get(transMeta).activateParameters();
 		}
 	}
 
@@ -696,37 +690,49 @@ public class MappingFieldRunner extends BaseStep implements StepInterface
 	}
 
 	@Override
-	public int rowsetInputSize()
+	public synchronized int rowsetInputSize()
 	{
 		int size = 0;
-		if (mappingTrans.size() > 0)
+		try
 		{
-			Trans tran = mappingTrans.values().iterator().next();
-			for (MappingInput input : tran.findMappingInput())
+			if (mappingTrans.size() > 0)
 			{
-				for (RowSet rowSet : input.getInputRowSets())
+				MappingInput[] input = mappingTrans.values().iterator().next().findMappingInput();
+				for (int i=0;i>input.length;i++)
 				{
-					size += rowSet.size();
+					for (RowSet rowSet : input[i].getInputRowSets())
+					{
+						size += rowSet.size();
+					}
 				}
 			}
+		} catch(NullPointerException e)
+		{
+			return 0;
 		}
 		return size;
 	}
 
 	@Override
-	public int rowsetOutputSize()
+	public synchronized int rowsetOutputSize()
 	{
 		int size = 0;
-		if (mappingTrans.size() > 0)
+		try
 		{
-			Trans tran = mappingTrans.values().iterator().next();
-			for (MappingInput output : tran.findMappingInput())
+			if (mappingTrans.size() > 0)
 			{
-				for (RowSet rowSet : output.getOutputRowSets())
+				MappingOutput[] output = mappingTrans.values().iterator().next().findMappingOutput();
+				for (int i=0;i>output.length;i++)
 				{
-					size += rowSet.size();
+					for (RowSet rowSet : output[i].getOutputRowSets())
+					{
+						size += rowSet.size();
+					}
 				}
 			}
+		} catch(NullPointerException e)
+		{
+			return 0;
 		}
 		return size;
 	}
