@@ -53,7 +53,7 @@ class MySQLRunner
 		}
 
 		$result = $this->link->multi_query("SET query_cache_type=0;".$sql);		
-		if (!$result) 
+		if (!$result || $this->link->errno) 
 		{
 			print( "Could not successfully run query ($sql) from DB: " .  $this->link->error);
 			$this->disconnect();

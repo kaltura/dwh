@@ -46,13 +46,17 @@ BEGIN
 		  LEAVE read_loop;
 		END IF;
 		
+		SET v_drop_from_archive = 0;
+		SET v_drop_from_fact = 0;
+		
 		-- Check if a partition exists in the archive or the fact and is older than the delete policy
-		SELECT MAX(v_is_archived), MAX(v_is_in_fact)
+		SELECT v_is_archived, v_is_in_fact
 		INTO v_drop_from_archive, v_drop_from_fact
 		FROM kalturadw_ds.retention_policy
 		WHERE DATE(NOW() - INTERVAL archive_delete_days_back DAY)*1 >= v_partition_date_id
-		AND table_name = v_table_name;
-		
+		AND table_name = v_table_name
+		LIMIT 1;
+	
 		IF (v_drop_from_archive > 0) THEN 
 			SET @s = CONCAT('ALTER TABLE ',v_archive_name,' DROP PARTITION ', v_partition_name);
 			
@@ -99,6 +103,7 @@ BEGIN
 
 			SET v_drop_from_fact = 1;
 		END IF;
+
 		-- If partition has migrated from the fact or should be dropped due to the fact that it's older than the delete policy
 		IF (v_drop_from_fact > 0) THEN
 			SET @s = CONCAT('ALTER TABLE ',v_table_name,' DROP PARTITION ',v_partition_name);
