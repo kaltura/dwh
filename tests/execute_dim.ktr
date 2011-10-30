@@ -293,7 +293,7 @@
            <schema_name/>
            </partitioning>
     <trans_object_id/>
-    <field_name>base_path</field_name>
+    <fieldname>base_path</fieldname>
     <for_each_row>Y</for_each_row>
     <mappings>
       <input>

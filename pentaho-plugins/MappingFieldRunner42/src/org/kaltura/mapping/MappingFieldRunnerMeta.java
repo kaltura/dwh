@@ -100,7 +100,7 @@ public class MappingFieldRunnerMeta extends BaseStepMeta implements StepMetaInte
       String transId = XMLHandler.getTagValue(stepnode, "trans_object_id");
       transObjectId = Const.isEmpty(transId) ? null : new StringObjectId(transId);
 
-      fieldName = XMLHandler.getTagValue(stepnode, "field_name"); //$NON-NLS-1$
+      fieldName = XMLHandler.getTagValue(stepnode, "fieldname"); //$NON-NLS-1$
       String forEachRow = XMLHandler.getTagValue(stepnode, "for_each_row");
       executeForEachRow =  Const.isEmpty(forEachRow) ? false : "Y".equalsIgnoreCase(forEachRow);
       Node mappingsNode = XMLHandler.getSubNode(stepnode, "mappings"); //$NON-NLS-1$
@@ -193,7 +193,7 @@ public class MappingFieldRunnerMeta extends BaseStepMeta implements StepMetaInte
     StringBuffer retval = new StringBuffer(300);
 
     retval.append("    ").append(XMLHandler.addTagValue("trans_object_id", transObjectId == null ? null : transObjectId.toString()));
-    retval.append("    ").append(XMLHandler.addTagValue("field_name", fieldName)); //$NON-NLS-1$
+    retval.append("    ").append(XMLHandler.addTagValue("fieldname", fieldName)); //$NON-NLS-1$
     retval.append("    ").append(XMLHandler.addTagValue("for_each_row", executeForEachRow) ); //$NON-NLS-1$
     
     retval.append("    ").append(XMLHandler.openTag("mappings")).append(Const.CR); //$NON-NLS-1$ $NON-NLS-2$
@@ -225,7 +225,7 @@ public class MappingFieldRunnerMeta extends BaseStepMeta implements StepMetaInte
   public void readRep(Repository rep, ObjectId id_step, List<DatabaseMeta> databases, Map<String, Counter> counters) throws KettleException {
     String transId = rep.getStepAttributeString(id_step, "trans_object_id");
     transObjectId = Const.isEmpty(transId) ? null : new StringObjectId(transId);
-    fieldName = rep.getStepAttributeString(id_step, "field_name"); //$NON-NLS-1$
+    fieldName = rep.getStepAttributeString(id_step, "fieldname"); //$NON-NLS-1$
     executeForEachRow = rep.getStepAttributeBoolean(id_step, "for_each_row");
     inputMappings.clear();
     outputMappings.clear();
@@ -284,7 +284,7 @@ public class MappingFieldRunnerMeta extends BaseStepMeta implements StepMetaInte
 
   public void saveRep(Repository rep, ObjectId id_transformation, ObjectId id_step) throws KettleException {
     rep.saveStepAttribute(id_transformation, id_step, "trans_object_id", transObjectId==null ? null : transObjectId.toString());
-    rep.saveStepAttribute(id_transformation, id_step, "field_name", fieldName); //$NON-NLS-1$
+    rep.saveStepAttribute(id_transformation, id_step, "fieldname", fieldName); //$NON-NLS-1$
     rep.saveStepAttribute(id_transformation, id_step, "for_each_row", executeForEachRow);
     for (int i = 0; i < inputMappings.size(); i++) {
       inputMappings.get(i).saveRep(rep, id_transformation, id_step, "input_", i);
