@@ -11,14 +11,14 @@ BEGIN
 	DECLARE v_partition_name VARCHAR(256);
 	DECLARE v_partition_date_id INT;
 	DECLARE v_column VARCHAR(256);
-	DECLARE v_is_archived BOOL;
-	DECLARE v_is_in_fact BOOL;
+	DECLARE v_is_archived INT;
+	DECLARE v_is_in_fact INT;
 	
 	DECLARE v_drop_from_archive INT DEFAULT 0;
 	DECLARE v_drop_from_fact INT DEFAULT 0;
 	DECLARE v_migrate_from_fact INT DEFAULT 0;
 		
-	DECLARE done INT DEFAULT 0;
+	DECLARE v_done INT DEFAULT 0;
 	
 	DECLARE c_partitions 
 	CURSOR FOR 	
@@ -36,27 +36,28 @@ BEGIN
 	GROUP BY r.table_name, partition_name, partition_date_id, column_name
 	ORDER BY partition_date_id;
 	
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_done = 1;
 	
 	OPEN c_partitions;
 	
 	read_loop: LOOP
 		FETCH c_partitions INTO v_table_name, v_archive_name, v_partition_name, v_partition_date_id, v_column, v_is_archived, v_is_in_fact;
-		IF done THEN
+
+		IF v_done = 1 THEN
 		  LEAVE read_loop;
 		END IF;
-		
+
 		SET v_drop_from_archive = 0;
 		SET v_drop_from_fact = 0;
-		
+		SET v_migrate_from_fact = 0;
+
 		-- Check if a partition exists in the archive or the fact and is older than the delete policy
-		SELECT v_is_archived, v_is_in_fact
+		SELECT if(count(*)=0,0,v_is_archived), if(count(*)=0, 0,v_is_in_fact)
 		INTO v_drop_from_archive, v_drop_from_fact
 		FROM kalturadw_ds.retention_policy
 		WHERE DATE(NOW() - INTERVAL archive_delete_days_back DAY)*1 >= v_partition_date_id
-		AND table_name = v_table_name
-		LIMIT 1;
-	
+		AND table_name = v_table_name;
+
 		IF (v_drop_from_archive > 0) THEN 
 			SET @s = CONCAT('ALTER TABLE ',v_archive_name,' DROP PARTITION ', v_partition_name);
 			
@@ -66,7 +67,7 @@ BEGIN
 		END IF;
 
 		-- Check if a partition exists in the fact and is older than the archive policy
-		SELECT COUNT(*)
+		SELECT if(count(*)=0,0, v_is_in_fact)
 		INTO v_migrate_from_fact
 		FROM kalturadw_ds.retention_policy
 		WHERE DATE(NOW() - INTERVAL archive_start_days_back DAY)*1 >= v_partition_date_id
@@ -112,7 +113,9 @@ BEGIN
 			EXECUTE stmt;
 			DEALLOCATE PREPARE stmt;
 		END IF;
-	END LOOP;
+	END LOOP read_loop;
+
+	CLOSE c_partitions;
 END$$
 
 DELIMITER ;
