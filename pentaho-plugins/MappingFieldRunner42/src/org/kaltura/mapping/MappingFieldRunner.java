@@ -104,9 +104,6 @@ public class MappingFieldRunner extends BaseStep implements StepInterface
 					prepareMappingExecution(transMeta);
 					lookupStatusStepNumbers(transMeta);
 				
-					// Start the mapping/sub-transformation threads
-					mappingTrans.get(transMeta).startThreads();
-					
 					MappingInput[] mappingInputs = mappingTrans.get(transMeta).findMappingInput();
 					
 					// Pass this rowset down to a mapping input step in the
@@ -129,6 +126,9 @@ public class MappingFieldRunner extends BaseStep implements StepInterface
 						throw new KettleException(
 								"Unsupported situation detected where more than one Mapping Input step needs to be handled.  To solve it, insert a dummy step before the mapping step.");
 					}
+					
+					// Start the mapping/sub-transformation threads
+					mappingTrans.get(transMeta).startThreads();					
 				}
 
 				rowSets.get(transName).putRow(getInputRowMeta(), r);				
@@ -187,9 +187,10 @@ public class MappingFieldRunner extends BaseStep implements StepInterface
 			//
 			
 			Trans trans = mappingTrans.get(transMeta);
-			if (mappingParameters.isInheritingAllVariables()) {
-				transMeta.copyVariablesFrom(getTransMeta());
-				trans.copyParametersFrom(getTrans());
+			if (mappingParameters.isInheritingAllVariables()) 
+			{
+				transMeta.shareVariablesWith(this);
+				trans.shareVariablesWith(this);
 			}
 			
 			// Just set the variables in the transformation statically.
