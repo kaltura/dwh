@@ -6,7 +6,7 @@ CREATE TABLE `ds_incomplete_api_calls` (
   `file_id` INT(11) NOT NULL,
   `line_number` INT(11) NOT NULL,
   `api_call_time` DATETIME DEFAULT NULL,
-  `api_call_date_id` INT(11) NOT NULL DEFAULT '0',
+  `api_call_date_id` INT(11) DEFAULT NULL,
   `api_call_hour_id` TINYINT(4) DEFAULT NULL,
   `session_id` VARCHAR(50) NOT NULL,
   `request_index` INT(11) DEFAULT NULL,

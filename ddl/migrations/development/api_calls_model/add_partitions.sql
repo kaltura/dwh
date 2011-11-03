@@ -1,3 +1,4 @@
+DELIMITER $$
 
 USE `kalturadw`$$
 
@@ -10,6 +11,7 @@ BEGIN
 	CALL add_daily_partition_for_table('dwh_fact_fms_sessions');
 	CALL add_daily_partition_for_table('dwh_fact_bandwidth_usage');
 	CALL add_daily_partition_for_table('dwh_fact_api_calls');
+	CALL add_daily_partition_for_table('dwh_fact_incomplete_api_calls');
 	CALL add_monthly_partition_for_table('dwh_fact_entries_sizes');
 	CALL add_monthly_partition_for_table('dwh_hourly_events_entry');
 	CALL add_monthly_partition_for_table('dwh_hourly_events_domain');
@@ -19,8 +21,8 @@ BEGIN
 	CALL add_monthly_partition_for_table('dwh_hourly_events_domain_referrer');	
 	CALL add_monthly_partition_for_table('dwh_hourly_partner');
 	CALL add_monthly_partition_for_table('dwh_hourly_partner_usage');
-    CALL add_monthly_partition_for_table('dwh_hourly_partner_api');
 	CALL add_monthly_partition_for_table('dwh_hourly_events_devices');
+	CALL add_monthly_partition_for_table('dwh_hourly_api_calls');
 END$$
 
 DELIMITER ;

@@ -9,7 +9,7 @@ CREATE TABLE `dwh_fact_api_calls` (
   `api_call_hour_id` TINYINT(4) DEFAULT NULL,
   `session_id` VARCHAR(50) NOT NULL,
   `request_index` INT(11) DEFAULT NULL,
-  `partner_id` INT(11) DEFAULT NULL,
+  `partner_id` INT(11) NOT NULL,
   `action_id` INT(11) NOT NULL DEFAULT '0', 
   `os_id` INT(11) DEFAULT NULL,
   `browser_id` INT(11) DEFAULT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE `dwh_fact_api_calls` (
   `error_code_id` INT(11) DEFAULT NULL,
   `duration_msecs` INT(11) DEFAULT NULL,
   PRIMARY KEY (`file_id`,`line_number`,`api_call_date_id`),
-  KEY `event_hour_id_event_date_id_partner_id` (`api_call_date_id`,`api_call_hour_id`,`partner_id`)
+  KEY (`api_call_date_id`,`api_call_hour_id`,`partner_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 /*!50100 PARTITION BY RANGE (api_call_date_id)
 (PARTITION p_20111110 VALUES LESS THAN (20111111) ENGINE = InnoDB) */
