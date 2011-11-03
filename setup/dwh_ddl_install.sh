@@ -97,6 +97,7 @@ mysqlexec $DS_ROOT_DIR/staging_areas.sql
 mysqlexec $DS_ROOT_DIR/populate_repository_for_events.sql
 mysqlexec $DS_ROOT_DIR/populate_repository_for_fms_streaming.sql
 mysqlexec $DS_ROOT_DIR/populate_repository_for_bandwidth_usage.sql
+mysqlexec $DS_ROOT_DIR/populate_repository_for_api_calls.sql
 mysqlexec $DS_ROOT_DIR/fms_incomplete_session.sql
 mysqlexec $DS_ROOT_DIR/fms_stale_sessions.sql
 mysqlexec $DS_ROOT_DIR/fms_sessionize.sql
@@ -114,6 +115,8 @@ mysqlexec $DS_ROOT_DIR/pentaho_sequences.sql
 mysqlexec $DS_ROOT_DIR/version_table.sql
 mysqlexec $DS_ROOT_DIR/etl_servers.sql
 mysqlexec $DS_ROOT_DIR/retention_policy.sql
+mysqlexec $DS_ROOT_DIR/ds_api_calls.sql
+mysqlexec $DS_ROOT_DIR/ds_incomplete_api_calls.sql
 
 #etl_log
 mysqlexec $DDL_ROOT_DIR/log/etl_log.sql
@@ -150,7 +153,7 @@ mysqlexec $DW_ROOT_DIR/calc_entries_sizes.sql
 mysqlexec $DW_ROOT_DIR/generate_daily_usage_report.sql
 mysqlexec $DW_ROOT_DIR/dwh_daily_usage_reports.sql
 
-#dw/facts
+#dw/acts
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_events.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_events_archive.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_bandwidth_usage.sql
@@ -159,6 +162,9 @@ mysqlexec $DW_ROOT_DIR/facts/dwh_fact_fms_sessions.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_fms_sessions_archive.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_fms_session_events.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_fms_session_events_archive.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_api_calls.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_api_calls_archive.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_incomplete_api_calls.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_entries_sizes.sql
 
 #dw/dimensions
@@ -201,6 +207,10 @@ mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_tags.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_flavor_asset_tags.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_ui_conf.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_ui_conf_swf_interfaces.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_api_actions.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_api_error_codes.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_client_tags.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_hosts.sql
 
 #dw/maintenance
 mysqlexec $DW_ROOT_DIR/maintenance/add_partition_procedure.sql
@@ -219,10 +229,12 @@ mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_uid.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_partner_usage.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_devices.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_api_calls.sql
 mysqlexec $DW_ROOT_DIR/aggr/time_zone_helper_function.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_procedure.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_bandwidth.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_storage.sql
+mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_api_calls.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_widget.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/recalc_aggr_day_procedure.sql
