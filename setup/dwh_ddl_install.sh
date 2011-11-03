@@ -117,6 +117,7 @@ mysqlexec $DS_ROOT_DIR/etl_servers.sql
 mysqlexec $DS_ROOT_DIR/retention_policy.sql
 mysqlexec $DS_ROOT_DIR/ds_api_calls.sql
 mysqlexec $DS_ROOT_DIR/ds_incomplete_api_calls.sql
+mysqlexec $DS_ROOT_DIR/unify_incomplete_api_calls.sql
 
 #etl_log
 mysqlexec $DDL_ROOT_DIR/log/etl_log.sql
