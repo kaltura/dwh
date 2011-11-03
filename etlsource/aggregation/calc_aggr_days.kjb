@@ -138,7 +138,7 @@
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturaLog</database>
+    <database>kalturalog</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -153,6 +153,31 @@
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>KalturaMonitoring</name>
+    <server>${MonitoringDbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>monmon</database>
+    <port>${OpDbPort}</port>
+    <username>${MonitoringDbUser}</username>
+    <password>${MonitoringDbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>SET SESSION sql_log_bin=0</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
@@ -266,14 +291,42 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
-      <yloc>120</yloc>
+      <xloc>410</xloc>
+      <yloc>139</yloc>
       </entry>
     <entry>
       <name>calc_aggr_bandwidth_usage</name>
       <description>Transformation</description>
       <type>TRANS</type>
       <filename>file:&#47;&#47;&#47;${EtlBasePath}aggregation&#47;calc_aggr_bandwidth_usage.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile>${LogPath}\log ${Internal.Job.Name}</logfile>
+      <logext>log</logext>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>Y</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>534</xloc>
+      <yloc>139</yloc>
+      </entry>
+    <entry>
+      <name>calc_aggr_api_calls</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename>file:&#47;&#47;&#47;${EtlBasePath}aggregation&#47;calc_aggr_api_calls.ktr</filename>
       <transname/>
       <directory/>
       <arg_from_previous>N</arg_from_previous>
@@ -295,7 +348,7 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>560</xloc>
+      <xloc>704</xloc>
       <yloc>140</yloc>
       </entry>
   </entries>
@@ -321,6 +374,15 @@
     <hop>
       <from>calc_aggr_day</from>
       <to>calc_aggr_bandwidth_usage</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>calc_aggr_bandwidth_usage</from>
+      <to>calc_aggr_api_calls</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

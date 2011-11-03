@@ -67,7 +67,7 @@ abstract class CycleProcessTestCase extends KalturaTestCase
                                 $file_list[] = $file;
                         }
                 }
-                return preg_grep("/$regex/", $file_list);
+                return preg_grep("/^$regex$/", $file_list);
         }
 	
 	private function isFilesRegistered($cycleID)

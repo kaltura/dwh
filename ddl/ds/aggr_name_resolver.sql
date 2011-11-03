@@ -32,7 +32,8 @@ values  ('entry','dwh_hourly_events_entry','entry_id','','events'),
 	('domain_referrer', 'dwh_hourly_events_domain_referrer', 'domain_id, referrer_id', '','events'),
 	('devices', 'dwh_hourly_events_devices', 'country_id,location_id,os_id,browser_id,ui_conf_id, entry_id','','events'),
 	('bandwidth_usage', 'dwh_hourly_partner_usage', 'bandwidth_source_id', '', 'bandwidth'),
-	('devices_bandwidth_usage', 'dwh_hourly_events_devices', 'country_id, location_id', '', 'bandwidth');
+	('devices_bandwidth_usage', 'dwh_hourly_events_devices', 'country_id, location_id', '', 'bandwidth'),
+	('api_calls','dwh_hourly_api_calls','action_id', '', 'api');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

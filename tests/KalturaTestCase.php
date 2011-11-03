@@ -87,7 +87,7 @@ abstract class KalturaTestCase extends PHPUnit_Framework_TestCase
                 return $items;
         }
 
-	public function compareAggregation($factTables, $aggrTables, $filter = '1=1')
+	public function compareAggregation($factTables, $aggrTables, $maxDiff = 0, $filter = '1=1')
         {
                 $aggrGroups = DWHInspector::groupBy($aggrTables, $filter);
                 $factGroups = DWHInspector::groupBy($factTables, $filter);
@@ -96,10 +96,10 @@ abstract class KalturaTestCase extends PHPUnit_Framework_TestCase
                 {
                         if(!array_key_exists($id,$aggrGroups))
                         {
-                                $this->assertEquals(0, $measure);
+                                $this->assertEquals(0, $measure, "For the following group:" .$id. ".Aggr = ". $aggrGroups[$id] .". Fact = ".$measure);
                         } else
                         {
-                                $this->assertLessThanOrEqual(0.01, $aggrGroups[$id]-$measure, "For the following group: $id");
+                                $this->assertLessThanOrEqual($maxDiff, $aggrGroups[$id]-$measure, "For the following group:" .$id. ".Aggr = ". $aggrGroups[$id] .". Fact = ".$measure);
                         }
                 }
         }

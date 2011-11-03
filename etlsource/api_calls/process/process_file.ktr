@@ -1,0 +1,2633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>process_api_calls_file</name>
+    <description/>
+    <extended_description/>
+    <trans_version/>
+    <trans_status>0</trans_status>
+    <directory>&#47;</directory>
+    <parameters>
+    </parameters>
+    <log>
+      <read/>
+      <write/>
+      <input/>
+      <output/>
+      <update/>
+      <rejected/>
+      <connection/>
+      <table/>
+      <step_performance_table/>
+      <use_batchid>Y</use_batchid>
+      <use_logfield>N</use_logfield>
+      <size_limit_lines/>
+    </log>
+    <maxdate>
+      <connection/>
+      <table/>
+      <field/>
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file/>
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+  <modified_user>-</modified_user>
+  <modified_date>2011&#47;10&#47;26 09:10:46.618</modified_date>
+  </info>
+  <notepads>
+  </notepads>
+  <connection>
+    <name>Kaltura</name>
+    <server>${OpDbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kaltura</database>
+    <port>${OpDbPort}</port>
+    <username>${OpDbUser}</username>
+    <password>${OpDbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Kaltura_Writable</name>
+    <server>${OpWritableDbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kaltura</database>
+    <port>${OpDbPort}</port>
+    <username>${OpWritableDbUser}</username>
+    <password>${OpWritableDbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>SET SESSION sql_log_bin=0</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>KalturaDW</name>
+    <server>${DbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw</database>
+    <port>${DbPort}</port>
+    <username>${DbUser}</username>
+    <password>${DbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>kalturadw_bisources</name>
+    <server>${DbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw_bisources</database>
+    <port>${DbPort}</port>
+    <username>${DbUser}</username>
+    <password>${DbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>kalturadw_ds</name>
+    <server>${DbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw_ds</database>
+    <port>${DbPort}</port>
+    <username>${DbUser}</username>
+    <password>${DbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>KalturaLogs</name>
+    <server>${DbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturaLog</database>
+    <port>${DbPort}</port>
+    <username>${DbUser}</username>
+    <password>${DbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>KalturaMonitoring</name>
+    <server>${MonitoringDbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>monmon</database>
+    <port>${OpDbPort}</port>
+    <username>${MonitoringDbUser}</username>
+    <password>${MonitoringDbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>SET SESSION sql_log_bin=0</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>KalturaReadDW</name>
+    <server>${DbReadHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw</database>
+    <port>${DbReadPort}</port>
+    <username>${DbReadUser}</username>
+    <password>${DbReadPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbReadPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <order>
+  <hop> <from>create output file</from><to>Text file input</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath + output file creation command</from><to>create output file</to><enabled>Y</enabled> </hop>  <hop> <from>Text file input</from><to>Switch &#47; Case</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>invalid</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath + output file creation command</to><enabled>Y</enabled> </hop>  <hop> <from>Sort &quot;request starts&quot;</from><to>Unify requests</to><enabled>Y</enabled> </hop>  <hop> <from>Sort &quot;request ends&quot;</from><to>Unify requests</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>get request start fields</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>get request end fields</to><enabled>Y</enabled> </hop>  <hop> <from>get request start fields</from><to>filter ignored starts</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored starts</from><to>ignored request start</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored ends</from><to>ignore request end</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored starts</from><to>parse user agent</to><enabled>Y</enabled> </hop>  <hop> <from>action&#47;service lookup</from><to>client tag lookup</to><enabled>Y</enabled> </hop>  <hop> <from>client tag lookup</from><to>host lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter error_code</from><to>lookup error_code</to><enabled>Y</enabled> </hop>  <hop> <from>filter error_code</from><to>add null api_error_code_id</to><enabled>Y</enabled> </hop>  <hop> <from>lookup error_code</from><to>Sort &quot;request ends&quot;</to><enabled>Y</enabled> </hop>  <hop> <from>add null api_error_code_id</from><to>Sort &quot;request ends&quot;</to><enabled>Y</enabled> </hop>  <hop> <from>parse user agent</from><to>action&#47;service lookup</to><enabled>Y</enabled> </hop>  <hop> <from>host lookup</from><to>get numeric_ip</to><enabled>Y</enabled> </hop>  <hop> <from>get numeric_ip</from><to>Get IP location</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>Sort &quot;request starts&quot;</to><enabled>Y</enabled> </hop>  <hop> <from>create events output file_name</from><to>filter incomplete rows</to><enabled>Y</enabled> </hop>  <hop> <from>filter incomplete rows</from><to>Text File Output - FULL</to><enabled>Y</enabled> </hop>  <hop> <from>Unify requests</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle and file</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Choose populated fields</from><to>Text File Output - INCOMPLETE</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>Get Cycles Path events</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path events</from><to>create events output file_name</to><enabled>Y</enabled> </hop>  <hop> <from>filter incomplete rows</from><to>rename line_number</to><enabled>Y</enabled> </hop>  <hop> <from>rename line_number</from><to>Choose populated fields</to><enabled>Y</enabled> </hop>  <hop> <from>get request end fields</from><to>filter ignored ends</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored ends</from><to>filter invalid ends</to><enabled>Y</enabled> </hop>  <hop> <from>filter invalid ends</from><to>filter error_code</to><enabled>Y</enabled> </hop>  <hop> <from>filter invalid ends</from><to>format errornous line</to><enabled>Y</enabled> </hop>  <hop> <from>format errornous line</from><to>Get Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get Process ID</from><to>Append cycle_id, file_id for invalid lines</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle and file for invalid lines</from><to>Append cycle_id, file_id for invalid lines</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id for invalid lines</from><to>Insert invalid ds line</to><enabled>Y</enabled> </hop>  </order>
+  <step>
+    <name>Append cycle_id, file_id</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>%%java.io.tmpdir%%</directory>
+      <prefix>out</prefix>
+      <cache_size>500</cache_size>
+      <main>Unify requests</main>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue/>
+ <function>=</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1124</xloc>
+      <yloc>278</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Choose populated fields</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+session_id = session_id_start != null ? session_id_start : session_id_end;
+request_index = request_index_start != null ? request_index_start : request_index_end;
+line_number = line_number_start != null ? line_number_start : line_number_end;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>session_id</name>
+        <rename>session_id</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>request_index</name>
+        <rename>request_index</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>line_number</name>
+        <rename>line_number</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1194</xloc>
+      <yloc>645</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Enrich cycle and file</name>
+    <type>RowsFromResult</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>cycle_id</name>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      <field>        <name>file_name</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      <field>        <name>file_id</name>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1123</xloc>
+      <yloc>199</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Cycles Path events</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>cycle_path</name>
+        <variable>${CyclePath}</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>0</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1123</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get IP location</name>
+    <type>DynamicSQLRow</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>3</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaReadDW</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select 1 country_id, 2 location_id</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <sql_fieldname>ipLookupSQL</sql_fieldname>
+    <query_only_on_change>Y</query_only_on_change>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>899</xloc>
+      <yloc>154</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>cycle_path</name>
+        <variable>${CyclePath}</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>172</xloc>
+      <yloc>71</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get cycle and file</name>
+    <type>RowsFromResult</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>cycle_id</name>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      <field>        <name>file_name</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      <field>        <name>file_id</name>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>173</xloc>
+      <yloc>13</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort &quot;request ends&quot;</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>%%java.io.tmpdir%%</directory>
+      <prefix>out</prefix>
+      <sort_size/>
+      <free_memory>25</free_memory>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>session_id_end</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+      <field>
+        <name>request_index_end</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>902</xloc>
+      <yloc>312</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort &quot;request starts&quot;</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>%%java.io.tmpdir%%</directory>
+      <prefix>out</prefix>
+      <sort_size/>
+      <free_memory>25</free_memory>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>session_id_start</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+      <field>
+        <name>request_index_start</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>901</xloc>
+      <yloc>237</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Switch &#47; Case</name>
+    <type>SwitchCase</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<fieldname>row</fieldname>
+<use_contains>Y</use_contains>
+<case_value_type>String</case_value_type>
+<case_value_format/>
+<case_value_decimal/>
+<case_value_group/>
+<default_target_step>invalid</default_target_step>
+<cases><case><value> request_start,</value>
+<target_step>get request start fields</target_step>
+</case><case><value> request_end,</value>
+<target_step>get request end fields</target_step>
+</case></cases>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>275</xloc>
+      <yloc>276</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Text File Output - FULL</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator>;</separator>
+    <enclosure>&quot;</enclosure>
+    <enclosure_forced>Y</enclosure_forced>
+    <header>N</header>
+    <footer>N</footer>
+    <format>Unix</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>Y</fileNameInField>
+    <fileNameField>full_output_file_name</fileNameField>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention/>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>cycle_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>file_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>line_number</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>date</name>
+        <type>Date</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>api_call_date_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>api_call_hour_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>session_id_start</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>request_index_start</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>partner_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>action_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>os_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>browser_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>client_tag_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>is_admin</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>os_process_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>host_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>ip_address</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>numeric_ip_address</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>country_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>location_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>master_partner_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>ks</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>kuser_id</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>is_in_multi_request</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>success</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>api_error_code_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>duration_msecs</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1010</xloc>
+      <yloc>571</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Text File Output - INCOMPLETE</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator>;</separator>
+    <enclosure>&quot;</enclosure>
+    <enclosure_forced>Y</enclosure_forced>
+    <header>N</header>
+    <footer>N</footer>
+    <format>Unix</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>Y</fileNameInField>
+    <fileNameField>incomplete_output_file_name</fileNameField>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention/>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>cycle_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>file_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>line_number</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>date</name>
+        <type>Date</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>api_call_date_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>api_call_hour_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>session_id</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>request_index</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>partner_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>action_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>os_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>browser_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>client_tag_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>is_admin</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>os_process_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>host_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>ip_address</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>numeric_ip_address</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>country_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>location_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>master_partner_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>ks</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>kuser_id</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>is_in_multi_request</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>success</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>api_error_code_id</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>duration_msecs</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1194</xloc>
+      <yloc>723</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Text file input</name>
+    <type>TextFileInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <accept_filenames>Y</accept_filenames>
+    <passing_through_fields>N</passing_through_fields>
+    <accept_field>file_fullpath</accept_field>
+    <accept_stepname>create output file</accept_stepname>
+    <separator/>
+    <enclosure/>
+    <enclosure_breaks>N</enclosure_breaks>
+    <escapechar/>
+    <header>N</header>
+    <nr_headerlines>1</nr_headerlines>
+    <footer>N</footer>
+    <nr_footerlines>1</nr_footerlines>
+    <line_wrapped>N</line_wrapped>
+    <nr_wraps>1</nr_wraps>
+    <layout_paged>N</layout_paged>
+    <nr_lines_per_page>80</nr_lines_per_page>
+    <nr_lines_doc_header>0</nr_lines_doc_header>
+    <noempty>Y</noempty>
+    <include>Y</include>
+    <include_field>full_file_path</include_field>
+    <rownum>Y</rownum>
+    <rownumByFile>Y</rownumByFile>
+    <rownum_field>line_number</rownum_field>
+    <format>Unix</format>
+    <encoding/>
+    <add_to_result_filenames>Y</add_to_result_filenames>
+    <file>
+      <name/>
+      <filemask/>
+      <file_required/>
+      <type>Fixed</type>
+      <compression>None</compression>
+    </file>
+    <filters>
+    </filters>
+    <fields>
+      <field>
+        <name>row</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <ifnull/>
+        <position>0</position>
+        <length>1000000</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <error_ignored>N</error_ignored>
+    <error_line_skipped>N</error_line_skipped>
+    <error_count_field/>
+    <error_fields_field/>
+    <error_text_field/>
+    <bad_line_files_destination_directory/>
+    <bad_line_files_extension>warning</bad_line_files_extension>
+    <error_line_files_destination_directory/>
+    <error_line_files_extension>error</error_line_files_extension>
+    <line_number_files_destination_directory/>
+    <line_number_files_extension>line</line_number_files_extension>
+    <date_format_lenient>Y</date_format_lenient>
+    <date_format_locale>en_us</date_format_locale>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>173</xloc>
+      <yloc>274</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Unify requests</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<join_type>FULL OUTER</join_type>
+<step1>Sort &quot;request starts&quot;</step1>
+<step2>Sort &quot;request ends&quot;</step2>
+    <keys_1>
+      <key>session_id_start</key>
+      <key>request_index_start</key>
+    </keys_1>
+    <keys_2>
+      <key>session_id_end</key>
+      <key>request_index_end</key>
+    </keys_2>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1014</xloc>
+      <yloc>277</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>action&#47;service lookup</name>
+    <type>ConcurrentSafeCombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dwh_dim_api_actions</table>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>100</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>action</name>
+          <lookup>action_name</lookup>
+        </key>
+        <key>
+          <name>service</name>
+          <lookup>service_name</lookup>
+        </key>
+        <return>
+          <name>action_id</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>669</xloc>
+      <yloc>156</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>add null api_error_code_id</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+api_error_code_id = null;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>api_error_code_id</name>
+        <rename>api_error_code_id</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>775</xloc>
+      <yloc>247</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>client tag lookup</name>
+    <type>ConcurrentSafeCombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dwh_dim_client_tags</table>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>100</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>client_tag</name>
+          <lookup>client_tag_name</lookup>
+        </key>
+        <return>
+          <name>client_tag_id</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>671</xloc>
+      <yloc>67</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>create events output file_name</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>full_output_file_name = cycle_path + &quot;&#47;process&#47;&quot; + cycle_id + &quot;&#47;ds_api_calls_&quot; + file_name;
+incomplete_output_file_name = cycle_path + &quot;&#47;process&#47;&quot; + cycle_id + &quot;&#47;ds_incomplete_api_calls_&quot; + file_name;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>full_output_file_name</name>
+        <rename>full_output_file_name</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>incomplete_output_file_name</name>
+        <rename>incomplete_output_file_name</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1123</xloc>
+      <yloc>419</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>create output file</name>
+    <type>ExecProcess</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <processfield>create_output_file_command</processfield>
+    <resultfieldname>result</resultfieldname>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>174</xloc>
+      <yloc>206</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>filter error_code</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>add null api_error_code_id</send_true_to>
+<send_false_to>lookup error_code</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>error_code</leftvalue>
+   <function>=</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text/><length>-1</length><precision>-1</precision><isnull>Y</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>error_code</leftvalue>
+   <function>IS NULL</function>
+   <rightvalue/>
+   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>777</xloc>
+      <yloc>314</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>filter ignored ends</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>filter invalid ends</send_true_to>
+<send_false_to>ignore request end</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>ignored_line</leftvalue>
+ <function>=</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>N</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>544</xloc>
+      <yloc>313</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>filter ignored starts</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>parse user agent</send_true_to>
+<send_false_to>ignored request start</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>ignored_line</leftvalue>
+ <function>=</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>N</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>544</xloc>
+      <yloc>235</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>filter incomplete rows</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>rename line_number</send_true_to>
+<send_false_to>Text File Output - FULL</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>session_id_start</leftvalue>
+   <function>IS NULL</function>
+   <rightvalue/>
+   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>session_id_end</leftvalue>
+   <function>IS NULL</function>
+   <rightvalue/>
+   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1124</xloc>
+      <yloc>498</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>get numeric_ip</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var numeric_ip_address = ip2number(ip_address);
+
+function ip2number (ip_address) 
+{
+	numeric_ip = 0;
+	if (ip_address) 
+	{
+		ip_array = ip_address.split(&apos;.&apos;);
+		if (ip_array.length == 4) 
+		{
+			with (Math) 
+			{
+   		    	numeric_ip = ip_array[0]*pow(256,3)+ip_array[1]*pow(256,2)+ip_array[2]*256+ip_array[3]*1;
+			}
+		}
+	}
+	return numeric_ip;
+}
+
+var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM kalturadw.dwh_dim_ip_ranges WHERE &quot; + numeric_ip_address + &quot;&gt;= ip_from)&quot;;
+</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>ipLookupSQL</name>
+        <rename>ipLookupSQL</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>numeric_ip_address</name>
+        <rename>numeric_ip_address</rename>
+        <type>Integer</type>
+        <length>10</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>898</xloc>
+      <yloc>71</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>get request end fields</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+&#47;&#47; 2011-10-23 14:17:28 [::1] [1799708821]: request_end,-1,-1,NmE0OGFlNWMzMzQ4NGRkZWNlMzhjMWQ0YmJiNzc3OTdhODFjMjM3ZXwtMTs7MTMyMTk4NTg0ODsyOzEzMTkzOTM4NDguMzIyNztiYXRjaFVzZXI7Oy0xOw==,1,&quot;batchUser&quot;,0.066039085388184,1,,0
+&#47;&#47; &lt;Date&gt; &lt;Hour&gt; [&lt;IPAddress&gt;] [&lt;SessionID&gt;]: request_end,&lt;partner_id&gt;,&lt;master_partner_id&gt;,&lt;ks&gt;,&lt;is_admin&gt;,&lt;kuser_id&gt;,&lt;duration&gt;,&lt;success&gt;,&lt;error_code&gt;,&lt;request_index&gt;
+
+var datetime_field_index = 0;
+var session_id_index = 1;
+var partner_id_index = 2;
+var master_partner_id_index = 3;
+var ks_index = 4;
+var is_admin_index = 5;
+var kuser_id_index = 6;
+var duration_index = 7;
+var success_index = 8;
+var error_code_index = 9;
+var request_index_index = 10;
+
+var session_id = null;
+var partner_id = null;
+var master_partner_id = null;
+var ks = null;
+var is_admin = null;
+var kuser_id = null;
+var duration = null;
+var success = null;
+var error_code = null;
+var request_index = null;
+
+var invalid_line = false;
+var error_reason = &apos;&apos;;
+var error_date_id = 0;
+
+var split_regex = &quot;([^ ]+ [^ ]+) \\\[[^\\\]]+\\\] \\\[([^\\\]]+)\\\]: request_end,([^,]*),([^,]*),([^,]*),([01]),\&quot;([^\&quot;]*)\&quot;,(\\d+\.\\d+),([01]),([^,]*),(\\d+).*&quot;;
+var result_arr = str2RegExp(row, split_regex);
+
+var ignored_line = false;
+
+if (result_arr != null &amp;&amp; result_arr.length &gt; request_index_index) {
+	var session_id = result_arr[session_id_index];
+	var partner_id_string = result_arr[partner_id_index];
+	partner_id = is_not_numeric(partner_id_string) ? null : partner_id_string;
+	var master_partner_id_string = result_arr[master_partner_id_index];
+	master_partner_id = is_not_numeric(master_partner_id_string) ?  null : master_partner_id_string;
+	var ks = result_arr[ks_index];
+	var is_admin = result_arr[is_admin_index];
+	var kuser_id = result_arr[kuser_id_index];
+	var duration_string = result_arr[duration_index];
+	var duration_msecs = is_not_numeric(duration_string) ? null : duration_string * 1000; &#47;&#47;seconds
+	var success = result_arr[success_index];
+	var error_code = result_arr[error_code_index];
+	var request_index = result_arr[request_index_index];
+	ignored_line = session_id == null || request_index == null;
+	if (partner_id == null)
+	{
+		invalid_line = true;
+		error_reason = &apos;missing_partner&apos;;
+		date = str2date(result_arr[datetime_field_index],&quot;yyyy-MM-dd HH:m:s&quot;);
+		error_date_id = year(date)*10000+ (month(date)+1)*100 + getDayNumber(date,&quot;m&quot;);;
+	}
+}
+else
+{
+	ignored_line = true;
+}
+
+function is_not_numeric(s) {
+	return (isNaN(s) || s == null || s == &quot;&quot;);
+}</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
+        <jsScript_name>str2RegExp_Sample</jsScript_name>
+        <jsScript_script>&#47;&#47; Split&apos;s a String with a Regular Expression to an Array.
+&#47;&#47;
+&#47;&#47; Usage:
+&#47;&#47; replace(var, var, var);
+&#47;&#47; 1: String - The Variable with the Content
+&#47;&#47; 2: String - The Regular Expression to apply
+&#47;&#47;
+&#47;&#47; 2006-11-15
+&#47;&#47;
+var strToMatch = &quot;info@proconis.de&quot;;
+var strReg = &quot;^(\\w+)@([a-zA-Z_]+?)\\.([a-zA-Z]{2,3})$&quot;;
+var xArr =  str2RegExp(strToMatch, strReg);
+if ( xArr != null ) {
+    for(i=0;i&lt;xArr.length;i++) {
+	    Alert(xArr[i]);
+	}
+}
+else {
+    Alert(&quot;no match&quot;);
+}</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>session_id</name>
+        <rename>session_id_end</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>partner_id</name>
+        <rename>partner_id</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>master_partner_id</name>
+        <rename>master_partner_id</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>ks</name>
+        <rename>ks</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>is_admin</name>
+        <rename>is_admin</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>kuser_id</name>
+        <rename>kuser_id</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>duration_msecs</name>
+        <rename>duration_msecs</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>success</name>
+        <rename>success</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>error_code</name>
+        <rename>error_code</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>request_index</name>
+        <rename>request_index_end</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>ignored_line</name>
+        <rename>ignored_line</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>invalid_line</name>
+        <rename>invalid_line</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>error_reason</name>
+        <rename>error_reason</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>error_date_id</name>
+        <rename>error_date_id</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>402</xloc>
+      <yloc>312</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>get request start fields</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+&#47;&#47; 2011-10-23 14:16:29 [::1] [1819377696]: request_start,22758,&quot;&quot;,,&quot;batch: Default Scheduler&quot;,1319393789.4666,dropfolder_dropfolderfile,list,0,0
+&#47;&#47; &lt;Date&gt; &lt;Hour&gt; [&lt;IPAddress&gt;] [&lt;SessionID&gt;]: request_start,&lt;os_process_id&gt;,&quot;&lt;userAgent&gt;&quot;,&lt;hostname&gt;,&quot;&lt;clientTag&gt;&quot;,&lt;unixTimestamp&gt;,&lt;service&gt;,&lt;action&gt;,&lt;requestIndex&gt;,&lt;isInMultiRequest&gt;
+var datetime_field_index = 0;
+var ip_address_index = 1;
+var session_id_index = 2;
+var os_process_id_index = 3;
+var user_agent_index = 4;
+var host_index = 5;
+var client_tag_index = 6;
+var service_index = 7;
+var action_index = 8;
+var request_index_index = 9;
+var is_in_multi_request_index = 10;
+
+var date = null;
+var ip_address = null;
+var session_id = null;
+var os_process_id = null;
+var user_agent = null;
+var host = null;
+var client_tag = null;
+var service = null;
+var action = null;
+var request_index = null;
+var is_in_multi_request = null;
+
+var split_regex = &quot;([^ ]+ [^ ]+) \\\[([^\\\]]+)\\\] \\\[([^\\\]]+)\\\]: request_start,([^,]*),\&quot;([^\&quot;]*)\&quot;,([^,]*),\&quot;([^\&quot;]*)\&quot;,[^,]*,([^,]*),([^,]*),(\\d+),([01]).*&quot;;
+var result_arr = str2RegExp(row, split_regex);
+
+var ignored_line = false;
+
+if (result_arr != null &amp;&amp; result_arr.length &gt; is_in_multi_request_index) {
+	date = str2date(result_arr[datetime_field_index],&quot;yyyy-MM-dd HH:m:s&quot;);
+	api_call_date_id = year(date)*10000+ (month(date)+1)*100 + getDayNumber(date,&quot;m&quot;);
+	api_call_hour_id = date.getHours();
+	ip_address = result_arr[ip_address_index];
+	session_id = result_arr[session_id_index];
+	os_process_id = result_arr[os_process_id_index];
+	user_agent = result_arr[user_agent_index];
+	host = get_default_value(result_arr[host_index]);
+	client_tag = get_default_value(result_arr[client_tag_index]);
+	service = get_default_value(result_arr[service_index]);
+	action = get_default_value(result_arr[action_index]);
+	request_index = result_arr[request_index_index];
+	is_in_multi_request = result_arr[is_in_multi_request_index];
+	ignored_line = session_id == null || request_index == null;
+}
+else
+{
+	ignored_line = true;
+}
+
+function get_default_value(s) {
+	if (s == null || s == &apos;&apos;) {
+		return &apos;unknown&apos;;
+	} else	{
+		return s;
+	}
+}</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
+        <jsScript_name>str2RegExp_Sample</jsScript_name>
+        <jsScript_script>&#47;&#47; Split&apos;s a String with a Regular Expression to an Array.
+&#47;&#47;
+&#47;&#47; Usage:
+&#47;&#47; replace(var, var, var);
+&#47;&#47; 1: String - The Variable with the Content
+&#47;&#47; 2: String - The Regular Expression to apply
+&#47;&#47;
+&#47;&#47; 2006-11-15
+&#47;&#47;
+var strToMatch = &quot;info@proconis.de&quot;;
+var strReg = &quot;^(\\w+)@([a-zA-Z_]+?)\\.([a-zA-Z]{2,3})$&quot;;
+var xArr =  str2RegExp(strToMatch, strReg);
+if ( xArr != null ) {
+    for(i=0;i&lt;xArr.length;i++) {
+	    Alert(xArr[i]);
+	}
+}
+else {
+    Alert(&quot;no match&quot;);
+}</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>date</name>
+        <rename>date</rename>
+        <type>Date</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>api_call_date_id</name>
+        <rename>api_call_date_id</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>api_call_hour_id</name>
+        <rename>api_call_hour_id</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>ip_address</name>
+        <rename>ip_address</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>session_id</name>
+        <rename>session_id_start</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>os_process_id</name>
+        <rename>os_process_id</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>user_agent</name>
+        <rename>user_agent</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>host</name>
+        <rename>host</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>client_tag</name>
+        <rename>client_tag</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>service</name>
+        <rename>service</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>action</name>
+        <rename>action</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>request_index</name>
+        <rename>request_index_start</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>is_in_multi_request</name>
+        <rename>is_in_multi_request</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>ignored_line</name>
+        <rename>ignored_line</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>404</xloc>
+      <yloc>235</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>host lookup</name>
+    <type>ConcurrentSafeCombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dwh_dim_hosts</table>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>100</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>host</name>
+          <lookup>host_name</lookup>
+        </key>
+        <return>
+          <name>host_id</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>784</xloc>
+      <yloc>70</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>ignore request end</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>543</xloc>
+      <yloc>390</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>ignored request start</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>542</xloc>
+      <yloc>158</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>invalid</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>275</xloc>
+      <yloc>353</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>lookup error_code</name>
+    <type>ConcurrentSafeCombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dwh_dim_api_error_codes</table>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>100</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>error_code</name>
+          <lookup>api_error_code_name</lookup>
+        </key>
+        <return>
+          <name>api_error_code_id</name>
+          <creation_method>tablemax</creation_method>
+          <use_autoinc>N</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>778</xloc>
+      <yloc>390</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>parse user agent</name>
+    <type>Mapping</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <trans_name/>
+    <filename>${EtlBasePath}&#47;common&#47;user_agent_lookup.ktr</filename>
+    <directory_path/>
+    <mappings>
+      <input>
+    <mapping>    <input_step>filter ignored starts</input_step>
+    <output_step>Mapping input specification</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+    </mapping>      </input>
+      <output>
+    <mapping>    <input_step>Mapping output specification</input_step>
+    <output_step>action&#47;service lookup</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+    </mapping>      </output>
+          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    </mappings>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>665</xloc>
+      <yloc>236</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>rename line_number</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>line_number</name>
+        <rename>line_number_start</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>line_number_1</name>
+        <rename>line_number_end</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>Y</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1192</xloc>
+      <yloc>571</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>set file fullpath + output file creation command</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+var file_fullpath = cycle_path + &quot;&#47;process&#47;&quot; + cycle_id +&quot;&#47;&quot; + file_name;
+var create_output_file_command = &quot;touch &quot; + 
+			cycle_path + &quot;&#47;process&#47;&quot; + cycle_id + &quot;&#47;ds_api_calls_&quot; + file_name + &quot; &quot; + 
+ 		    cycle_path + &quot;&#47;process&#47;&quot; + cycle_id + &quot;&#47;ds_incomplete_api_calls_&quot; + file_name;</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
+        <jsScript_name>str2RegExp_Sample</jsScript_name>
+        <jsScript_script>&#47;&#47; Split&apos;s a String with a Regular Expression to an Array.
+&#47;&#47;
+&#47;&#47; Usage:
+&#47;&#47; replace(var, var, var);
+&#47;&#47; 1: String - The Variable with the Content
+&#47;&#47; 2: String - The Regular Expression to apply
+&#47;&#47;
+&#47;&#47; 2006-11-15
+&#47;&#47;
+var strToMatch = &quot;info@proconis.de&quot;;
+var strReg = &quot;^(\\w+)@([a-zA-Z_]+?)\\.([a-zA-Z]{2,3})$&quot;;
+var xArr =  str2RegExp(strToMatch, strReg);
+if ( xArr != null ) {
+    for(i=0;i&lt;xArr.length;i++) {
+	    Alert(xArr[i]);
+	}
+}
+else {
+    Alert(&quot;no match&quot;);
+}</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>file_fullpath</name>
+        <rename>file_fullpath</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>create_output_file_command</name>
+        <rename>create_output_file_command</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>172</xloc>
+      <yloc>131</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>filter invalid ends</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>filter error_code</send_true_to>
+<send_false_to>format errornous line</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>invalid_line</leftvalue>
+ <function>=</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>N</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>662</xloc>
+      <yloc>315</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Insert invalid ds line</name>
+    <type>Mapping</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <trans_name/>
+    <filename>${EtlBasePath}&#47;common&#47;insert_invalid_ds_line.ktr</filename>
+    <directory_path/>
+    <mappings>
+      <input>
+    <mapping>    <input_step>Append cycle_id, file_id for invalid lines</input_step>
+    <output_step>Mapping input specification</output_step>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+       <connector><parent>error_reason</parent><child>error_reason</child></connector>
+       <connector><parent>errornous_line</parent><child>errornous_line</child></connector>
+       <connector><parent>process_id</parent><child>process_id</child></connector>
+       <connector><parent>file_id</parent><child>file_id</child></connector>
+       <connector><parent>cycle_id</parent><child>cycle_id</child></connector>
+       <connector><parent>error_date_id</parent><child>date_id</child></connector>
+       <connector><parent>line_number</parent><child>line_number</child></connector>
+       <connector><parent>partner_id</parent><child>partner_id</child></connector>
+    </mapping>      </input>
+      <output>
+      </output>
+          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    </mappings>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>665</xloc>
+      <yloc>600</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Process ID</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>process_id</name>
+        <variable>${ProcessID}</variable>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>663</xloc>
+      <yloc>462</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>format errornous line</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+
+errornous_line = substr (row, 0 , 1023);
+</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>errornous_line</name>
+        <rename>errornous_line</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>663</xloc>
+      <yloc>391</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Enrich cycle and file for invalid lines</name>
+    <type>RowsFromResult</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>cycle_id</name>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      <field>        <name>file_id</name>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        </field>      </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>463</xloc>
+      <yloc>528</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Append cycle_id, file_id for invalid lines</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>%%java.io.tmpdir%%</directory>
+      <prefix>out</prefix>
+      <cache_size>500</cache_size>
+      <main>Unify requests</main>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue/>
+ <function>=</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>663</xloc>
+      <yloc>530</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step_error_handling>
+  </step_error_handling>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+</transformation>

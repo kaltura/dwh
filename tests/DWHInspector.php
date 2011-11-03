@@ -1,6 +1,7 @@
 <?php
 require_once 'Configuration.php';
 require_once 'MySQLRunner.php';
+require_once 'ApiCall.php';
 
 class DWHInspector
 {
@@ -41,19 +42,21 @@ class DWHInspector
 		}
 	}
 	
-	public static function countRows($tableName, $fileID, $extra='')
+	public static function countRows($tableName, $fileID, $extra='', $join_table=null,$joined_key=null, $key_in_join_table=null)
 	{
-		return self::aggregateRows($tableName, $fileID, "count", "*", $extra);
+		return self::aggregateRows($tableName, $fileID, "count", "*", $extra, $join_table, $joined_key, $key_in_join_table);
 	}
 
-        public static function sumRows($tableName, $fileID, $aggregatedColumn, $extra='')
+        public static function sumRows($tableName, $fileID, $aggregatedColumn, $extra='', $join_table=null,$joined_key=null, $key_in_join_table=null)
         {
-                return self::aggregateRows($tableName, $fileID, "sum", $aggregatedColumn, $extra);
+                return self::aggregateRows($tableName, $fileID, "sum", $aggregatedColumn, $extra, $extra, $join_table, $joined_key, $key_in_join_table);
         }
 	
-        public static function countDistinct($table_name,$fileId,$select)
+        public static function countDistinct($table_name,$fileId,$select,$join_table=null,$joined_key=null, $key_in_join_table=null)
         {
-                $res = MySQLRunner::execute("SELECT count(distinct ".$select.") amount FROM ".$table_name." WHERE file_id = ? ",array(0=>$fileId));
+		$key_in_join_table = $key_in_join_table ?: $joined_key;
+                $join_syntax = $join_table != null && $joined_key != null ? "INNER JOIN ".$join_table." ON (".$table_name.".".$joined_key."=".$join_table.".".$key_in_join_table.")" : "";
+                $res = MySQLRunner::execute("SELECT count(distinct ".$select.") amount FROM ".$table_name. " " . $join_syntax . " " . " WHERE file_id like '?' ",array(0=>$fileId));
                 foreach($res as $row)
                 {
                         return (int) $row["amount"];
@@ -61,9 +64,11 @@ class DWHInspector
         }
 
 
-	public static function aggregateRows($table_name, $fileID, $aggregateFunction, $aggregatedColumn, $extra='')
+	public static function aggregateRows($table_name, $fileID, $aggregateFunction, $aggregatedColumn, $extra='', $join_table=null,$joined_key=null, $key_in_join_table=null)
 	{
-		$res = MySQLRunner::execute("SELECT ".$aggregateFunction."(".$aggregatedColumn.") amount FROM ".$table_name." WHERE file_id = ? ".$extra,array(0=>$fileID));
+		$key_in_join_table = $key_in_join_table ?: $joined_key;
+                $join_syntax = $join_table != null && $joined_key != null ? "INNER JOIN ".$join_table." ON (".$table_name.".".$joined_key."=".$join_table.".".$key_in_join_table.")" : "";
+		$res = MySQLRunner::execute("SELECT ".$aggregateFunction."(".$aggregatedColumn.") amount FROM ".$table_name. " " . $join_syntax . " " . " WHERE file_id like '?' ".$extra,array(0=>$fileID));
 		foreach ($res as $row)
 		{
 			return $row["amount"];
@@ -231,6 +236,23 @@ class DWHInspector
 		MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_entries (partner_id, entry_id, entry_name, entry_status_id, entry_type_id, created_at, updated_at) VALUES(?,'?','?',2, 1, DATE(?), DATE(?))", 
 					array(0=>$partnerId,1=>$entryId,2=>$entryId,3=>$dateId, 4=>$dateId));
 		return $entryId;
+	}
+
+	public static function getUnifiedAPICalls($cycleID)
+	{
+		$rows = MySQLRunner::execute("SELECT ds.session_id, ds.request_index FROM kalturadw_ds.ds_incomplete_api_calls ds, kalturadw.dwh_fact_incomplete_api_calls f ".
+				     "WHERE ds.session_id = f.session_id ".
+				     "AND ds.request_index = f.request_index ".
+				     "AND ds.cycle_id=? ".
+		 		     "AND IFNULL(ds.api_call_date_id, f.api_call_date_id) IS NOT NULL ".
+			             "AND IFNULL(ds.duration_msecs, f.duration_msecs) IS NOT NULL", array(0=>$cycleID));
+				
+		$res = array();
+		foreach ($rows as $row)
+                {
+                        $res[] = APICall::CreateAPICallByID($row["session_id"], $row["request_index"]);
+                }
+                return $res;
 	}
 
 }

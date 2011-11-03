@@ -13,4 +13,6 @@ INSERT INTO retention_policy VALUES
 ('dwh_fact_events', 180, 2000, DATE('2011-01-01')),
 ('dwh_fact_bandwidth_usage', 180, 2000, DATE('2011-01-01')),
 ('dwh_fact_fms_session_events', 180, 2000, DATE('2011-01-01')),
-('dwh_fact_fms_sessions', 180, 2000, DATE('2011-01-01'));
+('dwh_fact_fms_sessions', 180, 2000, DATE('2011-01-01')),
+('dwh_fact_api_calls', 180, 2000, DATE('2011-01-01')),
+('dwh_fact_incomplete_api_calls', NULL, 3, NULL);
