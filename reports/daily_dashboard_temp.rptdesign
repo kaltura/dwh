@@ -277,7 +277,7 @@ ORDER BY 	DATE_ID DESC]]></xml-property>
                     <text-property name="heading">count_calls</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">sum_duration</property>
+                    <property name="columnName">sum_duration_msecs</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">sum_duration</text-property>
                     <text-property name="heading">sum_duration</text-property>
@@ -307,7 +307,7 @@ ORDER BY 	DATE_ID DESC]]></xml-property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">sum_duration</property>
+                        <property name="name">sum_duration_msecs</property>
                         <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
@@ -330,15 +330,15 @@ ORDER BY 	DATE_ID DESC]]></xml-property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
-                    <property name="name">sum_duration</property>
-                    <property name="nativeName">sum_duration</property>
+                    <property name="name">sum_duration_msecs</property>
+                    <property name="nativeName">sum_duration_msecs</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">3</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT 	date_id,SUM(count_calls) AS count_calls, 
-		SUM(sum_duration) AS sum_duration
-FROM 		kalturadw.dwh_hourly_partner_api u
+		SUM(sum_duration_msecs) AS sum_duration
+FROM 		kalturadw.dwh_hourly_api_calls u
 WHERE 		DATE_ID BETWEEN DATE(NOW()-INTERVAL 30 DAY)*1 AND DATE(NOW()-INTERVAL 1 DAY)*1
 GROUP BY 	DATE_ID
 ORDER BY 	DATE_ID DESC;]]></xml-property>
@@ -1881,16 +1881,34 @@ ORDER BY count_plays DESC]]></xml-property>
                     <text-property name="heading">avg_count_calls</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">avg_success_rate</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">avg_success_rate</text-property>
+                    <text-property name="heading">avg_success_rate</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">2_days_ago_count_calls</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">2_days_ago_count_calls</text-property>
                     <text-property name="heading">2_days_ago_count_calls</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">2_days_ago_success_rate</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">2_days_ago_success_rate</text-property>
+                    <text-property name="heading">2_days_ago_success_rate</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">count_calls</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">count_calls</text-property>
                     <text-property name="heading">count_calls</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">success_rate</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">success_rate</text-property>
+                    <text-property name="heading">success_rate</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">is_paying_rank</property>
@@ -1936,26 +1954,41 @@ ORDER BY count_plays DESC]]></xml-property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">2_days_ago_count_calls</property>
+                        <property name="name">avg_success_rate</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">count_calls</property>
+                        <property name="name">2_days_ago_count_calls</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
+                        <property name="name">2_days_ago_success_rate</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">count_calls</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">success_rate</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
                         <property name="name">is_paying_rank</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
+                        <property name="position">11</property>
                         <property name="name">rank</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">9</property>
+                        <property name="position">12</property>
                         <property name="name">total</property>
                         <property name="dataType">decimal</property>
                     </structure>
@@ -1993,53 +2026,86 @@ ORDER BY count_plays DESC]]></xml-property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
+                    <property name="name">avg_success_rate</property>
+                    <property name="nativeName">avg_success_rate</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
                     <property name="name">2_days_ago_count_calls</property>
                     <property name="nativeName">2_days_ago_count_calls</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">7</property>
+                    <property name="name">2_days_ago_success_rate</property>
+                    <property name="nativeName">2_days_ago_success_rate</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
                     <property name="name">count_calls</property>
                     <property name="nativeName">count_calls</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
-                    <property name="position">7</property>
+                    <property name="position">9</property>
+                    <property name="name">success_rate</property>
+                    <property name="nativeName">success_rate</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
                     <property name="name">is_paying_rank</property>
                     <property name="nativeName">is_paying_rank</property>
                     <property name="dataType">float</property>
                     <property name="nativeDataType">8</property>
                 </structure>
                 <structure>
-                    <property name="position">8</property>
+                    <property name="position">11</property>
                     <property name="name">rank</property>
                     <property name="nativeName">rank</property>
-                    <property name="dataType">integer</property>
+                    <property name="dataType">float</property>
                     <property name="nativeDataType">8</property>
                 </structure>
                 <structure>
-                    <property name="position">9</property>
+                    <property name="position">12</property>
                     <property name="name">total</property>
                     <property name="nativeName">total</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">3</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT partner_id, partner_name, is_paying, avg_count_calls, 2_days_ago_count_calls,count_calls, is_paying_rank, @rownum_calls_a:=IFNULL(@rownum_calls_a+1,1) AS rank, total FROM (
-SELECT partner_id, partner_name, avg_count_calls, 2_days_ago_count_calls,count_calls, @rownum_calls_is_paying_a:=IFNULL(IF(@is_paying_calls_a=is_paying,@rownum_calls_is_paying_a+1,1),1) AS is_paying_rank,
-	@is_paying_calls_a:=is_paying AS is_paying, total FROM (
-SELECT u.partner_id, SUM(count_calls)/7 avg_count_calls, 
-SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_calls,0)) 2_days_ago_count_calls, 
-SUM(IF((DATE(NOW()) - INTERVAL 1 DAY)*1=date_id,count_calls,0)) count_calls,
-p.partner_name, IF(partner_package>1,'yes','no') is_paying,total FROM kalturadw.dwh_hourly_partner_api u, kalturadw.dwh_dim_partners p,
-(SELECT SUM(count_calls) total FROM kalturadw.dwh_hourly_partner_api WHERE date_id=(DATE(NOW()) - INTERVAL 1 DAY)*1) total
-WHERE u.partner_id = p.partner_id
-AND date_id BETWEEN (DATE(NOW()) - INTERVAL 7 DAY)*1 AND (DATE(NOW()) - INTERVAL 1 DAY)*1
-GROUP BY partner_id
-ORDER BY is_paying, count_calls DESC) a
-) b 
+            <xml-property name="queryText"><![CDATA[SELECT partner_id, partner_name, is_paying, 
+avg_count_calls, avg_success_calls / avg_count_calls avg_success_rate, 
+2_days_ago_count_calls, 2_days_ago_success_calls/2_days_ago_count_calls 2_days_ago_success_rate, 
+count_calls, success_calls/count_calls success_rate, 
+is_paying_rank, @rownum_calls_a:=IFNULL(@rownum_calls_a+1,1) AS rank, total 
+FROM (
+ SELECT partner_id, partner_name, avg_count_calls, avg_success_calls, 
+    2_days_ago_count_calls, 2_days_ago_success_calls, 
+    count_calls, success_calls, 
+    @rownum_calls_is_paying_a:=IFNULL(IF(@is_paying_calls_a=is_paying,@rownum_calls_is_paying_a+1,1),1) AS is_paying_rank,
+	@is_paying_calls_a:=is_paying AS is_paying, total 
+ FROM (
+  SELECT u.partner_id, SUM(count_calls)/7 avg_count_calls, 
+  SUM(count_success)/7 avg_success_calls, 
+  SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_calls,0)) 2_days_ago_count_calls, 
+  SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_success,0)) 2_days_ago_success_calls, 
+  SUM(IF((DATE(NOW()) - INTERVAL 1 DAY)*1=date_id,count_calls,0)) count_calls,
+  SUM(IF((DATE(NOW()) - INTERVAL 1 DAY)*1=date_id,count_success,0)) success_calls,
+  p.partner_name, IF(partner_package>1,'yes','no') is_paying,total FROM kalturadw.dwh_hourly_api_calls u, kalturadw.dwh_dim_partners p,
+  (SELECT SUM(count_calls) total FROM kalturadw.dwh_hourly_api_calls WHERE date_id=(DATE(NOW()) - INTERVAL 1 DAY)*1) total
+  WHERE u.partner_id = p.partner_id
+  AND date_id BETWEEN (DATE(NOW()) - INTERVAL 7 DAY)*1 AND (DATE(NOW()) - INTERVAL 1 DAY)*1
+  GROUP BY partner_id
+  ORDER BY is_paying, count_calls DESC) a
+ ) b 
 ORDER BY count_calls DESC]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
@@ -2079,10 +2145,22 @@ ORDER BY count_calls DESC]]></xml-property>
                     <text-property name="heading">avg_count_calls</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">avg_success_rate</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">avg_success_rate</text-property>
+                    <text-property name="heading">avg_success_rate</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">2_days_ago_count_calls</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">2_days_ago_count_calls</text-property>
                     <text-property name="heading">2_days_ago_count_calls</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">2_days_ago_success_rate</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">2_days_ago_success_rate</text-property>
+                    <text-property name="heading">2_days_ago_success_rate</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">count_calls</property>
@@ -2091,22 +2169,22 @@ ORDER BY count_calls DESC]]></xml-property>
                     <text-property name="heading">count_calls</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">success_rate</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">success_rate</text-property>
+                    <text-property name="heading">success_rate</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">count_is_admin</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">count_is_admin</text-property>
                     <text-property name="heading">count_is_admin</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">count_in_multi_part</property>
+                    <property name="columnName">count_in_multi_request</property>
                     <property name="analysis">measure</property>
-                    <text-property name="displayName">count_in_multi_part</text-property>
-                    <text-property name="heading">count_in_multi_part</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">count_success</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">count_success</text-property>
-                    <text-property name="heading">count_success</text-property>
+                    <text-property name="displayName">count_in_multi_request</text-property>
+                    <text-property name="heading">count_in_multi_request</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">avg_duration</property>
@@ -2147,41 +2225,51 @@ ORDER BY count_calls DESC]]></xml-property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">2_days_ago_count_calls</property>
+                        <property name="name">avg_success_rate</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">count_calls</property>
+                        <property name="name">2_days_ago_count_calls</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">count_is_admin</property>
+                        <property name="name">2_days_ago_success_rate</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
-                        <property name="name">count_in_multi_part</property>
+                        <property name="name">count_calls</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">8</property>
-                        <property name="name">count_success</property>
+                        <property name="name">success_rate</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
-                        <property name="name">avg_duration</property>
+                        <property name="name">count_is_admin</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">10</property>
+                        <property name="name">count_in_multi_request</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">avg_duration</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
                         <property name="name">rank</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">11</property>
+                        <property name="position">13</property>
                         <property name="name">total</property>
                         <property name="dataType">decimal</property>
                     </structure>
@@ -2212,73 +2300,94 @@ ORDER BY count_calls DESC]]></xml-property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
+                    <property name="name">avg_success_rate</property>
+                    <property name="nativeName">avg_success_rate</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
                     <property name="name">2_days_ago_count_calls</property>
                     <property name="nativeName">2_days_ago_count_calls</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">6</property>
+                    <property name="name">2_days_ago_success_rate</property>
+                    <property name="nativeName">2_days_ago_success_rate</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
                     <property name="name">count_calls</property>
                     <property name="nativeName">count_calls</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">8</property>
+                    <property name="name">success_rate</property>
+                    <property name="nativeName">success_rate</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
                     <property name="name">count_is_admin</property>
                     <property name="nativeName">count_is_admin</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
-                    <property name="position">7</property>
-                    <property name="name">count_in_multi_part</property>
-                    <property name="nativeName">count_in_multi_part</property>
+                    <property name="position">10</property>
+                    <property name="name">count_in_multi_request</property>
+                    <property name="nativeName">count_in_multi_request</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
-                    <property name="position">8</property>
-                    <property name="name">count_success</property>
-                    <property name="nativeName">count_success</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
-                </structure>
-                <structure>
-                    <property name="position">9</property>
+                    <property name="position">11</property>
                     <property name="name">avg_duration</property>
                     <property name="nativeName">avg_duration</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
-                    <property name="position">10</property>
+                    <property name="position">12</property>
                     <property name="name">rank</property>
                     <property name="nativeName">rank</property>
                     <property name="dataType">float</property>
                     <property name="nativeDataType">8</property>
                 </structure>
                 <structure>
-                    <property name="position">11</property>
+                    <property name="position">13</property>
                     <property name="name">total</property>
                     <property name="nativeName">total</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">3</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT service_name, action_name, avg_count_calls, 2_days_ago_count_calls, count_calls, count_is_admin, count_in_multi_part, count_success, sum_duration/count_calls avg_duration, @rownum_calls:=IFNULL(@rownum_calls+1,1) AS rank, total 
+            <xml-property name="queryText"><![CDATA[SELECT service_name, action_name, avg_count_calls, 
+  avg_success_calls/avg_success_calls avg_success_rate, 
+  2_days_ago_count_calls, 2_days_ago_success_calls / 2_days_ago_count_calls 2_days_ago_success_rate, 
+  count_calls, count_success/count_calls success_rate, 
+  count_is_admin, count_in_multi_request, sum_duration/count_calls avg_duration, @rownum_calls:=IFNULL(@rownum_calls+1,1) AS rank, total 
 FROM (
-SELECT service_name, action_name, SUM(count_calls)/7 avg_count_calls, 
+SELECT service_name, action_name, 
+SUM(count_calls)/7 avg_count_calls, 
+SUM(count_success)/7 avg_success_calls, 
 SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_calls,0)) 2_days_ago_count_calls, 
+SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_success,0)) 2_days_ago_success_calls, 
 SUM(IF((DATE(NOW()) - INTERVAL 1 DAY)*1=date_id,count_calls,0)) count_calls,
 SUM(IF((DATE(NOW()) - INTERVAL 1 DAY)*1=date_id,count_is_admin,0)) count_is_admin,
-SUM(IF((DATE(NOW()) - INTERVAL 1 DAY)*1=date_id,count_is_in_multi_part,0)) count_in_multi_part,
+SUM(IF((DATE(NOW()) - INTERVAL 1 DAY)*1=date_id,count_is_in_multi_request,0)) count_in_multi_request,
 SUM(IF((DATE(NOW()) - INTERVAL 1 DAY)*1=date_id,count_success,0)) count_success,
-SUM(IF((DATE(NOW()) - INTERVAL 1 DAY)*1=date_id,sum_duration,0)) sum_duration, total
-FROM kalturadw.dwh_hourly_partner_api u, kalturadw.dwh_dim_api_actions p,
-(SELECT SUM(count_calls) total FROM kalturadw.dwh_hourly_partner_api WHERE date_id=(DATE(NOW()) - INTERVAL 1 DAY)*1) total
-WHERE u.api_action_id = p.action_id
+SUM(IF((DATE(NOW()) - INTERVAL 1 DAY)*1=date_id,sum_duration_msecs,0)) sum_duration, total
+FROM kalturadw.dwh_hourly_api_calls u, kalturadw.dwh_dim_api_actions p,
+(SELECT SUM(count_calls) total FROM kalturadw.dwh_hourly_api_calls WHERE date_id=(DATE(NOW()) - INTERVAL 1 DAY)*1) total
+WHERE u.action_id = p.action_id
 AND date_id BETWEEN (DATE(NOW()) - INTERVAL 7 DAY)*1 AND (DATE(NOW()) - INTERVAL 1 DAY)*1
 GROUP BY service_name, action_name
 ORDER BY count_calls DESC ) a;]]></xml-property>
@@ -22989,7 +23098,7 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>Api Calls (Millions, 30 Days Back)</Value>
+          <Value>Api Calls (Thousands, 30 Days Back)</Value>
           <Font>
             <Size>16.0</Size>
             <Bold>true</Bold>
@@ -23596,13 +23705,13 @@ function beforeGeneration( chart, icsc )&#xD;
             <Visible>false</Visible>
           </Label>
           <DataDefinition>
-            <Definition>row[&quot;count_calls&quot;]/1000000</Definition>
+            <Definition>row[&quot;count_calls&quot;]/1000</Definition>
             <Grouping>
               <GroupType>Text</GroupType>
               <AggregateExpression>Sum</AggregateExpression>
             </Grouping>
           </DataDefinition>
-          <SeriesIdentifier>Api Calls (Millions)</SeriesIdentifier>
+          <SeriesIdentifier>Api Calls (K)</SeriesIdentifier>
           <DataPoint>
             <Components>
               <Type>Orthogonal_Value</Type>
@@ -24106,7 +24215,1172 @@ day + month / 100</Definition>
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
-                                <property name="name">sum_duration</property>
+                                <property name="name">sum_duration_msecs</property>
+                                <expression name="expression" type="javascript">dataSetRow["sum_duration"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="style">left</property>
+                    </extended-item>
+                </cell>
+            </row>
+            <row id="1885">
+                <cell id="1886">
+                    <extended-item extensionName="Chart" id="1887">
+                        <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
+  <Version>2.5.1</Version>
+  <Type>Bar Chart</Type>
+  <SubType>Side-by-side</SubType>
+  <Block>
+    <Children xsi:type="layout:TitleBlock">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <Label>
+        <Caption>
+          <Value>Api Runtime Duration (Seconds, 30 Days Back)</Value>
+          <Font>
+            <Size>16.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+    </Children>
+    <Children xsi:type="layout:Plot">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>0</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Background>
+      <Visible>true</Visible>
+      <HorizontalSpacing>5</HorizontalSpacing>
+      <VerticalSpacing>5</VerticalSpacing>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>0.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>0.0</Right>
+        </Insets>
+      </ClientArea>
+    </Children>
+    <Children xsi:type="layout:Legend">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>2.0</Top>
+          <Left>2.0</Left>
+          <Bottom>2.0</Bottom>
+          <Right>2.0</Right>
+        </Insets>
+      </ClientArea>
+      <Text>
+        <Value></Value>
+        <Font>
+          <Alignment/>
+        </Font>
+      </Text>
+      <Orientation>Vertical</Orientation>
+      <Direction>Top_Bottom</Direction>
+      <Separator>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </Separator>
+      <Position>Below</Position>
+      <ItemType>Series</ItemType>
+      <Title>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Title>
+      <TitlePosition>Above</TitlePosition>
+      <ShowValue>false</ShowValue>
+    </Children>
+    <Bounds>
+      <Left>0.0</Left>
+      <Top>0.0</Top>
+      <Width>212.0</Width>
+      <Height>130.0</Height>
+    </Bounds>
+    <Insets>
+      <Top>3.0</Top>
+      <Left>3.0</Left>
+      <Bottom>3.0</Bottom>
+      <Right>3.0</Right>
+    </Insets>
+    <Row>-1</Row>
+    <Column>-1</Column>
+    <Rowspan>-1</Rowspan>
+    <Columnspan>-1</Columnspan>
+    <Outline>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Color>
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Color>
+      <Visible>false</Visible>
+    </Outline>
+    <Visible>true</Visible>
+  </Block>
+  <Dimension>Two_Dimensional</Dimension>
+  <Script>&#xD;
+/**&#xD;
+ * Called before generation of chart model to GeneratedChartState.&#xD;
+ * &#xD;
+ * @param chart&#xD;
+ *            Chart&#xD;
+ * @param icsc&#xD;
+ *            IChartScriptContext&#xD;
+ */&#xD;
+&#xD;
+function beforeGeneration( chart, icsc )&#xD;
+{&#xD;
+	xAxis = chart.getBaseAxes()[0];&#xD;
+	yAxis = chart.getOrthogonalAxes( xAxis, true )[0];&#xD;
+	seriesDef = yAxis.getSeriesDefinitions().get(0);&#xD;
+	runSeries = seriesDef.getRunTimeSeries()[0];&#xD;
+	chart.getBlock().getBounds().setHeight(180);&#xD;
+	chart.getBlock().getBounds().setWidth(550);&#xD;
+}&#xD;
+</Script>
+  <Units>Points</Units>
+  <SeriesThickness>10.0</SeriesThickness>
+  <ExtendedProperties>
+    <Name>enable.area.alt</Name>
+    <Value>false</Value>
+  </ExtendedProperties>
+  <SampleData>
+    <BaseSampleData>
+      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
+    </BaseSampleData>
+    <OrthogonalSampleData>
+      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
+      <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
+    </OrthogonalSampleData>
+  </SampleData>
+  <Interactivity/>
+  <EmptyMessage>
+    <Caption>
+      <Value>This chart contains no data.</Value>
+      <Font>
+        <Alignment>
+          <horizontalAlignment>Center</horizontalAlignment>
+          <verticalAlignment>Center</verticalAlignment>
+        </Alignment>
+      </Font>
+    </Caption>
+    <Background xsi:type="attribute:ColorDefinition">
+      <Transparency>64</Transparency>
+      <Red>127</Red>
+      <Green>127</Green>
+      <Blue>127</Blue>
+    </Background>
+    <Outline>
+      <Color>
+        <Transparency>128</Transparency>
+        <Red>127</Red>
+        <Green>127</Green>
+        <Blue>127</Blue>
+      </Color>
+      <Visible>true</Visible>
+    </Outline>
+    <Insets>
+      <Top>10.0</Top>
+      <Left>10.0</Left>
+      <Bottom>10.0</Bottom>
+      <Right>10.0</Right>
+    </Insets>
+    <Visible>false</Visible>
+  </EmptyMessage>
+  <Axes>
+    <Type>Linear</Type>
+    <Title>
+      <Caption>
+        <Value>X-Axis Title</Value>
+        <Font>
+          <Size>14.0</Size>
+          <Bold>true</Bold>
+          <Alignment>
+            <horizontalAlignment>Center</horizontalAlignment>
+            <verticalAlignment>Center</verticalAlignment>
+          </Alignment>
+        </Font>
+      </Caption>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>0</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Background>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+      </Outline>
+      <Insets>
+        <Top>0.0</Top>
+        <Left>2.0</Left>
+        <Bottom>0.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Visible>false</Visible>
+    </Title>
+    <TitlePosition>Below</TitlePosition>
+    <AssociatedAxes>
+      <Type>Linear</Type>
+      <Title>
+        <Caption>
+          <Value>Y-Axis Title</Value>
+          <Font>
+            <Size>14.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+            <Rotation>90.0</Rotation>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Title>
+      <TitlePosition>Left</TitlePosition>
+      <SeriesDefinitions>
+        <Query>
+          <Definition></Definition>
+        </Query>
+        <SeriesPalette>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>80</Red>
+            <Green>166</Green>
+            <Blue>218</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>242</Red>
+            <Green>88</Green>
+            <Blue>106</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>232</Red>
+            <Green>172</Green>
+            <Blue>57</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>255</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>64</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>170</Red>
+            <Green>85</Green>
+            <Blue>85</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>192</Red>
+            <Green>192</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>192</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>7</Red>
+            <Green>146</Green>
+            <Blue>94</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>128</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>0</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>64</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>80</Red>
+            <Green>240</Green>
+            <Blue>120</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>64</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>0</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>0</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>64</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>0</Blue>
+          </Entries>
+        </SeriesPalette>
+        <Series xsi:type="type:BarSeries">
+          <Visible>true</Visible>
+          <Label>
+            <Caption>
+              <Value></Value>
+              <Font>
+                <Alignment/>
+              </Font>
+            </Caption>
+            <Background xsi:type="attribute:ColorDefinition">
+              <Transparency>0</Transparency>
+              <Red>255</Red>
+              <Green>255</Green>
+              <Blue>255</Blue>
+            </Background>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </Outline>
+            <Insets>
+              <Top>0.0</Top>
+              <Left>2.0</Left>
+              <Bottom>0.0</Bottom>
+              <Right>3.0</Right>
+            </Insets>
+            <Visible>false</Visible>
+          </Label>
+          <DataDefinition>
+            <Definition>row[&quot;sum_duration_msecs&quot;]/1000</Definition>
+            <Grouping>
+              <GroupType>Text</GroupType>
+              <AggregateExpression>Sum</AggregateExpression>
+            </Grouping>
+          </DataDefinition>
+          <SeriesIdentifier>Api Duration (Seconds)</SeriesIdentifier>
+          <DataPoint>
+            <Components>
+              <Type>Orthogonal_Value</Type>
+            </Components>
+            <Separator>, </Separator>
+          </DataPoint>
+          <LabelPosition>Outside</LabelPosition>
+          <Stacked>false</Stacked>
+          <Riser>Rectangle</Riser>
+        </Series>
+        <Grouping>
+          <GroupType>Text</GroupType>
+          <AggregateExpression>Sum</AggregateExpression>
+        </Grouping>
+      </SeriesDefinitions>
+      <Orientation>Vertical</Orientation>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Visible>true</Visible>
+      </LineAttributes>
+      <Label>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+      <FormatSpecifier xsi:type="attribute:JavaNumberFormatSpecifier">
+        <Pattern>##,###</Pattern>
+      </FormatSpecifier>
+      <LabelPosition>Left</LabelPosition>
+      <MajorGrid>
+        <LineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>196</Red>
+            <Green>196</Green>
+            <Blue>196</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </LineAttributes>
+        <TickStyle>Across</TickStyle>
+        <TickAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>196</Red>
+            <Green>196</Green>
+            <Blue>196</Blue>
+          </Color>
+          <Visible>true</Visible>
+        </TickAttributes>
+      </MajorGrid>
+      <MinorGrid>
+        <LineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>225</Red>
+            <Green>225</Green>
+            <Blue>225</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </LineAttributes>
+        <TickStyle>Across</TickStyle>
+        <TickAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>225</Red>
+            <Green>225</Green>
+            <Blue>225</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </TickAttributes>
+      </MinorGrid>
+      <Scale>
+        <MinorGridsPerUnit>5</MinorGridsPerUnit>
+      </Scale>
+      <Origin>
+        <Type>Min</Type>
+        <Value xsi:type="data:NumberDataElement">
+          <Value>0.0</Value>
+        </Value>
+      </Origin>
+      <PrimaryAxis>true</PrimaryAxis>
+      <Percent>false</Percent>
+    </AssociatedAxes>
+    <SeriesDefinitions>
+      <Query>
+        <Definition></Definition>
+      </Query>
+      <SeriesPalette>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>80</Red>
+          <Green>166</Green>
+          <Blue>218</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>242</Red>
+          <Green>88</Green>
+          <Blue>106</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>232</Red>
+          <Green>172</Green>
+          <Blue>57</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>255</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>64</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>170</Red>
+          <Green>85</Green>
+          <Blue>85</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>192</Red>
+          <Green>192</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>192</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>7</Red>
+          <Green>146</Green>
+          <Blue>94</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>128</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>0</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>64</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>80</Red>
+          <Green>240</Green>
+          <Blue>120</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>64</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>0</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>0</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>64</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>0</Blue>
+        </Entries>
+      </SeriesPalette>
+      <Series>
+        <Visible>true</Visible>
+        <Label>
+          <Caption>
+            <Value></Value>
+            <Font>
+              <Alignment/>
+            </Font>
+          </Caption>
+          <Background xsi:type="attribute:ColorDefinition">
+            <Transparency>0</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Background>
+          <Outline>
+            <Style>Solid</Style>
+            <Thickness>1</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>false</Visible>
+          </Outline>
+          <Insets>
+            <Top>0.0</Top>
+            <Left>2.0</Left>
+            <Bottom>0.0</Bottom>
+            <Right>3.0</Right>
+          </Insets>
+          <Visible>false</Visible>
+        </Label>
+        <DataDefinition>
+          <Definition>var month = BirtMath.mod(row[&quot;date_id&quot;],10000);&#xD;
+var day = BirtMath.mod(month,100);&#xD;
+month = BirtMath.roundDown((month - day)/100);&#xD;
+day + month / 100</Definition>
+        </DataDefinition>
+        <SeriesIdentifier></SeriesIdentifier>
+        <DataPoint>
+          <Components>
+            <Type>Orthogonal_Value</Type>
+          </Components>
+          <Separator>, </Separator>
+        </DataPoint>
+        <LabelPosition>Outside</LabelPosition>
+        <Stacked>false</Stacked>
+      </Series>
+      <Grouping>
+        <Enabled>true</Enabled>
+        <GroupType>Text</GroupType>
+        <AggregateExpression>Sum</AggregateExpression>
+      </Grouping>
+      <Sorting>Ascending</Sorting>
+      <SortKey>
+        <Definition>row[&quot;date_id&quot;]</Definition>
+      </SortKey>
+    </SeriesDefinitions>
+    <Orientation>Horizontal</Orientation>
+    <LineAttributes>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Visible>true</Visible>
+    </LineAttributes>
+    <Label>
+      <Caption>
+        <Value></Value>
+        <Font>
+          <Alignment/>
+          <Rotation>90.0</Rotation>
+        </Font>
+      </Caption>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>0</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Background>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+      </Outline>
+      <Insets>
+        <Top>0.0</Top>
+        <Left>2.0</Left>
+        <Bottom>0.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Visible>true</Visible>
+    </Label>
+    <LabelPosition>Below</LabelPosition>
+    <Staggered>false</Staggered>
+    <MajorGrid>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>196</Red>
+          <Green>196</Green>
+          <Blue>196</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </LineAttributes>
+      <TickStyle>Across</TickStyle>
+      <TickAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>196</Red>
+          <Green>196</Green>
+          <Blue>196</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </TickAttributes>
+    </MajorGrid>
+    <MinorGrid>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>225</Red>
+          <Green>225</Green>
+          <Blue>225</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </LineAttributes>
+      <TickStyle>Across</TickStyle>
+      <TickAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>225</Red>
+          <Green>225</Green>
+          <Blue>225</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </TickAttributes>
+    </MinorGrid>
+    <Scale>
+      <MinorGridsPerUnit>5</MinorGridsPerUnit>
+    </Scale>
+    <Origin>
+      <Type>Min</Type>
+      <Value xsi:type="data:NumberDataElement">
+        <Value>0.0</Value>
+      </Value>
+    </Origin>
+    <PrimaryAxis>true</PrimaryAxis>
+    <CategoryAxis>true</CategoryAxis>
+    <Percent>false</Percent>
+  </Axes>
+  <Orientation>Vertical</Orientation>
+  <UnitSpacing>50.0</UnitSpacing>
+  <Rotation/>
+</model:ChartWithAxes>
+]]></xml-property>
+                        <property name="outputFormat">SVG</property>
+                        <property name="inheritColumns">true</property>
+                        <property name="pageBreakBefore">auto</property>
+                        <structure name="toc"/>
+                        <property name="dataSet">Api</property>
+                        <property name="height">250px</property>
+                        <property name="width">760px</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">date_id</property>
+                                <expression name="expression" type="javascript">dataSetRow["date_id"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">count_calls</property>
+                                <expression name="expression" type="javascript">dataSetRow["count_calls"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">sum_duration_msecs</property>
                                 <expression name="expression" type="javascript">dataSetRow["sum_duration"]</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
@@ -24126,15 +25400,22 @@ day + month / 100</Definition>
             </row>
             <row id="1550">
                 <cell id="1551">
+                    <data id="1636">
+                        <structure name="numberFormat">
+                            <property name="category">Percent</property>
+                            <property name="pattern">#,##0.00%{RoundingMode=HALF_UP}</property>
+                        </structure>
+                        <property name="resultSetColumn">percent_of_total</property>
+                    </data>
                     <table id="1552">
                         <property name="textAlign">left</property>
-                        <property name="width">7.854166666666667in</property>
+                        <property name="width">7.875in</property>
                         <property name="dataSet">DetailedApiActions</property>
                         <list-property name="boundDataColumns">
                             <structure>
                                 <property name="name">avg_count_bandwidth_kb</property>
                                 <text-property name="displayName">avg_count_calls</text-property>
-                                <expression name="expression" type="javascript">x = dataSetRow["avg_count_calls"]/1000000;&#13;
+                                <expression name="expression" type="javascript">x = dataSetRow["avg_count_calls"]/1000;&#13;
 if (x>1) { &#13;
 	BirtMath.round(x);&#13;
 } else {&#13;
@@ -24145,7 +25426,7 @@ if (x>1) { &#13;
                             <structure>
                                 <property name="name">2_days_ago_count_bandwidth_kb</property>
                                 <text-property name="displayName">2_days_ago_count_bandwidth_kb</text-property>
-                                <expression name="expression" type="javascript">x = dataSetRow["2_days_ago_count_calls"]/1000000;&#13;
+                                <expression name="expression" type="javascript">x = dataSetRow["2_days_ago_count_calls"]/1000;&#13;
 if (x>1) { &#13;
 	BirtMath.round(x);&#13;
 } else {&#13;
@@ -24156,7 +25437,7 @@ if (x>1) { &#13;
                             <structure>
                                 <property name="name">count_bandwidth_kb</property>
                                 <text-property name="displayName">count_calls</text-property>
-                                <expression name="expression" type="javascript">x = dataSetRow["count_calls"]/1000000;&#13;
+                                <expression name="expression" type="javascript">x = dataSetRow["count_calls"]/1000;&#13;
 if (x>1) { &#13;
 	BirtMath.round(x);&#13;
 } else {&#13;
@@ -24213,15 +25494,9 @@ if (x>1) { &#13;
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
-                                <property name="name">count_in_multi_part</property>
-                                <text-property name="displayName">count_in_multi_part</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count_in_multi_part"]</expression>
-                                <property name="dataType">decimal</property>
-                            </structure>
-                            <structure>
-                                <property name="name">count_success</property>
-                                <text-property name="displayName">count_success</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count_success"]</expression>
+                                <property name="name">count_in_multi_request</property>
+                                <text-property name="displayName">count_in_multi_request</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["count_in_multi_request"]</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
@@ -24244,17 +25519,28 @@ if(x>1)&#13;
                                 <property name="dataType">float</property>
                             </structure>
                             <structure>
-                                <property name="name">success_rate</property>
-                                <text-property name="displayName">success_rate</text-property>
-                                <expression name="expression" type="javascript">x = dataSetRow["count_success"]/dataSetRow["count_calls"];&#13;
-BirtMath.round(x,2)*100;</expression>
-                                <property name="dataType">float</property>
-                            </structure>
-                            <structure>
                                 <property name="name">action_name</property>
                                 <text-property name="displayName">action_name</text-property>
                                 <expression name="expression" type="javascript">dataSetRow["action_name"]</expression>
                                 <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">% Sucess</property>
+                                <text-property name="displayName">% Sucess</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["success_rate"]*100)</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">2_days_%_sucess</property>
+                                <text-property name="displayName">2_days_%_sucess</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["2_days_ago_success_rate"]*100)</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">7_days_%_success</property>
+                                <text-property name="displayName">7_days_%_success</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["avg_success_rate"]*100)</expression>
+                                <property name="dataType">integer</property>
                             </structure>
                         </list-property>
                         <list-property name="filter">
@@ -24267,37 +25553,44 @@ BirtMath.round(x,2)*100;</expression>
                             </structure>
                         </list-property>
                         <column id="1583">
-                            <property name="width">0.7395833333333334in</property>
+                            <property name="width">0.53125in</property>
                         </column>
                         <column id="1584">
-                            <property name="width">0.8020833333333334in</property>
+                            <property name="width">0.5729166666666666in</property>
                         </column>
                         <column id="1586">
-                            <property name="width">1.0104166666666667in</property>
+                            <property name="width">0.71875in</property>
                             <property name="repeat">1</property>
                         </column>
                         <column id="1587">
-                            <property name="width">1.0416666666666667in</property>
+                            <property name="width">0.7395833333333334in</property>
                             <property name="repeat">1</property>
                         </column>
-                        <column id="1588">
-                            <property name="width">1.25in</property>
-                        </column>
-                        <column id="1589">
-                            <property name="width">0.9166666666666666in</property>
+                        <column id="1736">
+                            <property name="width">0.7395833333333334in</property>
                             <property name="repeat">1</property>
                         </column>
                         <column id="1592">
-                            <property name="width">1.1666666666666667in</property>
+                            <property name="width">0.8333333333333334in</property>
                             <property name="repeat">1</property>
                         </column>
-                        <column id="1595">
-                            <property name="width">0.9270833333333334in</property>
+                        <column id="1588">
+                            <property name="width">0.8854166666666666in</property>
+                        </column>
+                        <column id="1741">
+                            <property name="width">0.8854166666666666in</property>
+                        </column>
+                        <column id="1589">
+                            <property name="width">0.65625in</property>
+                            <property name="repeat">1</property>
+                        </column>
+                        <column id="1746">
+                            <property name="width">0.65625in</property>
                             <property name="repeat">1</property>
                         </column>
                         <header>
                             <row id="1553">
-                                <property name="height">0.4791666666666667in</property>
+                                <property name="height">0.46875in</property>
                                 <cell id="1554">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
@@ -24364,10 +25657,10 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1563">
-                                        <text-property name="text">Percent of Total</text-property>
+                                        <text-property name="text">% of Total</text-property>
                                     </label>
                                 </cell>
-                                <cell id="1564">
+                                <cell id="1734">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -24380,25 +25673,8 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <label id="1565">
-                                        <text-property name="text">Two days ago</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="1566">
-                                    <property name="borderBottomColor">#000000</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">1px</property>
-                                    <property name="borderLeftColor">#000000</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">1px</property>
-                                    <property name="borderRightColor">#000000</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">1px</property>
-                                    <property name="borderTopColor">#000000</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">1px</property>
-                                    <label id="1567">
-                                        <text-property name="text">Last 7 days avg</text-property>
+                                    <label id="1737">
+                                        <text-property name="text">% Sucess</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1590">
@@ -24418,7 +25694,7 @@ BirtMath.round(x,2)*100;</expression>
                                         <text-property name="text">Avg duration</text-property>
                                     </label>
                                 </cell>
-                                <cell id="1593">
+                                <cell id="1564">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -24431,8 +25707,59 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <label id="1597">
-                                        <text-property name="text">Success rate</text-property>
+                                    <label id="1565">
+                                        <text-property name="text">Two days ago</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1739">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="1742">
+                                        <text-property name="text">% Sucess</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1566">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="1567">
+                                        <text-property name="text">Last 7 days avg</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1744">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="1747">
+                                        <text-property name="text">% Sucess</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -24529,6 +25856,40 @@ BirtMath.round(x,2)*100;</expression>
                                         <property name="resultSetColumn">percent_of_total</property>
                                     </data>
                                 </cell>
+                                <cell id="1735">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="1738">
+                                        <property name="resultSetColumn">% Sucess</property>
+                                    </data>
+                                </cell>
+                                <cell id="1591">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="1599">
+                                        <property name="resultSetColumn">avg_duration_display</property>
+                                    </data>
+                                </cell>
                                 <cell id="1579">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
@@ -24549,6 +25910,23 @@ BirtMath.round(x,2)*100;</expression>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">2_days_ago_count_bandwidth_kb</property>
+                                    </data>
+                                </cell>
+                                <cell id="1740">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="1743">
+                                        <property name="resultSetColumn">2_days_%_sucess</property>
                                     </data>
                                 </cell>
                                 <cell id="1581">
@@ -24573,7 +25951,7 @@ BirtMath.round(x,2)*100;</expression>
                                         <property name="resultSetColumn">avg_count_bandwidth_kb</property>
                                     </data>
                                 </cell>
-                                <cell id="1591">
+                                <cell id="1745">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -24586,25 +25964,8 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <data id="1599">
-                                        <property name="resultSetColumn">avg_duration_display</property>
-                                    </data>
-                                </cell>
-                                <cell id="1594">
-                                    <property name="borderBottomColor">#000000</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">1px</property>
-                                    <property name="borderLeftColor">#000000</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">1px</property>
-                                    <property name="borderRightColor">#000000</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">1px</property>
-                                    <property name="borderTopColor">#000000</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">1px</property>
-                                    <data id="1600">
-                                        <property name="resultSetColumn">success_rate</property>
+                                    <data id="1748">
+                                        <property name="resultSetColumn">7_days_%_success</property>
                                     </data>
                                 </cell>
                             </row>
@@ -24672,20 +26033,53 @@ BirtMath.round(x,2)*100;</expression>
                             <structure>
                                 <property name="name">avg_count_calls</property>
                                 <text-property name="displayName">avg_count_calls</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["avg_count_calls"]</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["avg_count_calls"]/1000;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
                                 <property name="name">2_days_ago_count_calls</property>
                                 <text-property name="displayName">2_days_ago_count_calls</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["2_days_ago_count_calls"]</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["2_days_ago_count_calls"]/1000;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
                                 <property name="name">count_calls</property>
                                 <text-property name="displayName">count_calls</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count_calls"]</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["count_calls"]/1000;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">% success</property>
+                                <text-property name="displayName">% success</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["success_rate"]*100)</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">2_days_%_success</property>
+                                <text-property name="displayName">2_days_%_success</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["2_days_ago_success_rate"]*100)</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">7_avg_%_success</property>
+                                <text-property name="displayName">7_avg_%_success</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["avg_success_rate"]*100)</expression>
+                                <property name="dataType">integer</property>
                             </structure>
                         </list-property>
                         <list-property name="filter">
@@ -24708,10 +26102,19 @@ BirtMath.round(x,2)*100;</expression>
                         <column id="1645">
                             <property name="repeat">1</property>
                         </column>
+                        <column id="1751">
+                            <property name="repeat">1</property>
+                        </column>
                         <column id="1646">
                             <property name="repeat">1</property>
                         </column>
+                        <column id="1754">
+                            <property name="repeat">1</property>
+                        </column>
                         <column id="1647">
+                            <property name="repeat">1</property>
+                        </column>
+                        <column id="1757">
                             <property name="repeat">1</property>
                         </column>
                         <header>
@@ -24798,7 +26201,24 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1621">
-                                        <text-property name="text">Percent of Total</text-property>
+                                        <text-property name="text">% of Total</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1749">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="1758">
+                                        <text-property name="text">% Sucess</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1622">
@@ -24818,6 +26238,23 @@ BirtMath.round(x,2)*100;</expression>
                                         <text-property name="text">Two days ago</text-property>
                                     </label>
                                 </cell>
+                                <cell id="1752">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="1759">
+                                        <text-property name="text">% Sucess</text-property>
+                                    </label>
+                                </cell>
                                 <cell id="1624">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
@@ -24831,8 +26268,25 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <label id="1625">
-                                        <text-property name="text">Last seven days avg</text-property>
+                                    <label id="1888">
+                                        <text-property name="text">Last 7 days avg</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1755">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="1760">
+                                        <text-property name="text">% Sucess</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -24938,12 +26392,22 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <data id="1636">
-                                        <structure name="numberFormat">
-                                            <property name="category">Percent</property>
-                                            <property name="pattern">#,##0.00%{RoundingMode=HALF_UP}</property>
-                                        </structure>
-                                        <property name="resultSetColumn">percent_of_total</property>
+                                </cell>
+                                <cell id="1750">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="1761">
+                                        <property name="resultSetColumn">% success</property>
                                     </data>
                                 </cell>
                                 <cell id="1637">
@@ -24967,6 +26431,23 @@ BirtMath.round(x,2)*100;</expression>
                                         <property name="resultSetColumn">2_days_ago_count_calls</property>
                                     </data>
                                 </cell>
+                                <cell id="1753">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="1762">
+                                        <property name="resultSetColumn">2_days_%_success</property>
+                                    </data>
+                                </cell>
                                 <cell id="1639">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
@@ -24986,6 +26467,23 @@ BirtMath.round(x,2)*100;</expression>
                                             <property name="pattern">###,##0</property>
                                         </structure>
                                         <property name="resultSetColumn">avg_count_calls</property>
+                                    </data>
+                                </cell>
+                                <cell id="1756">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="1763">
+                                        <property name="resultSetColumn">7_avg_%_success</property>
                                     </data>
                                 </cell>
                             </row>
@@ -25029,19 +26527,34 @@ BirtMath.round(x,2)*100;</expression>
                             <structure>
                                 <property name="name">avg_count_calls</property>
                                 <text-property name="displayName">avg_count_calls</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["avg_count_calls"]</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["avg_count_calls"]/1000;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
                                 <property name="name">2_days_ago_count_calls</property>
                                 <text-property name="displayName">2_days_ago_count_calls</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["2_days_ago_count_calls"]</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["2_days_ago_count_calls"]/1000;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
                                 <property name="name">count_calls</property>
                                 <text-property name="displayName">count_calls</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count_calls"]</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["count_calls"]/1000;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
@@ -25074,6 +26587,24 @@ BirtMath.round(x,2)*100;</expression>
                                 <expression name="expression" type="javascript">BirtStr.concat("#",dataSetRow["rank"])</expression>
                                 <property name="dataType">string</property>
                             </structure>
+                            <structure>
+                                <property name="name">% success</property>
+                                <text-property name="displayName">% success</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["success_rate"]*100)</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">2_days_%_success</property>
+                                <text-property name="displayName">2_days_%_success</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["2_days_ago_success_rate"]*100)</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">7_avg_%_success</property>
+                                <text-property name="displayName">7_avg_%_success</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["avg_success_rate"]*100)</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
                         </list-property>
                         <list-property name="filter">
                             <structure>
@@ -25102,10 +26633,19 @@ BirtMath.round(x,2)*100;</expression>
                         <column id="1688">
                             <property name="repeat">1</property>
                         </column>
+                        <column id="1766">
+                            <property name="repeat">1</property>
+                        </column>
                         <column id="1689">
                             <property name="repeat">1</property>
                         </column>
+                        <column id="1769">
+                            <property name="repeat">1</property>
+                        </column>
                         <column id="1690">
+                            <property name="repeat">1</property>
+                        </column>
+                        <column id="1772">
                             <property name="repeat">1</property>
                         </column>
                         <header>
@@ -25175,7 +26715,7 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1662">
-                                        <text-property name="text">Yesterday GB</text-property>
+                                        <text-property name="text">Yesterday</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1663">
@@ -25192,7 +26732,24 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1664">
-                                        <text-property name="text">Percent of Total</text-property>
+                                        <text-property name="text">% of Total</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1764">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="1773">
+                                        <text-property name="text">% Sucess</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1665">
@@ -25209,7 +26766,24 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1666">
-                                        <text-property name="text">Two days ago GB</text-property>
+                                        <text-property name="text">Two days ago</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1767">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="1774">
+                                        <text-property name="text">% Sucess</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1667">
@@ -25226,7 +26800,24 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
                                     <label id="1668">
-                                        <text-property name="text">Last seven days avg GB</text-property>
+                                        <text-property name="text">Last 7 days avg</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1770">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="1775">
+                                        <text-property name="text">% Sucess</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -25329,6 +26920,23 @@ BirtMath.round(x,2)*100;</expression>
                                         <property name="resultSetColumn">percent_of_total</property>
                                     </data>
                                 </cell>
+                                <cell id="1765">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="1776">
+                                        <property name="resultSetColumn">% success</property>
+                                    </data>
+                                </cell>
                                 <cell id="1680">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
@@ -25349,6 +26957,23 @@ BirtMath.round(x,2)*100;</expression>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">2_days_ago_count_calls</property>
+                                    </data>
+                                </cell>
+                                <cell id="1768">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="1777">
+                                        <property name="resultSetColumn">2_days_%_success</property>
                                     </data>
                                 </cell>
                                 <cell id="1682">
@@ -25373,6 +26998,23 @@ BirtMath.round(x,2)*100;</expression>
                                         <property name="resultSetColumn">avg_count_calls</property>
                                     </data>
                                 </cell>
+                                <cell id="1771">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="1778">
+                                        <property name="resultSetColumn">7_avg_%_success</property>
+                                    </data>
+                                </cell>
                             </row>
                         </detail>
                     </table>
@@ -25389,7 +27031,7 @@ BirtMath.round(x,2)*100;</expression>
             </row>
             <row id="1691">
                 <cell id="1692">
-                    <table id="1695">
+                    <table id="1832">
                         <property name="textAlign">left</property>
                         <property name="dataSet">DetailedApiPartners</property>
                         <list-property name="boundDataColumns">
@@ -25414,19 +27056,34 @@ BirtMath.round(x,2)*100;</expression>
                             <structure>
                                 <property name="name">avg_count_calls</property>
                                 <text-property name="displayName">avg_count_calls</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["avg_count_calls"]</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["avg_count_calls"]/1000;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
                                 <property name="name">2_days_ago_count_calls</property>
                                 <text-property name="displayName">2_days_ago_count_calls</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["2_days_ago_count_calls"]</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["2_days_ago_count_calls"]/1000;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
                                 <property name="name">count_calls</property>
                                 <text-property name="displayName">count_calls</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["count_calls"]</expression>
+                                <expression name="expression" type="javascript">x = dataSetRow["count_calls"]/1000;&#13;
+if (x>1) { &#13;
+	BirtMath.round(x);&#13;
+} else {&#13;
+	x;&#13;
+}</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
@@ -25459,6 +27116,24 @@ BirtMath.round(x,2)*100;</expression>
                                 <expression name="expression" type="javascript">BirtStr.concat("#",dataSetRow["rank"])</expression>
                                 <property name="dataType">string</property>
                             </structure>
+                            <structure>
+                                <property name="name">% success</property>
+                                <text-property name="displayName">% success</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["success_rate"]*100)</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">2_days_%_success</property>
+                                <text-property name="displayName">2_days_%_success</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["2_days_ago_success_rate"]*100)</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">7_avg_%_success</property>
+                                <text-property name="displayName">7_avg_%_success</text-property>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["avg_success_rate"]*100)</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
                         </list-property>
                         <list-property name="filter">
                             <structure>
@@ -25476,26 +27151,35 @@ BirtMath.round(x,2)*100;</expression>
                                 </simple-property-list>
                             </structure>
                         </list-property>
-                        <column id="1726"/>
-                        <column id="1727">
+                        <column id="1875"/>
+                        <column id="1876">
                             <property name="width">0.5in</property>
                         </column>
-                        <column id="1728">
+                        <column id="1877">
                             <property name="width">1.75in</property>
                         </column>
-                        <column id="1729"/>
-                        <column id="1730">
+                        <column id="1878"/>
+                        <column id="1879">
                             <property name="repeat">1</property>
                         </column>
-                        <column id="1731">
+                        <column id="1880">
                             <property name="repeat">1</property>
                         </column>
-                        <column id="1732">
+                        <column id="1881">
+                            <property name="repeat">1</property>
+                        </column>
+                        <column id="1882">
+                            <property name="repeat">1</property>
+                        </column>
+                        <column id="1883">
+                            <property name="repeat">1</property>
+                        </column>
+                        <column id="1884">
                             <property name="repeat">1</property>
                         </column>
                         <header>
-                            <row id="1696">
-                                <cell id="1697">
+                            <row id="1833">
+                                <cell id="1834">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -25508,11 +27192,11 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <label id="1698">
+                                    <label id="1835">
                                         <text-property name="text">Partner ID</text-property>
                                     </label>
                                 </cell>
-                                <cell id="1699">
+                                <cell id="1836">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -25525,11 +27209,11 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <label id="1700">
+                                    <label id="1837">
                                         <text-property name="text">Total Rank</text-property>
                                     </label>
                                 </cell>
-                                <cell id="1701">
+                                <cell id="1838">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -25542,11 +27226,11 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <label id="1702">
+                                    <label id="1839">
                                         <text-property name="text">Name</text-property>
                                     </label>
                                 </cell>
-                                <cell id="1703">
+                                <cell id="1840">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -25559,11 +27243,11 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <label id="1704">
-                                        <text-property name="text">Yesterday GB</text-property>
+                                    <label id="1841">
+                                        <text-property name="text">Yesterday</text-property>
                                     </label>
                                 </cell>
-                                <cell id="1705">
+                                <cell id="1842">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -25576,11 +27260,11 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <label id="1706">
-                                        <text-property name="text">Percent of Total</text-property>
+                                    <label id="1843">
+                                        <text-property name="text">% of Total</text-property>
                                     </label>
                                 </cell>
-                                <cell id="1707">
+                                <cell id="1844">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -25593,11 +27277,11 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <label id="1708">
-                                        <text-property name="text">Two days ago GB</text-property>
+                                    <label id="1845">
+                                        <text-property name="text">% Sucess</text-property>
                                     </label>
                                 </cell>
-                                <cell id="1709">
+                                <cell id="1846">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -25610,15 +27294,66 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <label id="1710">
-                                        <text-property name="text">Last seven days avg GB</text-property>
+                                    <label id="1847">
+                                        <text-property name="text">Two days ago</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1848">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="1849">
+                                        <text-property name="text">% Sucess</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1850">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="1889">
+                                        <text-property name="text">Last 7 days avg</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1852">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <label id="1853">
+                                        <text-property name="text">% Sucess</text-property>
                                     </label>
                                 </cell>
                             </row>
                         </header>
                         <detail>
-                            <row id="1711">
-                                <cell id="1712">
+                            <row id="1854">
+                                <cell id="1855">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -25631,12 +27366,12 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <data id="1713">
+                                    <data id="1856">
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">partner_id</property>
                                     </data>
                                 </cell>
-                                <cell id="1714">
+                                <cell id="1857">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -25649,11 +27384,11 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <data id="1715">
+                                    <data id="1858">
                                         <property name="resultSetColumn">rank_string</property>
                                     </data>
                                 </cell>
-                                <cell id="1716">
+                                <cell id="1859">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -25666,12 +27401,12 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <data id="1717">
+                                    <data id="1860">
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">partner_name</property>
                                     </data>
                                 </cell>
-                                <cell id="1718">
+                                <cell id="1861">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -25684,7 +27419,7 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <data id="1719">
+                                    <data id="1862">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
                                             <property name="pattern">###,##0.##</property>
@@ -25693,7 +27428,7 @@ BirtMath.round(x,2)*100;</expression>
                                         <property name="resultSetColumn">count_calls</property>
                                     </data>
                                 </cell>
-                                <cell id="1720">
+                                <cell id="1863">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -25706,7 +27441,7 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <data id="1721">
+                                    <data id="1864">
                                         <structure name="numberFormat">
                                             <property name="category">Percent</property>
                                             <property name="pattern">#,##0.00%{RoundingMode=HALF_UP}</property>
@@ -25714,7 +27449,7 @@ BirtMath.round(x,2)*100;</expression>
                                         <property name="resultSetColumn">percent_of_total</property>
                                     </data>
                                 </cell>
-                                <cell id="1722">
+                                <cell id="1865">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -25727,7 +27462,24 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <data id="1723">
+                                    <data id="1866">
+                                        <property name="resultSetColumn">% success</property>
+                                    </data>
+                                </cell>
+                                <cell id="1867">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="1868">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
                                             <property name="pattern">###,##0.##</property>
@@ -25736,7 +27488,7 @@ BirtMath.round(x,2)*100;</expression>
                                         <property name="resultSetColumn">2_days_ago_count_calls</property>
                                     </data>
                                 </cell>
-                                <cell id="1724">
+                                <cell id="1869">
                                     <property name="borderBottomColor">#000000</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">1px</property>
@@ -25749,13 +27501,47 @@ BirtMath.round(x,2)*100;</expression>
                                     <property name="borderTopColor">#000000</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">1px</property>
-                                    <data id="1725">
+                                    <data id="1870">
+                                        <property name="resultSetColumn">2_days_%_success</property>
+                                    </data>
+                                </cell>
+                                <cell id="1871">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="1872">
                                         <structure name="numberFormat">
                                             <property name="category">Custom</property>
                                             <property name="pattern">###,##0.##</property>
                                         </structure>
                                         <property name="whiteSpace">nowrap</property>
                                         <property name="resultSetColumn">avg_count_calls</property>
+                                    </data>
+                                </cell>
+                                <cell id="1873">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <data id="1874">
+                                        <property name="resultSetColumn">7_avg_%_success</property>
                                     </data>
                                 </cell>
                             </row>
