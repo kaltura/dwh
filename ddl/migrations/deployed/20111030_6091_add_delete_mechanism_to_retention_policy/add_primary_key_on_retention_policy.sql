@@ -1,1 +1,1 @@
-ALTER TABLE kalturadw.retention_policy ADD PRIMARY KEY (table_name);
+ALTER TABLE kalturadw_ds.retention_policy ADD PRIMARY KEY (table_name);
