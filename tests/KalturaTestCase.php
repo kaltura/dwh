@@ -96,7 +96,7 @@ abstract class KalturaTestCase extends PHPUnit_Framework_TestCase
                 {
                         if(!array_key_exists($id,$aggrGroups))
                         {
-                                $this->assertEquals(0, $measure, "For the following group:" .$id. ".Aggr = ". $aggrGroups[$id] .". Fact = ".$measure);
+                                $this->assertEquals(0, $measure, "For the following group (larger than 0 in fact, doesn't exist in aggregation): " .$id. ". Fact = ".$measure);
                         } else
                         {
                                 $this->assertLessThanOrEqual($maxDiff, $aggrGroups[$id]-$measure, "For the following group:" .$id. ".Aggr = ". $aggrGroups[$id] .". Fact = ".$measure);
