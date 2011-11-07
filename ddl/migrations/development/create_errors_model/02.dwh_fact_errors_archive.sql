@@ -12,11 +12,6 @@ CREATE TABLE dwh_fact_errors (
 	error_object_id VARCHAR(50) NOT NULL,
 	error_object_type_id INT(11) NOT NULL,
 	error_code_id INT(11) NOT NULL,
-	description mediumtext DEFAULT NULL,
-	PRIMARY KEY (`file_id`, `line_number`, `error_date_id`),
-	UNIQUE KEY (`error_date_id`,`error_object_id`,`error_object_type_id`,`error_time`)
-	) ENGINE=INNODB DEFAULT CHARSET=latin1
+	description mediumtext DEFAULT NULL) ENGINE=ARCHIVE DEFAULT CHARSET = latin1
 	/*!50100 PARTITION BY RANGE (error_date_id)
-	(PARTITION p_20101231 VALUES LESS THAN (20110101) ENGINE = INNODB)*/;
-
-CALL add_daily_partition_for_table('dwh_fact_errors');
+	(PARTITION p_0 VALUES LESS THAN (1))*/;
