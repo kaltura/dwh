@@ -291,7 +291,7 @@ class ApiCallsTest extends CycleProcessTestCase
                 $collection = array();
                 foreach($calls as $callID => $call)
                 {
-			if ($onlyErrornousCalls && in_array($call->$errorCodeIndexer, array('', 0), true))
+			if ($onlyErrornousCalls && in_array($call->$errorCodeIndexer, array('', '0')))
 			{
 				continue;
 			}
