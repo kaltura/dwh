@@ -6,3 +6,10 @@ ALTER TABLE kalturadw.dwh_dim_error_codes
         ADD sub_error_code_name VARCHAR(165) NOT NULL DEFAULT 'unknown' AFTER error_code_name,
         DROP KEY api_error_code_name,
         ADD UNIQUE KEY (error_code_name, sub_error_code_name);
+
+DROP TRIGGER IF EXISTS `kalturadw`.`dwh_dim_api_error_code_setcreationtime_oninsert`;
+
+CREATE TRIGGER `kalturadw`.`dwh_dim_error_code_setcreationtime_oninsert` BEFORE INSERT
+    ON `kalturadw`.`dwh_dim_error_codes`
+    FOR EACH ROW
+        SET new.dwh_creation_date = NOW();
