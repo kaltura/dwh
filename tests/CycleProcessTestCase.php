@@ -180,7 +180,7 @@ abstract class CycleProcessTestCase extends KalturaTestCase
 
 	private function getAggregationJob()
         {
-                return '/aggregation/calc_aggr_days.kjb';
+                return '/aggregation/perform_aggregations.kjb';
         }
 
 	protected function countRows($file, $validationCallback)

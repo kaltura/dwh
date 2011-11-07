@@ -1,8 +1,8 @@
 USE kalturadw;
 
-DROP TABLE IF EXISTS dwh_fact_errors;
+DROP TABLE IF EXISTS dwh_fact_errors_archive;
 
-CREATE TABLE dwh_fact_errors (
+CREATE TABLE dwh_fact_errors_archive (
 	file_id INT(11) NOT NULL,
 	line_number INT(11) NOT NULL,
 	partner_id INT(11) NOT NULL,

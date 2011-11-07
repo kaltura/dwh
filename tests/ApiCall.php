@@ -12,11 +12,12 @@ class APICall
         const REQUEST_START_ACTION_INDEX = 3;
         const REQUEST_START_REQUEST_INDEX_INDEX = 4;
 
-        const REQUEST_END_REGEX = "/[^ ]+ [^ ]+ \[[^\]]+\] \[([^\]]+)\]: request_end,([^,]*),[^,]*,[^,]*,([01]),\"[^\"]*\",\d+\.\d+,[01],[^,]*,(\d+).*/";
+        const REQUEST_END_REGEX = "/[^ ]+ [^ ]+ \[[^\]]+\] \[([^\]]+)\]: request_end,([^,]*),[^,]*,[^,]*,([01]),\"[^\"]*\",\d+\.\d+,[01],([^,]*),(\d+).*/";
         const REQUEST_END_SESSION_ID_INDEX = 0;
         const REQUEST_END_PARTNER_ID_INDEX = 1;
         const REQUEST_END_IS_ADMIN_INDEX = 2;
-        const REQUEST_END_REQUEST_INDEX_INDEX = 3;
+        const REQUEST_END_ERROR_CODE_INDEX = 3;
+        const REQUEST_END_REQUEST_INDEX_INDEX = 4;
 
         public static function validLine($line)
         {
@@ -105,6 +106,7 @@ class APICall
                         preg_match(self::REQUEST_END_REGEX, $line, $matches);
                         $dict["PARTNER_ID"]=$matches[self::REQUEST_END_PARTNER_ID_INDEX+1];
                         $dict["IS_ADMIN"]=$matches[self::REQUEST_END_IS_ADMIN_INDEX+1];
+                        $dict["ERROR_CODE"]=$matches[self::REQUEST_END_ERROR_CODE_INDEX+1];
                 }
 
 		foreach ($dict as $key => $val)

@@ -238,14 +238,16 @@ class DWHInspector
 		return $entryId;
 	}
 
-	public static function getUnifiedAPICalls($cycleID)
+	public static function getUnifiedAPICalls($cycleID, $onlyErrornousCalls = false)
 	{
+		$errornousFilter = $onlyErrornousCalls ? 'AND IFNULL(ds.error_code_id,f.error_code_id) IS NOT NULL' : '';
+
 		$rows = MySQLRunner::execute("SELECT ds.session_id, ds.request_index FROM kalturadw_ds.ds_incomplete_api_calls ds, kalturadw.dwh_fact_incomplete_api_calls f ".
 				     "WHERE ds.session_id = f.session_id ".
 				     "AND ds.request_index = f.request_index ".
 				     "AND ds.cycle_id=? ".
 		 		     "AND IFNULL(ds.api_call_date_id, f.api_call_date_id) IS NOT NULL ".
-			             "AND IFNULL(ds.duration_msecs, f.duration_msecs) IS NOT NULL", array(0=>$cycleID));
+			             "AND IFNULL(ds.duration_msecs, f.duration_msecs) IS NOT NULL $onlyErrornousCalls", array(0=>$cycleID));
 				
 		$res = array();
 		foreach ($rows as $row)

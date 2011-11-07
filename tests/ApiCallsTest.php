@@ -16,6 +16,7 @@ class ApiCallsTest extends CycleProcessTestCase
                 $dsTableToFactTables = array();
                 $dsTablesToFactTables["ds_api_calls"]="dwh_fact_api_calls";
                 $dsTablesToFactTables["ds_incomplete_api_calls"]="dwh_fact_incomplete_api_calls";
+                $dsTablesToFactTables["ds_errors"]="dwh_fact_errors";
                 return $dsTableToFactTables;
         }
 
@@ -119,6 +120,24 @@ class ApiCallsTest extends CycleProcessTestCase
 
                         }
 
+			// compare number of distinct partners and number of rows per partner
+                        $collection = $this->getFullCallsPerEntity($filename, "PARTNER_ID", '', true);
+                        $this->assertEquals(DWHInspector::countDistinct('kalturadw_ds.ds_errors',$fileID,'partner_id'), count($collection));
+                        foreach($collection as $objectID=>$val)
+                        {
+                                $res = DWHInspector::countRows('kalturadw_ds.ds_errors',$fileID," and partner_id = '$objectID'");
+                                $this->assertEquals($res, $val, "Expected(db): $res, Actual(file): $val partner_id: $objectID");
+                        }
+
+			$collection = $this->getFullCallsPerEntity($filename, "ERROR_CODE", '', true);
+                        $this->assertEquals(DWHInspector::countDistinct('kalturadw_ds.ds_errors',$fileID,'error_code_name', 'kalturadw.dwh_dim_error_codes', 'error_code_id'), count($collection));
+                        foreach($collection as $objectID=>$val)
+                        {
+                                $res = DWHInspector::countRows('kalturadw_ds.ds_errors',$fileID," and error_code_name = '$objectID'", 'kalturadw.dwh_dim_error_codes', 'error_code_id');
+                                $this->assertEquals($res, $val, "Expected(db): $res, Actual(file): $val error_code_name: $objectID");
+                        }
+			
+			
 			// make sure there are very little invalid lines
                         $this->assertEquals($this->countInvalidLines($filename,
                                                                         array($this, 'validLine'),
@@ -143,13 +162,14 @@ class ApiCallsTest extends CycleProcessTestCase
 		$files = DWHInspector::getFiles($cycleID);
 
                 $unifiedApiCalls = DWHInspector::getUnifiedAPICalls($cycleID);
+                $errornousUnifiedApiCalls = DWHInspector::getUnifiedAPICalls($cycleID, true);
 
 		parent::testTransfer();
 		foreach ($unifiedApiCalls as $call)
 		{
-			print_r($call);
 			$this->assertEquals(DWHInspector::countRows('kalturadw.dwh_fact_api_calls', '%', "and CONCAT(session_id,'_',request_index) = '". $call->getID()."'"), 1, "APICall ID ". $call->getID());
 			$this->assertEquals(DWHInspector::countRows('kalturadw.dwh_fact_incomplete_api_calls', '%', "and CONCAT(session_id,'_',request_index) = '". $call->getID()."'"), 0, "APICall ID ". $call->getID());
+			$this->assertEquals(DWHInspector::countRows('kalturadw.dwh_fact_errors', '%', "and error_object_id = '". $call->getID()."'"), 1, "APICall ID ". $call->getID());
 		}
 	}
 
@@ -176,6 +196,9 @@ class ApiCallsTest extends CycleProcessTestCase
                                           array(new ComparedTable('action_id', 'kalturadw.dwh_hourly_api_calls', 'ifnull(count_is_in_multi_request, 0)')));
                 $this->compareAggregation(array(new ComparedTable('action_id', 'kalturadw.dwh_fact_api_calls', 'is_admin')),
                                           array(new ComparedTable('action_id', 'kalturadw.dwh_hourly_api_calls', 'ifnull(count_is_admin, 0)')));
+
+		$this->compareAggregation(array(new ComparedTable('error_code_id', 'kalturadw.dwh_fact_errors', '*')),
+                                          array(new ComparedTable('error_code_id', 'kalturadw.dwh_hourly_errors', 'ifnull(count_errors, 0)')));
 	}	
 
 	private function AssertEntity($filename, $entityName, $fileID, $tableEntityName)
@@ -261,12 +284,17 @@ class ApiCallsTest extends CycleProcessTestCase
                 return array_merge($requestStarts, $requestEnds);
 	}
 
-	public static function getFullCallsPerEntity($file, $entityName, $defaultValue = '')
+	public static function getFullCallsPerEntity($file, $entityName, $defaultValue = '', $onlyErrornousCalls = false)
         {
                 $calls = self::getFileApiFullCalls($file);
+		$errorCodeIndexer = 'ERROR_CODE';
                 $collection = array();
                 foreach($calls as $callID => $call)
                 {
+			if ($onlyErrornousCalls && in_array($call->$errorCodeIndexer, array('', 0), true))
+			{
+				continue;
+			}
                         $objectID = $call->$entityName;
                         $objectID = $objectID == '' ? $defaultValue : $objectID;
                         if (!array_key_exists($objectID, $collection))

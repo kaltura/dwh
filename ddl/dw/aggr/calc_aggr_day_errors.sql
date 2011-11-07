@@ -18,7 +18,7 @@ BEGIN
         WHERE aggr_name = 'errors';
  
  
-        UPDATE aggr_managment SET is_calculated = 0, start_time = NOW() WHERE aggr_name = 'erros' AND aggr_day_int = DATE(p_date_val)*1 AND hour_id = p_hour_id;
+        UPDATE aggr_managment SET is_calculated = 0, start_time = NOW() WHERE aggr_name = 'errors' AND aggr_day_int = DATE(p_date_val)*1 AND hour_id = p_hour_id;
  
         SELECT MAX(DATE(NOW() - INTERVAL archive_delete_days_back DAY))
         INTO v_ignore
