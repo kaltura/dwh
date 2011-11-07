@@ -32,6 +32,6 @@ CREATE TABLE `dwh_fact_api_calls` (
   KEY (`api_call_date_id`,`api_call_hour_id`,`partner_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 /*!50100 PARTITION BY RANGE (api_call_date_id)
-(PARTITION p_20111101 VALUES LESS THAN (20111102) ENGINE = InnoDB) */;
+(PARTITION p_20111001 VALUES LESS THAN (20111002) ENGINE = InnoDB) */;
 
 CALL add_daily_partition_for_table('dwh_fact_api_calls');
