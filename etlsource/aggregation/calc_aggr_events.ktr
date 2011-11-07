@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>calc_aggr_api_calls</name>
+    <name>calc_aggr_events</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -45,11 +45,12 @@
     <partitionschemas>
     </partitionschemas>
     <slaveservers>
+         <slaveserver><name>local</name><hostname>localhost</hostname><port>8080</port><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
   <modified_user>-</modified_user>
-  <modified_date>2011&#47;03&#47;20 17:14:30.354</modified_date>
+  <modified_date>2009&#47;07&#47;08 10:34:50.328</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -179,7 +180,7 @@
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturaLog</database>
+    <database>kalturalog</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -194,31 +195,6 @@
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>KalturaMonitoring</name>
-    <server>${MonitoringDbHostName}</server>
-    <type>MYSQL</type>
-    <access>Native</access>
-    <database>monmon</database>
-    <port>${OpDbPort}</port>
-    <username>${MonitoringDbUser}</username>
-    <password>${MonitoringDbPassword}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SQL_CONNECT</code><attribute>SET SESSION sql_log_bin=0</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
@@ -249,9 +225,59 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>aggregate api_calls</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  <hop> <from>Read days to calc</from><to>Write to log - before calc</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log - before calc</from><to>aggregate api_calls</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>aggregate events</from><to>Write to log - after calc</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log - before calc</from><to>aggregate events</to><enabled>Y</enabled> </hop>  <hop> <from>Table input</from><to>Write to log - before calc</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Select aggr_name</to><enabled>Y</enabled> </hop>  <hop> <from>Select aggr_name</from><to>Table input</to><enabled>Y</enabled> </hop>  </order>
   <step>
-    <name>Read days to calc</name>
+    <name>input</name>
+    <type>MappingInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>aggr_name</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+        <select_unspecified>N</select_unspecified>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>73</xloc>
+      <yloc>268</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select aggr_name</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>aggr_name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>202</xloc>
+      <yloc>267</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Table input</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -261,30 +287,21 @@
            <schema_name/>
            </partitioning>
     <connection>KalturaDW</connection>
-    <sql>&#47;*
-caluculate all the non calculated aggr from the aggr_managment table 
-AND 
-the ones of type &quot;partner&quot; that are 3 days old - this will allow fixing bandwidth aggregations that relay on pending logs that arrive 3 days late
-*&#47;
-SELECT 	aggr_name,aggr_day, hour_id aggr_hour
+    <sql>SELECT 	aggr_name,aggr_day, hour_id aggr_hour 
 FROM kalturadw.aggr_managment 
 WHERE 	aggr_day + INTERVAL hour_id HOUR &lt; NOW() - INTERVAL ${AggregationHoursBack} HOUR
 		AND is_calculated = 0 
-		AND aggr_name in 
-		(select aggr_name 
-		 from kalturadw_ds.aggr_name_resolver 
-		 where aggr_type = &apos;api&apos;)
-order by aggr_day, hour_id, aggr_name
-</sql>
+		AND aggr_name = ?
+order by aggr_day, hour_id</sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup>Select aggr_name</lookup>
     <execute_each_row>N</execute_each_row>
     <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>197</xloc>
-      <yloc>127</yloc>
+      <xloc>317</xloc>
+      <yloc>268</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -303,10 +320,10 @@ order by aggr_day, hour_id, aggr_name
       <displayHeader>Y</displayHeader>
     <fields>
       <field>
-        <name>aggr_day</name>
+        <name>aggr_name</name>
         </field>
       <field>
-        <name>aggr_name</name>
+        <name>aggr_day</name>
         </field>
       <field>
         <name>aggr_hour</name>
@@ -314,8 +331,8 @@ order by aggr_day, hour_id, aggr_name
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>574</xloc>
-      <yloc>127</yloc>
+      <xloc>744</xloc>
+      <yloc>267</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -334,10 +351,10 @@ order by aggr_day, hour_id, aggr_name
       <displayHeader>Y</displayHeader>
     <fields>
       <field>
-        <name>aggr_day</name>
+        <name>aggr_name</name>
         </field>
       <field>
-        <name>aggr_name</name>
+        <name>aggr_day</name>
         </field>
       <field>
         <name>aggr_hour</name>
@@ -345,14 +362,14 @@ order by aggr_day, hour_id, aggr_name
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>316</xloc>
-      <yloc>128</yloc>
+      <xloc>455</xloc>
+      <yloc>267</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>aggregate api_calls</name>
+    <name>aggregate events</name>
     <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
@@ -364,7 +381,7 @@ order by aggr_day, hour_id, aggr_name
     <connection>KalturaDW</connection>
     <execute_each_row>Y</execute_each_row>
     <replace_variables>N</replace_variables>
-    <sql>call kalturadw.calc_aggr_day_api_calls(date(&apos;?&apos;), ?);</sql>
+    <sql>call kalturadw.recalc_aggr_day(date(&apos;?&apos;),?,&apos;?&apos;);</sql>
     <insert_field/>
     <update_field/>
     <delete_field/>
@@ -372,11 +389,12 @@ order by aggr_day, hour_id, aggr_name
     <arguments>
        <argument><name>aggr_day</name></argument>
        <argument><name>aggr_hour</name></argument>
+       <argument><name>aggr_name</name></argument>
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>445</xloc>
-      <yloc>128</yloc>
+      <xloc>594</xloc>
+      <yloc>267</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
