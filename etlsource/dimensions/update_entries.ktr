@@ -1907,7 +1907,7 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>kalturadw</schema>
-      <table>dwh_dim_flavor_asset_tags</table>
+      <table>dwh_dim_entry_categories</table>
       <key>
         <name>category_id</name>
         <field>category_id</field>
