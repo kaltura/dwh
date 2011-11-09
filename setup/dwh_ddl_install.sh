@@ -206,6 +206,8 @@ mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_sub_type.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_type.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_browser.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_os.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_categories.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_entry_categories.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_entry_type_display.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_tags.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_flavor_asset_tags.sql
