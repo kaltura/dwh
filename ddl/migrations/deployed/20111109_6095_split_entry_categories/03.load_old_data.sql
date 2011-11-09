@@ -14,6 +14,7 @@ BEGIN
     DECLARE v_category_id INT;
     DECLARE v_categories_done INT;
     DECLARE v_categories_idx INT;
+    DECLARE v_category_exists INT;
     DECLARE done INT DEFAULT 0;
     DECLARE entries CURSOR FOR
     SELECT partner_id, entry_id, categories, updated_at
@@ -45,13 +46,14 @@ BEGIN
                 -- add the category if it doesnt already exist
                 SET v_category_id = NULL;
                 
-                SELECT category_id INTO v_category_id FROM dwh_dim_categories WHERE category_name = v_category_name;
-		IF v_category_id = NULL THEN
+                SELECT COUNT(*) INTO v_category_exists FROM dwh_dim_categories WHERE category_name = v_category_name;
+		IF NOT v_category_exists THEN
 			INSERT INTO dwh_dim_categories (category_name) VALUES (v_category_name);
-			SELECT category_id INTO v_category_id FROM dwh_dim_categories WHERE category_name = v_category_name;
 		END IF;
+		SELECT category_id INTO v_category_id FROM dwh_dim_categories WHERE category_name = v_category_name;
+		
                 -- add the entry category
-                INSERT INTO dwh_dim_entry_categories (partner_id, entry_id, category_id, updated_at) VALUES (v_partner_id, v_entry_id, v_category_id, v_updated_at);
+                INSERT IGNORE INTO dwh_dim_entry_categories (partner_id, entry_id, category_id, updated_at) VALUES (v_partner_id, v_entry_id, v_category_id, v_updated_at);
             ELSE
                 SET v_categories_done = 1;
             END IF;
@@ -60,6 +62,7 @@ BEGIN
 END$$
 
 DELIMITER ;
+
 
 CALL load_categories();
 
