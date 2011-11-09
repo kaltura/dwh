@@ -265,7 +265,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Set defaults</from><to>Calc date and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc date and hour ids</from><to>Custom Data - height</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - height</from><to>Custom Data - width</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - width</from><to>Custom Data - storage_size</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - storage_size</from><to>Custom Data - conversion_quality</to><enabled>Y</enabled> </hop>  <hop> <from>Read Table entry</from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>filter unmodified entries</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified entries</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - editor_type</from><to>Custom Data - puser_id</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - puser_id</from><to>puser_id -&gt; is_admin_content</to><enabled>Y</enabled> </hop>  <hop> <from>puser_id -&gt; is_admin_content</from><to>fix values</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - conversion_quality</from><to>fix conversion_quality</to><enabled>Y</enabled> </hop>  <hop> <from>fix conversion_quality</from><to>Custom Data - editor_type</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Table entry</to><enabled>Y</enabled> </hop>  <hop> <from>fix values</from><to>Set RI_IND 0</to><enabled>Y</enabled> </hop>  <hop> <from>entry_media_source id</from><to>entry_media_type id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_media_type id</from><to>entry_status id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_status id</from><to>entry_type id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_type id</from><to>moderation_status id</to><enabled>Y</enabled> </hop>  <hop> <from>moderation_status id</from><to>Insert &#47; Update Main</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI_IND 0</from><to>editor_type text</to><enabled>Y</enabled> </hop>  <hop> <from>editor_type text</from><to>entry_media_source id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_type id</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>entry type display</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>Write to log on upsert error</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Main</from><to>Filter duplicate key errors</to><enabled>Y</enabled> </hop>  <hop> <from>split categories</from><to>category dimension</to><enabled>Y</enabled> </hop>  <hop> <from>category dimension</from><to>category insert</to><enabled>Y</enabled> </hop>  <hop> <from>fix values</from><to>If field value is null</to><enabled>Y</enabled> </hop>  <hop> <from>If field value is null</from><to>split categories</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Set defaults</from><to>Calc date and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc date and hour ids</from><to>Custom Data - height</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - height</from><to>Custom Data - width</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - width</from><to>Custom Data - storage_size</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - storage_size</from><to>Custom Data - conversion_quality</to><enabled>Y</enabled> </hop>  <hop> <from>Read Table entry</from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>filter unmodified entries</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified entries</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - editor_type</from><to>Custom Data - puser_id</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - puser_id</from><to>puser_id -&gt; is_admin_content</to><enabled>Y</enabled> </hop>  <hop> <from>puser_id -&gt; is_admin_content</from><to>fix values</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - conversion_quality</from><to>fix conversion_quality</to><enabled>Y</enabled> </hop>  <hop> <from>fix conversion_quality</from><to>Custom Data - editor_type</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Table entry</to><enabled>Y</enabled> </hop>  <hop> <from>fix values</from><to>Set RI_IND 0</to><enabled>Y</enabled> </hop>  <hop> <from>entry_media_source id</from><to>entry_media_type id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_media_type id</from><to>entry_status id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_status id</from><to>entry_type id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_type id</from><to>moderation_status id</to><enabled>Y</enabled> </hop>  <hop> <from>moderation_status id</from><to>Insert &#47; Update Main</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI_IND 0</from><to>editor_type text</to><enabled>Y</enabled> </hop>  <hop> <from>editor_type text</from><to>entry_media_source id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_type id</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>entry type display</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>Write to log on upsert error</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Main</from><to>Filter duplicate key errors</to><enabled>Y</enabled> </hop>  <hop> <from>split categories</from><to>category dimension</to><enabled>Y</enabled> </hop>  <hop> <from>category dimension</from><to>category insert</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>split categories</to><enabled>Y</enabled> </hop>  <hop> <from>fix values</from><to>Filter rows</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Calc date and hour ids</name>
     <type>Formula</type>
@@ -1920,6 +1920,12 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>partner_id</name>
+        <field>partner_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>category_id</name>
         <rename>category_id</rename>
@@ -1935,6 +1941,11 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
         <rename>updated_at</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>partner_id</name>
+        <rename>partner_id</rename>
+        <update>N</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -1945,8 +1956,8 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
     </step>
 
   <step>
-    <name>If field value is null</name>
-    <type>IfNull</type>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -1954,23 +1965,20 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <replaceAllByValue/>
-      <replaceAllMask/>
-      <selectFields>Y</selectFields>
-      <selectValuesType>N</selectValuesType>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>categories</name>
-        <value>-</value>
-        <mask/>
-        </field>
-      </fields>
+<send_true_to>split categories</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>categories</leftvalue>
+ <function>IS NOT NULL</function>
+ <rightvalue/>
+ </condition>
+    </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>998</xloc>
-      <yloc>302</yloc>
+      <xloc>996</xloc>
+      <yloc>298</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

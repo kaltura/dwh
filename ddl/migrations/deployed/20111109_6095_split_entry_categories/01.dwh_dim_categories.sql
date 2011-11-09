@@ -14,7 +14,7 @@ CREATE TABLE `dwh_dim_categories` (
 	`dwh_creation_date` TIMESTAMP  NOT NULL DEFAULT '0000-00-00 00:00:00',
 	`dwh_update_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`category_id`), UNIQUE KEY (category_name)
-) ENGINE=MYISAM; 
+) ENGINE=MYISAM DEFAULT CHARSET=utf8; 
 
 CREATE TRIGGER `kalturadw`.`dwh_dim_categories_oninsert` BEFORE INSERT
     ON `kalturadw`.`dwh_dim_categories`
