@@ -5,35 +5,23 @@
     <description/>
     <extended_description/>
     <trans_version/>
-    <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
     <directory>&#47;</directory>
     <parameters>
     </parameters>
     <log>
-<trans-log-table><connection/>
-<schema/>
-<table/>
-<size_limit_lines/>
-<interval/>
-<timeout_days/>
-<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>N</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject>Insert &#47; Update Main</subject></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject>Read Table entry</subject></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject>Insert &#47; Update Main</subject></field><field><id>LINES_REJECTED</id><enabled>N</enabled><name>LINES_REJECTED</name><subject>Insert &#47; Update Main</subject></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></trans-log-table>
-<perf-log-table><connection/>
-<schema/>
-<table/>
-<interval/>
-<timeout_days/>
-<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>SEQ_NR</id><enabled>Y</enabled><name>SEQ_NR</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>INPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>INPUT_BUFFER_ROWS</name></field><field><id>OUTPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>OUTPUT_BUFFER_ROWS</name></field></perf-log-table>
-<channel-log-table><connection/>
-<schema/>
-<table/>
-<timeout_days/>
-<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
-<step-log-table><connection/>
-<schema/>
-<table/>
-<timeout_days/>
-<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></step-log-table>
+      <read/>
+      <write/>
+      <input/>
+      <output/>
+      <update/>
+      <rejected/>
+      <connection/>
+      <table/>
+      <step_performance_table/>
+      <use_batchid>N</use_batchid>
+      <use_logfield>N</use_logfield>
+      <size_limit_lines/>
     </log>
     <maxdate>
       <connection/>
@@ -52,18 +40,15 @@
     <shared_objects_file/>
     <capture_step_performance>N</capture_step_performance>
     <step_performance_capturing_delay>1000</step_performance_capturing_delay>
-    <step_performance_capturing_size_limit/>
     <dependencies>
     </dependencies>
     <partitionschemas>
     </partitionschemas>
     <slaveservers>
-         <slaveserver><name>local</name><hostname>localhost</hostname><port>8080</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
+         <slaveserver><name>local</name><hostname>localhost</hostname><port>8080</port><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
-  <created_user/>
-  <created_date>2011&#47;11&#47;09 12:16:56.995</created_date>
   <modified_user>admin</modified_user>
   <modified_date>2009&#47;06&#47;23 15:45:59.000</modified_date>
   </info>
@@ -265,7 +250,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Set defaults</from><to>Calc date and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc date and hour ids</from><to>Custom Data - height</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - height</from><to>Custom Data - width</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - width</from><to>Custom Data - storage_size</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - storage_size</from><to>Custom Data - conversion_quality</to><enabled>Y</enabled> </hop>  <hop> <from>Read Table entry</from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>filter unmodified entries</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified entries</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - editor_type</from><to>Custom Data - puser_id</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - puser_id</from><to>puser_id -&gt; is_admin_content</to><enabled>Y</enabled> </hop>  <hop> <from>puser_id -&gt; is_admin_content</from><to>fix values</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - conversion_quality</from><to>fix conversion_quality</to><enabled>Y</enabled> </hop>  <hop> <from>fix conversion_quality</from><to>Custom Data - editor_type</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Table entry</to><enabled>Y</enabled> </hop>  <hop> <from>fix values</from><to>Set RI_IND 0</to><enabled>Y</enabled> </hop>  <hop> <from>entry_media_source id</from><to>entry_media_type id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_media_type id</from><to>entry_status id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_status id</from><to>entry_type id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_type id</from><to>moderation_status id</to><enabled>Y</enabled> </hop>  <hop> <from>moderation_status id</from><to>Insert &#47; Update Main</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI_IND 0</from><to>editor_type text</to><enabled>Y</enabled> </hop>  <hop> <from>editor_type text</from><to>entry_media_source id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_type id</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>entry type display</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>Write to log on upsert error</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Main</from><to>Filter duplicate key errors</to><enabled>Y</enabled> </hop>  <hop> <from>split categories</from><to>category dimension</to><enabled>Y</enabled> </hop>  <hop> <from>category dimension</from><to>category insert</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>split categories</to><enabled>Y</enabled> </hop>  <hop> <from>fix values</from><to>Filter rows</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Set defaults</from><to>Calc date and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc date and hour ids</from><to>Custom Data - height</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - height</from><to>Custom Data - width</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - width</from><to>Custom Data - storage_size</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - storage_size</from><to>Custom Data - conversion_quality</to><enabled>Y</enabled> </hop>  <hop> <from>Read Table entry</from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>filter unmodified entries</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified entries</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - editor_type</from><to>Custom Data - puser_id</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - puser_id</from><to>puser_id -&gt; is_admin_content</to><enabled>Y</enabled> </hop>  <hop> <from>puser_id -&gt; is_admin_content</from><to>fix values</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - conversion_quality</from><to>fix conversion_quality</to><enabled>Y</enabled> </hop>  <hop> <from>fix conversion_quality</from><to>Custom Data - editor_type</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Table entry</to><enabled>Y</enabled> </hop>  <hop> <from>fix values</from><to>Set RI_IND 0</to><enabled>Y</enabled> </hop>  <hop> <from>entry_media_source id</from><to>entry_media_type id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_media_type id</from><to>entry_status id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_status id</from><to>entry_type id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_type id</from><to>moderation_status id</to><enabled>Y</enabled> </hop>  <hop> <from>moderation_status id</from><to>Insert &#47; Update Main</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI_IND 0</from><to>editor_type text</to><enabled>Y</enabled> </hop>  <hop> <from>editor_type text</from><to>entry_media_source id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_type id</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>entry type display</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>Write to log on upsert error</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Main</from><to>Filter duplicate key errors</to><enabled>Y</enabled> </hop>  <hop> <from>fix values</from><to>Filter rows</to><enabled>Y</enabled> </hop>  <hop> <from>split categories to levels</from><to>split categories for each level</to><enabled>Y</enabled> </hop>  <hop> <from>categories lookup</from><to>entry_categories upsert</to><enabled>Y</enabled> </hop>  <hop> <from>split categories for each level</from><to>trim category</to><enabled>Y</enabled> </hop>  <hop> <from>trim category</from><to>categories lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows</from><to>split categories to levels</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Calc date and hour ids</name>
     <type>Formula</type>
@@ -340,7 +325,6 @@
     <resultfieldname>res</resultfieldname>
     <usevar>N</usevar>
     <allowcapturegroups>Y</allowcapturegroups>
-    <replacefields>N</replacefields>
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
@@ -384,7 +368,6 @@
     <resultfieldname>res</resultfieldname>
     <usevar>N</usevar>
     <allowcapturegroups>Y</allowcapturegroups>
-    <replacefields>N</replacefields>
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
@@ -428,7 +411,6 @@
     <resultfieldname>res</resultfieldname>
     <usevar>N</usevar>
     <allowcapturegroups>Y</allowcapturegroups>
-    <replacefields>N</replacefields>
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
@@ -472,7 +454,6 @@
     <resultfieldname>res</resultfieldname>
     <usevar>N</usevar>
     <allowcapturegroups>Y</allowcapturegroups>
-    <replacefields>N</replacefields>
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
@@ -516,7 +497,6 @@
     <resultfieldname>res</resultfieldname>
     <usevar>N</usevar>
     <allowcapturegroups>Y</allowcapturegroups>
-    <replacefields>N</replacefields>
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
@@ -560,7 +540,6 @@
     <resultfieldname>res</resultfieldname>
     <usevar>N</usevar>
     <allowcapturegroups>Y</allowcapturegroups>
-    <replacefields>N</replacefields>
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
@@ -614,6 +593,34 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>140</xloc>
       <yloc>280</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>split categories</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>categories</leftvalue>
+ <function>IS NOT NULL</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>996</xloc>
+      <yloc>298</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1320,7 +1327,6 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
            </partitioning>
       <loglevel>log_level_basic</loglevel>
       <displayHeader>Y</displayHeader>
-      <logmessage/>
     <fields>
       </fields>
      <cluster_schema/>
@@ -1829,7 +1835,7 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
     </step>
 
   <step>
-    <name>split categories</name>
+    <name>split categories to levels</name>
     <type>SplitFieldToRows3</type>
     <description/>
     <distribute>Y</distribute>
@@ -1839,21 +1845,21 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
            <schema_name/>
            </partitioning>
    <splitfield>categories</splitfield>
-   <delimiter>,</delimiter>
-   <newfield>category</newfield>
-   <rownum>N</rownum>
-   <rownum_field/>
-   <resetrownumber>N</resetrownumber>
+   <delimiter>&gt;</delimiter>
+   <newfield>categories_each_level</newfield>
+   <rownum>Y</rownum>
+   <rownum_field>level</rownum_field>
+   <resetrownumber>Y</resetrownumber>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1000</xloc>
-      <yloc>360</yloc>
+      <xloc>996</xloc>
+      <yloc>372</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>category dimension</name>
+    <name>categories lookup</name>
     <type>ConcurrentSafeCombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -1862,7 +1868,7 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <schema>kalturadw</schema>
+      <schema/>
       <table>dwh_dim_categories</table>
       <connectionRead>KalturaReadDW</connectionRead>
       <connectionWrite>KalturaDW</connectionWrite>
@@ -1886,14 +1892,14 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1000</xloc>
-      <yloc>420</yloc>
+      <xloc>991</xloc>
+      <yloc>602</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>category insert</name>
+    <name>entry_categories upsert</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -1906,7 +1912,7 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema>kalturadw</schema>
+      <schema/>
       <table>dwh_dim_entry_categories</table>
       <key>
         <name>category_id</name>
@@ -1915,7 +1921,7 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
         <name2/>
       </key>
       <key>
-        <name>id</name>
+        <name>entry_id</name>
         <field>entry_id</field>
         <condition>=</condition>
         <name2/>
@@ -1933,7 +1939,12 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
       </value>
       <value>
         <name>entry_id</name>
-        <rename>id</rename>
+        <rename>entry_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>partner_id</name>
+        <rename>partner_id</rename>
         <update>N</update>
       </value>
       <value>
@@ -1942,22 +1953,22 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
         <update>Y</update>
       </value>
       <value>
-        <name>partner_id</name>
-        <rename>partner_id</rename>
-        <update>N</update>
+        <name>level</name>
+        <rename>level</rename>
+        <update>Y</update>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1000</xloc>
-      <yloc>480</yloc>
+      <xloc>993</xloc>
+      <yloc>677</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
+    <name>split categories for each level</name>
+    <type>SplitFieldToRows3</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -1965,20 +1976,41 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>split categories</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>categories</leftvalue>
- <function>IS NOT NULL</function>
- <rightvalue/>
- </condition>
-    </compare>
+   <splitfield>categories_each_level</splitfield>
+   <delimiter>,</delimiter>
+   <newfield>category</newfield>
+   <rownum>N</rownum>
+   <rownum_field/>
+   <resetrownumber>N</resetrownumber>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>994</xloc>
+      <yloc>454</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>trim category</name>
+    <type>Formula</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <formula><field_name>category</field_name>
+<formula_string>trim([category])</formula_string>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field>category</replace_field>
+</formula>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>996</xloc>
-      <yloc>298</yloc>
+      <yloc>530</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
