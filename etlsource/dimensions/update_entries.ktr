@@ -607,7 +607,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>split categories</send_true_to>
+<send_true_to/>
 <send_false_to/>
     <compare>
 <condition>
@@ -1338,6 +1338,46 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
     </step>
 
   <step>
+    <name>categories lookup</name>
+    <type>ConcurrentSafeCombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dwh_dim_categories</table>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>category</name>
+          <lookup>category_name</lookup>
+        </key>
+        <return>
+          <name>category_id</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1010</xloc>
+      <yloc>583</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>duplicate key error</name>
     <type>Dummy</type>
     <description/>
@@ -1438,6 +1478,74 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>400</xloc>
       <yloc>420</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>entry_categories upsert</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>dwh_dim_entry_categories</table>
+      <key>
+        <name>category_id</name>
+        <field>category_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id</name>
+        <field>entry_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>partner_id</name>
+        <field>partner_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>category_id</name>
+        <rename>category_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>entry_id</name>
+        <rename>id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>partner_id</name>
+        <rename>partner_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>updated_at</name>
+        <rename>updated_at</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>level</name>
+        <rename>level</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1012</xloc>
+      <yloc>659</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1835,138 +1943,6 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
     </step>
 
   <step>
-    <name>split categories to levels</name>
-    <type>SplitFieldToRows3</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-   <splitfield>categories</splitfield>
-   <delimiter>&gt;</delimiter>
-   <newfield>categories_each_level</newfield>
-   <rownum>Y</rownum>
-   <rownum_field>level</rownum_field>
-   <resetrownumber>Y</resetrownumber>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1005</xloc>
-      <yloc>313</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>categories lookup</name>
-    <type>ConcurrentSafeCombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <schema/>
-      <table>dwh_dim_categories</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
-      <commit>1</commit>
-      <cache_size>9999</cache_size>
-      <replace>N</replace>
-      <crc>N</crc>
-      <crcfield>hashcode</crcfield>
-      <fields>
-        <key>
-          <name>category</name>
-          <lookup>category_name</lookup>
-        </key>
-        <return>
-          <name>category_id</name>
-          <creation_method>autoinc</creation_method>
-          <use_autoinc>Y</use_autoinc>
-        </return>
-      </fields>
-      <sequence/>
-      <last_update_field/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1010</xloc>
-      <yloc>583</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>entry_categories upsert</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>dwh_dim_entry_categories</table>
-      <key>
-        <name>category_id</name>
-        <field>category_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id</name>
-        <field>entry_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>partner_id</name>
-        <field>partner_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>category_id</name>
-        <rename>category_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>entry_id</name>
-        <rename>id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>partner_id</name>
-        <rename>partner_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>updated_at</name>
-        <rename>updated_at</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>level</name>
-        <rename>level</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1012</xloc>
-      <yloc>659</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>split categories for each level</name>
     <type>SplitFieldToRows3</type>
     <description/>
@@ -1986,6 +1962,30 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1003</xloc>
       <yloc>395</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>split categories to levels</name>
+    <type>SplitFieldToRows3</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+   <splitfield>categories</splitfield>
+   <delimiter>&gt;</delimiter>
+   <newfield>categories_each_level</newfield>
+   <rownum>Y</rownum>
+   <rownum_field>level</rownum_field>
+   <resetrownumber>Y</resetrownumber>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1005</xloc>
+      <yloc>313</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
