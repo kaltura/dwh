@@ -1921,7 +1921,7 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
         <name2/>
       </key>
       <key>
-        <name>entry_id</name>
+        <name>id</name>
         <field>entry_id</field>
         <condition>=</condition>
         <name2/>
@@ -1939,7 +1939,7 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
       </value>
       <value>
         <name>entry_id</name>
-        <rename>entry_id</rename>
+        <rename>id</rename>
         <update>N</update>
       </value>
       <value>
@@ -1961,7 +1961,7 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>993</xloc>
-      <yloc>677</yloc>
+      <yloc>678</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
