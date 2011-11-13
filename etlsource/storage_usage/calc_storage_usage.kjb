@@ -138,7 +138,7 @@
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturaLog</database>
+    <database>kalturalog</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -152,6 +152,30 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>KalturaReadDW</name>
+    <server>${DbReadHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kalturadw</database>
+    <port>${DbReadPort}</port>
+    <username>${DbReadUser}</username>
+    <password>${DbReadPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbReadPort}</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
@@ -226,9 +250,11 @@
 			AND is_calculated = 1) aggr_m
 		WHERE dwh_dim_file_sync.dwh_creation_date &gt; last_execution 
 		AND original = 1) dates
-	SET a.is_calculated=0 WHERE a.aggr_day &gt;= dates.date_id
-	AND a.aggr_name = &apos;storage_usage&apos;;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
+	SET a.is_calculated=0 
+	WHERE a.aggr_day &gt;= dates.date_id
+		AND a.aggr_name = &apos;storage_usage&apos;
+		AND a.aggr_day &gt; date(now()) - ${ResetStorageMaxDaysBack};</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <connection>KalturaDW</connection>
@@ -265,7 +291,7 @@
 -- file sync record is rarely updated.</note>
       <xloc>296</xloc>
       <yloc>176</yloc>
-      <width>438</width>
+      <width>459</width>
       <heigth>36</heigth>
     </notepad>
   </notepads>
