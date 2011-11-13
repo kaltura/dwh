@@ -12,9 +12,9 @@ do      case "$o" in
         esac
 done
 
-rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/MySQLInserter32/MySQLInserter $KITCHEN/plugins/steps/
-rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/MappingFieldRunner32/MappingFieldRunner $KITCHEN/plugins/steps/
-rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/GetFTPFileNames32/GetFTPFileNames $KITCHEN/plugins/steps/
-rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/FetchFTPFile32/FetchFTPFile $KITCHEN/plugins/steps/
-rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/DimLookup32/DimLookup $KITCHEN/plugins/steps/
+rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/MySQLInserter42/MySQLInserter $KITCHEN/plugins/steps/
+rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/MappingFieldRunner42/MappingFieldRunner $KITCHEN/plugins/steps/
+rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/GetFTPFileNames42/GetFTPFileNames $KITCHEN/plugins/steps/
+rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/FetchFTPFile42/FetchFTPFile $KITCHEN/plugins/steps/
+rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/DimLookup42/DimLookup $KITCHEN/plugins/steps/
 rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/resources/* $KITCHEN/libext/
