@@ -15,7 +15,7 @@ BEGIN
         count_storage_mb    DECIMAL(19,4) NOT NULL
     ) ENGINE = MEMORY;
       
-    INSERT INTO     temp_storage (c.category_name, date_id, count_storage_mb)
+    INSERT INTO     temp_storage (category_name, date_id, count_storage_mb)
     SELECT  IF(ec.updated_at IS NULL OR c.category_name IS NULL,'-', c.category_name) category_name,  
         entry_size_date_id, 
         SUM(entry_additional_size_kb)/1024 aggr_storage_mb
@@ -41,7 +41,7 @@ BEGIN
     INSERT INTO     temp_aggr_storage
     SELECT         a.category_name, a.date_id, SUM(b.count_storage_mb)
     FROM         temp_storage a, temp_storage_2 b 
-    WHERE         a.category_name=b.category_name AND p_date_end >=a.date_id AND a.date_id >= b.date_id AND b.count_storage_mb<>0
+    WHERE         a.category_name=b.category_name AND p_end_date_id >=a.date_id AND a.date_id >= b.date_id AND b.count_storage_mb<>0
     GROUP BY     a.date_id, a.category_name;
         
     DROP TEMPORARY TABLE IF EXISTS temp_aggr_storage_inner;
