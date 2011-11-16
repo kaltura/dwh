@@ -166,6 +166,7 @@ class DWHInspector
 	{
 		MySQLRunner::execute('DELETE FROM kalturadw_ds.files', array());		
 		MySQLRunner::execute('DELETE FROM kalturadw_ds.cycles', array());
+        MySQLRunner::execute('UPDATE kalturadw_ds.retention_policy SET archive = 2000 where archive < 180 ', array());
 	}
 	
 	public static function getEntryIDByFlavorID($flavorID)

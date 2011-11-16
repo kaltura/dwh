@@ -14,12 +14,12 @@ abstract class KalturaTestCase extends PHPUnit_Framework_TestCase
 	}
 
 	private static function cleanOldCycles()
-        {
-                global $CONF;
-                self::rrmdir($CONF->CyclePath.'/process/');
-                self::rrmdir($CONF->CyclePath.'/originals/');
-                DWHInspector::purgeCycles();    
-        }
+    {
+            global $CONF;
+            self::rrmdir($CONF->CyclePath.'/process/');
+            self::rrmdir($CONF->CyclePath.'/originals/');
+            DWHInspector::purgeCycles();    
+    }
 	
 	private static function rrmdir($dir) 
 	{ 
