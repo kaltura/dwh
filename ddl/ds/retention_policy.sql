@@ -10,10 +10,10 @@ CREATE TABLE retention_policy (
 ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO retention_policy VALUES 
-('dwh_fact_events', 180, 2000, DATE('2011-01-01')),
-('dwh_fact_bandwidth_usage', 180, 2000, DATE('2011-01-01')),
-('dwh_fact_fms_session_events', 180, 2000, DATE('2011-01-01')),
-('dwh_fact_fms_sessions', 180, 2000, DATE('2011-01-01')),
-('dwh_fact_api_calls', 180, 2000, DATE('2011-01-01')),
-('dwh_fact_incomplete_api_calls', NULL, 3, NULL),
+('dwh_fact_events', 30, 2000, DATE('2011-01-01')),
+('dwh_fact_bandwidth_usage', 30, 2000, DATE('2011-01-01')),
+('dwh_fact_fms_session_events', 30, 2000, DATE('2011-01-01')),
+('dwh_fact_fms_sessions', 30, 2000, DATE('2011-01-01')),
+('dwh_fact_api_calls', 30, 2000, DATE('2011-01-01')),
+('dwh_fact_incomplete_api_calls', 30, 3, NULL),
 ('dwh_fact_errors', 365, 2000, DATE(20110101));
