@@ -24,10 +24,10 @@ public function testTranscodingErrors()
 		KettleRunner::execute('/../tests/execute_dim.ktr', array('TransformationName'=>$CONF->EtlBasePath.$job,'LastUpdatedAt'=>$start->format('Y/m/d')." 00:00:00"));
 		
 		$sourceDB = new MySQLRunner($CONF->MonitoringDbHostName,$CONF->MonitoringDbPort, $CONF->MonitoringDbUser, $CONF->MonitoringDbPassword);		
-		$sourceRows = $sourceDB ->run("SELECT count(*) amount FROM monmon.monitor_entry where updated_at>='".$start->format('Y-m-d')."' and created_at<='".$before->format('Y-m-d')."'");
+		$sourceRows = $sourceDB ->run("SELECT count(*) amount FROM monmon.monitor_entry where updated_at>='".$start->format('Y-m-d')."' and updated_at<='".$before->format('Y-m-d')."'");
 		
 		$targetDB = new MySQLRunner($CONF->DbHostName,$CONF->DbPort, $CONF->DbUser, $CONF->DbPassword);
-		$targetRows = $targetDB->run("SELECT count(*) amount FROM kalturadw.dwh_fact_errors where error_time>='".$start->format('Y-m-d')."' and error_time<='".$before->format('Y-m-d')."' and error_object_type_id = 2");		
+		$targetRows = $targetDB->run("SELECT count(*) amount FROM kalturadw.dwh_fact_errors e, kalturadw.dwh_dim_error_object_types t where error_time>='".$start->format('Y-m-d')."' and error_time<='".$before->format('Y-m-d')."' and e.error_object_type_id = t.error_object_type_id and t.error_object_type_name = 'Transcoding'");		
 
 		#$this->assertGreaterThan(0, $targetRows[0]['amount']);
 		$this->assertEquals($sourceRows[0]['amount'], $targetRows[0]['amount']);
