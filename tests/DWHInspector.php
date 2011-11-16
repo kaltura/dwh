@@ -242,9 +242,10 @@ class DWHInspector
 	{
 		$errornousFilter = $onlyErrornousCalls ? 'AND IFNULL(ds.error_code_id,f.error_code_id) IS NOT NULL' : '';
 
-		$rows = MySQLRunner::execute("SELECT ds.session_id, ds.request_index FROM kalturadw_ds.ds_incomplete_api_calls ds, kalturadw.dwh_fact_incomplete_api_calls f ".
+		$rows = MySQLRunner::execute("SELECT ds.session_id, ds.request_index, ds.user_ip FROM kalturadw_ds.ds_incomplete_api_calls ds, kalturadw.dwh_fact_incomplete_api_calls f ".
 				     "WHERE ds.session_id = f.session_id ".
 				     "AND ds.request_index = f.request_index ".
+				     "AND ds.user_ip = f.user_ip ".
 				     "AND ds.cycle_id=? ".
 		 		     "AND IFNULL(ds.api_call_date_id, f.api_call_date_id) IS NOT NULL ".
 			             "AND IFNULL(ds.duration_msecs, f.duration_msecs) IS NOT NULL $onlyErrornousCalls", array(0=>$cycleID));
@@ -252,7 +253,7 @@ class DWHInspector
 		$res = array();
 		foreach ($rows as $row)
                 {
-                        $res[] = APICall::CreateAPICallByID($row["session_id"], $row["request_index"]);
+                        $res[] = APICall::CreateAPICallByID($row["session_id"], $row["request_index"],$row["user_ip"]);
                 }
                 return $res;
 	}

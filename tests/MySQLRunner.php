@@ -72,6 +72,7 @@ class MySQLRunner
 				}		
 				$result->close();
 			}	
+
 		} while ($this->link->next_result());
 			
 		$this->disconnect();
