@@ -23,7 +23,7 @@ public function testTranscodingErrors()
 
 		KettleRunner::execute('/../tests/execute_dim.ktr', array('TransformationName'=>$CONF->EtlBasePath.$job,'LastUpdatedAt'=>$start->format('Y/m/d')." 00:00:00"));
 		
-		$sourceDB = new MySQLRunner($CONF->OpDbHostName,$CONF->OpDbPort, $CONF->OpDbUser, $CONF->OpDbPassword);		
+		$sourceDB = new MySQLRunner($CONF->MonitoringDbHostName,$CONF->MonitoringDbPort, $CONF->MonitoringDbUser, $CONF->MonitoringDbPassword);		
 		$sourceRows = $sourceDB ->run("SELECT count(*) amount FROM monmon.monitor_entry where updated_at>='".$start->format('Y-m-d')."' and created_at<='".$before->format('Y-m-d')."'");
 		
 		$targetDB = new MySQLRunner($CONF->DbHostName,$CONF->DbPort, $CONF->DbUser, $CONF->DbPassword);
