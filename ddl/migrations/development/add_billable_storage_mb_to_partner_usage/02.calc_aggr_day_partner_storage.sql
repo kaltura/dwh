@@ -29,7 +29,7 @@ BEGIN
 	ON DUPLICATE KEY UPDATE count_storage_mb=VALUES(count_storage_mb);
 	
 	INSERT INTO 	kalturadw.dwh_hourly_partner_usage (partner_id, date_id, hour_id, bandwidth_source_id, billable_storage_mb)
-	SELECT 		u.partner_id, DATE(date_val)*1, 0, 1, SUM(b.count_storage_mb) / DAY(LAST_DAY(DATE(date_val))) billable_storage_mb
+	SELECT 		u.partner_id, DATE(date_val)*1, 0, 1, SUM(u.count_storage_mb) / DAY(LAST_DAY(DATE(date_val))) billable_storage_mb
 	FROM 		dwh_hourly_partner_usage u
 	WHERE 		DATE(date_val)*1 >=u.date_id AND u.hour_id = 0 AND u.bandwidth_source_id = 1 AND u.count_storage_mb<>0
 	GROUP BY 	u.partner_id

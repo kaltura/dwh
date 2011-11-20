@@ -127,20 +127,20 @@ class StorageTest extends KalturaTestCase
 		foreach($rows as $row)
 		{
 			$size = floatval($row["size"]);
-			echo "x:" .$row["entry_id"]." ".$this->expected[$row["entry_id"]]/1024 ." " .$size . "\n";
-			$this->assertLessThan(0.01,abs($this->expected[$row["entry_id"]]/1024 - $size));
+			echo "x:" .$row["entry_id"]." ".round($this->expected[$row["entry_id"]]/1024,3) ." " .$size . "\n";
+			$this->assertLessThan(0.01,abs(round($this->expected[$row["entry_id"]]/1024,3) - $size));
 			$expectedTotal += $size;			
 		}
 		
-		$rows = MySQLRunner::execute("SELECT sum(aggr_storage_mb) size FROM kalturadw.dwh_hourly_partner_usage WHERE date_id = ? AND partner_id = ?" , array(0=>$dateId, 1=>$this->partnerId));
+		$rows = MySQLRunner::execute("SELECT sum(billable_storage_mb) size FROM kalturadw.dwh_hourly_partner_usage WHERE date_id = ? AND partner_id = ?" , array(0=>$dateId, 1=>$this->partnerId));
 		$actualTotal = floatval($rows[0]["size"]);
-		echo "total: expected " .$expectedTotal/1024 ." actual " .$actualTotal . "\n";
-		$this->assertLessThan(0.01,abs($expectedTotal/1024 - $actualTotal));
+		echo "total: expected " .round($expectedTotal/1024/31,3) ." actual " .$actualTotal . "\n";
+		$this->assertLessThan(0.01,abs(round($expectedTotal/1024/31,3) - $actualTotal));
 		
 		$rows = MySQLRunner::execute("SELECT sum(count_storage_mb) size FROM kalturadw.dwh_hourly_partner_usage WHERE date_id = ? AND partner_id = ?" , array(0=>$dateId, 1=>$this->partnerId));
 		$actualDelta = floatval($rows[0]["size"]);
-		echo "delta: expected " .$this->delta/1024/1024 ." actual " .$actualDelta. "\n";
-		$this->assertLessThan(0.01,abs($this->delta/1024/1024 - $actualDelta));
+		echo "delta: expected " .round($this->delta/1024/1024,3) ." actual " .$actualDelta. "\n";
+		$this->assertLessThan(0.01,abs(round($this->delta/1024/1024,3) - $actualDelta));
 
 	}
 }

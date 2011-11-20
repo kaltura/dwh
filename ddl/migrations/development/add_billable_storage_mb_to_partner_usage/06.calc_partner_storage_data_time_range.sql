@@ -14,7 +14,8 @@ BEGIN
     FROM dwh_hourly_partner_usage aggr_p
     WHERE date_id between p_start_date_id AND p_end_date_id
     AND aggr_p.partner_id = p_partner_id
-    AND aggr_p.hour_id = 0;
+    AND aggr_p.hour_id = 0
+		  AND aggr_p.bandwidth_souce_id = 1;
     
 	RETURN total_billable_storage_mb;
 END$$

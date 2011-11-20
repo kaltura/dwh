@@ -29,9 +29,9 @@ BEGIN
       
     -- fetch results per category
         
-    SELECT s.category_name, SUM(b.count_storage_mb)/DAY(LAST_DAY(DATE(s.date_id))) avg_continuous_aggr_storage_mb
+    SELECT s.category_name, SUM(s.count_storage_mb)/DAY(LAST_DAY(DATE(all_times.day_id))) avg_continuous_aggr_storage_mb
     FROM   dwh_dim_time all_times, temp_storage s 
-    WHERE  all_times.date_id BETWEEN p_start_date_id AND p_end_date_id 
+    WHERE  all_times.day_id BETWEEN p_start_date_id AND p_end_date_id 
     AND all_times.day_id >= s.date_id 
     AND s.count_storage_mb<>0
     GROUP BY s.category_name;
