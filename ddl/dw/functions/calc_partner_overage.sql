@@ -67,7 +67,7 @@ BEGIN
 				MAX(charge_monthly_bandwidth_kb_unit) charge_monthly_bandwidth_kb_unit,
 				MAX(charge_monthly_bandwidth_kb_usd) charge_monthly_bandwidth_kb_usd,	
 				MAX(max_monthly_storage_mb) included_storage_mb,
-				IFNULL(calc_partner_monthly_storage(p_month_id , pq.partner_id),0) actual_storage_mb,
+				IFNULL(SUM(billable_storage_mb),0) actual_storage_mb,
 				MAX(charge_monthly_storage_mb_unit) charge_monthly_storage_mb_unit,
 				MAX(charge_monthly_storage_mb_usd) charge_monthly_storage_mb_usd,
 				MAX(max_monthly_total_usage_mb) included_total_usage_mb,
