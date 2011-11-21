@@ -46,7 +46,12 @@ class Level3Test extends CDNBandwidthHttpTestCase
 	{
 		return '/^[^ ]+ [^ ]+ [^ ]+ .*\/p\/(\d+)\/[^ ]* [^ ]+ [^ ]+ [^ ]+ [^ ]+ (\d+) [^ ]+ [^ ]+ "[^"]+" ".+" ".+"/';
 	}
-
+	
+	protected function getBandwidthSourceID()
+	{	
+		return 3;
+	}
+	
 	protected function ignoredInvalidBWLine($line)
         {
                 return false;

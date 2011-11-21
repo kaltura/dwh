@@ -41,6 +41,7 @@ abstract class CDNBandwidthHttpTestCase extends CycleProcessTestCase
 		
 			// compare rows in ds_bandwidth_usage to rows in file
                         $this->assertEquals(DWHInspector::countRows('kalturadw_ds.ds_bandwidth_usage',$fileID),$this->countRows($filename, array($this, 'validBWLine')));
+                        $this->assertEquals(DWHInspector::countRows('kalturadw_ds.ds_bandwidth_usage',$fileID, 'and bandwidth_source_id = '. $this->getBandwidthSourceID()),$this->countRows($filename, array($this, 'validBWLine')));
 
                         // compare bandwidth_bytes in ds_bandwidth_usage to bandwidth bytes consumed in file
                         $this->assertEquals(DWHInspector::sumRows('kalturadw_ds.ds_bandwidth_usage',$fileID,"bandwidth_bytes"),$this->sumBytes($filename, array($this, 'validBWLine'), $this->getBWRegex()));
@@ -62,6 +63,7 @@ abstract class CDNBandwidthHttpTestCase extends CycleProcessTestCase
 	
 	protected abstract function ignoredInvalidBWLine($line);
 	protected abstract function getBWRegex();
+	protected abstract function getBandwidthSourceID();
 	
 	public function validBWLine($line)
         {

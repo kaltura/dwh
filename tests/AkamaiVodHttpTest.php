@@ -54,6 +54,12 @@ class AkamaiVodHttpTest extends CDNBandwidthHttpTestCase
 	{
 		return '/^.*\t\/[^\.]+\.kaltura\.com.*\/p\/([0-9]+)\/[^\t]*\t\d+\t(\d+)\t.*$/';
 	}
+	
+        protected function getBandwidthSourceID()
+        {
+                return 4;
+        }
+
 
 	protected function ignoredInvalidBWLine($line)
         {

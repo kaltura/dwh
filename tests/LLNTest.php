@@ -47,6 +47,12 @@ class LLNTest extends CDNBandwidthHttpTestCase
 		return '/^[^ ]+ [^ ]+ [^ ]+ \[[^]]+\] "[^ ]+ http:\/\/[^\.]+\.kaltura\.com\/p\/([0-9]+)\/.* [^\/]+\/[^"]+" [^ ]+ (\d+) "[^"]+" "(.+)"/';
 	}
 
+        protected function getBandwidthSourceID()
+        {
+                return 2;
+        }
+
+
 	protected function ignoredInvalidBWLine($line)
         {
                 return false;
