@@ -7,9 +7,9 @@ CREATE TABLE `kalturadw_bisources`.`bisources_entry_media_source` (
   PRIMARY KEY (`entry_media_source_id`)
 ) ENGINE=MYISAM  DEFAULT CHARSET=utf8;
 
-INSERT INTO kalturadw_bisources.bisources_entry_media_source (ENTRY_MEDIA_SOURCE_id,ENTRY_MEDIA_SOURCE_name) VALUES(-1,'KALTURA_EDITOR');
+INSERT INTO kalturadw_bisources.bisources_entry_media_source (ENTRY_MEDIA_SOURCE_id,ENTRY_MEDIA_SOURCE_name) VALUES(-1,'UNKNOWN');
 INSERT INTO kalturadw_bisources.bisources_entry_media_source (ENTRY_MEDIA_SOURCE_id,ENTRY_MEDIA_SOURCE_name) VALUES(0,'OTHER');	
-INSERT INTO kalturadw_bisources.bisources_entry_media_source (ENTRY_MEDIA_SOURCE_id,ENTRY_MEDIA_SOURCE_name) VALUES(1,'UNKNOWN'); 
+INSERT INTO kalturadw_bisources.bisources_entry_media_source (ENTRY_MEDIA_SOURCE_id,ENTRY_MEDIA_SOURCE_name) VALUES(1,'FILE'); 
 INSERT INTO kalturadw_bisources.bisources_entry_media_source (ENTRY_MEDIA_SOURCE_id,ENTRY_MEDIA_SOURCE_name) VALUES(2,'WEBCAM'); 
 INSERT INTO kalturadw_bisources.bisources_entry_media_source (ENTRY_MEDIA_SOURCE_id,ENTRY_MEDIA_SOURCE_name) VALUES(3,'FLICKR'); 
 INSERT INTO kalturadw_bisources.bisources_entry_media_source (ENTRY_MEDIA_SOURCE_id,ENTRY_MEDIA_SOURCE_name) VALUES(4,'YOUTUBE'); 
