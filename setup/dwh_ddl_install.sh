@@ -219,6 +219,7 @@ mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_error_codes.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_client_tags.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_hosts.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_error_object_types.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_hours.sql
 
 #dw/maintenance
 mysqlexec $DW_ROOT_DIR/maintenance/add_partition_procedure.sql
