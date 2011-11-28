@@ -5,23 +5,35 @@
     <description/>
     <extended_description/>
     <trans_version/>
+    <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
     <directory>&#47;</directory>
     <parameters>
     </parameters>
     <log>
-      <read/>
-      <write/>
-      <input/>
-      <output/>
-      <update/>
-      <rejected/>
-      <connection/>
-      <table/>
-      <step_performance_table/>
-      <use_batchid>Y</use_batchid>
-      <use_logfield>N</use_logfield>
-      <size_limit_lines/>
+<trans-log-table><connection/>
+<schema/>
+<table/>
+<size_limit_lines/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>N</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>N</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></trans-log-table>
+<perf-log-table><connection/>
+<schema/>
+<table/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>SEQ_NR</id><enabled>Y</enabled><name>SEQ_NR</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>INPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>INPUT_BUFFER_ROWS</name></field><field><id>OUTPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>OUTPUT_BUFFER_ROWS</name></field></perf-log-table>
+<channel-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
+<step-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></step-log-table>
     </log>
     <maxdate>
       <connection/>
@@ -40,6 +52,7 @@
     <shared_objects_file/>
     <capture_step_performance>N</capture_step_performance>
     <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <step_performance_capturing_size_limit/>
     <dependencies>
     </dependencies>
     <partitionschemas>
@@ -48,6 +61,8 @@
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
+  <created_user/>
+  <created_date>2011&#47;11&#47;24 12:47:58.709</created_date>
   <modified_user>-</modified_user>
   <modified_date>2011&#47;10&#47;26 09:10:46.618</modified_date>
   </info>
@@ -249,7 +264,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>create output file</from><to>Text file input</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath + output file creation command</from><to>create output file</to><enabled>Y</enabled> </hop>  <hop> <from>Text file input</from><to>Switch &#47; Case</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>invalid</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath + output file creation command</to><enabled>Y</enabled> </hop>  <hop> <from>Sort &quot;request starts&quot;</from><to>Unify requests</to><enabled>Y</enabled> </hop>  <hop> <from>Sort &quot;request ends&quot;</from><to>Unify requests</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>get request start fields</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>get request end fields</to><enabled>Y</enabled> </hop>  <hop> <from>get request start fields</from><to>filter ignored starts</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored starts</from><to>ignored request start</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored ends</from><to>ignore request end</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored starts</from><to>parse user agent</to><enabled>Y</enabled> </hop>  <hop> <from>action&#47;service lookup</from><to>client tag lookup</to><enabled>Y</enabled> </hop>  <hop> <from>client tag lookup</from><to>host lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter error_code</from><to>lookup error_code</to><enabled>Y</enabled> </hop>  <hop> <from>filter error_code</from><to>add null error_code_id</to><enabled>Y</enabled> </hop>  <hop> <from>lookup error_code</from><to>Sort &quot;request ends&quot;</to><enabled>Y</enabled> </hop>  <hop> <from>add null error_code_id</from><to>Sort &quot;request ends&quot;</to><enabled>Y</enabled> </hop>  <hop> <from>parse user agent</from><to>action&#47;service lookup</to><enabled>Y</enabled> </hop>  <hop> <from>host lookup</from><to>get numeric_ip</to><enabled>Y</enabled> </hop>  <hop> <from>get numeric_ip</from><to>Get IP location</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>Sort &quot;request starts&quot;</to><enabled>Y</enabled> </hop>  <hop> <from>create events output file_name</from><to>filter incomplete rows</to><enabled>Y</enabled> </hop>  <hop> <from>Unify requests</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle and file</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Choose populated fields</from><to>Output: Partial calls</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>Get Cycles Path events</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path events</from><to>create events output file_name</to><enabled>Y</enabled> </hop>  <hop> <from>filter incomplete rows</from><to>rename line_number</to><enabled>Y</enabled> </hop>  <hop> <from>rename line_number</from><to>Choose populated fields</to><enabled>Y</enabled> </hop>  <hop> <from>get request end fields</from><to>filter ignored ends</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored ends</from><to>filter invalid ends</to><enabled>Y</enabled> </hop>  <hop> <from>filter invalid ends</from><to>filter error_code</to><enabled>Y</enabled> </hop>  <hop> <from>filter invalid ends</from><to>format errornous line</to><enabled>Y</enabled> </hop>  <hop> <from>format errornous line</from><to>Get Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get Process ID</from><to>Append cycle_id, file_id for invalid lines</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle and file for invalid lines</from><to>Append cycle_id, file_id for invalid lines</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id for invalid lines</from><to>Insert invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>filter incomplete rows</from><to>Distribute full api calls</to><enabled>Y</enabled> </hop>  <hop> <from>Distribute full api calls</from><to>Output: full calls</to><enabled>Y</enabled> </hop>  <hop> <from>Set error_object_type = API Call</from><to>lookup error_object_type</to><enabled>Y</enabled> </hop>  <hop> <from>filter api errors</from><to>Create api_error_id</to><enabled>Y</enabled> </hop>  <hop> <from>Create api_error_id</from><to>Set error_object_type = API Call</to><enabled>Y</enabled> </hop>  <hop> <from>Distribute full api calls</from><to>filter api errors</to><enabled>Y</enabled> </hop>  <hop> <from>lookup error_object_type</from><to>Output: full calls errors</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>create output file</from><to>Text file input</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath + output file creation command</from><to>create output file</to><enabled>Y</enabled> </hop>  <hop> <from>Text file input</from><to>Switch &#47; Case</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>invalid</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath + output file creation command</to><enabled>Y</enabled> </hop>  <hop> <from>Sort &quot;request starts&quot;</from><to>Unify requests</to><enabled>Y</enabled> </hop>  <hop> <from>Sort &quot;request ends&quot;</from><to>Unify requests</to><enabled>Y</enabled> </hop>  <hop> <from>get request start fields</from><to>filter ignored starts</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored starts</from><to>ignored request start</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored ends</from><to>ignore request end</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored starts</from><to>parse user agent</to><enabled>Y</enabled> </hop>  <hop> <from>action&#47;service lookup</from><to>client tag lookup</to><enabled>Y</enabled> </hop>  <hop> <from>client tag lookup</from><to>host lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter error_code</from><to>lookup error_code</to><enabled>Y</enabled> </hop>  <hop> <from>filter error_code</from><to>add null error_code_id</to><enabled>Y</enabled> </hop>  <hop> <from>lookup error_code</from><to>Sort &quot;request ends&quot;</to><enabled>Y</enabled> </hop>  <hop> <from>add null error_code_id</from><to>Sort &quot;request ends&quot;</to><enabled>Y</enabled> </hop>  <hop> <from>parse user agent</from><to>action&#47;service lookup</to><enabled>Y</enabled> </hop>  <hop> <from>host lookup</from><to>get numeric_ip</to><enabled>Y</enabled> </hop>  <hop> <from>get numeric_ip</from><to>Get IP location</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>Sort &quot;request starts&quot;</to><enabled>Y</enabled> </hop>  <hop> <from>create events output file_name</from><to>filter incomplete rows</to><enabled>Y</enabled> </hop>  <hop> <from>Unify requests</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle and file</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Choose populated fields</from><to>Output: Partial calls</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>Get Cycles Path events</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path events</from><to>create events output file_name</to><enabled>Y</enabled> </hop>  <hop> <from>filter incomplete rows</from><to>rename line_number</to><enabled>Y</enabled> </hop>  <hop> <from>rename line_number</from><to>Choose populated fields</to><enabled>Y</enabled> </hop>  <hop> <from>get request end fields</from><to>filter ignored ends</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored ends</from><to>filter invalid ends</to><enabled>Y</enabled> </hop>  <hop> <from>filter invalid ends</from><to>filter error_code</to><enabled>Y</enabled> </hop>  <hop> <from>filter invalid ends</from><to>format errornous line</to><enabled>Y</enabled> </hop>  <hop> <from>format errornous line</from><to>Get Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get Process ID</from><to>Append cycle_id, file_id for invalid lines</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle and file for invalid lines</from><to>Append cycle_id, file_id for invalid lines</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id for invalid lines</from><to>Insert invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>filter incomplete rows</from><to>Distribute full api calls</to><enabled>Y</enabled> </hop>  <hop> <from>Distribute full api calls</from><to>Output: full calls</to><enabled>Y</enabled> </hop>  <hop> <from>Set error_object_type = API Call</from><to>lookup error_object_type</to><enabled>Y</enabled> </hop>  <hop> <from>filter api errors</from><to>Create api_error_id</to><enabled>Y</enabled> </hop>  <hop> <from>Create api_error_id</from><to>Set error_object_type = API Call</to><enabled>Y</enabled> </hop>  <hop> <from>Distribute full api calls</from><to>filter api errors</to><enabled>Y</enabled> </hop>  <hop> <from>lookup error_object_type</from><to>Output: full calls errors</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>Regex Evaluation Start</to><enabled>Y</enabled> </hop>  <hop> <from>Regex Evaluation Start</from><to>get request start fields</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>Regex Evaluation End</to><enabled>Y</enabled> </hop>  <hop> <from>Regex Evaluation End</from><to>get request end fields</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Append cycle_id, file_id</name>
     <type>JoinRows</type>
@@ -613,6 +628,8 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
            <method>none</method>
            <schema_name/>
            </partitioning>
+    <specification_method>filename</specification_method>
+    <trans_object_id/>
     <trans_name/>
     <filename>${EtlBasePath}&#47;common&#47;insert_invalid_ds_line.ktr</filename>
     <directory_path/>
@@ -637,6 +654,8 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
           <parameters>    <inherit_all_vars>Y</inherit_all_vars>
     </parameters>
     </mappings>
+    <allow_multiple_input>N</allow_multiple_input>
+    <allow_multiple_output>N</allow_multiple_output>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>614</xloc>
@@ -658,6 +677,7 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
     <separator>;</separator>
     <enclosure>&quot;</enclosure>
     <enclosure_forced>Y</enclosure_forced>
+    <enclosure_fix_disabled>Y</enclosure_fix_disabled>
     <header>N</header>
     <footer>N</footer>
     <format>Unix</format>
@@ -666,9 +686,11 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
     <endedLine/>
     <fileNameInField>Y</fileNameInField>
     <fileNameField>incomplete_output_file_name</fileNameField>
+    <create_parent_folder>N</create_parent_folder>
     <file>
       <name>file</name>
       <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention/>
       <append>N</append>
@@ -1030,6 +1052,7 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
     <separator>;</separator>
     <enclosure>&quot;</enclosure>
     <enclosure_forced>Y</enclosure_forced>
+    <enclosure_fix_disabled>Y</enclosure_fix_disabled>
     <header>N</header>
     <footer>N</footer>
     <format>Unix</format>
@@ -1038,9 +1061,11 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
     <endedLine/>
     <fileNameInField>Y</fileNameInField>
     <fileNameField>full_output_file_name</fileNameField>
+    <create_parent_folder>N</create_parent_folder>
     <file>
       <name>file</name>
       <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention/>
       <append>N</append>
@@ -1402,6 +1427,7 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
     <separator>;</separator>
     <enclosure>&quot;</enclosure>
     <enclosure_forced>Y</enclosure_forced>
+    <enclosure_fix_disabled>Y</enclosure_fix_disabled>
     <header>N</header>
     <footer>N</footer>
     <format>Unix</format>
@@ -1410,9 +1436,11 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
     <endedLine/>
     <fileNameInField>Y</fileNameInField>
     <fileNameField>errors_output_file_name</fileNameField>
+    <create_parent_folder>N</create_parent_folder>
     <file>
       <name>file</name>
       <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention/>
       <append>N</append>
@@ -1680,9 +1708,9 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
 <case_value_group/>
 <default_target_step>invalid</default_target_step>
 <cases><case><value> request_start,</value>
-<target_step>get request start fields</target_step>
+<target_step>Regex Evaluation Start</target_step>
 </case><case><value> request_end,</value>
-<target_step>get request end fields</target_step>
+<target_step>Regex Evaluation End</target_step>
 </case></cases>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>224</xloc>
@@ -1730,7 +1758,9 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
     <file>
       <name/>
       <filemask/>
+      <exclude_filemask/>
       <file_required/>
+      <include_subfolders/>
       <type>Fixed</type>
       <compression>None</compression>
     </file>
@@ -1755,6 +1785,9 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
     </fields>
     <limit>0</limit>
     <error_ignored>N</error_ignored>
+    <skip_bad_files>N</skip_bad_files>
+    <file_error_field/>
+    <file_error_message_field/>
     <error_line_skipped>N</error_line_skipped>
     <error_count_field/>
     <error_fields_field/>
@@ -1766,7 +1799,15 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
     <line_number_files_destination_directory/>
     <line_number_files_extension>line</line_number_files_extension>
     <date_format_lenient>Y</date_format_lenient>
-    <date_format_locale>en_us</date_format_locale>
+    <date_format_locale>en_US</date_format_locale>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>127</xloc>
@@ -1972,6 +2013,9 @@ incomplete_output_file_name = cycle_path + &quot;&#47;process&#47;&quot; + cycle
            </partitioning>
     <processfield>create_output_file_command</processfield>
     <resultfieldname>result</resultfieldname>
+    <errorfieldname/>
+    <exitvaluefieldname/>
+    <failwhennotsuccess>N</failwhennotsuccess>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>125</xloc>
@@ -2269,7 +2313,7 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     <name>get request end fields</name>
     <type>ScriptValueMod</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
@@ -2283,68 +2327,18 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
 &#47;&#47; 2011-10-23 14:17:28 [::1] [1799708821]: request_end,-1,-1,NmE0OGFlNWMzMzQ4NGRkZWNlMzhjMWQ0YmJiNzc3OTdhODFjMjM3ZXwtMTs7MTMyMTk4NTg0ODsyOzEzMTkzOTM4NDguMzIyNztiYXRjaFVzZXI7Oy0xOw==,1,&quot;batchUser&quot;,0.066039085388184,1,,0
 &#47;&#47; &lt;Date&gt; &lt;Hour&gt; [&lt;IPAddress&gt;] [&lt;SessionID&gt;]: request_end,&lt;partner_id&gt;,&lt;master_partner_id&gt;,&lt;ks&gt;,&lt;is_admin&gt;,&lt;kuser_id&gt;,&lt;duration&gt;,&lt;success&gt;,&lt;error_code&gt;,&lt;request_index&gt;
 
-var datetime_field_index = 0;
-var session_id_index = 1;
-var partner_id_index = 2;
-var master_partner_id_index = 3;
-var ks_index = 4;
-var is_admin_index = 5;
-var kuser_id_index = 6;
-var duration_index = 7;
-var success_index = 8;
-var error_code_index = 9;
-var request_index_index = 10;
-
-var session_id = null;
-var partner_id = null;
-var master_partner_id = null;
-var ks = null;
-var is_admin = null;
-var kuser_id = null;
-var duration = null;
-var success = null;
-var error_code = null;
-var request_index = null;
-
 var invalid_line = false;
 var error_reason = &apos;&apos;;
 var error_date_id = 0;
+var ignored_line = session_id_end == null || request_index_end == null;
+var date = null;
 
-var split_regex = &quot;([^ ]+ [^ ]+) \\\[[^\\\]]+\\\] \\\[([^\\\]]+)\\\]: request_end,([^,]*),([^,]*),([^,]*),([01]),\&quot;([^\&quot;]*)\&quot;,(\\d+\.\\d+),([01]),([^,]*),(\\d+).*&quot;;
-var result_arr = str2RegExp(row, split_regex);
-
-var ignored_line = false;
-
-if (result_arr != null &amp;&amp; result_arr.length &gt; request_index_index) {
-	var session_id = result_arr[session_id_index];
-	var partner_id_string = result_arr[partner_id_index];
-	partner_id = is_not_numeric(partner_id_string) ? null : partner_id_string;
-	var master_partner_id_string = result_arr[master_partner_id_index];
-	master_partner_id = is_not_numeric(master_partner_id_string) ?  null : master_partner_id_string;
-	var ks = result_arr[ks_index];
-	var is_admin = result_arr[is_admin_index];
-	var kuser_id = result_arr[kuser_id_index];
-	var duration_string = result_arr[duration_index];
-	var duration_msecs = is_not_numeric(duration_string) ? null : duration_string * 1000; &#47;&#47;seconds
-	var success = result_arr[success_index];
-	var error_code = result_arr[error_code_index];
-	var request_index = result_arr[request_index_index];
-	ignored_line = session_id == null || request_index == null;
-	if (partner_id == null)
-	{
-		invalid_line = true;
-		error_reason = &apos;missing_partner&apos;;
-		date = str2date(result_arr[datetime_field_index],&quot;yyyy-MM-dd HH:m:s&quot;);
-		error_date_id = year(date)*10000+ (month(date)+1)*100 + getDayNumber(date,&quot;m&quot;);;
-	}
-}
-else
+if (partner_id == null)
 {
-	ignored_line = true;
-}
-
-function is_not_numeric(s) {
-	return (isNaN(s) || s == null || s == &quot;&quot;);
+	invalid_line = true;
+	error_reason = &apos;missing_partner&apos;;
+	date = str2date(datetime,&quot;yyyy-MM-dd HH:m:s&quot;);
+	error_date_id = year(date)*10000+ (month(date)+1)*100 + getDayNumber(date,&quot;m&quot;);;
 }</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>str2RegExp_Sample</jsScript_name>
@@ -2368,63 +2362,9 @@ if ( xArr != null ) {
 else {
     Alert(&quot;no match&quot;);
 }</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>session_id</name>
-        <rename>session_id_end</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>partner_id</name>
-        <rename>partner_id</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>master_partner_id</name>
-        <rename>master_partner_id</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>ks</name>
-        <rename>ks</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>is_admin</name>
-        <rename>is_admin</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>kuser_id</name>
-        <rename>kuser_id</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>duration_msecs</name>
-        <rename>duration_msecs</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>success</name>
-        <rename>success</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>error_code</name>
-        <rename>error_code</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>request_index</name>
-        <rename>request_index_end</rename>
-        <type>Integer</type>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>date</name>
+        <rename>date</rename>
+        <type>Date</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
@@ -2454,8 +2394,8 @@ else {
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>351</xloc>
-      <yloc>280</yloc>
+      <xloc>383</xloc>
+      <yloc>278</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2477,55 +2417,16 @@ else {
 
 &#47;&#47; 2011-10-23 14:16:29 [::1] [1819377696]: request_start,22758,&quot;&quot;,,&quot;batch: Default Scheduler&quot;,1319393789.4666,dropfolder_dropfolderfile,list,0,0
 &#47;&#47; &lt;Date&gt; &lt;Hour&gt; [&lt;IPAddress&gt;] [&lt;SessionID&gt;]: request_start,&lt;os_process_id&gt;,&quot;&lt;userAgent&gt;&quot;,&lt;hostname&gt;,&quot;&lt;clientTag&gt;&quot;,&lt;unixTimestamp&gt;,&lt;service&gt;,&lt;action&gt;,&lt;requestIndex&gt;,&lt;isInMultiRequest&gt;
-var datetime_field_index = 0;
-var ip_address_index = 1;
-var session_id_index = 2;
-var os_process_id_index = 3;
-var user_agent_index = 4;
-var host_index = 5;
-var client_tag_index = 6;
-var service_index = 7;
-var action_index = 8;
-var request_index_index = 9;
-var is_in_multi_request_index = 10;
 
-var date = null;
-var ip_address = null;
-var session_id = null;
-var os_process_id = null;
-var user_agent = null;
-var host = null;
-var client_tag = null;
-var service = null;
-var action = null;
-var request_index = null;
-var is_in_multi_request = null;
-
-var split_regex = &quot;([^ ]+ [^ ]+) \\\[([^\\\]]+)\\\] \\\[([^\\\]]+)\\\]: request_start,([^,]*),\&quot;([^\&quot;]*)\&quot;,([^,]*),\&quot;([^\&quot;]*)\&quot;,[^,]*,([^,]*),([^,]*),(\\d+),([01]).*&quot;;
-var result_arr = str2RegExp(row, split_regex);
-
-var ignored_line = false;
-
-if (result_arr != null &amp;&amp; result_arr.length &gt; is_in_multi_request_index) {
-	date = str2date(result_arr[datetime_field_index],&quot;yyyy-MM-dd HH:m:s&quot;);
-	api_call_date_id = year(date)*10000+ (month(date)+1)*100 + getDayNumber(date,&quot;m&quot;);
-	api_call_hour_id = date.getHours();
-	ip_address = result_arr[ip_address_index];
-	session_id = result_arr[session_id_index];
-	os_process_id = result_arr[os_process_id_index];
-	user_agent = result_arr[user_agent_index];
-	host = get_default_value(result_arr[host_index]);
-	client_tag = get_default_value(result_arr[client_tag_index]);
-	service = get_default_value(result_arr[service_index]);
-	action = get_default_value(result_arr[action_index]);
-	request_index = result_arr[request_index_index];
-	is_in_multi_request = result_arr[is_in_multi_request_index];
-	ignored_line = session_id == null || request_index == null;
-}
-else
-{
-	ignored_line = true;
-}
+var	date = str2date(datetime,&quot;yyyy-MM-dd HH:m:s&quot;);
+var api_call_date_id = year(date)*10000+ (month(date)+1)*100 + getDayNumber(date,&quot;m&quot;);
+var api_call_hour_id = date.getHours();
+host = get_default_value(host);
+client_tag = get_default_value(client_tag);
+service = get_default_value(service);
+action = get_default_value(action);
+user_agent = get_default_value(user_agent);
+var ignored_line = session_id_start == null || request_index_start == null;
 
 function get_default_value(s) {
 	if (s == null || s == &apos;&apos;) {
@@ -2574,21 +2475,33 @@ else {
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
-      </field>      <field>        <name>ip_address</name>
-        <rename>ip_address</rename>
+      </field>      <field>        <name>host</name>
+        <rename>host</rename>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>session_id</name>
-        <rename>session_id_start</rename>
+        <replace>Y</replace>
+      </field>      <field>        <name>client_tag</name>
+        <rename>client_tag</rename>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>os_process_id</name>
-        <rename>os_process_id</rename>
+        <replace>Y</replace>
+      </field>      <field>        <name>service</name>
+        <rename>service</rename>
         <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>      <field>        <name>action</name>
+        <rename>action</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>      <field>        <name>ignored_line</name>
+        <rename>ignored_line</rename>
+        <type>Boolean</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
@@ -2597,52 +2510,10 @@ else {
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>host</name>
-        <rename>host</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>client_tag</name>
-        <rename>client_tag</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>service</name>
-        <rename>service</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>action</name>
-        <rename>action</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>request_index</name>
-        <rename>request_index_start</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>is_in_multi_request</name>
-        <rename>is_in_multi_request</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>ignored_line</name>
-        <rename>ignored_line</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
+        <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>353</xloc>
+      <xloc>383</xloc>
       <yloc>203</yloc>
       <draw>Y</draw>
       </GUI>
@@ -2832,6 +2703,8 @@ else {
            <method>none</method>
            <schema_name/>
            </partitioning>
+    <specification_method>filename</specification_method>
+    <trans_object_id/>
     <trans_name/>
     <filename>${EtlBasePath}&#47;common&#47;user_agent_lookup.ktr</filename>
     <directory_path/>
@@ -2853,6 +2726,8 @@ else {
           <parameters>    <inherit_all_vars>Y</inherit_all_vars>
     </parameters>
     </mappings>
+    <allow_multiple_input>N</allow_multiple_input>
+    <allow_multiple_output>N</allow_multiple_output>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>614</xloc>
@@ -2946,6 +2821,334 @@ else {
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>126</xloc>
       <yloc>116</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Regex Evaluation Start</name>
+    <type>RegexEval</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <script><![CDATA[([^ ]+ [^ ]+) \[([^\]]+)\] \[([^\]]+)\]: request_start,([^,]*),"([^"]*)",([^,]*),"([^"]*)",[^,]*,([^,]*),([^,]*),(\d+),([01]).*]]></script>    <matcher>row</matcher>
+    <resultfieldname>result</resultfieldname>
+    <usevar>N</usevar>
+    <allowcapturegroups>Y</allowcapturegroups>
+    <replacefields>Y</replacefields>
+    <canoneq>N</canoneq>
+    <caseinsensitive>N</caseinsensitive>
+    <comment>N</comment>
+    <dotall>N</dotall>
+    <multiline>N</multiline>
+    <unicode>N</unicode>
+    <unix>N</unix>
+    <fields>
+      <field>
+        <name>datetime</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>ip_address</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>session_id_start</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>os_process_id</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>user_agent</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>host</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>client_tag</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>service</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>action</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>request_index_start</name>
+        <type>Integer</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>is_in_multi_request</name>
+        <type>Integer</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>308</xloc>
+      <yloc>175</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Regex Evaluation End</name>
+    <type>RegexEval</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <script><![CDATA[([^ ]+ [^ ]+) \[[^\]]+\] \[([^\]]+)\]: request_end,([^,]*),([^,]*),([^,]*),([01]),"([^"]*)",(\d+.\d+),([01]),([^,]*),(\d+).*]]></script>    <matcher>row</matcher>
+    <resultfieldname>result</resultfieldname>
+    <usevar>N</usevar>
+    <allowcapturegroups>Y</allowcapturegroups>
+    <replacefields>Y</replacefields>
+    <canoneq>N</canoneq>
+    <caseinsensitive>N</caseinsensitive>
+    <comment>N</comment>
+    <dotall>N</dotall>
+    <multiline>N</multiline>
+    <unicode>N</unicode>
+    <unix>N</unix>
+    <fields>
+      <field>
+        <name>datetime</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>session_id_end</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>partner_id</name>
+        <type>Integer</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>master_partner_id</name>
+        <type>Integer</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>ks</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>is_admin</name>
+        <type>Integer</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>kuser_id</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>duration_msecs</name>
+        <type>Integer</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>success</name>
+        <type>Integer</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>error_code</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>request_index_end</name>
+        <type>Integer</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>312</xloc>
+      <yloc>358</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
