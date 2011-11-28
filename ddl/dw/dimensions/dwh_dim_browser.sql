@@ -11,3 +11,5 @@ CREATE TABLE `dwh_dim_browser` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `browser` (`browser`,`group`,`manufacturer`,`render_engine`,`type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO dwh_dim_browser VALUES(-1,'UNDEFINED','UNDEFINED','UNDEFINED','UNDEFINED','UNDEFINED');

@@ -11,3 +11,5 @@ CREATE TABLE `dwh_dim_os` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `os` (`os`,`device`,`is_mobile`,`manufacturer`,`group`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO dwh_dim_os VALUES(-1,'UNDEFINED',0,'UNDEFINED','UNDEFINED','UNDEFINED');
