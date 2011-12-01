@@ -11,7 +11,7 @@ CREATE TABLE kalturadw.`dwh_hourly_events_devices` (
   `os_id` INT NOT NULL DEFAULT -1,
   `browser_id` INT NOT NULL DEFAULT -1,
   `ui_conf_id` INT NOT NULL DEFAULT -1,
-  `entry_id` VARCHAR(20) NOT NULL DEFAULT -1,
+  `entry_media_type_id` INT(11) NOT NULL DEFAULT -1,
   `sum_time_viewed` DECIMAL(20,3) DEFAULT NULL,
   `count_time_viewed` INT DEFAULT NULL,
   `count_plays` INT DEFAULT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE kalturadw.`dwh_hourly_events_devices` (
   `count_bandwidth_kb` INT DEFAULT NULL,
   `total_admins` INT DEFAULT NULL,
   `total_media_entries` INT DEFAULT NULL,
-  PRIMARY KEY `partner_id` (`partner_id`,`date_id`,`hour_id`,`location_id`,`country_id`,`os_id`,`browser_id`,`ui_conf_id`,`entry_id`),
+  PRIMARY KEY `partner_id` (`partner_id`,`date_id`,`hour_id`,`location_id`,`country_id`,`os_id`,`browser_id`,`ui_conf_id`,`entry_media_type_id`),
   KEY (`date_id`, `hour_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 PARTITION BY RANGE (date_id)

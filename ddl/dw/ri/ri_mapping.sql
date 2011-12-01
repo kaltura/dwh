@@ -59,4 +59,5 @@ INSERT INTO kalturadw.`ri_mapping` (`table_name`, `column_name`, `date_id_column
 	('dwh_hourly_events_uid', 'partner_id', 'date_id', '', 'dwh_dim_partners', 'partner_id', '1'),
 	('dwh_hourly_events_uid', 'kuser_id', 'date_id', '', 'dwh_dim_kusers', 'kuser_id', '1'),
 	('dwh_hourly_events_widget', 'partner_id', 'date_id', '', 'dwh_dim_partners', 'partner_id', '1'),
-	('dwh_hourly_events_widget', 'widget_id', 'date_id', '', 'dwh_dim_widget', 'widget_id', '1');
+	('dwh_hourly_events_widget', 'widget_id', 'date_id', '', 'dwh_dim_widget', 'widget_id', '1'),
+	('dwh_hourly_events_devices', 'ui_conf_id', 'date_id', '', 'dwh_dim_ui_conf', 'ui_conf_id', '1');
