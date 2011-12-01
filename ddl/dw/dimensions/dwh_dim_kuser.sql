@@ -1,6 +1,8 @@
-DROP TABLE IF EXISTS `kalturadw`.`dwh_dim_kusers_new`;
+USE kalturadw;
 
-CREATE TABLE `kalturadw`.`dwh_dim_kusers_new` (
+DROP TABLE IF EXISTS `dwh_dim_kusers`;
+
+CREATE TABLE `dwh_dim_kusers` (
   `kuser_id` INT NOT NULL ,
   `screen_name` VARCHAR(127) DEFAULT 'missing value',
   `full_name` VARCHAR(40) DEFAULT 'missing value',
@@ -59,119 +61,9 @@ CREATE TABLE `kalturadw`.`dwh_dim_kusers_new` (
   KEY `operational_measures_updated_at` (`operational_measures_updated_at`)
 ) ENGINE=INNODB  DEFAULT CHARSET=utf8;
 
-INSERT INTO `kalturadw`.`dwh_dim_kusers_new` 
-	(`kuser_id`, 
-	`screen_name`, 
-	`full_name`, 
-	`first_name`, 
-	`last_name`, 
-	`email`, 
-	`date_of_birth`, 
-	`location_id`, 
-	`country_id`, 
-	`zip`, 
-	`url_list`, 
-	`picture`, 
-	`icon`, 
-	`about_me`, 
-	`tags`, 
-	`tagline`, 
-	`network_highschool`, 
-	`network_college`, 
-	`network_other`, 
-	`mobile_num`, 
-	`mature_content`, 
-	`gender_id`, 
-	`gender_name`, 
-	`registration_ip`, 
-	`registration_cookie`, 
-	`im_list`, 
-	`views`, 
-	`fans`, 
-	`entries`, 
-	`produced_kshows`, 
-	`kuser_status_id`, 
-	`kuser_status_name`, 
-	`created_at`, 
-	`created_date_id`, 
-	`created_hour_id`, 
-	`updated_at`, 
-	`updated_date_id`, 
-	`updated_hour_id`, 
-	`operational_measures_updated_at`,
-	`partner_id`, 
-	`display_in_search`, 
-	`search_text`, 
-	`partner_data`, 
-	`dwh_creation_date`, 
-	`dwh_update_date`, 
-	`ri_ind`, 
-	`storage_size`, 
-	`puser_id`, 
-	`admin_tags`, 
-	`indexed_partner_data_int`, 
-	`indexed_partner_data_string`, 
-	`is_admin`
-	)
-	SELECT 
-	`kuser_id`, 
-	`screen_name`, 
-	`full_name`, 
-	`first_name`, 
-	`last_name`, 
-	`email`, 
-	`date_of_birth`, 
-	`location_id`, 
-	`country_id`, 
-	`zip`, 
-	`url_list`, 
-	`picture`, 
-	`icon`, 
-	`about_me`, 
-	`tags`, 
-	`tagline`, 
-	`network_highschool`, 
-	`network_college`, 
-	`network_other`, 
-	`mobile_num`, 
-	`mature_content`, 
-	`gender_id`, 
-	`gender_name`, 
-	`registration_ip`, 
-	`registration_cookie`, 
-	`im_list`, 
-	`views`, 
-	`fans`, 
-	`entries`, 
-	`produced_kshows`, 
-	`kuser_status_id`, 
-	`kuser_status_name`, 
-	`created_at`, 
-	`created_date_id`, 
-	`created_hour_id`, 
-	`updated_at`, 
-	`updated_date_id`, 
-	`updated_hour_id`, 
-	NOW(),
-	`partner_id`, 
-	`display_in_search`, 
-	`search_text`, 
-	`partner_data`, 
-	`dwh_creation_date`, 
-	`dwh_update_date`, 
-	`ri_ind`, 
-	`storage_size`, 
-	`puser_id`, 
-	`admin_tags`, 
-	`indexed_partner_data_int`, 
-	`indexed_partner_data_string`, 
-	`is_admin`
-	FROM kalturadw.dwh_dim_kusers;
-
-DROP TABLE kalturadw.dwh_dim_kusers;
-RENAME TABLE kalturadw.dwh_dim_kusers_new TO kalturadw.dwh_dim_kusers;
-
 CREATE TRIGGER `kalturadw`.`dwh_dim_kusers_setcreationtime_oninsert` BEFORE INSERT
     ON `kalturadw`.`dwh_dim_kusers`
     FOR EACH ROW 
 	SET new.dwh_creation_date = NOW();
+
+    

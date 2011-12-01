@@ -88,8 +88,6 @@ mysqlexec $DS_ROOT_DIR/get_ip_country_location_function.sql
 mysqlexec $DS_ROOT_DIR/restore_file_status_procedure.sql
 mysqlexec $DS_ROOT_DIR/set_file_status_full_procedure.sql
 mysqlexec $DS_ROOT_DIR/set_file_status_procedure.sql
-mysqlexec $DS_ROOT_DIR/updated_entries.sql
-mysqlexec $DS_ROOT_DIR/updated_kusers_storage_usage.sql
 mysqlexec $DS_ROOT_DIR/aggr_name_resolver.sql
 mysqlexec $DS_ROOT_DIR/parameters.sql
 mysqlexec $DS_ROOT_DIR/processes.sql
@@ -120,6 +118,7 @@ mysqlexec $DS_ROOT_DIR/ds_api_calls.sql
 mysqlexec $DS_ROOT_DIR/ds_incomplete_api_calls.sql
 mysqlexec $DS_ROOT_DIR/unify_incomplete_api_calls.sql
 mysqlexec $DS_ROOT_DIR/ds_errors.sql
+mysqlexec $DS_ROOT_DIR/operational_syncs.sql
 
 #etl_log
 mysqlexec $DDL_ROOT_DIR/log/etl_log.sql
@@ -145,14 +144,12 @@ mysqlexec $DW_ROOT_DIR/dw_user_status.sql
 mysqlexec $DW_ROOT_DIR/dw_WIDGET_SECURITY_POLICY.sql
 mysqlexec $DW_ROOT_DIR/dw_widget_security_type.sql
 mysqlexec $DW_ROOT_DIR/ip_ranges.sql
-mysqlexec $DW_ROOT_DIR/kuser.sql
 mysqlexec $DW_ROOT_DIR/locations.sql
 mysqlexec $DW_ROOT_DIR/locations_init.sql
 mysqlexec $DW_ROOT_DIR/time.sql
 mysqlexec $DW_ROOT_DIR/widget.sql
 mysqlexec $DW_ROOT_DIR/countries_states_view.sql
 mysqlexec $DW_ROOT_DIR/countries_view.sql
-mysqlexec $DW_ROOT_DIR/calc_entries_sizes.sql
 mysqlexec $DW_ROOT_DIR/generate_daily_usage_report.sql
 mysqlexec $DW_ROOT_DIR/dwh_daily_usage_reports.sql
 
@@ -173,6 +170,7 @@ mysqlexec $DW_ROOT_DIR/facts/dwh_fact_incomplete_api_calls.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_entries_sizes.sql
 
 #dw/dimensions
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_kuser.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_entries.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_partners.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_partners_billing.sql
@@ -246,16 +244,14 @@ mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_bandwidth.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_storage.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_api_calls.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_errors.sql
+mysqlexec $DW_ROOT_DIR/aggr/calc_entries_sizes.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_widget.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_partner.sql
+mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_entry.sql
 mysqlexec $DW_ROOT_DIR/aggr/recalc_aggr_day_procedure.sql
 mysqlexec $DW_ROOT_DIR/aggr/resolve_aggr_name_function.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_aggr_events_partitions_view.sql
 mysqlexec $DW_ROOT_DIR/aggr/old_entries_table.sql
-
-#ds sync with operational
-mysqlexec $DS_ROOT_DIR/create_updated_entries_procedure.sql
-mysqlexec $DS_ROOT_DIR/create_updated_kusers_storage_usage.sql
 
 #dw/functions/
 mysqlexec $DW_ROOT_DIR/functions/calc_month_id_function.sql
@@ -265,6 +261,8 @@ mysqlexec $DW_ROOT_DIR/functions/calc_partner_storage_data_time_range.sql
 mysqlexec $DW_ROOT_DIR/functions/get_overage_charge.sql
 mysqlexec $DW_ROOT_DIR/functions/calc_partner_overage.sql
 mysqlexec $DW_ROOT_DIR/functions/calc_partner_billing_data_procedure.sql
+mysqlexec $DW_ROOT_DIR/functions/get_data_for_operational.sql
+mysqlexec $DW_ROOT_DIR/functions/mark_operational_as_done.sql
 
 #dw/ri/ 
 mysqlexec $DW_ROOT_DIR/ri/ri_defaults.sql

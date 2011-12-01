@@ -164,7 +164,7 @@ INSERT INTO `kalturadw`.`dwh_dim_entries_new`
 	`end_date_id`, 
 	`end_hour_id`
 	)
-SELECT `entry_id`, 
+SELECT distinct `entry_id`, 
 	`kshow_id`, 
 	`kuser_id`, 
 	`entry_name`, 
