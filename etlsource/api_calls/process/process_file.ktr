@@ -98,7 +98,7 @@
     <type>MYSQL</type>
     <access>Native</access>
     <database>kaltura</database>
-    <port>${OpDbPort}</port>
+    <port>${OpWritableDbPort}</port>
     <username>${OpWritableDbUser}</username>
     <password>${OpWritableDbPassword}</password>
     <servername/>
@@ -109,7 +109,7 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${OpWritableDbPort}</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SQL_CONNECT</code><attribute>SET SESSION sql_log_bin=0</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
@@ -194,7 +194,7 @@
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturaLog</database>
+    <database>kalturalog</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -219,8 +219,8 @@
     <server>${MonitoringDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>monmon</database>
-    <port>${OpDbPort}</port>
+    <database>kaltura</database>
+    <port>${MonitoringDbPort}</port>
     <username>${MonitoringDbUser}</username>
     <password>${MonitoringDbPassword}</password>
     <servername/>
@@ -231,9 +231,8 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${MonitoringDbPort}</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SQL_CONNECT</code><attribute>SET SESSION sql_log_bin=0</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
@@ -1759,7 +1758,7 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <script><![CDATA[([^ ]+ [^ ]+) \[([^\]]+)\] \[([^\]]+)\]: request_start,([^,]*),"([^"]*)",([^,]*),"([^"]*)",[^,]*,([^,]*),([^,]*),(\d+),([01]).*]]></script>    <matcher>row</matcher>
+    <script><![CDATA[([^ ]+ [^ ]+) \[([^\]]+)\] \[([^\]]+)\]: request_start,([^,]*),"(.*)",([^,]*),"(.*)",[^,]*,([^,]*),([^,]*),(\d+),([01]).*]]></script>    <matcher>row</matcher>
     <resultfieldname>result</resultfieldname>
     <usevar>N</usevar>
     <allowcapturegroups>Y</allowcapturegroups>
