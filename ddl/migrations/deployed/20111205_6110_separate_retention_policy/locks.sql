@@ -1,1 +1,1 @@
-INSERT INTO kalturadw_ds.locks ('retention_lock', FALSE);
+INSERT INTO kalturadw_ds.locks (lock_name, lock_state) VALUES('retention_lock', FALSE);
