@@ -1,2 +1,3 @@
 00 * * * * kaltura /opt/kaltura/dwh/etlsource/execute/etl_hourly.sh
 59 0,4,8,12,16,20 kaltura * * * /opt/kaltura/dwh/etlsource/execute/etl_daily.sh
+30 12  kaltura * * * /opt/kaltura/dwh/etlsource/execute/etl_perform_retention_policy.sh
