@@ -130,11 +130,11 @@ BEGIN
 			SUM(IF(ev.event_type_id = 38, 1,NULL)) count_postroll_25,
 			SUM(IF(ev.event_type_id = 39, 1,NULL)) count_postroll_50,
 			SUM(IF(ev.event_type_id = 40, 1,NULL)) count_postroll_75
-			FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), (select entry_id e_id, entry_media_type_id from dwh_dim_entries) e
+			FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), (select entry_id e_id, entry_media_type_id e_media_type_id from dwh_dim_entries) e
 			WHERE ev.event_type_id BETWEEN 2 AND 40 
 				AND ev.event_date_id  = DATE(''',p_date_val,''')*1
 				AND ev.event_hour_id = ',p_hour_id,'
-				AND e.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
+				AND e.e_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
                 AND e.e_id = ev.entry_id
 			GROUP BY partner_id,event_date_id, event_hour_id',v_aggr_id_field_str,';');
 		
@@ -160,10 +160,10 @@ BEGIN
 					COUNT(DISTINCT IF(ev.event_type_id IN (6),1,NULL)) v_75,
 					COUNT(DISTINCT IF(ev.event_type_id IN (7),1,NULL)) v_100,
 					MAX(IF(event_type_id IN (3),session_id,NULL)) s_play
-				FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), (select entry_id e_id, entry_media_type_id from dwh_dim_entries) e
+				FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), (select entry_id e_id, entry_media_type_id e_media_type_id from dwh_dim_entries) e
 				WHERE ev.event_date_id  = DATE(''',p_date_val,''')*1
 					AND ev.event_hour_id = ',p_hour_id,'
-					AND e.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
+					AND e.e_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
                     AND e.e_id = ev.entry_id
 					AND ev.event_type_id IN(3,4,5,6,7) /* time viewed only when player reaches 25,50,75,100 */
 				GROUP BY ev.partner_id, ev.event_date_id, ev.event_hour_id , ev.entry_id',v_aggr_id_field_str,',ev.session_id) e
