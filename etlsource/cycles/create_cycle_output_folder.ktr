@@ -262,7 +262,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>get cycle output folder</from><to>Create output_path</to><enabled>Y</enabled> </hop>  <hop> <from>Get rows from result</from><to>get cycle output folder</to><enabled>Y</enabled> </hop>  <hop> <from>Create output_path</from><to>Set CycleOutputPath variable</to><enabled>Y</enabled> </hop>  <hop> <from>Set CycleOutputPath variable</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>get cycle output folder</from><to>Create output_path</to><enabled>Y</enabled> </hop>  <hop> <from>Get rows from result</from><to>get cycle output folder</to><enabled>Y</enabled> </hop>  <hop> <from>Create output_path</from><to>Set CycleOutputPath variable</to><enabled>Y</enabled> </hop>  <hop> <from>Set CycleOutputPath variable</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Copy rows to result</name>
     <type>RowsToResult</type>
@@ -275,8 +275,32 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>910</xloc>
-      <yloc>169</yloc>
+      <xloc>813</xloc>
+      <yloc>170</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Create output_path</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+createFolder(output_path);</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>507</xloc>
+      <yloc>168</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -304,8 +328,8 @@
     </step>
 
   <step>
-    <name>Create output_path</name>
-    <type>ScriptValueMod</type>
+    <name>Set CycleOutputPath variable</name>
+    <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -313,16 +337,19 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <compatible>N</compatible>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47;Script here
-
-createFolder(output_path);</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
+    <fields>
+      <field>
+        <field_name>output_path</field_name>
+        <variable_name>CycleOutputPath</variable_name>
+        <variable_type>PARENT_JOB</variable_type>
+        <default_value/>
+        </field>
+      </fields>
+    <use_formatting>Y</use_formatting>
+     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>507</xloc>
-      <yloc>168</yloc>
+      <xloc>666</xloc>
+      <yloc>169</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -366,56 +393,6 @@ createFolder(output_path);</jsScript_script>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>368</xloc>
       <yloc>168</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set CycleOutputPath variable</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <field_name>output_path</field_name>
-        <variable_name>CycleOutputPath</variable_name>
-        <variable_type>PARENT_JOB</variable_type>
-        <default_value/>
-        </field>
-      </fields>
-    <use_formatting>Y</use_formatting>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>666</xloc>
-      <yloc>169</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <logmessage/>
-    <fields>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>806</xloc>
-      <yloc>169</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
