@@ -313,7 +313,7 @@
         <length>-1</length>
         <precision>-1</precision>
       </field>
-        <select_unspecified>N</select_unspecified>
+        <select_unspecified>Y</select_unspecified>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
