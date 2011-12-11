@@ -3120,7 +3120,7 @@ else {
 var file_fullpath = cycle_path + &quot;&#47;process&#47;&quot; + cycle_id +&quot;&#47;&quot; + file_name;
 var create_output_files_command = &quot;touch &quot; + 
 											output_cycle_path + &quot;&#47;ds_api_calls_&quot; + file_name + &quot; &quot; + 
-											output_cycle_path + &quot;&#47;ds_incomplete_api_calls_&quot; + file_name &quot; &quot; +
+											output_cycle_path + &quot;&#47;ds_incomplete_api_calls_&quot; + file_name + &quot; &quot; +
 											output_cycle_path + &quot;&#47;ds_errors_&quot; + file_name;</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>str2RegExp_Sample</jsScript_name>
