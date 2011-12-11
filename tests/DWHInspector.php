@@ -158,16 +158,23 @@ class DWHInspector
 		return $res;
 	}
 	
-	public static function setEntryMediaType($val)
+	public static function createEntriesFromFact()
 	{
-		MySQLRunner::execute('update kalturadw.dwh_dim_entries set entry_media_type_id = ?',array(0=>$val));
+		MySQLRunner::execute('INSERT INTO kalturadw.dwh_dim_entries (entry_id, entry_media_type_id)
+				SELECT DISTINCT entry_id, 1 FROM kalturadw.dwh_fact_events',array());
 	}
 
 	public static function purgeCycles()
 	{
-		MySQLRunner::execute('DELETE FROM kalturadw_ds.files', array());		
-		MySQLRunner::execute('DELETE FROM kalturadw_ds.cycles', array());
-        MySQLRunner::execute('UPDATE kalturadw_ds.retention_policy SET archive_start_days_back = 2000 where archive_start_days_back < 180 ', array());
+		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.files', array());		
+		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.cycles', array());
+		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.ds_events', array());
+		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.ds_bandwidth_usage', array());
+		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_dim_entries', array());
+		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_fact_events', array());
+		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_fact_bandwidth_usage', array());
+		
+	        MySQLRunner::execute('UPDATE kalturadw_ds.retention_policy SET archive_start_days_back = 2000 where archive_start_days_back < 180 ', array());
 	}
 	
 	public static function getEntryIDByFlavorID($flavorID)

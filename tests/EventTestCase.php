@@ -144,8 +144,8 @@ abstract class EventTestCase extends CycleProcessTestCase
 
 	public function testAggregation()
 	{
-		// fake entry media type for aggregations
-		DWHInspector::setEntryMediaType(1);
+		// create entries for aggregation according to fact
+		DWHInspector::createEntriesFromFact();
 
 		parent::testAggregation();
 		
