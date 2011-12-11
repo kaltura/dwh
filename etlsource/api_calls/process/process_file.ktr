@@ -569,20 +569,32 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
       <field>
         <name>cycle_path</name>
         <variable>${CyclePath}</variable>
-        <type>String</type>
+        <type>-</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <length>-1</length>
-        <precision>-1</precision>
+        <length>0</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>output_cycle_path</name>
+        <variable>${CycleOutputPath}</variable>
+        <type>-</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>0</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>39</xloc>
-      <yloc>81</yloc>
+      <yloc>76</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

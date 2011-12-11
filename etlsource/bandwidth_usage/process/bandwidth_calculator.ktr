@@ -789,7 +789,7 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai_vo
       <field>
         <name>cycle_path</name>
         <variable>${CyclePath}</variable>
-        <type>-</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -801,13 +801,25 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai_vo
       <field>
         <name>bandwidth_source_name</name>
         <variable>${BandwidthSourceName}</variable>
-        <type>-</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <length>0</length>
         <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>output_cycle_path</name>
+        <variable>${CycleOutputPath}</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
     </fields>
@@ -1397,7 +1409,7 @@ var url = substr(url, 0, 200);</jsScript_script>
         <jsScript_script>&#47;&#47;Script here
 
 var file_fullpath = cycle_path + &quot;&#47;process&#47;&quot; + cycle_id +&quot;&#47;&quot; + file_name;
-var create_output_file_command = &quot;touch &quot; + output_path + &quot;&#47;ds_bandwidth_usage_&quot; + file_name;
+var create_output_file_command = &quot;touch &quot; + output_cycle_path + &quot;&#47;ds_bandwidth_usage_&quot; + file_name;
 </jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>str2RegExp_Sample</jsScript_name>
