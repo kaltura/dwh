@@ -1,4 +1,5 @@
 USE kalturadw;
+DROP TABLE IF EXISTS dwh_hourly_events_devices_new;
 
 CREATE TABLE `dwh_hourly_events_devices_new` (
   `partner_id` int(11) NOT NULL DEFAULT '-1',
