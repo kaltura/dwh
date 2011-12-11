@@ -78,6 +78,7 @@ class DWHInspector
 	public static function setAggregations($isCalculated)
 	{
 		MySQLRunner::execute("UPDATE kalturadw.aggr_managment SET is_calculated = ?",array(0=>$isCalculated));
+        MySQLRunner::execute("UPDATE kalturadw_ds.parameters SET date_value = now() where id = 2");
 	}
 	
 	public static function getAggregations($dateId, $hourId, $isCalculated = 0)
@@ -159,7 +160,7 @@ class DWHInspector
 	
 	public static function setEntryMediaType($val)
 	{
-		MySQLRunner::execute('update kalturadw.dwh_fact_events set entry_media_type_id = ?',array(0=>$val));
+		MySQLRunner::execute('update kalturadw.dwh_dim_entries set entry_media_type_id = ?',array(0=>$val));
 	}
 
 	public static function purgeCycles()
