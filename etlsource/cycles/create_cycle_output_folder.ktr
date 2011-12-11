@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>load_cycle_files</name>
+    <name>create_cycle_output_folder</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -16,7 +16,7 @@
 <size_limit_lines/>
 <interval/>
 <timeout_days/>
-<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>N</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>N</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></trans-log-table>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field></trans-log-table>
 <perf-log-table><connection/>
 <schema/>
 <table/>
@@ -51,7 +51,7 @@
     <shared_objects_file/>
     <capture_step_performance>N</capture_step_performance>
     <step_performance_capturing_delay>1000</step_performance_capturing_delay>
-    <step_performance_capturing_size_limit/>
+    <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
     <dependencies>
     </dependencies>
     <partitionschemas>
@@ -60,10 +60,10 @@
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
-  <created_user/>
-  <created_date>2011&#47;12&#47;11 12:52:42.195</created_date>
+  <created_user>-</created_user>
+  <created_date>2011&#47;12&#47;11 10:44:34.915</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2011&#47;08&#47;04 16:15:15.601</modified_date>
+  <modified_date>2011&#47;12&#47;11 10:44:34.915</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -262,7 +262,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get cycle files</from><to>Join Rows (cartesian product)</to><enabled>Y</enabled> </hop>  <hop> <from>Get staging_areas</from><to>Join Rows (cartesian product)</to><enabled>Y</enabled> </hop>  <hop> <from>Wait till all files are loaded</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>  <hop> <from>Get rows from result</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Get cycle files</to><enabled>Y</enabled> </hop>  <hop> <from>create loaded file path</from><to>Load file</to><enabled>Y</enabled> </hop>  <hop> <from>Load file</from><to>File loaded</to><enabled>Y</enabled> </hop>  <hop> <from>File loaded</from><to>Wait till all files are loaded</to><enabled>Y</enabled> </hop>  <hop> <from>Join Rows (cartesian product)</from><to>get cycle output folder</to><enabled>Y</enabled> </hop>  <hop> <from>get cycle output folder</from><to>create loaded file path</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>get cycle output folder</from><to>Create output_path</to><enabled>Y</enabled> </hop>  <hop> <from>Get rows from result</from><to>get cycle output folder</to><enabled>Y</enabled> </hop>  <hop> <from>Create output_path</from><to>Set CycleOutputPath variable</to><enabled>Y</enabled> </hop>  <hop> <from>Set CycleOutputPath variable</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Copy rows to result</name>
     <type>RowsToResult</type>
@@ -275,61 +275,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1220</xloc>
-      <yloc>196</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>File loaded</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <logmessage/>
-    <fields>
-      <field>
-        <name>input_file_path</name>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>964</xloc>
-      <yloc>197</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get cycle files</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>kalturadw_ds</connection>
-    <sql>SELECT cycle_id, file_name FROM files 
-WHERE file_status = &apos;IN_CYCLE&apos; 
-and cycle_id = ?</sql>
-    <limit>0</limit>
-    <lookup>Select values</lookup>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>270</xloc>
-      <yloc>151</yloc>
+      <xloc>910</xloc>
+      <yloc>169</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -350,152 +297,14 @@ and cycle_id = ?</sql>
         <precision>-1</precision>
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>79</xloc>
-      <yloc>152</yloc>
+      <xloc>171</xloc>
+      <yloc>167</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Get staging_areas</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>kalturadw_ds</connection>
-    <sql>SELECT source_table 
-FROM staging_areas 
-WHERE process_id = ${ProcessID}</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>271</xloc>
-      <yloc>254</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Join Rows (cartesian product)</name>
-    <type>JoinRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <directory>%%java.io.tmpdir%%</directory>
-      <prefix>out</prefix>
-      <cache_size>500</cache_size>
-      <main>Get cycle files</main>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue/>
- <function>=</function>
- <rightvalue/>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>408</xloc>
-      <yloc>197</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Load file</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>2</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>kalturadw_ds</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <sql>LOAD DATA LOCAL INFILE &quot;?&quot;
-	INTO TABLE ?
-	FIELDS TERMINATED BY &apos;;&apos;
-		ENCLOSED BY &apos;&quot;&apos;
-	LINES TERMINATED BY &quot;\n&quot;;</sql>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-       <argument><name>input_file_path</name></argument>
-       <argument><name>source_table</name></argument>
-    </arguments>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>889</xloc>
-      <yloc>197</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>cycle_id</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>183</xloc>
-      <yloc>151</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Wait till all files are loaded</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <pass_all_rows>N</pass_all_rows>
-      <directory>%%java.io.tmpdir%%</directory>
-      <prefix>block</prefix>
-      <cache_size>5000</cache_size>
-      <compress>Y</compress>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1085</xloc>
-      <yloc>196</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>create loaded file path</name>
+    <name>Create output_path</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -507,17 +316,13 @@ WHERE process_id = ${ProcessID}</sql>
     <compatible>N</compatible>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>input_file_path = output_path + &quot;&#47;&quot; + source_table + &quot;_&quot; + file_name;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>input_file_path</name>
-        <rename>input_file_path</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
+        <jsScript_script>&#47;&#47;Script here
+
+createFolder(output_path);</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>755</xloc>
-      <yloc>198</yloc>
+      <xloc>507</xloc>
+      <yloc>168</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -559,8 +364,58 @@ WHERE process_id = ${ProcessID}</sql>
     <allow_multiple_output>N</allow_multiple_output>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>568</xloc>
-      <yloc>195</yloc>
+      <xloc>368</xloc>
+      <yloc>168</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set CycleOutputPath variable</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <field_name>output_path</field_name>
+        <variable_name>CycleOutputPath</variable_name>
+        <variable_type>PARENT_JOB</variable_type>
+        <default_value/>
+        </field>
+      </fields>
+    <use_formatting>Y</use_formatting>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>666</xloc>
+      <yloc>169</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <logmessage/>
+    <fields>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>806</xloc>
+      <yloc>169</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
