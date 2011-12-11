@@ -3421,7 +3421,7 @@ Alert(getEnvironmentVar(strVarName));</jsScript_script>
         <jsScript_script>&#47;&#47;Script here
 
 var file_fullpath = cycle_path + &quot;&#47;process&#47;&quot; + cycle_id +&quot;&#47;&quot; + file_name;
-var create_output_files_command = &quot;touch &quot; + output_cycle_path + &quot;&#47;ds_bandwidth_usage_&quot; + file_name + &quot; &quot; + output_cycle_path + &quot;&#47;ds_events_&quot; + file_name;</jsScript_script>
+var create_output_files_command = &quot;touch &quot; + output_cycle_path + &quot;&#47;&quot; + cycle_id + &quot;&#47;ds_bandwidth_usage_&quot; + file_name + &quot; &quot; + output_cycle_path + &quot;&#47;ds_events_&quot; + file_name;</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>str2RegExp_Sample</jsScript_name>
         <jsScript_script>&#47;&#47; Split&apos;s a String with a Regular Expression to an Array.

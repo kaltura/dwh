@@ -709,6 +709,18 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai_vo
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>output_cycle_path</name>
+        <variable>${CycleOutputPath}</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -1355,7 +1367,7 @@ var url = substr(url, 0, 200);</jsScript_script>
     <compatible>N</compatible>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>output_file_name = cycle_path + &quot;&#47;process&#47;&quot; + cycle_id + &quot;&#47;ds_bandwidth_usage_&quot; + file_name;</jsScript_script>
+        <jsScript_script>output_file_name = output_cycle_path + &quot;&#47;ds_bandwidth_usage_&quot; + file_name;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>output_file_name</name>
         <rename>output_file_name</rename>
         <type>String</type>
