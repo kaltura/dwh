@@ -263,7 +263,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Mapping input specification</from><to>Set lock name = retention_lock</to><enabled>Y</enabled> </hop>  <hop> <from>Set lock name = retention_lock</from><to>Mapping output specification</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Mapping input specification</from><to>Set lock name = dims_lock</to><enabled>Y</enabled> </hop>  <hop> <from>Set lock name = dims_lock</from><to>Mapping output specification</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Mapping input specification</name>
     <type>MappingInput</type>
@@ -304,7 +304,7 @@
     </step>
 
   <step>
-    <name>Set lock name = retention_lock</name>
+    <name>Set lock name = dims_lock</name>
     <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
@@ -321,7 +321,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>daily_lock</nullif>
+        <nullif>update_dims_lock</nullif>
         <length>-1</length>
         <precision>-1</precision>
       </field>
