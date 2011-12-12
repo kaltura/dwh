@@ -263,7 +263,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>create output file</from><to>Text file input</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath + output file creation command</from><to>create output file</to><enabled>Y</enabled> </hop>  <hop> <from>Text file input</from><to>Switch &#47; Case</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>invalid</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath + output file creation command</to><enabled>Y</enabled> </hop>  <hop> <from>Sort &quot;request starts&quot;</from><to>Unify requests</to><enabled>Y</enabled> </hop>  <hop> <from>Sort &quot;request ends&quot;</from><to>Unify requests</to><enabled>Y</enabled> </hop>  <hop> <from>get request start fields</from><to>filter ignored starts</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored starts</from><to>ignored request start</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored ends</from><to>ignore request end</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored starts</from><to>parse user agent</to><enabled>Y</enabled> </hop>  <hop> <from>action&#47;service lookup</from><to>client tag lookup</to><enabled>Y</enabled> </hop>  <hop> <from>client tag lookup</from><to>host lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter error_code</from><to>lookup error_code</to><enabled>Y</enabled> </hop>  <hop> <from>filter error_code</from><to>add null error_code_id</to><enabled>Y</enabled> </hop>  <hop> <from>lookup error_code</from><to>Sort &quot;request ends&quot;</to><enabled>Y</enabled> </hop>  <hop> <from>add null error_code_id</from><to>Sort &quot;request ends&quot;</to><enabled>Y</enabled> </hop>  <hop> <from>parse user agent</from><to>action&#47;service lookup</to><enabled>Y</enabled> </hop>  <hop> <from>host lookup</from><to>get numeric_ip</to><enabled>Y</enabled> </hop>  <hop> <from>get numeric_ip</from><to>Get IP location</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>Sort &quot;request starts&quot;</to><enabled>Y</enabled> </hop>  <hop> <from>create events output file_name</from><to>filter incomplete rows</to><enabled>Y</enabled> </hop>  <hop> <from>Unify requests</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle and file</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Choose populated fields</from><to>Output: Partial calls</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>Get Cycles Path events</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path events</from><to>create events output file_name</to><enabled>Y</enabled> </hop>  <hop> <from>filter incomplete rows</from><to>rename line_number</to><enabled>Y</enabled> </hop>  <hop> <from>rename line_number</from><to>Choose populated fields</to><enabled>Y</enabled> </hop>  <hop> <from>get request end fields</from><to>filter ignored ends</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored ends</from><to>filter invalid ends</to><enabled>Y</enabled> </hop>  <hop> <from>filter invalid ends</from><to>filter error_code</to><enabled>Y</enabled> </hop>  <hop> <from>filter invalid ends</from><to>format errornous line</to><enabled>Y</enabled> </hop>  <hop> <from>format errornous line</from><to>Get Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get Process ID</from><to>Append cycle_id, file_id for invalid lines</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle and file for invalid lines</from><to>Append cycle_id, file_id for invalid lines</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id for invalid lines</from><to>Insert invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>filter incomplete rows</from><to>Distribute full api calls</to><enabled>Y</enabled> </hop>  <hop> <from>Distribute full api calls</from><to>Output: full calls</to><enabled>Y</enabled> </hop>  <hop> <from>Set error_object_type = API Call</from><to>lookup error_object_type</to><enabled>Y</enabled> </hop>  <hop> <from>filter api errors</from><to>Create api_error_id</to><enabled>Y</enabled> </hop>  <hop> <from>Create api_error_id</from><to>Set error_object_type = API Call</to><enabled>Y</enabled> </hop>  <hop> <from>Distribute full api calls</from><to>filter api errors</to><enabled>Y</enabled> </hop>  <hop> <from>lookup error_object_type</from><to>Output: full calls errors</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>Regex Evaluation Start</to><enabled>Y</enabled> </hop>  <hop> <from>Regex Evaluation Start</from><to>get request start fields</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>Regex Evaluation End</to><enabled>Y</enabled> </hop>  <hop> <from>Regex Evaluation End</from><to>get request end fields</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>create output file</from><to>Text file input</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath + output file creation command</from><to>create output file</to><enabled>Y</enabled> </hop>  <hop> <from>Text file input</from><to>Switch &#47; Case</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>invalid</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath + output file creation command</to><enabled>Y</enabled> </hop>  <hop> <from>Sort &quot;request starts&quot;</from><to>Unify requests</to><enabled>Y</enabled> </hop>  <hop> <from>Sort &quot;request ends&quot;</from><to>Unify requests</to><enabled>Y</enabled> </hop>  <hop> <from>get request start fields</from><to>filter ignored starts</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored starts</from><to>ignored request start</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored ends</from><to>ignore request end</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored starts</from><to>parse user agent</to><enabled>Y</enabled> </hop>  <hop> <from>action&#47;service lookup</from><to>client tag lookup</to><enabled>Y</enabled> </hop>  <hop> <from>client tag lookup</from><to>host lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter error_code</from><to>lookup error_code</to><enabled>Y</enabled> </hop>  <hop> <from>filter error_code</from><to>add null error_code_id</to><enabled>Y</enabled> </hop>  <hop> <from>lookup error_code</from><to>Sort &quot;request ends&quot;</to><enabled>Y</enabled> </hop>  <hop> <from>add null error_code_id</from><to>Sort &quot;request ends&quot;</to><enabled>Y</enabled> </hop>  <hop> <from>parse user agent</from><to>action&#47;service lookup</to><enabled>Y</enabled> </hop>  <hop> <from>host lookup</from><to>get numeric_ip</to><enabled>Y</enabled> </hop>  <hop> <from>get numeric_ip</from><to>Get IP location</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location</from><to>Sort &quot;request starts&quot;</to><enabled>Y</enabled> </hop>  <hop> <from>create events output file_name</from><to>filter incomplete rows</to><enabled>Y</enabled> </hop>  <hop> <from>Unify requests</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle and file</from><to>Append cycle_id, file_id</to><enabled>Y</enabled> </hop>  <hop> <from>Choose populated fields</from><to>Output: Partial calls</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id</from><to>Get Cycles Path events</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path events</from><to>create events output file_name</to><enabled>Y</enabled> </hop>  <hop> <from>filter incomplete rows</from><to>rename line_number</to><enabled>Y</enabled> </hop>  <hop> <from>rename line_number</from><to>Choose populated fields</to><enabled>Y</enabled> </hop>  <hop> <from>get request end fields</from><to>filter ignored ends</to><enabled>Y</enabled> </hop>  <hop> <from>filter ignored ends</from><to>filter invalid ends</to><enabled>Y</enabled> </hop>  <hop> <from>filter invalid ends</from><to>filter error_code</to><enabled>Y</enabled> </hop>  <hop> <from>filter invalid ends</from><to>format errornous line</to><enabled>Y</enabled> </hop>  <hop> <from>format errornous line</from><to>Get Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get Process ID</from><to>Append cycle_id, file_id for invalid lines</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle and file for invalid lines</from><to>Append cycle_id, file_id for invalid lines</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id for invalid lines</from><to>Insert invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>filter incomplete rows</from><to>Distribute full api calls</to><enabled>Y</enabled> </hop>  <hop> <from>Distribute full api calls</from><to>Output: full calls</to><enabled>Y</enabled> </hop>  <hop> <from>Set error_object_type = API Call</from><to>lookup error_object_type</to><enabled>Y</enabled> </hop>  <hop> <from>filter api errors</from><to>Create api_error_id</to><enabled>Y</enabled> </hop>  <hop> <from>Create api_error_id</from><to>Set error_object_type = API Call</to><enabled>Y</enabled> </hop>  <hop> <from>Distribute full api calls</from><to>filter api errors</to><enabled>Y</enabled> </hop>  <hop> <from>lookup error_object_type</from><to>Output: full calls errors</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>Regex Evaluation Start</to><enabled>Y</enabled> </hop>  <hop> <from>Switch &#47; Case</from><to>Regex Evaluation End</to><enabled>Y</enabled> </hop>  <hop> <from>Regex Evaluation Start</from><to>Filter regex failures start</to><enabled>Y</enabled> </hop>  <hop> <from>Filter regex failures start</from><to>get request start fields</to><enabled>Y</enabled> </hop>  <hop> <from>Filter regex failures start</from><to>start regex fail</to><enabled>Y</enabled> </hop>  <hop> <from>Regex Evaluation End</from><to>Filter regex failures end</to><enabled>Y</enabled> </hop>  <hop> <from>Filter regex failures end</from><to>get request end fields</to><enabled>Y</enabled> </hop>  <hop> <from>Filter regex failures end</from><to>end regex fail</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Append cycle_id, file_id</name>
     <type>JoinRows</type>
@@ -460,8 +460,8 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
         <precision>-1</precision>
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>412</xloc>
-      <yloc>496</yloc>
+      <xloc>512</xloc>
+      <yloc>447</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1766,8 +1766,8 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>312</xloc>
-      <yloc>358</yloc>
+      <xloc>266</xloc>
+      <yloc>403</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1930,8 +1930,8 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>308</xloc>
-      <yloc>175</yloc>
+      <xloc>268</xloc>
+      <yloc>93</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3172,6 +3172,98 @@ else {
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>126</xloc>
       <yloc>116</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter regex failures start</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>get request start fields</send_true_to>
+<send_false_to>start regex fail</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>result</leftvalue>
+ <function>=</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>378</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>start regex fail</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>381</xloc>
+      <yloc>28</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter regex failures end</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>get request end fields</send_true_to>
+<send_false_to>end regex fail</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>result</leftvalue>
+ <function>=</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>395</xloc>
+      <yloc>404</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>end regex fail</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>387</xloc>
+      <yloc>487</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
