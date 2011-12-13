@@ -359,7 +359,7 @@
       <yloc>60</yloc>
       </entry>
     <entry>
-      <name>Seize retention lock</name>
+      <name>Seize update dims lock</name>
       <description>Transformation</description>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
@@ -404,7 +404,7 @@
       <yloc>180</yloc>
       </entry>
     <entry>
-      <name>Release retention lock</name>
+      <name>Release update dims lock</name>
       <description>Transformation</description>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
@@ -431,7 +431,7 @@
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
             <parameter>            <name>LockNameMapping</name>
             <stream_name/>
-            <value>${EtlBasePath}&#47;common&#47;get_retention_lock_name.ktr</value>
+            <value>${EtlBasePath}&#47;common&#47;get_update_dims_lock_name.ktr</value>
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -469,7 +469,7 @@
     </hop>
     <hop>
       <from>START</from>
-      <to>Seize retention lock</to>
+      <to>Seize update dims lock</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -477,7 +477,7 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Seize retention lock</from>
+      <from>Seize update dims lock</from>
       <to>get_last_updated_at</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -486,7 +486,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Seize retention lock</from>
+      <from>Seize update dims lock</from>
       <to>Success 1</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -496,7 +496,7 @@
     </hop>
     <hop>
       <from>set_last_updated_at</from>
-      <to>Release retention lock</to>
+      <to>Release update dims lock</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -504,7 +504,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Release retention lock</from>
+      <from>Release update dims lock</from>
       <to>Success 1</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
