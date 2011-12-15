@@ -467,6 +467,62 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
     </step>
 
   <step>
+    <name>Filter regex failures end</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>get request end fields</send_true_to>
+<send_false_to>end regex fail</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>result</leftvalue>
+ <function>=</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>395</xloc>
+      <yloc>404</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter regex failures start</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>get request start fields</send_true_to>
+<send_false_to>start regex fail</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>result</leftvalue>
+ <function>=</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>378</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Get Cycles Path events</name>
     <type>GetVariable</type>
     <description/>
@@ -2376,6 +2432,24 @@ incomplete_output_file_name = output_cycle_path + &quot;&#47;ds_incomplete_api_c
     </step>
 
   <step>
+    <name>end regex fail</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>387</xloc>
+      <yloc>487</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>filter api errors</name>
     <type>FilterRows</type>
     <description/>
@@ -3130,7 +3204,7 @@ else {
         <jsScript_script>&#47;&#47;Script here
 
 var file_fullpath = cycle_path + &quot;&#47;process&#47;&quot; + cycle_id +&quot;&#47;&quot; + file_name;
-var create_output_files_command = &quot;touch &quot; + 
+var create_output_file_command = &quot;touch &quot; + 
 											output_cycle_path + &quot;&#47;ds_api_calls_&quot; + file_name + &quot; &quot; + 
 											output_cycle_path + &quot;&#47;ds_incomplete_api_calls_&quot; + file_name + &quot; &quot; +
 											output_cycle_path + &quot;&#47;ds_errors_&quot; + file_name;</jsScript_script>
@@ -3177,34 +3251,6 @@ else {
     </step>
 
   <step>
-    <name>Filter regex failures start</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>get request start fields</send_true_to>
-<send_false_to>start regex fail</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>result</leftvalue>
- <function>=</function>
- <rightvalue/>
- <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>378</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>start regex fail</name>
     <type>Dummy</type>
     <description/>
@@ -3218,52 +3264,6 @@ else {
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>381</xloc>
       <yloc>28</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter regex failures end</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>get request end fields</send_true_to>
-<send_false_to>end regex fail</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>result</leftvalue>
- <function>=</function>
- <rightvalue/>
- <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>395</xloc>
-      <yloc>404</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>end regex fail</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>387</xloc>
-      <yloc>487</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
