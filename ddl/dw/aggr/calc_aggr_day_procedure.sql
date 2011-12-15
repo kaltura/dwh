@@ -7,7 +7,6 @@ DROP PROCEDURE IF EXISTS `calc_aggr_day`$$
 CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day`(p_date_val DATE,p_hour_id INT(11), p_aggr_name VARCHAR(100))
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
-	DECLARE v_aggr_id_field VARCHAR(100);
 	DECLARE v_aggr_id_field_str VARCHAR(100);
 	DECLARE extra VARCHAR(100);
 	DECLARE v_from_archive DATE;
@@ -19,24 +18,24 @@ BEGIN
 	FROM kalturadw_ds.retention_policy
 	WHERE table_name = 'dwh_fact_events';	
 	
-	IF (p_date_val >= v_ignore) THEN -- not so old that we don't have any data
+	IF (p_date_val >= v_ignore) THEN 
 	
-		IF (p_date_val >= v_from_archive) THEN -- aggr from archive or from events
+		IF (p_date_val >= v_from_archive) THEN 
 			SET v_table_name = 'dwh_fact_events';
 		ELSE
 			SET v_table_name = 'dwh_fact_events_archive';
 		END IF;
 		
-		SELECT aggr_table, aggr_id_field
-		INTO  v_aggr_table, v_aggr_id_field
+		SELECT aggr_table, CONCAT(
+						IF(aggr_id_field <> '', CONCAT(',', aggr_id_field),'') ,
+						IF(dim_id_field <> '', 	CONCAT(', e.', REPLACE(dim_id_field,',',', e.')), '')
+					  )
+		INTO  v_aggr_table, v_aggr_id_field_str
 		FROM kalturadw_ds.aggr_name_resolver
 		WHERE aggr_name = p_aggr_name;
 		
-		IF ( v_aggr_id_field <> "" ) THEN
-			SET v_aggr_id_field_str = CONCAT (',',v_aggr_id_field);
-		ELSE
-			SET v_aggr_id_field_str = "";
-		END IF;
+		
+		
 		
 		SET @s = CONCAT('UPDATE aggr_managment SET start_time = NOW()
 		WHERE aggr_name = ''',p_aggr_name,''' AND aggr_day = ''',p_date_val,''' AND hour_id = ',p_hour_id);
@@ -44,7 +43,7 @@ BEGIN
 		EXECUTE stmt;
 		DEALLOCATE PREPARE stmt;
 		
-		IF ( v_aggr_table <> "" ) THEN
+		IF ( v_aggr_table <> '' ) THEN
 			SET @s = CONCAT('INSERT INTO ',v_aggr_table,'
 				(partner_id
 				,date_id
@@ -130,12 +129,12 @@ BEGIN
 			SUM(IF(ev.event_type_id = 38, 1,NULL)) count_postroll_25,
 			SUM(IF(ev.event_type_id = 39, 1,NULL)) count_postroll_50,
 			SUM(IF(ev.event_type_id = 40, 1,NULL)) count_postroll_75
-			FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), (select entry_id e_id, entry_media_type_id, kuser_id from dwh_dim_entries) e
-			WHERE ev.event_type_id BETWEEN 2 AND 40 
+			FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), dwh_dim_entries e
+				WHERE ev.event_type_id BETWEEN 2 AND 40 
 				AND ev.event_date_id  = DATE(''',p_date_val,''')*1
 				AND ev.event_hour_id = ',p_hour_id,'
 				AND e.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
-                AND e.e_id = ev.entry_id
+			AND e.entry_id = ev.entry_id
 			GROUP BY partner_id,event_date_id, event_hour_id',v_aggr_id_field_str,';');
 		
 		PREPARE stmt FROM  @s;
@@ -160,11 +159,11 @@ BEGIN
 					COUNT(DISTINCT IF(ev.event_type_id IN (6),1,NULL)) v_75,
 					COUNT(DISTINCT IF(ev.event_type_id IN (7),1,NULL)) v_100,
 					MAX(IF(event_type_id IN (3),session_id,NULL)) s_play
-				FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), (select entry_id e_id, entry_media_type_id, kuser_id from dwh_dim_entries) e
+				FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), dwh_dim_entries e
 				WHERE ev.event_date_id  = DATE(''',p_date_val,''')*1
 					AND ev.event_hour_id = ',p_hour_id,'
 					AND e.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
-                    AND e.e_id = ev.entry_id
+					AND e.entry_id = ev.entry_id
 					AND ev.event_type_id IN(3,4,5,6,7) /* time viewed only when player reaches 25,50,75,100 */
 				GROUP BY ev.partner_id, ev.event_date_id, ev.event_hour_id , ev.entry_id',v_aggr_id_field_str,',ev.session_id) e
 				GROUP BY partner_id, event_date_id, event_hour_id',v_aggr_id_field_str,'
@@ -185,7 +184,7 @@ BEGIN
 			
 		END IF;	  
 		
-	END IF; -- end skip old data
+	END IF; 
 	
 	SET @s = CONCAT('UPDATE aggr_managment SET is_calculated = 1,end_time = NOW()
 	WHERE aggr_name = ''',p_aggr_name,''' AND aggr_day = ''',p_date_val,''' AND hour_id =',p_hour_id);
