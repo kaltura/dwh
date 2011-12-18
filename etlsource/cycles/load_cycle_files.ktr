@@ -430,7 +430,7 @@ WHERE process_id = ${ProcessID}</sql>
     <sql>LOAD DATA LOCAL INFILE &quot;?&quot;
 	INTO TABLE ?
 	FIELDS TERMINATED BY &apos;;&apos;
-		ENCLOSED BY &apos;&quot;&apos;
+		ENCLOSED BY &apos;&quot;&apos; ESCAPED BY &apos;&apos;
 	LINES TERMINATED BY &quot;\n&quot;;</sql>
     <insert_field/>
     <update_field/>
