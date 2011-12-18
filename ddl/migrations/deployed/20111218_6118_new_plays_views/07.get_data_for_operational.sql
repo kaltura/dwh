@@ -23,7 +23,7 @@ BEGIN
     SET date_value = v_execution_start_time 
     WHERE id = v_execution_start_time_parameter_id;
 
-    IF p_sync_type='entries' THEN -- HACK. When KUSERS move to the same mechanism as ENTRIES, need to rewrite the entire procedure.
+    IF p_sync_type='entry' THEN -- HACK. When KUSERS move to the same mechanism as ENTRIES, need to rewrite the entire procedure.
     
         SELECT e.entry_id, e.plays, e.views
         FROM dwh_entry_plays_views e, kalturadw_ds.parameters p
