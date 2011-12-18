@@ -10,6 +10,6 @@ BEGIN
     WHERE date_id = p_date_id AND hour_id = p_hour_id 
     ON DUPLICATE KEY UPDATE 
         plays = IF(plays - VALUES(plays) >= 0, plays - VALUES(plays), 0),
-        views = IF(views - VALUES(views) >= 0, views - VALUES(views), 0; 
+        views = IF(views - VALUES(views) >= 0, views - VALUES(views), 0); 
 
 END&&
