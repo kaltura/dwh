@@ -1,19 +1,18 @@
 USE kalturadw;
 
-DELIMITER &&
-
 DROP PROCEDURE IF EXISTS calc_plays_views;
+
+DELIMITER &&
 
 CREATE PROCEDURE calc_plays_views()
 BEGIN
-    DECLARE v_date_id INT;
-    DECLARE v_hour_id INT;
-    DECLARE v_done INT DEFAULT 0;
+    DECLARE v_date_id INT(11);
+    DECLARE v_hour_id INT(11);
+    DECLARE v_done INT(1) DEFAULT 0;
     
-    DECLARE c_partitions 
-    CURSOR FOR
-    SELECT DISTINCT date_id, hour_id FROM kalturadw.dwh_hourly_events_entry;
+    DECLARE c_partitions CURSOR FOR SELECT DISTINCT date_id, hour_id FROM kalturadw.dwh_hourly_events_entry;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_done = 1;
+    
     OPEN c_partitions;
     
     TRUNCATE TABLE dwh_entry_plays_views;
@@ -23,7 +22,7 @@ BEGIN
     FROM entry_plays_views_before_08_2009;
     
     read_loop: LOOP
-    FETCH c_partitions INTO v_date_id, v_hour_id;
+        FETCH c_partitions INTO v_date_id, v_hour_id;
         IF v_done = 1 THEN
          LEAVE read_loop;
         END IF;
@@ -33,7 +32,7 @@ BEGIN
         FROM kalturadw.dwh_hourly_events_entry aggr
         WHERE date_id BETWEEN v_date_id AND v_date_id AND hour_id = v_hour_id
         ON DUPLICATE KEY UPDATE 
-        plays = plays + VALUES(plays) ,
+        plays = plays + VALUES(plays),
         views = views + VALUES(views), 
         updated_at = DATE(20000101);
     END LOOP read_loop;

@@ -7,7 +7,7 @@ DROP PROCEDURE IF EXISTS `calc_aggr_day`$$
 CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day`(p_date_val DATE,p_hour_id INT(11), p_aggr_name VARCHAR(100))
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
-	DECLARE v_aggr_id_field_str VARCHAR(100);
+	DECLARE v_aggr_id_field VARCHAR(100);
 	DECLARE extra VARCHAR(100);
 	DECLARE v_from_archive DATE;
 	DECLARE v_ignore DATE;
@@ -60,7 +60,7 @@ BEGIN
 						IF(aggr_id_field <> '', CONCAT(',', aggr_id_field),'') ,
 						IF(dim_id_field <> '', 	CONCAT(', e.', REPLACE(dim_id_field,',',', e.')), '')
 					  )
-		INTO  v_aggr_table, v_aggr_id_field_str
+		INTO  v_aggr_table, v_aggr_id_field
 		FROM kalturadw_ds.aggr_name_resolver
 		WHERE aggr_name = p_aggr_name;
 		
@@ -75,7 +75,7 @@ BEGIN
 				(partner_id
 				,date_id
 				,hour_id
-				',REPLACE(v_aggr_id_field_str,'e.',''),' 
+				',REPLACE(v_aggr_id_field,'e.',''),' 
 				,count_loads
 				,count_plays 
 				,count_plays_25 
@@ -116,7 +116,7 @@ BEGIN
 				,count_postroll_50
 				,count_postroll_75
 				) 
-			SELECT  ev.partner_id,ev.event_date_id, event_hour_id',v_aggr_id_field_str,',
+			SELECT  ev.partner_id,ev.event_date_id, event_hour_id',v_aggr_id_field,',
 			SUM(IF(ev.event_type_id = 2, 1,NULL)) count_loads,
 			SUM(IF(ev.event_type_id = 3, 1,NULL)) count_plays,
 			SUM(IF(ev.event_type_id = 4, 1,NULL)) count_plays_25,
@@ -162,7 +162,7 @@ BEGIN
 				AND ev.event_hour_id = ',p_hour_id,'
 				AND e.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
 			AND e.entry_id = ev.entry_id
-			GROUP BY partner_id,event_date_id, event_hour_id',v_aggr_id_field_str,';');
+			GROUP BY partner_id,event_date_id, event_hour_id',v_aggr_id_field,';');
 		
 		PREPARE stmt FROM  @s;
 		EXECUTE stmt;
@@ -172,14 +172,14 @@ BEGIN
 				(partner_id
 				,date_id
 				,hour_id
-				',REPLACE(v_aggr_id_field_str,'e.',''),'
+				',REPLACE(v_aggr_id_field,'e.',''),'
 				,sum_time_viewed
 				,count_time_viewed)
-				SELECT partner_id, event_date_id, event_hour_id',v_aggr_id_field_str,',
+				SELECT partner_id, event_date_id, event_hour_id',v_aggr_id_field,',
 				SUM(duration / 60 / 4 * (v_25+v_50+v_75+v_100)) sum_time_viewed,
 				COUNT(DISTINCT s_play) count_time_viewed
 				FROM(
-				SELECT ev.partner_id, ev.event_date_id, ev.event_hour_id',v_aggr_id_field_str,', ev.session_id,
+				SELECT ev.partner_id, ev.event_date_id, ev.event_hour_id',v_aggr_id_field,', ev.session_id,
 					MAX(duration) duration,
 					COUNT(DISTINCT IF(ev.event_type_id IN (4),1,NULL)) v_25,
 					COUNT(DISTINCT IF(ev.event_type_id IN (5),1,NULL)) v_50,
@@ -192,8 +192,8 @@ BEGIN
 					AND e.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
 					AND e.entry_id = ev.entry_id
 					AND ev.event_type_id IN(3,4,5,6,7) /* time viewed only when player reaches 25,50,75,100 */
-				GROUP BY ev.partner_id, ev.event_date_id, ev.event_hour_id , ev.entry_id',v_aggr_id_field_str,',ev.session_id) e
-				GROUP BY partner_id, event_date_id, event_hour_id',v_aggr_id_field_str,'
+				GROUP BY ev.partner_id, ev.event_date_id, ev.event_hour_id , ev.entry_id',v_aggr_id_field,',ev.session_id) e
+				GROUP BY partner_id, event_date_id, event_hour_id',v_aggr_id_field,'
 				ON DUPLICATE KEY UPDATE
 				sum_time_viewed = values(sum_time_viewed), count_time_viewed=values(count_time_viewed);');
 		
