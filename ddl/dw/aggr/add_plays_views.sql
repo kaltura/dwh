@@ -13,3 +13,5 @@ BEGIN
         views = views + VALUES(views); 
 
 END&&
+
+DELIMITER ;
