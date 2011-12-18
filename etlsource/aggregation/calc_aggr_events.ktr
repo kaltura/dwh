@@ -373,7 +373,7 @@ order by aggr_day, hour_id</sql>
     <execute_each_row>Y</execute_each_row>
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
-    <sql>call kalturadw.recalc_aggr_day(date(&apos;?&apos;),?,&apos;?&apos;);</sql>
+    <sql>call kalturadw.calc_aggr_day(date(&apos;?&apos;),?,&apos;?&apos;);</sql>
     <insert_field/>
     <update_field/>
     <delete_field/>
