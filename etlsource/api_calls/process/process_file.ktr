@@ -98,7 +98,7 @@
     <type>MYSQL</type>
     <access>Native</access>
     <database>kaltura</database>
-    <port>${OpDbPort}</port>
+    <port>${OpWritableDbPort}</port>
     <username>${OpWritableDbUser}</username>
     <password>${OpWritableDbPassword}</password>
     <servername/>
@@ -109,7 +109,7 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${OpWritableDbPort}</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SQL_CONNECT</code><attribute>SET SESSION sql_log_bin=0</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
@@ -194,7 +194,7 @@
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturaLog</database>
+    <database>kalturalog</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -1772,8 +1772,8 @@ line_number = line_number_start != null ? line_number_start : line_number_end;</
         <trimtype>both</trimtype>
       </field>
       <field>
-        <name>duration_msecs</name>
-        <type>Integer</type>
+        <name>duration_secs</name>
+        <type>Number</type>
         <format/>
         <group/>
         <decimal/>
@@ -2757,7 +2757,7 @@ var error_reason = &apos;&apos;;
 var error_date_id = 0;
 var ignored_line = session_id_end == null || request_index_end == null;
 var date = null;
-duration_msecs = duration_msecs*1000;
+duration_msecs = duration_secs*1000;
 
 if (partner_id == null || !isNum(partner_id) )
 {
@@ -2818,12 +2818,12 @@ else {
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
-      </field>      <field>        <name>duration_msecs</name>
-        <rename>duration_msecs</rename>
+      </field>      <field>        <name>duration_secs</name>
+        <rename>duration_secs</rename>
         <type>Integer</type>
         <length>-1</length>
         <precision>-1</precision>
-        <replace>Y</replace>
+        <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>383</xloc>
