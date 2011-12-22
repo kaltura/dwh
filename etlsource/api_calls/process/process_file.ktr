@@ -2818,8 +2818,8 @@ else {
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
-      </field>      <field>        <name>duration_secs</name>
-        <rename>duration_secs</rename>
+      </field>      <field>        <name>duration_msecs</name>
+        <rename>duration_msecs</rename>
         <type>Integer</type>
         <length>-1</length>
         <precision>-1</precision>
