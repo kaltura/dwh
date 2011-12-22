@@ -101,6 +101,14 @@ class ApiCallsTest extends CycleProcessTestCase
                                 $this->assertEquals($res, $val, "Expected(db): $res, Actual(file): $val partner_id: $objectID");
                         }
 
+			$collection = $this->sumFullCallsPerEntity($filename, "PARTNER_ID", "DURATION");
+			foreach($collection as $partnerID=>$duration)
+			{
+				$res = DWHInspector::sumRows('kalturadw_ds.ds_api_calls', $fileID, 'duration_msecs', " and  partner_id = '$partnerID'");
+				$maxDiffInPercent = 1;
+				$this->assertLessThanOrEqual($maxDiffInPercent,  abs(100 - ($duration / $res * 100)),  "Diff is bigger than $maxDiffInPercent percent - Expected(db): $res, Actual(file): $duration partner_id: $partnerID");
+			}
+
 			// compare number of distinct tags and number of rows per tags
                         $collection = $this->getFullCallsPerEntity($filename, "CLIENT_TAG", "unknown");
                         $this->assertEquals(DWHInspector::countDistinct('kalturadw_ds.ds_api_calls',$fileID,'client_tag_name', 'kalturadw.dwh_dim_client_tags', 'client_tag_id'),count($collection));
@@ -128,6 +136,7 @@ class ApiCallsTest extends CycleProcessTestCase
                                 $res = DWHInspector::countRows('kalturadw_ds.ds_errors',$fileID," and partner_id = '$objectID'");
                                 $this->assertEquals($res, $val, "Expected(db): $res, Actual(file): $val partner_id: $objectID");
                         }
+
 
 			$collection = $this->getFullCallsPerEntity($filename, "ERROR_CODE", '', true);
                         $this->assertEquals(DWHInspector::countDistinct('kalturadw_ds.ds_errors',$fileID,'error_code_name', 'kalturadw.dwh_dim_error_codes', 'error_code_id'), count($collection));
@@ -284,7 +293,7 @@ class ApiCallsTest extends CycleProcessTestCase
                 return array_merge($requestStarts, $requestEnds);
 	}
 
-	public static function getFullCallsPerEntity($file, $entityName, $defaultValue = '', $onlyErrornousCalls = false)
+	public static function getFullCallsPerEntity($file, $entityName, $defaultValue = '', $onlyErrornousCalls = false, $aggregatedMeasure = '')
         {
                 $calls = self::getFileApiFullCalls($file);
 		$errorCodeIndexer = 'ERROR_CODE';
@@ -297,14 +306,23 @@ class ApiCallsTest extends CycleProcessTestCase
 			}
                         $objectID = $call->$entityName;
                         $objectID = $objectID == '' ? $defaultValue : $objectID;
-                        if (!array_key_exists($objectID, $collection))
+			if (!array_key_exists($objectID, $collection))
                         {
-                                $collection[$objectID] = 0;
+                                $collection[$objectID] = $aggregatedMeasure == '' ? 1 : $call->$aggregatedMeasure;
                         }
-                        $collection[$objectID]++;
+                        else
+                        {
+                                $collection[$objectID] += $aggregatedMeasure == '' ? 1 : $call->$aggregatedMeasure;
+                        }
                 }
                 return $collection;
         }
+
+	public static function sumFullCallsPerEntity($file, $entityName, $aggregatedMeasure)
+	{
+		return self::getFullCallsPerEntity($file, $entityName, $defaultValue = '', $onlyErrornousCalls = false, $aggregatedMeasure);
+	}
+
 }
 
 ?>
