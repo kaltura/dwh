@@ -11,7 +11,7 @@ CREATE TABLE kalturadw.`dwh_hourly_events_devices` (
   `os_id` INT NOT NULL DEFAULT -1,
   `browser_id` INT NOT NULL DEFAULT -1,
   `ui_conf_id` INT NOT NULL DEFAULT -1,
-  `entry_media_type_id` INT(11) NOT NULL DEFAULT -1,
+  `entry_media_type_id` SMALLINT(6) NOT NULL DEFAULT -1,
   `sum_time_viewed` DECIMAL(20,3) DEFAULT NULL,
   `count_time_viewed` INT DEFAULT NULL,
   `count_plays` INT DEFAULT NULL,
