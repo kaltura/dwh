@@ -3,6 +3,7 @@
     <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">fixed layout</property>
     <property name="bidiLayoutOrientation">ltr</property>
     <property name="imageDPI">96</property>
     <parameters>
@@ -3282,7 +3283,7 @@ ORDER BY count_storage_mb DESC]]></xml-property>
 			AND date_id BETWEEN (DATE(NOW()) - INTERVAL 7 DAY)*1 AND (DATE(NOW()) - INTERVAL 1 DAY)*1
 			GROUP BY service_name, action_name) a
 		ORDER BY yesterday_avg_duration DESC
-		LIMIT 20]]></xml-property>
+		LIMIT 30]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -3506,11 +3507,57 @@ ORDER BY count_storage_mb DESC]]></xml-property>
     </styles>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
+            <property name="showHeaderOnFirst">true</property>
             <page-footer>
-                <text id="3">
-                    <property name="contentType">html</property>
-                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
-                </text>
+                <grid id="2008">
+                    <property name="width">7.895833333333333in</property>
+                    <column id="2009">
+                        <property name="width">6.21875in</property>
+                    </column>
+                    <column id="2043">
+                        <property name="width">0.4791666666666667in</property>
+                    </column>
+                    <column id="2033">
+                        <property name="width">0.25in</property>
+                    </column>
+                    <column id="2036">
+                        <property name="width">0.25in</property>
+                    </column>
+                    <column id="2039">
+                        <property name="width">0.6979166666666666in</property>
+                    </column>
+                    <row id="2012">
+                        <cell id="2013">
+                            <text id="2023">
+                                <property name="fontSize">10pt</property>
+                                <property name="display">block</property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="2042">
+                            <label id="2045">
+                                <text-property name="text">Page:</text-property>
+                            </label>
+                        </cell>
+                        <cell id="2031">
+                            <auto-text id="2014">
+                                <property name="textAlign">justify</property>
+                                <property name="type">page-number</property>
+                            </auto-text>
+                        </cell>
+                        <cell id="2034">
+                            <label id="2046">
+                                <text-property name="text">of</text-property>
+                            </label>
+                        </cell>
+                        <cell id="2037">
+                            <auto-text id="2018">
+                                <property name="type">total-page</property>
+                            </auto-text>
+                        </cell>
+                    </row>
+                </grid>
             </page-footer>
         </simple-master-page>
     </page-setup>
@@ -4740,7 +4787,7 @@ day + month / 100</Definition>
                     <label id="691">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top vod using partners</text-property>
+                        <text-property name="text">Yesterday 20 Top VOD Using Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -5142,7 +5189,7 @@ if (x>1) { &#13;
                     <label id="951">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top vod using billable partners</text-property>
+                        <text-property name="text">Yesterday 20 Top VOD Using Billable Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -5541,7 +5588,7 @@ if (x>1) { &#13;
                     <label id="996">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top vod using non-billable partners</text-property>
+                        <text-property name="text">Yesterday 20 Top Vod Using Non-Billable Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -7123,7 +7170,7 @@ day + month / 100</Definition>
                     <label id="688">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 5 top live streaming using partners</text-property>
+                        <text-property name="text">Yesterday 5 Top Live Streaming Using Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -7528,7 +7575,7 @@ if (x>1) { &#13;
                     <label id="907">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 5 top live streaming using billable partners</text-property>
+                        <text-property name="text">Yesterday 5 Top Live Streaming Using Billable Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -7939,7 +7986,7 @@ if (x>1) { &#13;
                     <label id="912">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 5 top live streaming using non-billable partners</text-property>
+                        <text-property name="text">Yesterday 5 Top Live Streaming Using Non-Billable Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -8375,7 +8422,7 @@ if (x>1) { &#13;
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>Bandwidth usage by CDN (GB)</Value>
+          <Value>Bandwidth Usage by CDN (GB)</Value>
           <Font>
             <Size>16.0</Size>
             <Bold>true</Bold>
@@ -12814,7 +12861,7 @@ day + month / 100</Definition>
                     <label id="696">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top plays-count partners</text-property>
+                        <text-property name="text">Yesterday 20 Top Plays-Count Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -13186,7 +13233,7 @@ day + month / 100</Definition>
                     <label id="1081">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top plays-count billable partners</text-property>
+                        <text-property name="text">Yesterday 20 Top Plays-Count Billable Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -13559,7 +13606,7 @@ day + month / 100</Definition>
                     <label id="1082">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top plays-count non-billable partners</text-property>
+                        <text-property name="text">Yesterday 20 Top Plays-Count Non-Billable Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -15094,7 +15141,7 @@ day + month / 100</Definition>
                     <label id="1433">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top views-count partners</text-property>
+                        <text-property name="text">Yesterday 20 Top Views-Count Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -15475,7 +15522,7 @@ day + month / 100</Definition>
                     <label id="1434">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top views-count billable partners</text-property>
+                        <text-property name="text">Yesterday 20 Top Views-Count Billable Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -15856,7 +15903,7 @@ day + month / 100</Definition>
                     <label id="1435">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top views-count non-billable partners</text-property>
+                        <text-property name="text">Yesterday 20 Top Views-Count Non-Billable Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -17423,7 +17470,7 @@ day + month / 100</Definition>
                     <label id="685">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top storage using partners</text-property>
+                        <text-property name="text">Yesterday 20 Top Storage Using Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -17811,7 +17858,7 @@ if (x>1) { &#13;
                     <label id="1177">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top storage using billable partners</text-property>
+                        <text-property name="text">Yesterday 20 Top Storage Using Billable Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -18199,7 +18246,7 @@ if (x>1) { &#13;
                     <label id="1178">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top storage using non-billable partners</text-property>
+                        <text-property name="text">Yesterday 20 Top Storage Using Non-Billable Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -21334,7 +21381,7 @@ day + month / 100</Definition>
                         <property name="marginTop">10pt</property>
                         <property name="textAlign">center</property>
                         <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[Yesterday's new created content]]></text-property>
+                        <text-property name="content"><![CDATA[Yesterday's New Created Content]]></text-property>
                     </text>
                 </cell>
             </row>
@@ -23460,7 +23507,7 @@ day + month / 100</Definition>
                         <property name="marginTop">10pt</property>
                         <property name="textAlign">center</property>
                         <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[Yesterday's new ingested content]]></text-property>
+                        <text-property name="content"><![CDATA[Yesterday's New Ingested Content]]></text-property>
                     </text>
                 </cell>
             </row>
@@ -23684,6 +23731,7 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                 </cell>
             </row>
             <row id="1998">
+                <property name="pageBreakBefore">always</property>
                 <cell id="1999">
                     <label id="2002">
                         <property name="fontSize">14pt</property>
@@ -24345,7 +24393,7 @@ function beforeGeneration( chart, icsc )&#xD;
               <AggregateExpression>Sum</AggregateExpression>
             </Grouping>
           </DataDefinition>
-          <SeriesIdentifier>API Calls (K)</SeriesIdentifier>
+          <SeriesIdentifier>API Calls (Thousands)</SeriesIdentifier>
           <DataPoint>
             <Components>
               <Type>Orthogonal_Value</Type>
@@ -24832,7 +24880,7 @@ day + month / 100</Definition>
 ]]></xml-property>
                         <property name="outputFormat">SVG</property>
                         <property name="inheritColumns">true</property>
-                        <property name="pageBreakBefore">always</property>
+                        <property name="pageBreakBefore">auto</property>
                         <structure name="toc"/>
                         <property name="dataSet">Api</property>
                         <property name="height">250px</property>
@@ -24863,7 +24911,7 @@ day + month / 100</Definition>
                     <label id="1603">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top called actions (Inc. batch partner)</text-property>
+                        <text-property name="text">Yesterday 30 Top Called Actions (Inc. Batch Partner)</text-property>
                     </label>
                 </cell>
             </row>
@@ -24973,7 +25021,7 @@ day + month / 100</Definition>
                                 <property name="operator">le</property>
                                 <expression name="expr" type="javascript">row["rank"]</expression>
                                 <simple-property-list name="value1">
-                                    <value>20</value>
+                                    <value>30</value>
                                 </simple-property-list>
                             </structure>
                         </list-property>
@@ -25332,7 +25380,7 @@ day + month / 100</Definition>
                     <label id="1900">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top called actions (external calls)</text-property>
+                        <text-property name="text">Yesterday 30 Top Called Actions (External Calls)</text-property>
                     </label>
                 </cell>
             </row>
@@ -25466,7 +25514,7 @@ day + month / 100</Definition>
                                 <property name="operator">le</property>
                                 <expression name="expr" type="javascript">row["rank"]</expression>
                                 <simple-property-list name="value1">
-                                    <value>20</value>
+                                    <value>30</value>
                                 </simple-property-list>
                             </structure>
                         </list-property>
@@ -25825,7 +25873,7 @@ day + month / 100</Definition>
                     <label id="1607">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top api partners</text-property>
+                        <text-property name="text">Yesterday 30 Top API Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -25919,7 +25967,7 @@ day + month / 100</Definition>
                                 <property name="operator">le</property>
                                 <expression name="expr" type="javascript">row["rank"]</expression>
                                 <simple-property-list name="value1">
-                                    <value>20</value>
+                                    <value>30</value>
                                 </simple-property-list>
                             </structure>
                         </list-property>
@@ -26265,7 +26313,7 @@ day + month / 100</Definition>
                     <label id="1652">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top API billable partners</text-property>
+                        <text-property name="text">Yesterday 30 Top API Billable Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -26365,7 +26413,7 @@ day + month / 100</Definition>
                                 <property name="operator">le</property>
                                 <expression name="expr" type="javascript">row["is_paying_rank"]</expression>
                                 <simple-property-list name="value1">
-                                    <value>20</value>
+                                    <value>30</value>
                                 </simple-property-list>
                             </structure>
                             <structure>
@@ -26709,7 +26757,7 @@ day + month / 100</Definition>
                     <label id="1733">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top API non-billable partners</text-property>
+                        <text-property name="text">Yesterday 30 Top API Non-Billable Partners</text-property>
                     </label>
                 </cell>
             </row>
@@ -26809,7 +26857,7 @@ day + month / 100</Definition>
                                 <property name="operator">le</property>
                                 <expression name="expr" type="javascript">row["is_paying_rank"]</expression>
                                 <simple-property-list name="value1">
-                                    <value>20</value>
+                                    <value>30</value>
                                 </simple-property-list>
                             </structure>
                             <structure>
@@ -28325,7 +28373,7 @@ day + month / 100</Definition>
                     <label id="2007">
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">10pt</property>
-                        <text-property name="text">Yesterday 20 top API slow calls (based on average duration)</text-property>
+                        <text-property name="text">Yesterday 30 Top API Slow Calls (Based on Average Duration)</text-property>
                     </label>
                 </cell>
             </row>
@@ -28379,15 +28427,27 @@ day + month / 100</Definition>
                         </list-property>
                         <column id="1991">
                             <property name="width">1.7in</property>
+                            <property name="textAlign">left</property>
                         </column>
                         <column id="1992">
                             <property name="width">1.5in</property>
+                            <property name="textAlign">left</property>
                         </column>
-                        <column id="1993"/>
-                        <column id="1994"/>
-                        <column id="1995"/>
-                        <column id="1996"/>
-                        <column id="1997"/>
+                        <column id="1993">
+                            <property name="textAlign">left</property>
+                        </column>
+                        <column id="1994">
+                            <property name="textAlign">left</property>
+                        </column>
+                        <column id="1995">
+                            <property name="textAlign">left</property>
+                        </column>
+                        <column id="1996">
+                            <property name="textAlign">left</property>
+                        </column>
+                        <column id="1997">
+                            <property name="textAlign">left</property>
+                        </column>
                         <header>
                             <row id="1953">
                                 <cell id="1954">
@@ -28758,6 +28818,9 @@ day + month / 100</Definition>
                         </footer>
                     </table>
                 </cell>
+            </row>
+            <row id="2026">
+                <cell id="2027"/>
             </row>
         </grid>
     </body>
