@@ -75,16 +75,16 @@ class DWHInspector
 		}
 	}	
 	
-	public static function setAggregations($isCalculated)
+	public static function markAllAsAggregated()
 	{
-		MySQLRunner::execute("UPDATE kalturadw.aggr_managment SET is_calculated = ?",array(0=>$isCalculated));
-        MySQLRunner::execute("UPDATE kalturadw_ds.parameters SET date_value = now() where id = 2");
+		MySQLRunner::execute("UPDATE kalturadw.aggr_managment SET data_insert_time = date(19700101)");
+	        MySQLRunner::execute("UPDATE kalturadw_ds.parameters SET date_value = now() where id = 2");
 	}
 	
-	public static function getAggregations($dateId, $hourId, $isCalculated = 0)
+	public static function getAggregations($dateId, $hourId, $getAllAggregations = 0)
 	{
-		$rows = MySQLRunner::execute("SELECT DISTINCT aggr_name FROM kalturadw.aggr_managment WHERE aggr_day_int = ? AND hour_id = ? AND is_calculated = ?",array(0=>$dateId,1=>$hourId, 2=>$isCalculated));
-		
+		$rows = MySQLRunner::execute("SELECT DISTINCT aggr_name FROM kalturadw.aggr_managment WHERE date_id = ? AND hour_id = ? AND (1 = ? or ifnull(start_time,date(19700101) < data_insert_time))", 
+																					array(0=>$dateId,1=>$hourId, 2=>$getAllAggregations));
 		$res = array();
 		foreach ($rows as $row)
 		{

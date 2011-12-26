@@ -287,5 +287,4 @@ mysqlexec $DW_ROOT_DIR/fms/fms_dim_tables.sql
  
 mysqlexec $DW_ROOT_DIR/maintenance/populate_table_partitions.sql
 mysqlexec $DDL_SETUP_ROOT_DIR/populate_time_dim.sql
-mysqlexec $DDL_SETUP_ROOT_DIR/populate_aggr_managment_table.sql
 mysqlexec $DDL_SETUP_ROOT_DIR/populate_dwh_dim_ip_ranges.sql

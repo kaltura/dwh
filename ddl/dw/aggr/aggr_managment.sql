@@ -20,13 +20,12 @@ DROP TABLE IF EXISTS `aggr_managment`;
 
 CREATE TABLE `aggr_managment` (
   `aggr_name` varchar(100) NOT NULL DEFAULT '',
-  `aggr_day_int` int(11) unsigned NOT NULL DEFAULT '0',
-  `aggr_day` date NOT NULL DEFAULT '0000-00-00',
+  `date_id` INT(11) unsigned NOT NULL DEFAULT '0',
   `hour_id` INT(11) UNSIGNED NOT NULL DEFAULT '0',
-  `is_calculated` tinyint(4) DEFAULT NULL,
   `start_time` datetime DEFAULT NULL,
   `end_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`aggr_name`,`aggr_day_int`,`hour_id`)
+  `data_insert_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`aggr_name`,`date_id`,`hour_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

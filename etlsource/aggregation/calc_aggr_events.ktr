@@ -99,7 +99,7 @@
     <type>MYSQL</type>
     <access>Native</access>
     <database>kaltura</database>
-    <port>${OpDbPort}</port>
+    <port>${OpWritableDbPort}</port>
     <username>${OpWritableDbUser}</username>
     <password>${OpWritableDbPassword}</password>
     <servername/>
@@ -110,7 +110,7 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${OpWritableDbPort}</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SQL_CONNECT</code><attribute>SET SESSION sql_log_bin=0</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
@@ -216,6 +216,30 @@
     </attributes>
   </connection>
   <connection>
+    <name>KalturaMonitoring</name>
+    <server>${MonitoringDbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kaltura</database>
+    <port>${MonitoringDbPort}</port>
+    <username>${MonitoringDbUser}</username>
+    <password>${MonitoringDbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${MonitoringDbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
     <name>KalturaReadDW</name>
     <server>${DbReadHostName}</server>
     <type>MYSQL</type>
@@ -275,13 +299,15 @@
            <schema_name/>
            </partitioning>
     <connection>KalturaDW</connection>
-    <sql>SELECT 	aggr_name,aggr_day, hour_id aggr_hour 
+    <sql>SELECT 	aggr_name,date_id, hour_id aggr_hour 
 FROM kalturadw.aggr_managment, kalturadw_ds.parameters p
-WHERE 	aggr_day + INTERVAL hour_id HOUR &lt; p.date_value
-		AND is_calculated = 0 
-		AND p.id = 2
+WHERE 	date_id + INTERVAL hour_id HOUR &lt; p.date_value
+		AND (ifnull(start_time,date(19700101)) &lt; data_insert_time 
+			or
+			start_time &gt; end_time &#47;* Handle Failed aggregations*&#47;)
+		AND p.id = 2 &#47;*Update dimensions parameter*&#47;
 		AND aggr_name = ?
-order by aggr_day, hour_id</sql>
+order by date_id, hour_id</sql>
     <limit>0</limit>
     <lookup>Select aggr_name</lookup>
     <execute_each_row>N</execute_each_row>
@@ -313,7 +339,7 @@ order by aggr_day, hour_id</sql>
         <name>aggr_name</name>
         </field>
       <field>
-        <name>aggr_day</name>
+        <name>date_id</name>
         </field>
       <field>
         <name>aggr_hour</name>
@@ -345,7 +371,7 @@ order by aggr_day, hour_id</sql>
         <name>aggr_name</name>
         </field>
       <field>
-        <name>aggr_day</name>
+        <name>date_id</name>
         </field>
       <field>
         <name>aggr_hour</name>
@@ -379,7 +405,7 @@ order by aggr_day, hour_id</sql>
     <delete_field/>
     <read_field/>
     <arguments>
-       <argument><name>aggr_day</name></argument>
+       <argument><name>date_id</name></argument>
        <argument><name>aggr_hour</name></argument>
        <argument><name>aggr_name</name></argument>
     </arguments>

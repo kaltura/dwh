@@ -137,7 +137,7 @@ abstract class CycleProcessTestCase extends KalturaTestCase
 			}
 		}
 	
-                DWHInspector::setAggregations(1);
+                DWHInspector::markAllAsAggregated();
 	
 		$transferParams = $this->getTransferParams();
 		KettleRunner::execute($this->getTransferJob(), $transferParams);
