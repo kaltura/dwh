@@ -2759,8 +2759,8 @@ var ignored_line = session_id_end == null || request_index_end == null;
 var date = null;
 duration_msecs = duration_secs*1000;
 
-partner_id = is_not_numeric(partner_id) ? master_partner_id : partner_id;
 master_partner_id = is_not_numeric(master_partner_id) ? null : master_partner_id;
+partner_id = is_not_numeric(partner_id) ? master_partner_id : partner_id;
 
 if (partner_id == null || is_not_numeric(partner_id))
 {
