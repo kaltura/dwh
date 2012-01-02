@@ -263,7 +263,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Add file_status constants</from><to>Set splitted status</to><enabled>Y</enabled> </hop>  <hop> <from>Archiving needed?</from><to>Copy to process</to><enabled>Y</enabled> </hop>  <hop> <from>Archiving needed?</from><to>Move to process</to><enabled>Y</enabled> </hop>  <hop> <from>Copy to process</from><to>Gzip needed?</to><enabled>Y</enabled> </hop>  <hop> <from>Create gzip command</from><to>Gzip originals</to><enabled>Y</enabled> </hop>  <hop> <from>Create unzip command</from><to>Gunzip process</to><enabled>Y</enabled> </hop>  <hop> <from>Delete original file</from><to>Get now</to><enabled>Y</enabled> </hop>  <hop> <from>Do not split</from><to>Select cycle_id</to><enabled>Y</enabled> </hop>  <hop> <from>Get splitted files</from><to>Set file_size_kb</to><enabled>Y</enabled> </hop>  <hop> <from>Get now</from><to>Get splitted files</to><enabled>Y</enabled> </hop>  <hop> <from>Gunzip process</from><to>remove gunzip fields</to><enabled>Y</enabled> </hop>  <hop> <from>Gzip needed?</from><to>Create gzip command</to><enabled>Y</enabled> </hop>  <hop> <from>Gzip needed?</from><to>Unzip needed?</to><enabled>Y</enabled> </hop>  <hop> <from>Gzip originals</from><to>remove gzip fields</to><enabled>Y</enabled> </hop>  <hop> <from>Move to process</from><to>Unzip needed?</to><enabled>Y</enabled> </hop>  <hop> <from>Now splitting file</from><to>run &apos;split&apos; files</to><enabled>Y</enabled> </hop>  <hop> <from>Register splitted files</from><to>Select cycle_id - split stream</to><enabled>Y</enabled> </hop>  <hop> <from>Select cycle_id</from><to>Wait till all files are ready</to><enabled>Y</enabled> </hop>  <hop> <from>Select cycle_id - split stream</from><to>Wait till all files are ready</to><enabled>Y</enabled> </hop>  <hop> <from>Set file_size_kb</from><to>Register splitted files</to><enabled>Y</enabled> </hop>  <hop> <from>Set splitted status</from><to>Delete original file</to><enabled>Y</enabled> </hop>  <hop> <from>Split files?</from><to>Do not split</to><enabled>Y</enabled> </hop>  <hop> <from>Split files?</from><to>Now splitting file</to><enabled>Y</enabled> </hop>  <hop> <from>Unzip needed?</from><to>Create split command</to><enabled>Y</enabled> </hop>  <hop> <from>Unzip needed?</from><to>Create unzip command</to><enabled>Y</enabled> </hop>  <hop> <from>Wait till all files are ready</from><to>Mapping output specification</to><enabled>Y</enabled> </hop>  <hop> <from>remove gunzip fields</from><to>Create split command</to><enabled>Y</enabled> </hop>  <hop> <from>remove gzip fields</from><to>Unzip needed?</to><enabled>Y</enabled> </hop>  <hop> <from>run &apos;split&apos; files</from><to>Add file_status constants</to><enabled>Y</enabled> </hop>  <hop> <from>Mapping input specification</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Archiving needed?</to><enabled>Y</enabled> </hop>  <hop> <from>Create split command</from><to>Split files?</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Add file_status constants</from><to>Set splitted status</to><enabled>Y</enabled> </hop>  <hop> <from>Archiving needed?</from><to>Copy to process</to><enabled>Y</enabled> </hop>  <hop> <from>Archiving needed?</from><to>Move to process</to><enabled>Y</enabled> </hop>  <hop> <from>Copy to process</from><to>Gzip needed?</to><enabled>Y</enabled> </hop>  <hop> <from>Create gzip command</from><to>Gzip originals</to><enabled>Y</enabled> </hop>  <hop> <from>Create unzip command</from><to>Gunzip process</to><enabled>Y</enabled> </hop>  <hop> <from>Delete original file</from><to>Get now</to><enabled>Y</enabled> </hop>  <hop> <from>Do not split</from><to>Select cycle_id</to><enabled>Y</enabled> </hop>  <hop> <from>Get splitted files</from><to>Set file_size_kb</to><enabled>Y</enabled> </hop>  <hop> <from>Get now</from><to>Get splitted files</to><enabled>Y</enabled> </hop>  <hop> <from>Gunzip process</from><to>remove gunzip fields</to><enabled>Y</enabled> </hop>  <hop> <from>Gzip needed?</from><to>Create gzip command</to><enabled>Y</enabled> </hop>  <hop> <from>Gzip needed?</from><to>Unzip needed?</to><enabled>Y</enabled> </hop>  <hop> <from>Gzip originals</from><to>remove gzip fields</to><enabled>Y</enabled> </hop>  <hop> <from>Move to process</from><to>Unzip needed?</to><enabled>Y</enabled> </hop>  <hop> <from>Now splitting file</from><to>run &apos;split&apos; files</to><enabled>Y</enabled> </hop>  <hop> <from>Register splitted files</from><to>Select cycle_id - split stream</to><enabled>Y</enabled> </hop>  <hop> <from>Select cycle_id</from><to>Wait till all files are ready</to><enabled>Y</enabled> </hop>  <hop> <from>Select cycle_id - split stream</from><to>Wait till all files are ready</to><enabled>Y</enabled> </hop>  <hop> <from>Set file_size_kb</from><to>Register splitted files</to><enabled>Y</enabled> </hop>  <hop> <from>Set splitted status</from><to>Delete original file</to><enabled>Y</enabled> </hop>  <hop> <from>Split files?</from><to>Do not split</to><enabled>Y</enabled> </hop>  <hop> <from>Split files?</from><to>Now splitting file</to><enabled>Y</enabled> </hop>  <hop> <from>Unzip needed?</from><to>Create split command</to><enabled>Y</enabled> </hop>  <hop> <from>Unzip needed?</from><to>Create unzip command</to><enabled>Y</enabled> </hop>  <hop> <from>Wait till all files are ready</from><to>Mapping output specification</to><enabled>Y</enabled> </hop>  <hop> <from>remove gunzip fields</from><to>Create split command</to><enabled>Y</enabled> </hop>  <hop> <from>remove gzip fields</from><to>Unzip needed?</to><enabled>Y</enabled> </hop>  <hop> <from>run &apos;split&apos; files</from><to>Add file_status constants</to><enabled>Y</enabled> </hop>  <hop> <from>Mapping input specification</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Archiving needed?</to><enabled>Y</enabled> </hop>  <hop> <from>Create split command</from><to>Split files?</to><enabled>Y</enabled> </hop>  <hop> <from>Gunzip process</from><to>Gunzip failed</to><enabled>Y</enabled> </hop>  <hop> <from>Gunzip failed</from><to>Delete errornous files from table</to><enabled>Y</enabled> </hop>  <hop> <from>Delete errornous files from table</from><to>Select cycle_id - gzip error stream</to><enabled>Y</enabled> </hop>  <hop> <from>Select cycle_id - gzip error stream</from><to>Wait till all files are ready</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Add file_status constants</name>
     <type>Constant</type>
@@ -610,9 +610,9 @@ gunzip_command = &quot;gunzip -f &quot; + process_filename;</jsScript_script>
            </partitioning>
     <processfield>gunzip_command</processfield>
     <resultfieldname>result</resultfieldname>
-    <errorfieldname/>
-    <exitvaluefieldname/>
-    <failwhennotsuccess>N</failwhennotsuccess>
+    <errorfieldname>error</errorfieldname>
+    <exitvaluefieldname>return_code</exitvaluefieldname>
+    <failwhennotsuccess>Y</failwhennotsuccess>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>711</xloc>
@@ -1206,7 +1206,95 @@ gunzip_command = &quot;gunzip -f &quot; + process_filename;</jsScript_script>
       </GUI>
     </step>
 
+  <step>
+    <name>Gunzip failed</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <logmessage/>
+    <fields>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>795</xloc>
+      <yloc>198</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Delete errornous files from table</name>
+    <type>Delete</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>kalturadw_ds</connection>
+    <commit>100</commit>
+    <lookup>
+      <schema/>
+      <table>files</table>
+      <key>
+        <name>file_id</name>
+        <field>file_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>938</xloc>
+      <yloc>197</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select cycle_id - gzip error stream</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>cycle_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>945</xloc>
+      <yloc>282</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step_error_handling>
+      <error>
+        <source_step>Gunzip process</source_step>
+        <target_step>Gunzip failed</target_step>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename>desc</descriptions_valuename>
+        <fields_valuename>errors</fields_valuename>
+        <codes_valuename>codes</codes_valuename>
+        <max_errors/>
+        <max_pct_errors/>
+        <min_pct_rows/>
+      </error>
   </step_error_handling>
    <slave-step-copy-partition-distribution>
 </slave-step-copy-partition-distribution>
