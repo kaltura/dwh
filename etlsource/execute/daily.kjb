@@ -290,8 +290,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>470</xloc>
-      <yloc>57</yloc>
+      <xloc>358</xloc>
+      <yloc>58</yloc>
       </entry>
     <entry>
       <name>Execute daily sequence</name>
@@ -320,33 +320,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>617</xloc>
-      <yloc>57</yloc>
-      </entry>
-    <entry>
-      <name>Wait for hourly lock</name>
-      <description>Wait for SQL</description>
-      <type>WAIT_FOR_SQL</type>
-      <connection>kalturadw_ds</connection>
-      <schemaname/>
-      <tablename>locks</tablename>
-      <success_condition>rows_count_equal</success_condition>
-      <rows_count_value>0</rows_count_value>
-      <is_custom_sql>Y</is_custom_sql>
-      <is_usevars>N</is_usevars>
-      <custom_sql>select * from kalturadw_ds.locks
-where (lock_name like &apos;hourly_%&apos; or lock_name = &apos;update_dims_lock&apos;)
-and lock_state = 1;</custom_sql>
-      <add_rows_result>N</add_rows_result>
-      <maximum_timeout>${DailyLockTimeout}</maximum_timeout>
-      <check_cycle_time>${HourlyLockPoleInterval}</check_cycle_time>
-      <success_on_timeout>N</success_on_timeout>
-      <clear_result_rows>N</clear_result_rows>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>332</xloc>
-      <yloc>57</yloc>
+      <xloc>505</xloc>
+      <yloc>58</yloc>
       </entry>
     <entry>
       <name>Success 1</name>
@@ -440,15 +415,6 @@ and lock_state = 1;</custom_sql>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Wait for hourly lock</from>
-      <to>Set jobs sequence file name</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>START</from>
       <to>Seize daily lock</to>
       <from_nr>0</from_nr>
@@ -456,24 +422,6 @@ and lock_state = 1;</custom_sql>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Wait for hourly lock</from>
-      <to>Release daily lock</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Seize daily lock</from>
-      <to>Wait for hourly lock</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>Seize daily lock</from>
@@ -496,6 +444,15 @@ and lock_state = 1;</custom_sql>
     <hop>
       <from>Release daily lock</from>
       <to>Success 1</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Seize daily lock</from>
+      <to>Set jobs sequence file name</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
