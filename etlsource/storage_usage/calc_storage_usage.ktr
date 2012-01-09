@@ -330,7 +330,7 @@
            <schema_name/>
            </partitioning>
     <connection>KalturaDW</connection>
-    <sql>SELECT derived_days.date_id FROM kalturadw.aggr_managment derived_days, 
+    <sql>SELECT DISTINCT derived_days.date_id FROM kalturadw.aggr_managment derived_days, 
 	(SELECT min(date_id) date_id FROM kalturadw.aggr_managment
 	 WHERE aggr_name = &apos;storage_usage&apos;
 	 AND data_insert_time &gt; IFNULL(start_time, date(19700101))
