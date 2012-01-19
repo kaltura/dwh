@@ -111,7 +111,7 @@
     <type>MYSQL</type>
     <access>Native</access>
     <database>kaltura</database>
-    <port>${OpDbPort}</port>
+    <port>${OpWritableDbPort}</port>
     <username>${OpWritableDbUser}</username>
     <password>${OpWritableDbPassword}</password>
     <servername/>
@@ -122,7 +122,7 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>${OpDbPort}</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${OpWritableDbPort}</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SQL_CONNECT</code><attribute>SET SESSION sql_log_bin=0</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
@@ -207,7 +207,7 @@
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturaLog</database>
+    <database>kalturalog</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -221,6 +221,30 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>KalturaMonitoring</name>
+    <server>${MonitoringDbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>kaltura</database>
+    <port>${MonitoringDbPort}</port>
+    <username>${MonitoringDbUser}</username>
+    <password>${MonitoringDbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.zeroDateTimeBehavior</code><attribute>convertToNull</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${MonitoringDbPort}</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
@@ -488,7 +512,8 @@
 	custom_data
 	FROM 
 	flavor_params_output 
-WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
+WHERE updated_at between STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
+and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -960,6 +985,127 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
     </step>
 
   <step>
+    <name>Update new flavor params</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <sql>INSERT INTO  dwh_dim_flavor_params (VERSION,
+	id, 
+	NAME, 
+	tags, 
+	description, 
+	ready_behavior, 
+	is_default, 
+	flavor_format_id, 
+	video_codec_id, 
+	video_bitrate, 
+	audio_codec_id, 
+	audio_bitrate, 
+	audio_channels, 
+	audio_sample_rate, 
+	audio_resolution, 
+	width, 
+	height, 
+	frame_rate, 
+	gop_size, 
+	two_pass, 
+	conversion_engines, 
+	conversion_engines_extra_params, 
+	view_order, 
+	bypass_by_extension, 
+	creation_mode, 
+	deinterlice, 
+	rotate, 
+	operators, 
+	engine_version)
+SELECT 	? VERSION,
+	id, 
+	NAME, 
+	tags, 
+	description, 
+	ready_behavior, 
+	is_default, 
+	flavor_format_id, 
+	video_codec_id, 
+	video_bitrate, 
+	audio_codec_id, 
+	audio_bitrate, 
+	audio_channels, 
+	audio_sample_rate, 
+	audio_resolution, 
+	width, 
+	height, 
+	frame_rate, 
+	gop_size, 
+	two_pass, 
+	conversion_engines, 
+	conversion_engines_extra_params, 
+	view_order, 
+	bypass_by_extension, 
+	creation_mode, 
+	deinterlice, 
+	rotate, 
+	operators, 
+	engine_version
+	FROM dwh_dim_flavor_params 
+	WHERE id = ?
+	AND VERSION &lt; ?
+	ORDER BY VERSION DESC 
+ ON DUPLICATE KEY UPDATE
+	NAME = values(NAME), 
+	tags = values(tags), 
+	description = values(description), 
+	ready_behavior = values(ready_behavior), 
+	is_default = values(is_default), 
+	flavor_format_id = values(flavor_format_id), 
+	video_codec_id = values(video_codec_id), 
+	video_bitrate = values(video_bitrate), 
+	audio_codec_id = values(audio_codec_id), 
+	audio_bitrate = values(audio_bitrate), 
+	audio_channels = values(audio_channels), 
+	audio_sample_rate = values(audio_sample_rate), 
+	audio_resolution = values(audio_resolution), 
+	width = values(width), 
+	height = values(height), 
+	frame_rate = values(frame_rate), 
+	gop_size = values(gop_size), 
+	two_pass = values(two_pass), 
+	conversion_engines = values(conversion_engines), 
+	conversion_engines_extra_params = values(conversion_engines_extra_params), 
+	view_order = values(view_order), 
+	bypass_by_extension = values(bypass_by_extension), 
+	creation_mode = values(creation_mode), 
+	deinterlice = values(deinterlice), 
+	rotate = values(rotate), 
+	operators = values(operators), 
+	engine_version = values(engine_version);</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>flavor_params_version</name></argument>
+       <argument><name>flavor_params_id</name></argument>
+       <argument><name>flavor_params_version</name></argument>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>995</xloc>
+      <yloc>480</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>audio codec text</name>
     <type>ConcurrentSafeCombinationLookup</type>
     <description/>
@@ -1182,127 +1328,6 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>458</xloc>
       <yloc>235</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Update new flavor params</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <sql>INSERT INTO  dwh_dim_flavor_params (VERSION,
-	id, 
-	NAME, 
-	tags, 
-	description, 
-	ready_behavior, 
-	is_default, 
-	flavor_format_id, 
-	video_codec_id, 
-	video_bitrate, 
-	audio_codec_id, 
-	audio_bitrate, 
-	audio_channels, 
-	audio_sample_rate, 
-	audio_resolution, 
-	width, 
-	height, 
-	frame_rate, 
-	gop_size, 
-	two_pass, 
-	conversion_engines, 
-	conversion_engines_extra_params, 
-	view_order, 
-	bypass_by_extension, 
-	creation_mode, 
-	deinterlice, 
-	rotate, 
-	operators, 
-	engine_version)
-SELECT 	? VERSION,
-	id, 
-	NAME, 
-	tags, 
-	description, 
-	ready_behavior, 
-	is_default, 
-	flavor_format_id, 
-	video_codec_id, 
-	video_bitrate, 
-	audio_codec_id, 
-	audio_bitrate, 
-	audio_channels, 
-	audio_sample_rate, 
-	audio_resolution, 
-	width, 
-	height, 
-	frame_rate, 
-	gop_size, 
-	two_pass, 
-	conversion_engines, 
-	conversion_engines_extra_params, 
-	view_order, 
-	bypass_by_extension, 
-	creation_mode, 
-	deinterlice, 
-	rotate, 
-	operators, 
-	engine_version
-	FROM dwh_dim_flavor_params 
-	WHERE id = ?
-	AND VERSION &lt; ?
-	ORDER BY VERSION DESC 
- ON DUPLICATE KEY UPDATE
-	NAME = values(NAME), 
-	tags = values(tags), 
-	description = values(description), 
-	ready_behavior = values(ready_behavior), 
-	is_default = values(is_default), 
-	flavor_format_id = values(flavor_format_id), 
-	video_codec_id = values(video_codec_id), 
-	video_bitrate = values(video_bitrate), 
-	audio_codec_id = values(audio_codec_id), 
-	audio_bitrate = values(audio_bitrate), 
-	audio_channels = values(audio_channels), 
-	audio_sample_rate = values(audio_sample_rate), 
-	audio_resolution = values(audio_resolution), 
-	width = values(width), 
-	height = values(height), 
-	frame_rate = values(frame_rate), 
-	gop_size = values(gop_size), 
-	two_pass = values(two_pass), 
-	conversion_engines = values(conversion_engines), 
-	conversion_engines_extra_params = values(conversion_engines_extra_params), 
-	view_order = values(view_order), 
-	bypass_by_extension = values(bypass_by_extension), 
-	creation_mode = values(creation_mode), 
-	deinterlice = values(deinterlice), 
-	rotate = values(rotate), 
-	operators = values(operators), 
-	engine_version = values(engine_version);</sql>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-       <argument><name>flavor_params_version</name></argument>
-       <argument><name>flavor_params_id</name></argument>
-       <argument><name>flavor_params_version</name></argument>
-    </arguments>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>995</xloc>
-      <yloc>480</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

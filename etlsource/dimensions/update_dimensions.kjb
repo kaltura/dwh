@@ -257,7 +257,7 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>537</xloc>
+      <xloc>740</xloc>
       <yloc>60</yloc>
       </entry>
     <entry>
@@ -309,7 +309,7 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>657</xloc>
+      <xloc>940</xloc>
       <yloc>60</yloc>
       </entry>
     <entry>
@@ -344,7 +344,7 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>417</xloc>
+      <xloc>420</xloc>
       <yloc>60</yloc>
       </entry>
     <entry>
@@ -379,8 +379,8 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>797</xloc>
-      <yloc>60</yloc>
+      <xloc>708</xloc>
+      <yloc>177</yloc>
       </entry>
     <entry>
       <name>Seize update dims lock</name>
@@ -414,7 +414,7 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>277</xloc>
+      <xloc>280</xloc>
       <yloc>60</yloc>
       </entry>
     <entry>
@@ -424,7 +424,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>277</xloc>
+      <xloc>280</xloc>
       <yloc>180</yloc>
       </entry>
     <entry>
@@ -459,7 +459,7 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>797</xloc>
+      <xloc>500</xloc>
       <yloc>180</yloc>
       </entry>
     <entry>
@@ -480,32 +480,66 @@ WHERE lock_name = &apos;daily_lock&apos; AND lock_state = 0</custom_sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>132</xloc>
-      <yloc>59</yloc>
+      <xloc>140</xloc>
+      <yloc>60</yloc>
+      </entry>
+    <entry>
+      <name>get_operational_replication_synced_at</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${EtlBasePath}&#47;dimensions&#47;get_operational_replication_synced_at.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>591</xloc>
+      <yloc>60</yloc>
+      </entry>
+    <entry>
+      <name>Set new last updated as the operantional synced at</name>
+      <description/>
+      <type>SET_VARIABLES</type>
+      <replacevars>Y</replacevars>
+      <filename/>
+      <file_variable_type>JVM</file_variable_type>
+      <fields>
+        <field>
+          <variable_name>NewLastUpdatedAt</variable_name>
+          <variable_value>${OperationalReplicationSyncedAt}</variable_value>
+          <variable_type>ROOT_JOB</variable_type>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>940</xloc>
+      <yloc>180</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
       <from>Get Sequence</from>
       <to>Iterate sequences</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Iterate sequences</from>
-      <to>set_last_updated_at</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>get_last_updated_at</from>
-      <to>Get Sequence</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -582,6 +616,42 @@ WHERE lock_name = &apos;daily_lock&apos; AND lock_state = 0</custom_sql>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>get_last_updated_at</from>
+      <to>get_operational_replication_synced_at</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>get_operational_replication_synced_at</from>
+      <to>Get Sequence</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Iterate sequences</from>
+      <to>Set new last updated as the operantional synced at</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set new last updated as the operantional synced at</from>
+      <to>set_last_updated_at</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>

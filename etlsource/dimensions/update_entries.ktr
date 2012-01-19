@@ -1067,7 +1067,8 @@
 , categories_ids
 FROM 
 	kaltura.entry
-WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
+WHERE updated_at between STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
+and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
 </sql>
     <limit>0</limit>
     <lookup/>

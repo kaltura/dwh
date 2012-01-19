@@ -846,6 +846,69 @@ if (file_size &lt; 0)
     </step>
 
   <step>
+    <name>Insert &#47; Update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>aggr_managment</table>
+      <key>
+        <name>STORAGE_USAGE_AGGR_NAME</name>
+        <field>aggr_name</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>day_id</name>
+        <field>date_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>hour</name>
+        <field>hour_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>data_insert_time</name>
+        <rename>now</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>date_id</name>
+        <rename>day_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>hour_id</name>
+        <rename>hour</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>aggr_name</name>
+        <rename>STORAGE_USAGE_AGGR_NAME</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1113</xloc>
+      <yloc>89</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Insert &#47; Update File Sync</name>
     <type>InsertUpdate</type>
     <description/>
@@ -1613,7 +1676,8 @@ if (file_size &lt; 0)
 	file_size
 	FROM 
 	kaltura.file_sync 
-WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)</sql>
+WHERE updated_at between STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
+and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1994,69 +2058,6 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
       </GUI>
     </step>
 
-  <step>
-    <name>Insert &#47; Update</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>aggr_managment</table>
-      <key>
-        <name>STORAGE_USAGE_AGGR_NAME</name>
-        <field>aggr_name</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>day_id</name>
-        <field>date_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>hour</name>
-        <field>hour_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>data_insert_time</name>
-        <rename>now</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>date_id</name>
-        <rename>day_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>hour_id</name>
-        <rename>hour</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>aggr_name</name>
-        <rename>STORAGE_USAGE_AGGR_NAME</rename>
-        <update>N</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1113</xloc>
-      <yloc>89</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step_error_handling>
       <error>
         <source_step>Attempt to insert to flavor asset</source_step>
@@ -2069,6 +2070,18 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
         <max_errors>-1</max_errors>
         <max_pct_errors>-1</max_pct_errors>
         <min_pct_rows>-1</min_pct_rows>
+      </error>
+      <error>
+        <source_step>Insert &#47; Update</source_step>
+        <target_step/>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename>desc</descriptions_valuename>
+        <fields_valuename>fields</fields_valuename>
+        <codes_valuename>codes</codes_valuename>
+        <max_errors/>
+        <max_pct_errors/>
+        <min_pct_rows/>
       </error>
       <error>
         <source_step>Insert &#47; Update File Sync</source_step>
@@ -2117,18 +2130,6 @@ WHERE updated_at &gt; STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&
         <max_errors>-1</max_errors>
         <max_pct_errors>-1</max_pct_errors>
         <min_pct_rows>-1</min_pct_rows>
-      </error>
-      <error>
-        <source_step>Insert &#47; Update</source_step>
-        <target_step>Write to log 2 2</target_step>
-        <is_enabled>Y</is_enabled>
-        <nr_valuename/>
-        <descriptions_valuename>desc</descriptions_valuename>
-        <fields_valuename>fields</fields_valuename>
-        <codes_valuename>codes</codes_valuename>
-        <max_errors/>
-        <max_pct_errors/>
-        <min_pct_rows/>
       </error>
   </step_error_handling>
    <slave-step-copy-partition-distribution>
