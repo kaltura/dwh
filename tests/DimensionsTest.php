@@ -74,8 +74,9 @@ class DimensionsTest extends KalturaTestCase
 		$before = new DateTime(date("Y-m-d"));
 		$start = new DateTime(date("Y-m-d"));
                 $start->sub(new DateInterval("P30D"));
-
-		KettleRunner::execute('/../tests/execute_dim.ktr', array('TransformationName'=>$CONF->EtlBasePath.$job,'LastUpdatedAt'=>$start->format('Y/m/d')." 00:00:00"));
+		$end = new DateTime(date("Y-m-d"));
+                $end->add(new DateInterval("P1D"));
+		KettleRunner::execute('/../tests/execute_dim.ktr', array('TransformationName'=>$CONF->EtlBasePath.$job,'LastUpdatedAt'=>$start->format('Y/m/d')." 00:00:00", 'OperationalReplicationSyncedAt'=>$end->format('Y/m/d')." 00:00:00"));
 		
 		$sourceDB = new MySQLRunner($CONF->OpDbHostName,$CONF->OpDbPort, $CONF->OpDbUser, $CONF->OpDbPassword);		
 		$sourceRows = $sourceDB ->run("SELECT count(*) amount FROM kaltura.".$source." where updated_at>='".$start->format('Y-m-d')."' and created_at<='".$before->format('Y-m-d')."'");
