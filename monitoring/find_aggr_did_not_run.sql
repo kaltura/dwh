@@ -8,6 +8,6 @@ WHERE 	date_id + INTERVAL hour_id HOUR
 		AND (IFNULL(start_time,DATE(19700101)) < data_insert_time 
 			OR
 			start_time > end_time /* Handle Failed aggregations*/)
-	AND data_insert_time < NOW() - INTERVAL 2 HOUR
+	AND data_insert_time < NOW() - INTERVAL 8 HOUR
 GROUP BY date_id, aggr_name
 ORDER BY date_id, aggr_name
