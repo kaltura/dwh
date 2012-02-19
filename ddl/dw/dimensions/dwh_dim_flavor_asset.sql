@@ -35,5 +35,6 @@ create table `dwh_dim_flavor_asset` (
 	PRIMARY KEY (`id`) ,
 	KEY deleted_at (deleted_at),
 	KEY dwh_update_date (dwh_update_date),
-	KEY updated_at (updated_at)
+	KEY updated_at (updated_at),
+	KEY entry_id (entry_id)
 ) ENGINE=MYISAM; 

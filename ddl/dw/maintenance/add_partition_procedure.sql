@@ -73,6 +73,7 @@ BEGIN
         CALL add_daily_partition_for_table('dwh_fact_fms_session_events');
         CALL add_daily_partition_for_table('dwh_fact_fms_sessions');
         CALL add_daily_partition_for_table('dwh_fact_bandwidth_usage');
+        CALL add_daily_partition_for_table('dwh_fact_file_sync');
         CALL add_daily_partition_for_table('dwh_fact_api_calls');
         CALL add_daily_partition_for_table('dwh_fact_incomplete_api_calls');
         CALL add_daily_partition_for_table('dwh_fact_errors');
