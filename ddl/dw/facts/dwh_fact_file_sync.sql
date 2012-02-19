@@ -54,8 +54,6 @@ CREATE TABLE `dwh_fact_file_sync` (
         PARTITION p_20101130 VALUES LESS THAN (20101201) ENGINE = INNODB,
         PARTITION p_20101231 VALUES LESS THAN (20110101) ENGINE = INNODB)*/;
 
-        CALL add_daily_partition_for_table('dwh_fact_file_sync');
-
 CREATE TRIGGER `kalturadw`.`dwh_fact_file_sync_setcreationtime_oninsert` BEFORE INSERT
     ON `kalturadw`.`dwh_fact_file_sync`
     FOR EACH ROW 
