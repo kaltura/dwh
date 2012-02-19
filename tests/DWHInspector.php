@@ -2,6 +2,7 @@
 require_once 'Configuration.php';
 require_once 'MySQLRunner.php';
 require_once 'ApiCall.php';
+require_once 'FileSyncRecord.php';
 
 class DWHInspector
 {
@@ -175,6 +176,7 @@ class DWHInspector
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.invalid_event_lines', array());
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.invalid_fms_event_lines', array());
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_dim_entries', array());
+		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_fact_file_sync', array());
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_fact_events', array());
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_fact_bandwidth_usage', array());
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_fact_fms_session_events', array());
@@ -281,5 +283,48 @@ class DWHInspector
                 return $res;
 	}
 
+	public static function getFileSyncCollection($startDate)
+	{
+		global $CONF;
+                $opDB = new MySQLRunner($CONF->OpDbHostName,$CONF->OpDbPort, $CONF->OpDbUser, $CONF->OpDbPassword);
+
+		$rows = $opDB->run("SELECT id, partner_id, object_type, object_id, VERSION, object_sub_type, original, created_at, updated_at, ready_at, STATUS, file_size FROM ".
+		    	" kaltura.file_sync WHERE updated_at >='".$startDate->format('Y-m-d')."' and original = 1 AND ready_at IS NOT NULL AND object_type IN (1,4) ".
+			" AND STATUS IN (2,3)"); 
+
+                $fileSyncCollection = new FileSyncCollection();
+                foreach ($rows as $row)
+                {
+			$fileSize = $row["file_size"] < 0 ? 0 : $row["file_size"];
+			$deletedAt = $row["STATUS"] == 3 ? $row["updated_at"] : null;
+			$fileSyncRecord = new FileSyncRecord($row["id"], $row["object_id"], $row["object_type"], $row["object_sub_type"], $row["partner_id"], $row["VERSION"], $fileSize, $row["ready_at"], $deletedAt);	
+                        $fileSyncCollection->Insert($fileSyncRecord);
+		}
+		return $fileSyncCollection;
+	}
+	
+	public static function writeFileSyncRecordForEntry($entryID, $partnerID)
+	{
+		self::writeFileSyncRecordForObject($entryID, $partnerID, 1);
+	}
+
+	public static function writeFileSyncRecordForFlavorAsset($flavorAssetID, $partnerID)
+        {
+                self::writeFileSyncRecordForObject($flavorAssetID, $partnerID, 4);
+        }
+	
+	private static function writeFileSyncRecordForObject($objectID, $partnerID, $objectType)
+        {
+                global $CONF;
+                MySQLRunner::execute("DELETE FROM kalturadw.dwh_fact_file_sync WHERE object_id = '?' and object_type = ?", array(0=>$objectID, 1=>$objectType));
+                $rows = MySQLRunner::execute("SELECT max(id) id FROM kalturadw.dwh_fact_file_sync");
+		$maxID = $rows[0]["id"]+1;
+                $readyAt = new DateTime(date("Y-m-d"));
+                $readyAt->sub(new DateInterval("P30D"));
+                MySQLRunner::execute("INSERT INTO kalturadw.dwh_fact_file_sync (id, object_id, object_type, object_sub_type, ready_at, partner_id, file_size, version) VALUES (?,'?',?,?,'?',?,?,?)", 
+					array(0=>$maxID,1=>$objectID,2=>$objectType,3=>1,4=>$readyAt->format('Y-m-d'),5=>$partnerID, 6=>1, 7=>1));
+
+		
+        }
 }
 ?>
