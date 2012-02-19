@@ -262,7 +262,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Read Flavor Asset</from><to>Set Defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get Now</from><to>Insert &#47; Update Flavor Asset</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Flavor Asset</to><enabled>Y</enabled> </hop>  <hop> <from>Set Defaults</from><to>Set RI IND 0</to><enabled>Y</enabled> </hop>  <hop> <from>container format text</from><to>video codec text</to><enabled>Y</enabled> </hop>  <hop> <from>video codec text</from><to>Get Now</to><enabled>Y</enabled> </hop>  <hop> <from>asset status id</from><to>file extension text</to><enabled>Y</enabled> </hop>  <hop> <from>file extension text</from><to>container format text</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI IND 0</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>split tags</from><to>tag dimension</to><enabled>Y</enabled> </hop>  <hop> <from>tag dimension</from><to>tag insert</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - split stream</to><enabled>Y</enabled> </hop>  <hop> <from>Dummy - split stream</from><to>asset status id</to><enabled>Y</enabled> </hop>  <hop> <from>Dummy - split stream</from><to>tags is not null</to><enabled>Y</enabled> </hop>  <hop> <from>tags is not null</from><to>split tags</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>Write to log on upsert error</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Flavor Asset</from><to>Filter duplicate key errors</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Read Flavor Asset</from><to>Set Defaults</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Flavor Asset</to><enabled>Y</enabled> </hop>  <hop> <from>Set Defaults</from><to>Set RI IND 0</to><enabled>Y</enabled> </hop>  <hop> <from>asset status id</from><to>file extension text</to><enabled>Y</enabled> </hop>  <hop> <from>file extension text</from><to>container format text</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI IND 0</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>split tags</from><to>tag dimension</to><enabled>Y</enabled> </hop>  <hop> <from>tag dimension</from><to>tag insert</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - split stream</to><enabled>Y</enabled> </hop>  <hop> <from>Dummy - split stream</from><to>asset status id</to><enabled>Y</enabled> </hop>  <hop> <from>Dummy - split stream</from><to>tags is not null</to><enabled>Y</enabled> </hop>  <hop> <from>tags is not null</from><to>split tags</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>Write to log on upsert error</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Flavor Asset</from><to>Filter duplicate key errors</to><enabled>Y</enabled> </hop>  <hop> <from>Update file_sync as deleted</from><to>Get day and hour ids - deleted_at</to><enabled>Y</enabled> </hop>  <hop> <from>Get day and hour ids - deleted_at</from><to>select date and hour</to><enabled>Y</enabled> </hop>  <hop> <from>distinct date and hours</from><to>Set Aggr_name = storage_usage</to><enabled>Y</enabled> </hop>  <hop> <from>select date and hour</from><to>distinct date and hours</to><enabled>Y</enabled> </hop>  <hop> <from>get now for aggr</from><to>Reset aggr_managment create</to><enabled>Y</enabled> </hop>  <hop> <from>Set Aggr_name = storage_usage</from><to>get now for aggr</to><enabled>Y</enabled> </hop>  <hop> <from>Dummy - split stream</from><to>Filter deleted flavors</to><enabled>Y</enabled> </hop>  <hop> <from>Filter deleted flavors</from><to>Update file_sync as deleted</to><enabled>Y</enabled> </hop>  <hop> <from>container format text</from><to>Get now</to><enabled>Y</enabled> </hop>  <hop> <from>Get now</from><to>Insert &#47; Update Flavor Asset</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Database lookup</name>
     <type>DBLookup</type>
@@ -347,6 +347,46 @@
     </step>
 
   <step>
+    <name>Filter deleted flavors</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to/>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>STATUS</leftvalue>
+   <function>=</function>
+   <rightvalue/>
+   <value><name>constant</name><type>Integer</type><text>3</text><length>-1</length><precision>0</precision><isnull>N</isnull><mask>#;-#</mask></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>deleted_at</leftvalue>
+   <function>IS NOT NULL</function>
+   <rightvalue/>
+   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>683</xloc>
+      <yloc>227</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Filter duplicate key errors</name>
     <type>FilterRows</type>
     <description/>
@@ -375,26 +415,33 @@
     </step>
 
   <step>
-    <name>Get Now</name>
+    <name>Get day and hour ids - deleted_at</name>
     <type>Formula</type>
     <description/>
     <distribute>Y</distribute>
-    <copies>3</copies>
+    <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <formula><field_name>now</field_name>
-<formula_string>now()</formula_string>
-<value_type>Date</value_type>
+       <formula><field_name>hour</field_name>
+<formula_string>hour([deleted_at])</formula_string>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
+       <formula><field_name>day_id</field_name>
+<formula_string>10000*year([deleted_at])+100*month([deleted_at])+day([deleted_at])</formula_string>
+<value_type>Number</value_type>
 <value_length>-1</value_length>
 <value_precision>-1</value_precision>
 <replace_field/>
 </formula>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1080</xloc>
-      <yloc>100</yloc>
+      <xloc>996</xloc>
+      <yloc>229</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -472,16 +519,6 @@
         <update>Y</update>
       </value>
       <value>
-        <name>bitrate</name>
-        <rename>bitrate</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>frame_rate</name>
-        <rename>frame_rate</rename>
-        <update>Y</update>
-      </value>
-      <value>
         <name>size</name>
         <rename>size</rename>
         <update>Y</update>
@@ -499,11 +536,6 @@
       <value>
         <name>container_format_id</name>
         <rename>container_format_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>video_codec_id</name>
-        <rename>video_codec_id</rename>
         <update>Y</update>
       </value>
       <value>
@@ -570,13 +602,10 @@
 	description,
 	width,
 	height,
-	bitrate,
-	frame_rate,
 	size,
 	is_original,
 	file_ext,
-	container_format,
-	video_codec_id video_codec
+	container_format
 	FROM flavor_asset
 WHERE updated_at between STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
 and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
@@ -590,6 +619,111 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>60</xloc>
       <yloc>100</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Reset aggr_managment create</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>aggr_managment</table>
+      <key>
+        <name>STORAGE_USAGE_AGGR_NAME</name>
+        <field>aggr_name</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>day_id</name>
+        <field>date_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>hour</name>
+        <field>hour_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>data_insert_time</name>
+        <rename>now</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>date_id</name>
+        <rename>day_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>hour_id</name>
+        <rename>hour</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>aggr_name</name>
+        <rename>STORAGE_USAGE_AGGR_NAME</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>825</xloc>
+      <yloc>372</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set Aggr_name = storage_usage</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>STORAGE_USAGE_AGGR_NAME</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>storage_usage</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>RI_IND_1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>665</xloc>
+      <yloc>295</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -653,16 +787,6 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
         </field>
       <field>
         <name>height</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      <field>
-        <name>bitrate</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      <field>
-        <name>frame_rate</name>
         <value>-1</value>
         <mask/>
         </field>
@@ -732,6 +856,56 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
     </step>
 
   <step>
+    <name>Update file_sync as deleted</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>Y</error_ignored>
+    <ignore_flag_field>updated</ignore_flag_field>
+    <lookup>
+      <schema/>
+      <table>dwh_fact_file_sync</table>
+      <key>
+        <name>id</name>
+        <field>object_id</field>
+        <condition>=</condition>
+        <name2/>
+        </key>
+      <key>
+        <name>partner_id</name>
+        <field>partner_id</field>
+        <condition>=</condition>
+        <name2/>
+        </key>
+      <key>
+        <name/>
+        <field>deleted_at</field>
+        <condition>IS NULL</condition>
+        <name2/>
+        </key>
+      <value>
+        <name>deleted_at</name>
+        <rename>deleted_at</rename>
+        </value>
+      </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>822</xloc>
+      <yloc>228</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Write to log on upsert error</name>
     <type>WriteToLog</type>
     <description/>
@@ -758,7 +932,7 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
     <name>asset status id</name>
     <type>ConcurrentSafeCombinationLookup</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
@@ -788,8 +962,8 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>680</xloc>
-      <yloc>100</yloc>
+      <xloc>693</xloc>
+      <yloc>101</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -828,8 +1002,45 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>860</xloc>
-      <yloc>100</yloc>
+      <xloc>948</xloc>
+      <yloc>99</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>distinct date and hours</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>%%java.io.tmpdir%%</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>Y</unique_rows>
+    <fields>
+      <field>
+        <name>day_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+      <field>
+        <name>hour</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>826</xloc>
+      <yloc>295</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -846,8 +1057,8 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1066</xloc>
-      <yloc>186</yloc>
+      <xloc>1201</xloc>
+      <yloc>260</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -886,8 +1097,8 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>760</xloc>
-      <yloc>100</yloc>
+      <xloc>799</xloc>
+      <yloc>98</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -921,6 +1132,30 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
     </step>
 
   <step>
+    <name>get now for aggr</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>now</name>
+        <type>system date (variable)</type>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>666</xloc>
+      <yloc>371</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>input</name>
     <type>MappingInput</type>
     <description/>
@@ -937,6 +1172,37 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>60</xloc>
       <yloc>20</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>select date and hour</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>day_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>hour</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>STORAGE_USAGE_AGGR_NAME</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>999</xloc>
+      <yloc>294</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -959,8 +1225,8 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
    <resetrownumber>N</resetrownumber>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>678</xloc>
-      <yloc>193</yloc>
+      <xloc>777</xloc>
+      <yloc>164</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -999,8 +1265,8 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>758</xloc>
-      <yloc>193</yloc>
+      <xloc>857</xloc>
+      <yloc>164</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1051,8 +1317,8 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>845</xloc>
-      <yloc>192</yloc>
+      <xloc>944</xloc>
+      <yloc>163</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1079,15 +1345,15 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>584</xloc>
-      <yloc>195</yloc>
+      <xloc>683</xloc>
+      <yloc>166</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>video codec text</name>
-    <type>ConcurrentSafeCombinationLookup</type>
+    <name>Get now</name>
+    <type>SystemInfo</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -1095,32 +1361,16 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <schema/>
-      <table>dwh_dim_video_codec</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
-      <commit>1</commit>
-      <cache_size>9999</cache_size>
-      <replace>N</replace>
-      <crc>N</crc>
-      <crcfield>hashcode</crcfield>
-      <fields>
-        <key>
-          <name>video_codec</name>
-          <lookup>video_codec</lookup>
-        </key>
-        <return>
-          <name>video_codec_id</name>
-          <creation_method>autoinc</creation_method>
-          <use_autoinc>Y</use_autoinc>
-        </return>
+    <fields>
+      <field>
+        <name>now</name>
+        <type>system date (variable)</type>
+        </field>
       </fields>
-      <sequence/>
-      <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>980</xloc>
-      <yloc>100</yloc>
+      <xloc>1066</xloc>
+      <yloc>102</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
