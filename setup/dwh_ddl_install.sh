@@ -168,6 +168,7 @@ mysqlexec $DW_ROOT_DIR/facts/dwh_fact_errors.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_errors_archive.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_incomplete_api_calls.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_entries_sizes.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_file_sync.sql
 
 #dw/dimensions
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_kuser.sql
