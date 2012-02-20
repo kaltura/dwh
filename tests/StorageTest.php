@@ -74,7 +74,7 @@ class StorageTest extends KalturaTestCase
                         DWHInspector::writeFileSyncRecordForEntry($row["id"], $row["partner_id"]);
                 }
 
-                $rows = $opDB->run("SELECT id, partner_id, status, deleted_at, entry_id FROM kaltura.flavor_asset WHERE updated_at >='".$start->format('Y-m-d')."'");
+		$rows = $opDB->run("SELECT id, partner_id, status, if(status=3,ifnull(deleted_at, updated_at), deleted_at) deleted_at, entry_id FROM kaltura.flavor_asset WHERE updated_at >='".$start->format('Y-m-d')."'");
                 foreach ($rows as $row)
                 {
                         if (array_key_exists($row["entry_id"], $deletedEntries))
