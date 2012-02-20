@@ -290,7 +290,7 @@ class DWHInspector
 
 		$rows = $opDB->run("SELECT id, partner_id, object_type, object_id, VERSION, object_sub_type, original, created_at, updated_at, ready_at, STATUS, file_size FROM ".
 		    	" kaltura.file_sync WHERE updated_at >='".$startDate->format('Y-m-d')."' and original = 1 AND ready_at IS NOT NULL AND object_type IN (1,4) ".
-			" AND STATUS IN (2,3)"); 
+			" AND STATUS IN (2,3) and partner_id not in (-2, -1, 0, 99)"); 
 
                 $fileSyncCollection = new FileSyncCollection();
                 foreach ($rows as $row)

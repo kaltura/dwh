@@ -1191,6 +1191,7 @@ WHERE updated_at between STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;
 and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
 and original = 1 and ready_at is not null and object_type in (1,4)
 and status in (2,3)
+and partner_id NOT IN ( -1  , -2  , 0 , 99 )
 order by id</sql>
     <limit>0</limit>
     <lookup/>
