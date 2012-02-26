@@ -1838,7 +1838,7 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
 	fixed_width=width;
 search_text_discrete = replace(categories_ids, &apos;,&apos;, &apos; _CAT_&apos;);
 
-if (search_text_discrete != null) {
+if (search_text_discrete != null &amp;&amp; search_text_discrete != &apos;&apos;) {
 	search_text_discrete = &apos;_CAT_&apos; + search_text_discrete;
 }
 </jsScript_script>
