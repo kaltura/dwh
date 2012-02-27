@@ -25,6 +25,7 @@ CREATE TABLE `aggr_managment` (
   `start_time` datetime DEFAULT NULL,
   `end_time` datetime DEFAULT NULL,
   `data_insert_time` datetime DEFAULT NULL,
+  `ri_time` datetime DEFAULT NULL,
   PRIMARY KEY (`aggr_name`,`date_id`,`hour_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
