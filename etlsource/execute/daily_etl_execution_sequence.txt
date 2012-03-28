@@ -1,6 +1,3 @@
-create_partitions.kjb
 storage_usage/calc_storage_usage.kjb
 aggregation/perform_aggregations.kjb
-aggregation/plays_views_sync_operational.kjb
-aggregation/kuser_storage_usage_sync_operational.kjb
 perform_referential_integrity.kjb
