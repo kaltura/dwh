@@ -1047,7 +1047,7 @@
 , display_in_search
 , subp_id
 , custom_data
-, search_text
+, NULL search_text
 , screen_name
 , site_url
 , permissions
@@ -1062,7 +1062,7 @@
 , moderation_status
 , moderation_count
 , modified_at
-, search_text_discrete
+, NULL search_text_discrete
 , categories
 , categories_ids
 FROM 
@@ -1791,6 +1791,7 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
            <schema_name/>
            </partitioning>
     <compatible>N</compatible>
+    <optimizationLevel/>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
@@ -1826,6 +1827,7 @@ if ( conversion_quality != null )
            <schema_name/>
            </partitioning>
     <compatible>N</compatible>
+    <optimizationLevel/>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
@@ -2030,6 +2032,7 @@ if (search_text_discrete != null &amp;&amp; search_text_discrete != &apos;&apos;
            <schema_name/>
            </partitioning>
     <compatible>N</compatible>
+    <optimizationLevel/>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
