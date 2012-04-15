@@ -672,7 +672,7 @@
 , updated_at
 , partner_id
 , display_in_search
-, search_text
+, NULL search_text
 , partner_data
 , storage_size
 , puser_id
