@@ -40,8 +40,6 @@ CALL apply_table_partitions_to_target_table('dwh_fact_events');
 CALL apply_table_partitions_to_target_table('dwh_fact_bandwidth_usage_archive');
 CALL apply_table_partitions_to_target_table('dwh_fact_bandwidth_usage');
 CALL apply_table_partitions_to_target_table('dwh_fact_fms_sessions_archive');
-CALL apply_table_partitions_to_target_table('dwh_fact_fms_session_events_archive');
 CALL apply_table_partitions_to_target_table('dwh_fact_fms_sessions');
-CALL apply_table_partitions_to_target_table('dwh_fact_fms_session_events');
 
 DROP PROCEDURE IF EXISTS `apply_table_partitions_to_target_table`;
