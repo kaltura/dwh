@@ -264,53 +264,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Set defaults</from><to>Calc date and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Table Permissions</to><enabled>Y</enabled> </hop>  <hop> <from>Main Insert &#47; Update</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>Read Table Permissions</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Calc date and hour ids</from><to>Set RI_IND 0&#47;1</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI_IND 0&#47;1</from><to>Main Insert &#47; Update</to><enabled>Y</enabled> </hop>  </order>
-  <step>
-    <name>Calc date and hour ids</name>
-    <type>Formula</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <formula><field_name>created_hour_id</field_name>
-<formula_string>hour([created_at])</formula_string>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-       <formula><field_name>created_date_id</field_name>
-<formula_string>10000*year([created_at])+100*month([created_at])+day([created_at])</formula_string>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-       <formula><field_name>updated_hour_id</field_name>
-<formula_string>hour([updated_at])</formula_string>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-       <formula><field_name>updated_date_id</field_name>
-<formula_string>10000*year([updated_at])+100*month([updated_at])+day([updated_at])</formula_string>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>447</xloc>
-      <yloc>82</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
+  <hop> <from>input</from><to>Read Table Permissions</to><enabled>Y</enabled> </hop>  <hop> <from>Main Insert &#47; Update</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>Read Table Permissions</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>Set RI_IND 0&#47;1</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI_IND 0&#47;1</from><to>Main Insert &#47; Update</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Database lookup</name>
     <type>DBLookup</type>
@@ -388,10 +342,15 @@
       <table>dwh_dim_permissions</table>
       <key>
         <name>id</name>
-        <field>pernission_id</field>
+        <field>permission_id</field>
         <condition>=</condition>
         <name2/>
       </key>
+      <value>
+        <name>permission_id</name>
+        <rename>id</rename>
+        <update>N</update>
+      </value>
       <value>
         <name>created_at</name>
         <rename>created_at</rename>
@@ -422,11 +381,16 @@
         <rename>status</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>ri_ind</name>
+        <rename>RI_IND_0</rename>
+        <update>Y</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>752</xloc>
-      <yloc>84</yloc>
+      <xloc>639</xloc>
+      <yloc>81</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -503,8 +467,8 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>583</xloc>
-      <yloc>83</yloc>
+      <xloc>499</xloc>
+      <yloc>81</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -582,8 +546,8 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>902</xloc>
-      <yloc>86</yloc>
+      <xloc>791</xloc>
+      <yloc>82</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
