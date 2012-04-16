@@ -678,7 +678,7 @@ Alert(decode(str1, &quot;1&quot;, &quot;Mr&quot;, &quot;2&quot;, &quot;Mrs&quot;
         <currency/>
         <decimal/>
         <group/>
-        <nullif>END_USER_REPORTS</nullif>
+        <nullif>FEATURE_END_USER_REPORTS</nullif>
         <length>-1</length>
         <precision>-1</precision>
       </field>
