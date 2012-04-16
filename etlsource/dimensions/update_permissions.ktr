@@ -327,7 +327,7 @@
     <cache_size>0</cache_size>
     <lookup>
       <schema/>
-      <table>dwh_dim_permission</table>
+      <table>dwh_dim_permissions</table>
       <orderby/>
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
@@ -385,7 +385,7 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema/>
-      <table>dwh_dim_permission</table>
+      <table>dwh_dim_permissions</table>
       <key>
         <name>id</name>
         <field>pernission_id</field>
