@@ -393,44 +393,24 @@
         <name2/>
       </key>
       <value>
-        <name>created_date_id</name>
-        <rename>created_date_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>created_hour_id</name>
-        <rename>created_hour_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>updated_date_id</name>
-        <rename>updated_date_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>updated_hour_id</name>
-        <rename>updated_hour_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
         <name>created_at</name>
         <rename>created_at</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>type</name>
         <rename>type</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>name</name>
         <rename>name</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>partner_id</name>
         <rename>partner_id</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>updated_at</name>
