@@ -14,7 +14,7 @@ CREATE TABLE `kalturadw`.`dwh_dim_permissions` (
   PRIMARY KEY (`permission_id`),
   KEY `partner_permission_index` (`partner_id`,`name`),
   KEY `dwh_update_date` (`dwh_update_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TRIGGER `kalturadw`.`dwh_dim_permissions_setcreationtime_oninsert` BEFORE INSERT
