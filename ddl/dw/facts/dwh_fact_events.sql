@@ -32,7 +32,7 @@ CREATE TABLE kalturadw.dwh_fact_events
 	, browser_id INT(11)
 	, context_id INT(11) DEFAULT NULL
 	, user_id INT(11) DEFAULT NULL
-	,application_id INT(11) DEFAULT NULL,
+	,application_id INT(11) DEFAULT NULL
 	,PRIMARY KEY (file_id,event_id,event_date_id)
 	,KEY Entry_id (Entry_id)
 	,KEY `event_hour_id_event_date_id_partner_id` (event_hour_id, event_date_id, partner_id)
