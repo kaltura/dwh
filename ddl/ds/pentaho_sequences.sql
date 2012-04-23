@@ -18,3 +18,5 @@ INSERT INTO pentaho_sequences VALUES(6,'dimensions/update_widget.ktr',1,TRUE);
 INSERT INTO pentaho_sequences VALUES(7,'dimensions/update_convertsion_profile.ktr',1,TRUE);
 INSERT INTO pentaho_sequences VALUES(8,'dimensions/update_flavor_params_conversion_profile.ktr',1,TRUE);
 INSERT INTO pentaho_sequences VALUES(9,'dimensions/update_batch_job.ktr',1,TRUE);
+INSERT INTO pentaho_sequences VALUES(10,'dimensions/update_permissions.ktr',1,TRUE);
+

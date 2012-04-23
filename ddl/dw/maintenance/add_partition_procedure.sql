@@ -88,6 +88,7 @@ BEGIN
 	CALL add_monthly_partition_for_table('dwh_hourly_events_devices');
         CALL add_monthly_partition_for_table('dwh_hourly_api_calls');
         CALL add_monthly_partition_for_table('dwh_hourly_errors');
+	CALL add_monthly_partition_for_table('dwh_hourly_events_entry_user_app');
 END$$
 
 DELIMITER ;

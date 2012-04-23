@@ -13,6 +13,7 @@ CREATE TABLE `dwh_fact_fms_sessions` (
   `location_id` INT(10) UNSIGNED,
   `session_partner_id` INT(10) UNSIGNED DEFAULT NULL,
   `total_bytes` BIGINT(20) UNSIGNED DEFAULT NULL,
+  `entry_id` varchar(20) DEFAULT NULL,
   KEY `session_partner_id` (`session_partner_id`),
   UNIQUE KEY `session_id` (`session_id`,`session_date_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=latin1

@@ -12,13 +12,15 @@ BEGIN
 	DECLARE v_from_archive DATE;
 	DECLARE v_ignore DATE;
 	DECLARE v_table_name VARCHAR(100);
+	DECLARE v_join_table VARCHAR(100);
+	DECLARE v_join_condition VARCHAR(200);
     		
 	SELECT DATE(NOW() - INTERVAL archive_delete_days_back DAY), DATE(archive_last_partition)
 	INTO v_ignore, v_from_archive
 	FROM kalturadw_ds.retention_policy
 	WHERE table_name = 'dwh_fact_events';	
 	
-	IF (p_date_val >= v_ignore) THEN -- not so old, we don't have any data
+	IF (p_date_val >= v_ignore) THEN 
 	
 		SELECT aggr_table, aggr_id_field
 		INTO  v_aggr_table, v_aggr_id_field
@@ -41,9 +43,8 @@ BEGIN
 		END IF;
 		
 		SET @s = CONCAT('INSERT INTO aggr_managment(aggr_name, date_id, hour_id, data_insert_time)
-				VALUES(''',p_aggr_name,''',''',date(p_date_val)*1,''',',p_hour_id,',NOW())
+				VALUES(''',p_aggr_name,''',''',DATE(p_date_val)*1,''',',p_hour_id,',NOW())
 				ON DUPLICATE KEY UPDATE data_insert_time = values(data_insert_time)');
-
 		PREPARE stmt FROM  @s;
 		EXECUTE stmt;
 		DEALLOCATE PREPARE stmt;
@@ -62,8 +63,14 @@ BEGIN
 		FROM kalturadw_ds.aggr_name_resolver
 		WHERE aggr_name = p_aggr_name;
 		
+		SELECT IF(join_table <> '' , CONCAT(',', join_table), ''), IF(join_table <> '', CONCAT(' AND ev.' ,join_id_field,'=',join_table,'.',join_id_field), '')
+		INTO v_join_table, v_join_condition
+		FROM kalturadw_ds.aggr_name_resolver
+		WHERE aggr_name = p_aggr_name;
+		
+		
 		SET @s = CONCAT('UPDATE aggr_managment SET start_time = NOW()
-				WHERE aggr_name = ''',p_aggr_name,''' AND date_id = ''',date(p_date_val)*1,''' AND hour_id = ',p_hour_id);
+				WHERE aggr_name = ''',p_aggr_name,''' AND date_id = ''',DATE(p_date_val)*1,''' AND hour_id = ',p_hour_id);
 		PREPARE stmt FROM  @s;
 		EXECUTE stmt;
 		DEALLOCATE PREPARE stmt;
@@ -154,13 +161,13 @@ BEGIN
 			SUM(IF(ev.event_type_id = 38, 1,NULL)) count_postroll_25,
 			SUM(IF(ev.event_type_id = 39, 1,NULL)) count_postroll_50,
 			SUM(IF(ev.event_type_id = 40, 1,NULL)) count_postroll_75
-			FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), dwh_dim_entries e
-				WHERE ev.event_type_id BETWEEN 2 AND 40 
+			FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), dwh_dim_entries e',v_join_table,
+				' WHERE ev.event_type_id BETWEEN 2 AND 40 
 				AND ev.event_date_id  = DATE(''',p_date_val,''')*1
 				AND ev.event_hour_id = ',p_hour_id,'
 				AND e.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
-			AND e.entry_id = ev.entry_id
-			GROUP BY partner_id,event_date_id, event_hour_id',v_aggr_id_field,';');
+			AND e.entry_id = ev.entry_id ' ,v_join_condition, 
+			' GROUP BY partner_id,event_date_id, event_hour_id',v_aggr_id_field,';');
 		
 		PREPARE stmt FROM  @s;
 		EXECUTE stmt;
@@ -184,13 +191,13 @@ BEGIN
 					COUNT(DISTINCT IF(ev.event_type_id IN (6),1,NULL)) v_75,
 					COUNT(DISTINCT IF(ev.event_type_id IN (7),1,NULL)) v_100,
 					MAX(IF(event_type_id IN (3),session_id,NULL)) s_play
-				FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), dwh_dim_entries e
-				WHERE ev.event_date_id  = DATE(''',p_date_val,''')*1
+				FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), dwh_dim_entries e',v_join_table,
+				' WHERE ev.event_date_id  = DATE(''',p_date_val,''')*1
 					AND ev.event_hour_id = ',p_hour_id,'
 					AND e.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
 					AND e.entry_id = ev.entry_id
-					AND ev.event_type_id IN(3,4,5,6,7) /* time viewed only when player reaches 25,50,75,100 */
-				GROUP BY ev.partner_id, ev.event_date_id, ev.event_hour_id , ev.entry_id',v_aggr_id_field,',ev.session_id) e
+					AND ev.event_type_id IN(3,4,5,6,7) /* time viewed only when player reaches 25,50,75,100 */ ',v_join_condition,
+				' GROUP BY ev.partner_id, ev.event_date_id, ev.event_hour_id , ev.entry_id',v_aggr_id_field,',ev.session_id) e
 				GROUP BY partner_id, event_date_id, event_hour_id',v_aggr_id_field,'
 				ON DUPLICATE KEY UPDATE
 				sum_time_viewed = values(sum_time_viewed), count_time_viewed=values(count_time_viewed);');
@@ -211,7 +218,7 @@ BEGIN
 		
 	END IF; 
 	
-	SET @s = CONCAT('UPDATE aggr_managment SET end_time = NOW() WHERE aggr_name = ''',p_aggr_name,''' AND date_id = ''',date(p_date_val)*1,''' AND hour_id =',p_hour_id);
+	SET @s = CONCAT('UPDATE aggr_managment SET end_time = NOW() WHERE aggr_name = ''',p_aggr_name,''' AND date_id = ''',DATE(p_date_val)*1,''' AND hour_id =',p_hour_id);
 	PREPARE stmt FROM  @s;
 	EXECUTE stmt;
 	DEALLOCATE PREPARE stmt;
