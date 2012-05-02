@@ -941,7 +941,7 @@
     <enclosure_fix_disabled>Y</enclosure_fix_disabled>
     <header>N</header>
     <footer>N</footer>
-    <format>Unix</format>
+    <format>DOS</format>
     <compression>None</compression>
     <encoding/>
     <endedLine/>
@@ -952,7 +952,7 @@
       <name>file</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
       <extention/>
       <append>N</append>
       <split>N</split>
@@ -1340,6 +1340,18 @@
         <precision>-1</precision>
       </field>
       <field>
+        <name>contextId</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
         <name>user_id</name>
         <type>Number</type>
         <format/>
@@ -1359,6 +1371,18 @@
         <decimal/>
         <group/>
         <nullif>NULL</nullif>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>featureType</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
@@ -2117,6 +2141,16 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
       <field>
         <name>domain</name>
         <value> </value>
+        <mask/>
+        </field>
+      <field>
+        <name>contextId</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>featureType</name>
+        <value>0</value>
         <mask/>
         </field>
       </fields>
@@ -3089,6 +3123,8 @@ var queryStringReferrer = null;
 var eventTimestamp = null;
 var ksUrl = null;
 var application = null;
+var contextId = null;
+var featureType = null;
 
 &#47;&#47; Trim &quot;[&quot; and set it to a date
 eventTime = str2date(substr(raw_datetime,1),&apos;dd&#47;MMM&#47;yyyy:HH:mm:ss&apos;);
@@ -3141,6 +3177,8 @@ if (lineType == 2){
 	uid = getValue(queryStringDictionary,&quot;userId&quot;);
 	eventType = getValue(queryStringDictionary, &quot;eventType&quot;);
 	application = getValue(queryStringDictionary, &quot;applicationId&quot;);
+	contextId = getValue(queryStringDictionary, &quot;contextId&quot;);
+	featureType = getValue(queryStringDictionary, &quot;featureType&quot;);
 	keyPrefix = &quot;&quot;;
 	ksUrl = getValue(queryStringDictionary, &quot;ks&quot;);
 }
@@ -3384,6 +3422,18 @@ Alert(getEnvironmentVar(strVarName));</jsScript_script>
         <replace>N</replace>
       </field>      <field>        <name>application</name>
         <rename>application</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>contextId</name>
+        <rename>contextId</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>featureType</name>
+        <rename>featureType</rename>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
