@@ -282,7 +282,7 @@
  <leftvalue>status</leftvalue>
  <function>=</function>
  <rightvalue/>
- <value><name>constant</name><type>Integer</type><text>2</text><length>-1</length><precision>0</precision><isnull>N</isnull><mask>#</mask></value> </condition>
+ <value><name>constant</name><type>Integer</type><text>1</text><length>-1</length><precision>0</precision><isnull>N</isnull><mask>#</mask></value> </condition>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
