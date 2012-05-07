@@ -36,6 +36,7 @@ CREATE TABLE kalturadw.dwh_fact_events_new (
   `context_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `application_id` int(11) DEFAULT NULL,
+  `feature_type` int(11) DEFAULT NULL,
   PRIMARY KEY (`file_id`,`event_id`,`event_date_id`),
   KEY `Entry_id` (`entry_id`),
   KEY `event_hour_id_event_date_id_partner_id` (`event_hour_id`,`event_date_id`,`partner_id`)
