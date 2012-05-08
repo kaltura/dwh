@@ -438,7 +438,7 @@ if (str2num(ksPartnerID) == partnerID) {
 	ksPuserID = getUserIdFromKS(ks);
 &#47;&#47;	if (ksPuserID == &quot;Unknown&quot;)
 &#47;&#47;		ksPartnerID = -99;
-&#47;&#47;}
+}
 
 function is_not_numeric(s) {
 	return (isNaN(s) || s == null || s == &quot;&quot;);
