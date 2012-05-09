@@ -425,8 +425,10 @@
 &#47;&#47;Alert(getUserIdFromKS(strToMatch));
 &#47;&#47;var strToMatch = base64_decode (&quot;NWI1MTI4YTM1NDZmZTg0ODM2Mzk2NzEzN2I4YWNkYWY2NWEzYzI4OXw0OTYwMDc7NDk2MDA3OzEzMzM1NTI1NDQ7MjsxMzMzNDY2MTQ0LjM5Mjc7bm9hMTBAbWFpbGluYXRvci5jb207KixkaXNhYmxlZW50aXRsZW1lbnQ7Ow&quot;);
 &#47;&#47;Alert(strToMatch);
-&#47;&#47;Alert(getPartnerIdFromKS(strToMatch));
-&#47;&#47;Alert(getUserIdFromKS(strToMatch));
+var strToMatch = base64_decode (&quot;NGRlZGQ5ZjU3ZjY4YmQ0YWQzMWI4OWJmZTIwZWQyZmM5ZTVlMzk4MHwzNDYxNTE7MzQ2MTUxOzEzMzY2NjAwOTE7MDsxMzM2NTczNjkxLjUxMjE7MDt2aWV3Oiosd2lkZ2V0OjE7Ow==&quot;);
+Alert(strToMatch);
+Alert(getPartnerIdFromKS(strToMatch));
+Alert(getUserIdFromKS(strToMatch));
 
 var ks = base64_decode(ksUrl);
 var strKsPartnerID = getPartnerIdFromKS(ks);
@@ -456,11 +458,11 @@ function getPartnerIdFromKS(strToMatch) {
 function getUserIdFromKS(strToMatch) {
 	var strReg = &quot;^[a-z0-9]*\\|[0-9]+\\;[0-9]+\\;[0-9]+\\;[0-9]+\\;[0-9.]+\\;([^\\;]+)\\;.*&quot;;
 	var resArr =  str2RegExp(strToMatch, strReg);
-	if (resArr!=null &amp;&amp; resArr.length &gt; 0) {
+	if (resArr!=null &amp;&amp; resArr.length &gt; 0 &amp;&amp; resArr[0] != &quot;0&quot;) {
 		return resArr[0];
 	}
-	if (puser!=null)
-		return puser; 
+	if (uid!=null)
+		return uid; 
 	return &quot;Unknown&quot;;
 }
 
