@@ -77,11 +77,12 @@ CREATE TABLE `dwh_dim_entries_new` (
   `end_date_id` int(11) DEFAULT NULL,
   `end_hour_id` tinyint(4) DEFAULT NULL,
   `prev_kuser_id` int(11) DEFAULT NULL,
-  `kuser_updated_date_id` int(11) DEFAULT '-1',
+  `kuser_updated_date_id` int(11) DEFAULT '-1'
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-INSERT INTO kalturadw.dwh_dim_entries_new
-select * from kalturadw.dwh_dim_entries;
+INSERT INTO kalturadw.dwh_dim_entries_new VALUES (`entry_id`,`kshow_id`,`kuser_id`,`entry_name`,`entry_type_id`,`entry_media_type_id`,`data`,`thumbnail`,`views`,`votes`,`comments`,`favorites`,`total_rank`,`rank`,`tags`,`anonymous`,`entry_status_id`,`entry_media_source_id`,`entry_source_id`,`source_link`,`entry_license_type_id`,`credit`,`length_in_msecs`,`height`,`width`,`conversion_quality`,`storage_size`,`editor_type_id`,`puser_id`,`is_admin_content`,`created_at` datetime,`created_date_id`,`created_hour_id`,`updated_at`,`updated_date_id`,`updated_hour_id`,`operational_measures_updated_at`,`partner_id`,`display_in_search`,`subp_id`,`custom_data`,`search_text`,`screen_name`,`site_url`,`permissions`,,`group_id`,`plays`,`partner_data`,`int_id`,`indexed_custom_data_1`,`description`,`media_date`,`admin_tags`,`moderation_status`,`moderation_count`,`modified_at`,`modified_date_id`,`modified_hour_id`,`dwh_creation_date`,`dwh_update_date`,`ri_ind`,`access_control_id`,`conversion_profile_id`,`categories`,`categories_ids`,`search_text_discrete`,`flavor_params_ids`,`start_date`,`start_date_id`,`start_hour_id`,`end_date`,`end_date_id`,`end_hour_id`)
+SELECT `entry_id`,`kshow_id`,`kuser_id`,`entry_name`,`entry_type_id`,`entry_media_type_id`,`data`,`thumbnail`,`views`,`votes`,`comments`,`favorites`,`total_rank`,`rank`,`tags`,`anonymous`,`entry_status_id`,`entry_media_source_id`,`entry_source_id`,`source_link`,`entry_license_type_id`,`credit`,`length_in_msecs`,`height`,`width`,`conversion_quality`,`storage_size`,`editor_type_id`,`puser_id`,`is_admin_content`,`created_at` datetime,`created_date_id`,`created_hour_id`,`updated_at`,`updated_date_id`,`updated_hour_id`,`operational_measures_updated_at`,`partner_id`,`display_in_search`,`subp_id`,`custom_data`,`search_text`,`screen_name`,`site_url`,`permissions`,,`group_id`,`plays`,`partner_data`,`int_id`,`indexed_custom_data_1`,`description`,`media_date`,`admin_tags`,`moderation_status`,`moderation_count`,`modified_at`,`modified_date_id`,`modified_hour_id`,`dwh_creation_date`,`dwh_update_date`,`ri_ind`,`access_control_id`,`conversion_profile_id`,`categories`,`categories_ids`,`search_text_discrete`,`flavor_params_ids`,`start_date`,`start_date_id`,`start_hour_id`,`end_date`,`end_date_id`,`end_hour_id` 
+FROM kalturadw.dwh_dim_entries;
 
 ALTER TABLE kalturadw.dwh_dim_entries_new
   ADD UNIQUE KEY (`entry_id`), 
