@@ -17,7 +17,7 @@ BEGIN
 	FLOOR(date_id/100) BETWEEN FLOOR(p_start_date_id/100) AND FLOOR(p_end_date_id/100))
     AND aggr_p.partner_id = p_partner_id
     AND aggr_p.hour_id = 0
-    AND aggr_p.bandwidth_soucre_id = 1;
+    AND aggr_p.bandwidth_source_id = 1;
     
 	RETURN total_billable_storage_mb;
 END$$
