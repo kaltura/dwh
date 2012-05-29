@@ -10,7 +10,7 @@ BEGIN
     
 	    SELECT 
 		month_id,
-	    SUM(free.continuous_aggr_storage_mb) avg_continuous_aggr_storage_mb,
+	    SUM(free.avg_continuous_aggr_storage_mb) avg_continuous_aggr_storage_mb,
 	    SUM(free.sum_partner_bandwidth_kb) sum_partner_bandwidth_kb
 	    FROM 
 	    (SELECT
