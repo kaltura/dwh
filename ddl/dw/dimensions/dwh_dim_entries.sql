@@ -99,7 +99,7 @@ CREATE TABLE `dwh_dim_entries` (
   KEY `partner_id_created_media_type_source` (`partner_id`,`created_at`,`entry_media_type_id`,`entry_media_source_id`),
   KEY `created_at` (`created_at`),
   KEY `modified_at` (`modified_at`),
-  KEY `operational_measures_updated_at` (`operational_measures_updated_at`),
+  KEY `operational_measures_updated_at` (`operational_measures_updated_at`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 DELIMITER $$
