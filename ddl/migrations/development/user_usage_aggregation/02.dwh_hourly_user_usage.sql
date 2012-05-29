@@ -17,6 +17,6 @@ CREATE TABLE kalturadw.`dwh_hourly_user_usage` (
   KEY (`date_id`, `hour_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 PARTITION BY RANGE (date_id)
-(PARTITION p_2012501 VALUES LESS THAN (20102501) ENGINE = INNODB);
+(PARTITION p_2012501 VALUES LESS THAN (20120501) ENGINE = INNODB);
  
  CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_user_usage');
