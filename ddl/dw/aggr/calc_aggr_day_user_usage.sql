@@ -23,6 +23,7 @@ BEGIN
     FROM         dwh_fact_entries_sizes f, dwh_dim_entries e
     WHERE        entry_size_date_id=p_date_id
     AND          f.entry_id = e.entry_id
+    AND          e.entry_type_id IN (1,2,7,10)
     GROUP BY     e.kuser_id;
 
     
@@ -31,7 +32,8 @@ BEGIN
     SELECT partner_id, entry_id, prev_kuser_id, kuser_id 
     FROM dwh_dim_entries
     WHERE prev_kuser_id IS NOT NULL
-    AND kuser_updated_date_id = p_date_id;
+    AND kuser_updated_date_id = p_date_id
+    AND entry_type_id IN (1,2,7,10);
  
     ALTER TABLE entries_prev_owner ADD INDEX index_1 (kuser_id);
     
@@ -65,12 +67,13 @@ BEGIN
     
     INSERT INTO temp_aggr_entries(partner_id, kuser_id, added_entries, deleted_entries, added_msecs, deleted_msecs)
     SELECT partner_id, kuser_id,
-	SUM(IF(entry_status_id In (0,1,2,4) AND (created_date_id = p_date_id OR kuser_updated_date_id = p_date_id),1,0)),
+	SUM(IF(entry_status_id IN (0,1,2,4) AND (created_date_id = p_date_id OR kuser_updated_date_id = p_date_id),1,0)),
 	SUM(IF(entry_status_id = 3 AND (created_date_id <> p_date_id OR kuser_updated_date_id <> p_date_id),1,0)),
 	SUM(IF(entry_status_id IN (0,1,2,4) AND (created_date_id = p_date_id OR kuser_updated_date_id = p_date_id),length_in_msecs,0)),
 	SUM(IF(entry_status_id = 3 AND (created_date_id <> p_date_id OR kuser_updated_date_id <> p_date_id),length_in_msecs,0))
     FROM dwh_dim_entries e
     WHERE updated_date_id = p_date_id
+    AND e.entry_type_id IN (1,2,7,10)
     GROUP BY kuser_id;
     
     INSERT INTO temp_aggr_entries(partner_id, kuser_id, added_entries, deleted_entries, added_msecs, deleted_msecs)
@@ -103,17 +106,17 @@ BEGIN
 	      ON u.kuser_id = max.kuser_id AND u.date_id = max.date_id; 
 	      
     INSERT INTO dwh_hourly_user_usage (partner_id, kuser_id, date_id, hour_id, added_storage_kb, total_storage_kb, added_entries, total_entries, added_msecs, total_msecs)
-    SELECT      aggr.partner_id, aggr.kuser_id, p_date_id, 0, SUM(count_storage_kb), sum(count_storage_kb) + IFNULL(latest_total.total_storage_kb,0),
-                0, ifnull(latest_total.total_entries,0), 0, ifnull(latest_total.total_msecs,0)
-    FROM        temp_aggr_storage aggr left join latest_total on aggr.kuser_id = latest_total.kuser_id
-    where count_storage_kb <> 0
+    SELECT      aggr.partner_id, aggr.kuser_id, p_date_id, 0, SUM(count_storage_kb), SUM(count_storage_kb) + IFNULL(latest_total.total_storage_kb,0),
+                0, IFNULL(latest_total.total_entries,0), 0, IFNULL(latest_total.total_msecs,0)
+    FROM        temp_aggr_storage aggr LEFT JOIN latest_total ON aggr.kuser_id = latest_total.kuser_id
+    WHERE count_storage_kb <> 0
     GROUP BY    aggr.kuser_id;
         
     INSERT INTO dwh_hourly_user_usage (partner_id, kuser_id, date_id, hour_id, added_storage_kb, total_storage_kb, added_entries, total_entries, added_msecs, total_msecs)
-    SELECT 		aggr.partner_id, aggr.kuser_id, p_date_id, 0, 0, ifnull(latest_total.total_storage_kb,0),SUM(added_entries) - SUM(deleted_entries), SUM(added_entries) - SUM(deleted_entries) + ifnull(latest_total.total_entries,0),
+    SELECT 		aggr.partner_id, aggr.kuser_id, p_date_id, 0, 0, IFNULL(latest_total.total_storage_kb,0),SUM(added_entries) - SUM(deleted_entries), SUM(added_entries) - SUM(deleted_entries) + IFNULL(latest_total.total_entries,0),
 			SUM(added_msecs) - SUM(deleted_msecs), SUM(added_msecs) - SUM(deleted_msecs) + IFNULL(latest_total.total_msecs,0)
-	FROM 		temp_aggr_entries aggr LEFT join latest_total on aggr.kuser_id = latest_total.kuser_id
-	where added_entries <> 0 or added_msecs <> 0 or deleted_entries <> 0 or deleted_msecs <> 0
+	FROM 		temp_aggr_entries aggr LEFT JOIN latest_total ON aggr.kuser_id = latest_total.kuser_id
+	WHERE added_entries <> 0 OR added_msecs <> 0 OR deleted_entries <> 0 OR deleted_msecs <> 0
 	GROUP BY 	aggr.kuser_id
 	ON DUPLICATE KEY UPDATE added_entries = VALUES(added_entries), total_entries=VALUES(total_entries), 
 	                        added_msecs=VALUES(added_msecs), total_msecs=VALUES(total_msecs);
