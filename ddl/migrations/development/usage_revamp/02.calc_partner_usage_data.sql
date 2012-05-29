@@ -25,7 +25,7 @@ BEGIN
 	
 	SELECT
 		FLOOR(date_id/100) month_id,
-		MAX(aggr_storage_mb) continuous_aggr_storage_mb,
+		MAX(aggr_storage_mb) avg_continuous_aggr_storage_mb,
 		SUM(count_bandwidth_kb) sum_partner_bandwidth_kb
 	    FROM dwh_hourly_partner_usage 
 	    WHERE partner_id=p_partner_id AND hour_id = 0
