@@ -12,8 +12,8 @@ BEGIN
     DROP TABLE IF EXISTS temp_aggr_storage;
     CREATE TEMPORARY TABLE temp_aggr_storage(
         partner_id          INT(11) NOT NULL,
-        kuser_id             VARCHAR(60) NOT NULL,
-        count_storage_kb    DECIMAL(19,4) NOT NULL
+        kuser_id             INT(11) NOT NULL,
+        count_storage_kb    DECIMAL(19,4) NOT NULL DEFAULT 0.0000
     ) ENGINE = MEMORY;
     
     ALTER TABLE temp_aggr_storage ADD INDEX index_1 (kuser_id);  
@@ -53,11 +53,11 @@ BEGIN
     DROP TABLE IF EXISTS temp_aggr_entries;
     CREATE TEMPORARY TABLE temp_aggr_entries(
         partner_id          INT(11) NOT NULL,
-        kuser_id             VARCHAR(60) NOT NULL,
-        added_entries    INT(11) NOT NULL,
-        deleted_entries  INT(11) NOT NULL,
-        added_msecs INT(11) NOT NULL,
-        deleted_msecs INT(11) NOT NULL
+        kuser_id             INT(11) NOT NULL,
+        added_entries    INT(11) NOT NULL DEFAULT 0,
+        deleted_entries  INT(11) NOT NULL DEFAULT 0,
+        added_msecs INT(11) NOT NULL DEFAULT 0,
+        deleted_msecs INT(11) NOT NULL DEFAULT 0
         
     ) ENGINE = MEMORY; 
     
@@ -88,7 +88,7 @@ BEGIN
     DROP TABLE IF EXISTS latest_total;
     CREATE TEMPORARY TABLE latest_total(
         partner_id          INT(11) NOT NULL,
-        kuser_id             VARCHAR(60) NOT NULL,
+        kuser_id             INT(11) NOT NULL,
         total_storage_kb    DECIMAL(19,4) NOT NULL DEFAULT 0,
         total_entries  INT(11) NOT NULL DEFAULT 0,
         total_msecs INT(11) NOT NULL DEFAULT 0
