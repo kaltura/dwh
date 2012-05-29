@@ -93,14 +93,14 @@ CREATE TABLE `dwh_dim_entries` (
   `end_date` datetime DEFAULT NULL,
   `end_date_id` int(11) DEFAULT NULL,
   `end_hour_id` tinyint(4) DEFAULT NULL,
+  `prev_kuser_id` int(11) DEFAULT NULL,
+  `kuser_updated_date_id` int(11) DEFAULT '-1'
   PRIMARY KEY (`entry_id`),
   KEY `partner_id_created_media_type_source` (`partner_id`,`created_at`,`entry_media_type_id`,`entry_media_source_id`),
   KEY `created_at` (`created_at`),
   KEY `modified_at` (`modified_at`),
   KEY `operational_measures_updated_at` (`operational_measures_updated_at`),
-  FULLTEXT KEY `all_text` (`entry_name`,`description`,`tags`,`admin_tags`),
-  FULLTEXT KEY `search_text_discrete_index` (`search_text_discrete`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 DELIMITER $$
 

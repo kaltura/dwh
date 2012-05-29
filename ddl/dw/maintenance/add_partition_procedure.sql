@@ -86,9 +86,11 @@ BEGIN
         CALL add_monthly_partition_for_table('dwh_hourly_partner');
         CALL add_monthly_partition_for_table('dwh_hourly_partner_usage');
 	CALL add_monthly_partition_for_table('dwh_hourly_events_devices');
-        CALL add_monthly_partition_for_table('dwh_hourly_api_calls');
-        CALL add_monthly_partition_for_table('dwh_hourly_errors');
-	CALL add_monthly_partition_for_table('dwh_hourly_events_entry_user_app');
+	CALL add_monthly_partition_for_table('dwh_hourly_api_calls');
+    	CALL add_monthly_partition_for_table('dwh_hourly_errors');
+	CALL add_monthly_partition_for_table('dwh_hourly_events_context_entry_user_app');
+	CALL add_monthly_partition_for_table('dwh_hourly_events_context_app');
+	CALL add_monthly_partition_for_table('dwh_hourly_user_usage');
 END$$
 
 DELIMITER ;

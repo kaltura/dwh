@@ -37,5 +37,6 @@ values  ('entry','dwh_hourly_events_entry','','entry_id','events','',''),
 		('devices_bandwidth_usage', 'dwh_hourly_events_devices', 'country_id, location_id', '', 'bandwidth','',''),
 		('api_calls','dwh_hourly_api_calls','action_id', '', 'api','',''),
 		('errors','dwh_hourly_errors','error_code_id','','errors','',''),
-		('users', 'dwh_hourly_events_entry_user_app', 'user_id,application_id', 'entry_id', 'events', 'dwh_dim_user_reports_allowed_partners', 'partner_id');
+		('users', 'dwh_hourly_events_context_entry_user_app', 'context_id,user_id,application_id', 'entry_id', 'events', 'dwh_dim_user_reports_allowed_partners', 'partner_id'),
+		('context', 'dwh_hourly_events_context_app', 'context_id,application_id', '', 'events', 'dwh_dim_user_reports_allowed_partners', 'partner_id');
 		
