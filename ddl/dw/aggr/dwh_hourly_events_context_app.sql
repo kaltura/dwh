@@ -1,14 +1,13 @@
 USE `kalturadw`;
 
-DROP TABLE IF EXISTS kalturadw.`dwh_hourly_events_entry_user_app`;
+DROP TABLE IF EXISTS kalturadw.`dwh_hourly_events_context_app`;
 
-CREATE TABLE kalturadw.`dwh_hourly_events_entry_user_app` (
+CREATE TABLE kalturadw.`dwh_hourly_events_context_app` (
   `partner_id` INT NOT NULL DEFAULT -1,
   `date_id` INT NOT NULL,
   `hour_id` INT NOT NULL,
-  `user_id` INT NOT NULL DEFAULT -1,
+  `context_id` INT NOT NULL DEFAULT -1,
   `application_id` INT NOT NULL DEFAULT -1,
-  `entry_id` VARCHAR(20) NOT NULL DEFAULT -1,
   `sum_time_viewed` DECIMAL(20,3) DEFAULT NULL,
   `count_time_viewed` INT DEFAULT NULL,
   `count_plays` INT DEFAULT NULL,
@@ -53,20 +52,10 @@ CREATE TABLE kalturadw.`dwh_hourly_events_entry_user_app` (
   `count_bandwidth_kb` INT DEFAULT NULL,
   `total_admins` INT DEFAULT NULL,
   `total_media_entries` INT DEFAULT NULL,
-  PRIMARY KEY `partner_id` (`partner_id`,`date_id`,`hour_id`,`entry_id`,`user_id`,`application_id`),
+  PRIMARY KEY `partner_id` (`partner_id`,`date_id`,`hour_id`,`context_id`,`application_id`),
   KEY (`date_id`, `hour_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 PARTITION BY RANGE (date_id)
-(PARTITION p_201001 VALUES LESS THAN (20100201) ENGINE = INNODB,
- PARTITION p_201002 VALUES LESS THAN (20100301) ENGINE = INNODB,
- PARTITION p_201003 VALUES LESS THAN (20100401) ENGINE = INNODB,
- PARTITION p_201004 VALUES LESS THAN (20100501) ENGINE = INNODB,
- PARTITION p_201005 VALUES LESS THAN (20100601) ENGINE = INNODB,
- PARTITION p_201006 VALUES LESS THAN (20100701) ENGINE = INNODB,
- PARTITION p_201007 VALUES LESS THAN (20100801) ENGINE = INNODB,
- PARTITION p_201008 VALUES LESS THAN (20100901) ENGINE = INNODB,
- PARTITION p_201009 VALUES LESS THAN (20101001) ENGINE = INNODB,
- PARTITION p_201010 VALUES LESS THAN (20101101) ENGINE = INNODB,
- PARTITION p_201011 VALUES LESS THAN (20101201) ENGINE = INNODB);
+(PARTITION p_201205 VALUES LESS THAN (20120601) ENGINE = INNODB);
 
-CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_events_entry_user_app');
+CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_events_context_app');
