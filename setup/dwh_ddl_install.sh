@@ -220,7 +220,6 @@ mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_error_object_types.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_hours.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_applications.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_permissions.sql
-mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_user_reports_allowed_partners.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_pusers.sql
 
 
@@ -240,14 +239,18 @@ mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_widget.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_uid.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_partner_usage.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_user_usage.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_devices.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_api_calls.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_errors.sh
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_entry_uesr_app.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_entry_uesr_app.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_app.sql
 mysqlexec $DW_ROOT_DIR/aggr/time_zone_helper_function.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_procedure.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_bandwidth.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_storage.sql
+mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_user_usage.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_api_calls.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_errors.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_entries_sizes.sql
@@ -272,7 +275,7 @@ mysqlexec $DW_ROOT_DIR/functions/calc_partner_overage.sql
 mysqlexec $DW_ROOT_DIR/functions/calc_partner_billing_data_procedure.sql
 mysqlexec $DW_ROOT_DIR/functions/get_data_for_operational.sql
 mysqlexec $DW_ROOT_DIR/functions/mark_operational_as_done.sql
-
+mysqlexec $DW_ROOT_DIR/functions/calc_partner_usage_data.sql
 #dw/ri/ 
 mysqlexec $DW_ROOT_DIR/ri/ri_defaults.sql
 mysqlexec $DW_ROOT_DIR/ri/ri_mapping.sql
@@ -287,6 +290,7 @@ mysqlexec $DW_ROOT_DIR/views/dwh_view_entry_type.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_view_partners_monthly_billing_last_updated_at.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_view_partners_monthly_billing.sql
 mysqlexec $DW_ROOT_DIR/views/dwh_view_monthly_active_partners.sql
+mysqlexec $DW_ROOT_DIR/views/dwh_dim_user_reports_allowed_partners.sql
 
 #dw/fms/
 mysqlexec $DW_ROOT_DIR/fms/fms_dim_tables.sql
