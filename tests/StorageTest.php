@@ -132,10 +132,10 @@ class StorageTest extends KalturaTestCase
 			$expectedTotal += $size;			
 		}
 		
-		$rows = MySQLRunner::execute("SELECT sum(billable_storage_mb) size FROM kalturadw.dwh_hourly_partner_usage WHERE date_id = ? AND partner_id = ?" , array(0=>$dateId, 1=>$this->partnerId));
+		$rows = MySQLRunner::execute("SELECT sum(aggr_storage_mb) size FROM kalturadw.dwh_hourly_partner_usage WHERE date_id = ? AND partner_id = ?" , array(0=>$dateId, 1=>$this->partnerId));
 		$actualTotal = floatval($rows[0]["size"]);
-		echo "total: expected " .round($expectedTotal/1024/31,3) ." actual " .$actualTotal . "\n";
-		$this->assertLessThan(0.01,abs(round($expectedTotal/1024/31,3) - $actualTotal));
+		echo "total: expected " .round($expectedTotal/1024,3) ." actual " .$actualTotal . "\n";
+		$this->assertLessThan(0.01,abs(round($expectedTotal/1024,3) - $actualTotal));
 		
 		$rows = MySQLRunner::execute("SELECT sum(count_storage_mb) size FROM kalturadw.dwh_hourly_partner_usage WHERE date_id = ? AND partner_id = ?" , array(0=>$dateId, 1=>$this->partnerId));
 		$actualDelta = floatval($rows[0]["size"]);
