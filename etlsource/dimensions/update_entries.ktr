@@ -2034,7 +2034,7 @@ if ( conversion_quality != null )
 var fixed_height=-1;
 var fixed_width=-1;
 var kuser_updated_date_id = current_kuser_updated_date_id;
-
+var prev_kuser_id = current_prev_kuser_id;
 if (height&gt;0 &amp;&amp; height&lt;100000) 
 	fixed_height=height;
 if (width&gt;0 &amp;&amp; width&lt;100000) 
@@ -2082,7 +2082,7 @@ if (current_kuser_id != null &amp;&amp; current_kuser_id != kuser_id)
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
-        <replace>Y</replace>
+        <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1000</xloc>
@@ -2167,7 +2167,7 @@ if (current_kuser_id != null &amp;&amp; current_kuser_id != kuser_id)
     <name>lookup entry</name>
     <type>DBLookup</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
@@ -2209,7 +2209,7 @@ if (current_kuser_id != null &amp;&amp; current_kuser_id != kuser_id)
       </value>
       <value>
         <name>prev_kuser_id</name>
-        <rename>prev_kuser_id</rename>
+        <rename>current_prev_kuser_id</rename>
         <default/>
         <type>Integer</type>
       </value>
@@ -2226,7 +2226,7 @@ if (current_kuser_id != null &amp;&amp; current_kuser_id != kuser_id)
     <name>moderation_status id</name>
     <type>ConcurrentSafeCombinationLookup</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
