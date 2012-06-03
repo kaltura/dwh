@@ -33,6 +33,7 @@ BEGIN
     FROM dwh_dim_entries
     WHERE prev_kuser_id IS NOT NULL
     AND kuser_updated_date_id = p_date_id
+    AND created_date_id <> p_date_id
     AND entry_type_id IN (1,2,7,10);
  
     ALTER TABLE entries_prev_owner ADD INDEX index_1 (kuser_id);
@@ -68,9 +69,9 @@ BEGIN
     INSERT INTO temp_aggr_entries(partner_id, kuser_id, added_entries, deleted_entries, added_msecs, deleted_msecs)
     SELECT partner_id, kuser_id,
 	SUM(IF(entry_status_id IN (0,1,2,4) AND (created_date_id = p_date_id OR kuser_updated_date_id = p_date_id),1,0)),
-	SUM(IF(entry_status_id = 3 AND (created_date_id <> p_date_id OR kuser_updated_date_id <> p_date_id),1,0)),
+	SUM(IF(entry_status_id = 3 AND (created_date_id <> p_date_id AND kuser_updated_date_id <> p_date_id),1,0)),
 	SUM(IF(entry_status_id IN (0,1,2,4) AND (created_date_id = p_date_id OR kuser_updated_date_id = p_date_id),length_in_msecs,0)),
-	SUM(IF(entry_status_id = 3 AND (created_date_id <> p_date_id OR kuser_updated_date_id <> p_date_id),length_in_msecs,0))
+	SUM(IF(entry_status_id = 3 AND (created_date_id <> p_date_id AND kuser_updated_date_id <> p_date_id),length_in_msecs,0))
     FROM dwh_dim_entries e
     WHERE updated_date_id = p_date_id
     AND e.entry_type_id IN (1,2,7,10)
