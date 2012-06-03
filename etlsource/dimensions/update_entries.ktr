@@ -2045,7 +2045,7 @@ if (search_text_discrete != null &amp;&amp; search_text_discrete != &apos;&apos;
 	search_text_discrete = &apos;_CAT_&apos; + search_text_discrete;
 }
 
-if (current_kuser_id != null &amp;&amp; current_kuser_id != kuser_id)
+if (current_kuser_id != null &amp;&amp; Number(current_kuser_id) != Number(kuser_id))
 {
 	kuser_updated_date_id = updated_date_id;
 	prev_kuser_id = current_kuser_id;
@@ -2196,14 +2196,14 @@ if (current_kuser_id != null &amp;&amp; current_kuser_id != kuser_id)
         <type>Date</type>
       </value>
       <value>
-        <name>kuser_id</name>
-        <rename>current_kuser_id</rename>
+        <name>kuser_updated_date_id</name>
+        <rename>current_kuser_updated_date_id</rename>
         <default/>
         <type>Integer</type>
       </value>
       <value>
-        <name>kuser_updated_date_id</name>
-        <rename>current_kuser_updated_date_id</rename>
+        <name>kuser_id</name>
+        <rename>current_kuser_id</rename>
         <default/>
         <type>Integer</type>
       </value>
