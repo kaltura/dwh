@@ -12,6 +12,8 @@ BEGIN
 	DECLARE v_from_archive DATE;
 	DECLARE v_ignore DATE;
 	DECLARE v_table_name VARCHAR(100);
+	DECLARE v_hourly_table_name VARCHAR(100);
+	DECLARE v_hourly_id_field VARCHAR(100);
 	DECLARE v_join_table VARCHAR(100);
 	DECLARE v_join_condition VARCHAR(200);
     		
@@ -58,8 +60,9 @@ BEGIN
 		SELECT aggr_table, CONCAT(
 						IF(aggr_id_field <> '', CONCAT(',', aggr_id_field),'') ,
 						IF(dim_id_field <> '', 	CONCAT(', e.', REPLACE(dim_id_field,',',', e.')), '')
-					  )
-		INTO  v_aggr_table, v_aggr_id_field
+					  ),
+					  aggr_id_field
+		INTO  v_aggr_table, v_aggr_id_field, v_hourly_id_field
 		FROM kalturadw_ds.aggr_name_resolver
 		WHERE aggr_name = p_aggr_name;
 		
@@ -76,6 +79,25 @@ BEGIN
 		DEALLOCATE PREPARE stmt;
 		
 		IF ( v_aggr_table <> '' ) THEN
+			SET v_hourly_table_name = CONCAT('STG_',p_aggr_name);
+			
+			SET @s = CONCAT('DROP TABLE IF EXISTS ',v_hourly_table_name);
+			PREPARE stmt FROM  @s;
+			EXECUTE stmt;
+			DEALLOCATE PREPARE stmt;
+			IF (v_hourly_id_field <> '') THEN
+				SET v_hourly_id_field = CONCAT(', ',v_hourly_id_field);
+			END IF;
+			SET @s = CONCAT('CREATE TABLE ',v_hourly_table_name,'
+					ENGINE=INNODB
+					AS SELECT partner_id,event_date_id, event_hour_id, event_type_id, entry_id, session_id, duration',v_hourly_id_field,'
+					FROM ',v_table_name,' USE INDEX (event_hour_id_event_date_id_partner_id)
+					WHERE event_date_id  = DATE(''',p_date_val,''')*1
+					AND event_hour_id = ',p_hour_id);
+			PREPARE stmt FROM  @s;
+			EXECUTE stmt;
+			DEALLOCATE PREPARE stmt;
+		
 			SET @s = CONCAT('INSERT INTO ',v_aggr_table,'
 				(partner_id
 				,date_id
@@ -161,10 +183,8 @@ BEGIN
 			SUM(IF(ev.event_type_id = 38, 1,NULL)) count_postroll_25,
 			SUM(IF(ev.event_type_id = 39, 1,NULL)) count_postroll_50,
 			SUM(IF(ev.event_type_id = 40, 1,NULL)) count_postroll_75
-			FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), dwh_dim_entries e',v_join_table,
+			FROM ',v_hourly_table_name,' as ev, dwh_dim_entries e',v_join_table,
 				' WHERE ev.event_type_id BETWEEN 2 AND 40 
-				AND ev.event_date_id  = DATE(''',p_date_val,''')*1
-				AND ev.event_hour_id = ',p_hour_id,'
 				AND e.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
 			AND e.entry_id = ev.entry_id ' ,v_join_condition, 
 			' GROUP BY partner_id,event_date_id, event_hour_id',v_aggr_id_field,';');
@@ -191,10 +211,8 @@ BEGIN
 					COUNT(DISTINCT IF(ev.event_type_id IN (6),1,NULL)) v_75,
 					COUNT(DISTINCT IF(ev.event_type_id IN (7),1,NULL)) v_100,
 					MAX(IF(event_type_id IN (3),session_id,NULL)) s_play
-				FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), dwh_dim_entries e',v_join_table,
-				' WHERE ev.event_date_id  = DATE(''',p_date_val,''')*1
-					AND ev.event_hour_id = ',p_hour_id,'
-					AND e.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
+				FROM ',v_hourly_table_name,' as ev, dwh_dim_entries e',v_join_table,
+				' WHERE e.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
 					AND e.entry_id = ev.entry_id
 					AND ev.event_type_id IN(3,4,5,6,7) /* time viewed only when player reaches 25,50,75,100 */ ',v_join_condition,
 				' GROUP BY ev.partner_id, ev.event_date_id, ev.event_hour_id , ev.entry_id',v_aggr_id_field,',ev.session_id) e
