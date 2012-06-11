@@ -304,7 +304,7 @@
            </partitioning>
       <schema>kalturadw</schema>
       <table>dwh_dim_applications</table>
-      <connection>KalturaReadDW</connection>
+      <connection>KalturaDW</connection>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
