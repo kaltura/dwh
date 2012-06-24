@@ -24,7 +24,7 @@ BEGIN
 	GROUP BY 	partner_id;
 	
 	INSERT INTO 	kalturadw.dwh_hourly_partner_usage (partner_id, date_id, hour_id, bandwidth_source_id, count_storage_mb, aggr_storage_mb)
-	SELECT		partner_id, DATE(date_val)*1, 0 hour_id, 1, 0, aggr_storage_mb
+	SELECT		partner_id, DATE(date_val)*1, 0 hour_id, 1, 0, IFNULL(aggr_storage_mb,0)
 	FROM        kalturadw.dwh_hourly_partner_usage
 	WHERE       date_id = DATE(date_val - INTERVAL 1 DAY)*1
 	ON DUPLICATE KEY UPDATE count_storage_mb=VALUES(count_storage_mb), aggr_storage_mb = VALUES(aggr_storage_mb);
