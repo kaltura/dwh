@@ -15,7 +15,7 @@ BEGIN
 	    FROM 
 	    (SELECT
 		FLOOR(date_id/100) month_id,
-		MAX(aggr_storage_mb) avg_continuous_aggr_storage_mb,
+		SUM(aggr_storage_mb/IF(FLOOR(date_id/100)=FLOOR(LEAST(p_date_id,DATE(NOW())*1)),DAY(LEAST(p_date_id,DATE(NOW())*1)),DAY(LAST_DAY(date_id)))) avg_continuous_aggr_storage_mb,
 		SUM(count_bandwidth_kb) sum_partner_bandwidth_kb
 	    FROM dwh_hourly_partner_usage 
 	    WHERE partner_id=p_partner_id AND hour_id = 0
@@ -25,7 +25,7 @@ BEGIN
 	
 	SELECT
 		FLOOR(date_id/100) month_id,
-		MAX(aggr_storage_mb) avg_continuous_aggr_storage_mb,
+		SUM(aggr_storage_mb)/DAY(LEAST(p_date_id,DATE(NOW())*1)) avg_continuous_aggr_storage_mb,
 		SUM(count_bandwidth_kb) sum_partner_bandwidth_kb
 	    FROM dwh_hourly_partner_usage 
 	    WHERE partner_id=p_partner_id AND hour_id = 0
