@@ -87,6 +87,7 @@ class StorageTest extends KalturaTestCase
 	public function testUpdateEntrySize()
 	{
 		MySQLRunner::execute("CALL kalturadw.calc_entries_sizes(?)",array(0=>self::DATE_ID));		
+		MySQLRunner::execute("CALL kalturadw.calc_entries_sizes(?)",array(0=>self::DATE_ID+1));		
 		$this->updateEntrySize(self::DATE_ID+2);
 		
 		MySQLRunner::execute("CALL kalturadw.calc_entries_sizes(?)",array(0=>self::DATE_ID+2));
