@@ -35,5 +35,6 @@ create table `dwh_dim_file_sync` (
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `unique_key` (`object_type`,`object_id`,`object_sub_type`,`version`,`dc`),
 	KEY `updated_at` (`updated_at`),
+	KEY `ready_at` (`ready_at`),
 	KEY `dwh_update_date` (`dwh_update_date`)
 ) ENGINE=MYISAM; 
