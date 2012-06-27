@@ -24,12 +24,7 @@ CREATE TABLE `dwh_dim_file_sync_new` (
 	`file_size` bigint (20),  
 	`dwh_creation_date` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
 	`dwh_update_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	`ri_ind` TINYINT(4) NOT NULL DEFAULT '0',
-	PRIMARY KEY (`id`),
-	UNIQUE KEY `unique_key` (`object_type`,`object_id`,`object_sub_type`,`version`,`dc`),
-	KEY `updated_at` (`updated_at`),
-	KEY `ready_at` (`ready_at`),
-	KEY `dwh_update_date` (`dwh_update_date`)
+	`ri_ind` TINYINT(4) NOT NULL DEFAULT '0'
 ) ENGINE=MYISAM; 
 
 INSERT INTO kalturadw.dwh_dim_file_sync_new 
