@@ -680,7 +680,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>get deleted date and value</send_true_to>
+<send_true_to/>
 <send_false_to/>
     <compare>
 <condition>
