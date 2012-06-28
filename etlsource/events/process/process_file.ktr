@@ -2434,7 +2434,7 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
            <schema_name/>
            </partitioning>
     <compatible>N</compatible>
-    <optimizationLevel/>
+    <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>var iplong = ip2number(user_ip);
@@ -2457,6 +2457,8 @@ function ip2number (ip_address)
 }
 
 var referrer = referrer ? unescape(referrer) : referrer;
+referrer = referrer ? referrer.replace(&#47;\r?\n|\r&#47;g, &quot;&quot;) : referrer;
+
 var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM kalturadw.dwh_dim_ip_ranges WHERE &quot; + iplong + &quot;&gt;= ip_from)&quot;;
 </jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>ipLookupSQL</name>
