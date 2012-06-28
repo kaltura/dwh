@@ -42,7 +42,7 @@ class StorageTest extends KalturaTestCase
 			$fileSize = rand(100,10000);
 
 			MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_file_sync (partner_id, object_type, object_sub_type, object_id, file_size, id, updated_at, ready_at, original, status, version) 
-						VALUES(?,4,1,'?',?, ?, DATE(?), DATE(?), 1, 2, 1)", array(0=>$partnerId,1=>$flavorId, 2=>$fileSize, 3=>($fileSyncId + $i), 4=>self::DATE_ID, 5=>self::DATE_ID)));
+						VALUES(?,4,1,'?',?, ?, DATE(?), DATE(?), 1, 2, 1)", array(0=>$partnerId,1=>$flavorId, 2=>$fileSize, 3=>($fileSyncId + $i), 4=>self::DATE_ID, 5=>self::DATE_ID));
 			
 			if(!array_key_exists($entryId,$this->expected))
 			{
