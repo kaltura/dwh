@@ -425,21 +425,13 @@
 &#47;&#47;Alert(getUserIdFromKS(strToMatch));
 &#47;&#47;var strToMatch = base64_decode (&quot;NWI1MTI4YTM1NDZmZTg0ODM2Mzk2NzEzN2I4YWNkYWY2NWEzYzI4OXw0OTYwMDc7NDk2MDA3OzEzMzM1NTI1NDQ7MjsxMzMzNDY2MTQ0LjM5Mjc7bm9hMTBAbWFpbGluYXRvci5jb207KixkaXNhYmxlZW50aXRsZW1lbnQ7Ow&quot;);
 &#47;&#47;Alert(strToMatch);
-var strToMatch = base64_decode (&quot;NGRlZGQ5ZjU3ZjY4YmQ0YWQzMWI4OWJmZTIwZWQyZmM5ZTVlMzk4MHwzNDYxNTE7MzQ2MTUxOzEzMzY2NjAwOTE7MDsxMzM2NTczNjkxLjUxMjE7MDt2aWV3Oiosd2lkZ2V0OjE7Ow==&quot;);
-Alert(strToMatch);
-Alert(getPartnerIdFromKS(strToMatch));
-Alert(getUserIdFromKS(strToMatch));
 
 var ks = base64_decode(ksUrl);
 var strKsPartnerID = getPartnerIdFromKS(ks);
 var ksPartnerID = is_not_numeric(strKsPartnerID) ? -1 : strKsPartnerID;
 var ksPuserID = &quot;Unknown&quot;;
 if (str2num(ksPartnerID) == partnerID) {
-&#47;&#47;	ksPartnerID = -99;
-&#47;&#47;} else {
 	ksPuserID = getUserIdFromKS(ks);
-&#47;&#47;	if (ksPuserID == &quot;Unknown&quot;)
-&#47;&#47;		ksPartnerID = -99;
 }
 
 function is_not_numeric(s) {
