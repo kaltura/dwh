@@ -8,7 +8,7 @@ CREATE TABLE `kalturadw`.`dwh_dim_pusers` (
   `dwh_update_date` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
   `ri_ind` TINYINT NOT NULL DEFAULT '0',
   PRIMARY KEY (`puser_id`),
-  KEY `name_partner_index` (`name`,`partner_id`)
+  KEY `partner_name_index` (`partner_id`,`name`)
 ) ENGINE=MYISAM  DEFAULT CHARSET=utf8;
 
 CREATE TRIGGER `kalturadw`.`dwh_dim_pusers_setcreationtime_oninsert` BEFORE INSERT
