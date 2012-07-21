@@ -1,15 +1,15 @@
 USE `kalturadw`;
 
-DROP TABLE IF EXISTS kalturadw.`dwh_hourly_events_context_entry_user_app`;
+DROP TABLE IF EXISTS kalturadw.`dwh_hourly_events_entry_user_context_app`;
 
-CREATE TABLE kalturadw.`dwh_hourly_events_context_entry_user_app` (
+CREATE TABLE kalturadw.`dwh_hourly_events_entry_user_context_app` (
   `partner_id` INT NOT NULL DEFAULT -1,
   `date_id` INT NOT NULL,
   `hour_id` INT NOT NULL,
-  `user_id` INT NOT NULL DEFAULT -1,
-  `application_id` INT NOT NULL DEFAULT -1,
   `entry_id` VARCHAR(20) NOT NULL DEFAULT -1,
-  `context_id` INT NOT NULL,
+  `user_id` INT NOT NULL DEFAULT -1,
+  `context_id` INT NOT NULL DEFAULT -1,
+  `application_id` INT NOT NULL DEFAULT -1,
   `sum_time_viewed` DECIMAL(20,3) DEFAULT NULL,
   `count_time_viewed` INT DEFAULT NULL,
   `count_plays` INT DEFAULT NULL,
@@ -54,10 +54,10 @@ CREATE TABLE kalturadw.`dwh_hourly_events_context_entry_user_app` (
   `count_bandwidth_kb` INT DEFAULT NULL,
   `total_admins` INT DEFAULT NULL,
   `total_media_entries` INT DEFAULT NULL,
-  PRIMARY KEY `partner_id` (`partner_id`,`date_id`,`hour_id`,`context_id`,`entry_id`,`user_id`,`application_id`),
+  PRIMARY KEY `partner_id` (`partner_id`,`date_id`,`hour_id`,`entry_id`,`user_id`,`context_id`,`application_id`),
   KEY (`date_id`, `hour_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 PARTITION BY RANGE (date_id)
-(PARTITION p_201205 VALUES LESS THAN (20120601) ENGINE = INNODB);
+(PARTITION p_201207 VALUES LESS THAN (20120801) ENGINE = INNODB);
 
-CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_events_context_entry_user_app');
+CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_events_entry_user_context_app');
