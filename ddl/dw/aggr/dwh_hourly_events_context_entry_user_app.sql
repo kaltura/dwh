@@ -1,8 +1,8 @@
 USE `kalturadw`;
 
-DROP TABLE IF EXISTS kalturadw.`dwh_hourly_events_entry_user_context_app`;
+DROP TABLE IF EXISTS kalturadw.`dwh_hourly_events_context_entry_user_app`;
 
-CREATE TABLE kalturadw.`dwh_hourly_events_entry_user_context_app` (
+CREATE TABLE kalturadw.`dwh_hourly_events_context_entry_user_app` (
   `partner_id` INT NOT NULL DEFAULT -1,
   `date_id` INT NOT NULL,
   `hour_id` INT NOT NULL,
@@ -60,4 +60,4 @@ CREATE TABLE kalturadw.`dwh_hourly_events_entry_user_context_app` (
 PARTITION BY RANGE (date_id)
 (PARTITION p_201207 VALUES LESS THAN (20120801) ENGINE = INNODB);
 
-CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_events_entry_user_context_app');
+CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_events_context_entry_user_app');
