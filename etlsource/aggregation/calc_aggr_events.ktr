@@ -303,8 +303,8 @@
 FROM kalturadw.aggr_managment, kalturadw_ds.parameters p
 WHERE 	date_id + INTERVAL hour_id HOUR &lt; p.date_value
 		AND (ifnull(start_time,date(19700101)) &lt; data_insert_time 
-			or
-			start_time &gt; end_time &#47;* Handle Failed aggregations*&#47;)
+			OR
+			start_time &gt; ifnull(end_time,date(19700101)) &#47;* Handle Failed aggregations*&#47;)
 		AND p.id = 2 &#47;*Update dimensions parameter*&#47;
 		AND aggr_name = ?
 order by date_id, hour_id</sql>
