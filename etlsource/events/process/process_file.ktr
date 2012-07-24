@@ -1376,7 +1376,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>featureType</name>
+        <name>feature_type_fixed</name>
         <type>Integer</type>
         <format>0</format>
         <currency/>
@@ -2726,7 +2726,7 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
            <schema_name/>
            </partitioning>
     <compatible>N</compatible>
-    <optimizationLevel/>
+    <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
@@ -2737,6 +2737,7 @@ var unique_viewer_fixed = uv != null ? substr(uv,0,40) : null;
 var session_id_fixed = sessionID != null ? substr(sessionID,0,50) : null;
 var current_point_fixed = is_not_numeric(currentPoint) ? 0 : currentPoint;
 var duration_fixed = is_not_numeric(duration) ? 0 : duration;
+var feature_type_fixed = is_not_numeric(featureType) ? 0 : featureType;
 
 if ( currentPoint &lt; 0 ) {
 &#47;&#47; _current_point_fixed - is in seconds NOT millis
@@ -2803,6 +2804,12 @@ function is_not_numeric(s) {
         <rename>duration_fixed</rename>
         <type>String</type>
         <length>20</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>feature_type_fixed</name>
+        <rename>feature_type_fixed</rename>
+        <type>Integer</type>
+        <length>10</length>
         <precision>-1</precision>
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
@@ -3126,6 +3133,7 @@ var eventTimestamp = null;
 var ksUrl = null;
 var application = null;
 var contextId = null;
+var strContextId = null;
 var featureType = null;
 
 &#47;&#47; Trim &quot;[&quot; and set it to a date
@@ -3179,7 +3187,8 @@ if (lineType == 2){
 	uid = getValue(queryStringDictionary,&quot;userId&quot;);
 	eventType = getValue(queryStringDictionary, &quot;eventType&quot;);
 	application = getValue(queryStringDictionary, &quot;applicationId&quot;);
-	contextId = getValue(queryStringDictionary, &quot;contextId&quot;);
+	strContextId = getValue(queryStringDictionary, &quot;contextId&quot;);
+	contextId = is_not_numeric(strContextId) ? -1 : strContextId;
 	featureType = getValue(queryStringDictionary, &quot;featureType&quot;);
 	keyPrefix = &quot;&quot;;
 	ksUrl = getValue(queryStringDictionary, &quot;ks&quot;);
@@ -3436,7 +3445,7 @@ Alert(getEnvironmentVar(strVarName));</jsScript_script>
         <replace>N</replace>
       </field>      <field>        <name>featureType</name>
         <rename>featureType</rename>
-        <type>Integer</type>
+        <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
@@ -3663,7 +3672,7 @@ else if ( year(eventTime)&lt;2009 ) { &#47;&#47; validate event time is more tha
            <schema_name/>
            </partitioning>
     <compatible>N</compatible>
-    <optimizationLevel/>
+    <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
@@ -3700,10 +3709,12 @@ else if ( substr(entryID,0,5)==&quot;rtmp:&quot;  )  &#47;&#47; validate the ent
 else if ( sessionID==&quot;false&quot; )
 {
 	error_reason=&quot;invalid session id&quot;;
-} else if (is_not_numeric(uiConfID))
+} 
+else if (is_not_numeric(uiConfID))
 {
 	error_reason=&quot;invalid uiconf id&quot;;
 }
+
 
 function is_not_numeric(s) {
 	return isNaN(s) || s == &apos;&apos; || s == null;
