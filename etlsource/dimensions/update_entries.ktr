@@ -1928,7 +1928,7 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
 <condition>
  <negated>N</negated>
  <leftvalue>desc</leftvalue>
- <function>=</function>
+ <function>CONTAINS</function>
  <rightvalue/>
  <value><name>constant</name><type>String</type><text>Duplicate</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
     </compare>
@@ -2711,7 +2711,7 @@ category = substr(trim(category), 0, 333)</jsScript_script>
 <condition>
  <negated>N</negated>
  <leftvalue>desc</leftvalue>
- <function>=</function>
+ <function>CONTAINS</function>
  <rightvalue/>
  <value><name>constant</name><type>String</type><text>Duplicate</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
     </compare>
