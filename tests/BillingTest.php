@@ -50,27 +50,27 @@ class BillingTest extends KalturaTestCase
 	{
 		# Month with overage  bandwidth
 		MySQLRunner::execute("INSERT INTO kalturadw.dwh_hourly_partner_usage (partner_id, 
-			date_id, hour_id, bandwidth_source_id, count_bandwidth_kb , billable_storage_mb)
+			date_id, hour_id, bandwidth_source_id, count_bandwidth_kb , aggr_storage_mb)
 			VALUES(?, ?,0,8,250,0)",array(0=>$this->partnerId, 1=>self::BW_MONTH));
 
 		MySQLRunner::execute("INSERT INTO kalturadw.dwh_hourly_partner_usage (partner_id, 
-			date_id, hour_id, bandwidth_source_id, count_bandwidth_kb , billable_storage_mb)
+			date_id, hour_id, bandwidth_source_id, count_bandwidth_kb , aggr_storage_mb)
 			VALUES(?, ?,0,9,250,0)",array(0=>$this->partnerId, 1=>self::BW_MONTH));
 
 		# Month with overage storage
         for($i=0;$i<28;$i++)
         {
             MySQLRunner::execute("INSERT INTO kalturadw.dwh_hourly_partner_usage (partner_id, 
-                date_id, hour_id, bandwidth_source_id, count_bandwidth_kb , billable_storage_mb)
-                VALUES(?, ?,0,8,0,500/28)",array(0=>$this->partnerId, 1=>self::ST_MONTH+$i));
+                date_id, hour_id, bandwidth_source_id, count_bandwidth_kb , aggr_storage_mb)
+                VALUES(?, ?,0,8,0,500)",array(0=>$this->partnerId, 1=>self::ST_MONTH+$i));
         }
         
         # Month with overage storage + bandwidth
 		for($i=0;$i<31;$i++)
         {
             MySQLRunner::execute("INSERT INTO kalturadw.dwh_hourly_partner_usage (partner_id, 
-                date_id, hour_id, bandwidth_source_id, count_bandwidth_kb , billable_storage_mb)
-                VALUES(?, ?,0,8,290*1024/31,290/31)",array(0=>$this->partnerId, 1=>self::BW_ST_MONTH+$i));
+                date_id, hour_id, bandwidth_source_id, count_bandwidth_kb , aggr_storage_mb)
+                VALUES(?, ?,0,8,290*1024/31,290)",array(0=>$this->partnerId, 1=>self::BW_ST_MONTH+$i));
         }
     
 		# Month with overage plays
