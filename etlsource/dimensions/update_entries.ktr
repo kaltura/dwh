@@ -921,11 +921,6 @@ var fix_current_puser_id = current_kuser_id = null ? kuser_id : current_kuser_id
         <update>Y</update>
       </value>
       <value>
-        <name>search_text</name>
-        <rename>search_text</rename>
-        <update>Y</update>
-      </value>
-      <value>
         <name>screen_name</name>
         <rename>screen_name</rename>
         <update>Y</update>
@@ -1058,11 +1053,6 @@ var fix_current_puser_id = current_kuser_id = null ? kuser_id : current_kuser_id
       <value>
         <name>puser_id</name>
         <rename>puser_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>search_text_discrete</name>
-        <rename>search_text_discrete</rename>
         <update>Y</update>
       </value>
       <value>
@@ -1329,7 +1319,6 @@ var fix_current_puser_id = current_kuser_id = null ? kuser_id : current_kuser_id
 , display_in_search
 , subp_id
 , custom_data
-, NULL search_text
 , screen_name
 , site_url
 , permissions
@@ -1344,7 +1333,6 @@ var fix_current_puser_id = current_kuser_id = null ? kuser_id : current_kuser_id
 , moderation_status
 , moderation_count
 , modified_at
-, NULL search_text_discrete
 , categories
 , categories_ids
 FROM 
@@ -1403,7 +1391,6 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
       </remove>      <remove>        <name>display_in_search</name>
       </remove>      <remove>        <name>subp_id</name>
       </remove>      <remove>        <name>custom_data</name>
-      </remove>      <remove>        <name>search_text</name>
       </remove>      <remove>        <name>screen_name</name>
       </remove>      <remove>        <name>site_url</name>
       </remove>      <remove>        <name>permissions</name>
@@ -1418,7 +1405,6 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
       </remove>      <remove>        <name>moderation_status</name>
       </remove>      <remove>        <name>moderation_count</name>
       </remove>      <remove>        <name>modified_at</name>
-      </remove>      <remove>        <name>search_text_discrete</name>
       </remove>      <remove>        <name>categories</name>
       </remove>      <remove>        <name>categories_ids</name>
       </remove>      <remove>        <name>current_updated_at</name>
@@ -1446,6 +1432,8 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
       </remove>      <remove>        <name>fixed_width</name>
       </remove>      <remove>        <name>RI_IND_0</name>
       </remove>      <remove>        <name>editor_type_id</name>
+      </remove>      <remove>        <name>prev_kuser_id</name>
+      </remove>      <remove>        <name>kuser_updated_date_id</name>
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>400</xloc>
@@ -1662,6 +1650,29 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>403</xloc>
       <yloc>732</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log on u_storage upsert error 2</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <logmessage/>
+    <fields>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>25</xloc>
+      <yloc>886</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1913,6 +1924,24 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
     </step>
 
   <step>
+    <name>duplicate u_storage error 2</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>118</xloc>
+      <yloc>883</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>duplicate u_storage key</name>
     <type>FilterRows</type>
     <description/>
@@ -1936,6 +1965,34 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>349</xloc>
       <yloc>792</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>duplicate u_storage key 2</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>duplicate u_storage error 2</send_true_to>
+<send_false_to>Write to log on u_storage upsert error 2</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>desc</leftvalue>
+ <function>CONTAINS</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>Duplicate</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>53</xloc>
+      <yloc>817</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2365,11 +2422,7 @@ if (height&gt;0 &amp;&amp; height&lt;100000)
 	fixed_height=height;
 if (width&gt;0 &amp;&amp; width&lt;100000) 
 	fixed_width=width;
-search_text_discrete = replace(categories_ids, &apos;,&apos;, &apos; _CAT_&apos;);
 
-if (search_text_discrete != null &amp;&amp; search_text_discrete != &apos;&apos;) {
-	search_text_discrete = &apos;_CAT_&apos; + search_text_discrete;
-}
 
 if (current_kuser_id != null &amp;&amp; Number(current_kuser_id) != Number(kuser_id))
 {
@@ -2391,12 +2444,6 @@ if (current_kuser_id != null &amp;&amp; Number(current_kuser_id) != Number(kuser
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
-      </field>      <field>        <name>search_text_discrete</name>
-        <rename>search_text_discrete</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
       </field>      <field>        <name>kuser_updated_date_id</name>
         <rename>kuser_updated_date_id</rename>
         <type>Number</type>
@@ -2691,75 +2738,6 @@ category = substr(trim(category), 0, 333)</jsScript_script>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1004</xloc>
       <yloc>389</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>duplicate u_storage key 2</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>duplicate u_storage error 2</send_true_to>
-<send_false_to>Write to log on u_storage upsert error 2</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>desc</leftvalue>
- <function>CONTAINS</function>
- <rightvalue/>
- <value><name>constant</name><type>String</type><text>Duplicate</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>53</xloc>
-      <yloc>817</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Write to log on u_storage upsert error 2</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <logmessage/>
-    <fields>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>25</xloc>
-      <yloc>886</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>duplicate u_storage error 2</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>118</xloc>
-      <yloc>883</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
