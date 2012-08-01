@@ -7,6 +7,9 @@ DROP PROCEDURE IF EXISTS `calc_aggr_day_user_usage`$$
 CREATE DEFINER=`etl`@`%` PROCEDURE `calc_aggr_day_user_usage`(p_date_id INT(11))
 BEGIN
 
+    DECLARE v_date DATETIME;
+    SET v_date = DATE(p_date_id);
+	
     UPDATE aggr_managment SET start_time = NOW() WHERE aggr_name = 'user_storage_usage' AND date_id = p_date_id;
     
     DROP TABLE IF EXISTS temp_aggr_storage;
@@ -32,6 +35,7 @@ BEGIN
     SELECT partner_id, entry_id, prev_kuser_id, kuser_id 
     FROM dwh_dim_entries
     WHERE prev_kuser_id IS NOT NULL
+    AND updated_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
     AND kuser_updated_date_id = p_date_id
     AND created_date_id <> p_date_id
     AND entry_type_id IN (1,2,7,10);
@@ -73,7 +77,7 @@ BEGIN
 	SUM(IF(entry_status_id IN (0,1,2,4) AND (created_date_id = p_date_id OR kuser_updated_date_id = p_date_id),length_in_msecs,0)),
 	SUM(IF(entry_status_id = 3 AND (created_date_id <> p_date_id AND kuser_updated_date_id <> p_date_id),length_in_msecs,0))
     FROM dwh_dim_entries e
-    WHERE updated_date_id = p_date_id
+    WHERE updated_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
     AND e.entry_type_id IN (1,2,7,10)
     GROUP BY kuser_id;
     
