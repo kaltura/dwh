@@ -61,7 +61,6 @@ CREATE TABLE `dwh_dim_entries` (
   `display_in_search` tinyint(4) DEFAULT NULL,
   `subp_id` int(11) DEFAULT '-1',
   `custom_data` text,
-  `search_text` varchar(4096) DEFAULT NULL,
   `screen_name` varchar(20) DEFAULT NULL,
   `site_url` varchar(256) DEFAULT NULL,
   `permissions` int(11) DEFAULT NULL,
@@ -85,7 +84,6 @@ CREATE TABLE `dwh_dim_entries` (
   `conversion_profile_id` int(11) DEFAULT NULL,
   `categories` varchar(4096) DEFAULT NULL,
   `categories_ids` varchar(1024) DEFAULT NULL,
-  `search_text_discrete` varchar(4096) DEFAULT NULL,
   `flavor_params_ids` varchar(512) DEFAULT NULL,
   `start_date` datetime DEFAULT NULL,
   `start_date_id` int(11) DEFAULT NULL,
@@ -98,6 +96,7 @@ CREATE TABLE `dwh_dim_entries` (
   PRIMARY KEY (`entry_id`),
   KEY `partner_id_created_media_type_source` (`partner_id`,`created_at`,`entry_media_type_id`,`entry_media_source_id`),
   KEY `created_at` (`created_at`),
+  KEY `updated_at` (`updated_at`),
   KEY `modified_at` (`modified_at`),
   KEY `operational_measures_updated_at` (`operational_measures_updated_at`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
