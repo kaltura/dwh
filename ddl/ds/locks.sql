@@ -20,7 +20,7 @@ DROP TABLE IF EXISTS `locks`;
 
 CREATE TABLE `locks` (
   `lock_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `lock_name` varchar(30) DEFAULT NULL,
+  `lock_name` varchar(265) DEFAULT NULL,
   `lock_time` datetime DEFAULT NULL,
   `lock_state` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`lock_id`)
