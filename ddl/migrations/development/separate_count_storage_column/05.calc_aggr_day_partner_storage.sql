@@ -2,7 +2,7 @@ DELIMITER $$
 
 USE `kalturadw`$$
 
-DROP PROCEDURE IF EXISTS `calc_partner_billing_storage_per_category`$$
+DROP PROCEDURE IF EXISTS `calc_aggr_day_partner_storage`$$
 
 CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day_partner_storage`(date_val DATE)
 BEGIN
@@ -19,7 +19,7 @@ BEGIN
 	) ENGINE = MEMORY;
       
 	INSERT INTO 	temp_aggr_storage (partner_id, date_id, hour_id, added_storage_mb, deleted_storage_mb)
-   	SELECT 		partner_id, MAX(entry_size_date_id), 0 hour_id, SUM(IF(entry_additional_size_kb>0,entry_additional_size_kb,0))/1024 added_storage_mb, SUM(IF(entry_additional_size_kb<0,entry_additional_size_kb,0))/1024 deleted_storage_mb 
+   	SELECT 		partner_id, MAX(entry_size_date_id), 0 hour_id, SUM(IF(entry_additional_size_kb>0,entry_additional_size_kb,0))/1024 added_storage_mb, SUM(IF(entry_additional_size_kb<0,entry_additional_size_kb*-1,0))/1024 deleted_storage_mb 
 	FROM 		dwh_fact_entries_sizes
 	WHERE		entry_size_date_id=DATE(date_val)*1
 	GROUP BY 	partner_id;

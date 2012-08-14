@@ -2,10 +2,14 @@ DELIMITER $$
 
 USE `kalturadw`$$
 
-DROP PROCEDURE IF EXISTS `calc_partner_billing_storage_per_category`$$
+DROP PROCEDURE IF EXISTS `calc_aggr_day_user_usage`$$
 
 CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day_user_usage`(p_date_id INT(11))
 BEGIN
+
+    DECLARE v_date DATETIME;
+    SET v_date = DATE(p_date_id);
+	
     UPDATE aggr_managment SET start_time = NOW() WHERE aggr_name = 'user_storage_usage' AND date_id = p_date_id;
     
     DROP TABLE IF EXISTS temp_aggr_storage;
@@ -19,7 +23,7 @@ BEGIN
     ALTER TABLE temp_aggr_storage ADD INDEX index_1 (kuser_id);  
     
     INSERT INTO     temp_aggr_storage (partner_id, kuser_id, added_storage_kb, deleted_storage_kb)
-    SELECT         e.partner_id, e.kuser_id, SUM(if(f.entry_additional_size_kb > 0,entry_additional_size_kb,0)),SUM(IF(f.entry_additional_size_kb < 0,entry_additional_size_kb,0))
+    SELECT         e.partner_id, e.kuser_id, SUM(if(f.entry_additional_size_kb > 0,entry_additional_size_kb,0)),SUM(IF(f.entry_additional_size_kb < 0,entry_additional_size_kb*-1,0))
     FROM         dwh_fact_entries_sizes f, dwh_dim_entries e
     WHERE        entry_size_date_id=p_date_id
     AND          f.entry_id = e.entry_id
@@ -31,6 +35,7 @@ BEGIN
     SELECT partner_id, entry_id, prev_kuser_id, kuser_id 
     FROM dwh_dim_entries
     WHERE prev_kuser_id IS NOT NULL
+	AND updated_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
     AND kuser_updated_date_id = p_date_id
     AND created_date_id <> p_date_id
     AND entry_type_id IN (1,2,7,10);
@@ -72,7 +77,7 @@ BEGIN
     SUM(IF(entry_status_id IN (0,1,2,4) AND (created_date_id = p_date_id OR kuser_updated_date_id = p_date_id),length_in_msecs,0)),
     SUM(IF(entry_status_id = 3 AND (created_date_id <> p_date_id AND kuser_updated_date_id <> p_date_id),length_in_msecs,0))
     FROM dwh_dim_entries e
-    WHERE updated_date_id = p_date_id
+    WHERE updated_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
     AND e.entry_type_id IN (1,2,7,10)
     GROUP BY kuser_id;
     
@@ -105,11 +110,11 @@ BEGIN
     FROM dwh_hourly_user_usage u JOIN (SELECT kuser_id, MAX(date_id) AS date_id FROM dwh_hourly_user_usage GROUP BY kuser_id) MAX
           ON u.kuser_id = max.kuser_id AND u.date_id = max.date_id; 
           
-    INSERT INTO dwh_hourly_user_usage (partner_id, kuser_id, date_id, hour_id, added_storage_kb, deleeted_storage_kb, total_storage_kb, added_entries, deleted_entries, total_entries, added_msecs, deleted_msecs, total_msecs)
+    INSERT INTO dwh_hourly_user_usage (partner_id, kuser_id, date_id, hour_id, added_storage_kb, deleted_storage_kb, total_storage_kb, added_entries, deleted_entries, total_entries, added_msecs, deleted_msecs, total_msecs)
     SELECT      aggr.partner_id, aggr.kuser_id, p_date_id, 0, SUM(added_storage_kb), SUM(deleted_storage_kb), SUM(added_storage_kb) - SUM(deleted_storage_kb) + IFNULL(latest_total.total_storage_kb,0),
                 0, 0, IFNULL(latest_total.total_entries,0), 0, 0,  IFNULL(latest_total.total_msecs,0)
     FROM        temp_aggr_storage aggr LEFT JOIN latest_total ON aggr.kuser_id = latest_total.kuser_id
-    WHERE added_storage_kb <> 0 OR deleted_storage <> 0
+    WHERE added_storage_kb <> 0 OR deleted_storage_kb <> 0
     GROUP BY    aggr.kuser_id;
         
     INSERT INTO dwh_hourly_user_usage (partner_id, kuser_id, date_id, hour_id, added_storage_kb, deleted_storage_kb, total_storage_kb, added_entries, deleted_entries, total_entries, added_msecs, deleted_msecs, total_msecs)
