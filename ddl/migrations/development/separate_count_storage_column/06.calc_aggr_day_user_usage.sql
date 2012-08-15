@@ -123,8 +123,8 @@ BEGIN
     FROM         temp_aggr_entries aggr LEFT JOIN latest_total ON aggr.kuser_id = latest_total.kuser_id
     WHERE added_entries <> 0 OR added_msecs <> 0 OR deleted_entries <> 0 OR deleted_msecs <> 0
     GROUP BY     aggr.kuser_id
-    ON DUPLICATE KEY UPDATE added_entries = VALUES(added_entries), total_entries=VALUES(total_entries), 
-                            added_msecs=VALUES(added_msecs), total_msecs=VALUES(total_msecs);
+    ON DUPLICATE KEY UPDATE added_entries = VALUES(added_entries), deleted_entries = VALUES(deleted_entries), total_entries=VALUES(total_entries), 
+                            added_msecs=VALUES(added_msecs), deleted_msecs=VALUES(deleted_msecs), total_msecs=VALUES(total_msecs);
     
     
     UPDATE aggr_managment SET end_time = NOW() WHERE aggr_name = 'user_storage_usage' AND date_id = p_date_id; 
