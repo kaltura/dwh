@@ -138,7 +138,7 @@ class StorageTest extends KalturaTestCase
 		echo "total: expected " .round($expectedTotal/1024,3) ." actual " .$actualTotal . "\n";
 		$this->assertLessThan(0.01,abs(round($expectedTotal/1024,3) - $actualTotal));
 		
-		$rows = MySQLRunner::execute("SELECT sum(count_storage_mb) size FROM kalturadw.dwh_hourly_partner_usage WHERE date_id = ? AND partner_id = ?" , array(0=>$dateId, 1=>$this->partnerId));
+		$rows = MySQLRunner::execute("SELECT sum(added_storage_mb) - sum(deleted_storage_mb) size FROM kalturadw.dwh_hourly_partner_usage WHERE date_id = ? AND partner_id = ?" , array(0=>$dateId, 1=>$this->partnerId));
 		$actualDelta = floatval($rows[0]["size"]);
 		echo "delta: expected " .round($this->delta/1024/1024,3) ." actual " .$actualDelta. "\n";
 		$this->assertLessThan(0.01,abs(round($this->delta/1024/1024,3) - $actualDelta));
