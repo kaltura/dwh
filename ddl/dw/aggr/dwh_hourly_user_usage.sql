@@ -8,10 +8,13 @@ CREATE TABLE kalturadw.`dwh_hourly_user_usage` (
   `date_id` INT(11) NOT NULL,
   `hour_id` INT(11) NOT NULL,
   `added_storage_kb`  DECIMAL(19,4) DEFAULT 0.0000,
+  `deleted_storage_kb`  DECIMAL(19,4) DEFAULT 0.0000,
   `total_storage_kb` DECIMAL(19,4) ,
   `added_entries`  INT(11) DEFAULT 0,
+  `deleted_entries`  INT(11) DEFAULT 0,
   `total_entries` INT(11) ,
   `added_msecs`  INT(11) DEFAULT 0,
+  `deleted_msecs`  INT(11) DEFAULT 0,
   `total_msecs` INT(11) ,
   PRIMARY KEY (`partner_id`, `kuser_id`,`date_id`, `hour_id`),
   KEY (`date_id`, `hour_id`)
