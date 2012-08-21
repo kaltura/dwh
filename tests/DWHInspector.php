@@ -95,25 +95,34 @@ class DWHInspector
 	
 	public static function getAggrDatesAndHours($cycleId)
 	{
-		$rows = MySQLRunner::execute("SELECT DISTINCT event_date_id, event_hour_id FROM kalturadw.dwh_fact_events WHERE file_id in (SELECT file_id FROM kalturadw_ds.files WHERE cycle_id = ? AND file_status = 'IN_CYCLE')",array(0=>$cycleId));
-		
 		$res = array();
-		foreach ($rows as $row)
+		$staging_areas = MySQLRunner::execute("SELECT target_table, aggr_date_field, hour_id_field FROM kalturadw_ds.cycles c, kalturadw_ds.staging_areas s WHERE cycle_id = ? and c.process_id = s.process_id", array(0=>$cycleId));
+		foreach ($staging_areas as $staging_area)
 		{
-			$date_id = $row["event_date_id"];
-			$hour_id = $row["event_hour_id"];
-			if (!array_key_exists($date_id, $res))
+			$date_id_column = $staging_area["aggr_date_field"];
+			$hour_id_column = $staging_area["hour_id_field"];
+			$table_name = $staging_area["target_table"];
+			
+			$rows = MySQLRunner::execute("SELECT DISTINCT ?, ? FROM ? WHERE file_id in (SELECT file_id FROM kalturadw_ds.files WHERE cycle_id = ? AND file_status = 'IN_CYCLE')",array(0=>$date_id_column, 1=>$hour_id_column, 2=>$table_name, 3=>$cycleId));
+		
+			$res[$table_name] = array();
+			foreach ($rows as $row)
 			{
-				$res[$date_id]=array();
+				$date_id = $row[$date_id_column];
+				$hour_id = $row[$hour_id_column];
+				if (!array_key_exists($date_id, $res[$table_name]))
+				{
+					$res[$table_name][$date_id]=array();
+				}
+				$res[$table_name][$date_id][] = $hour_id; 
 			}
-			$res[$date_id][] = $hour_id; 
 		}
 		return $res;
 	}
 
-	public static function getPostTransferAggregationTypes($processID)
+	public static function getPostTransferAggregationTypes($processID, $factTable = '')
 	{
-		$rows = MySQLRunner::execute("SELECT post_transfer_aggregations FROM kalturadw_ds.staging_areas WHERE process_id = ?", array(0=>$processID));
+		$rows = MySQLRunner::execute("SELECT post_transfer_aggregations FROM kalturadw_ds.staging_areas WHERE process_id = ? and ('' = '?' or target_table = '?') ", array(0=>$processID, 1=>$factTable, 2=>$factTable));
 		$aggrTypes = array();
 		foreach ($rows as $row)
 		{
@@ -279,6 +288,29 @@ class DWHInspector
                         $res[] = APICall::CreateAPICallByID($row["session_id"], $row["request_index"],$row["user_ip"]);
                 }
                 return $res;
+	}
+
+	public static function rowExists($table_name, $filter = '1=1')
+	{
+		$rows = MySQLRunner::execute("SELECT * FROM $table_name WHERE $filter");
+		return count($rows) != 0;
+	}
+	
+	public static function getResetAggregationsMinDateID($cycleID, $factTable = '')
+	{
+		$sql= "SELECT min(reset_aggregations_min_date)*1 min_date_id " . 
+						"FROM kalturadw_ds.staging_areas s, kalturadw_ds.cycles c ". 
+						"WHERE s.process_id = c.process_id ".
+						"AND c.cycle_id = $cycleID and (target_table = '$factTable' or '' = '$factTable')";
+		$rows = MySQLRunner::execute($sql);
+		if (count($rows) > 0)
+		{
+			return $rows[0]["min_date_id"];
+		}
+		else
+		{
+			return 19700101;
+		}
 	}
 
 }

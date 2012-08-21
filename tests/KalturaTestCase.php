@@ -87,10 +87,10 @@ abstract class KalturaTestCase extends PHPUnit_Framework_TestCase
                 return $items;
         }
 
-	public function compareAggregation($factTables, $aggrTables, $maxDiffInPercent = 0, $filter = '1=1')
+	public function compareAggregation($factTables, $aggrTables, $maxDiffInPercent = 0, $factFilter = '1=1', $aggrFilter = '1=1')
         {
-                $aggrGroups = DWHInspector::groupBy($aggrTables, $filter);
-                $factGroups = DWHInspector::groupBy($factTables, $filter);
+                $aggrGroups = DWHInspector::groupBy($aggrTables, $aggrFilter);
+                $factGroups = DWHInspector::groupBy($factTables, $factFilter);
 
                 foreach($factGroups as $id=>$measure)
                 {

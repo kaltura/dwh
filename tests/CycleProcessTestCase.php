@@ -157,14 +157,22 @@ abstract class CycleProcessTestCase extends KalturaTestCase
 			}
                 }
 
-                // make sure aggregations are reset
-                foreach(DWHInspector::getAggrDatesAndHours($cycleID) as $dateID => $hours)
+		foreach(DWHInspector::getAggrDatesAndHours($cycleID) as $table => $arr)
                 {
-			foreach ($hours as $hourID)
-			{
-				$postTransferAggregationTypes = DWHInspector::getPostTransferAggregationTypes($transferParams[self::TRANSFER_PARAM_PROCESS_ID]);
-	                        $this->assertEquals(count($postTransferAggregationTypes),count(DWHInspector::getAggregations($dateID, $hourID, 0)));
-			}
+	                $minDateID = DWHInspector::getResetAggregationsMinDateID($cycleID, $table);
+			$postTransferAggregationTypes = DWHInspector::getPostTransferAggregationTypes($transferParams[self::TRANSFER_PARAM_PROCESS_ID], $table);
+                        foreach ($arr as $dateID => $hours)
+                        {
+				foreach ($hours as $hourID)
+                                {
+					foreach ($postTransferAggregationTypes as $aggrType)
+					{
+						$filter = 'aggr_name = \'' . $aggrType . '\' and date_id = ' . $dateID . ' and hour_id = '. $hourID . ' and ifnull(start_time,date(19700101)) < data_insert_time';
+						$rowExists = DWHInspector::rowExists('kalturadw.aggr_managment',$filter);
+						$this->assertEquals($dateID >= $minDateID, $rowExists, "Row Date: $dateID $hourID $aggrType . Min Date: $minDateID");
+					}
+				}
+                        }
                 }
         }
 

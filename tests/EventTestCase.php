@@ -148,25 +148,57 @@ abstract class EventTestCase extends CycleProcessTestCase
 		DWHInspector::createEntriesFromFact();
 
 		parent::testAggregation();
+                $cycleID = DWHInspector::getCycle('DONE');
+		$factsToHours = DWHInspector::getAggrDatesAndHours($cycleID);
+		$factTable = 'kalturadw.dwh_fact_events';
+		$minDateID = DWHInspector::getResetAggregationsMinDateID($cycleID, $factTable);
+		foreach ($factsToHours[$factTable] as $dateID => $hours)
+		{
+			if ($dateID < $minDateID)
+			{
+				continue;
+			}
+			foreach ($hours as $hourID)
+			{
+				$this->compareAggregation(array(new ComparedTable('partner_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')), 
+					  array(new ComparedTable('partner_id', 'kalturadw.dwh_hourly_partner', 'ifnull(count_plays, 0)')),0,
+					 'event_date_id = ' . $dateID . ' and event_hour_id = ' . $hourID,
+                                         'date_id = ' . $dateID . ' and hour_id = ' . $hourID);
+				$this->compareAggregation(array(new ComparedTable('entry_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
+                                          array(new ComparedTable('entry_id', 'kalturadw.dwh_hourly_events_entry', 'ifnull(count_plays, 0)')),0,
+                                         'event_date_id = ' . $dateID . ' and event_hour_id = ' . $hourID,
+                                         'date_id = ' . $dateID . ' and hour_id = ' . $hourID);
+				$this->compareAggregation(array(new ComparedTable('domain_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
+                                          array(new ComparedTable('domain_id', 'kalturadw.dwh_hourly_events_domain', 'ifnull(count_plays, 0)')),0,
+                                         'event_date_id = ' . $dateID . ' and event_hour_id = ' . $hourID,
+                                         'date_id = ' . $dateID . ' and hour_id = ' . $hourID);
+				$this->compareAggregation(array(new ComparedTable('referrer_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
+                                          array(new ComparedTable('referrer_id', 'kalturadw.dwh_hourly_events_domain_referrer', 'ifnull(count_plays, 0)')),0,
+                                         'event_date_id = ' . $dateID . ' and event_hour_id = ' . $hourID,
+                                         'date_id = ' . $dateID . ' and hour_id = ' . $hourID);
+				$this->compareAggregation(array(new ComparedTable('location_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
+                                          array(new ComparedTable('location_id', 'kalturadw.dwh_hourly_events_country', 'ifnull(count_plays, 0)')),0,
+                                         'event_date_id = ' . $dateID . ' and event_hour_id = ' . $hourID,
+                                         'date_id = ' . $dateID . ' and hour_id = ' . $hourID);
+				$this->compareAggregation(array(new ComparedTable('country_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
+                                          array(new ComparedTable('country_id', 'kalturadw.dwh_hourly_events_country', 'ifnull(count_plays, 0)')),0,
+                                         'event_date_id = ' . $dateID . ' and event_hour_id = ' . $hourID,
+                                         'date_id = ' . $dateID . ' and hour_id = ' . $hourID);
+				$this->compareAggregation(array(new ComparedTable('widget_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
+                                          array(new ComparedTable('widget_id', 'kalturadw.dwh_hourly_events_widget', 'ifnull(count_plays, 0)')),0,
+                                         'event_date_id = ' . $dateID . ' and event_hour_id = ' . $hourID,
+                                         'date_id = ' . $dateID . ' and hour_id = ' . $hourID);
+				$this->compareAggregation(array(new ComparedTable('os_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
+                                          array(new ComparedTable('os_id', 'kalturadw.dwh_hourly_events_devices', 'ifnull(count_plays, 0)')),0,
+                                         'event_date_id = ' . $dateID . ' and event_hour_id = ' . $hourID,
+                                         'date_id = ' . $dateID . ' and hour_id = ' . $hourID);
+				$this->compareAggregation(array(new ComparedTable('browser_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
+                                          array(new ComparedTable('browser_id', 'kalturadw.dwh_hourly_events_devices', 'ifnull(count_plays, 0)')),0,
+                                         'event_date_id = ' . $dateID . ' and event_hour_id = ' . $hourID,
+                                         'date_id = ' . $dateID . ' and hour_id = ' . $hourID);
+			}
+		}
 		
-		$this->compareAggregation(array(new ComparedTable('partner_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')), 
-					  array(new ComparedTable('partner_id', 'kalturadw.dwh_hourly_partner', 'ifnull(count_plays, 0)')));
-		$this->compareAggregation(array(new ComparedTable('entry_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
-                                          array(new ComparedTable('entry_id', 'kalturadw.dwh_hourly_events_entry', 'ifnull(count_plays, 0)')));
-		$this->compareAggregation(array(new ComparedTable('domain_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
-                                          array(new ComparedTable('domain_id', 'kalturadw.dwh_hourly_events_domain', 'ifnull(count_plays, 0)')));
-		$this->compareAggregation(array(new ComparedTable('referrer_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
-                                          array(new ComparedTable('referrer_id', 'kalturadw.dwh_hourly_events_domain_referrer', 'ifnull(count_plays, 0)')));
-		$this->compareAggregation(array(new ComparedTable('location_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
-                                          array(new ComparedTable('location_id', 'kalturadw.dwh_hourly_events_country', 'ifnull(count_plays, 0)')));
-		$this->compareAggregation(array(new ComparedTable('country_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
-                                          array(new ComparedTable('country_id', 'kalturadw.dwh_hourly_events_country', 'ifnull(count_plays, 0)')));
-		$this->compareAggregation(array(new ComparedTable('widget_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
-                                          array(new ComparedTable('widget_id', 'kalturadw.dwh_hourly_events_widget', 'ifnull(count_plays, 0)')));
-		$this->compareAggregation(array(new ComparedTable('os_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
-                                          array(new ComparedTable('os_id', 'kalturadw.dwh_hourly_events_devices', 'ifnull(count_plays, 0)')));
-		$this->compareAggregation(array(new ComparedTable('browser_id', 'kalturadw.dwh_fact_events', 'if(event_type_id=3,1,0)')),
-                                          array(new ComparedTable('browser_id', 'kalturadw.dwh_hourly_events_devices', 'ifnull(count_plays, 0)')));
 		$this->compareAggregation(array(new ComparedTable('partner_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)'),
                                         new ComparedTable('session_partner_id', 'kalturadw.dwh_fact_fms_sessions', '(total_bytes/1024)')),
 								  array(new ComparedTable('partner_id', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)')), 1);
