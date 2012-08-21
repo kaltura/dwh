@@ -14,6 +14,7 @@ BEGIN
 	DECLARE v_table_name VARCHAR(100);
 	DECLARE v_join_table VARCHAR(100);
 	DECLARE v_join_condition VARCHAR(200);
+	DECLARE use_index_cmd VARCHAR(200) DEFAULT '';
     		
 	SELECT DATE(NOW() - INTERVAL archive_delete_days_back DAY), DATE(archive_last_partition)
 	INTO v_ignore, v_from_archive
@@ -51,6 +52,7 @@ BEGIN
 	
 		IF (p_date_val >= v_from_archive) THEN 
 			SET v_table_name = 'dwh_fact_events';
+			SET use_index_cmd = 'USE INDEX (event_hour_id_event_date_id_partner_id)';
 		ELSE
 			SET v_table_name = 'dwh_fact_events_archive';
 		END IF;
@@ -161,7 +163,7 @@ BEGIN
 			SUM(IF(ev.event_type_id = 38, 1,NULL)) count_postroll_25,
 			SUM(IF(ev.event_type_id = 39, 1,NULL)) count_postroll_50,
 			SUM(IF(ev.event_type_id = 40, 1,NULL)) count_postroll_75
-			FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), dwh_dim_entries e',v_join_table,
+			FROM ',v_table_name,' as ev ', use_index_cmd, ', dwh_dim_entries e',v_join_table,
 				' WHERE ev.event_type_id BETWEEN 2 AND 40 
 				AND ev.event_date_id  = DATE(''',p_date_val,''')*1
 				AND ev.event_hour_id = ',p_hour_id,'
@@ -191,7 +193,7 @@ BEGIN
 					COUNT(DISTINCT IF(ev.event_type_id IN (6),1,NULL)) v_75,
 					COUNT(DISTINCT IF(ev.event_type_id IN (7),1,NULL)) v_100,
 					MAX(IF(event_type_id IN (3),session_id,NULL)) s_play
-				FROM ',v_table_name,' as ev USE INDEX (event_hour_id_event_date_id_partner_id), dwh_dim_entries e',v_join_table,
+				FROM ',v_table_name,' as ev ', use_index_cmd ,', dwh_dim_entries e',v_join_table,
 				' WHERE ev.event_date_id  = DATE(''',p_date_val,''')*1
 					AND ev.event_hour_id = ',p_hour_id,'
 					AND e.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */

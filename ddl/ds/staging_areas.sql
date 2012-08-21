@@ -29,6 +29,7 @@ CREATE TABLE `staging_areas` (
   `aggr_date_field` varchar(45),
   `hour_id_field` VARCHAR(45),
   `post_transfer_aggregations` VARCHAR(255),
+  `reset_aggregations_min_date` DATE NOT NULL DEFAULT '1970-01-01'
   `ignore_duplicates_on_transfer` BOOLEAN NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

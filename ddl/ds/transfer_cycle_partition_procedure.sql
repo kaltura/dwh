@@ -16,10 +16,11 @@ BEGIN
 	DECLARE aggr_date VARCHAR(400);
 	DECLARE aggr_hour VARCHAR(400);
 	DECLARE aggr_names VARCHAR(4000);
+	DECLARE reset_aggr_min_date DATETIME;
 	
 	
 	DECLARE done INT DEFAULT 0;
-	DECLARE staging_areas_cursor CURSOR FOR SELECT 	source_table, target_table, IFNULL(on_duplicate_clause,''),	staging_partition_field, post_transfer_sp, aggr_date_field, hour_id_field, post_transfer_aggregations, ignore_duplicates_on_transfer
+	DECLARE staging_areas_cursor CURSOR FOR SELECT 	source_table, target_table, IFNULL(on_duplicate_clause,''),	staging_partition_field, post_transfer_sp, aggr_date_field, hour_id_field, post_transfer_aggregations, reset_aggregations_min_date, ignore_duplicates_on_transfer
 											FROM staging_areas s, cycles c
 											WHERE s.process_id=c.process_id AND c.cycle_id = p_cycle_id;
 											
@@ -27,7 +28,7 @@ BEGIN
 	OPEN staging_areas_cursor;
 	
 	read_loop: LOOP
-		FETCH staging_areas_cursor INTO src_table, tgt_table, dup_clause, partition_field, post_transfer_sp_val, aggr_date, aggr_hour, aggr_names, v_ignore_duplicates_on_transfer;
+		FETCH staging_areas_cursor INTO src_table, tgt_table, dup_clause, partition_field, post_transfer_sp_val, aggr_date, aggr_hour, aggr_names, reset_aggr_min_date, v_ignore_duplicates_on_transfer;
 		IF done THEN
 			LEAVE read_loop;
 		END IF;
@@ -41,7 +42,8 @@ BEGIN
 					(select distinct ',aggr_date, ' aggr_date,' ,aggr_hour,' aggr_hour 
 					 from ',src_table,
 					' where ',partition_field,' = ',p_cycle_id,') ds
-				WHERE aggr_name in ', aggr_names,'
+				WHERE 	aggr_name in ', aggr_names,'
+					AND aggr_date >= date(\'', reset_aggr_min_date, '\')
 				ON DUPLICATE KEY UPDATE data_insert_time = now()');
 
 			PREPARE stmt FROM @s;
