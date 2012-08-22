@@ -41,8 +41,8 @@
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://192.168.252.222:3306/kalturadw</property>
-            <property name="odaUser">etl</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">ZXRs</encrypted-property>
+            <property name="odaUser">kaltura_read</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">a2FsdHVyYV9yZWFk</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
