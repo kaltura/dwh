@@ -18,7 +18,7 @@ BEGIN
 	FROM kalturadw_ds.retention_policy
 	WHERE table_name IN('dwh_fact_bandwidth_usage', 'dwh_fact_fms_sessions');
 	
-	IF (p_date_val >= v_ignore) THEN -- not so old, we don't have any data
+	IF (p_date_val >= v_ignore) THEN 
 		
 		SELECT aggr_table, IF(IFNULL(aggr_id_field,'')='','', CONCAT(', ', aggr_id_field)) aggr_id_field
 		INTO  v_aggr_table, v_aggr_id_field_str
@@ -36,7 +36,7 @@ BEGIN
 		FROM kalturadw_ds.retention_policy
 		WHERE table_name = 'dwh_fact_bandwidth_usage';
 	
-                IF (p_date_val >= v_from_archive) THEN -- aggr from archive or from events
+                IF (p_date_val >= v_from_archive) THEN 
                         SET v_table_name = 'dwh_fact_bandwidth_usage';
                 ELSE
                         SET v_table_name = 'dwh_fact_bandwidth_usage_archive';
@@ -59,7 +59,7 @@ BEGIN
 		FROM kalturadw_ds.retention_policy
 		WHERE table_name = 'dwh_fact_fms_sessions';
 		
-		IF (p_date_val >= v_from_archive) THEN -- aggr from archive or from events
+		IF (p_date_val >= v_from_archive) THEN 
                         SET v_table_name = 'dwh_fact_fms_sessions';
                 ELSE
                         SET v_table_name = 'dwh_fact_fms_sessions_archive';
@@ -67,7 +67,7 @@ BEGIN
 
 		SET @s = CONCAT('INSERT INTO kalturadw.', v_aggr_table, ' (partner_id, date_id, hour_id', v_aggr_id_field_str,', count_bandwidth_kb)
 				SELECT session_partner_id, MAX(session_date_id), 0 hour_id', v_aggr_id_field_str,', SUM(total_bytes)/1024 count_bandwidth 
-				FROM kalturadw.dwh_fact_fms_sessions WHERE session_date_id=date(\'',p_date_val,'\')*1
+				FROM ', v_table_name, ' WHERE session_date_id=date(\'',p_date_val,'\')*1
 				GROUP BY session_partner_id', v_aggr_id_field_str,'
 				ON DUPLICATE KEY UPDATE	count_bandwidth_kb=VALUES(count_bandwidth_kb)');
 		PREPARE stmt FROM  @s;
