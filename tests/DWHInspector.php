@@ -189,6 +189,7 @@ class DWHInspector
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_fact_fms_session_events', array());
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_fact_fms_sessions', array());
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_hourly_events_entry', array());
+		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_entry_plays_views', array());
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_hourly_events_country', array());
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_hourly_events_domain', array());
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_hourly_events_domain_referrer', array());
