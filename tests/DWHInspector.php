@@ -173,10 +173,18 @@ class DWHInspector
 				SELECT DISTINCT entry_id, 1 FROM kalturadw.dwh_fact_events',array());
 	}
 
-	public static function purgeCycles()
+	public static function purgeCycles($purgeData=true)
 	{
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.files', array());		
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.cycles', array());
+		if ($purgeData)
+		{
+			self::purgeData();
+		}
+	}
+
+	private static function purgeData()
+	{
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.ds_events', array());
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.ds_bandwidth_usage', array());
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.ds_fms_session_events', array());
@@ -199,6 +207,11 @@ class DWHInspector
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_hourly_partner', array());
 		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_hourly_partner_usage', array());
 	        MySQLRunner::execute('UPDATE kalturadw_ds.retention_policy SET archive_start_days_back = 2000 where archive_start_days_back < 180 ', array());
+	}
+
+	public static function cleanEtlServers()
+	{
+		MySQLRunner::execute("TRUNCATE TABLE kalturadw_ds.etl_servers");
 	}
 	
 	public static function getEntryIDByFlavorID($flavorID)
@@ -314,5 +327,36 @@ class DWHInspector
 		}
 	}
 
+	public static function registerFile($fileName, $processId, $fileSizeKb, $compressionSuffix = '', $subdir = '.')
+	{
+		$sql = "CALL kalturadw_ds.register_file('$fileName', $processId, $fileSizeKb, '$compressionSuffix', '$subdir')";
+		MySQLRunner::execute($sql);
+	}
+
+	public static function registerEtlServer($etlServerName, $lbConstant=1)
+	{
+		MySQLRunner::execute("INSERT INTO kalturadw_ds.etl_servers (etl_server_name, lb_constant) VALUES ('$etlServerName', $lbConstant)");
+	}
+
+	public static function isFileRegistered($fileName, $processId, $fileSize, $compressionSuffix, $subdir, $etlServerName)
+	{
+		$sql = "SELECT * FROM kalturadw_ds.files f, kalturadw_ds.cycles c, kalturadw_ds.etl_servers es ".
+			"WHERE f.cycle_id = c.cycle_id and c.assigned_server_id = es.etl_server_id ".
+			"AND f.file_name = '$fileName' and f.process_id = $processId and f.file_size_kb = $fileSize and compression_suffix = '$compressionSuffix' and subdir = '$subdir' and etl_server_name = '$etlServerName'";
+		$rows = MySQLRunner::execute($sql);
+		return (count($rows) == 1);
+	}
+	
+	public static function dropTablePartitions($tableSchema, $tableName, $initialPartition = 'p_0')
+	{
+		$sql = "SELECT partition_name FROM information_schema.PARTITIONS WHERE table_schema = '$tableSchema' and table_name = '$tableName' AND partition_name <> '$initialPartition'";	
+		$rows = MySQLRunner::execute($sql);
+		
+		foreach ($rows as $row)
+		{
+			$sql = "ALTER TABLE $tableSchema.$tableName DROP PARTITION " . $row["partition_name"];
+			MySQLRunner::execute($sql);
+		}
+	}
 }
 ?>
