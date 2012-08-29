@@ -185,28 +185,31 @@ class DWHInspector
 
 	private static function purgeData()
 	{
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.ds_events', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.ds_bandwidth_usage', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.ds_fms_session_events', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.invalid_ds_lines', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.invalid_event_lines', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.invalid_fms_event_lines', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_dim_entries', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_fact_events', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_fact_bandwidth_usage', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_fact_fms_session_events', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_fact_fms_sessions', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_hourly_events_entry', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_entry_plays_views', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_hourly_events_country', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_hourly_events_domain', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_hourly_events_domain_referrer', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_hourly_events_uid', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_hourly_events_widget', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_hourly_events_devices', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_hourly_partner', array());
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw.dwh_hourly_partner_usage', array());
-	        MySQLRunner::execute('UPDATE kalturadw_ds.retention_policy SET archive_start_days_back = 2000 where archive_start_days_back < 180 ', array());
+		MySQLRunner::execute('DELETE FROM kalturadw_ds.ds_events', array());
+                self::dropTablePartitions('kalturadw_ds','ds_events');
+                MySQLRunner::execute('DELETE FROM kalturadw_ds.ds_bandwidth_usage', array());
+                self::dropTablePartitions('kalturadw_ds','ds_bandwidth_usage');
+                MySQLRunner::execute('DELETE FROM kalturadw_ds.ds_fms_session_events', array());
+                self::dropTablePartitions('kalturadw_ds','ds_fms_session_events');
+                MySQLRunner::execute('DELETE FROM kalturadw_ds.invalid_ds_lines', array());
+                MySQLRunner::execute('DELETE FROM kalturadw_ds.invalid_event_lines', array());
+                MySQLRunner::execute('DELETE FROM kalturadw_ds.invalid_fms_event_lines', array());
+                MySQLRunner::execute('DELETE FROM kalturadw.dwh_dim_entries', array());
+                MySQLRunner::execute('DELETE FROM kalturadw.dwh_fact_events', array());
+                MySQLRunner::execute('DELETE FROM kalturadw.dwh_fact_bandwidth_usage', array());
+                MySQLRunner::execute('DELETE FROM kalturadw.dwh_fact_fms_session_events', array());
+                MySQLRunner::execute('DELETE FROM kalturadw.dwh_fact_fms_sessions', array());
+                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_events_entry', array());
+                MySQLRunner::execute('DELETE FROM kalturadw.dwh_entry_plays_views', array());
+                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_events_country', array());
+                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_events_domain', array());
+                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_events_domain_referrer', array());
+                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_events_uid', array());
+                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_events_widget', array());
+                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_events_devices', array());
+                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_partner', array());
+                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_partner_usage', array());
+                MySQLRunner::execute('UPDATE kalturadw_ds.retention_policy SET archive_start_days_back = 2000 where archive_start_days_back < 180 ', array());
 	}
 
 	public static function cleanEtlServers()
