@@ -107,6 +107,11 @@ class RegisterFilesTestCase extends PHPUnit_Framework_TestCase
                 $this->assertTrue(DWHInspector::isFileRegistered($fileName3, $processId, $fileSize2K, $compressionSuffix, $subdir, $server2));
         }
 
+	public static function tearDownAfterClass()
+	{
+		DWHInspector::cleanEtlServers();
+	}
+
 }
 
 ?>
