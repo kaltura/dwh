@@ -4,8 +4,7 @@ SELECT 	aggr_name,
 	DATE(date_id) DATE, 
 	MAX(data_insert_time) latest_data_insert_time
 FROM kalturadw.aggr_managment
-WHERE 	date_id + INTERVAL hour_id HOUR
-		AND (IFNULL(start_time,DATE(19700101)) < data_insert_time 
+WHERE 	(IFNULL(start_time,DATE(19700101)) < data_insert_time 
 			OR
 			start_time > end_time /* Handle Failed aggregations*/)
 	AND data_insert_time < NOW() - INTERVAL 8 HOUR
