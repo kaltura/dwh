@@ -29,7 +29,7 @@ BEGIN
 	FROM        kalturadw.dwh_hourly_partner_usage
 	WHERE       date_id = DATE(date_val - INTERVAL 1 DAY)*1
 	AND         bandwidth_source_id = 1
-	ON DUPLICATE KEY UPDATE count_storage_mb=VALUES(count_storage_mb), aggr_storage_mb = VALUES(aggr_storage_mb);
+	ON DUPLICATE KEY UPDATE added_storage_mb=VALUES(added_storage_mb), deleted_storage_mb=VALUES(deleted_storage_mb), aggr_storage_mb = VALUES(aggr_storage_mb);
 	
 	INSERT INTO 	kalturadw.dwh_hourly_partner_usage (partner_id, date_id, hour_id, bandwidth_source_id, added_storage_mb, deleted_storage_mb, aggr_storage_mb)
 	SELECT		aggr.partner_id, aggr.date_id, aggr.hour_id, 1, aggr.added_storage_mb, aggr.deleted_storage_mb, aggr.added_storage_mb - aggr.deleted_storage_mb
