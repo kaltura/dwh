@@ -22,7 +22,7 @@ CREATE TABLE `staging_areas` (
   `id` int(10) unsigned NOT NULL,
   `process_id` int(10) unsigned NOT NULL,
   `source_table` varchar(45) NOT NULL,
-  `target_table` varchar(45) NOT NULL,
+  `target_table_id` int NOT NULL,
   `on_duplicate_clause` varchar(4000) DEFAULT NULL,
   `staging_partition_field` varchar(45) DEFAULT NULL,
   `post_transfer_sp` varchar(500) DEFAULT NULL,
