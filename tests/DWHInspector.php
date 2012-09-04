@@ -96,12 +96,12 @@ class DWHInspector
 	public static function getAggrDatesAndHours($cycleId)
 	{
 		$res = array();
-		$staging_areas = MySQLRunner::execute("SELECT target_table, aggr_date_field, hour_id_field FROM kalturadw_ds.cycles c, kalturadw_ds.staging_areas s WHERE cycle_id = ? and c.process_id = s.process_id", array(0=>$cycleId));
+		$staging_areas = MySQLRunner::execute("SELECT fact_table_name, aggr_date_field, hour_id_field FROM kalturadw_ds.cycles c, kalturadw_ds.staging_areas s, kalturadw_ds.fact_tables f WHERE cycle_id = ? and c.process_id = s.process_id and s.target_table_id = f.fact_table_id", array(0=>$cycleId));
 		foreach ($staging_areas as $staging_area)
 		{
 			$date_id_column = $staging_area["aggr_date_field"];
 			$hour_id_column = $staging_area["hour_id_field"];
-			$table_name = $staging_area["target_table"];
+			$table_name = $staging_area["fact_table_name"];
 			
 			$rows = MySQLRunner::execute("SELECT DISTINCT ?, ? FROM ? WHERE file_id in (SELECT file_id FROM kalturadw_ds.files WHERE cycle_id = ? AND file_status = 'IN_CYCLE')",array(0=>$date_id_column, 1=>$hour_id_column, 2=>$table_name, 3=>$cycleId));
 		
@@ -122,7 +122,7 @@ class DWHInspector
 
 	public static function getPostTransferAggregationTypes($processID, $factTable = '')
 	{
-		$rows = MySQLRunner::execute("SELECT post_transfer_aggregations FROM kalturadw_ds.staging_areas WHERE process_id = ? and ('' = '?' or target_table = '?') ", array(0=>$processID, 1=>$factTable, 2=>$factTable));
+		$rows = MySQLRunner::execute("SELECT post_transfer_aggregations FROM kalturadw_ds.staging_areas s, kalturadw_ds.fact_tables f WHERE s.target_table_id = f.fact_table_id and process_id = ? and ('' = '?' or fact_table_name = '?') ", array(0=>$processID, 1=>$factTable, 2=>$factTable));
 		$aggrTypes = array();
 		foreach ($rows as $row)
 		{
@@ -316,9 +316,9 @@ class DWHInspector
 	public static function getResetAggregationsMinDateID($cycleID, $factTable = '')
 	{
 		$sql= "SELECT min(reset_aggregations_min_date)*1 min_date_id " . 
-						"FROM kalturadw_ds.staging_areas s, kalturadw_ds.cycles c ". 
-						"WHERE s.process_id = c.process_id ".
-						"AND c.cycle_id = $cycleID and (target_table = '$factTable' or '' = '$factTable')";
+						"FROM kalturadw_ds.staging_areas s, kalturadw_ds.cycles c, kalturadw_ds.fact_tables f ". 
+						"WHERE s.process_id = c.process_id and s.target_table_id = f.fact_table_id ".
+						"AND c.cycle_id = $cycleID and (fact_table_name = '$factTable' or '' = '$factTable')";
 		$rows = MySQLRunner::execute($sql);
 		if (count($rows) > 0)
 		{
