@@ -120,6 +120,7 @@ mysqlexec $DS_ROOT_DIR/unify_incomplete_api_calls.sql
 mysqlexec $DS_ROOT_DIR/ds_errors.sql
 mysqlexec $DS_ROOT_DIR/operational_syncs.sql
 mysqlexec $DS_ROOT_DIR/fact_tables.sql
+mysqlexec $DS_ROOT_DIR/fact_stats.sql
 
 #etl_log
 mysqlexec $DDL_ROOT_DIR/log/etl_log.sql
