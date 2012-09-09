@@ -43,7 +43,7 @@ BEGIN
 				'(SELECT ', aggr_date, ' date_id, ', aggr_hour, ' hour_id, count(*) new_rows FROM ',src_table,
 				' WHERE ', partition_field,'  = ',p_cycle_id, ' group by date_id, hour_id) ds ',
 				'LEFT OUTER JOIN kalturadw_ds.fact_stats fs on ds.date_id = fs.date_id AND ds.hour_id = fs.hour_id
-				WHERE fs.fact_table_id = ', tgt_table_id);
+				AND fs.fact_table_id = ', tgt_table_id);
 		PREPARE stmt FROM @s;
 		EXECUTE stmt;
 		DEALLOCATE PREPARE stmt;

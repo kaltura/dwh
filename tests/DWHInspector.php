@@ -194,6 +194,7 @@ class DWHInspector
                 MySQLRunner::execute('DELETE FROM kalturadw_ds.invalid_ds_lines', array());
                 MySQLRunner::execute('DELETE FROM kalturadw_ds.invalid_event_lines', array());
                 MySQLRunner::execute('DELETE FROM kalturadw_ds.invalid_fms_event_lines', array());
+				MySQLRunner::execute('DELETE FROM kalturadw_ds.fact_stats', array());
                 MySQLRunner::execute('DELETE FROM kalturadw.dwh_dim_entries', array());
                 MySQLRunner::execute('DELETE FROM kalturadw.dwh_fact_events', array());
                 MySQLRunner::execute('DELETE FROM kalturadw.dwh_fact_bandwidth_usage', array());
