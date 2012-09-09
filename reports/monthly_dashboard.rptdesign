@@ -57,8 +57,8 @@
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
             <property name="odaURL">jdbc:mysql://192.168.252.222:3306/kalturadw</property>
-            <property name="odaUser">kaltura_read</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">a2FsdHVyYV9yZWFk</encrypted-property>
+            <property name="odaUser">etl</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">ZXRs</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -144,7 +144,7 @@
             <xml-property name="queryText"><![CDATA[SELECT 	LAST_DAY(DATE(DATE_ID))*1 DATE_ID, 
 		SUM(IF(d.is_live=0,COUNT_BANDWIDTH_KB,0)) AS VOD_KB, 
 		SUM(IF(d.is_live=1,COUNT_BANDWIDTH_KB,0)) AS LIVESTREAM_KB,
-		SUM(COUNT_STORAGE_MB) AS STOR_MB
+		SUM(added_storage_mb - deleted_storage_mb) AS STOR_MB
 FROM 		kalturadw.DWH_HOURLY_PARTNER_USAGE u, 
 		kalturadw.dwh_dim_bandwidth_source d
 WHERE 		u.bandwidth_source_id = d.bandwidth_source_id AND 
@@ -2018,7 +2018,7 @@ ORDER BY count_loads DESC]]></xml-property>
                     <structure>
                         <property name="position">8</property>
                         <property name="name">rank</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
@@ -2075,7 +2075,7 @@ ORDER BY count_loads DESC]]></xml-property>
                     <property name="position">8</property>
                     <property name="name">rank</property>
                     <property name="nativeName">rank</property>
-                    <property name="dataType">integer</property>
+                    <property name="dataType">float</property>
                 </structure>
                 <structure>
                     <property name="position">9</property>
@@ -2088,11 +2088,11 @@ ORDER BY count_loads DESC]]></xml-property>
 SELECT partner_id, partner_name, avg_count_storage_mb, 2_months_ago_count_storage_mb,count_storage_mb,  
 	@rownum_storage_is_paying:=IFNULL(IF(@is_paying_storage=is_paying,@rownum_storage_is_paying+1,1),1) AS is_paying_rank,
 	@is_paying_storage:=is_paying AS is_paying, total FROM (
-SELECT u.partner_id, SUM(count_storage_mb)/12 avg_count_storage_mb, 
-SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (3+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH)*1,count_storage_mb,0)) 2_months_ago_count_storage_mb, 
-SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1,count_storage_mb,0)) count_storage_mb,
+SELECT u.partner_id, SUM(added_storage_mb - deleted_storage_mb)/12 avg_count_storage_mb, 
+SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (3+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH)*1,added_storage_mb - deleted_storage_mb,0)) 2_months_ago_count_storage_mb, 
+SUM(IF(date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1,added_storage_mb - deleted_storage_mb,0)) count_storage_mb,
 p.partner_name, IF(partner_package>1,'yes','no') is_paying, total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d, kalturadw.dwh_dim_partners p,
-(SELECT SUM(count_storage_mb) total FROM kalturadw.dwh_hourly_partner_usage WHERE date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1) total
+(SELECT SUM(added_storage_mb - deleted_storage_mb) total FROM kalturadw.dwh_hourly_partner_usage WHERE date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (2+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1) total
 WHERE u.bandwidth_source_id = d.bandwidth_source_id
 AND u.partner_id = p.partner_id
 AND date_id BETWEEN (LAST_DAY(NOW()) - INTERVAL (13+?) MONTH + INTERVAL 1 DAY)*1 AND (LAST_DAY(NOW()) - INTERVAL (1+?) MONTH)*1
