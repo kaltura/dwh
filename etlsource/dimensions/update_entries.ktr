@@ -1382,7 +1382,6 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
       </remove>      <remove>        <name>fixed_conversion_quality</name>
       </remove>      <remove>        <name>res_4</name>
       </remove>      <remove>        <name>editor_type</name>
-      </remove>      <remove>        <name>res_5</name>
       </remove>      <remove>        <name>puser_id</name>
       </remove>      <remove>        <name>is_admin_content</name>
       </remove>      <remove>        <name>fixed_height</name>
