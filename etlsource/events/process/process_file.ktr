@@ -3134,6 +3134,7 @@ var ksUrl = null;
 var application = null;
 var contextId = null;
 var strContextId = null;
+var numContextId = null;
 var featureType = null;
 
 &#47;&#47; Trim &quot;[&quot; and set it to a date
@@ -3188,7 +3189,8 @@ if (lineType == 2){
 	eventType = getValue(queryStringDictionary, &quot;eventType&quot;);
 	application = getValue(queryStringDictionary, &quot;applicationId&quot;);
 	strContextId = getValue(queryStringDictionary, &quot;contextId&quot;);
-	contextId = is_not_numeric(strContextId) ? -1 : strContextId;
+	numContextId = is_not_numeric(strContextId) ? -1 : strContextId;
+	contextId = isInt(numContextId) ? numContextId : -1;
 	featureType = getValue(queryStringDictionary, &quot;featureType&quot;);
 	keyPrefix = &quot;&quot;;
 	ksUrl = getValue(queryStringDictionary, &quot;ks&quot;);
@@ -3216,6 +3218,9 @@ function is_not_numeric(s) {
 	return (isNaN(s) || s == null || s == &quot;&quot;);
 }
 
+function isInt(n) {
+   return n % 1 == 0;
+}
 </jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>date2str_Sample</jsScript_name>
