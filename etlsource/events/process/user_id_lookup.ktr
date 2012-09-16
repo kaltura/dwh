@@ -413,9 +413,9 @@
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
-
-
-&#47;&#47;var strToMatch = base64_decode (&quot;OTYwNzk2YjEzYjc2ODY5YjU2NGNlZGNiYzkxZTMxNDg0OWQyMjBkNXw0OTYwMTQ7NDk2MDE0OzEzMzI0NDQ2ODM7MjsxMzMyMzU4MjgzLjg5OTs7Ozs&quot;);
+&#47;&#47;MGJkNTQ4OGY1NmZmYjBiMmY0Mzk4OTFhY2Q2YWExNzRlNjgxNGU1NXw5MzEyMjE7OTMxMjIxOzEzNDc4NTg4NzU7MjsxMzQ3NzcyNDc1LjI4NTc7bWFuZHkuci5iaWNrZXJtYW5AYWNjZW50dXJlLmNvbTsqLGRpc2FibGVlbnRpdGxlbWVudDs7
+&#47;&#47;MDM0MjFjMDA1ZjcwNWJiZDhiZDJlY2YxODI1ODBiZmFmMzY0YzJiOXw5MzEyMjE7OzEzNDc2ODYwMDc7MDsxMzQ3Njc4ODA3LjY4OTU7amFnYWRpc2gubmF5YWtAYWNjZW50dXJlLmNvbTs
+&#47;&#47;var strToMatch = base64_decode (&quot;NzdlMWI1NjJmMWFhNDNkOTE3MzgwZmZiZDAzMGQ2OTkwY2IxMGM3M3w3NjI5MDE7NzYyOTAxOzEzMzA1MTc3NzQ7MDsxMzMwNDk5Nzc0LjIwNTE7ZmlsZS11cGxvYWQtc2VydmljZTtzZXRyb2xlOjg2MDgxODEsc3ZpZXc6MV9oNWR1ZHZ1azs7&quot;);
 &#47;&#47;Alert(strToMatch);
 &#47;&#47;Alert(getPartnerIdFromKS(strToMatch));
 &#47;&#47;Alert(getUserIdFromKS(strToMatch));
@@ -448,7 +448,7 @@ function getPartnerIdFromKS(strToMatch) {
 }
 
 function getUserIdFromKS(strToMatch) {
-	var strReg = &quot;^[a-z0-9]*\\|[0-9]+\\;[0-9]+\\;[0-9]+\\;[0-9]+\\;[0-9.]+\\;([^\\;]+)\\;.*&quot;;
+	var strReg = &quot;^[a-z0-9]*\\|[0-9]*\\;[0-9]*\\;[0-9]*\\;[0-9]*\\;[0-9.]*\\;([^\\;]+)\\;.*&quot;;
 	var resArr =  str2RegExp(strToMatch, strReg);
 	if (resArr!=null &amp;&amp; resArr.length &gt; 0 &amp;&amp; resArr[0] != &quot;0&quot;) {
 		return resArr[0];
