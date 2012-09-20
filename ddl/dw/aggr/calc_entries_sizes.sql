@@ -21,7 +21,7 @@ BEGIN
                 WHERE s.ready_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
                 AND object_type IN (1,4)
                 AND original = 1
-                AND s.STATUS IN (2,3)
+                AND s.STATUS IN (2,3,4)
                 AND s.partner_id NOT IN ( -1  , -2  , 0 , 99 );
                 
                 ALTER TABLE today_file_sync_subset ADD INDEX id (`id`);            
@@ -47,7 +47,7 @@ BEGIN
                                 WHERE s.updated_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
                                 AND object_type IN (1,4)
                                 AND original = 1
-                                AND s.STATUS IN (3)
+                                AND s.STATUS IN (3,4)
                                 AND s.partner_id NOT IN ( -1  , -2  , 0 , 99 )
                 ON DUPLICATE KEY UPDATE
                                 file_size = 0;       
@@ -112,7 +112,7 @@ BEGIN
                 AND f.object_sub_type = today.object_sub_type
                 AND f.ready_at < v_date
                 AND f.original = 1
-                AND f.STATUS IN (2,3);
+                AND f.STATUS IN (2,3,4);
                 
                 
                 DROP TABLE IF EXISTS yesterday_file_sync_max_version_ids;
