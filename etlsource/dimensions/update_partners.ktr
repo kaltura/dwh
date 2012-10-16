@@ -644,6 +644,16 @@
         <rename>internal_use</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>crm_id</name>
+        <rename>crm_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>crm_link</name>
+        <rename>crm_link</rename>
+        <update>Y</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
