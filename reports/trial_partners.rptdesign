@@ -580,11 +580,24 @@ GROUP BY p.partner_id
     <body>
         <grid id="363">
             <column id="364"/>
+            <row id="605">
+                <cell id="606">
+                    <text-data id="607">
+                        <property name="fontSize">14pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <expression name="valueExpr">'Week: ' + Formatter.format(BirtDateTime.addWeek(BirtDateTime.today(),-1), 'M/d/yy') + '-' +&#13;
+Formatter.format(BirtDateTime.addDay(BirtDateTime.today(),-1), 'M/d/yy')</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
             <row id="371">
                 <cell id="372">
                     <label id="374">
                         <property name="fontWeight">bold</property>
-                        <property name="paddingBottom">5pt</property>
+                        <property name="paddingTop">5pt</property>
+                        <property name="paddingBottom">1pt</property>
                         <property name="textAlign">center</property>
                         <text-property name="text">Trial partners using over 8GB</text-property>
                     </label>
@@ -1291,7 +1304,8 @@ wrap(dataSetRow["admin_email"],10)</expression>
                                     <property name="borderTopWidth">thin</property>
                                     <data id="405">
                                         <structure name="dateTimeFormat">
-                                            <property name="category">Unformatted</property>
+                                            <property name="category">Custom</property>
+                                            <property name="pattern">M/d/yy</property>
                                             <property name="locale">en_US_POSIX</property>
                                         </structure>
                                         <property name="textAlign">center</property>
