@@ -1793,7 +1793,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <script><![CDATA[.+s:\d+:"verticalClasiffication";[id]:(\d+).+]]></script>    <matcher>custom_data</matcher>
+    <script><![CDATA[.+"verticalClasiffication";(?:i:|s:\d+:"?)(.+?)(?:"?|);.+]]></script>    <matcher>custom_data</matcher>
     <resultfieldname>res</resultfieldname>
     <usevar>N</usevar>
     <allowcapturegroups>Y</allowcapturegroups>
