@@ -2006,6 +2006,192 @@ ORDER BY count_storage_mb DESC]]></xml-property>
 &lt;/SQLQueryBuilder></property>
             </structure>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="YesterdayEntryType" id="1541">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">date_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">date_id</text-property>
+                    <text-property name="heading">date_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">videos</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">videos</text-property>
+                    <text-property name="heading">videos</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">images</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">images</text-property>
+                    <text-property name="heading">images</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">audios</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">audios</text-property>
+                    <text-property name="heading">audios</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">documents</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">documents</text-property>
+                    <text-property name="heading">documents</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">playlists</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">playlists</text-property>
+                    <text-property name="heading">playlists</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">other</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">other</text-property>
+                    <text-property name="heading">other</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">livestream</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">livestream</text-property>
+                    <text-property name="heading">livestream</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">total</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">total</text-property>
+                    <text-property name="heading">total</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">date_id</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">videos</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">images</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">audios</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">documents</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">playlists</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">other</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">livestream</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">total</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">date_id</property>
+                    <property name="nativeName">date_id</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">videos</property>
+                    <property name="nativeName">videos</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">images</property>
+                    <property name="nativeName">images</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">audios</property>
+                    <property name="nativeName">audios</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">documents</property>
+                    <property name="nativeName">documents</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">playlists</property>
+                    <property name="nativeName">playlists</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">other</property>
+                    <property name="nativeName">other</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">livestream</property>
+                    <property name="nativeName">livestream</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">total</property>
+                    <property name="nativeName">total</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT 	DATE(date_id) date_id, 
+		SUM(new_videos) videos, 
+		SUM(new_images) images, 
+		SUM(new_audios) audios, 
+		SUM(new_documents) documents, 
+		SUM(new_playlists) playlists, 
+		SUM(new_other_entries) other, 
+		SUM(new_livestreams) livestream,
+		SUM(new_videos)+ SUM(new_images)+ SUM(new_audios)+ SUM(new_documents)+ SUM(new_playlists) + SUM(new_other_entries) + SUM(new_livestreams) total 
+		FROM kalturadw.dwh_hourly_partner
+WHERE date_id = (DATE(NOW()) - INTERVAL 1 DAY)*1
+]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <styles>
         <style name="report" id="4">
@@ -20084,7 +20270,7 @@ day + month / 100</Definition>
                                         <property name="pattern">###,##0</property>
                                     </structure>
                                     <property name="whiteSpace">nowrap</property>
-                                    <property name="dataSet">EntryTypes</property>
+                                    <property name="dataSet">YesterdayEntryType</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
                                             <property name="name">videos</property>
@@ -20119,7 +20305,7 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                         <property name="pattern">###,##0</property>
                                     </structure>
                                     <property name="whiteSpace">nowrap</property>
-                                    <property name="dataSet">EntryTypes</property>
+                                    <property name="dataSet">YesterdayEntryType</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
                                             <property name="name">videos</property>
@@ -20154,7 +20340,7 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                         <property name="pattern">###,##0</property>
                                     </structure>
                                     <property name="whiteSpace">nowrap</property>
-                                    <property name="dataSet">EntryTypes</property>
+                                    <property name="dataSet">YesterdayEntryType</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
                                             <property name="name">videos</property>
@@ -20189,16 +20375,17 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                         <property name="pattern">###,##0</property>
                                     </structure>
                                     <property name="whiteSpace">nowrap</property>
-                                    <property name="dataSet">EntryTypes</property>
+                                    <property name="dataSet">YesterdayEntryType</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
                                             <property name="name">videos</property>
-                                            <text-property name="displayName">Documents</text-property>
+                                            <text-property name="displayName">videos</text-property>
                                             <expression name="expression" type="javascript">var entries = dataSetRow["documents"];&#13;
 var total = dataSetRow["total"];&#13;
 var percent = Formatter.format(entries/total,"###,##0.##%");&#13;
 Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
-                                            <property name="dataType">string</property>
+                                            <property name="dataType">decimal</property>
+                                            <property name="allowExport">true</property>
                                         </structure>
                                     </list-property>
                                     <property name="resultSetColumn">videos</property>
@@ -20224,7 +20411,7 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                         <property name="pattern">###,##0</property>
                                     </structure>
                                     <property name="whiteSpace">nowrap</property>
-                                    <property name="dataSet">EntryTypes</property>
+                                    <property name="dataSet">YesterdayEntryType</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
                                             <property name="name">videos</property>
@@ -20259,7 +20446,7 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                         <property name="pattern">###,##0</property>
                                     </structure>
                                     <property name="whiteSpace">nowrap</property>
-                                    <property name="dataSet">EntryTypes</property>
+                                    <property name="dataSet">YesterdayEntryType</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
                                             <property name="name">videos</property>
@@ -20294,7 +20481,7 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                         <property name="pattern">###,##0</property>
                                     </structure>
                                     <property name="whiteSpace">nowrap</property>
-                                    <property name="dataSet">EntryTypes</property>
+                                    <property name="dataSet">YesterdayEntryType</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
                                             <property name="name">videos</property>
@@ -20329,7 +20516,7 @@ Formatter.format(entries, "###,##0") + " (" + percent + ")";</expression>
                                         <property name="pattern">###,##0</property>
                                     </structure>
                                     <property name="whiteSpace">nowrap</property>
-                                    <property name="dataSet">EntryTypes</property>
+                                    <property name="dataSet">YesterdayEntryType</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
                                             <property name="name">videos</property>
