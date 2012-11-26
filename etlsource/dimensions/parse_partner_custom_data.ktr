@@ -1814,7 +1814,7 @@
         <decimal/>
         <length>-1</length>
         <precision>-1</precision>
-        <nullif/>
+        <nullif>&quot;</nullif>
         <ifnull/>
         <trimtype>none</trimtype>
       </field>
