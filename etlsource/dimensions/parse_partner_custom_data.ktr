@@ -1808,7 +1808,7 @@
     <fields>
       <field>
         <name>vertical_id</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <group/>
         <decimal/>
