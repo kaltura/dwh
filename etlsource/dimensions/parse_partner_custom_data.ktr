@@ -281,7 +281,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -325,7 +325,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -369,7 +369,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -425,7 +425,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -481,7 +481,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -537,7 +537,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -593,7 +593,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -649,7 +649,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -705,7 +705,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -749,7 +749,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -805,7 +805,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -861,7 +861,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -917,7 +917,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -973,7 +973,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -1029,7 +1029,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -1085,7 +1085,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -1129,7 +1129,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -1185,7 +1185,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -1241,7 +1241,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -1297,7 +1297,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -1353,7 +1353,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -1409,7 +1409,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -1465,7 +1465,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -1521,7 +1521,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -1577,7 +1577,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -1633,7 +1633,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -1689,7 +1689,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -1745,7 +1745,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
@@ -1801,7 +1801,7 @@
     <canoneq>N</canoneq>
     <caseinsensitive>N</caseinsensitive>
     <comment>N</comment>
-    <dotall>N</dotall>
+    <dotall>Y</dotall>
     <multiline>N</multiline>
     <unicode>N</unicode>
     <unix>N</unix>
