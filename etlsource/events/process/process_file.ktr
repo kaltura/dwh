@@ -2945,7 +2945,7 @@ errornous_line = substr (errornous_line, 0 , 1023);</jsScript_script>
            <schema_name/>
            </partitioning>
     <compatible>N</compatible>
-    <optimizationLevel/>
+    <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
@@ -2958,7 +2958,7 @@ var activityDate = str2date(&quot;2099-01-01&quot;, &quot;yyyy-MM-dd&quot;);
 var parnterRegex = &quot;GET &#47;p&#47;([0-9]+)&#47;.*&quot;;
 resArr = str2RegExp(http_string, parnterRegex);
 
-if (resArr!=null &amp;&amp; resArr.length &gt; 0 &amp;&amp; http_response_code == &quot;200&quot; &amp;&amp; (!is_not_numeric(response_size)))
+if (resArr!=null &amp;&amp; resArr.length &gt; 0 &amp;&amp; (http_response_code == &quot;200&quot; || http_response_code == &quot;206&quot;) &amp;&amp; (!is_not_numeric(response_size)))
 {
 	&#47;&#47; Trim &quot;[&quot; and set it to a date
 	activityDate = str2date(substr(raw_datetime,1),&apos;dd&#47;MMM&#47;yyyy:HH:mm:ss&apos;);
