@@ -763,7 +763,8 @@ Alert(str2);</jsScript_script>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>Y</select_unspecified>
-    </fields>     <cluster_schema/>
+      <remove>        <name>isV2Ks</name>
+      </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1129</xloc>
       <yloc>91</yloc>
