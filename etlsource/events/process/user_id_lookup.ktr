@@ -462,7 +462,7 @@ var ksPuserID = &quot;Unknown&quot;;
 var isV2Ks = false;
 
 var ks = base64_decode(ksUrl);
-if (isV2Ks(ks)) {
+if (is_V2_Ks(ks)) {
 	isV2Ks = true;
 	strKsPartnerID = getPartnerIdFromKSV2(ks);
 	ksPartnerID = is_not_numeric(strKsPartnerID) ? -1 : strKsPartnerID;
@@ -478,7 +478,7 @@ function is_not_numeric(s) {
 	return (isNaN(s) || s == null || s == &quot;&quot;);
 }
 
-function isV2Ks(ks) {
+function is_V2_Ks(ks) {
 	return (indexOf(strToMatch,&quot;v2|&quot;) == 0) ;
 }
 
