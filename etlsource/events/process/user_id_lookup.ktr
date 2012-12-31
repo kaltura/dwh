@@ -1043,10 +1043,10 @@ Alert(decode(str1, &quot;1&quot;, &quot;Mr&quot;, &quot;2&quot;, &quot;Mrs&quot;
       <logmessage/>
     <fields>
       <field>
-        <name>puser_id</name>
+        <name>user_id</name>
         </field>
       <field>
-        <name>application_id</name>
+        <name>app_id</name>
         </field>
       </fields>
      <cluster_schema/>
