@@ -414,7 +414,7 @@
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
 
-var ksDecryptor = new com.kaltura.ks.crackKs();
+var ksDecryptor = new com.kaltura.ks.CrackKs();
 ksDecryptor.decryptKs(admin_secret,ksUrl);
 
 ksPuserID = ksDecryptor.getUserId();</jsScript_script>
