@@ -263,7 +263,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Mapping input specification</from><to>Permission Name Constant</to><enabled>Y</enabled> </hop>  <hop> <from>Permission Lookup</from><to>Active Permission</to><enabled>Y</enabled> </hop>  <hop> <from>Active Permission</from><to>Parse ks</to><enabled>Y</enabled> </hop>  <hop> <from>Active Permission</from><to>set no user</to><enabled>Y</enabled> </hop>  <hop> <from>Permission Name Constant</from><to>Permission Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Select User &amp; App</from><to>Mapping output specification</to><enabled>Y</enabled> </hop>  <hop> <from>User lookup&#47;update</from><to>Application lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>set no user</from><to>Select User &amp; App</to><enabled>Y</enabled> </hop>  <hop> <from>Application lookup&#47;update</from><to>Select User &amp; App</to><enabled>Y</enabled> </hop>  <hop> <from>Parse ks</from><to>V2 Ks</to><enabled>Y</enabled> </hop>  <hop> <from>V2 Ks</from><to>get Admin Secret</to><enabled>Y</enabled> </hop>  <hop> <from>V2 Ks</from><to>User lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>get Admin Secret</from><to>Get User from V2 ks</to><enabled>Y</enabled> </hop>  <hop> <from>Get User from V2 ks</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>User lookup&#47;update</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Mapping input specification</from><to>Permission Name Constant</to><enabled>Y</enabled> </hop>  <hop> <from>Permission Lookup</from><to>Active Permission</to><enabled>Y</enabled> </hop>  <hop> <from>Active Permission</from><to>Parse ks</to><enabled>Y</enabled> </hop>  <hop> <from>Active Permission</from><to>set no user</to><enabled>Y</enabled> </hop>  <hop> <from>Permission Name Constant</from><to>Permission Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>User lookup&#47;update</from><to>Application lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>set no user</from><to>Select User &amp; App</to><enabled>Y</enabled> </hop>  <hop> <from>Application lookup&#47;update</from><to>Select User &amp; App</to><enabled>Y</enabled> </hop>  <hop> <from>Parse ks</from><to>V2 Ks</to><enabled>Y</enabled> </hop>  <hop> <from>V2 Ks</from><to>get Admin Secret</to><enabled>Y</enabled> </hop>  <hop> <from>V2 Ks</from><to>User lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>get Admin Secret</from><to>Get User from V2 ks</to><enabled>Y</enabled> </hop>  <hop> <from>Get User from V2 ks</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>User lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>Select User &amp; App</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>Write to log</from><to>Mapping output specification</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Active Permission</name>
     <type>FilterRows</type>
@@ -748,7 +748,7 @@ Alert(str2);</jsScript_script>
     <name>Select User &amp; App</name>
     <type>SelectValues</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
@@ -989,8 +989,8 @@ Alert(decode(str1, &quot;1&quot;, &quot;Mr&quot;, &quot;2&quot;, &quot;Mrs&quot;
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>646</xloc>
-      <yloc>334</yloc>
+      <xloc>644</xloc>
+      <yloc>408</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1011,6 +1011,35 @@ Alert(decode(str1, &quot;1&quot;, &quot;Mr&quot;, &quot;2&quot;, &quot;Mrs&quot;
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>883</xloc>
       <yloc>337</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <logmessage/>
+    <fields>
+      <field>
+        <name>puser_id</name>
+        </field>
+      <field>
+        <name>application_id</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1196</xloc>
+      <yloc>221</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
