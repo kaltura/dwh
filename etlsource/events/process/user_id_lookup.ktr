@@ -479,7 +479,7 @@ function is_not_numeric(s) {
 }
 
 function is_V2_Ks(ks) {
-	return (indexOf(strToMatch,&quot;v2|&quot;) == 0) ;
+	return (indexOf(ks,&quot;v2|&quot;) == 0) ;
 }
 
 function getPartnerIdFromKS(strToMatch) {
