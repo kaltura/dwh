@@ -497,14 +497,20 @@ function getPartnerIdFromKS(strToMatch) {
 	return &quot;-99&quot;;
 }
 
+&#47;&#47;function getPartnerIdFromKSV2(strToMatch) {
+&#47;&#47;    var strReg = &quot;^[a-z0-9]*\\|([0-9]+)\\|.*&quot;;
+&#47;&#47;	var resArr =  str2RegExp(strToMatch, strReg);
+&#47;&#47;	if (resArr!=null &amp;&amp; resArr.length &gt; 0) {
+&#47;&#47;		return resArr[0];
+&#47;&#47;	}
+&#47;&#47;	return &quot;-99&quot;;
+&#47;&#47;}
+
 function getPartnerIdFromKSV2(strToMatch) {
-    var strReg = &quot;^[a-z0-9]*\\|([0-9]+)\\|.*&quot;;
-	var resArr =  str2RegExp(strToMatch, strReg);
-	if (resArr!=null &amp;&amp; resArr.length &gt; 0) {
-		return resArr[0];
-	}
-	return &quot;-99&quot;;
+    var strArr = strToMatch.split(&quot;|&quot;);
+        return strArr[1];
 }
+
 
 function getUserIdFromKS(strToMatch) {
 	var strReg = &quot;^[a-z0-9]*\\|[0-9]*\\;[0-9]*\\;[0-9]*\\;[0-9]*\\;[0-9.]*\\;([^\\;]+)\\;.*&quot;;
