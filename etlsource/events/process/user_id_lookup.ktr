@@ -417,7 +417,13 @@
 var ksDecryptor = new com.kaltura.ks.CrackKs();
 ksDecryptor.decryptKs(admin_secret,unescape(ksUrl));
 
-var ksPuserID = unescape(ksDecryptor.getUserId());</jsScript_script>
+var ksPuserID = unescape(ksDecryptor.getUserId());
+if (ksPuserID == &quot;0&quot;)
+{ 
+        ksPuserID = uid!=null?uid : &quot;Unknown&quot;;
+
+}
+</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>ksPuserID</name>
         <rename>ksPuserID</rename>
         <type>String</type>
