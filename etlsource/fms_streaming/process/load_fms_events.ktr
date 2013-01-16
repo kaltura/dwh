@@ -1110,9 +1110,9 @@ entry_partner_id = -1;
 
 if (indexOf(cs_uri_query, &quot;&amp;g=&quot;) &gt; -1)
 {
-	var additionalParams = substr(strToMatch, indexOf(cs_uri_query, &quot;&amp;g=&quot;) + 3); 
-	var params = last.split(&quot;&amp;&quot;);
-	c_client_id = (words[0]);
+	var additionalParams = substr(cs_uri_query, indexOf(cs_uri_query, &quot;&amp;g=&quot;) + 3); 
+	var params = additionalParams.split(&quot;&amp;&quot;);
+	c_client_id = (params[0]);
 }
 </jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
