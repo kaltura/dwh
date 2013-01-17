@@ -1108,7 +1108,6 @@ entry_partner_id = -1;
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
 
-var cs_uri_query = &quot;v=2.8.2&amp;fp=WIN%2011,5,502,135&amp;r=MOBPJ&amp;g=PEJTHSPNVGUS&quot;;
 if (indexOf(cs_uri_query, &quot;&amp;g=&quot;) &gt; -1)
 {
 	var additionalParams = substr(cs_uri_query, indexOf(cs_uri_query, &quot;&amp;g=&quot;) + 3); 
