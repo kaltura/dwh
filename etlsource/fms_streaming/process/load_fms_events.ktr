@@ -1108,6 +1108,7 @@ entry_partner_id = -1;
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
 
+var cs_uri_query = &quot;v=2.8.2&amp;fp=WIN%2011,5,502,135&amp;r=MOBPJ&amp;g=PEJTHSPNVGUS&quot;;
 if (indexOf(cs_uri_query, &quot;&amp;g=&quot;) &gt; -1)
 {
 	var additionalParams = substr(cs_uri_query, indexOf(cs_uri_query, &quot;&amp;g=&quot;) + 3); 
@@ -1132,7 +1133,13 @@ Alert(&quot;Input : &quot; + str1);
 Alert(&quot;From position 6: &quot; + str2);
 Alert(&quot;From position 6 for 7 long : &quot; + str3);
 </jsScript_script>
-      </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>c_client_id</name>
+        <rename>c_client_id</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1151</xloc>
       <yloc>410</yloc>
