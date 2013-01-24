@@ -8,7 +8,7 @@ CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day_ingestion`(p_date_id I
 BEGIN
 	DECLARE v_ignore DATE;
 	DECLARE v_from_archive DATE;
-        DECLARE v_table_name VARCHAR(100);
+    DECLARE v_table_name VARCHAR(100);
 	DECLARE v_aggr_table VARCHAR(100);
 	DECLARE v_aggr_id_field_str VARCHAR(100);
 	
@@ -72,30 +72,8 @@ BEGIN
 	PREPARE stmt FROM  @s;
     EXECUTE stmt;
     DEALLOCATE PREPARE stmt;
-		/* FMS */
-		SELECT DATE(archive_last_partition)
-		INTO v_from_archive
-		FROM kalturadw_ds.retention_policy
-		WHERE table_name = 'dwh_fact_fms_sessions';
 		
-		IF (p_date_val >= v_from_archive) THEN 
-                        SET v_table_name = 'dwh_fact_fms_sessions';
-                ELSE
-                        SET v_table_name = 'dwh_fact_fms_sessions_archive';
-                END IF;
-
-		SET @s = CONCAT('INSERT INTO kalturadw.', v_aggr_table, ' (partner_id, date_id, hour_id', v_aggr_id_field_str,', count_bandwidth_kb)
-				SELECT session_partner_id, MAX(session_date_id), 0 hour_id', v_aggr_id_field_str,', SUM(total_bytes)/1024 count_bandwidth 
-				FROM ', v_table_name, ' WHERE session_date_id=date(\'',p_date_val,'\')*1
-				GROUP BY session_partner_id', v_aggr_id_field_str,'
-				ON DUPLICATE KEY UPDATE	count_bandwidth_kb=VALUES(count_bandwidth_kb)');
-		PREPARE stmt FROM  @s;
-                EXECUTE stmt;
-                DEALLOCATE PREPARE stmt;
-	
-	END IF;
-	
-	UPDATE aggr_managment SET end_time = NOW() WHERE aggr_name = p_aggr_name AND date_id = DATE(p_date_val)*1;
+	UPDATE aggr_managment SET end_time = NOW() WHERE aggr_name = 'ingestion' AND date_id = p_date_id;
 END$$
 
 DELIMITER ;
