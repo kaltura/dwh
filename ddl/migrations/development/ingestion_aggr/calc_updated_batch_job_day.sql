@@ -76,7 +76,7 @@ BEGIN
                                                                 LEAVE read_loop;
                                                 END IF;
                                                 INSERT INTO kalturadw.aggr_managment(aggr_name,date_id,hour_id,data_insert_time) 
-												VALUES ("conversion_job", p_date_id, 0 ,now());
+												VALUES ("conversion_job", p_date_id, 0 ,now())
                                                 ON DUPLICATE KEY UPDATE
                                                                 data_insert_time = VALUES(data_insert_time);
                                 END LOOP;
