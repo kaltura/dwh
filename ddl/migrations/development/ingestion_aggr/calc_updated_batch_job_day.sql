@@ -18,8 +18,6 @@ BEGIN
 				GROUP BY partner_id
 				HAVING COUNT(*) > 10000) ignore_partner;
                                 
-                v_ignore_partner_ids = LEFT(v_ignore_partner_ids,LENGTH(v_ignore_partner_ids)-1);
-                                
                 
                 SET @s = CONCAT("INSERT INTO kalturadw.dwh_fact_convert_job(id, job_type_id, stauts_id, created_date_id, updated_date_id, finish_date_id, partner_id, dc, wait_time, conversion_time, is_ff
 				SELECT id, job_type_id, stauts_id, created_date_id, updated_date_id, finish_date_id, partner_id, dc, time_to_sec(timediff(queue_time, create_at) wait_time, IFNULL(finish_time, -1, time_to_sec(finish_time, queue_time)) conversion_time, 0
