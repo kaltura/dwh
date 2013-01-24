@@ -55,7 +55,7 @@ CREATE TABLE `dwh_dim_batch_job_sep` (
   `ri_ind` TINYINT(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`dwh_id`),
   UNIQUE KEY(`id`),
-  KEY `dwh_update_date` (`dwh_update_date`)
+  KEY `dwh_update_date` (`dwh_update_date`),
   KEY `update_date_id` (`update_date_id`)
 ) ENGINE=MYISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
