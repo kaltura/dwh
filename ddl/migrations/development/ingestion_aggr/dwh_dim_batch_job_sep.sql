@@ -23,7 +23,7 @@ CREATE TABLE `dwh_dim_batch_job_sep` (
   `id` INT(11) NOT NULL,
   `job_type_id` SMALLINT(6) DEFAULT NULL,
   `job_sub_type_id` SMALLINT(6) DEFAULT NULL,
-  `object_id` VARCHAR(20) DEFAULT NULL,,
+  `object_id` VARCHAR(20) DEFAULT NULL,
   `object_type` SMALLINT(6) DEFAULT NULL,
   `data` varchar(8192) DEFAULT NULL,
   `status_id` INT(11) DEFAULT NULL,
@@ -56,6 +56,7 @@ CREATE TABLE `dwh_dim_batch_job_sep` (
   PRIMARY KEY (`dwh_id`),
   UNIQUE KEY(`id`),
   KEY `dwh_update_date` (`dwh_update_date`)
+  KEY `update_date_id` (`update_date_id`)
 ) ENGINE=MYISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
