@@ -14,8 +14,7 @@ CREATE TABLE `bisources_batch_job_object_type` (
   PRIMARY KEY (`batch_job_object_type_id`)
 );
 
-INSERT INTO `bisources_batch_job_object_type`
-			(`batch_job_object_type_id`,`batch_job_object_type_name`) 
+INSERT INTO `bisources_batch_job_object_type` (`batch_job_object_type_id`,`batch_job_object_type_name`) 
 VALUES 		(1,'ENTRY'),
 			(2,'CATEGORY'),
 			(3,'FILE_SYNC'),

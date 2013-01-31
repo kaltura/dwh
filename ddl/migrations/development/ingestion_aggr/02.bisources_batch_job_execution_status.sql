@@ -15,6 +15,5 @@ CREATE TABLE `bisources_batch_job_exec_status` (
 );
 
 INSERT INTO `bisources_batch_job_exec_status`
-			
 VALUES 		(0,'NORMAL'),
 			(1,'ABORTED');
