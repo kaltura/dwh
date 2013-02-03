@@ -8,7 +8,7 @@ CREATE TABLE `dwh_daily_partner_ingestion` (
   `partner_id` int(11) NOT NULL,
   `total_conversion_sec` int(22) DEFAULT NULL,
   PRIMARY KEY (`date_id`,`partner_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 PARTITION BY RANGE (date_id)
 (PARTITION p_201301 VALUES LESS THAN (20130201) ENGINE = InnoDB);
 
