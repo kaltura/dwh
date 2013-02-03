@@ -461,7 +461,7 @@
            </partitioning>
     <fields>
       <field>
-        <field_name>new_last_updated_date_id</field_name>
+        <field_name>new_last_updated_at</field_name>
         <variable_name>NewLastUpdatedAt</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
