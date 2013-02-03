@@ -18,8 +18,6 @@ USE `kalturadw`;
 
 DROP TABLE IF EXISTS `dwh_dim_batch_job_sep`;
 
-SHOW CREATE TABLE dwh_dim_batch_job_sep
-
 CREATE TABLE `dwh_dim_batch_job_sep` (
   `dwh_id` INT(11) NOT NULL AUTO_INCREMENT,
   `id` INT(11) NOT NULL,

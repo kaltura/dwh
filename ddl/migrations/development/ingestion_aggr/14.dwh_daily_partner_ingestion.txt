@@ -1,0 +1,23 @@
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+USE `kalturadw`;
+
+DROP TABLE IF EXISTS `dwh_daily_partner_ingestion`;
+
+
+CREATE TABLE `dwh_daily_partner_ingestion` (
+  `date_id` int(11) NOT NULL,
+  `partner_id` int(11) NOT NULL,
+  `total_conversion_sec` int(22) DEFAULT NULL,
+  PRIMARY KEY (`date_id`,`partner_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
+/*!50100 PARTITION BY RANGE (date_id)
+(PARTITION p_201301 VALUES LESS THAN (20130201) ENGINE = InnoDB) */
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
