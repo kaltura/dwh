@@ -23,5 +23,5 @@ done
 
 res=0
         export BIRT_HOME=/home/kaltura/birt-runtime-4_2_1/
-        sh $BIRT_HOME/ReportEngine/genReport.sh -m runrender -f $OUT -p "DateIDParam=20121201" -o $ATTACH $ROOT_DIR/reports/$REPORT 
+        sh $BIRT_HOME/ReportEngine/genReport.sh -m runrender -f $OUT -p "DateIDParam=$STARTDATE" -o $ATTACH $ROOT_DIR/reports/$REPORT 
 
