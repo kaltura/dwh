@@ -5918,7 +5918,7 @@ BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", 
                                 <list-property name="arguments">
                                     <structure>
                                         <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">dataSetRow["percentage_value"]</expression>
+                                        <expression name="value" type="javascript">dataSetRow["percentage_value"]/100</expression>
                                     </structure>
                                 </list-property>
                                 <property name="allowExport">true</property>
@@ -6096,6 +6096,10 @@ BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", 
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">thin</property>
                                     <data id="953">
+                                        <structure name="numberFormat">
+                                            <property name="category">Percent</property>
+                                            <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
+                                        </structure>
                                         <property name="resultSetColumn">ff_total_percentage</property>
                                     </data>
                                 </cell>
@@ -9945,6 +9949,10 @@ day + month / 100</Definition>
         <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
+      <Sorting>Ascending</Sorting>
+      <SortKey>
+        <Definition>row[&quot;date_id&quot;]</Definition>
+      </SortKey>
     </SeriesDefinitions>
     <Orientation>Horizontal</Orientation>
     <LineAttributes>
@@ -12646,6 +12654,10 @@ month + year / 10000</Definition>
         <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
+      <Sorting>Ascending</Sorting>
+      <SortKey>
+        <Definition>row[&quot;date_id&quot;]</Definition>
+      </SortKey>
     </SeriesDefinitions>
     <Orientation>Horizontal</Orientation>
     <LineAttributes>
@@ -14362,6 +14374,10 @@ month + year / 10000</Definition>
         <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
+      <Sorting>Ascending</Sorting>
+      <SortKey>
+        <Definition>row[&quot;date_id&quot;]</Definition>
+      </SortKey>
     </SeriesDefinitions>
     <Orientation>Horizontal</Orientation>
     <LineAttributes>
@@ -15875,6 +15891,10 @@ day + month / 100</Definition>
         <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
+      <Sorting>Ascending</Sorting>
+      <SortKey>
+        <Definition>row[&quot;date_id&quot;]</Definition>
+      </SortKey>
     </SeriesDefinitions>
     <Orientation>Horizontal</Orientation>
     <LineAttributes>
@@ -17033,6 +17053,10 @@ month + year / 10000;</Definition>
         <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
+      <Sorting>Ascending</Sorting>
+      <SortKey>
+        <Definition>row[&quot;date_id&quot;]</Definition>
+      </SortKey>
     </SeriesDefinitions>
     <Orientation>Horizontal</Orientation>
     <LineAttributes>
@@ -18160,7 +18184,7 @@ month + year / 10000;</Definition>
                                 <list-property name="arguments">
                                     <structure>
                                         <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">dataSetRow["percentage_value"]</expression>
+                                        <expression name="value" type="javascript">dataSetRow["percentage_value"]/100</expression>
                                     </structure>
                                 </list-property>
                                 <property name="allowExport">true</property>
@@ -18332,6 +18356,10 @@ month + year / 10000;</Definition>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">thin</property>
                                     <data id="960">
+                                        <structure name="numberFormat">
+                                            <property name="category">Percent</property>
+                                            <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
+                                        </structure>
                                         <property name="resultSetColumn">total_percentage</property>
                                     </data>
                                 </cell>
@@ -21268,6 +21296,10 @@ month + year / 10000</Definition>
         <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
+      <Sorting>Ascending</Sorting>
+      <SortKey>
+        <Definition>row[&quot;date_id&quot;]</Definition>
+      </SortKey>
     </SeriesDefinitions>
     <Orientation>Horizontal</Orientation>
     <LineAttributes>
@@ -22564,7 +22596,7 @@ BirtStr.concat(month, "-", year);</expression>
                                 <list-property name="arguments">
                                     <structure>
                                         <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">dataSetRow["percentage_value"]</expression>
+                                        <expression name="value" type="javascript">dataSetRow["percentage_value"]/100</expression>
                                     </structure>
                                 </list-property>
                                 <property name="allowExport">true</property>
@@ -22736,6 +22768,10 @@ BirtStr.concat(month, "-", year);</expression>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">thin</property>
                                     <data id="967">
+                                        <structure name="numberFormat">
+                                            <property name="category">Percent</property>
+                                            <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
+                                        </structure>
                                         <property name="resultSetColumn">total_percentage</property>
                                     </data>
                                 </cell>
@@ -24063,6 +24099,10 @@ day + month / 100</Definition>
         <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
+      <Sorting>Ascending</Sorting>
+      <SortKey>
+        <Definition>row[&quot;date_id&quot;]</Definition>
+      </SortKey>
     </SeriesDefinitions>
     <Orientation>Horizontal</Orientation>
     <LineAttributes>
@@ -25664,6 +25704,10 @@ month + year / 10000;</Definition>
         <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
+      <Sorting>Ascending</Sorting>
+      <SortKey>
+        <Definition>row[&quot;date_id&quot;]</Definition>
+      </SortKey>
     </SeriesDefinitions>
     <Orientation>Horizontal</Orientation>
     <LineAttributes>
