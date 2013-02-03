@@ -4797,8 +4797,9 @@ AND file_size > -1 and status_id IN (6,10)
                     <property name="name">month_str</property>
                     <text-property name="displayName">month_str</text-property>
                     <expression name="expression" type="javascript">var year = params["DateIDParam"].value.substring(0,4);&#13;
-var month = params["DateIDParam"].value.substring(5,6);&#13;
-var day = params["DateIDParam"].value.substring(7,8);&#13;
+var month = params["DateIDParam"].value.substring(4,6);&#13;
+var day = params["DateIDParam"].value.substring(6,8);&#13;
+&#13;
 BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", year);</expression>
                     <property name="dataType">string</property>
                     <property name="allowExport">true</property>
@@ -26871,7 +26872,7 @@ BirtStr.concat(month, "-", year);</expression>
             </row>
             <row id="793">
                 <cell id="794">
-                    <property name="backgroundColor">silver</property>
+                    <property name="backgroundColor">white</property>
                     <label id="797">
                         <property name="backgroundColor">#FFFFFF</property>
                         <property name="fontSize">16pt</property>
@@ -29609,7 +29610,7 @@ BirtStr.concat(month, "-", year);</expression>
             </row>
             <row id="892">
                 <cell id="893">
-                    <property name="backgroundColor">silver</property>
+                    <property name="backgroundColor">white</property>
                     <label id="894">
                         <property name="backgroundColor">white</property>
                         <property name="fontSize">16pt</property>
