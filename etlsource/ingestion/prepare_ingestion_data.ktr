@@ -273,7 +273,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Generate Row</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>update covert job data</from><to>Write to log</to><enabled>Y</enabled> </hop>  <hop> <from>update covert job data</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>Calc date id</to><enabled>Y</enabled> </hop>  <hop> <from>Calc date id</from><to>update covert job data</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Generate Row</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>update covert job data</from><to>Abort</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>Calc date id</to><enabled>Y</enabled> </hop>  <hop> <from>Calc date id</from><to>update covert job data</to><enabled>Y</enabled> </hop>  <hop> <from>update covert job data</from><to>set variables</to><enabled>Y</enabled> </hop>  <hop> <from>set variables</from><to>Write to log</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Abort</name>
     <type>Abort</type>
@@ -412,8 +412,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>613</xloc>
-      <yloc>124</yloc>
+      <xloc>728</xloc>
+      <yloc>122</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -445,6 +445,33 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>482</xloc>
       <yloc>120</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>set variables</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <field_name>new_last_updated_date_id</field_name>
+        <variable_name>NewLastUpdatedAt</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value/>
+        </field>
+      </fields>
+    <use_formatting>Y</use_formatting>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>618</xloc>
+      <yloc>117</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
