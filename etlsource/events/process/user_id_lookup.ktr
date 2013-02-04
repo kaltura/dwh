@@ -263,7 +263,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Mapping input specification</from><to>Permission Name Constant</to><enabled>Y</enabled> </hop>  <hop> <from>Permission Lookup</from><to>Active Permission</to><enabled>Y</enabled> </hop>  <hop> <from>Active Permission</from><to>Parse ks</to><enabled>Y</enabled> </hop>  <hop> <from>Active Permission</from><to>set no user</to><enabled>Y</enabled> </hop>  <hop> <from>Permission Name Constant</from><to>Permission Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>User lookup&#47;update</from><to>Application lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>set no user</from><to>Select User &amp; App</to><enabled>Y</enabled> </hop>  <hop> <from>Application lookup&#47;update</from><to>Select User &amp; App</to><enabled>Y</enabled> </hop>  <hop> <from>Parse ks</from><to>V2 Ks</to><enabled>Y</enabled> </hop>  <hop> <from>V2 Ks</from><to>get Admin Secret</to><enabled>Y</enabled> </hop>  <hop> <from>V2 Ks</from><to>User lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>get Admin Secret</from><to>Get User from V2 ks</to><enabled>Y</enabled> </hop>  <hop> <from>Get User from V2 ks</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>User lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>Select User &amp; App</from><to>Mapping output specification</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Mapping input specification</from><to>Permission Name Constant</to><enabled>Y</enabled> </hop>  <hop> <from>Permission Lookup</from><to>Active Permission</to><enabled>Y</enabled> </hop>  <hop> <from>Active Permission</from><to>Parse ks</to><enabled>Y</enabled> </hop>  <hop> <from>Active Permission</from><to>set no user</to><enabled>Y</enabled> </hop>  <hop> <from>Permission Name Constant</from><to>Permission Lookup</to><enabled>Y</enabled> </hop>  <hop> <from>set no user</from><to>Select User &amp; App</to><enabled>Y</enabled> </hop>  <hop> <from>Parse ks</from><to>V2 Ks</to><enabled>Y</enabled> </hop>  <hop> <from>V2 Ks</from><to>get Admin Secret</to><enabled>Y</enabled> </hop>  <hop> <from>V2 Ks</from><to>User lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>get Admin Secret</from><to>Get User from V2 ks</to><enabled>Y</enabled> </hop>  <hop> <from>Get User from V2 ks</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>User lookup&#47;update</to><enabled>Y</enabled> </hop>  <hop> <from>Select User &amp; App</from><to>Mapping output specification</to><enabled>Y</enabled> </hop>  <hop> <from>User lookup&#47;update</from><to>Select User &amp; App</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Active Permission</name>
     <type>FilterRows</type>
@@ -288,112 +288,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>512</xloc>
       <yloc>89</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Application lookup&#47;update</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <schema>kalturadw</schema>
-      <table>dwh_dim_applications</table>
-      <connection>KalturaDW</connection>
-      <commit>1</commit>
-      <cache_size>9999</cache_size>
-      <replace>N</replace>
-      <crc>N</crc>
-      <crcfield>hashcode</crcfield>
-      <fields>
-        <key>
-          <name>application</name>
-          <lookup>name</lookup>
-        </key>
-        <key>
-          <name>partnerID</name>
-          <lookup>partner_id</lookup>
-        </key>
-        <return>
-          <name>application_id</name>
-          <creation_method>autoinc</creation_method>
-          <use_autoinc>Y</use_autoinc>
-        </return>
-      </fields>
-      <sequence/>
-      <last_update_field/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>960</xloc>
-      <yloc>91</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Mapping input specification</name>
-    <type>MappingInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>partnerID</name>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>ksUrl</name>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>application</name>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>uid</name>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-        <select_unspecified>N</select_unspecified>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>52</xloc>
-      <yloc>88</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Mapping output specification</name>
-    <type>MappingOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1263</xloc>
-      <yloc>92</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -432,8 +326,65 @@ if (ksPuserID == &quot;0&quot;)
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>778</xloc>
-      <yloc>336</yloc>
+      <xloc>796</xloc>
+      <yloc>413</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Mapping input specification</name>
+    <type>MappingInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>partnerID</name>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>ksUrl</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>uid</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+        <select_unspecified>N</select_unspecified>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>52</xloc>
+      <yloc>88</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Mapping output specification</name>
+    <type>MappingOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1263</xloc>
+      <yloc>92</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -776,15 +727,31 @@ Alert(str2);</jsScript_script>
         <rename>user_id</rename>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>application_id</name>
-        <rename>app_id</rename>
-        <length>-2</length>
-        <precision>-2</precision>
       </field>        <select_unspecified>Y</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1129</xloc>
       <yloc>91</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>admin_secret</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>964</xloc>
+      <yloc>411</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -826,8 +793,77 @@ Alert(str2);</jsScript_script>
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>828</xloc>
-      <yloc>91</yloc>
+      <xloc>960</xloc>
+      <yloc>238</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>V2 Ks</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>get Admin Secret</send_true_to>
+<send_false_to>User lookup&#47;update</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>isV2Ks</leftvalue>
+ <function>=</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>#</mask></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>645</xloc>
+      <yloc>237</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>get Admin Secret</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>dwh_dim_partners</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>ksPartnerID</name>
+        <field>partner_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>admin_secret</name>
+        <rename>admin_secret</rename>
+        <default/>
+        <type>String</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>644</xloc>
+      <yloc>408</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -849,7 +885,6 @@ Alert(str2);</jsScript_script>
         <jsScript_script>&#47;&#47;Script here
 
 var ksPuserid = -1;
-var application_id = -1;
 var isV2Ks = false;</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>substr_Sample</jsScript_name>
@@ -937,105 +972,10 @@ Alert(decode(str1, &quot;1&quot;, &quot;Mr&quot;, &quot;2&quot;, &quot;Mrs&quot;
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
-      </field>      <field>        <name>application_id</name>
-        <rename>application_id</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>512</xloc>
-      <yloc>234</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>V2 Ks</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>get Admin Secret</send_true_to>
-<send_false_to>User lookup&#47;update</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>isV2Ks</leftvalue>
- <function>=</function>
- <rightvalue/>
- <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>#</mask></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>645</xloc>
-      <yloc>237</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>get Admin Secret</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema/>
-      <table>dwh_dim_partners</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>ksPartnerID</name>
-        <field>partner_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>admin_secret</name>
-        <rename>admin_secret</rename>
-        <default/>
-        <type>String</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>644</xloc>
-      <yloc>408</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>        <select_unspecified>N</select_unspecified>
-      <remove>        <name>admin_secret</name>
-      </remove>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>883</xloc>
-      <yloc>337</yloc>
+      <xloc>828</xloc>
+      <yloc>10</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
