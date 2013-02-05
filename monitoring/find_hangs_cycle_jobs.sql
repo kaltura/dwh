@@ -11,6 +11,8 @@ WHERE
  OR 
  (STATUS = 'TRANSFERING' AND c.transfer_time < NOW() - INTERVAL 3 HOUR)
  OR 
+ (STATUS = 'GENERATING' AND c.insert_time < NOW() - INTERVAL 12 HOUR AND DATE(c.insert_time) > 20130101)
+ OR
  STATUS NOT IN ('DONE', 'GENERATED', 'GENERATING', 'REGISTERED', 'PROCESSED', 'LOADED', 'RUNNING', 'LOADING','TRANSFERING', 'DELETED', 'SPOOF_CYCLE')) c,
  kalturadw_ds.files f
  WHERE c.cycle_id = f.cycle_id
