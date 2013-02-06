@@ -3869,7 +3869,7 @@ Alert(str2date(&quot;22.02.2008 23:23:01&quot;,&quot;dd.MM.yyyy HH:mm:ss&quot;,&
         <currency/>
         <decimal/>
         <group/>
-        <nullif>-1</nullif>
+        <nullif>0</nullif>
         <length>-1</length>
         <precision>-1</precision>
       </field>
