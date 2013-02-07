@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `do_tables_to_new`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `do_tables_to_new`(p_greater_than_or_equal_date_id int, p_less_than_date_id int, p_table_name varchar(256))
+CREATE PROCEDURE `do_tables_to_new`(p_greater_than_or_equal_date_id int, p_less_than_date_id int, p_table_name varchar(256))
 BEGIN
 	DECLARE v_copied int;
 	declare v_column varchar(256);
@@ -53,7 +53,7 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `all_tables_to_new`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `all_tables_to_new`()
+CREATE PROCEDURE `all_tables_to_new`()
 BEGIN
 	DECLARE done INT DEFAULT 0;
 	DECLARE v_greater_than_or_equal_date_id INT;

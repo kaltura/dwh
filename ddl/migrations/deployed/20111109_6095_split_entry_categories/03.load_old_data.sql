@@ -4,7 +4,7 @@ DROP PROCEDURE IF EXISTS load_categories;
 
 DELIMITER $$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `load_categories`()
+CREATE PROCEDURE `load_categories`()
 BEGIN
     DECLARE v_entry_id VARCHAR(60);
     DECLARE v_partner_id INT(11);

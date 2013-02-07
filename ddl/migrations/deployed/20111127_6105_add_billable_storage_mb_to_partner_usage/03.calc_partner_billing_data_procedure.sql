@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_partner_billing_data`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `calc_partner_billing_data`(p_date_id INT(11),p_partner_id INT)
+CREATE PROCEDURE `calc_partner_billing_data`(p_date_id INT(11),p_partner_id INT)
 BEGIN
     SELECT
         FLOOR(date_id/100) month_id,

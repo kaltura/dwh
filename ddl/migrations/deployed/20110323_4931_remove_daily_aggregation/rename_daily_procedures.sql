@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_aggr_partner`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `daily_procedure_dwh_aggr_partner_20110325`(date_val DATE,aggr_name VARCHAR(100))
+CREATE PROCEDURE `daily_procedure_dwh_aggr_partner_20110325`(date_val DATE,aggr_name VARCHAR(100))
 BEGIN
 	DECLARE aggr_table VARCHAR(100);
 	DECLARE aggr_id_field VARCHAR(100);
@@ -173,7 +173,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_aggr_events_widget`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `daily_procedure_dwh_aggr_events_widget_20110325`(date_val DATE,aggr_name VARCHAR(100))
+CREATE PROCEDURE `daily_procedure_dwh_aggr_events_widget_20110325`(date_val DATE,aggr_name VARCHAR(100))
 BEGIN
 	DECLARE aggr_table VARCHAR(100);
 	DECLARE aggr_id_field VARCHAR(100);
@@ -219,7 +219,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_aggr_partner_daily_usage`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `daily_procedure_dwh_aggr_partner_daily_usage_20110325`(date_val DATE)
+CREATE PROCEDURE `daily_procedure_dwh_aggr_partner_daily_usage_20110325`(date_val DATE)
 BEGIN
 	
 	SET @s = CONCAT('
@@ -370,7 +370,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_aggr_partner_daily_usage_loop`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `daily_procedure_dwh_aggr_partner_daily_usage_loop_20110325`(from_date DATE,to_date DATE)
+CREATE PROCEDURE `daily_procedure_dwh_aggr_partner_daily_usage_loop_20110325`(from_date DATE,to_date DATE)
 BEGIN
 DECLARE _count INT DEFAULT 0;
 

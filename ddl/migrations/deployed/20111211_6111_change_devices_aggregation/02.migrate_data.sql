@@ -10,7 +10,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `tmp_fix_devices`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `tmp_fix_devices`()
+CREATE PROCEDURE `tmp_fix_devices`()
 BEGIN
         DECLARE v_date_id INT;
         DECLARE done INT DEFAULT 0;

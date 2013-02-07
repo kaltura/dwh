@@ -4,7 +4,7 @@ DELIMITER $$
 USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `kalturadw`.`add_partition_for_fact_table`$$
-CREATE DEFINER=`etl`@`localhost` PROCEDURE  `kalturadw`.`add_partition_for_fact_table`(table_name varchar(100))
+CREATE PROCEDURE  `kalturadw`.`add_partition_for_fact_table`(table_name varchar(100))
 BEGIN
 	DECLARE p_name,p_value VARCHAR(100);
 	DECLARE p_date,_current_date DATETIME;
@@ -36,7 +36,7 @@ END $$
 
 DROP PROCEDURE IF EXISTS `kalturadw`.`add_partition_for_table`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `kalturadw`.`add_partition_for_table`(table_name VARCHAR(40))
+CREATE PROCEDURE `kalturadw`.`add_partition_for_table`(table_name VARCHAR(40))
 BEGIN
 	DECLARE p_name,p_value VARCHAR(100);
 	DECLARE p_date,_current_date DATETIME;
@@ -69,7 +69,7 @@ END$$
 
 DROP PROCEDURE IF EXISTS `kalturadw`.`add_partitions`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE  `kalturadw`.`add_partitions`()
+CREATE PROCEDURE  `kalturadw`.`add_partitions`()
 BEGIN
   CALL kalturadw.add_partition_for_fact_table('dwh_fact_events');
   CALL kalturadw.add_partition_for_fact_table('dwh_fact_fms_session_events');

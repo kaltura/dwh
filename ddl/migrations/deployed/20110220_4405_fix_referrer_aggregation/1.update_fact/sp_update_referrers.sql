@@ -4,7 +4,7 @@ USE `kalturadw_ds`$$
 
 DROP PROCEDURE IF EXISTS `update_referrers`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `update_referrers`()
+CREATE PROCEDURE `update_referrers`()
 BEGIN
 	DECLARE v_date_id INT;
 	DECLARE done INT DEFAULT 0;	

@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day_partner`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day_partner`(date_val DATE)
+CREATE PROCEDURE `calc_aggr_day_partner`(date_val DATE)
 BEGIN
 	UPDATE aggr_managment SET start_time = NOW()
 	WHERE aggr_name = 'partner_usage' AND aggr_day = DATE(date_val)*1;

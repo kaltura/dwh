@@ -4,7 +4,7 @@ USE `kalturadw_ds`$$
 
 DROP PROCEDURE IF EXISTS `transfer_cycle_partition`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `transfer_cycle_partition`(p_cycle_id VARCHAR(10))
+CREATE PROCEDURE `transfer_cycle_partition`(p_cycle_id VARCHAR(10))
 BEGIN
 	DECLARE src_table VARCHAR(45);
 	DECLARE tgt_table VARCHAR(45);

@@ -4,7 +4,7 @@ USE `kalturadw_ds`$$
 
 DROP PROCEDURE IF EXISTS `insert_invalid_ds_line`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `insert_invalid_ds_line`(line_number_param INT(11), 
+CREATE PROCEDURE `insert_invalid_ds_line`(line_number_param INT(11), 
 									file_id_param INT(11), 
 									error_reason_param VARCHAR(255), 
 									ds_line_param VARCHAR(4096), 

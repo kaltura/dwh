@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `add_partition_for_table`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `add_monthly_partition_for_table`(table_name VARCHAR(40))
+CREATE PROCEDURE `add_monthly_partition_for_table`(table_name VARCHAR(40))
 BEGIN
 	DECLARE p_name,p_value VARCHAR(100);
 	DECLARE p_date,_current_date DATETIME;

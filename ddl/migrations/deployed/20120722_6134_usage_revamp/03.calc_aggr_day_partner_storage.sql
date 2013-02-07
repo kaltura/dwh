@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day_partner_storage`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day_partner_storage`(date_val DATE)
+CREATE PROCEDURE `calc_aggr_day_partner_storage`(date_val DATE)
 BEGIN
 	DELETE FROM kalturadw.dwh_hourly_partner_usage WHERE date_id = DATE(date_val)*1 AND IFNULL(count_bandwidth_kb,0) = 0 AND (IFNULL(count_storage_mb,0) > 0 OR IFNULL(aggr_storage_mb,0) > 0);
     UPDATE kalturadw.dwh_hourly_partner_usage SET count_storage_mb = NULL, aggr_storage_mb=NULL WHERE date_id = DATE(date_val)*1 AND IFNULL(count_bandwidth_kb,0) > 0;

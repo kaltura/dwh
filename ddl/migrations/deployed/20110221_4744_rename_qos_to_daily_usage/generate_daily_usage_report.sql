@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `generate_QoS_report`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `generate_daily_usage_report`(p_date_val DATE)
+CREATE PROCEDURE `generate_daily_usage_report`(p_date_val DATE)
 BEGIN
 	DECLARE yesterday_date_id INT(11);
 	

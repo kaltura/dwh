@@ -4,7 +4,7 @@ USE `kalturadw_ds`$$
 
 DROP PROCEDURE IF EXISTS `drop_ods_partition`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `drop_ods_partition`(
+CREATE PROCEDURE `drop_ods_partition`(
 	partition_number VARCHAR(10), p_table_name VARCHAR(32)
 	)
 BEGIN
@@ -33,7 +33,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day`(p_date_val DATE,p_aggr_name VARCHAR(100))
+CREATE PROCEDURE `calc_aggr_day`(p_date_val DATE,p_aggr_name VARCHAR(100))
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
 	DECLARE v_aggr_id_field VARCHAR(100);
@@ -208,7 +208,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `add_partitions`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `add_partitions`()
+CREATE PROCEDURE `add_partitions`()
 BEGIN
 	CALL add_daily_partition_for_table('dwh_fact_events');
 	CALL add_daily_partition_for_table('dwh_fact_fms_session_events');
@@ -949,7 +949,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `populate_new_facts`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `populate_new_facts`()
+CREATE PROCEDURE `populate_new_facts`()
 BEGIN
 	DECLARE v_start_date_id INT;
 	DECLARE v_end_date_id INT;

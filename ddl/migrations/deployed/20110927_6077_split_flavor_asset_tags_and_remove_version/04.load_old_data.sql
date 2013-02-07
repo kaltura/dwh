@@ -4,7 +4,7 @@ DROP PROCEDURE IF EXISTS load_tags;
 
 DELIMITER $$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `load_tags`()
+CREATE PROCEDURE `load_tags`()
 BEGIN
     DECLARE v_flavor_asset_id VARCHAR(60);
     DECLARE v_tags VARCHAR(256);

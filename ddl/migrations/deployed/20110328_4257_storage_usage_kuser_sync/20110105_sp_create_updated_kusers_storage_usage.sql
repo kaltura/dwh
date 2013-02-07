@@ -4,7 +4,7 @@ USE `kalturadw_ds`$$
 
 DROP PROCEDURE IF EXISTS `create_updated_kusers_storage_usage`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `create_updated_kusers_storage_usage`(max_date DATE)
+CREATE PROCEDURE `create_updated_kusers_storage_usage`(max_date DATE)
 BEGIN
 	TRUNCATE TABLE kalturadw_ds.updated_kusers_storage_usage;
 	

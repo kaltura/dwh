@@ -5,7 +5,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `add_partitions`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `add_partitions`()
+CREATE PROCEDURE `add_partitions`()
 BEGIN
   CALL add_partition_for_fact_table('dwh_fact_events');
   CALL add_partition_for_fact_table('dwh_fact_fms_session_events');
@@ -456,7 +456,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day`(p_date_val DATE,p_aggr_name VARCHAR(100))
+CREATE PROCEDURE `calc_aggr_day`(p_date_val DATE,p_aggr_name VARCHAR(100))
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
     DECLARE v_hourly_aggr_table VARCHAR(100);
@@ -806,7 +806,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_hourly_events_widget`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `daily_procedure_dwh_hourly_events_widget`(date_val DATE,p_aggr_name VARCHAR(100))
+CREATE PROCEDURE `daily_procedure_dwh_hourly_events_widget`(date_val DATE,p_aggr_name VARCHAR(100))
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
 	DECLARE v_aggr_id_field VARCHAR(100);
@@ -853,7 +853,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_hourly_partner`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `daily_procedure_dwh_hourly_partner`(date_val DATE,p_aggr_name VARCHAR(100))
+CREATE PROCEDURE `daily_procedure_dwh_hourly_partner`(date_val DATE,p_aggr_name VARCHAR(100))
 BEGIN
 
 	DECLARE v_aggr_table VARCHAR(100);
@@ -1022,7 +1022,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `recalc_aggr_day`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `recalc_aggr_day`(date_val DATE,p_aggr_name VARCHAR(100))
+CREATE PROCEDURE `recalc_aggr_day`(date_val DATE,p_aggr_name VARCHAR(100))
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
 	DECLARE v_aggr_id_field VARCHAR(100);

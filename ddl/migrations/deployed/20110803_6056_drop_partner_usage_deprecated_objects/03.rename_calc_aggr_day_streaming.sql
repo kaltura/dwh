@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day_partner_streaming`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day_partner_streaming_20110803`(date_val DATE)
+CREATE PROCEDURE `calc_aggr_day_partner_streaming_20110803`(date_val DATE)
 BEGIN
 	
 	DROP TABLE IF EXISTS temp_aggr_live_streaming;

@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `populate_time_dim`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `populate_time_dim`(start_date datetime, end_date datetime)
+CREATE PROCEDURE `populate_time_dim`(start_date datetime, end_date datetime)
     DETERMINISTIC
 BEGIN    
 

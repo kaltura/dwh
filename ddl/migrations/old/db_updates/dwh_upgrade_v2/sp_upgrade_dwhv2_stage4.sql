@@ -7,7 +7,7 @@ alter table `kalturadw`.`dwh_aggr_partner_daily_usage` add (sum_streaming_mb big
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `kalturadw`.`daily_procedure_dwh_aggr_partner`$$
-CREATE DEFINER=`etl`@`localhost` PROCEDURE  `kalturadw`.`daily_procedure_dwh_aggr_partner`(date_val DATE,aggr_name VARCHAR(100))
+CREATE PROCEDURE  `kalturadw`.`daily_procedure_dwh_aggr_partner`(date_val DATE,aggr_name VARCHAR(100))
 BEGIN
 	DECLARE aggr_table VARCHAR(100);
 	DECLARE aggr_id_field VARCHAR(100);
@@ -159,7 +159,7 @@ BEGIN
 END $$
 
 DROP PROCEDURE IF EXISTS `kalturadw`.`daily_procedure_dwh_aggr_partner_daily_usage`$$
-CREATE DEFINER=`etl`@`localhost` PROCEDURE  `kalturadw`.`daily_procedure_dwh_aggr_partner_daily_usage`(date_val DATE)
+CREATE PROCEDURE  `kalturadw`.`daily_procedure_dwh_aggr_partner_daily_usage`(date_val DATE)
 BEGIN
 	
 	SET @s = CONCAT('

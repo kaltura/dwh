@@ -4,7 +4,7 @@ USE `kaltura`$$
 
 DROP PROCEDURE IF EXISTS `update_kusers`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `update_kusers`()
+CREATE PROCEDURE `update_kusers`()
 BEGIN
     DECLARE done INT DEFAULT 0;
     DECLARE new_kuser_id CHAR(50);

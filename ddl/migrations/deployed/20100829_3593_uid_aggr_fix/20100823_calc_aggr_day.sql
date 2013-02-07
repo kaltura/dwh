@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day`(p_date_val DATE,p_aggr_name VARCHAR(100))
+CREATE PROCEDURE `calc_aggr_day`(p_date_val DATE,p_aggr_name VARCHAR(100))
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
 	DECLARE v_aggr_id_field VARCHAR(100);

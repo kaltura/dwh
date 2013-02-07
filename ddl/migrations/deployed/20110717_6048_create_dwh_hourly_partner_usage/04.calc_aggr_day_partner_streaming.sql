@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day_partner_streaming`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day_partner_streaming`(date_val DATE)
+CREATE PROCEDURE `calc_aggr_day_partner_streaming`(date_val DATE)
 BEGIN
 	/*Temporary until dwh_hourly_partner's usage columns are dropped - we use to store data which is loaded to two different tables instead of one.*/
 	DROP TABLE IF EXISTS temp_aggr_live_streaming;

@@ -4,7 +4,7 @@ USE `kalturadw_ds`$$
 
 DROP PROCEDURE IF EXISTS `drop_ods_partition`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `drop_ods_partition`(
+CREATE PROCEDURE `drop_ods_partition`(
 	partition_number VARCHAR(10), p_table_name VARCHAR(32)
 	)
 BEGIN

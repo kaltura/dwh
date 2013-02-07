@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `post_aggregation_partner`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `post_aggregation_partner`(date_val DATE, p_hour_id INT(11))
+CREATE PROCEDURE `post_aggregation_partner`(date_val DATE, p_hour_id INT(11))
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
 	
@@ -118,7 +118,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `reaggregate_post_data_partner`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `reaggregate_post_data_partner`()
+CREATE PROCEDURE `reaggregate_post_data_partner`()
 BEGIN
     DECLARE v_date_id INT;
     DECLARE v_hour_id INT;

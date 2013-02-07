@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day_partner_storage`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day_partner_storage`(date_val DATE)
+CREATE PROCEDURE `calc_aggr_day_partner_storage`(date_val DATE)
 BEGIN
 	
 	DROP TABLE IF EXISTS temp_aggr_storage;

@@ -4,7 +4,7 @@ USE `kalturadw_ds`$$
 
 DROP PROCEDURE IF EXISTS `fms_sessionize_by_date_id`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `fms_sessionize_by_date_id`(p_event_date_id INT)
+CREATE PROCEDURE `fms_sessionize_by_date_id`(p_event_date_id INT)
 BEGIN
 	DROP TABLE IF EXISTS ds_temp_fms_session_aggr;
 	DROP TABLE IF EXISTS ds_temp_fms_sessions;

@@ -4,7 +4,7 @@ USE `kalturadw_ds`$$
 
 DROP PROCEDURE IF EXISTS `agg_new_fms_to_partner_activity`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `agg_new_fms_to_bandwidth_usage`()
+CREATE PROCEDURE `agg_new_fms_to_bandwidth_usage`()
 BEGIN
   DECLARE FMS_BANDWIDTH_SOURCE INTEGER;
   SET FMS_BANDWIDTH_SOURCE = 5;

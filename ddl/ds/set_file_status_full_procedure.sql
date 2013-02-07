@@ -2,7 +2,7 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `kalturadw_ds`.`set_file_status_full`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE kalturadw_ds.`set_file_status_full`(
+CREATE PROCEDURE kalturadw_ds.`set_file_status_full`(
 	pfile_id INT(20),
 	new_file_status VARCHAR(20),
 	override_safety_check INT

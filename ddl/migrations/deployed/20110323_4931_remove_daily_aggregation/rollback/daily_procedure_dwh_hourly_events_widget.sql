@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_hourly_events_widget`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `daily_procedure_dwh_hourly_events_widget`(date_val DATE,p_aggr_name VARCHAR(100))
+CREATE PROCEDURE `daily_procedure_dwh_hourly_events_widget`(date_val DATE,p_aggr_name VARCHAR(100))
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
 	DECLARE v_aggr_id_field VARCHAR(100);

@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day_user_usage`$$
 
-CREATE DEFINER=`etl`@`%` PROCEDURE `calc_aggr_day_user_usage`(p_date_id INT(11))
+CREATE PROCEDURE `calc_aggr_day_user_usage`(p_date_id INT(11))
 BEGIN
 
     UPDATE aggr_managment SET start_time = NOW() WHERE aggr_name = 'user_storage_usage' AND date_id = p_date_id;

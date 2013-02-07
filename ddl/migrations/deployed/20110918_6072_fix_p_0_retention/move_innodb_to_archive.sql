@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `move_innodb_to_archive`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `move_innodb_to_archive`()
+CREATE PROCEDURE `move_innodb_to_archive`()
 BEGIN
 	DECLARE v_partition VARCHAR(256);
 	DECLARE v_column VARCHAR(256);

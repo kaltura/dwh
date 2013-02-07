@@ -4,7 +4,7 @@ USE `kalturadw_ds`$$
 
 DROP PROCEDURE IF EXISTS `register_file`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `register_file`(p_file_name VARCHAR(750), p_process_id INT, p_file_size_kb INT(11), p_compression_suffix VARCHAR(10), p_subdir VARCHAR(1024))
+CREATE PROCEDURE `register_file`(p_file_name VARCHAR(750), p_process_id INT, p_file_size_kb INT(11), p_compression_suffix VARCHAR(10), p_subdir VARCHAR(1024))
 BEGIN
 	DECLARE v_assigned_server_id INT;
 	DECLARE v_cycle_id INT;

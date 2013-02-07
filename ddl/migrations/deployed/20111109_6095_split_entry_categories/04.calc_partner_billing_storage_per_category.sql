@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_partner_billing_storage_per_category`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_partner_billing_storage_per_category`(p_start_date_id INT, p_end_date_id INT ,p_partner_id INT)
+CREATE PROCEDURE `calc_partner_billing_storage_per_category`(p_start_date_id INT, p_end_date_id INT ,p_partner_id INT)
 BEGIN
    -- Fetch storage per entry of this partner (as seen on selected date)
     

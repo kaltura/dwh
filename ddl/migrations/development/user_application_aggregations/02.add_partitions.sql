@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `add_partitions`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `add_partitions`()
+CREATE PROCEDURE `add_partitions`()
 BEGIN
 	CALL add_daily_partition_for_table('dwh_fact_events');
         CALL add_daily_partition_for_table('dwh_fact_fms_session_events');

@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day_partner_bandwidth`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day_partner_bandwidth`(p_date_val DATE)
+CREATE PROCEDURE `calc_aggr_day_partner_bandwidth`(p_date_val DATE)
 BEGIN
 	DECLARE v_ignore DATE;
 	DECLARE v_from_archive DATE;

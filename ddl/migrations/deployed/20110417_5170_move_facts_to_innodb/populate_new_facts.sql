@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `populate_new_facts`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `populate_new_facts`()
+CREATE PROCEDURE `populate_new_facts`()
 BEGIN
 	DECLARE v_start_date_id INT;
 	DECLARE v_end_date_id INT;

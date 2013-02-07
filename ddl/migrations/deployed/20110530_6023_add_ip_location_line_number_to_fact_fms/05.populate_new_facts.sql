@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `populate_new_fms_facts`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `populate_new_fms_facts`()
+CREATE PROCEDURE `populate_new_fms_facts`()
 BEGIN
         DECLARE v_date_id INT;
         DECLARE done INT DEFAULT 0;

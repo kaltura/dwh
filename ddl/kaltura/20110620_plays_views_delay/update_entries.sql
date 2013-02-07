@@ -4,7 +4,7 @@ USE `kaltura`$$
 
 DROP PROCEDURE IF EXISTS `update_entries`$$
 
-CREATE DEFINER=`etl`@`%` PROCEDURE `update_entries`()
+CREATE PROCEDURE `update_entries`()
 BEGIN
     
     DECLARE done INT DEFAULT 0;

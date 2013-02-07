@@ -4,7 +4,7 @@ USE `kalturadw_ds`$$
 
 DROP PROCEDURE IF EXISTS `add_cycle_partition`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `add_cycle_partition`(p_cycle_id VARCHAR(10))
+CREATE PROCEDURE `add_cycle_partition`(p_cycle_id VARCHAR(10))
 BEGIN
 	DECLARE table_name VARCHAR(32);
 	DECLARE done INT DEFAULT 0;

@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_hourly_partner`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `daily_procedure_dwh_hourly_partner`(date_val DATE,p_aggr_name VARCHAR(100))
+CREATE PROCEDURE `daily_procedure_dwh_hourly_partner`(date_val DATE,p_aggr_name VARCHAR(100))
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
 	

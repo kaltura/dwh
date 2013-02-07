@@ -4,7 +4,7 @@ DROP PROCEDURE IF EXISTS  `mark_as_aggregated`;
 
 DELIMITER $$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `mark_as_aggregated`( max_date VARCHAR(4000), aggr_name VARCHAR(50))
+CREATE PROCEDURE `mark_as_aggregated`( max_date VARCHAR(4000), aggr_name VARCHAR(50))
 BEGIN
 	SET @s = CONCAT('update kalturadw.aggr_managment set is_calculated=1, end_time=now() ',
 			'where aggr_day < ''',max_date,''' ',

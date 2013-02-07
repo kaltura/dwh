@@ -28,7 +28,7 @@ CREATE TABLE  `kalturadw_ds`.`fms_stale_sessions` (
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `kalturadw_ds`.`fms_sessionize`$$
-CREATE DEFINER=`etl`@`localhost` PROCEDURE  `kalturadw_ds`.`fms_sessionize`(
+CREATE PROCEDURE  `kalturadw_ds`.`fms_sessionize`(
   partition_id INTEGER)
 BEGIN
   DECLARE SESSION_DATE_IDS VARCHAR(4000);

@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_hourly_events_widget`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `post_aggregation_widget`(date_val DATE)
+CREATE PROCEDURE `post_aggregation_widget`(date_val DATE)
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
 
@@ -36,7 +36,7 @@ END$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_hourly_partner`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `post_aggregation_partner`(date_val DATE)
+CREATE PROCEDURE `post_aggregation_partner`(date_val DATE)
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
 	

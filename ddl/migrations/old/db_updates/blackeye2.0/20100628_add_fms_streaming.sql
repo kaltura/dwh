@@ -192,7 +192,7 @@ CREATE TABLE  `kalturadw`.`dwh_fact_fms_session_events` (
 DROP PROCEDURE IF EXISTS `kalturadw`.`add_partition_for_fact_event` $$
 
 DROP PROCEDURE IF EXISTS `kalturadw`.`add_partitions` $$
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `kalturadw`.`add_partitions`()
+CREATE PROCEDURE `kalturadw`.`add_partitions`()
 BEGIN
   CALL kalturadw.add_partition_for_fact_table('dwh_fact_events');
   CALL kalturadw.add_partition_for_fact_table('dwh_fact_fms_session_events');

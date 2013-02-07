@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `remove_plays_views`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `remove_plays_views`(p_date_id INT, p_hour_id INT)
+CREATE PROCEDURE `remove_plays_views`(p_date_id INT, p_hour_id INT)
 BEGIN
   DECLARE v_done INT DEFAULT FALSE;
   DECLARE v_entry_id VARCHAR(20);

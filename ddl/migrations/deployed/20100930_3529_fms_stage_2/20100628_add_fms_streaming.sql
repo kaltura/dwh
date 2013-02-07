@@ -199,7 +199,7 @@ CREATE TABLE `kalturadw`.`dwh_fact_fms_sessions` (
  
  DROP PROCEDURE IF EXISTS  `kalturadw_ds`.`agg_new_fms_to_partner_activity`;
 DELIMITER $$
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `kalturadw_ds`.`agg_new_fms_to_partner_activity`()
+CREATE PROCEDURE `kalturadw_ds`.`agg_new_fms_to_partner_activity`()
 BEGIN
   DECLARE DEFAULT_ACTIVITY_ID INTEGER;
   DECLARE STREAMING_ACTIVITY_ID INTEGER;
@@ -229,7 +229,7 @@ DELIMITER ;
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `kalturadw`.`add_partition_for_fact_event` $$
 DROP PROCEDURE IF EXISTS `kalturadw`.`add_partitions` $$
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `kalturadw`.`add_partitions`()
+CREATE PROCEDURE `kalturadw`.`add_partitions`()
 BEGIN
 	CALL kalturadw.add_partition_for_fact_table('dwh_fact_events');
 	CALL kalturadw.add_partition_for_fact_table('dwh_fact_fms_session_events');

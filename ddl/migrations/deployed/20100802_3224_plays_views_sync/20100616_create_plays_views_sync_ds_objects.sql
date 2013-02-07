@@ -32,7 +32,7 @@ DELIMITER $$
 USE `kalturadw_ds`$$
 DROP procedure IF EXISTS `create_updated_entries`$$
 USE `kalturadw_ds`$$
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `create_updated_entries`(max_date date)
+CREATE PROCEDURE `create_updated_entries`(max_date date)
 BEGIN
 	truncate table kalturadw_ds.updated_entries;
 	
@@ -63,7 +63,7 @@ DROP PROCEDURE IF EXISTS  `mark_as_aggregated`;
 
 DELIMITER $$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `mark_as_aggregated`( max_date VARCHAR(4000), aggr_name VARCHAR(50))
+CREATE PROCEDURE `mark_as_aggregated`( max_date VARCHAR(4000), aggr_name VARCHAR(50))
 BEGIN
 	SET @s = CONCAT('update kalturadw.aggr_managment set is_calculated=1, end_time=now() ',
 			'where aggr_day < ''',max_date,''' ',
@@ -80,7 +80,7 @@ DROP PROCEDURE IF EXISTS  `mark_for_reaggregation`;
 
 DELIMITER $$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `mark_for_reaggregation`( date_id_list varchar(4000), aggr_name varchar(50))
+CREATE PROCEDURE `mark_for_reaggregation`( date_id_list varchar(4000), aggr_name varchar(50))
 BEGIN
 	SET @s = CONCAT('update kalturadw.aggr_managment set is_calculated=0,start_time=null,end_time=null ',
 			'where aggr_day_int in (',date_id_list,') ',

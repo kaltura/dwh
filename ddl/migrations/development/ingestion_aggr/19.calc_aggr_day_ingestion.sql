@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day_ingestion`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day_ingestion`(p_date_id INT(11))
+CREATE PROCEDURE `calc_aggr_day_ingestion`(p_date_id INT(11))
 BEGIN
 	DECLARE v_entry_with_flavor_failed_count INT(11);
 	DECLARE v_all_convert_entries_count INT(11);

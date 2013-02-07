@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `recalc_aggr_day`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `recalc_aggr_day`(p_date_id DATE, p_hour_id INT(11),p_aggr_name VARCHAR(100))
+CREATE PROCEDURE `recalc_aggr_day`(p_date_id DATE, p_hour_id INT(11),p_aggr_name VARCHAR(100))
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
 	DECLARE v_aggr_id_field VARCHAR(100);

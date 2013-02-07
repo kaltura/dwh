@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_updated_batch_job`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_updated_batch_job`(p_start_date INT(11), p_end_date INT(11))
+CREATE PROCEDURE `calc_updated_batch_job`(p_start_date INT(11), p_end_date INT(11))
 BEGIN
                                 
                 BEGIN

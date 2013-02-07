@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_entries_sizes`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_entries_sizes`(p_date_id INT(11))
+CREATE PROCEDURE `calc_entries_sizes`(p_date_id INT(11))
 BEGIN
                 DECLARE v_date DATETIME;
                 SET v_date = DATE(p_date_id);

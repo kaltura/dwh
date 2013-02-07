@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `mark_operational_sync_as_done`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `mark_operational_sync_as_done`(p_sync_type VARCHAR(55))
+CREATE PROCEDURE `mark_operational_sync_as_done`(p_sync_type VARCHAR(55))
 BEGIN
 	DECLARE v_last_execution_parameter_id INT;
 	DECLARE v_execution_start_time_parameter_id INT;

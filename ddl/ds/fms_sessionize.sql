@@ -4,7 +4,7 @@ USE `kalturadw_ds`$$
 
 DROP PROCEDURE IF EXISTS `fms_sessionize`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `fms_sessionize`(
+CREATE PROCEDURE `fms_sessionize`(
   partition_id INTEGER)
 BEGIN
   DECLARE FMS_STALE_SESSION_PURGE DATETIME;

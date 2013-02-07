@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_partner_overage`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_partner_overage`(p_month_id INTEGER)
+CREATE PROCEDURE `calc_partner_overage`(p_month_id INTEGER)
 BEGIN
 		DROP TABLE IF EXISTS partner_quotas;
 		CREATE TEMPORARY TABLE partner_quotas AS

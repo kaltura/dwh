@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_partner_billing_data`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `calc_partner_billing_data`(p_date_id INT(11),partner_id VARCHAR(100))
+CREATE PROCEDURE `calc_partner_billing_data`(p_date_id INT(11),partner_id VARCHAR(100))
 BEGIN
 SET @current_date_id=LEAST(p_date_id,DATE(NOW())*1);
 SET @current_partner_id=partner_id;

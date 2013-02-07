@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `get_data_for_operational`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `get_data_for_operational`(p_sync_type VARCHAR(55))
+CREATE PROCEDURE `get_data_for_operational`(p_sync_type VARCHAR(55))
 BEGIN
 	DECLARE v_execution_start_time DATETIME;
 	

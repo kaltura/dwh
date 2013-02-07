@@ -3,7 +3,7 @@ USE kalturadw;
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `apply_table_partitions_to_target_table`$$
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `apply_table_partitions_to_target_table`(p_table_name VARCHAR(255))
+CREATE PROCEDURE `apply_table_partitions_to_target_table`(p_table_name VARCHAR(255))
 BEGIN
         DECLARE done INT DEFAULT 0;
         DECLARE v_partition_statement VARCHAR(255);

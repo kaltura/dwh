@@ -2,7 +2,7 @@
 
 DROP PROCEDURE IF EXISTS `kalturadw`.`monthly_partner_billing_report` $$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE  `kalturadw`.`monthly_partner_billing_report`( month_id int )
+CREATE PROCEDURE  `kalturadw`.`monthly_partner_billing_report`( month_id int )
 BEGIN
 
 SET @current_month = month_id;
@@ -68,7 +68,7 @@ END $$
 
 DROP PROCEDURE `kalturadw`.`monthly_non_paying_billing_report` $$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE  `kalturadw`.`monthly_non_paying_billing_report`( month_id INT )
+CREATE PROCEDURE  `kalturadw`.`monthly_non_paying_billing_report`( month_id INT )
 BEGIN
 SET @current_month = month_id;
 	SELECT 

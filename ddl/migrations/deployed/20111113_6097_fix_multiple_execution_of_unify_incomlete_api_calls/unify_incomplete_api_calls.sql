@@ -4,7 +4,7 @@ USE `kalturadw_ds`$$
 
 DROP PROCEDURE IF EXISTS `unify_incomplete_api_calls`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `unify_incomplete_api_calls`(p_cycle_id INTEGER)
+CREATE PROCEDURE `unify_incomplete_api_calls`(p_cycle_id INTEGER)
 BEGIN
 	DROP TABLE IF EXISTS unified_api_calls;
 	CREATE TEMPORARY TABLE unified_api_calls

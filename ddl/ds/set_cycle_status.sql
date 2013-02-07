@@ -4,7 +4,7 @@ USE `kalturadw_ds`$$
 
 DROP PROCEDURE IF EXISTS `set_cycle_status`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `set_cycle_status`(
+CREATE PROCEDURE `set_cycle_status`(
 	p_cycle_id INT(20),
 	new_cycle_status VARCHAR(20)
     )

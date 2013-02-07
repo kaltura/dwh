@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_monthly_billing`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `calc_monthly_billing`(p_month_id INT(11))
+CREATE PROCEDURE `calc_monthly_billing`(p_month_id INT(11))
 BEGIN
 	SET @current_month_id=p_month_id;
 	

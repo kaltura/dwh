@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day_errors`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day_errors`(p_date_val DATE, p_hour_id INT)
+CREATE PROCEDURE `calc_aggr_day_errors`(p_date_val DATE, p_hour_id INT)
 BEGIN
         DECLARE v_ignore DATE;
         DECLARE v_from_archive DATE;

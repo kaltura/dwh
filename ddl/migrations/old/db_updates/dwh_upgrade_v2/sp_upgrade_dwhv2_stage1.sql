@@ -102,7 +102,7 @@ BEGIN
 END $$
 
 DROP PROCEDURE IF EXISTS `kalturadw_ds`.`transfer_ods_partition` $$
-CREATE DEFINER=`etl`@`localhost` PROCEDURE  `kalturadw_ds`.`transfer_ods_partition`(
+CREATE PROCEDURE  `kalturadw_ds`.`transfer_ods_partition`(
 	staging_area_id INTEGER, partition_number VARCHAR(10)
 )
 BEGIN

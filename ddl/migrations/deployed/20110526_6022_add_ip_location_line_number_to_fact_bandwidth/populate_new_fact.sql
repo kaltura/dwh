@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `populate_new_bandwidth_fact`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `populate_new_bandwidth_fact`()
+CREATE PROCEDURE `populate_new_bandwidth_fact`()
 BEGIN
         DECLARE v_date_id INT;
         DECLARE done INT DEFAULT 0;
