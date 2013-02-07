@@ -4,7 +4,7 @@ USE `kalturadw_ds`$$
 
 DROP FUNCTION IF EXISTS `get_error_code`$$
 
-CREATE DEFINER=`etl`@`localhost` FUNCTION `get_error_code`(error_code_reason_param varchar(255)) RETURNS SMALLINT(6)
+CREATE  FUNCTION `get_error_code`(error_code_reason_param varchar(255)) RETURNS SMALLINT(6)
     NO SQL
 BEGIN
 	DECLARE error_code smallint(6);

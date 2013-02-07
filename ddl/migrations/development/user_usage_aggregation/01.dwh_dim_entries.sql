@@ -99,7 +99,7 @@ DELIMITER $$
 DROP TRIGGER /*!50032 IF EXISTS */ `dwh_dim_entries_setcreationtime_oninsert`$$
 
 CREATE
-    /*!50017 DEFINER = 'root'@'localhost' */
+    /*!50017  */
     TRIGGER `dwh_dim_entries_setcreationtime_oninsert` BEFORE INSERT ON `dwh_dim_entries` 
     FOR EACH ROW SET new.dwh_creation_date = NOW();
 $$

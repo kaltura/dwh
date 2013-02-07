@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP VIEW IF EXISTS `dwh_view_monthly_active_partners`$$
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`etl`@`%` SQL SECURITY DEFINER VIEW `dwh_view_monthly_active_partners` AS (
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `dwh_view_monthly_active_partners` AS (
 select
   CAST(substr(date_id, 1, 6) as SIGNED INT) as month_id,
   `partner_id` AS `partner_id`,

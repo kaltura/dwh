@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP VIEW IF EXISTS `ri_mapping_and_defaults`$$
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`etl`@`localhost` SQL SECURITY DEFINER VIEW `ri_mapping_and_defaults` AS (
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ri_mapping_and_defaults` AS (
 SELECT
   `m`.`table_name`          AS `table_name`,
   `m`.`column_name`         AS `column_name`,

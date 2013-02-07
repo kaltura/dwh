@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP VIEW IF EXISTS `dwh_view_partners_monthly_billing_last_updated_at`$$
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`etl`@`localhost` SQL SECURITY DEFINER VIEW `dwh_view_partners_monthly_billing_last_updated_at` AS (
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `dwh_view_partners_monthly_billing_last_updated_at` AS (
 SELECT
   `month_id` AS `month_id`,
   `p`.`partner_id` AS `partner_id`,

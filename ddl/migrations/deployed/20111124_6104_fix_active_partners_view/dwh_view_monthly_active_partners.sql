@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP VIEW IF EXISTS `dwh_view_monthly_active_partners`$$
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`etl`@`%` SQL SECURITY DEFINER VIEW `dwh_view_monthly_active_partners` AS (
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `dwh_view_monthly_active_partners` AS (
 SELECT
   FLOOR((CAST(`dwh_hourly_partner`.`date_id` AS SIGNED) / 100)) AS `month_id`,
   `dwh_hourly_partner`.`partner_id` AS `partner_id`,

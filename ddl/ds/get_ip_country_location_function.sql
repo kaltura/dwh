@@ -2,7 +2,7 @@ DELIMITER $$
 
 DROP FUNCTION IF EXISTS `kalturadw_ds`.`get_ip_country_location`$$
 
-CREATE DEFINER=`etl`@`localhost` FUNCTION kalturadw_ds.`get_ip_country_location`(ip BIGINT) RETURNS VARCHAR(30)
+CREATE  FUNCTION kalturadw_ds.`get_ip_country_location`(ip BIGINT) RETURNS VARCHAR(30)
 DETERMINISTIC
 READS SQL DATA
 BEGIN

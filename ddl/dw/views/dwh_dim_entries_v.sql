@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP VIEW IF EXISTS `dwh_dim_entries_v`$$
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`etl`@`%` SQL SECURITY DEFINER VIEW `dwh_dim_entries_v` AS 
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `dwh_dim_entries_v` AS 
 SELECT
   `a`.`entry_id`              AS `entry_id`,
   `a`.`entry_name`            AS `entry_name`,

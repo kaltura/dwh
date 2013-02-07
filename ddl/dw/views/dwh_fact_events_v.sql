@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP VIEW IF EXISTS `dwh_fact_events_v`$$
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`etl`@`%` SQL SECURITY DEFINER VIEW `dwh_fact_events_v` AS (
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `dwh_fact_events_v` AS (
 SELECT
   `dwh_fact_events`.`file_id`          AS `file_id`,
   `dwh_fact_events`.`event_id`         AS `event_id`,

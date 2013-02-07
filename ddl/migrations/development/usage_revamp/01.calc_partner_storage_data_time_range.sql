@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP FUNCTION IF EXISTS `calc_partner_storage_data_time_range`$$
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `calc_partner_storage_data_time_range`(p_start_date_id INT, p_end_date_id INT ,p_partner_id INT ) RETURNS DECIMAL(19,4)
+CREATE  FUNCTION `calc_partner_storage_data_time_range`(p_start_date_id INT, p_end_date_id INT ,p_partner_id INT ) RETURNS DECIMAL(19,4)
     DETERMINISTIC
 BEGIN	
 	DECLARE total_billable_storage_mb DECIMAL (19,4);

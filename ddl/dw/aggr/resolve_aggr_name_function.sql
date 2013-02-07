@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP FUNCTION IF EXISTS `resolve_aggr_name`$$
 
-CREATE DEFINER=`etl`@`localhost` FUNCTION `resolve_aggr_name`(p_aggr_name VARCHAR(100),p_field_name VARCHAR(100)) RETURNS VARCHAR(100) CHARSET latin1
+CREATE  FUNCTION `resolve_aggr_name`(p_aggr_name VARCHAR(100),p_field_name VARCHAR(100)) RETURNS VARCHAR(100) CHARSET latin1
     DETERMINISTIC
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
