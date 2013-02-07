@@ -25,7 +25,14 @@ ETL_ROOT_DIR=$ROOT_DIR/etlsource
 INSTALLATION_LOG=$SETUP_ROOT_DIR/installation_log.log
 
 # Create the DWH
-$SETUP_ROOT_DIR/dwh_ddl_install.sh -u$USER -p$PW -k$KITCHEN -d$ROOT_DIR -h$HOST -P$PORT | tee -a $INSTALLATION_LOG
+$SETUP_ROOT_DIR/dwh_ddl_install.sh -u$USER -p$PW -k$KITCHEN -d$ROOT_DIR -h$HOST -P$PORT >> $INSTALLATION_LOG  2>&1
+
+ret_val=$?
+if [ $ret_val -ne 0 ];then
+	echo $ret_val
+       	echo "Error - bailing out!"
+       	exit
+fi
 
 # Populate time dimension
 export KETTLE_HOME=$ROOT_DIR

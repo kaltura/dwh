@@ -27,7 +27,7 @@ function mysqlexec {
         if [ $ret_val -ne 0 ];then
 			echo $ret_val
 			echo "Error - bailing out!"
-			exit
+			exit 1
         fi
 }
 
