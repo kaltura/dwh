@@ -17,7 +17,7 @@ CREATE TABLE `dwh_daily_ingestion` (
   `all_conversion_job_entries_count` int(11) NOT NULL,
   `failed_conversion_job_entries_count` int(11) NOT NULL,
   `total_wait_time_sec` bigint(22) DEFAULT '0',
-  `total_ff_wait_time_sec` bigint(22) DEFAULT NULL,
+  `total_ff_wait_time_sec` bigint(22) DEFAULT '0',
   `convert_jobs_count` int(11) NOT NULL,
   `median_ff_wait_time_sec` bigint(22) DEFAULT '0',
   PRIMARY KEY (`date_id`)
@@ -25,5 +25,5 @@ CREATE TABLE `dwh_daily_ingestion` (
 PARTITION BY RANGE (date_id)
 (PARTITION p_201301 VALUES LESS THAN (20130201) ENGINE = InnoDB);
 
-CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_events_context_app');
+CALL kalturadw.add_monthly_partition_for_table('dwh_daily_ingestion');
 
