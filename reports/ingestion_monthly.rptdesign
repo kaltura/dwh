@@ -56,7 +56,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://127.0.0.1:33306/kalturadw</property>
+            <property name="odaURL">jdbc:mysql://192.168.252.222:3306/kalturadw</property>
             <property name="odaUser">etl</property>
             <encrypted-property name="odaPassword" encryptionID="base64">ZXRs</encrypted-property>
         </oda-data-source>
@@ -8204,9 +8204,9 @@ BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", 
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;]);&#xD;
+          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;],3);&#xD;
 var day = BirtDateTime.day(row[&quot;date_id&quot;]);&#xD;
-day + month / 100</Definition>
+day + &quot;-&quot; + month</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -9930,9 +9930,9 @@ day + month / 100</Definition>
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;]);&#xD;
+          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;],3);&#xD;
 var day = BirtDateTime.day(row[&quot;date_id&quot;]);&#xD;
-day + month / 100</Definition>
+day + &quot;-&quot; + month</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -12635,9 +12635,9 @@ day + month / 100</Definition>
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;]); 5&#xD;
-var year = BirtDateTime.year(row[&quot;date_id&quot;]); 3&#xD;
-month + year / 10000</Definition>
+          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;],3); &#xD;
+var year = BirtDateTime.year(row[&quot;date_id&quot;]); &#xD;
+month + &quot;-&quot; + year</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -14355,9 +14355,9 @@ month + year / 10000</Definition>
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;]); 5&#xD;
-var year = BirtDateTime.year(row[&quot;date_id&quot;]); 3&#xD;
-month + year / 10000</Definition>
+          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;],3); &#xD;
+var year = BirtDateTime.year(row[&quot;date_id&quot;]); &#xD;
+month + &quot;-&quot; + year</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -15872,9 +15872,9 @@ BirtStr.concat(month, "-", year);</expression>
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;]); &#xD;
-var day = BirtDateTime.day(row[&quot;date_id&quot;]); &#xD;
-day + month / 100</Definition>
+          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;],3);&#xD;
+var day = BirtDateTime.day(row[&quot;date_id&quot;]);&#xD;
+day + &quot;-&quot; + month</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -17034,9 +17034,9 @@ day + month / 100</Definition>
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;]); &#xD;
+          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;],3); &#xD;
 var year = BirtDateTime.year(row[&quot;date_id&quot;]); &#xD;
-month + year / 10000;</Definition>
+month + &quot;-&quot; + year</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -18379,8 +18379,9 @@ month + year / 10000;</Definition>
                 <structure>
                     <property name="name">month_str</property>
                     <expression name="expression" type="javascript">var year = params["DateIDParam"].value.substring(0,4);&#13;
-var month = params["DateIDParam"].value.substring(5,6);&#13;
-var day = params["DateIDParam"].value.substring(7,8);&#13;
+var month = params["DateIDParam"].value.substring(4,6);&#13;
+var day = params["DateIDParam"].value.substring(6,8);&#13;
+&#13;
 BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", year);</expression>
                     <property name="dataType">string</property>
                     <property name="allowExport">true</property>
@@ -19670,9 +19671,9 @@ BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", 
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;]); 5&#xD;
-var day = BirtDateTime.day(row[&quot;date_id&quot;]); 3&#xD;
-day + month / 100</Definition>
+          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;],3);&#xD;
+var day = BirtDateTime.day(row[&quot;date_id&quot;]);&#xD;
+day + &quot;-&quot; + month</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -21276,9 +21277,9 @@ day + month / 100</Definition>
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;]); &#xD;
+          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;],3); &#xD;
 var year = BirtDateTime.year(row[&quot;date_id&quot;]); &#xD;
-month + year / 10000</Definition>
+month + &quot;-&quot; + year</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -22791,8 +22792,9 @@ BirtStr.concat(month, "-", year);</expression>
                 <structure>
                     <property name="name">month_str</property>
                     <expression name="expression" type="javascript">var year = params["DateIDParam"].value.substring(0,4);&#13;
-var month = params["DateIDParam"].value.substring(5,6);&#13;
-var day = params["DateIDParam"].value.substring(7,8);&#13;
+var month = params["DateIDParam"].value.substring(4,6);&#13;
+var day = params["DateIDParam"].value.substring(6,8);&#13;
+&#13;
 BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", year);</expression>
                     <property name="dataType">string</property>
                     <property name="allowExport">true</property>
@@ -24080,9 +24082,9 @@ BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", 
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;]); &#xD;
-var day = BirtDateTime.day(row[&quot;date_id&quot;]); &#xD;
-day + month / 100</Definition>
+          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;],3);&#xD;
+var day = BirtDateTime.day(row[&quot;date_id&quot;]);&#xD;
+day + &quot;-&quot; + month</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
@@ -25685,9 +25687,9 @@ day + month / 100</Definition>
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;]); &#xD;
+          <Definition>var month = BirtDateTime.month(row[&quot;date_id&quot;],3); &#xD;
 var year = BirtDateTime.year(row[&quot;date_id&quot;]); &#xD;
-month + year / 10000;</Definition>
+month + &quot;-&quot; + year</Definition>
         </DataDefinition>
         <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
