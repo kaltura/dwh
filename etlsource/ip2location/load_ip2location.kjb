@@ -511,7 +511,7 @@ LOAD DATA LOCAL INFILE &quot;${IP2LocationFile}&quot;
 		ENCLOSED BY &apos;&quot;&apos;
 	LINES TERMINATED BY &quot;\r\n&quot;;
 
-update kalturadw.dwh_dim_ip_ranges_raw set country_code = &apos;UK&apos; where ountry_code = &apos;GB&apos;</sql>
+update kalturadw.dwh_dim_ip_ranges_raw set country_code = &apos;UK&apos; where country_code = &apos;GB&apos;</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
