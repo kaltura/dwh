@@ -16,7 +16,7 @@ BEGIN
 				FROM 
 				(SELECT partner_id FROM kalturadw.dwh_dim_batch_job_sep WHERE job_type_id = 0 AND job_sub_type_id IN (1,2,3,99) AND updated_date_id = p_date_id
 				GROUP BY partner_id
-				HAVING COUNT(*) > 10000) ignore_partner;
+				HAVING COUNT(*) > 1000) ignore_partner;
                                 
                 
                 SET @s = CONCAT("INSERT INTO kalturadw.dwh_fact_convert_job(id, job_type_id, status_id, created_date_id, updated_date_id, finish_date_id, partner_id, entry_id, dc, wait_time, conversion_time, is_ff)
@@ -38,13 +38,21 @@ BEGIN
 				FROM 
 				(SELECT partner_id FROM kalturadw.dwh_dim_batch_job_sep WHERE job_type_id = 10 AND updated_date_id = p_date_id
 				GROUP BY partner_id
-				HAVING COUNT(*) > 10000) ignore_partner;
+				HAVING COUNT(*) > 1000) ignore_partner;
+			
+		DROP TABLE IF EXISTS kalturadw.tmp_convert_job_ids;
+			
+		SET @s = CONCAT("CREATE TEMPORARY TABLE kalturadw.tmp_convert_job_ids AS SELECT id FROM kalturadw.dwh_dim_batch_job_sep WHERE job_type_id = 10 AND priority <> 10 AND updated_date_id = ", p_date_id,
+		IF(LENGTH(v_ignore_partner_ids)=0,"",CONCAT(" AND partner_id NOT IN (" , v_ignore_partner_ids, ")")), ";");
+		
+		PREPARE stmt FROM  @s;
+		EXECUTE stmt;
+		DEALLOCATE PREPARE stmt;	
 				
-                SET @s = CONCAT("INSERT INTO kalturadw.dwh_fact_convert_job(id, job_type_id, status_id, created_date_id, updated_date_id, finish_date_id, partner_id, entry_id, dc, wait_time, conversion_time, is_ff)
+                INSERT INTO kalturadw.dwh_fact_convert_job(id, job_type_id, status_id, created_date_id, updated_date_id, finish_date_id, partner_id, entry_id, dc, wait_time, conversion_time, is_ff)
                                 SELECT id, job_type_id, status_id, created_date_id, updated_date_id, DATE(finish)*1, partner_id, c.entry_id, dc, TIME_TO_SEC(TIMEDIFF(queue_time, created_at)) wait_time, IF(finish IS NULL, -1, TIME_TO_SEC(TIMEDIFF(finish, queue_time))) conversion_time, 1 
 				FROM (SELECT entry_id, root_job_id, MIN(finish_time) AS finish 
-                FROM kalturadw.dwh_dim_batch_job_sep WHERE root_job_id IN (SELECT id FROM kalturadw.dwh_dim_batch_job_sep WHERE job_type_id = 10 AND priority <> 10 AND updated_date_id = ", p_date_id, IF(LENGTH(v_ignore_partner_ids)=0,"",CONCAT(" AND partner_id NOT IN (" , v_ignore_partner_ids, ")")),
-                ") AND job_type_id = 0 AND job_sub_type_id IN (1,2,3,99) GROUP BY entry_id)
+                FROM kalturadw.dwh_dim_batch_job_sep, tmp_convert_job_ids t WHERE root_job_id = t.id AND job_type_id = 0 AND job_sub_type_id IN (1,2,3,99) GROUP BY entry_id)
                 AS c INNER JOIN kalturadw.dwh_dim_batch_job_sep batch_job ON c.root_job_id = batch_job.root_job_id AND c.finish =  batch_job.finish_time
                 GROUP BY c.entry_id
 				ON DUPLICATE KEY UPDATE 
@@ -53,12 +61,8 @@ BEGIN
 					finish_date_id = VALUES(finish_date_id),
 					wait_time = VALUES(wait_time),
 					conversion_time = VALUES(conversion_time),
-					is_ff = VALUES(is_ff);");
-                
-                PREPARE stmt FROM  @s;
-				EXECUTE stmt;
-				DEALLOCATE PREPARE stmt;
-				
+					is_ff = VALUES(is_ff);
+                		
                                 
                 BEGIN
                                 DECLARE v_created_date_id INT(11);
