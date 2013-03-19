@@ -91,6 +91,7 @@ BEGIN
 	CALL add_monthly_partition_for_table('dwh_hourly_events_context_entry_user_app');
 	CALL add_monthly_partition_for_table('dwh_hourly_events_context_app');
 	CALL add_monthly_partition_for_table('dwh_hourly_user_usage');
+	CALL add_monthly_partition_for_table('dwh_hourly_events_context_app_devices');
 END$$
 
 DELIMITER ;
