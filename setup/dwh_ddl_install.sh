@@ -247,7 +247,7 @@ mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_api_calls.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_errors.sh
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_entry_user_app.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_app.sql
-mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_app.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_app_devices.sql
 mysqlexec $DW_ROOT_DIR/aggr/time_zone_helper_function.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_procedure.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_bandwidth.sql
