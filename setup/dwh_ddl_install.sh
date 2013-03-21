@@ -74,6 +74,9 @@ mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_type.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_fms_app.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_partner_vertical.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_partner_class_of_service.sql
+mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_execution_status.sql
+mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_object_type.sql
+mysqlexec $BISOURCE_ROOT_DIR/bisources_upload_token_status.sql
 
 #ds/
 mysqlexec $DS_ROOT_DIR/files.sql
@@ -173,6 +176,7 @@ mysqlexec $DW_ROOT_DIR/facts/dwh_fact_errors.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_errors_archive.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_incomplete_api_calls.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_entries_sizes.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_convert_job.sql
 
 #dw/dimensions
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_kuser.sql
@@ -226,6 +230,12 @@ mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_hours.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_applications.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_permissions.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_pusers.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_execution_status.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_object_type.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_upload_token_status.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_upload_token_object_type.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_sep.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_upload_token.sql
 
 
 #dw/maintenance
@@ -251,6 +261,8 @@ mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_errors.sh
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_entry_user_app.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_app.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_app_devices.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_daily_ingestion.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_daily_partner_ingestion.sql
 mysqlexec $DW_ROOT_DIR/aggr/time_zone_helper_function.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_procedure.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_bandwidth.sql
@@ -259,6 +271,9 @@ mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_user_usage.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_api_calls.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_errors.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_entries_sizes.sql
+mysqlexec $DW_ROOT_DIR/aggr/calc_updated_batch_job.sql
+mysqlexec $DW_ROOT_DIR/aggr/calc_updated_batch_job_day.sql
+mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_ingestion.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_widget.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_entry.sql
@@ -281,6 +296,7 @@ mysqlexec $DW_ROOT_DIR/functions/calc_partner_billing_data_procedure.sql
 mysqlexec $DW_ROOT_DIR/functions/get_data_for_operational.sql
 mysqlexec $DW_ROOT_DIR/functions/mark_operational_as_done.sql
 mysqlexec $DW_ROOT_DIR/functions/calc_partner_usage_data.sql
+mysqlexec $DW_ROOT_DIR/functions/calc_median_ff_convert_job_wait_time.sql
 #dw/ri/ 
 mysqlexec $DW_ROOT_DIR/ri/ri_defaults.sql
 mysqlexec $DW_ROOT_DIR/ri/ri_mapping.sql
