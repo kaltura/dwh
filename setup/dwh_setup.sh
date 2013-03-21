@@ -1,7 +1,6 @@
 #!/bin/bash
 
 USER="etl"
-PW="etl"
 KITCHEN=/usr/local/pentaho/pdi
 ROOT_DIR=/opt/kaltura/dwh
 HOST=localhost
@@ -25,7 +24,11 @@ ETL_ROOT_DIR=$ROOT_DIR/etlsource
 INSTALLATION_LOG=$SETUP_ROOT_DIR/installation_log.log
 
 # Create the DWH
-$SETUP_ROOT_DIR/dwh_ddl_install.sh -u$USER -p$PW -k$KITCHEN -d$ROOT_DIR -h$HOST -P$PORT >> $INSTALLATION_LOG  2>&1
+if [ -z "$PW" ]; then
+	$SETUP_ROOT_DIR/dwh_ddl_install.sh -u$USER -k$KITCHEN -d$ROOT_DIR -h$HOST -P$PORT >> $INSTALLATION_LOG  2>&1
+else
+	$SETUP_ROOT_DIR/dwh_ddl_install.sh -u$USER -p$PW -k$KITCHEN -d$ROOT_DIR -h$HOST -P$PORT >> $INSTALLATION_LOG  2>&1
+fi
 
 ret_val=$?
 if [ $ret_val -ne 0 ];then
@@ -46,7 +49,11 @@ if [ $ret_val -ne 0 ];then
 fi
 
 # Note that setup skips svn update and registers all files from migrations as if they were run (the changes are already incorporated in ddl).
-$SETUP_ROOT_DIR/update.sh -k $KITCHEN -d $ROOT_DIR -u $USER -p $PW -h $HOST -P $PORT -r 1 -v 0
+if [ -z "$PW" ]; then
+	$SETUP_ROOT_DIR/update.sh -k $KITCHEN -d $ROOT_DIR -u $USER -h $HOST -P $PORT -r 1 -v 0
+else
+	$SETUP_ROOT_DIR/update.sh -k $KITCHEN -d $ROOT_DIR -u $USER -p $PW -h $HOST -P $PORT -r 1 -v 0
+fi
 
 OS_CRONTAB_DIR=/etc/cron.d
 

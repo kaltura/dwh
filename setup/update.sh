@@ -1,6 +1,5 @@
 #!/bin/bash
 USER="etl"
-PW="etl"
 ROOT_DIR=/opt/kaltura/dwh
 HOST=localhost
 PORT=3306
@@ -25,7 +24,11 @@ done
 
 function mysqlexec {
 	echo "now executing $1"
-	mysql -u$USER -p$PW -h$HOST -P$PORT < $1 
+	if [ -z "$PW" ]; then
+		mysql -u$USER -h$HOST -P$PORT < $1 
+	else
+		mysql -u$USER -p$PW -h$HOST -P$PORT < $1 
+	fi
 
 	ret_val=$?
 	if [ $ret_val -ne 0 ];then
@@ -38,12 +41,20 @@ function mysqlexec {
 function updatedir {
 	for file_name in $(ls $ROOT_DIR/ddl/migrations/deployed/$1 | sort)
 	do
-		file_ver=$(mysql -u$USER -p$PW -h$HOST -P$PORT -se"SELECT count(version) FROM kalturadw_ds.version_management WHERE version = $2 AND filename = '$file_name'" | head -2 | tail -1)
+		if [ -z "$PW" ]; then
+			file_ver=$(mysql -u$USER -h$HOST -P$PORT -se"SELECT count(version) FROM kalturadw_ds.version_management WHERE version = $2 AND filename = '$file_name'" | head -2 | tail -1)
+		else
+			file_ver=$(mysql -u$USER -p$PW -h$HOST -P$PORT -se"SELECT count(version) FROM kalturadw_ds.version_management WHERE version = $2 AND filename = '$file_name'" | head -2 | tail -1)
+		fi
 		if [ $file_ver -eq 0 ];then
 			if [ $REGISTER_ONLY -eq 0 ]; then
 				mysqlexec $ROOT_DIR/ddl/migrations/deployed/$1/$file_name
 			fi
-			mysql -u$USER -p$PW -h$HOST -P$PORT -e"INSERT INTO kalturadw_ds.version_management(version, filename) VALUES ($2, '$file_name')"
+			if [ -z "$PW" ]; then
+				mysql -u$USER -h$HOST -P$PORT -e"INSERT INTO kalturadw_ds.version_management(version, filename) VALUES ($2, '$file_name')"
+			else
+				mysql -u$USER -p$PW -h$HOST -P$PORT -e"INSERT INTO kalturadw_ds.version_management(version, filename) VALUES ($2, '$file_name')"
+			fi
 		fi
 	done
 }
@@ -76,7 +87,12 @@ fi
 
 
 # get ver
-version=$(mysql -u$USER -p$PW -h$HOST -P$PORT -se"SELECT max(version) version FROM kalturadw_ds.version_management" | head -2 | tail -1)
+if [ -z "$PW" ]; then	
+	version=$(mysql -u$USER -h$HOST -P$PORT -se"SELECT max(version) version FROM kalturadw_ds.version_management" | head -2 | tail -1)
+else
+	version=$(mysql -u$USER -p$PW -h$HOST -P$PORT -se"SELECT max(version) version FROM kalturadw_ds.version_management" | head -2 | tail -1)
+fi
+
 echo "current version $version"
 
 update_all $version

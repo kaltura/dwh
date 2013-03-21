@@ -1,7 +1,6 @@
 #!/bin/bash
 
 USER="etl"
-PW="etl"
 KITCHEN=/usr/local/pentaho/pdi/kitchen.sh
 ROOT_DIR=/opt/kaltura/dwh
 HOST=localhost
@@ -22,7 +21,11 @@ done
 
 function mysqlexec {
         echo "now executing $1"
-        mysql -u$USER -p$PW -h$HOST -P$PORT < $1 >>  $ROOT_DIR/logs/dwh_drop_databases.log
+		if [ -z "$PW" ]; then
+			mysql -u$USER -h$HOST -P$PORT < $1 >>  $ROOT_DIR/logs/dwh_drop_databases.log
+		else
+			mysql -u$USER -p$PW -h$HOST -P$PORT < $1 >>  $ROOT_DIR/logs/dwh_drop_databases.log
+		fi
 
 		ret_val=$?
         if [ $ret_val -ne 0 ];then
