@@ -482,7 +482,7 @@ if (indexOf(user_agent,&quot;Windows NT 6.2&quot;) &gt; 0) {
 	os = &quot;WINDOWS_8&quot;;
 }
 
-if (indexOf(user_agent,&quot;BB10&quot;) &gt; 0) {
+if (indexOf(user_agent,&quot;BB10;&quot;) &gt; 0) {
 	os = &quot;BLACKBERRY10&quot;;
 }
 </jsScript_script>
