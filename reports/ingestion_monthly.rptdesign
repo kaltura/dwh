@@ -6400,7 +6400,7 @@ BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", 
   </ExtendedProperties>
   <SampleData>
     <BaseSampleData>
-      <DataSetRepresentation>A, B, C</DataSetRepresentation>
+      <DataSetRepresentation>'A','B','C','D','E'</DataSetRepresentation>
     </BaseSampleData>
     <OrthogonalSampleData>
       <DataSetRepresentation>5,4,12</DataSetRepresentation>
@@ -6794,6 +6794,7 @@ BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", 
               </Value>
             </Action>
           </Triggers>
+          <Translucent>false</Translucent>
           <Riser>Rectangle</Riser>
         </Series>
         <Grouping>
@@ -7970,6 +7971,7 @@ BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", 
       </Origin>
       <PrimaryAxis>true</PrimaryAxis>
       <Percent>false</Percent>
+      <Aligned>false</Aligned>
     </AssociatedAxes>
     <SeriesDefinitions>
       <Query>
@@ -8244,8 +8246,9 @@ day + &quot;-&quot; + month</Definition>
       <Caption>
         <Value></Value>
         <Font>
+          <Size>8.0</Size>
           <Alignment/>
-          <Rotation>88.0</Rotation>
+          <Rotation>90.0</Rotation>
         </Font>
       </Caption>
       <Background xsi:type="attribute:ColorDefinition">
@@ -8263,16 +8266,19 @@ day + &quot;-&quot; + month</Definition>
           <Green>0</Green>
           <Blue>0</Blue>
         </Color>
+        <Visible>false</Visible>
       </Outline>
       <Insets>
         <Top>0.0</Top>
-        <Left>2.0</Left>
+        <Left>0.0</Left>
         <Bottom>0.0</Bottom>
         <Right>3.0</Right>
       </Insets>
       <Visible>true</Visible>
     </Label>
     <LabelPosition>Below</LabelPosition>
+    <Staggered>false</Staggered>
+    <Interval>1</Interval>
     <MajorGrid>
       <LineAttributes>
         <Style>Solid</Style>
@@ -8285,7 +8291,7 @@ day + &quot;-&quot; + month</Definition>
         </Color>
         <Visible>false</Visible>
       </LineAttributes>
-      <TickStyle>Across</TickStyle>
+      <TickStyle>Below</TickStyle>
       <TickAttributes>
         <Style>Solid</Style>
         <Thickness>1</Thickness>
@@ -8295,7 +8301,7 @@ day + &quot;-&quot; + month</Definition>
           <Green>196</Green>
           <Blue>196</Blue>
         </Color>
-        <Visible>true</Visible>
+        <Visible>false</Visible>
       </TickAttributes>
     </MajorGrid>
     <MinorGrid>
@@ -8325,6 +8331,7 @@ day + &quot;-&quot; + month</Definition>
     </MinorGrid>
     <Scale>
       <MinorGridsPerUnit>5</MinorGridsPerUnit>
+      <ShowOutside>false</ShowOutside>
     </Scale>
     <Origin>
       <Type>Value</Type>
@@ -8997,6 +9004,7 @@ day + &quot;-&quot; + month</Definition>
             <Caption>
               <Value></Value>
               <Font>
+                <Size>8.0</Size>
                 <Alignment/>
               </Font>
             </Caption>
@@ -9262,6 +9270,7 @@ day + &quot;-&quot; + month</Definition>
             <Caption>
               <Value></Value>
               <Font>
+                <Size>8.0</Size>
                 <Alignment/>
               </Font>
             </Caption>
@@ -9528,6 +9537,7 @@ day + &quot;-&quot; + month</Definition>
             <Caption>
               <Value></Value>
               <Font>
+                <Size>8.0</Size>
                 <Alignment/>
               </Font>
             </Caption>
@@ -9571,7 +9581,7 @@ day + &quot;-&quot; + month</Definition>
             </Components>
             <Separator>, </Separator>
           </DataPoint>
-          <LabelPosition>Inside</LabelPosition>
+          <LabelPosition>Outside</LabelPosition>
           <Stacked>true</Stacked>
           <Triggers>
             <Condition>onmouseover</Condition>
@@ -9970,6 +9980,7 @@ day + &quot;-&quot; + month</Definition>
       <Caption>
         <Value></Value>
         <Font>
+          <Size>8.0</Size>
           <Alignment/>
           <Rotation>90.0</Rotation>
         </Font>
@@ -15204,7 +15215,7 @@ BirtStr.concat(month, "-", year);</expression>
       <Type>Linear</Type>
       <Title>
         <Caption>
-          <Value>wait time minuts</Value>
+          <Value>wait time minutes</Value>
           <Font>
             <Size>9.0</Size>
             <Bold>true</Bold>
@@ -15443,6 +15454,7 @@ BirtStr.concat(month, "-", year);</expression>
             <Caption>
               <Value></Value>
               <Font>
+                <Size>8.0</Size>
                 <Alignment/>
               </Font>
             </Caption>
@@ -15912,6 +15924,7 @@ day + &quot;-&quot; + month</Definition>
       <Caption>
         <Value></Value>
         <Font>
+          <Size>8.0</Size>
           <Alignment/>
           <Rotation>90.0</Rotation>
         </Font>
@@ -16395,7 +16408,7 @@ day + &quot;-&quot; + month</Definition>
       <Type>Linear</Type>
       <Title>
         <Caption>
-          <Value>wait time minuts</Value>
+          <Value>wait time minutes</Value>
           <Font>
             <Size>9.0</Size>
             <Bold>true</Bold>
@@ -16634,6 +16647,7 @@ day + &quot;-&quot; + month</Definition>
             <Caption>
               <Value></Value>
               <Font>
+                <Size>8.0</Size>
                 <Alignment/>
               </Font>
             </Caption>
@@ -17074,6 +17088,7 @@ month + &quot;-&quot; + year</Definition>
       <Caption>
         <Value></Value>
         <Font>
+          <Size>8.0</Size>
           <Alignment/>
           <Rotation>90.0</Rotation>
         </Font>
@@ -19005,7 +19020,9 @@ BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", 
             <Caption>
               <Value></Value>
               <Font>
+                <Size>8.0</Size>
                 <Alignment/>
+                <Rotation>90.0</Rotation>
               </Font>
             </Caption>
             <Background xsi:type="attribute:ColorDefinition">
@@ -19270,6 +19287,7 @@ BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", 
             <Caption>
               <Value></Value>
               <Font>
+                <Size>8.0</Size>
                 <Alignment/>
               </Font>
             </Caption>
@@ -19313,7 +19331,7 @@ BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", 
             </Components>
             <Separator>, </Separator>
           </DataPoint>
-          <LabelPosition>Inside</LabelPosition>
+          <LabelPosition>Outside</LabelPosition>
           <Stacked>true</Stacked>
           <Triggers>
             <Condition>onmouseover</Condition>
@@ -19711,6 +19729,7 @@ day + &quot;-&quot; + month</Definition>
       <Caption>
         <Value></Value>
         <Font>
+          <Size>8.0</Size>
           <Alignment/>
           <Rotation>90.0</Rotation>
         </Font>
@@ -20611,7 +20630,9 @@ day + &quot;-&quot; + month</Definition>
             <Caption>
               <Value></Value>
               <Font>
+                <Size>8.0</Size>
                 <Alignment/>
+                <Rotation>90.0</Rotation>
               </Font>
             </Caption>
             <Background xsi:type="attribute:ColorDefinition">
@@ -20876,6 +20897,7 @@ day + &quot;-&quot; + month</Definition>
             <Caption>
               <Value></Value>
               <Font>
+                <Size>8.0</Size>
                 <Alignment/>
               </Font>
             </Caption>
@@ -20919,7 +20941,7 @@ day + &quot;-&quot; + month</Definition>
             </Components>
             <Separator>, </Separator>
           </DataPoint>
-          <LabelPosition>Inside</LabelPosition>
+          <LabelPosition>Outside</LabelPosition>
           <Stacked>true</Stacked>
           <Triggers>
             <Condition>onmouseover</Condition>
@@ -21318,6 +21340,7 @@ month + &quot;-&quot; + year</Definition>
       <Caption>
         <Value></Value>
         <Font>
+          <Size>8.0</Size>
           <Alignment/>
           <Rotation>90.0</Rotation>
         </Font>
@@ -23416,7 +23439,9 @@ BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", 
             <Caption>
               <Value></Value>
               <Font>
+                <Size>8.0</Size>
                 <Alignment/>
+                <Rotation>90.0</Rotation>
               </Font>
             </Caption>
             <Background xsi:type="attribute:ColorDefinition">
@@ -23681,6 +23706,7 @@ BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", 
             <Caption>
               <Value></Value>
               <Font>
+                <Size>8.0</Size>
                 <Alignment/>
               </Font>
             </Caption>
@@ -23724,7 +23750,7 @@ BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", 
             </Components>
             <Separator>, </Separator>
           </DataPoint>
-          <LabelPosition>Inside</LabelPosition>
+          <LabelPosition>Outside</LabelPosition>
           <Stacked>true</Stacked>
           <Triggers>
             <Condition>onmouseover</Condition>
@@ -24122,6 +24148,7 @@ day + &quot;-&quot; + month</Definition>
       <Caption>
         <Value></Value>
         <Font>
+          <Size>8.0</Size>
           <Alignment/>
           <Rotation>90.0</Rotation>
         </Font>
@@ -25021,7 +25048,9 @@ day + &quot;-&quot; + month</Definition>
             <Caption>
               <Value></Value>
               <Font>
+                <Size>8.0</Size>
                 <Alignment/>
+                <Rotation>90.0</Rotation>
               </Font>
             </Caption>
             <Background xsi:type="attribute:ColorDefinition">
@@ -25286,6 +25315,7 @@ day + &quot;-&quot; + month</Definition>
             <Caption>
               <Value></Value>
               <Font>
+                <Size>8.0</Size>
                 <Alignment/>
               </Font>
             </Caption>
@@ -25329,7 +25359,7 @@ day + &quot;-&quot; + month</Definition>
             </Components>
             <Separator>, </Separator>
           </DataPoint>
-          <LabelPosition>Inside</LabelPosition>
+          <LabelPosition>Outside</LabelPosition>
           <Stacked>true</Stacked>
           <Triggers>
             <Condition>onmouseover</Condition>
@@ -25727,6 +25757,7 @@ month + &quot;-&quot; + year</Definition>
       <Caption>
         <Value></Value>
         <Font>
+          <Size>8.0</Size>
           <Alignment/>
           <Rotation>90.0</Rotation>
         </Font>
@@ -26483,7 +26514,7 @@ BirtStr.concat(month, "-", year);</expression>
                     <property name="textAlign">center</property>
                     <label id="720">
                         <property name="display">inline</property>
-                        <text-property name="text">Total number of added entries on this month</text-property>
+                        <text-property name="text">Total number of added entries on this month: </text-property>
                     </label>
                     <data id="721">
                         <property name="display">inline</property>
@@ -26612,7 +26643,7 @@ BirtStr.concat(month, "-", year);</expression>
                                     <property name="borderTopWidth">thin</property>
                                     <label id="756">
                                         <property name="textAlign">left</property>
-                                        <text-property name="text">Percent off all entries</text-property>
+                                        <text-property name="text">Percent of all entries added this month</text-property>
                                     </label>
                                 </cell>
                                 <cell id="729">
