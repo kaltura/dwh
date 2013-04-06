@@ -484,6 +484,10 @@ if (indexOf(user_agent,&quot;Windows NT 6.2&quot;) &gt; 0) {
 
 if (indexOf(user_agent,&quot;BB10;&quot;) &gt; 0) {
 	os = &quot;BLACKBERRY10&quot;;
+	isMobile = 1;
+	device = &quot;MOBILE&quot;;
+	osManufacturer = &quot;BLACKBERRY&quot;;
+	osGroup = &quot;BLACKBERRY&quot;;
 }
 </jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>browser</name>
