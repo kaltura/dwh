@@ -1130,7 +1130,6 @@ if (indexOf(lock_info, &quot;priority&quot;) &gt; -1)
 }
 
 var file_size = -1;
-var data = &apos;O:14:&quot;kImportJobData&quot;:5:{s:26:&quot;kImportJobDatasrcFileUrl&quot;;s:49:&quot;http:&#47;&#47;www.kaltura.org&#47;demos&#47;videos&#47;DemoVideo.flv&quot;;s:33:&quot;kImportJobDatadestFileLocalPath&quot;;s:56:&quot;&#47;web&#47;&#47;content&#47;entry&#47;data&#47;0&#47;1&#47;0_3fddnhsb_0_mfht6wxw_1.flv&quot;;s:29:&quot;kImportJobDataflavorAssetId&quot;;s:10:&quot;0_mfht6wxw&quot;;s:24:&quot;kImportJobDatacacheOnly&quot;;b:0;}&apos;;
 if (indexOf(data, &quot;kImportJobDatafileSize&quot;) &gt; -1)
 {
 	var additionalParams = substr(data, indexOf(data, &quot;kImportJobDatafileSize&quot;) + 28); 
