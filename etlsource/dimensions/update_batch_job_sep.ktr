@@ -1130,9 +1130,9 @@ if (indexOf(lock_info, &quot;priority&quot;) &gt; -1)
 }
 
 var file_size = -1;
-if (indexOf(data, &quot;kImportJobDatafileSize&quot;) &gt; -1)
+if (indexOf(DATA, &quot;kImportJobDatafileSize&quot;) &gt; -1)
 {
-	var additionalParams = substr(data, indexOf(data, &quot;kImportJobDatafileSize&quot;) + 28); 
+	var additionalParams = substr(DATA, indexOf(DATA, &quot;kImportJobDatafileSize&quot;) + 28); 
 	var params = additionalParams.split(&quot;:&quot;);
 	var file_size = (params[0]);
 }
