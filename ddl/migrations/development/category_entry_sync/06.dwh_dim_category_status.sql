@@ -17,7 +17,7 @@ CREATE TABLE `dwh_dim_category_status` (
   PRIMARY KEY (`category_status_id`)
 ) ENGINE=MYISAM;
 
-CREATE TRIGGER `kalturadw_bisources`.`dwh_dim_category_status_setcreationtime_oninsert` BEFORE INSERT
-    ON `kalturadw_bisources`.`dwh_dim_category_status`
+CREATE TRIGGER `kalturadw`.`dwh_dim_category_status_setcreationtime_oninsert` BEFORE INSERT
+    ON `kalturadw`.`dwh_dim_category_status`
     FOR EACH ROW 
 	SET new.dwh_creation_date = NOW();
