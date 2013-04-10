@@ -303,7 +303,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Main Insert &#47; Update</from><to>error inserting to db - MAYBE duplicate PRIMARY key</to><enabled>Y</enabled> </hop>  <hop> <from>category_entry status</from><to>Main Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>Read Table category</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>category_entry status</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Main Insert &#47; Update</from><to>error inserting to db - MAYBE duplicate PRIMARY key</to><enabled>Y</enabled> </hop>  <hop> <from>category_entry status</from><to>Main Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>Read Table category</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Set defaults</from><to>category_entry status</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Table category</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Database lookup</name>
     <type>DBLookup</type>
@@ -644,6 +644,27 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>606</xloc>
       <yloc>101</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>input</name>
+    <type>MappingInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+        <select_unspecified>N</select_unspecified>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>34</xloc>
+      <yloc>16</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
