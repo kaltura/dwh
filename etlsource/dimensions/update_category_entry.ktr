@@ -492,11 +492,6 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
         <mask>yyyy-MM-dd</mask>
         </field>
       <field>
-        <name>int_id</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      <field>
         <name>partner_id</name>
         <value>-1</value>
         <mask/>
@@ -508,6 +503,11 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
         </field>
       <field>
         <name>status</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>category_id</name>
         <value>-1</value>
         <mask/>
         </field>
