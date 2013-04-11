@@ -1130,6 +1130,7 @@ if (indexOf(lock_info, &quot;priority&quot;) &gt; -1)
 }
 
 var file_size = -1;
+DATA = &apos;O:14:&quot;kImportJobData&quot;:5:{s:26:&quot; kImportJobData srcFileUrl&quot;;s:91:&quot;ftp:&#47;&#47;starepg:startv%40123@kirk.in.startv.com&#47;WhatsOnIndia&#47;09-04-2013_STAR PLUS&#47;P361872.MXF&quot;;s:33:&quot; kImportJobData destFileLocalPath&quot;;s:49:&quot;&#47;opt&#47;kaltura&#47;tmp&#47;imports&#47;import_5164eb9a67ca0.MXF&quot;;s:29:&quot; kImportJobData flavorAssetId&quot;;N;s:24:&quot; kImportJobData fileSize&quot;;i:312849408;s:25:&quot; kImportJobData cacheOnly&quot;;b:0;}&apos;;
 if (indexOf(DATA, &quot;kImportJobData fileSize&quot;) &gt; -1)
 {
 	var additionalParams = substr(DATA, indexOf(DATA, &quot;kImportJobData fileSize&quot;) + 27); 
@@ -1153,7 +1154,7 @@ if (indexOf(DATA, &quot;kImportJobData fileSize&quot;) &gt; -1)
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
-        <replace>N</replace>
+        <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1205</xloc>
