@@ -641,7 +641,7 @@ subtype_key = num2str(job_type) + &quot;_&quot; + num2str(job_sub_type)</jsScrip
       <value>
         <name>file_size</name>
         <rename>file_size</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
     </lookup>
      <cluster_schema/>
