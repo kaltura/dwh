@@ -17,7 +17,7 @@ CREATE TABLE `dwh_dim_category` (
 	`created_at` DATETIME,
 	`updated_at` DATETIME,
 	`status_id` INT(11) NOT NULL,
-	`kuser_id` INT(11) NOT NULL,
+	`kuser_id` INT(11),
 	`dwh_creation_date` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
 	`dwh_update_date` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
 	PRIMARY KEY (`category_id`),
