@@ -425,9 +425,12 @@ var ksPuserID = &quot;Unknown&quot;;
 var isV2Ks = false;
 
 var ks = base64_decode(ksUrl);
+
 if (is_V2_Ks(ks)) {
 	isV2Ks = true;
-	strKsPartnerID = getPartnerIdFromKSV2(ks);
+	var encodedKs = replace(unescape(ksUrl), &quot;-&quot;, &quot;+&quot;);
+	encodedKs = replace(encodedKs, &quot;_&quot;, &quot;&#47;&quot;);
+	strKsPartnerID = getPartnerIdFromKSV2(base64_decode(encodedKs));
 	ksPartnerID = is_not_numeric(strKsPartnerID) ? -1 : strKsPartnerID;
 } else {
 	strKsPartnerID = getPartnerIdFromKS(ks);
