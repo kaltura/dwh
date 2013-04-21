@@ -146,7 +146,7 @@ SELECT 	DATE_ID,
 FROM 		kalturadw.DWH_HOURLY_PARTNER_USAGE u, 
 		kalturadw.dwh_dim_bandwidth_source d
 WHERE 		u.bandwidth_source_id = d.bandwidth_source_id AND 
-		DATE_ID BETWEEN DATE(NOW()-INTERVAL 30 DAY)*1 AND DATE(NOW()-INTERVAL 1 DAY)*1
+		DATE_ID BETWEEN DATE(NOW()-INTERVAL 31 DAY)*1 AND DATE(NOW()-INTERVAL 2 DAY)*1
 GROUP BY 	DATE_ID
 ORDER BY 	DATE_ID DESC]]></xml-property>
             <structure name="designerState">
@@ -458,7 +458,7 @@ ORDER BY 	DATE_ID DESC]]></xml-property>
 	SUM(count_bandwidth_kb) total
 FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d
 WHERE u.bandwidth_source_id = d.bandwidth_source_id
-AND date_id BETWEEN (DATE(NOW()) - INTERVAL 30 DAY)*1 AND (DATE(NOW()) - INTERVAL 1 DAY)*1
+AND date_id BETWEEN (DATE(NOW()) - INTERVAL 31 DAY)*1 AND (DATE(NOW()) - INTERVAL 2 DAY)*1
 GROUP BY date_id desc]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
@@ -765,7 +765,7 @@ GROUP BY date_id desc]]></xml-property>
 		SUM(new_livestreams) livestream,
 		SUM(new_videos)+ SUM(new_images)+ SUM(new_audios)+ SUM(new_documents)+ SUM(new_playlists) + SUM(new_other_entries) + SUM(new_livestreams) total 
 		FROM kalturadw.dwh_hourly_partner
-WHERE date_id BETWEEN (DATE(NOW()) - INTERVAL 30 DAY)*1 AND (DATE(NOW()) - INTERVAL 1 DAY)*1
+WHERE date_id BETWEEN (DATE(NOW()) - INTERVAL 31 DAY)*1 AND (DATE(NOW()) - INTERVAL 2 DAY)*1
 GROUP BY date_id]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
@@ -804,7 +804,7 @@ GROUP BY date_id]]></xml-property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT count(*) deleted FROM kalturadw.dwh_dim_entries 
-		WHERE modified_at BETWEEN DATE(now()) - interval 1 day and date(now())
+		WHERE modified_at BETWEEN DATE(now()) - interval 2 day and date(now()) - interval 1 day
 		AND entry_status_id = 3
 ]]></xml-property>
             <structure name="designerState">
@@ -933,7 +933,7 @@ count(*) total
 FROM (SELECT  DATE(created_at) date_id, 
 entry_media_source_id
 FROM kalturadw.dwh_dim_entries
-WHERE created_at BETWEEN DATE(NOW()-INTERVAL 30 DAY) AND DATE(NOW()) - INTERVAL 1 SECOND) p
+WHERE created_at BETWEEN DATE(NOW()-INTERVAL 31 DAY) AND DATE(NOW()) - INTERVAL 2 DAY) p
 GROUP BY date_id]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
@@ -1019,7 +1019,7 @@ GROUP BY date_id]]></xml-property>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT DATE_ID, SUM(COUNT_PLAYS) AS PLAYS, SUM(COUNT_LOADS) AS LOADS
   FROM `kalturadw`.DWH_HOURLY_PARTNER
-  WHERE 		DATE_ID BETWEEN DATE(NOW()-INTERVAL 30 DAY)*1 AND DATE(NOW()-INTERVAL 1 DAY)*1
+  WHERE 		DATE_ID BETWEEN DATE(NOW()-INTERVAL 31 DAY)*1 AND DATE(NOW()-INTERVAL 2 DAY)*1
 GROUP BY 	DATE_ID
 ORDER BY 	DATE_ID DESC
 ]]></xml-property>
@@ -1219,14 +1219,14 @@ SELECT partner_id, avg_count_bandwidth_kb, 2_days_ago_count_bandwidth_kb,count_b
 	@is_paying_vod:=is_paying AS is_paying
 	FROM (
 SELECT u.partner_id, SUM(count_bandwidth_kb)/7 avg_count_bandwidth_kb, 
-SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_bandwidth_kb,0)) 2_days_ago_count_bandwidth_kb, 
-SUM(IF((DATE(NOW()) - INTERVAL 1 DAY)*1=date_id,count_bandwidth_kb,0)) count_bandwidth_kb,
+SUM(IF((DATE(NOW()) - INTERVAL 3 DAY)*1=date_id,count_bandwidth_kb,0)) 2_days_ago_count_bandwidth_kb, 
+SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_bandwidth_kb,0)) count_bandwidth_kb,
 p.partner_name, IF(partner_package>1,'yes','no') is_paying, total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d, kalturadw.dwh_dim_partners p, 
 (SELECT SUM(count_bandwidth_kb) total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d WHERE (DATE(NOW()) - INTERVAL 1 DAY)*1=date_id
 AND u.bandwidth_source_id = d.bandwidth_source_id AND d.is_live = 0) total
 WHERE u.bandwidth_source_id = d.bandwidth_source_id AND d.is_live = 0
 AND u.partner_id = p.partner_id
-AND date_id BETWEEN (DATE(NOW()) - INTERVAL 7 DAY)*1 AND (DATE(NOW()) - INTERVAL 1 DAY)*1
+AND date_id BETWEEN (DATE(NOW()) - INTERVAL 8 DAY)*1 AND (DATE(NOW()) - INTERVAL 2 DAY)*1
 GROUP BY partner_id
 ORDER BY is_paying, count_bandwidth_kb DESC
 ) a
@@ -1428,14 +1428,14 @@ SELECT partner_id, avg_count_bandwidth_kb, 2_days_ago_count_bandwidth_kb,count_b
 	@is_paying_live:=is_paying AS is_paying, total
 	 FROM (
 SELECT u.partner_id, SUM(count_bandwidth_kb)/7 avg_count_bandwidth_kb, 
-SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_bandwidth_kb,0)) 2_days_ago_count_bandwidth_kb, 
-SUM(IF((DATE(NOW()) - INTERVAL 1 DAY)*1=date_id,count_bandwidth_kb,0)) count_bandwidth_kb,
+SUM(IF((DATE(NOW()) - INTERVAL 3 DAY)*1=date_id,count_bandwidth_kb,0)) 2_days_ago_count_bandwidth_kb, 
+SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_bandwidth_kb,0)) count_bandwidth_kb,
 p.partner_name, IF(partner_package>1,'yes','no') is_paying, total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d, kalturadw.dwh_dim_partners p,
 (SELECT SUM(count_bandwidth_kb) total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d WHERE (DATE(NOW()) - INTERVAL 1 DAY)*1=date_id
 AND u.bandwidth_source_id = d.bandwidth_source_id AND d.is_live = 1) total
 WHERE u.bandwidth_source_id = d.bandwidth_source_id AND d.is_live = 1
 AND u.partner_id = p.partner_id
-AND date_id BETWEEN (DATE(NOW()) - INTERVAL 7 DAY)*1 AND (DATE(NOW()) - INTERVAL 1 DAY)*1
+AND date_id BETWEEN (DATE(NOW()) - INTERVAL 8 DAY)*1 AND (DATE(NOW()) - INTERVAL 2 DAY)*1
 GROUP BY partner_id
 ORDER BY is_paying, count_bandwidth_kb DESC) a
 ) b
@@ -1634,12 +1634,12 @@ ORDER BY count_bandwidth_kb DESC]]></xml-property>
 SELECT partner_id, partner_name, avg_count_plays, 2_days_ago_count_plays,count_plays, @rownum_plays_is_paying:=IFNULL(IF(@is_paying_plays=is_paying,@rownum_plays_is_paying+1,1),1) AS is_paying_rank,
 	@is_paying_plays:=is_paying AS is_paying, total FROM (
 SELECT u.partner_id, SUM(count_plays)/7 avg_count_plays, 
-SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_plays,0)) 2_days_ago_count_plays, 
-SUM(IF((DATE(NOW()) - INTERVAL 1 DAY)*1=date_id,count_plays,0)) count_plays,
+SUM(IF((DATE(NOW()) - INTERVAL 3 DAY)*1=date_id,count_plays,0)) 2_days_ago_count_plays, 
+SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_plays,0)) count_plays,
 p.partner_name, IF(partner_package>1,'yes','no') is_paying,total FROM kalturadw.dwh_hourly_partner u, kalturadw.dwh_dim_partners p,
 (SELECT SUM(count_plays) total FROM kalturadw.dwh_hourly_partner WHERE date_id=(DATE(NOW()) - INTERVAL 1 DAY)*1) total
 WHERE u.partner_id = p.partner_id
-AND date_id BETWEEN (DATE(NOW()) - INTERVAL 7 DAY)*1 AND (DATE(NOW()) - INTERVAL 1 DAY)*1
+AND date_id BETWEEN (DATE(NOW()) - INTERVAL 8 DAY)*1 AND (DATE(NOW()) - INTERVAL 2 DAY)*1
 GROUP BY partner_id
 ORDER BY is_paying, count_plays DESC) a
 ) b 
@@ -1838,12 +1838,12 @@ ORDER BY count_plays DESC]]></xml-property>
 SELECT partner_id, partner_name, avg_count_loads, 2_days_ago_count_loads,count_loads, @rownum_loads_is_paying:=IFNULL(IF(@is_paying_loads=is_paying,@rownum_loads_is_paying+1,1),1) AS is_paying_rank,
 	@is_paying_loads:=is_paying AS is_paying, total FROM (
 SELECT u.partner_id, SUM(count_loads)/7 avg_count_loads, 
-SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_loads,0)) 2_days_ago_count_loads, 
-SUM(IF((DATE(NOW()) - INTERVAL 1 DAY)*1=date_id,count_loads,0)) count_loads,
+SUM(IF((DATE(NOW()) - INTERVAL 3 DAY)*1=date_id,count_loads,0)) 2_days_ago_count_loads, 
+SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_loads,0)) count_loads,
 p.partner_name, IF(partner_package>1,'yes','no') is_paying,total FROM kalturadw.dwh_hourly_partner u, kalturadw.dwh_dim_partners p,
 (SELECT SUM(count_loads) total FROM kalturadw.dwh_hourly_partner WHERE date_id=(DATE(NOW()) - INTERVAL 1 DAY)*1) total
 WHERE u.partner_id = p.partner_id
-AND date_id BETWEEN (DATE(NOW()) - INTERVAL 7 DAY)*1 AND (DATE(NOW()) - INTERVAL 1 DAY)*1
+AND date_id BETWEEN (DATE(NOW()) - INTERVAL 8 DAY)*1 AND (DATE(NOW()) - INTERVAL 2 DAY)*1
 GROUP BY partner_id
 ORDER BY is_paying, count_loads DESC) a
 ) b 
@@ -1978,13 +1978,13 @@ SELECT partner_id, partner_name, avg_count_storage_mb, 2_days_ago_count_storage_
 	@rownum_storage_is_paying:=IFNULL(IF(@is_paying_storage=is_paying,@rownum_storage_is_paying+1,1),1) AS is_paying_rank,
 	@is_paying_storage:=is_paying AS is_paying, total FROM (
 SELECT u.partner_id, SUM(added_storage_mb - deleted_storage_mb)/7 avg_count_storage_mb, 
-SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,added_storage_mb - deleted_storage_mb,0)) 2_days_ago_count_storage_mb, 
-SUM(IF((DATE(NOW()) - INTERVAL 1 DAY)*1=date_id,added_storage_mb - deleted_storage_mb,0)) count_storage_mb,
+SUM(IF((DATE(NOW()) - INTERVAL 3 DAY)*1=date_id,added_storage_mb - deleted_storage_mb,0)) 2_days_ago_count_storage_mb, 
+SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,added_storage_mb - deleted_storage_mb,0)) count_storage_mb,
 p.partner_name, IF(partner_package>1,'yes','no') is_paying, total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d, kalturadw.dwh_dim_partners p,
 (SELECT SUM(added_storage_mb - deleted_storage_mb) total FROM kalturadw.dwh_hourly_partner_usage WHERE date_id=(DATE(NOW()) - INTERVAL 1 DAY)*1) total
 WHERE u.bandwidth_source_id = d.bandwidth_source_id
 AND u.partner_id = p.partner_id
-AND date_id BETWEEN (DATE(NOW()) - INTERVAL 7 DAY)*1 AND (DATE(NOW()) - INTERVAL 1 DAY)*1
+AND date_id BETWEEN (DATE(NOW()) - INTERVAL 8 DAY)*1 AND (DATE(NOW()) - INTERVAL 2 DAY)*1
 GROUP BY partner_id
 ORDER BY is_paying, count_storage_mb DESC) a
 ) b 
@@ -2189,7 +2189,7 @@ ORDER BY count_storage_mb DESC]]></xml-property>
 		SUM(new_livestreams) livestream,
 		SUM(new_videos)+ SUM(new_images)+ SUM(new_audios)+ SUM(new_documents)+ SUM(new_playlists) + SUM(new_other_entries) + SUM(new_livestreams) total 
 		FROM kalturadw.dwh_hourly_partner
-WHERE date_id = (DATE(NOW()) - INTERVAL 1 DAY)*1
+WHERE date_id = (DATE(NOW()) - INTERVAL 2 DAY)*1
 ]]></xml-property>
         </oda-data-set>
     </data-sets>
