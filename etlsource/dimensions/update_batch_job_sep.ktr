@@ -263,7 +263,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get now</from><to>Check if sub type is null</to><enabled>Y</enabled> </hop>  <hop> <from>Check if sub type is null</from><to>No sub type - do nothing</to><enabled>Y</enabled> </hop>  <hop> <from>Check if sub type is null</from><to>Create subtype unique key</to><enabled>Y</enabled> </hop>  <hop> <from>Create subtype unique key</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Unique rows</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Table input</to><enabled>Y</enabled> </hop>  <hop> <from>Table input</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified batch jobs</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified batch jobs</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>Unique rows</from><to>Insert &#47; Update Batch Job Sub Types</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_type Insert &#47; Update</from><to>batch_job_error_type Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_error_type Insert &#47; Update</from><to>batch_job_status Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified batch jobs</from><to>Set foreign key default values</to><enabled>Y</enabled> </hop>  <hop> <from>Set foreign key default values</from><to>Get now</to><enabled>Y</enabled> </hop>  <hop> <from>Get now</from><to>batch_job_type Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_status Insert &#47; Update</from><to>batch_job_object_type Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_object_type Insert &#47; Update</from><to>batch_job_exec_status Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_exec_status Insert &#47; Update</from><to>parse lock_info and data</to><enabled>Y</enabled> </hop>  <hop> <from>parse lock_info and data</from><to>Insert &#47; Update Batch Jobs</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Batch Jobs</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Get now</from><to>Check if sub type is null</to><enabled>Y</enabled> </hop>  <hop> <from>Check if sub type is null</from><to>No sub type - do nothing</to><enabled>Y</enabled> </hop>  <hop> <from>Check if sub type is null</from><to>Create subtype unique key</to><enabled>Y</enabled> </hop>  <hop> <from>Create subtype unique key</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Unique rows</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Table input</to><enabled>Y</enabled> </hop>  <hop> <from>Table input</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified batch jobs</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified batch jobs</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>Unique rows</from><to>Insert &#47; Update Batch Job Sub Types</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_type Insert &#47; Update</from><to>batch_job_error_type Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_error_type Insert &#47; Update</from><to>batch_job_status Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified batch jobs</from><to>Set foreign key default values</to><enabled>Y</enabled> </hop>  <hop> <from>Set foreign key default values</from><to>Get now</to><enabled>Y</enabled> </hop>  <hop> <from>Get now</from><to>batch_job_type Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_status Insert &#47; Update</from><to>batch_job_object_type Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_object_type Insert &#47; Update</from><to>batch_job_exec_status Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>batch_job_exec_status Insert &#47; Update</from><to>parse lock_info and data</to><enabled>Y</enabled> </hop>  <hop> <from>parse lock_info and data</from><to>Insert &#47; Update Batch Jobs</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Batch Jobs</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>parse lock_info and data</from><to>File Size logging</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Check if sub type is null</name>
     <type>FilterRows</type>
@@ -1159,6 +1159,35 @@ if (indexOf(DATA, &quot;kImportJobData^@fileSize&quot;) &gt; -1)
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1205</xloc>
       <yloc>260</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>File Size logging</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <logmessage/>
+    <fields>
+      <field>
+        <name>DATA</name>
+        </field>
+      <field>
+        <name>file_size</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1016</xloc>
+      <yloc>264</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
