@@ -933,7 +933,7 @@ count(*) total
 FROM (SELECT  DATE(created_at) date_id, 
 entry_media_source_id
 FROM kalturadw.dwh_dim_entries
-WHERE created_at BETWEEN DATE(NOW()-INTERVAL 31 DAY) AND DATE(NOW()) - INTERVAL 2 DAY) p
+WHERE created_at BETWEEN DATE(NOW()-INTERVAL 31 DAY) AND DATE(NOW()) - INTERVAL 1 DAY) p
 GROUP BY date_id]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
