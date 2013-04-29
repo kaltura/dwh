@@ -289,7 +289,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Set defaults</from><to>Calc date and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc date and hour ids</from><to>Custom Data - height</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - height</from><to>Custom Data - width</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - width</from><to>Custom Data - storage_size</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - storage_size</from><to>Custom Data - conversion_quality</to><enabled>Y</enabled> </hop>  <hop> <from>Read Table entry</from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>filter unmodified entries</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified entries</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>puser_id -&gt; is_admin_content</from><to>fix values</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - conversion_quality</from><to>fix conversion_quality</to><enabled>Y</enabled> </hop>  <hop> <from>fix conversion_quality</from><to>Custom Data - editor_type</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Table entry</to><enabled>Y</enabled> </hop>  <hop> <from>fix values</from><to>Set RI_IND 0</to><enabled>Y</enabled> </hop>  <hop> <from>entry_media_source id</from><to>entry_media_type id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_media_type id</from><to>entry_status id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_status id</from><to>entry_type id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_type id</from><to>moderation_status id</to><enabled>Y</enabled> </hop>  <hop> <from>moderation_status id</from><to>Insert &#47; Update Main</to><enabled>Y</enabled> </hop>  <hop> <from>editor_type text</from><to>entry_media_source id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_type id</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>entry type display</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>Write to log on upsert error</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Main</from><to>Filter duplicate key errors</to><enabled>Y</enabled> </hop>  <hop> <from>categories lookup</from><to>entry_categories upsert</to><enabled>Y</enabled> </hop>  <hop> <from>fix values</from><to>split categories to levels</to><enabled>Y</enabled> </hop>  <hop> <from>trim category</from><to>Filter null categories</to><enabled>Y</enabled> </hop>  <hop> <from>Filter null categories</from><to>categories lookup</to><enabled>Y</enabled> </hop>  <hop> <from>split categories to levels</from><to>trim category</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI_IND 0</from><to>editor_type text</to><enabled>Y</enabled> </hop>  <hop> <from>get date and hour</from><to>distinct date and hours</to><enabled>Y</enabled> </hop>  <hop> <from>distinct date and hours</from><to>get now</to><enabled>Y</enabled> </hop>  <hop> <from>get now</from><to>add &apos;user_storage_usage&apos; const</to><enabled>Y</enabled> </hop>  <hop> <from>add &apos;user_storage_usage&apos; const</from><to>Insert &#47; Update owner changed</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Main</from><to>Fix perv kuser id</to><enabled>Y</enabled> </hop>  <hop> <from>Fix perv kuser id</from><to>filter unmodified owner</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified owner</from><to>get date and hour</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Main</from><to>Filter rows - deleted entries</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows - deleted entries</from><to>get deleted date and value</to><enabled>Y</enabled> </hop>  <hop> <from>get deleted date and value</from><to>distinct deleted date and rows</to><enabled>Y</enabled> </hop>  <hop> <from>distinct deleted date and rows</from><to>Get System Info</to><enabled>Y</enabled> </hop>  <hop> <from>Get System Info</from><to>aggr_name_constant</to><enabled>Y</enabled> </hop>  <hop> <from>aggr_name_constant</from><to>Insert &#47; Update partner storage</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update partner storage</from><to>Insert &#47; Update user storage</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update user storage</from><to>duplicate u_storage key</to><enabled>Y</enabled> </hop>  <hop> <from>duplicate u_storage key</from><to>Write to log on u_storage upsert error</to><enabled>Y</enabled> </hop>  <hop> <from>duplicate u_storage key</from><to>duplicate u_storage error</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update owner changed</from><to>duplicate u_storage key 2</to><enabled>Y</enabled> </hop>  <hop> <from>duplicate u_storage key 2</from><to>Write to log on u_storage upsert error 2</to><enabled>Y</enabled> </hop>  <hop> <from>duplicate u_storage key 2</from><to>duplicate u_storage error 2</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - editor_type</from><to>puser_id -&gt; is_admin_content</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Set defaults</from><to>Calc date and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc date and hour ids</from><to>Custom Data - height</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - height</from><to>Custom Data - width</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - width</from><to>Custom Data - storage_size</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - storage_size</from><to>Custom Data - conversion_quality</to><enabled>Y</enabled> </hop>  <hop> <from>Read Table entry</from><to>lookup entry</to><enabled>Y</enabled> </hop>  <hop> <from>lookup entry</from><to>filter unmodified entries</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified entries</from><to>Set defaults</to><enabled>Y</enabled> </hop>  <hop> <from>puser_id -&gt; is_admin_content</from><to>fix values</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - conversion_quality</from><to>fix conversion_quality</to><enabled>Y</enabled> </hop>  <hop> <from>fix conversion_quality</from><to>Custom Data - editor_type</to><enabled>Y</enabled> </hop>  <hop> <from>input</from><to>Read Table entry</to><enabled>Y</enabled> </hop>  <hop> <from>fix values</from><to>Set RI_IND 0</to><enabled>Y</enabled> </hop>  <hop> <from>entry_media_source id</from><to>entry_media_type id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_media_type id</from><to>entry_status id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_status id</from><to>entry_type id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_type id</from><to>moderation_status id</to><enabled>Y</enabled> </hop>  <hop> <from>moderation_status id</from><to>Insert &#47; Update Main</to><enabled>Y</enabled> </hop>  <hop> <from>editor_type text</from><to>entry_media_source id</to><enabled>Y</enabled> </hop>  <hop> <from>entry_type id</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>entry type display</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>Write to log on upsert error</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Main</from><to>Filter duplicate key errors</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI_IND 0</from><to>editor_type text</to><enabled>Y</enabled> </hop>  <hop> <from>get date and hour</from><to>distinct date and hours</to><enabled>Y</enabled> </hop>  <hop> <from>distinct date and hours</from><to>get now</to><enabled>Y</enabled> </hop>  <hop> <from>get now</from><to>add &apos;user_storage_usage&apos; const</to><enabled>Y</enabled> </hop>  <hop> <from>add &apos;user_storage_usage&apos; const</from><to>Insert &#47; Update owner changed</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Main</from><to>Fix perv kuser id</to><enabled>Y</enabled> </hop>  <hop> <from>Fix perv kuser id</from><to>filter unmodified owner</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified owner</from><to>get date and hour</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Main</from><to>Filter rows - deleted entries</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows - deleted entries</from><to>get deleted date and value</to><enabled>Y</enabled> </hop>  <hop> <from>get deleted date and value</from><to>distinct deleted date and rows</to><enabled>Y</enabled> </hop>  <hop> <from>distinct deleted date and rows</from><to>Get System Info</to><enabled>Y</enabled> </hop>  <hop> <from>Get System Info</from><to>aggr_name_constant</to><enabled>Y</enabled> </hop>  <hop> <from>aggr_name_constant</from><to>Insert &#47; Update partner storage</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update partner storage</from><to>Insert &#47; Update user storage</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update user storage</from><to>duplicate u_storage key</to><enabled>Y</enabled> </hop>  <hop> <from>duplicate u_storage key</from><to>Write to log on u_storage upsert error</to><enabled>Y</enabled> </hop>  <hop> <from>duplicate u_storage key</from><to>duplicate u_storage error</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update owner changed</from><to>duplicate u_storage key 2</to><enabled>Y</enabled> </hop>  <hop> <from>duplicate u_storage key 2</from><to>Write to log on u_storage upsert error 2</to><enabled>Y</enabled> </hop>  <hop> <from>duplicate u_storage key 2</from><to>duplicate u_storage error 2</to><enabled>Y</enabled> </hop>  <hop> <from>Custom Data - editor_type</from><to>puser_id -&gt; is_admin_content</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Calc date and hour ids</name>
     <type>Formula</type>
@@ -594,34 +594,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>140</xloc>
       <yloc>280</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter null categories</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to/>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>category</leftvalue>
- <function>IS NOT NULL</function>
- <rightvalue/>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1005</xloc>
-      <yloc>450</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1730,46 +1702,6 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
     </step>
 
   <step>
-    <name>categories lookup</name>
-    <type>ConcurrentSafeCombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <schema/>
-      <table>dwh_dim_categories</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
-      <commit>1</commit>
-      <cache_size>9999</cache_size>
-      <replace>N</replace>
-      <crc>N</crc>
-      <crcfield>hashcode</crcfield>
-      <fields>
-        <key>
-          <name>category</name>
-          <lookup>category_name</lookup>
-        </key>
-        <return>
-          <name>category_id</name>
-          <creation_method>autoinc</creation_method>
-          <use_autoinc>Y</use_autoinc>
-        </return>
-      </fields>
-      <sequence/>
-      <last_update_field/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1008</xloc>
-      <yloc>513</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>distinct date and hours</name>
     <type>SortRows</type>
     <description/>
@@ -2036,69 +1968,6 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>400</xloc>
       <yloc>420</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>entry_categories upsert</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>dwh_dim_entry_categories</table>
-      <key>
-        <name>category_id</name>
-        <field>category_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id</name>
-        <field>entry_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>partner_id</name>
-        <field>partner_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>category_id</name>
-        <rename>category_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>entry_id</name>
-        <rename>id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>partner_id</name>
-        <rename>partner_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>updated_at</name>
-        <rename>updated_at</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1010</xloc>
-      <yloc>589</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2380,7 +2249,7 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
 	fixed_width=width;
 
 
-if (current_kuser_id != null &amp;&amp; Number(current_kuser_id) != Number(kuser_id))
+if (current_kuser_id != null &amp;&amp; Number(current_kuser_id) != Number(kuser_id) &amp;&amp; int_id &lt;&gt; -1)
 {
 	kuser_updated_date_id = updated_date_id;
 	prev_kuser_id = current_kuser_id;
@@ -2569,6 +2438,12 @@ if (current_kuser_id != null &amp;&amp; Number(current_kuser_id) != Number(kuser
         <default/>
         <type>Integer</type>
       </value>
+      <value>
+        <name>int_id</name>
+        <rename>current_int_id</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -2639,61 +2514,6 @@ if (current_kuser_id != null &amp;&amp; Number(current_kuser_id) != Number(kuser
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1000</xloc>
       <yloc>140</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>split categories to levels</name>
-    <type>SplitFieldToRows3</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-   <splitfield>categories</splitfield>
-   <delimiter>,</delimiter>
-   <newfield>category</newfield>
-   <rownum>N</rownum>
-   <rownum_field/>
-   <resetrownumber>Y</resetrownumber>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1005</xloc>
-      <yloc>313</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>trim category</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel/>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47;Script here
-
-category = substr(trim(category), 0, 333)</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>category</name>
-        <rename>category</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1004</xloc>
-      <yloc>389</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
