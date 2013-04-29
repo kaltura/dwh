@@ -68,7 +68,8 @@ BEGIN
                                 DECLARE v_created_date_id INT(11);
                                 DECLARE done INT DEFAULT 0;
                                 DECLARE days_to_aggregate CURSOR FOR 
-                                SELECT DISTINCT(created_date_id) FROM kalturadw.dwh_fact_convert_job WHERE updated_date_id = p_date_id;
+                                SELECT DISTINCT(created_date_id) FROM kalturadw.dwh_fact_convert_job WHERE updated_date_id = p_date_id
+                                AND MONTH(DATE(created_date_id) + INTERVAL 1 MONTH) >=  MONTH(DATE(p_date_id));
                                 DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
                                 
                                 OPEN days_to_aggregate;
