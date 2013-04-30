@@ -288,7 +288,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath + output file creation command</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Trim URL</to><enabled>Y</enabled> </hop>  <hop> <from>Mapping (sub-transformation)</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>Text file input</from><to>Mapping (sub-transformation)</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich rows</from><to>Filter vaild rows</to><enabled>Y</enabled> </hop>  <hop> <from>Trim URL</from><to>Get bandwidth_source_name</to><enabled>Y</enabled> </hop>  <hop> <from>Filter ignored lines</from><to>Ignored line</to><enabled>Y</enabled> </hop>  <hop> <from>Filter ignored lines</from><to>Trim Line and Error reason</to><enabled>Y</enabled> </hop>  <hop> <from>Find ignored lines</from><to>Filter ignored lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file for enrichment</from><to>Enrich rows</to><enabled>Y</enabled> </hop>  <hop> <from>Trim Line and Error reason</from><to>Get Process ID</to><enabled>Y</enabled> </hop>  <hop> <from>Get Process ID</from><to>Insert invalid ds line</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>ip to location lookup error</to><enabled>Y</enabled> </hop>  <hop> <from>Get numeric IP - BW</from><to>Get IP location - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get bandwidth_source_name</from><to>Get numeric IP - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path</from><to>create output file_name</to><enabled>Y</enabled> </hop>  <hop> <from>create output file_name</from><to>Bandwdith Text file output</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath + output file creation command</from><to>create output file</to><enabled>Y</enabled> </hop>  <hop> <from>create output file</from><to>Text file input</to><enabled>Y</enabled> </hop>  <hop> <from>Filter vaild rows</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Filter vaild rows</from><to>Find ignored lines</to><enabled>Y</enabled> </hop>  <hop> <from>Parse user agent</from><to>Get Cycles Path</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Enrich rows</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>get bandwidth source sql</to><enabled>Y</enabled> </hop>  <hop> <from>get bandwidth source sql</from><to>Get bandwidth source</to><enabled>Y</enabled> </hop>  <hop> <from>Get bandwidth source</from><to>Parse user agent</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Get cycle and file</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>set file fullpath + output file creation command</to><enabled>Y</enabled> </hop>  <hop> <from>Select values</from><to>Trim URL</to><enabled>Y</enabled> </hop>  <hop> <from>Mapping (sub-transformation)</from><to>validate raw input</to><enabled>Y</enabled> </hop>  <hop> <from>Text file input</from><to>Mapping (sub-transformation)</to><enabled>Y</enabled> </hop>  <hop> <from>Enrich rows</from><to>Filter vaild rows</to><enabled>Y</enabled> </hop>  <hop> <from>Trim URL</from><to>Get bandwidth_source_name</to><enabled>Y</enabled> </hop>  <hop> <from>Filter ignored lines</from><to>Ignored line</to><enabled>Y</enabled> </hop>  <hop> <from>Filter ignored lines</from><to>Trim Line and Error reason</to><enabled>Y</enabled> </hop>  <hop> <from>Find ignored lines</from><to>Filter ignored lines</to><enabled>Y</enabled> </hop>  <hop> <from>Get cycle and file for enrichment</from><to>Enrich rows</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>ip to location lookup error</to><enabled>Y</enabled> </hop>  <hop> <from>Get numeric IP - BW</from><to>Get IP location - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get bandwidth_source_name</from><to>Get numeric IP - BW</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path</from><to>create output file_name</to><enabled>Y</enabled> </hop>  <hop> <from>create output file_name</from><to>Bandwdith Text file output</to><enabled>Y</enabled> </hop>  <hop> <from>set file fullpath + output file creation command</from><to>create output file</to><enabled>Y</enabled> </hop>  <hop> <from>create output file</from><to>Text file input</to><enabled>Y</enabled> </hop>  <hop> <from>Filter vaild rows</from><to>Select values</to><enabled>Y</enabled> </hop>  <hop> <from>Filter vaild rows</from><to>Find ignored lines</to><enabled>Y</enabled> </hop>  <hop> <from>Parse user agent</from><to>Get Cycles Path</to><enabled>Y</enabled> </hop>  <hop> <from>validate raw input</from><to>Enrich rows</to><enabled>Y</enabled> </hop>  <hop> <from>Get IP location - BW</from><to>get bandwidth source sql</to><enabled>Y</enabled> </hop>  <hop> <from>get bandwidth source sql</from><to>Get bandwidth source</to><enabled>Y</enabled> </hop>  <hop> <from>Get bandwidth source</from><to>Parse user agent</to><enabled>Y</enabled> </hop>  <hop> <from>Trim Line and Error reason</from><to>Insert invalid ds line</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Bandwdith Text file output</name>
     <type>TextFileOutput</type>
@@ -716,38 +716,6 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai_vo
     </step>
 
   <step>
-    <name>Get Process ID</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>process_id</name>
-        <variable>${ProcessID}</variable>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>0</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>734</xloc>
-      <yloc>549</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Get Variables</name>
     <type>GetVariable</type>
     <description/>
@@ -811,6 +779,31 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai_vo
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>152</xloc>
       <yloc>25</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get bandwidth source</name>
+    <type>DynamicSQLRow</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>KalturaDW</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select 1 bandwidth_source_id</sql>
+    <outer_join>Y</outer_join>
+    <replace_vars>N</replace_vars>
+    <sql_fieldname>bandwidth_source_id_sql</sql_fieldname>
+    <query_only_on_change>Y</query_only_on_change>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1119</xloc>
+      <yloc>261</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -996,7 +989,7 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     <directory_path/>
     <mappings>
       <input>
-    <mapping>    <input_step>Get Process ID</input_step>
+    <mapping>    <input_step>Trim Line and Error reason</input_step>
     <output_step>Mapping input specification</output_step>
     <main_path>Y</main_path>
     <rename_on_output>N</rename_on_output>
@@ -1019,8 +1012,8 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     <allow_multiple_output>N</allow_multiple_output>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>737</xloc>
-      <yloc>633</yloc>
+      <xloc>734</xloc>
+      <yloc>565</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1359,6 +1352,42 @@ var url = substr(url, 0, 200);</jsScript_script>
     </step>
 
   <step>
+    <name>get bandwidth source sql</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#47;&#47;Script here
+
+var bandwidth_source_id_sql=null;
+
+var bandwidth_source_id_sql = &quot;SELECT bandwidth_source_id FROM kalturadw.dwh_dim_http_delivery_source where process_id = &quot; + process_id + &quot; AND &apos;&quot; + file_name + &quot;&apos; REGEXP file_regex&quot;;
+
+
+</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>bandwidth_source_id_sql</name>
+        <rename>bandwidth_source_id_sql</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1040</xloc>
+      <yloc>262</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>ip to location lookup error</name>
     <type>WriteToLog</type>
     <description/>
@@ -1482,67 +1511,6 @@ var error_reason=null;
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>726</xloc>
       <yloc>33</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get bandwidth source</name>
-    <type>DynamicSQLRow</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select 1 bandwidth_source_id</sql>
-    <outer_join>Y</outer_join>
-    <replace_vars>N</replace_vars>
-    <sql_fieldname>bandwidth_source_id_sql</sql_fieldname>
-    <query_only_on_change>Y</query_only_on_change>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1119</xloc>
-      <yloc>261</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>get bandwidth source sql</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47;Script here
-
-var bandwidth_source_id_sql=null;
-
-var bandwidth_source_id_sql = &quot;SELECT bandwidth_source_id FROM kalturadw.dwh_dim_http_delivery_source where process_id = &quot; + process_id + &quot; AND &apos;&quot; + file_name + &quot;&apos; REGEXP file_regex&quot;;
-
-
-</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>bandwidth_source_id_sql</name>
-        <rename>bandwidth_source_id_sql</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1040</xloc>
-      <yloc>262</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
