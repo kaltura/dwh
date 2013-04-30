@@ -1093,12 +1093,7 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     <directory_path/>
     <mappings>
       <input>
-    <mapping>    <input_step>Database lookup</input_step>
-    <output_step>Mapping input specification</output_step>
-    <main_path>Y</main_path>
-    <rename_on_output>N</rename_on_output>
-    <description/>
-    </mapping>      </input>
+      </input>
       <output>
     <mapping>    <input_step>Mapping output specification</input_step>
     <output_step>Get Cycles Path</output_step>
