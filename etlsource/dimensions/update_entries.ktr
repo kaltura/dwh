@@ -2249,7 +2249,7 @@ if (width&gt;0 &amp;&amp; width&lt;100000)
 	fixed_width=width;
 
 
-if (current_kuser_id != null &amp;&amp; Number(current_kuser_id) != Number(kuser_id) &amp;&amp; int_id &lt;&gt; -1)
+if (current_kuser_id != null &amp;&amp; Number(current_kuser_id) != Number(kuser_id) &amp;&amp; current_int_id != -1)
 {
 	kuser_updated_date_id = updated_date_id;
 	prev_kuser_id = current_kuser_id;
