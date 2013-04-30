@@ -205,6 +205,7 @@ mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_flavor_params_output.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_media_info.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_user_agent.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_bandwidth_source.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_http_delivery_source.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_domain_referrer.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_referrer.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job.sql
