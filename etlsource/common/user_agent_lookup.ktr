@@ -462,8 +462,13 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var ua = new Packages.nl.bitwalker.useragentutils.UserAgent(user_agent);
+        <jsScript_script>
+if (user_agent == null)
+{
+	user_agent = &quot;&quot;;
+}
 
+var ua = new Packages.nl.bitwalker.useragentutils.UserAgent(user_agent);
 
 var browser = ua.getBrowser();
 var browserVer = ua.getBrowserVersion();
