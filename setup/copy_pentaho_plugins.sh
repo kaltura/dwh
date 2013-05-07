@@ -17,5 +17,6 @@ rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/MappingFieldRunner42/MappingF
 rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/GetFTPFileNames42/GetFTPFileNames $KITCHEN/plugins/steps/
 rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/FetchFTPFile42/FetchFTPFile $KITCHEN/plugins/steps/
 rsync -av --exclude=.svn $ROOT_DIR/pentaho-plugins/DimLookup42/DimLookup $KITCHEN/plugins/steps/
+chown -R kaltura.kaltura $ROOT_DIR/pentaho-plugins/resources
 rsync -avpog --exclude=.svn $ROOT_DIR/pentaho-plugins/resources/* $KITCHEN/libext/
 chown -R kaltura.kaltura $KITCHEN/plugins
