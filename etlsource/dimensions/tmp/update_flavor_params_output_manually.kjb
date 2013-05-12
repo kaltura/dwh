@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>update_flavor_params_manually</name>
+  <name>update_flavor_params_output_manually</name>
     <description/>
     <extended_description/>
     <job_version/>
@@ -259,12 +259,12 @@
       <yloc>96</yloc>
       </entry>
     <entry>
-      <name>Update flavor params manually</name>
+      <name>Update flavor params output manually</name>
       <description>Transformation</description>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${EtlBasePath}&#47;dimensions&#47;tmp&#47;update_flavor_params_manually.ktr</filename>
+      <filename>${EtlBasePath}&#47;dimensions&#47;tmp&#47;update_flavor_params_output_manually.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -316,7 +316,7 @@
     </hop>
     <hop>
       <from>Write To Log 1</from>
-      <to>Update flavor params manually</to>
+      <to>Update flavor params output manually</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
