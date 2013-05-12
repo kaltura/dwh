@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>update_flavor_asset_manually</name>
+    <name>update_flavor_params_manually</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -62,9 +62,9 @@
     <clusterschemas>
     </clusterschemas>
   <created_user/>
-  <created_date>2012&#47;01&#47;19 14:09:17.618</created_date>
+  <created_date>2012&#47;01&#47;19 14:09:30.801</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2010&#47;11&#47;25 18:14:42.171</modified_date>
+  <modified_date>2010&#47;11&#47;25 11:43:06.881</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -263,39 +263,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Read Flavor Asset</from><to>Set Defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Get Now</from><to>Insert &#47; Update Flavor Asset</to><enabled>Y</enabled> </hop>  <hop> <from>Set Defaults</from><to>Set RI IND 0</to><enabled>Y</enabled> </hop>  <hop> <from>video codec text</from><to>Get Now</to><enabled>Y</enabled> </hop>  <hop> <from>asset status id</from><to>file extension text</to><enabled>Y</enabled> </hop>  <hop> <from>file extension text</from><to>container format text</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI IND 0</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>tag dimension</from><to>tag insert</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - split stream</to><enabled>Y</enabled> </hop>  <hop> <from>Dummy - split stream</from><to>asset status id</to><enabled>Y</enabled> </hop>  <hop> <from>Dummy - split stream</from><to>tags is not null</to><enabled>Y</enabled> </hop>  <hop> <from>tags is not null</from><to>split tags</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>Filter duplicate key errors</from><to>Write to log on upsert error</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Flavor Asset</from><to>Filter duplicate key errors</to><enabled>Y</enabled> </hop>  <hop> <from>get deleted date and value</from><to>distinct deleted date and rows</to><enabled>Y</enabled> </hop>  <hop> <from>distinct deleted date and rows</from><to>Get System Info</to><enabled>Y</enabled> </hop>  <hop> <from>Get System Info</from><to>aggr_name_constant</to><enabled>Y</enabled> </hop>  <hop> <from>aggr_name_constant</from><to>Insert &#47; Update partner storage</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update partner storage</from><to>Insert &#47; Update user storage</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Flavor Asset</from><to>Filter rows - deleted flavors</to><enabled>Y</enabled> </hop>  <hop> <from>Filter rows - deleted flavors</from><to>Calc date and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Calc date and hour ids</from><to>get deleted date and value</to><enabled>Y</enabled> </hop>  <hop> <from>split tags</from><to>substr tag</to><enabled>Y</enabled> </hop>  <hop> <from>substr tag</from><to>tag dimension</to><enabled>Y</enabled> </hop>  <hop> <from>container format text</from><to>video codec text</to><enabled>Y</enabled> </hop>  </order>
-  <step>
-    <name>Calc date and hour ids</name>
-    <type>Formula</type>
-    <description/>
-    <distribute>N</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <formula><field_name>updated_hour_id</field_name>
-<formula_string>hour([updated_at])</formula_string>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-       <formula><field_name>updated_date_id</field_name>
-<formula_string>10000*year([updated_at])+100*month([updated_at])+day([updated_at])</formula_string>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>759</xloc>
-      <yloc>436</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
+  <hop> <from>Read flavor params</from><to>Set Defaults</to><enabled>Y</enabled> </hop>  <hop> <from>Set RI IND 0</from><to>Get Now</to><enabled>Y</enabled> </hop>  <hop> <from>Insert &#47; Update Flavor Params</from><to>Lookup duplicate key error</to><enabled>Y</enabled> </hop>  <hop> <from>video codec text</from><to>Set RI IND 0</to><enabled>Y</enabled> </hop>  <hop> <from>creation_mode id</from><to>Insert &#47; Update Flavor Params</to><enabled>Y</enabled> </hop>  <hop> <from>Get Now</from><to>ready_behavior id</to><enabled>Y</enabled> </hop>  <hop> <from>ready_behavior id</from><to>creation_mode id</to><enabled>Y</enabled> </hop>  <hop> <from>audio codec text</from><to>video codec text</to><enabled>Y</enabled> </hop>  <hop> <from>flavor format text</from><to>audio codec text</to><enabled>Y</enabled> </hop>  <hop> <from>Database lookup</from><to>filter unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>Dummy - unmodified</to><enabled>Y</enabled> </hop>  <hop> <from>Set Defaults</from><to>Database lookup</to><enabled>Y</enabled> </hop>  <hop> <from>filter unmodified</from><to>flavor format text</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Database lookup</name>
     <type>DBLookup</type>
@@ -312,7 +280,7 @@
     <cache_size>0</cache_size>
     <lookup>
       <schema/>
-      <table>dwh_dim_flavor_asset</table>
+      <table>dwh_dim_flavor_params</table>
       <orderby/>
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
@@ -323,7 +291,7 @@
         <name2/>
       </key>
       <key>
-        <name>VERSION</name>
+        <name>version</name>
         <field>version</field>
         <condition>=</condition>
         <name2/>
@@ -337,26 +305,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>360</xloc>
-      <yloc>100</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Dummy - split stream</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>N</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>580</xloc>
-      <yloc>100</yloc>
+      <xloc>303</xloc>
+      <yloc>102</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -373,64 +323,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>480</xloc>
-      <yloc>200</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter duplicate key errors</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>duplicate key error</send_true_to>
-<send_false_to>Write to log on upsert error</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>desc</leftvalue>
- <function>CONTAINS</function>
- <rightvalue/>
- <value><name>constant</name><type>String</type><text>Duplicate</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1165</xloc>
-      <yloc>451</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter rows - deleted flavors</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to/>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>STATUS</leftvalue>
- <function>=</function>
- <rightvalue/>
- <value><name>constant</name><type>Integer</type><text>3</text><length>-1</length><precision>0</precision><isnull>N</isnull><mask>#;-#</mask></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>760</xloc>
-      <yloc>362</yloc>
+      <xloc>437</xloc>
+      <yloc>204</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -454,41 +348,17 @@
 </formula>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1230</xloc>
-      <yloc>233</yloc>
+      <xloc>928</xloc>
+      <yloc>101</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Get System Info</name>
-    <type>SystemInfo</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>now</name>
-        <type>system date (variable)</type>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>758</xloc>
-      <yloc>639</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Insert &#47; Update Flavor Asset</name>
+    <name>Insert &#47; Update Flavor Params</name>
     <type>InsertUpdate</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
@@ -499,10 +369,16 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema/>
-      <table>dwh_dim_flavor_asset</table>
+      <table>dwh_dim_flavor_params</table>
       <key>
         <name>id</name>
         <field>id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>version</name>
+        <field>version</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -512,9 +388,9 @@
         <update>N</update>
       </value>
       <value>
-        <name>int_id</name>
-        <rename>int_id</rename>
-        <update>Y</update>
+        <name>version</name>
+        <rename>version</rename>
+        <update>N</update>
       </value>
       <value>
         <name>partner_id</name>
@@ -522,28 +398,68 @@
         <update>Y</update>
       </value>
       <value>
-        <name>entry_id</name>
-        <rename>entry_id</rename>
+        <name>name</name>
+        <rename>NAME</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>flavor_params_id</name>
-        <rename>flavor_params_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>status</name>
-        <rename>STATUS</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>version</name>
-        <rename>VERSION</rename>
+        <name>tags</name>
+        <rename>tags</rename>
         <update>Y</update>
       </value>
       <value>
         <name>description</name>
         <rename>description</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ready_behavior</name>
+        <rename>ready_behavior</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>is_default</name>
+        <rename>is_default</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>flavor_format_id</name>
+        <rename>flavor_format_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>video_codec_id</name>
+        <rename>video_codec_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>video_bitrate</name>
+        <rename>video_bitrate</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>audio_codec_id</name>
+        <rename>audio_codec_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>audio_bitrate</name>
+        <rename>audio_bitrate</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>audio_channels</name>
+        <rename>audio_channels</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>audio_sample_rate</name>
+        <rename>audio_sample_rate</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>audio_resolution</name>
+        <rename>audio_resolution</rename>
         <update>Y</update>
       </value>
       <value>
@@ -557,43 +473,68 @@
         <update>Y</update>
       </value>
       <value>
-        <name>bitrate</name>
-        <rename>bitrate</rename>
-        <update>Y</update>
-      </value>
-      <value>
         <name>frame_rate</name>
         <rename>frame_rate</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>size</name>
-        <rename>size</rename>
+        <name>gop_size</name>
+        <rename>gop_size</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>is_original</name>
-        <rename>is_original</rename>
+        <name>two_pass</name>
+        <rename>two_pass</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>file_ext_id</name>
-        <rename>file_ext_id</rename>
+        <name>conversion_engines</name>
+        <rename>conversion_engines</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>container_format_id</name>
-        <rename>container_format_id</rename>
+        <name>conversion_engines_extra_params</name>
+        <rename>conversion_engines_extra_params</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>video_codec_id</name>
-        <rename>video_codec_id</rename>
+        <name>view_order</name>
+        <rename>view_order</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>bypass_by_extension</name>
+        <rename>bypass_by_extension</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>creation_mode</name>
+        <rename>creation_mode</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>deinterlice</name>
+        <rename>deinterlice</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>rotate</name>
+        <rename>rotate</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>operators</name>
+        <rename>operators</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>engine_version</name>
+        <rename>engine_version</rename>
         <update>Y</update>
       </value>
       <value>
         <name>ri_ind</name>
-        <rename>ri_ind_0</rename>
+        <rename>RI_IND_0</rename>
         <update>Y</update>
       </value>
       <value>
@@ -604,11 +545,6 @@
       <value>
         <name>updated_at</name>
         <rename>updated_at</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>deleted_at</name>
-        <rename>deleted_at</rename>
         <update>Y</update>
       </value>
       <value>
@@ -624,15 +560,15 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1233</xloc>
-      <yloc>356</yloc>
+      <xloc>1322</xloc>
+      <yloc>101</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Insert &#47; Update partner storage</name>
-    <type>InsertUpdate</type>
+    <name>Lookup duplicate key error</name>
+    <type>Dummy</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -640,124 +576,16 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>aggr_managment</table>
-      <key>
-        <name>STORAGE_USAGE_AGGR_NAME</name>
-        <field>aggr_name</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>updated_date_id</name>
-        <field>date_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>updated_hour_id</name>
-        <field>hour_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>data_insert_time</name>
-        <rename>now</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>date_id</name>
-        <rename>updated_date_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>hour_id</name>
-        <rename>updated_hour_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>aggr_name</name>
-        <rename>STORAGE_USAGE_AGGR_NAME</rename>
-        <update>N</update>
-      </value>
-    </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>760</xloc>
-      <yloc>780</yloc>
+      <xloc>1326</xloc>
+      <yloc>212</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Insert &#47; Update user storage</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>aggr_managment</table>
-      <key>
-        <name>USER_STORAGE_USAGE_AGGR_NAME</name>
-        <field>aggr_name</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>updated_date_id</name>
-        <field>date_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>updated_hour_id</name>
-        <field>hour_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>data_insert_time</name>
-        <rename>now</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>date_id</name>
-        <rename>updated_date_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>hour_id</name>
-        <rename>updated_hour_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>aggr_name</name>
-        <rename>USER_STORAGE_USAGE_AGGR_NAME</rename>
-        <update>N</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>760</xloc>
-      <yloc>856</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Read Flavor Asset</name>
+    <name>Read flavor params</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -767,31 +595,12 @@
            <schema_name/>
            </partitioning>
     <connection>Kaltura</connection>
-    <sql>SELECT 	id,
-	int_id,
-	partner_id,
-	tags,
-	created_at,
-	updated_at,
-	deleted_at,
-	entry_id,
-	flavor_params_id,
-	STATUS,
-	VERSION,
-	description,
-	width,
-	height,
-	size,
-	is_original,
-	file_ext,
-	container_format,
-	bitrate,
-	frame_rate,
-	video_codec_id video_codec
-	FROM flavor_asset
+    <sql>SELECT 	id, version, partner_id, NAME, tags, created_at, updated_at, deleted_at, description, ready_behavior, is_default, FORMAT, video_codec, video_bitrate, audio_codec, 
+ audio_bitrate, audio_channels, audio_sample_rate, 
+ audio_resolution, width, height, frame_rate, gop_size, two_pass, conversion_engines, conversion_engines_extra_params, view_order, bypass_by_extension, creation_mode, deinterlice, rotate, operators, engine_version 
+FROM flavor_params
 WHERE updated_at between STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
-and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
-</sql>
+and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -799,7 +608,7 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>60</xloc>
+      <xloc>120</xloc>
       <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
@@ -828,7 +637,7 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
         <mask/>
         </field>
       <field>
-        <name>int_id</name>
+        <name>version</name>
         <value>-1</value>
         <mask/>
         </field>
@@ -838,22 +647,27 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
         <mask/>
         </field>
       <field>
-        <name>entry_id</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      <field>
-        <name>flavor_params_id</name>
-        <value>-1</value>
-        <mask/>
-        </field>
-      <field>
-        <name>STATUS</name>
+        <name>ready_behavior</name>
         <value>-2</value>
         <mask/>
         </field>
       <field>
-        <name>VERSION</name>
+        <name>is_default</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>video_bitrate</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>audio_sample_rate</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>audio_resolution</name>
         <value>-1</value>
         <mask/>
         </field>
@@ -868,34 +682,64 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
         <mask/>
         </field>
       <field>
-        <name>size</name>
+        <name>frame_rate</name>
         <value>-1</value>
         <mask/>
         </field>
       <field>
-        <name>is_original</name>
+        <name>gop_size</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>two_pass</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>view_order</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>creation_mode</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>deinterlice</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>rotate</name>
+        <value>-1</value>
+        <mask/>
+        </field>
+      <field>
+        <name>operators</name>
+        <value/>
+        <mask/>
+        </field>
+      <field>
+        <name>engine_version</name>
         <value>-1</value>
         <mask/>
         </field>
       <field>
         <name>created_at</name>
-        <value>01-01-2099</value>
+        <value>01-01-1999</value>
         <mask>dd-MM-yyyy</mask>
         </field>
       <field>
         <name>updated_at</name>
-        <value>01-01-2099</value>
-        <mask>dd-MM-yyyy</mask>
-        </field>
-      <field>
-        <name>deleted_at</name>
-        <value>01-01-2099</value>
+        <value>01-01-1999</value>
         <mask>dd-MM-yyyy</mask>
         </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
+      <xloc>220</xloc>
       <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
@@ -906,109 +750,44 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
     <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
-    <copies>3</copies>
+    <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
     <fields>
       <field>
-        <name>ri_ind_0</name>
+        <name>RI_IND_0</name>
         <type>Integer</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif>0</nullif>
-        <length>0</length>
-        <precision>0</precision>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>240</xloc>
-      <yloc>100</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Write to log on upsert error</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <logmessage/>
-    <fields>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1298</xloc>
-      <yloc>448</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>aggr_name_constant</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>USER_STORAGE_USAGE_AGGR_NAME</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>user_storage_usage</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>STORAGE_USAGE_AGGR_NAME</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>storage_usage</nullif>
         <length>-1</length>
         <precision>-1</precision>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>760</xloc>
-      <yloc>710</yloc>
+      <xloc>830</xloc>
+      <yloc>99</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>asset status id</name>
+    <name>audio codec text</name>
     <type>ConcurrentSafeCombinationLookup</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
       <schema/>
-      <table>dwh_dim_asset_status</table>
+      <table>dwh_dim_audio_codec</table>
       <connectionRead>KalturaReadDW</connectionRead>
       <connectionWrite>KalturaDW</connectionWrite>
       <commit>1</commit>
@@ -1018,8 +797,48 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
       <crcfield>hashcode</crcfield>
       <fields>
         <key>
-          <name>STATUS</name>
-          <lookup>asset_status_id</lookup>
+          <name>audio_codec</name>
+          <lookup>audio_codec</lookup>
+        </key>
+        <return>
+          <name>audio_codec_id</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>644</xloc>
+      <yloc>105</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>creation_mode id</name>
+    <type>ConcurrentSafeCombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dwh_dim_creation_mode</table>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>creation_mode</name>
+          <lookup>creation_mode_id</lookup>
         </key>
         <return>
           <name/>
@@ -1031,142 +850,7 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>693</xloc>
-      <yloc>102</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>container format text</name>
-    <type>ConcurrentSafeCombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <schema/>
-      <table>dwh_dim_container_format</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
-      <commit>1</commit>
-      <cache_size>9999</cache_size>
-      <replace>N</replace>
-      <crc>N</crc>
-      <crcfield>hashcode</crcfield>
-      <fields>
-        <key>
-          <name>container_format</name>
-          <lookup>container_format</lookup>
-        </key>
-        <return>
-          <name>container_format_id</name>
-          <creation_method>autoinc</creation_method>
-          <use_autoinc>Y</use_autoinc>
-        </return>
-      </fields>
-      <sequence/>
-      <last_update_field/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>931</xloc>
-      <yloc>99</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>distinct deleted date and rows</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <directory>%%java.io.tmpdir%%</directory>
-      <prefix>out</prefix>
-      <sort_size>1000000</sort_size>
-      <free_memory/>
-      <compress>N</compress>
-      <compress_variable/>
-      <unique_rows>Y</unique_rows>
-    <fields>
-      <field>
-        <name>updated_date_id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-      </field>
-      <field>
-        <name>updated_hour_id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>759</xloc>
-      <yloc>567</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>duplicate key error</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1045</xloc>
-      <yloc>450</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>file extension text</name>
-    <type>ConcurrentSafeCombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <schema/>
-      <table>dwh_dim_file_ext</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
-      <commit>1</commit>
-      <cache_size>9999</cache_size>
-      <replace>N</replace>
-      <crc>N</crc>
-      <crcfield>hashcode</crcfield>
-      <fields>
-        <key>
-          <name>file_ext</name>
-          <lookup>file_ext</lookup>
-        </key>
-        <return>
-          <name>file_ext_id</name>
-          <creation_method>autoinc</creation_method>
-          <use_autoinc>Y</use_autoinc>
-        </return>
-      </fields>
-      <sequence/>
-      <last_update_field/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>800</xloc>
+      <xloc>1171</xloc>
       <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1182,7 +866,7 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Dummy - split stream</send_true_to>
+<send_true_to>flavor format text</send_true_to>
 <send_false_to>Dummy - unmodified</send_false_to>
     <compare>
 <condition>
@@ -1194,97 +878,14 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>480</xloc>
-      <yloc>100</yloc>
+      <xloc>436</xloc>
+      <yloc>103</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>get deleted date and value</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>updated_date_id</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>updated_hour_id</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>760</xloc>
-      <yloc>504</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>split tags</name>
-    <type>SplitFieldToRows3</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-   <splitfield>tags</splitfield>
-   <delimiter>,</delimiter>
-   <newfield>tag</newfield>
-   <rownum>N</rownum>
-   <rownum_field/>
-   <resetrownumber>N</resetrownumber>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>678</xloc>
-      <yloc>193</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>substr tag</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47;Script here
-
-tag = substr(tag,0,49);
-</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>tag</name>
-        <rename>tag</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>751</xloc>
-      <yloc>197</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>tag dimension</name>
+    <name>flavor format text</name>
     <type>ConcurrentSafeCombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -1293,8 +894,48 @@ tag = substr(tag,0,49);
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <schema>kalturadw</schema>
-      <table>dwh_dim_tags</table>
+      <schema/>
+      <table>dwh_dim_flavor_format</table>
+      <connectionRead>KalturaReadDW</connectionRead>
+      <connectionWrite>KalturaDW</connectionWrite>
+      <commit>1</commit>
+      <cache_size>9999</cache_size>
+      <replace>Y</replace>
+      <crc>N</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>FORMAT</name>
+          <lookup>flavor_format</lookup>
+        </key>
+        <return>
+          <name>flavor_format_id</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>537</xloc>
+      <yloc>103</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>ready_behavior id</name>
+    <type>ConcurrentSafeCombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dwh_dim_ready_behavior</table>
       <connectionRead>KalturaReadDW</connectionRead>
       <connectionWrite>KalturaDW</connectionWrite>
       <commit>1</commit>
@@ -1304,101 +945,21 @@ tag = substr(tag,0,49);
       <crcfield>hashcode</crcfield>
       <fields>
         <key>
-          <name>tag</name>
-          <lookup>tag_name</lookup>
+          <name>ready_behavior</name>
+          <lookup>ready_behavior_id</lookup>
         </key>
         <return>
-          <name>tag_id</name>
-          <creation_method>autoinc</creation_method>
-          <use_autoinc>Y</use_autoinc>
+          <name/>
+          <creation_method>tablemax</creation_method>
+          <use_autoinc>N</use_autoinc>
         </return>
       </fields>
       <sequence/>
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>837</xloc>
-      <yloc>197</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>tag insert</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>KalturaDW</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>kalturadw</schema>
-      <table>dwh_dim_flavor_asset_tags</table>
-      <key>
-        <name>tag_id</name>
-        <field>tag_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id</name>
-        <field>flavor_asset_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>tag_id</name>
-        <rename>tag_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>flavor_asset_id</name>
-        <rename>id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>updated_at</name>
-        <rename>updated_at</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>927</xloc>
-      <yloc>196</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>tags is not null</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to/>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>tags</leftvalue>
- <function>IS NOT NULL</function>
- <rightvalue/>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>584</xloc>
-      <yloc>195</yloc>
+      <xloc>1043</xloc>
+      <yloc>102</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1437,21 +998,21 @@ tag = substr(tag,0,49);
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1163</xloc>
-      <yloc>100</yloc>
+      <xloc>744</xloc>
+      <yloc>105</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step_error_handling>
       <error>
-        <source_step>Insert &#47; Update Flavor Asset</source_step>
-        <target_step>Filter duplicate key errors</target_step>
+        <source_step>Insert &#47; Update Flavor Params</source_step>
+        <target_step>Lookup duplicate key error</target_step>
         <is_enabled>Y</is_enabled>
         <nr_valuename/>
-        <descriptions_valuename>desc</descriptions_valuename>
-        <fields_valuename>fields</fields_valuename>
-        <codes_valuename>codes</codes_valuename>
+        <descriptions_valuename/>
+        <fields_valuename/>
+        <codes_valuename/>
         <max_errors>-1</max_errors>
         <max_pct_errors>-1</max_pct_errors>
         <min_pct_rows>-1</min_pct_rows>
