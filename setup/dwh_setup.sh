@@ -54,20 +54,3 @@ if [ -z "$PW" ]; then
 else
 	$SETUP_ROOT_DIR/update.sh -k $KITCHEN -d $ROOT_DIR -u $USER -p $PW -h $HOST -P $PORT -r 1 -v 0
 fi
-
-OS_CRONTAB_DIR=/etc/cron.d
-
-#cp crontab file
-if [ "$(whoami)" != 'root' ]; then
-        echo "Installtion finished." 
-		echo "You must have root priveleges to configure cron."
-        su -c "/bin/bash $ROOT_DIR/setup/deploy_crontab.sh -d $ROOT_DIR -c $OS_CRONTAB_DIR" root
-        if [ ! $? == "0" ]; then
-		echo "Not root. exiting"
-		echo "To retry configuring cron - Execute as root: /bin/bash $ROOT_DIR/setup/deploy_crontab.sh -d $ROOT_DIR -c $OS_CRONTAB_DIR"
-	else
-		echo "Deployed cron successfully"
-        fi
-else
-	/bin/bash $ROOT_DIR/setup/deploy_crontab.sh -d $ROOT_DIR -c $OS_CRONTAB_DIR
-fi
