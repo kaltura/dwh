@@ -154,6 +154,8 @@ mysqlexec $DW_ROOT_DIR/dw_widget_security_type.sql
 mysqlexec $DW_ROOT_DIR/ip_ranges.sql
 mysqlexec $DW_ROOT_DIR/locations.sql
 mysqlexec $DW_ROOT_DIR/locations_init.sql
+mysqlexec $DW_ROOT_DIR/ip_ranges_init.sql
+mysqlexec $DW_ROOT_DIR/update_location_details.sql
 mysqlexec $DW_ROOT_DIR/time.sql
 mysqlexec $DW_ROOT_DIR/widget.sql
 mysqlexec $DW_ROOT_DIR/countries_states_view.sql
@@ -319,4 +321,5 @@ mysqlexec $DW_ROOT_DIR/fms/fms_dim_tables.sql
  
 mysqlexec $DW_ROOT_DIR/maintenance/populate_table_partitions.sql
 mysqlexec $DDL_SETUP_ROOT_DIR/populate_time_dim.sql
-mysqlexec $DDL_SETUP_ROOT_DIR/populate_dwh_dim_ip_ranges.sql
+
+
