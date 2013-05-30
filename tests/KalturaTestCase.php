@@ -106,7 +106,11 @@ abstract class KalturaTestCase extends PHPUnit_Framework_TestCase
                         {
 								if (($measure - $aggrGroups[$id]) > 0 and ($measure - $aggrGroups[$id]) < 1)
 								{
-									$measure = round($measure);
+									$measure = floor($measure);
+								}
+								if (($aggrGroups[$id] - $measure) > 0 and ($aggrGroups[$id] - $measure) < 1)
+								{
+									$measure = ceil($measure);
 								}
                                 $this->assertLessThanOrEqual($maxDiffInPercent,  abs(100 - ($measure / $aggrGroups[$id] * 100)),  "For the following group:" .$id. ".Aggr = ". $aggrGroups[$id] .". Fact = ".$measure);
                         }
