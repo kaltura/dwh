@@ -104,7 +104,7 @@ abstract class KalturaTestCase extends PHPUnit_Framework_TestCase
                         }
                         else
                         {
-								if ($measure - $aggrGroups[$id]) > 0 and (($measure - $aggrGroups[$id]) < 1)
+								if (($measure - $aggrGroups[$id]) > 0 and ($measure - $aggrGroups[$id]) < 1)
 								{
 									$measure = round($measure);
 								}
