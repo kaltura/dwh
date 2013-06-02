@@ -15,33 +15,63 @@ BEGIN
                 DROP TABLE IF EXISTS today_file_sync_subset; 
                 
                 CREATE TEMPORARY TABLE today_file_sync_subset AS
-                SELECT DISTINCT s.id, s.partner_id, IFNULL(a.entry_id, object_id) entry_id, object_id, object_type, object_sub_type, IFNULL(file_size, 0) file_size
+                SELECT DISTINCT s.id, s.partner_id, IFNULL(a.entry_id, object_id) entry_id, object_id, object_type, object_sub_type, s.created_at, s.status, IFNULL(file_size, 0) file_size
                 FROM kalturadw.dwh_dim_file_sync s LEFT OUTER JOIN kalturadw.dwh_dim_flavor_asset a
                 ON (object_type = 4 AND s.object_id = a.id AND a.entry_id IS NOT NULL AND a.ri_ind =0 AND s.partner_id = a.partner_id)
                 WHERE s.ready_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
                 AND object_type IN (1,4)
                 AND original = 1
                 AND s.STATUS IN (2,3,4)
+				AND s.dc IN (0,1)
                 AND s.partner_id NOT IN ( -1  , -2  , 0 , 99 );
                 
                 ALTER TABLE today_file_sync_subset ADD INDEX id (`id`);            
                 
+                DROP TABLE IF EXISTS today_latest_file_sync;
+                CREATE TEMPORARY TABLE today_latest_file_sync AS
+                SELECT MAX(created_at) created_at, partner_id, entry_id, object_id, object_type, object_sub_type FROM today_file_sync_subset
+                GROUP BY partner_id, entry_id, object_id, object_type, object_sub_type;
+                
                 DROP TABLE IF EXISTS today_file_sync_max_version_ids;
                 
                 CREATE TEMPORARY TABLE today_file_sync_max_version_ids AS
-                SELECT MAX(id) id, partner_id, entry_id, object_id, object_type, object_sub_type FROM today_file_sync_subset
-                GROUP BY partner_id, entry_id, object_id, object_type, object_sub_type;
+				SELECT today_file_sync_subset.id
+				FROM today_file_sync_subset, today_latest_file_sync
+				WHERE today_latest_file_sync.created_at = today_file_sync_subset.created_at
+				AND today_latest_file_sync.partner_id = today_file_sync_subset.partner_id
+				AND today_latest_file_sync.entry_id = today_file_sync_subset.entry_id
+				AND today_latest_file_sync.object_id = today_file_sync_subset.object_id
+				AND today_latest_file_sync.object_type = today_file_sync_subset.object_type
+				AND today_latest_file_sync.object_sub_type = today_file_sync_subset.object_sub_type;
                 
-                DROP TABLE IF EXISTS today_sizes;
-                CREATE TEMPORARY TABLE today_sizes AS
-                SELECT max_id.partner_id, max_id.entry_id, max_id.object_id, max_id.object_type, max_id.object_sub_type, original.file_size 
-                FROM today_file_sync_max_version_ids max_id, today_file_sync_subset original
-                WHERE max_id.id = original.id;
+				
+		DROP TABLE IF EXISTS today_sizes;
+		CREATE TEMPORARY TABLE today_sizes(
+			partner_id          INT(11) NOT NULL,
+			entry_id 			VARCHAR(60) NOT NULL,
+			object_id 			VARCHAR(60) NOT NULL,
+			object_type         TINYINT(4) NOT NULL,
+			object_sub_type     TINYINT(4) NOT NULL,
+			created_at          DATETIME NOT NULL,        
+			STATUS              TINYINT(4) NOT NULL,
+			file_size           BIGINT (20),
+			UNIQUE KEY `unique_key` (`partner_id`, `entry_id`, `object_id`, `object_type`, `object_sub_type`)
+		) ENGINE = MEMORY; 
 
-                ALTER TABLE today_sizes ADD UNIQUE INDEX unique_key (`partner_id`, `entry_id`, `object_id`, `object_type`, `object_sub_type`);
                 
+		INSERT INTO today_sizes(partner_id, entry_id, object_id, object_type, object_sub_type, created_at, STATUS, file_size)
+                SELECT original.partner_id, original.entry_id, original.object_id, original.object_type, original.object_sub_type, original.created_at, original.status, original.file_size 
+                FROM today_file_sync_max_version_ids max_id, today_file_sync_subset original
+                WHERE max_id.id = original.id
+				ORDER BY original.status DESC
+				ON DUPLICATE KEY UPDATE 
+					STATUS = VALUES(STATUS),
+					file_size = VALUES(file_size);
+
+                
+           
                 INSERT INTO today_sizes
-                                SELECT s.partner_id, IFNULL(a.entry_id, object_id) entry_id, object_id, object_type, object_sub_type, 0 file_size
+                                SELECT s.partner_id, IFNULL(a.entry_id, object_id) entry_id, object_id, object_type, object_sub_type, s.created_at, s.status, 0 file_size
                                 FROM kalturadw.dwh_dim_file_sync s LEFT OUTER JOIN kalturadw.dwh_dim_flavor_asset a
                                 ON (object_type = 4 AND s.object_id = a.id AND a.entry_id IS NOT NULL AND a.ri_ind =0 AND s.partner_id = a.partner_id)
                                 WHERE s.updated_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
@@ -50,9 +80,8 @@ BEGIN
                                 AND s.STATUS IN (3,4)
                                 AND s.partner_id NOT IN ( -1  , -2  , 0 , 99 )
                 ON DUPLICATE KEY UPDATE
-                                file_size = 0;       
-                
-				
+                                file_size = IF((VALUES(created_at) > today_sizes.created_at) OR (VALUES(created_at)=today_sizes.created_at AND today_sizes.STATUS IN (3,4)), 0, today_sizes.file_size);       			
+                                
                 DROP TABLE IF EXISTS deleted_flavors;
                 
                 CREATE TEMPORARY TABLE deleted_flavors AS 
@@ -66,6 +95,7 @@ BEGIN
                                 DECLARE v_deleted_flavor_entry_id VARCHAR(60);
                                 DECLARE v_deleted_flavor_id VARCHAR(60);
                                 DECLARE done INT DEFAULT 0;
+				DECLARE v_status TINYINT(4);
                                 DECLARE deleted_flavors_cursor CURSOR FOR 
                                 SELECT partner_id, entry_id, id  FROM deleted_flavors;
                                 DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
@@ -77,12 +107,21 @@ BEGIN
                                                 IF done THEN
                                                                 LEAVE read_loop;
                                                 END IF;
-                                                INSERT INTO today_sizes
-                                                                SELECT partner_id, v_deleted_flavor_entry_id, object_id, object_type, object_sub_type, 0 file_size
-                                                                FROM kalturadw.dwh_dim_file_sync
-                                                                WHERE object_id = v_deleted_flavor_id AND object_type = 4 AND ready_at < v_date AND file_size > 0
-                                                ON DUPLICATE KEY UPDATE
-                                                                file_size = VALUES(file_size);
+												
+												SELECT entry_status_id
+												INTO v_status
+												FROM kalturadw.dwh_dim_entries
+												WHERE entry_id = v_deleted_flavor_entry_id;
+												
+												IF v_STATUS <> 3 THEN
+													INSERT INTO today_sizes
+																	SELECT v_deleted_flavor_partner_id, v_deleted_flavor_entry_id, object_id, object_type, object_sub_type, MAX(created_at), 3 STATUS, 0 file_size
+																	FROM kalturadw.dwh_dim_file_sync
+																	WHERE object_id = v_deleted_flavor_id AND object_type = 4 AND ready_at < v_date AND file_size > 0
+																	GROUP BY object_id, object_type, object_sub_type
+													ON DUPLICATE KEY UPDATE
+																	file_size = VALUES(file_size);
+												END IF;
                                 END LOOP;
                                 CLOSE deleted_flavors_cursor;
                 END;
@@ -104,7 +143,7 @@ BEGIN
                 
                 DROP TABLE IF EXISTS yesterday_file_sync_subset; 
                 CREATE TEMPORARY TABLE yesterday_file_sync_subset AS
-                SELECT f.id, f.partner_id, f.object_id, f.object_type, f.object_sub_type, IFNULL(f.file_size, 0) file_size
+                SELECT f.id, f.partner_id, f.object_id, f.object_type, f.object_sub_type, f.created_at, IFNULL(f.file_size, 0) file_size
                 FROM today_sizes today, kalturadw.dwh_dim_file_sync f
                 WHERE f.object_id = today.object_id
                 AND f.partner_id = today.partner_id
@@ -112,17 +151,31 @@ BEGIN
                 AND f.object_sub_type = today.object_sub_type
                 AND f.ready_at < v_date
                 AND f.original = 1
+				AND f.dc IN (0,1)
                 AND f.STATUS IN (2,3,4);
                 
                 
-                DROP TABLE IF EXISTS yesterday_file_sync_max_version_ids;
-                CREATE TEMPORARY TABLE yesterday_file_sync_max_version_ids AS
-                SELECT MAX(id) id, partner_id, object_id, object_type, object_sub_type FROM yesterday_file_sync_subset
+                
+		DROP TABLE IF EXISTS yesterday_latest_file_sync;
+                CREATE TEMPORARY TABLE yesterday_latest_file_sync AS
+                SELECT MAX(created_at) created_at, partner_id, object_id, object_type, object_sub_type FROM yesterday_file_sync_subset
                 GROUP BY partner_id, object_id, object_type, object_sub_type;
                 
+                DROP TABLE IF EXISTS yesterday_file_sync_max_version_ids;
+                
+                CREATE TEMPORARY TABLE yesterday_file_sync_max_version_ids AS
+				SELECT yesterday_file_sync_subset.id
+				FROM yesterday_file_sync_subset, yesterday_latest_file_sync
+				WHERE yesterday_latest_file_sync.created_at = yesterday_file_sync_subset.created_at
+				AND yesterday_latest_file_sync.partner_id = yesterday_file_sync_subset.partner_id
+				AND yesterday_latest_file_sync.object_id = yesterday_file_sync_subset.object_id
+				AND yesterday_latest_file_sync.object_type = yesterday_file_sync_subset.object_type
+				AND yesterday_latest_file_sync.object_sub_type = yesterday_file_sync_subset.object_sub_type;
+                
+		
                 DROP TABLE IF EXISTS yesterday_sizes;
                 CREATE TEMPORARY TABLE yesterday_sizes AS
-                SELECT max_id.partner_id, max_id.object_id, max_id.object_type, max_id.object_sub_type, original.file_size 
+                SELECT original.partner_id, original.object_id, original.object_type, original.object_sub_type, original.file_size 
                 FROM yesterday_file_sync_max_version_ids max_id, yesterday_file_sync_subset original
                 WHERE max_id.id = original.id;
                 
