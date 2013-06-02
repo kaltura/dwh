@@ -10,7 +10,7 @@ use kalturadw;
 drop table if exists `dwh_dim_file_sync`;
 
 create table `dwh_dim_file_sync` (
-	`id` int (11),
+	`id` bigint(20),
 	`partner_id` int (11),
 	`object_type` int (4),
 	`object_id` varchar (60),
@@ -32,8 +32,9 @@ create table `dwh_dim_file_sync` (
 	`dwh_creation_date` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
 	`dwh_update_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`ri_ind` TINYINT(4) NOT NULL DEFAULT '0',
+	`deleted_id` bigint(20) DEFAULT '0',
 	PRIMARY KEY (`id`),
-	UNIQUE KEY `unique_key` (`object_type`,`object_id`,`object_sub_type`,`version`,`dc`),
+	UNIQUE KEY `unique_index` (`object_id`,`object_type`,`version`,`object_sub_type`,`dc`,`deleted_id`),
 	KEY `updated_at` (`updated_at`),
 	KEY `ready_at` (`ready_at`),
 	KEY `dwh_update_date` (`dwh_update_date`)
