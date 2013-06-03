@@ -24,7 +24,7 @@ class DimensionsTest extends KalturaTestCase
 
 	public function testUpdateFileSync()
     {
-		$this->compare('/dimensions/update_file_sync.ktr','file_sync','dwh_dim_file_sync');
+		$this->compare('/dimensions/update_file_sync.ktr','file_sync','dwh_dim_file_sync', ' and dc in (0,1) and status in (2,3,4) and original = 1 and object_type in (1,4)');
     }
 	
 	public function testUpdateMediaInfo()
@@ -67,7 +67,7 @@ class DimensionsTest extends KalturaTestCase
 		$this->compare('/dimensions/update_batch_job.ktr','batch_job','dwh_dim_batch_job');
     }
 	
-	private function compare($job, $source, $target)
+	private function compare($job, $source, $target, $additional_where = '')
 	{
 		global $CONF;
 		
@@ -79,10 +79,10 @@ class DimensionsTest extends KalturaTestCase
 		KettleRunner::execute('/../tests/execute_dim.ktr', array('TransformationName'=>$CONF->EtlBasePath.$job,'LastUpdatedAt'=>$start->format('Y/m/d')." 00:00:00", 'OperationalReplicationSyncedAt'=>$end->format('Y/m/d')." 00:00:00"));
 		
 		$sourceDB = new MySQLRunner($CONF->OpDbHostName,$CONF->OpDbPort, $CONF->OpDbUser, $CONF->OpDbPassword);		
-		$sourceRows = $sourceDB ->run("SELECT count(*) amount FROM kaltura.".$source." where updated_at>='".$start->format('Y-m-d')."' and created_at<='".$before->format('Y-m-d')."'");
+		$sourceRows = $sourceDB ->run("SELECT count(*) amount FROM kaltura.".$source." where updated_at>='".$start->format('Y-m-d')."' and created_at<='".$before->format('Y-m-d')."'".$additional_where);
 		
 		$targetDB = new MySQLRunner($CONF->DbHostName,$CONF->DbPort, $CONF->DbUser, $CONF->DbPassword);
-		$targetRows = $targetDB->run("SELECT count(*) amount FROM kalturadw.".$target." where updated_at>='".$start->format('Y-m-d')."' and created_at<='".$before->format('Y-m-d')."'");		
+		$targetRows = $targetDB->run("SELECT count(*) amount FROM kalturadw.".$target." where updated_at>='".$start->format('Y-m-d')."' and created_at<='".$before->format('Y-m-d')."'".$additional_where);		
 		
 		#$this->assertGreaterThan(0, $targetRows[0]['amount']);
 		$this->assertEquals($sourceRows[0]['amount'], $targetRows[0]['amount']);
