@@ -41,8 +41,8 @@ class StorageTest extends KalturaTestCase
 			
 			$fileSize = rand(100,10000);
 
-			MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_file_sync (partner_id, object_type, object_sub_type, object_id, file_size, id, updated_at, ready_at, original, status, version, dc) 
-						VALUES(?,4,1,'?',?, ?, DATE(?), DATE(?), 1, 2, 1,0)", array(0=>$partnerId,1=>$flavorId, 2=>$fileSize, 3=>($fileSyncId + $i), 4=>self::DATE_ID, 5=>self::DATE_ID));
+			MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_file_sync (partner_id, object_type, object_sub_type, object_id, file_size, id, updated_at, ready_at, original, status, version, dc, created_at) 
+						VALUES(?,4,1,'?',?, ?, DATE(?), DATE(?), 1, 2, 1,0, NOW())", array(0=>$partnerId,1=>$flavorId, 2=>$fileSize, 3=>($fileSyncId + $i), 4=>self::DATE_ID, 5=>self::DATE_ID));
 			
 			if(!array_key_exists($entryId,$this->expected))
 			{
@@ -105,8 +105,8 @@ class StorageTest extends KalturaTestCase
 			$size = 4096;
 			$flavorId = $entryId."_0";
 			
-			MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_file_sync (partner_id, object_type, object_sub_type, object_id, file_size, id, updated_at, ready_at, original, status, version, dc) 
-						SELECT partner_id, object_type, object_sub_type, object_id, file_size + ? , ?, DATE(?), DATE(?), original, status, 2, 0 FROM kalturadw.dwh_dim_file_sync
+			MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_file_sync (partner_id, object_type, object_sub_type, object_id, file_size, id, updated_at, ready_at, original, status, version, dc, created_at) 
+						SELECT partner_id, object_type, object_sub_type, object_id, file_size + ? , ?, DATE(?), DATE(?), original, status, 2, 0, NOW() FROM kalturadw.dwh_dim_file_sync
 						WHERE object_id = '?'", array(0=>$size, 1=>$fileSyncId, 2=>$dateId, 3=>$dateId, 4=>$flavorId));
 			$this->expected[$entryId] += $size;
 			$this->delta = $size;
