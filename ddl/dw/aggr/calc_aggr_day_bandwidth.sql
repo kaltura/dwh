@@ -46,7 +46,7 @@ BEGIN
 				'SELECT partner_id, MAX(activity_date_id), 0 hour_id', v_aggr_id_field_str,', SUM(bandwidth_bytes)/1024 count_bandwidth
 				FROM ', v_table_name, '	WHERE activity_date_id=date(\'',p_date_val,'\')*1
 				GROUP BY partner_id', v_aggr_id_field_str,'
-				ON DUPLICATE KEY UPDATE	count_bandwidth_kb=VALUES(count_bandwidth_kb)');
+				ON DUPLICATE KEY UPDATE	count_bandwidth_kb=IFNULL(count_bandwidth_kb,0) + VALUES(count_bandwidth_kb)');
 	
 
 		PREPARE stmt FROM  @s;
@@ -69,7 +69,7 @@ BEGIN
 				SELECT session_partner_id, MAX(session_date_id), 0 hour_id', v_aggr_id_field_str,', SUM(total_bytes)/1024 count_bandwidth 
 				FROM ', v_table_name, ' WHERE session_date_id=date(\'',p_date_val,'\')*1
 				GROUP BY session_partner_id', v_aggr_id_field_str,'
-				ON DUPLICATE KEY UPDATE	count_bandwidth_kb=VALUES(count_bandwidth_kb)');
+				ON DUPLICATE KEY UPDATE	count_bandwidth_kb=IFNULL(count_bandwidth_kb,0) + VALUES(count_bandwidth_kb)');
 		PREPARE stmt FROM  @s;
                 EXECUTE stmt;
                 DEALLOCATE PREPARE stmt;
