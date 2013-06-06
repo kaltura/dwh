@@ -56,7 +56,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://192.168.252.222:3306/kalturadw</property>
+            <property name="odaURL">jdbc:mysql://192.168.252.188:3306/kalturadw</property>
             <property name="odaUser">etl</property>
             <encrypted-property name="odaPassword" encryptionID="base64">ZXRs</encrypted-property>
         </oda-data-source>
@@ -184,7 +184,7 @@
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -471,7 +471,7 @@ WHERE date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -783,7 +783,7 @@ where date_id between ? and LAST_DAY(DATE(?))*1]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -1079,7 +1079,7 @@ GROUP BY FLOOR(date_id/100)]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -1241,7 +1241,7 @@ where date_id between ? and LAST_DAY(DATE(?))*1
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -1364,7 +1364,7 @@ where date_id between ? and LAST_DAY(DATE(?))*1]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -1642,7 +1642,7 @@ GROUP BY FLOOR(date_id/100)]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -1792,7 +1792,7 @@ where date_id between ? and LAST_DAY(DATE(?))*1
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -1932,7 +1932,7 @@ where date_id between ? and LAST_DAY(DATE(?))*1]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -2066,7 +2066,7 @@ GROUP BY FLOOR(date_id/100)]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -2177,7 +2177,7 @@ GROUP BY FLOOR(date_id/100)]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -2288,7 +2288,7 @@ where date_id between ? and LAST_DAY(DATE(?))*1]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -2391,7 +2391,7 @@ where date_id between ? and LAST_DAY(DATE(?))*1]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -2514,7 +2514,7 @@ GROUP BY FLOOR(date_id/100)]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -2658,7 +2658,7 @@ limit 20;
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -2763,7 +2763,7 @@ limit 20;]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -3084,7 +3084,7 @@ where date_id between ? and LAST_DAY(DATE(?))*1]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -3837,7 +3837,7 @@ AND file_size BETWEEN 1024*1024 AND 2*1024*1024
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -4494,7 +4494,7 @@ AND file_size > 2*1024*1024
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">pa-dwh1</property>
+            <property name="dataSource">pa-dwh2</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -6310,6 +6310,7 @@ BirtStr.concat(BirtDateTime.month(BirtDateTime.date(year, month-1,day),2), " ", 
       <Text>
         <Value></Value>
         <Font>
+          <Size>8.0</Size>
           <Alignment/>
         </Font>
       </Text>
@@ -8583,6 +8584,7 @@ day + &quot;-&quot; + month</Definition>
       <Text>
         <Value></Value>
         <Font>
+          <Size>8.0</Size>
           <Alignment/>
         </Font>
       </Text>
