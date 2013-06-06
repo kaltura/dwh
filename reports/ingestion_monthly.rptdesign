@@ -38,7 +38,7 @@
         </scalar-parameter>
     </parameters>
     <data-sources>
-        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="pa-dwh1" id="43">
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="pa-dwh2" id="43">
             <list-property name="privateDriverProperties">
                 <ex-property>
                     <name>contentBidiFormatStr</name>
