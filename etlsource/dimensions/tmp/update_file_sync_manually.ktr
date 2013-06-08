@@ -1743,7 +1743,11 @@ if (file_size &lt; 0)
 	FROM 
 	kaltura.file_sync 
 WHERE updated_at between STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
-and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)</sql>
+and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
+and original = 1
+and dc in (0,1)
+and status in (2,3,4)
+and object_type in (1,4)</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
