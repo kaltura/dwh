@@ -290,8 +290,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>358</xloc>
-      <yloc>58</yloc>
+      <xloc>472</xloc>
+      <yloc>59</yloc>
       </entry>
     <entry>
       <name>Execute daily sequence</name>
@@ -320,8 +320,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>505</xloc>
-      <yloc>58</yloc>
+      <xloc>639</xloc>
+      <yloc>57</yloc>
       </entry>
     <entry>
       <name>Success 1</name>
@@ -330,8 +330,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>216</xloc>
-      <yloc>156</yloc>
+      <xloc>329</xloc>
+      <yloc>152</yloc>
       </entry>
     <entry>
       <name>Seize daily lock</name>
@@ -365,8 +365,8 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>220</xloc>
-      <yloc>57</yloc>
+      <xloc>333</xloc>
+      <yloc>60</yloc>
       </entry>
     <entry>
       <name>Release daily lock</name>
@@ -400,8 +400,29 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>329</xloc>
-      <yloc>155</yloc>
+      <xloc>471</xloc>
+      <yloc>150</yloc>
+      </entry>
+    <entry>
+      <name>Check if update_dims_lock is seized</name>
+      <description>Evaluate rows number in a table</description>
+      <type>EVAL_TABLE_CONTENT</type>
+      <connection>kalturadw_ds</connection>
+      <schemaname/>
+      <tablename>locks</tablename>
+      <success_condition>rows_count_greater</success_condition>
+      <limit>0</limit>
+      <is_custom_sql>Y</is_custom_sql>
+      <is_usevars>N</is_usevars>
+      <custom_sql>SELECT * FROM locks
+WHERE lock_name = &apos;update_dims_lock&apos; AND lock_state = 0</custom_sql>
+      <add_rows_result>N</add_rows_result>
+      <clear_result_rows>N</clear_result_rows>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>224</xloc>
+      <yloc>59</yloc>
       </entry>
   </entries>
   <hops>
@@ -413,15 +434,6 @@
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>Seize daily lock</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
     </hop>
     <hop>
       <from>Seize daily lock</from>
@@ -457,6 +469,33 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>Check if update_dims_lock is seized</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Check if update_dims_lock is seized</from>
+      <to>Seize daily lock</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Check if update_dims_lock is seized</from>
+      <to>Success 1</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
