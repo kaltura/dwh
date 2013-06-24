@@ -77,6 +77,8 @@ mysqlexec $BISOURCE_ROOT_DIR/bisources_partner_class_of_service.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_execution_status.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_batch_job_object_type.sql
 mysqlexec $BISOURCE_ROOT_DIR/bisources_upload_token_status.sql
+mysqlexec $BISOURCE_ROOT_DIR/bisources_category_entry_status.sql
+mysqlexec $BISOURCE_ROOT_DIR/bisources_category_status.sql
 
 #ds/
 mysqlexec $DS_ROOT_DIR/files.sql
@@ -239,6 +241,10 @@ mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_upload_token_status.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_upload_token_object_type.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_batch_job_sep.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_upload_token.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_category.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_category_entry.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_category_entry_status.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_category_status.sql
 
 
 #dw/maintenance
