@@ -23,7 +23,7 @@ BEGIN
     ALTER TABLE temp_aggr_storage ADD INDEX index_1 (kuser_id);  
     
     INSERT INTO     temp_aggr_storage (partner_id, kuser_id, added_storage_kb, deleted_storage_kb)
-    SELECT         e.partner_id, e.kuser_id, SUM(if(f.entry_additional_size_kb > 0,entry_additional_size_kb,0)),SUM(IF(f.entry_additional_size_kb < 0,entry_additional_size_kb*-1,0))
+    SELECT         e.partner_id, e.kuser_id, SUM(IF(f.entry_additional_size_kb > 0,entry_additional_size_kb,0)),SUM(IF(f.entry_additional_size_kb < 0,entry_additional_size_kb*-1,0))
     FROM         dwh_fact_entries_sizes f, dwh_dim_entries e
     WHERE        entry_size_date_id=p_date_id
     AND          f.entry_id = e.entry_id
@@ -37,7 +37,7 @@ BEGIN
     WHERE prev_kuser_id IS NOT NULL
 	AND updated_at >= v_date
     AND IFNULL(kuser_updated_date_id,-1) = p_date_id
-    AND created_date_id <> p_date_id
+    AND IFNULL(created_date_id, -1) <> p_date_id
     AND entry_type_id IN (1,2,7,10);
  
     ALTER TABLE entries_prev_owner ADD INDEX index_1 (kuser_id);
@@ -74,12 +74,16 @@ BEGIN
     
     INSERT INTO temp_aggr_entries(partner_id, kuser_id, added_entries, deleted_entries, added_msecs, deleted_msecs)
     SELECT partner_id, kuser_id,
-    SUM(IF(entry_status_id IN (0,1,2,4) AND (created_date_id = p_date_id OR IFNULL(kuser_updated_date_id,-1) = p_date_id),1,0)),
-    SUM(IF(entry_status_id = 3 AND (created_date_id <> p_date_id AND IFNULL(kuser_updated_date_id,-1) <> p_date_id),1,0)),
-    SUM(IF(entry_status_id IN (0,1,2,4) AND (created_date_id = p_date_id OR IFNULL(kuser_updated_date_id,-1) = p_date_id),length_in_msecs,0)),
-    SUM(IF(entry_status_id = 3 AND (created_date_id <> p_date_id AND IFNULL(kuser_updated_date_id,-1) <> p_date_id),length_in_msecs,0))
+    SUM(IF((entry_status_id <> 3 AND ((IFNULL(created_date_id,-1) = p_date_id AND IFNULL(created_date_id,-1) >= IFNULL(kuser_updated_date_id,-1)) OR IFNULL(kuser_updated_date_id,-1) = p_date_id))
+		OR (entry_status_id = 3 AND IFNULL(updated_date_id,-1) <> p_date_id AND ((IFNULL(created_date_id,-1) = p_date_id AND IFNULL(created_date_id,-1) >= IFNULL(kuser_updated_date_id,-1)) OR IFNULL(kuser_updated_date_id,-1) = p_date_id)),1,0)),
+    SUM(IF(entry_status_id = 3 AND (IFNULL(created_date_id,-1) <> p_date_id AND IFNULL(kuser_updated_date_id,-1) <> p_date_id),1,0)),
+    SUM(IF((entry_status_id <> 3 AND ((IFNULL(created_date_id,-1) = p_date_id AND IFNULL(created_date_id,-1) >= IFNULL(kuser_updated_date_id,-1)) OR IFNULL(kuser_updated_date_id,-1) = p_date_id))
+		OR (entry_status_id = 3 AND IFNULL(updated_date_id,-1) <> p_date_id AND ((IFNULL(created_date_id,-1) = p_date_id AND IFNULL(created_date_id,-1) >= IFNULL(kuser_updated_date_id,-1)) OR IFNULL(kuser_updated_date_id,-1) = p_date_id)),length_in_msecs,0)),
+    SUM(IF(entry_status_id = 3 AND (IFNULL(created_date_id,-1) <> p_date_id AND IFNULL(kuser_updated_date_id,-1) <> p_date_id),length_in_msecs,0))
     FROM dwh_dim_entries e
-    WHERE (updated_at BETWEEN v_date AND v_date + INTERVAL 1 DAY OR created_at BETWEEN v_date AND v_date + INTERVAL 1 DAY OR IFNULL(kuser_updated_date_id,-1) = p_date_id)
+    WHERE updated_at >= v_date AND (updated_at <= v_date + INTERVAL 1 DAY 
+			OR IFNULL(created_date_id , -1) = p_date_id
+			OR IFNULL(kuser_updated_date_id,-1) = p_date_id)
     AND e.entry_type_id IN (1,2,7,10)
     GROUP BY kuser_id, partner_id;
     
@@ -90,7 +94,7 @@ BEGIN
     GROUP BY o.prev_kuser_id, o.partner_id;
    
     
-    DELETE FROM dwh_hourly_user_usage USING temp_aggr_storage, dwh_hourly_user_usage 
+    DELETE FROM dwh_hourly_user_usage USING temp_aggr_storage, dwh_hourly_user_usage
     WHERE dwh_hourly_user_usage.partner_id = temp_aggr_storage.partner_id 
     AND dwh_hourly_user_usage.kuser_id = temp_aggr_storage.kuser_id 
     AND dwh_hourly_user_usage.date_id = p_date_id;
