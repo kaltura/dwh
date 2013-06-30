@@ -1,6 +1,7 @@
 #!/bin/bash
+. /etc/kaltura.d/system.ini
 
-ROOT_DIR=/opt/kaltura/dwh
+ROOT_DIR=$BASE_DIR/dwh
 MAIL_SUBJECT="Daily Usage Report"
 RECIPIENTS="orly.lampert@kaltura.com"
 ATTACH=/tmp/ingestion_dashboard.pdf

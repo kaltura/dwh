@@ -1,7 +1,8 @@
 #!/bin/bash
+. /etc/kaltura.d/system.ini
 
-KITCHEN=/usr/local/pentaho/pdi
-ROOT_DIR=/opt/kaltura/dwh
+KITCHEN=$BASE_DIR/pentaho
+ROOT_DIR=$BASE_DIR/dwh
 
 while getopts "k:d:" o
 do      case "$o" in
