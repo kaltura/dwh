@@ -1,7 +1,11 @@
 #!/bin/bash
 . /etc/kaltura.d/system.ini
 
+<<<<<<< HEAD
 KITCHEN=$BASE_DIR/bin/pentaho/kitchen.sh
+=======
+KITCHEN=$BASE_DIR/pentaho/kitchen.sh
+>>>>>>> d1c3d07d81513494745dc28b9731a23aad0a241a
 ROOT_DIR=$BASE_DIR/dwh
 TMP_DIR=/tmp/
 
