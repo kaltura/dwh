@@ -2,7 +2,7 @@
 . /etc/kaltura.d/system.ini
 
 USER="etl"
-KITCHEN=$BASE_DIR/pentaho/kitchen.sh
+KITCHEN=$BASE_DIR/bin/pentaho/kitchen.sh
 ROOT_DIR=$BASE_DIR/dwh
 HOST=localhost
 PORT=3306

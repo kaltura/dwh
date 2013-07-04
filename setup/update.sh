@@ -5,7 +5,7 @@ USER="etl"
 ROOT_DIR=$BASE_DIR/dwh
 HOST=localhost
 PORT=3306
-KITCHEN=$BASE_DIR/pentaho
+KITCHEN=$BASE_DIR/bin/pentaho
 REGISTER_ONLY=0
 SVN=1
 while getopts "u:p:d:h:P:s:k:r:v:" o

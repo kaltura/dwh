@@ -1,7 +1,7 @@
 #!/bin/bash
 . /etc/kaltura.d/system.ini
 
-KITCHEN=$BASE_DIR/pentaho
+KITCHEN=$BASE_DIR/bin/pentaho
 ROOT_DIR=$BASE_DIR/dwh
 
 while getopts "k:d:" o
