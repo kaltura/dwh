@@ -1,6 +1,8 @@
 #!/bin/bash
-KITCHEN=/usr/local/pentaho/pdi/kitchen.sh
-ROOT_DIR=/opt/kaltura/dwh
+. /etc/kaltura.d/system.ini
+
+KITCHEN=$BASE_DIR/bin/pentaho/kitchen.sh
+ROOT_DIR=$BASE_DIR/dwh
 WHEN=$(date +%Y%m%d)
 
 while getopts "k:p:" o

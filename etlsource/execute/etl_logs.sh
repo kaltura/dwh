@@ -1,9 +1,11 @@
 #!/bin/bash
+. /etc/kaltura.d/system.ini
+
 ROOT_DIR=/home/etl/
 WHEN=$(date +%Y%m%d)
 MAILUSERS="dummy@example.com"
-LOG_DIR="/opt/kaltura/log/"
-APP_DIR="/opt/kaltura/app"
+LOG_DIR="$BASE_DIR/log/"
+APP_DIR="$BASE_DIR/app"
 
 while getopts "a:t:p:l:m:" o
 do	case "$o" in

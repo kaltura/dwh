@@ -1,9 +1,11 @@
 #!/bin/bash
+. /etc/kaltura.d/system.ini
+
 USER="etl"
-ROOT_DIR=/opt/kaltura/dwh
+ROOT_DIR=$BASE_DIR/dwh
 HOST=localhost
 PORT=3306
-KITCHEN=/usr/local/pentaho/pdi
+KITCHEN=$BASE_DIR/pentaho
 REGISTER_ONLY=0
 SVN=1
 while getopts "u:p:d:h:P:s:k:r:v:" o
