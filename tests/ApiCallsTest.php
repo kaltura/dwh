@@ -9,7 +9,7 @@ require_once 'CycleProcessTestCase.php';
 require_once 'ComparedTable.php';
 require_once 'ApiCall.php';
 
-class ApiCallsTest extends CycleProcessTestCase
+class ApiCallsTest 
 {
 	protected function getDSTablesToFactTables()
         {
