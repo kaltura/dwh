@@ -30,7 +30,7 @@ PRIMARY KEY (`partner_id`, `entry_id`, `entry_size_date_id`),
 KEY entry_id (`entry_id`))
 ENGINE=MYISAM DEFAULT CHARSET=utf8
 PARTITION BY RANGE (entry_size_date_id)
-(PARTITION p_201001 VALUES LESS THAN (20100201));
+(PARTITION p_201308 VALUES LESS THAN (20100901));
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

@@ -23,7 +23,7 @@ CREATE TABLE `dwh_daily_ingestion` (
   PRIMARY KEY (`date_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 PARTITION BY RANGE (date_id)
-(PARTITION p_201301 VALUES LESS THAN (20130201) ENGINE = InnoDB);
+(PARTITION p_201308 VALUES LESS THAN (20130901) ENGINE = InnoDB);
 
 CALL kalturadw.add_monthly_partition_for_table('dwh_daily_ingestion');
 
