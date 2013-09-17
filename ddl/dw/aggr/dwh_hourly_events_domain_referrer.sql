@@ -68,7 +68,7 @@ CREATE TABLE `dwh_hourly_events_domain_referrer` (
   PRIMARY KEY (`partner_id`, `date_id`, `hour_id`, `domain_id`, `referrer_id`),
   KEY (`date_id`, `hour_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
-/*!50100 PARTITION BY RANGE (date_id)
+PARTITION BY RANGE (date_id)
 (PARTITION p_201308 VALUES LESS THAN (20130901) ENGINE = INNODB);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
