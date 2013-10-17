@@ -7,4 +7,4 @@ CREATE TABLE kalturadw.`dwh_dim_http_delivery_source` (
 
 INSERT INTO kalturadw.`dwh_dim_http_delivery_source`
 			(`process_id`,`bandwidth_source_id`,`file_regex`) 
-VALUES 		(4,4,'_77660\\.|_113110\.|_146829\\.'),(4,7,'_105515\\.|_146836\\.|_146832\\.'),(4,8,'_159949\.'),(6,3,'.*');
+VALUES 		(4,4,'_77660\\.|_113110\.|_146829\\.'),(4,7,'_105515\\.|_146836\\.|_146832\\.'),(4,8,'_159949\\.|_142321\\.'),(10,9,'_172678\\.|_213019\\.'),(6,3,'.*');
