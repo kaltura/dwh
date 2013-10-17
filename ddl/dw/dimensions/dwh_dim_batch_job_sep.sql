@@ -19,7 +19,7 @@ USE `kalturadw`;
 DROP TABLE IF EXISTS `dwh_dim_batch_job_sep`;
 
 CREATE TABLE `dwh_dim_batch_job_sep` (
-  `dwh_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `dwh_id` bigint NOT NULL AUTO_INCREMENT,
   `id` INT(11) NOT NULL,
   `job_type_id` INT(6) DEFAULT NULL,
   `job_sub_type_id` INT(6) DEFAULT NULL,
@@ -40,14 +40,14 @@ CREATE TABLE `dwh_dim_batch_job_sep` (
   `partner_id` INT(11) DEFAULT NULL,
   `last_scheduler_id` INT(11) DEFAULT NULL,
   `last_worker_id` INT(11) DEFAULT NULL,
-  `parent_job_id` INT(11) DEFAULT NULL,
-  `bulk_job_id` INT(11) DEFAULT NULL,
-  `root_job_id` INT(11) DEFAULT NULL,
+  `parent_job_id` bigint DEFAULT NULL,
+  `bulk_job_id` bigint DEFAULT NULL,
+  `root_job_id` bigint DEFAULT NULL,
   `dc` VARCHAR(2) DEFAULT NULL,
   `error_type_id` INT(11) DEFAULT '0',
   `err_number` INT(11) DEFAULT '0',
   `execution_status_id` SMALLINT(6) DEFAULT NULL,
-  `batch_job_lock_id` INT(20) DEFAULT NULL,
+  `batch_job_lock_id` bigint DEFAULT NULL,
   `custom_data` TEXT,
   `lock_info` TEXT,
   `file_size` BIGINT(20) NOT NULL DEFAULT '-1',
