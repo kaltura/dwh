@@ -1,3 +1,4 @@
 storage_usage/calc_storage_usage.kjb
+transcoding_usage/calc_transcoding_usage.kjb
 aggregation/perform_aggregations.kjb
 perform_referential_integrity.kjb

@@ -334,7 +334,8 @@
 	(SELECT MIN(date_id) date_id FROM kalturadw.aggr_managment
 	 WHERE aggr_name = &apos;storage_usage&apos;
 	 AND (data_insert_time &gt; IFNULL(start_time, DATE(19700101)) OR ifnull(end_time,date(19700101)) &lt; start_time)
-	 AND date_id &gt; (DATE(NOW()) - INTERVAL ${ResetStorageMaxDaysBack} DAY)*1) reseted_days
+	 AND date_id &gt; (DATE(NOW()) - INTERVAL ${ResetStorageMaxDaysBack} DAY)*1
+	AND date_id &lt; DATE(NOW())*1) reseted_days
 	 WHERE derived_days.aggr_name = &apos;storage_usage&apos; 
 AND derived_days.date_id &gt;= reseted_days.date_id;
 </sql>

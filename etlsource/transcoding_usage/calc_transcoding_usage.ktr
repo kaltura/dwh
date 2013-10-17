@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>calc_user_storage_usage</name>
+    <name>calc_transcoding_usage</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#47;</directory>
     <parameters>
     </parameters>
@@ -16,7 +17,7 @@
 <size_limit_lines/>
 <interval/>
 <timeout_days/>
-<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field></trans-log-table>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>N</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>N</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></trans-log-table>
 <perf-log-table><connection/>
 <schema/>
 <table/>
@@ -51,7 +52,7 @@
     <shared_objects_file/>
     <capture_step_performance>N</capture_step_performance>
     <step_performance_capturing_delay>1000</step_performance_capturing_delay>
-    <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
+    <step_performance_capturing_size_limit/>
     <dependencies>
     </dependencies>
     <partitionschemas>
@@ -60,10 +61,10 @@
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
-  <created_user>-</created_user>
-  <created_date>2012&#47;05&#47;14 13:22:00.865</created_date>
+  <created_user/>
+  <created_date>2011&#47;12&#47;04 12:24:51.475</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2012&#47;05&#47;14 13:22:00.865</modified_date>
+  <modified_date>2011&#47;01&#47;05 14:38:13.645</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -262,7 +263,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Execute SQL script</from><to>Finished</to><enabled>Y</enabled> </hop>  <hop> <from>Table input</from><to>Execute SQL script</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Table input</from><to>Execute SQL script</to><enabled>Y</enabled> </hop>  <hop> <from>Execute SQL script</from><to>Finished</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Execute SQL script</name>
     <type>ExecSQL</type>
@@ -277,7 +278,7 @@
     <execute_each_row>Y</execute_each_row>
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
-    <sql>Call kalturadw.calc_aggr_day_user_usage(?);</sql>
+    <sql>Call kalturadw.calc_aggr_day_transcoding_usage(?);</sql>
     <insert_field/>
     <update_field/>
     <delete_field/>
@@ -287,8 +288,8 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>253</xloc>
-      <yloc>45</yloc>
+      <xloc>261</xloc>
+      <yloc>94</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -313,8 +314,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>414</xloc>
-      <yloc>49</yloc>
+      <xloc>391</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -330,15 +331,11 @@
            <schema_name/>
            </partitioning>
     <connection>KalturaDW</connection>
-    <sql>SELECT DISTINCT derived_days.date_id FROM kalturadw.aggr_managment derived_days, 
-	(SELECT MIN(date_id) date_id FROM kalturadw.aggr_managment
-	 WHERE aggr_name = &apos;user_storage_usage&apos;
+    <sql>SELECT date_id FROM kalturadw.aggr_managment
+	 WHERE aggr_name = &apos;transcoding_usage&apos;
 	 AND (data_insert_time &gt; IFNULL(start_time, DATE(19700101)) OR ifnull(end_time,date(19700101)) &lt; start_time)
-	 AND date_id &gt; (DATE(NOW()) - INTERVAL ${ResetStorageMaxDaysBack} DAY)*1
-	AND date_id &lt; DATE(NOW())*1) reseted_days
-	 WHERE derived_days.aggr_name = &apos;user_storage_usage&apos; 
-AND derived_days.date_id &gt;= reseted_days.date_id;
-</sql>
+     AND date_id &lt; DATE(NOW())*1
+	 </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -346,8 +343,8 @@ AND derived_days.date_id &gt;= reseted_days.date_id;
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>81</xloc>
-      <yloc>45</yloc>
+      <xloc>89</xloc>
+      <yloc>94</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
