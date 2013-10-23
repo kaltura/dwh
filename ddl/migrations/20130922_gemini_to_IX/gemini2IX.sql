@@ -1,8 +1,10 @@
+DELIMITER $$
+
 USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `get_data_for_operational`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `get_data_for_operational`(p_sync_type VARCHAR(55))
+CREATE PROCEDURE `get_data_for_operational`(p_sync_type VARCHAR(55))
 BEGIN
 	DECLARE v_execution_start_time DATETIME;
 	
@@ -137,6 +139,8 @@ END$$
 
 DELIMITER ;
 
+DROP TABLE IF EXISTS kalturadw.`dwh_dim_http_delivery_source`;
+
 CREATE TABLE kalturadw.`dwh_dim_http_delivery_source` (
   `process_id` INT(10) NOT NULL,
   `bandwidth_source_id` INT(11) NOT NULL,
@@ -156,7 +160,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day_user_usage`$$
 
-CREATE DEFINER=`etl`@`%` PROCEDURE `calc_aggr_day_user_usage`(p_date_id INT(11))
+CREATE PROCEDURE `calc_aggr_day_user_usage`(p_date_id INT(11))
 BEGIN
     DECLARE v_date DATETIME;
     SET v_date = DATE(p_date_id);
@@ -605,6 +609,8 @@ MODIFY parent_job_id bigint DEFAULT NULL,
 MODIFY bulk_job_id bigint DEFAULT NULL,
 MODIFY root_job_id bigint DEFAULT NULL,
 MODIFY batch_job_lock_id bigint DEFAULT NULL;
+
+UPDATE kalturadw_ds.pentaho_sequences SET is_active = 0 WHERE job_name = 'dimensions/update_batch_job.ktr';
 
 
 
