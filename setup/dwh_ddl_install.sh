@@ -285,6 +285,7 @@ mysqlexec $DW_ROOT_DIR/aggr/calc_entries_sizes.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_updated_batch_job.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_updated_batch_job_day.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_ingestion.sql
+mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_transcoding_usage.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_widget.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_entry.sql
