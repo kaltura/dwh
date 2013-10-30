@@ -37,7 +37,6 @@ function mysqlexec {
 #general
 mysqlexec $ROOT_DIR/ddl/migrations/20130922_gemini_to_IX/gemini2IX.sql
 
-rsync -avpog --exclude=.svn $ROOT_DIR/pentaho-plugins/resources/ksDecrypt.jar $KITCHEN/libext/
 
 
 
