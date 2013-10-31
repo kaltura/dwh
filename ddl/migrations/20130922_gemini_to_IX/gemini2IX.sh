@@ -1,9 +1,12 @@
 #!/bin/bash
-USER="etl"
-KITCHEN=/usr/local/pentaho/pdi
-ROOT_DIR=/opt/kaltura/dwh
-HOST=localhost
-PORT=3306
+. /etc/kaltura.d/system.ini
+
+KITCHEN=$BASE_DIR/bin/pentaho
+ROOT_DIR=$BASE_DIR/dwh
+USER=$DWH_USER
+HOST=$DWH_HOST
+PORT=$DWH_PORT
+PW=$DWH_PASS
 
 while getopts "u:p:k:d:h:P:" o
 do	case "$o" in
@@ -37,6 +40,8 @@ function mysqlexec {
 #general
 mysqlexec $ROOT_DIR/ddl/migrations/20130922_gemini_to_IX/gemini2IX.sql
 
+#cp pentaho plugins
+/bin/bash $ROOT_DIR/setup/copy_pentaho_plugins.sh -d $ROOT_DIR -k $KITCHEN 
 
 
 
