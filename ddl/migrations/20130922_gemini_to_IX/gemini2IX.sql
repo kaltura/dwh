@@ -653,5 +653,7 @@ MODIFY batch_job_lock_id bigint DEFAULT NULL;
 
 UPDATE kalturadw_ds.pentaho_sequences SET is_active = 0 WHERE job_name = 'dimensions/update_batch_job.ktr';
 
+ALTER TABLE kalturadw.dwh_dim_entries ADD COLUMN stream_id int(11),
+ADD INDEX stream_id (stream_id);
 
 
