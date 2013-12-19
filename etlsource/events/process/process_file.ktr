@@ -4349,7 +4349,7 @@ var parnterRegex = &quot;GET &#47;p&#47;([0-9]+)&#47;sp&#47;[0-9]+&#47;playManif
 
 resArr = str2RegExp(http_string, parnterRegex);
 
-if (resArr!=null &amp;&amp; resArr.length &gt; 0 &amp;&amp; host != &apos;cdnapi.kaltura.com&apos;)
+if (resArr!=null &amp;&amp; resArr.length &gt; 0 &amp;&amp; host != &apos;cdnapi.kaltura.com&apos; &amp;&amp; host != &apos;cdnapisec.kaltura.com&apos;)
 {
 	playDate = str2date(substr(raw_datetime,1),&apos;dd&#47;MMM&#47;yyyy:HH:mm:ss&apos;);
 	partnerIDStr = resArr[0];
