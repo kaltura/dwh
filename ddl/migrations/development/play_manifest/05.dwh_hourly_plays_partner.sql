@@ -12,5 +12,6 @@ CREATE TABLE kalturadw.`dwh_hourly_plays_partner` (
 PARTITION BY RANGE (date_id)
 (PARTITION p_201312 VALUES LESS THAN (20140101) ENGINE = INNODB);
  
+CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_plays_partner');
 
   
