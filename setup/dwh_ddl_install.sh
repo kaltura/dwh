@@ -131,6 +131,8 @@ mysqlexec $DS_ROOT_DIR/ds_errors.sql
 mysqlexec $DS_ROOT_DIR/operational_syncs.sql
 mysqlexec $DS_ROOT_DIR/fact_tables.sql
 mysqlexec $DS_ROOT_DIR/fact_stats.sql
+mysqlexec $DS_ROOT_DIR/ds_plays.sql
+mysqlexec $DS_ROOT_DIR/aggr_type.sql
 
 #etl_log
 mysqlexec $DDL_ROOT_DIR/log/etl_log.sql
@@ -183,6 +185,8 @@ mysqlexec $DW_ROOT_DIR/facts/dwh_fact_errors_archive.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_incomplete_api_calls.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_entries_sizes.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_convert_job.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_plays.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_plays_archive.sql
 
 #dw/dimensions
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_kuser.sql
@@ -272,6 +276,10 @@ mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_errors.sh
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_entry_user_app.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_app.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_app_devices.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_plays_partner.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_plays_entry.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_plays_country.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_plays_devices.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_daily_ingestion.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_daily_partner_ingestion.sql
 mysqlexec $DW_ROOT_DIR/aggr/time_zone_helper_function.sql
@@ -281,6 +289,7 @@ mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_storage.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_user_usage.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_api_calls.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_errors.sql
+mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_play.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_entries_sizes.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_updated_batch_job.sql
 mysqlexec $DW_ROOT_DIR/aggr/calc_updated_batch_job_day.sql

@@ -23,5 +23,3 @@ CREATE TABLE `dwh_fact_plays` (
 /*!50100 PARTITION BY RANGE (activity_date_id)
 (PARTITION p_20131231 VALUES LESS THAN (20140101) ENGINE = INNODB) */;
 
-CALL add_daily_partition_for_table('dwh_fact_plays');
-

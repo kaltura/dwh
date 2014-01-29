@@ -76,6 +76,7 @@ BEGIN
         CALL add_daily_partition_for_table('dwh_fact_api_calls');
         CALL add_daily_partition_for_table('dwh_fact_incomplete_api_calls');
         CALL add_daily_partition_for_table('dwh_fact_errors');
+		CALL add_daily_partition_for_table('dwh_fact_plays');
         CALL add_monthly_partition_for_table('dwh_fact_entries_sizes');
         CALL add_monthly_partition_for_table('dwh_hourly_events_entry');
         CALL add_monthly_partition_for_table('dwh_hourly_events_domain');
@@ -94,6 +95,11 @@ BEGIN
 	CALL add_monthly_partition_for_table('dwh_hourly_events_context_app_devices');
 	CALL add_monthly_partition_for_table('dwh_daily_ingestion');
 	CALL add_monthly_partition_for_table('dwh_daily_partner_ingestion');
+	CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_plays_partner');
+	CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_plays_entry');
+	CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_plays_country');
+	CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_plays_devices');
+	
 END$$
 
 DELIMITER ;
