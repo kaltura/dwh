@@ -490,11 +490,6 @@
         <update>Y</update>
       </value>
       <value>
-        <name>invalid_login_count</name>
-        <rename>invalid_login_count</rename>
-        <update>Y</update>
-      </value>
-      <value>
         <name>ks_max_expiry_in_seconds</name>
         <rename>ks_max_expiry_in_seconds</rename>
         <update>Y</update>
@@ -857,7 +852,6 @@
 	max_number_of_hits_per_day, 
 	appear_in_search, 
 	debug_level, 
-	invalid_login_count, 
 	created_at,
 	updated_at,
 	partner_alias, 
