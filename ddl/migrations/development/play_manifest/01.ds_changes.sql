@@ -39,21 +39,21 @@ INSERT INTO kalturadw_ds.aggr_name_resolver
 		join_table,
 		join_id_field)
 VALUES
-	(('plays_partner','dwh_hourly_plays_partner','','','plays',NULL,NULL),
+	('plays_partner','dwh_hourly_plays_partner','','','plays',NULL,NULL),
 	('plays_entry','dwh_hourly_plays_entry','entry_id','','plays',NULL,NULL);
     ('plays_country','dwh_hourly_plays_country','country_id, location_id','','plays',NULL,NULL);
-	('plays_devices','dwh_hourly_plays_devices','os_id, browser_id','','plays',NULL,NULL));
+	('plays_devices','dwh_hourly_plays_devices','os_id, browser_id','','plays',NULL,NULL);
 
 	
 CREATE TABLE kalturadw_ds.aggr_type (
 	`aggr_name` varchar(20) NOT NULL,
     `aggr_order` int(6) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO kalturadw_ds.aggr_type 
 	(aggr_name,
-	aggr_order
+	aggr_order)
 VALUES
-	(('events', 1),
+	('events', 1),
 	('bandwidth' , 2),
-	('plays' , 3));
+	('plays' , 3);

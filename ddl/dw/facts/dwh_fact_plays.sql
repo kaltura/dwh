@@ -16,10 +16,10 @@ CREATE TABLE `dwh_fact_plays` (
   `location_id` INT(11) DEFAULT NULL,
   `os_id` int(11),
   `browser_id` int(11),
-  UNIQUE KEY (`file_id`,`line_number`,`activity_date_id`),
+  UNIQUE KEY (`file_id`,`line_number`,`play_date_id`),
   KEY Entry_id (entry_id),
   KEY `play_hour_id_play_date_id_partner_id` (play_hour_id, play_date_id, partner_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
-/*!50100 PARTITION BY RANGE (activity_date_id)
+/*!50100 PARTITION BY RANGE (play_date_id)
 (PARTITION p_20131231 VALUES LESS THAN (20140101) ENGINE = INNODB) */;
 
