@@ -377,7 +377,7 @@ mapping_filename = etl_base_path + &apos;&#47;aggregation&#47;calc_aggr_&apos; +
     <sql>select distinct a.aggr_name, r.aggr_type 
 from kalturadw.aggr_managment a, kalturadw_ds.aggr_name_resolver r, kalturadw_ds.aggr_type t
 where a.aggr_name = r.aggr_name
-and r.aggr_name = t.aggr_name
+and r.aggr_type = t.aggr_name
 order by aggr_order;</sql>
     <limit>0</limit>
     <lookup/>
