@@ -17,6 +17,6 @@ CREATE TABLE `dwh_fact_plays_archive` (
   `os_id` int(11),
   `browser_id` int(11)
 ) ENGINE=ARCHIVE DEFAULT CHARSET=utf8
-/*!50100 PARTITION BY RANGE (event_date_id)
+/*!50100 PARTITION BY RANGE (play_date_id)
 (PARTITION p_0 VALUES LESS THAN (1) ENGINE = ARCHIVE)*/
 
