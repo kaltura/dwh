@@ -40,8 +40,8 @@ INSERT INTO kalturadw_ds.aggr_name_resolver
 		join_id_field)
 VALUES
 	('plays_partner','dwh_hourly_plays_partner','','','plays',NULL,NULL),
-	('plays_entry','dwh_hourly_plays_entry','entry_id','','plays',NULL,NULL);
-    ('plays_country','dwh_hourly_plays_country','country_id, location_id','','plays',NULL,NULL);
+	('plays_entry','dwh_hourly_plays_entry','entry_id','','plays',NULL,NULL),
+    ('plays_country','dwh_hourly_plays_country','country_id, location_id','','plays',NULL,NULL),
 	('plays_devices','dwh_hourly_plays_devices','os_id, browser_id','','plays',NULL,NULL);
 
 	
