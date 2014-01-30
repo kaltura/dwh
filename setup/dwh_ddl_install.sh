@@ -251,6 +251,7 @@ mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_category.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_category_entry.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_category_entry_status.sql
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_category_status.sql
+mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_client_tag.sql
 
 
 #dw/maintenance
