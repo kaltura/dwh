@@ -107,6 +107,7 @@ mysqlexec $DS_ROOT_DIR/populate_repository_for_fms_streaming.sql
 mysqlexec $DS_ROOT_DIR/populate_repository_for_bandwidth_usage.sql
 mysqlexec $DS_ROOT_DIR/populate_repository_for_api_calls.sql
 mysqlexec $DS_ROOT_DIR/populate_repository_for_transcoding.sql
+mysqlexec $DS_ROOT_DIR/populate_repository_for_plays.sql
 mysqlexec $DS_ROOT_DIR/fms_incomplete_session.sql
 mysqlexec $DS_ROOT_DIR/fms_stale_sessions.sql
 mysqlexec $DS_ROOT_DIR/fms_sessionize.sql
