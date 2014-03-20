@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_aggr_day`(p_date_val DATE,p_hour_id INT(11), p_aggr_name VARCHAR(100))
+CREATE PROCEDURE `calc_aggr_day`(p_date_val DATE,p_hour_id INT(11), p_aggr_name VARCHAR(100))
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
 	DECLARE v_aggr_id_field VARCHAR(100);
@@ -78,7 +78,7 @@ BEGIN
 			EXECUTE stmt;
 			DEALLOCATE PREPARE stmt;
 			
-			IF ( INSTR(v_aggr_table, 'live' = 0 ) THEN
+			IF ( INSTR(v_aggr_table, 'live') = 0) THEN
 				SET @s = CONCAT('INSERT INTO ',v_aggr_table,'
 					(partner_id
 					,date_id
@@ -224,12 +224,12 @@ BEGIN
 					) 
 				SELECT  ev.partner_id,ev.event_date_id, event_hour_id',v_aggr_id_field,',
 				SUM(IF(ev.event_type_id = 2, 1,NULL)) count_loads,
-				SUM(IF(ev.event_type_id = 3, 1,NULL)) count_plays,
+				SUM(IF(ev.event_type_id = 3, 1,NULL)) count_plays
 				FROM ',v_table_name,' as ev ', v_use_index, ' , dwh_dim_entries e',v_join_table,
-					' WHERE ev.event_type_id BETWEEN 2 AND 40 
+					' WHERE ev.event_type_id IN (2,3) 
 					AND ev.event_date_id  = DATE(''',p_date_val,''')*1
 					AND ev.event_hour_id = ',p_hour_id,'
-					AND e.entry_media_type_id = 7  /* allow only live entries */
+					AND e.entry_type_id = 7  /* allow only live entries */
 				AND e.entry_id = ev.entry_id ' ,v_join_condition, 
 				' GROUP BY partner_id,event_date_id, event_hour_id',v_aggr_id_field,';');
 			

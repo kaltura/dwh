@@ -11,7 +11,7 @@ BEGIN
   DECLARE v_plays INT;
   DECLARE v_views INT;
   
-  DECLARE entries CURSOR FOR SELECT entry_id, count_plays, count_loads FROM dwh_hourly_live_events_entry WHERE date_id = p_date_id AND hour_id = p_hour_id;
+  DECLARE entries CURSOR FOR SELECT entry_id, count_plays, count_loads FROM kalturadw.dwh_hourly_events_live_entry WHERE date_id = p_date_id AND hour_id = p_hour_id;
   
   DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_done = TRUE;
 

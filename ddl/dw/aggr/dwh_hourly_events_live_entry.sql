@@ -1,5 +1,7 @@
 USE `kalturadw`;
 
+DROP TABLE IF EXISTS kalturadw.`dwh_hourly_events_live_entry`; 
+
 CREATE TABLE kalturadw.`dwh_hourly_events_live_entry` (
   `partner_id` INT DEFAULT NULL,
   `date_id` INT DEFAULT NULL,
@@ -12,5 +14,5 @@ CREATE TABLE kalturadw.`dwh_hourly_events_live_entry` (
   KEY `entry_id` (`entry_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 PARTITION BY RANGE (date_id)
-(PARTITION p_201403 VALUES LESS THAN (20130401) ENGINE = INNODB);
+(PARTITION p_201403 VALUES LESS THAN (20140401) ENGINE = INNODB);
  
