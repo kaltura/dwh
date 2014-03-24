@@ -184,10 +184,10 @@ BEGIN
 					,sum_time_viewed
 					,count_time_viewed)
 					SELECT partner_id, event_date_id, event_hour_id',v_aggr_id_field,',
-					SUM(duration / 60 / 4 * (if(v_25>v_play,v_play,v_25)
-					                      +if(v_50>v_play,v_play,v_50)
-					                      +if(v_75>v_play,v_play,v_75)
-					                      +if(v_100>v_play,v_play,v_100))) sum_time_viewed,
+					SUM(duration / 60 / 4 * (if(v_25>v_play AND v_play <> 0,v_play,v_25)
+					                      +if(v_50>v_play AND v_play <> 0,v_play,v_50)
+					                      +if(v_75>v_play AND v_play <> 0,v_play,v_75)
+					                      +if(v_100>v_play AND v_play <> 0,v_play,v_100))) sum_time_viewed,
 					COUNT(DISTINCT s_play) count_time_viewed
 					FROM(
 					SELECT ev.partner_id, ev.event_date_id, ev.event_hour_id',v_aggr_id_field,', ev.session_id,
