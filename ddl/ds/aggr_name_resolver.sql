@@ -40,7 +40,7 @@ values  ('entry','dwh_hourly_events_entry','','entry_id','events','',''),
 		('users', 'dwh_hourly_events_context_entry_user_app', 'user_id,context_id,application_id', 'entry_id', 'events', 'dwh_dim_user_reports_allowed_partners', 'partner_id'),
 		('context', 'dwh_hourly_events_context_app', 'context_id,application_id', '', 'events', 'dwh_dim_user_reports_allowed_partners', 'partner_id'),
 		('app_devices', 'dwh_hourly_events_context_app_devices', 'context_id,application_id,os_id,browser_id', '', 'events','',''),
-		('plays_partner','dwh_hourly_plays_partner','','','plays',NULL,NULL),
-		('plays_entry','dwh_hourly_plays_entry','entry_id','','plays',NULL,NULL),
-		('live_entry','dwh_hourly_events_live_entry','','entry_id','events',NULL,NULL);
+		('plays_partner','dwh_hourly_plays_partner','','','plays','',''),
+		('plays_entry','dwh_hourly_plays_entry','entry_id','','plays','',''),
+		('live_entry','dwh_hourly_events_live_entry','','entry_id','events','','');
 		
