@@ -16,7 +16,7 @@ VALUES
          NULL,
          'cycle_id',
          NULL,
-	'(\'plays_partner\',\'plays_entry\',\'plays_country\',\'plays_devices\')',
+	'(\'plays_partner\',\'plays_entry\')',
 	'play_date_id',
 	'play_hour_id');
 
