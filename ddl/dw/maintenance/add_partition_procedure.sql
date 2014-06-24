@@ -97,8 +97,7 @@ BEGIN
 		CALL add_monthly_partition_for_table('dwh_daily_partner_ingestion');
 		CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_plays_partner');
 		CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_plays_entry');
-		CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_plays_country');
-		CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_plays_devices');
+		CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_events_live_entry');
 END$$
 
 DELIMITER ;

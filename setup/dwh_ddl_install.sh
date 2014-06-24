@@ -280,8 +280,7 @@ mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_app.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_app_devices.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_plays_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_plays_entry.sql
-mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_plays_country.sql
-mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_plays_devices.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_live_entry.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_daily_ingestion.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_daily_partner_ingestion.sql
 mysqlexec $DW_ROOT_DIR/aggr/time_zone_helper_function.sql
@@ -301,12 +300,16 @@ mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_widget.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_entry.sql
 mysqlexec $DW_ROOT_DIR/aggr/pre_aggregation_entry.sql
+mysqlexec $DW_ROOT_DIR/aggr/post_aggregation_live_entry.sql
+mysqlexec $DW_ROOT_DIR/aggr/pre_aggregation_live_entry.sql
 mysqlexec $DW_ROOT_DIR/aggr/add_plays_views.sql
 mysqlexec $DW_ROOT_DIR/aggr/remove_plays_views.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_entry_plays_views.sql
 mysqlexec $DW_ROOT_DIR/aggr/resolve_aggr_name_function.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_aggr_events_partitions_view.sql
 mysqlexec $DW_ROOT_DIR/aggr/old_entries_table.sql
+mysqlexec $DW_ROOT_DIR/aggr/add_live_plays_views.sql
+mysqlexec $DW_ROOT_DIR/aggr/remove_live_plays_views.sql
 
 #dw/functions/
 mysqlexec $DW_ROOT_DIR/functions/calc_month_id_function.sql
