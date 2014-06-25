@@ -9,7 +9,7 @@ PORT=3306
 
 while getopts "u:p:k:d:h:P:" o
 do	case "$o" in
-	u)	UESR="$OPTARG";;
+	u)	USER="$OPTARG";;
 	p)	PW="$OPTARG";;
     k)	KITCHEN="$OPTARG";;
     d)	ROOT_DIR="$OPTARG";;

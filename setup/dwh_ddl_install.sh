@@ -280,7 +280,7 @@ mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_app.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_context_app_devices.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_plays_partner.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_plays_entry.sql
-mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_live_entry.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_hourly_events_live_entry.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_daily_ingestion.sql
 mysqlexec $DW_ROOT_DIR/aggr/dwh_daily_partner_ingestion.sql
 mysqlexec $DW_ROOT_DIR/aggr/time_zone_helper_function.sql
