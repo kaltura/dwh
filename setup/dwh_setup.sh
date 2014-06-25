@@ -35,7 +35,7 @@ ret_val=$?
 if [ $ret_val -ne 0 ];then
 	echo $ret_val
        	echo "Error - bailing out!"
-       	exit
+       	exit $ret_val
 fi
 
 # Populate time dimension
@@ -46,7 +46,7 @@ ret_val=$?
 if [ $ret_val -ne 0 ];then
 	echo $ret_val
        	echo "Error - bailing out!"
-       	exit
+       	exit $ret_val
 fi
 
 # Note that setup skips svn update and registers all files from migrations as if they were run (the changes are already incorporated in ddl).
