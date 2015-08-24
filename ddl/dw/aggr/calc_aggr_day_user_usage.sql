@@ -113,8 +113,8 @@ BEGIN
     
     INSERT INTO latest_total (partner_id, kuser_id, total_storage_kb, total_entries, total_msecs)
     SELECT u.partner_id, u.kuser_id, IFNULL(u.total_storage_kb,0), IFNULL(u.total_entries,0), IFNULL(u.total_msecs,0)
-    FROM dwh_hourly_user_usage u JOIN (SELECT kuser_id, partner_id, MAX(date_id) AS date_id FROM dwh_hourly_user_usage WHERE date_id < p_date_id GROUP BY kuser_id, partner_id) MAX
-          ON u.kuser_id = max.kuser_id AND u.date_id = max.date_id AND u.partner_id = max.partner_id; 
+    FROM dwh_hourly_user_usage u JOIN (SELECT kuser_id, partner_id, MAX(date_id) AS date_id FROM dwh_hourly_user_usage WHERE date_id < p_date_id GROUP BY kuser_id, partner_id) max_user
+          ON u.kuser_id = max_user.kuser_id AND u.date_id = max_user.date_id AND u.partner_id = max_user.partner_id; 
           
     INSERT INTO dwh_hourly_user_usage (partner_id, kuser_id, date_id, hour_id, added_storage_kb, deleted_storage_kb, total_storage_kb, added_entries, deleted_entries, total_entries, added_msecs, deleted_msecs, total_msecs)
     SELECT      aggr.partner_id, aggr.kuser_id, p_date_id, 0, SUM(added_storage_kb), SUM(deleted_storage_kb), SUM(added_storage_kb) - SUM(deleted_storage_kb) + IFNULL(latest_total.total_storage_kb,0),
