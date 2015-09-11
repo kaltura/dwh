@@ -305,7 +305,7 @@
     <enclosure_fix_disabled>Y</enclosure_fix_disabled>
     <header>N</header>
     <footer>N</footer>
-    <format>DOS</format>
+    <format>mixed</format>
     <compression>None</compression>
     <encoding/>
     <endedLine/>
