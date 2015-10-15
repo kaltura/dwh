@@ -328,7 +328,7 @@
     <enclosure_forced>N</enclosure_forced>
     <header>Y</header>
     <footer>N</footer>
-    <format>DOS</format>
+    <format>mixed</format>
     <compression>None</compression>
     <encoding/>
     <endedLine/>

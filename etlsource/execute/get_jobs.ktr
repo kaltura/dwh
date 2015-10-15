@@ -280,7 +280,7 @@
     <rownum>N</rownum>
     <rownumByFile>N</rownumByFile>
     <rownum_field/>
-    <format>DOS</format>
+    <format>mixed</format>
     <encoding/>
     <add_to_result_filenames>N</add_to_result_filenames>
     <file>

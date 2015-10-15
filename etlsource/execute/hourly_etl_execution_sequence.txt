@@ -1,1 +1,2 @@
 events/events.kjb
+kaltura_live/kaltura_live.kjb
