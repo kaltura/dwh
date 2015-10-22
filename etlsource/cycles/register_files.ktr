@@ -356,7 +356,7 @@ if (gzIndex &gt;= 0){
 	compression_suffix = &quot;gz&quot;;
 }
 
-file_size_kb = size &#47; 1024;
+file_size_kb = floor(size &#47; 1024);
 
 if (path != main_logs_dir.replace(&#47;\&#47;*$&#47;,&apos;&apos;) &amp;&amp; path.length &gt;= main_logs_dir.length) {
 	var subdir = substr(path,main_logs_dir.length);
