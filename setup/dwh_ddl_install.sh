@@ -310,6 +310,9 @@ mysqlexec $DW_ROOT_DIR/aggr/dwh_aggr_events_partitions_view.sql
 mysqlexec $DW_ROOT_DIR/aggr/old_entries_table.sql
 mysqlexec $DW_ROOT_DIR/aggr/add_live_plays_views.sql
 mysqlexec $DW_ROOT_DIR/aggr/remove_live_plays_views.sql
+mysqlexec $DW_ROOT_DIR/aggr/dwh_daily_partner_totals.sql
+mysqlexec $DW_ROOT_DIR/aggr/calc_aggr_day_partner_totals.sql
+
 
 #dw/functions/
 mysqlexec $DW_ROOT_DIR/functions/calc_month_id_function.sql
@@ -323,6 +326,7 @@ mysqlexec $DW_ROOT_DIR/functions/get_data_for_operational.sql
 mysqlexec $DW_ROOT_DIR/functions/mark_operational_as_done.sql
 mysqlexec $DW_ROOT_DIR/functions/calc_partner_usage_data.sql
 mysqlexec $DW_ROOT_DIR/functions/calc_median_ff_convert_job_wait_time.sql
+mysqlexec $DW_ROOT_DIR/functions/calc_vpaas_partner_usage.sql
 #dw/ri/ 
 mysqlexec $DW_ROOT_DIR/ri/ri_defaults.sql
 mysqlexec $DW_ROOT_DIR/ri/ri_mapping.sql
