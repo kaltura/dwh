@@ -3716,7 +3716,8 @@ var partnerID = -1;
 var bandwidth = -1;
 var url = null;
 var activityDate = str2date(&quot;2099-01-01&quot;, &quot;yyyy-MM-dd&quot;);
-var parnterRegex = &quot;GET &#47;p&#47;([0-9]+)&#47;.*&quot;;
+var parnterRegex = &quot;GET .*&#47;p&#47;([0-9]+)&#47;.*&quot;;
+
 resArr = str2RegExp(http_string, parnterRegex);
 
 if (resArr!=null &amp;&amp; resArr.length &gt; 0 &amp;&amp; (http_response_code == &quot;200&quot; || http_response_code == &quot;206&quot;) &amp;&amp; (!is_not_numeric(response_size)))
