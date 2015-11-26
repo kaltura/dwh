@@ -20,7 +20,7 @@ BEGIN
 	GROUP BY partner_id;
 
 	INSERT INTO kalturadw.dwh_daily_partner_totals(partner_id, date_id, added_entries)
-	SELECT partner_id, p_the_day_before COUNT(entry_id)
+	SELECT partner_id, p_the_day_before, COUNT(entry_id)
 	FROM kalturadw.dwh_dim_entries
 	WHERE created_at BETWEEN DATE(p_the_day_before) AND DATE(p_the_day_before) + INTERVAL 1 DAY - INTERVAL 1 SECOND 
 	AND entry_status_id = 2
