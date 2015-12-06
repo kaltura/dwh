@@ -23,6 +23,7 @@ BEGIN
 	FROM 		dwh_dim_entries
 	WHERE		created_at BETWEEN DATE(calc_date_id) AND (DATE(calc_date_id) + INTERVAL 1 DAY - INTERVAL 1 SECOND)
 	AND         (entry_type_id = 7 OR entry_media_type_id IN (1,2,5))
+	AND         display_in_search <> -1
 	GROUP BY 	partner_id;
 	
 	INSERT INTO 	temp_totals (partner_id, deleted_entries)
@@ -31,6 +32,7 @@ BEGIN
 	WHERE		updated_at BETWEEN DATE(calc_date_id) AND (DATE(calc_date_id) + INTERVAL 1 DAY - INTERVAL 1 SECOND)
 	AND         entry_status_id = 3
 	AND         (entry_type_id = 7 OR entry_media_type_id IN (1,2,5))
+	AND         display_in_search <> -1
 	GROUP BY 	partner_id
 	ON DUPLICATE KEY UPDATE deleted_entries=VALUES(deleted_entries);
 	
