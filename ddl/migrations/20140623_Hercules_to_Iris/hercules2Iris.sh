@@ -39,9 +39,3 @@ function mysqlexec {
 
 #general
 mysqlexec $ROOT_DIR/ddl/migrations/20140623_Hercules_to_Iris/hercules2Iris.sql
-
-#cp pentaho plugins
-/bin/bash $ROOT_DIR/setup/copy_pentaho_plugins.sh -d $ROOT_DIR -k $KITCHEN 
-
-
-
