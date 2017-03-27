@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP FUNCTION IF EXISTS `calc_median_ff_convert_job_wait_time`$$
 
-CREATE DEFINER=`etl`@`localhost` FUNCTION `calc_median_ff_convert_job_wait_time`(p_date_id INT(11)) RETURNS INT(11)
+CREATE FUNCTION `calc_median_ff_convert_job_wait_time`(p_date_id INT(11)) RETURNS INT(11)
     DETERMINISTIC
 BEGIN
 	DECLARE v_median INT(11);
