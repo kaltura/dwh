@@ -301,7 +301,7 @@
     <connection>KalturaDW</connection>
     <sql>SELECT 	aggr_name,date_id, hour_id aggr_hour 
 FROM kalturadw.aggr_managment, kalturadw_ds.parameters p
-WHERE 	date_id + INTERVAL hour_id HOUR &lt; p.date_value
+WHERE 	date_id + INTERVAL hour_id HOUR &lt; p.date_value - INTERVAL 1 HOUR
 		AND (ifnull(start_time,date(19700101)) &lt; data_insert_time 
 			OR
 			start_time &gt; ifnull(end_time,date(19700101)) &#47;* Handle Failed aggregations*&#47;)
