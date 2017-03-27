@@ -4,7 +4,7 @@ USE `kalturadw`$$
 
 DROP PROCEDURE IF EXISTS `calc_updated_batch_job_day`$$
 
-CREATE DEFINER=`etl`@`localhost` PROCEDURE `calc_updated_batch_job_day`(p_date_id INT(11))
+CREATE PROCEDURE `calc_updated_batch_job_day`(p_date_id INT(11))
 BEGIN
                 DECLARE v_date DATETIME;
                 DECLARE v_ignore_partner_ids TEXT;
