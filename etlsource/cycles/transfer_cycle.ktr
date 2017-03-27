@@ -321,6 +321,7 @@
            <schema_name/>
            </partitioning>
     <compatible>N</compatible>
+    <optimizationLevel/>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
@@ -510,6 +511,49 @@ var deleteCommand = &quot;rm -Rf &quot; + processed_path + &quot;&#47;&quot; + c
     </step>
 
   <step>
+    <name>get cycle output folder</name>
+    <type>Mapping</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <specification_method>filename</specification_method>
+    <trans_object_id/>
+    <trans_name/>
+    <filename>${EtlBasePath}&#47;cycles&#47;get_cycle_output_folder.ktr</filename>
+    <directory_path/>
+    <mappings>
+      <input>
+    <mapping>    <input_step/>
+    <output_step/>
+    <main_path>Y</main_path>
+    <rename_on_output>Y</rename_on_output>
+    <description/>
+    </mapping>      </input>
+      <output>
+    <mapping>    <input_step/>
+    <output_step/>
+    <main_path>Y</main_path>
+    <rename_on_output>N</rename_on_output>
+    <description/>
+    </mapping>      </output>
+          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    </mappings>
+    <allow_multiple_input>N</allow_multiple_input>
+    <allow_multiple_output>N</allow_multiple_output>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>831</xloc>
+      <yloc>179</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>set cycle status done</name>
     <type>ExecSQL</type>
     <description/>
@@ -523,12 +567,16 @@ var deleteCommand = &quot;rm -Rf &quot; + processed_path + &quot;&#47;&quot; + c
     <execute_each_row>Y</execute_each_row>
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
-    <sql>call kalturadw_ds.set_cycle_status(?,&apos;DONE&apos;);</sql>
+    <sql>call kalturadw_ds.set_cycle_status(?,&apos;DONE&apos;);
+insert into kalturadw_ds.done_cycles select * from kalturadw_ds.cycles where cycle_id = ?;
+delete from kalturadw_ds.cycles where cycle_id = ?;</sql>
     <insert_field/>
     <update_field/>
     <delete_field/>
     <read_field/>
     <arguments>
+       <argument><name>cycle_id</name></argument>
+       <argument><name>cycle_id</name></argument>
        <argument><name>cycle_id</name></argument>
     </arguments>
      <cluster_schema/>
@@ -625,49 +673,6 @@ var deleteCommand = &quot;rm -Rf &quot; + processed_path + &quot;&#47;&quot; + c
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>465</xloc>
       <yloc>183</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>get cycle output folder</name>
-    <type>Mapping</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <specification_method>filename</specification_method>
-    <trans_object_id/>
-    <trans_name/>
-    <filename>${EtlBasePath}&#47;cycles&#47;get_cycle_output_folder.ktr</filename>
-    <directory_path/>
-    <mappings>
-      <input>
-    <mapping>    <input_step/>
-    <output_step/>
-    <main_path>Y</main_path>
-    <rename_on_output>Y</rename_on_output>
-    <description/>
-    </mapping>      </input>
-      <output>
-    <mapping>    <input_step/>
-    <output_step/>
-    <main_path>Y</main_path>
-    <rename_on_output>N</rename_on_output>
-    <description/>
-    </mapping>      </output>
-          <parameters>    <inherit_all_vars>Y</inherit_all_vars>
-    </parameters>
-    </mappings>
-    <allow_multiple_input>N</allow_multiple_input>
-    <allow_multiple_output>N</allow_multiple_output>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>831</xloc>
-      <yloc>179</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
