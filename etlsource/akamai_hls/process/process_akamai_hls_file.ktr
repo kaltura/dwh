@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>process_kaltura_live_file</name>
+    <name>process_akamai_hls_file</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -263,7 +263,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get cycle and file</from><to>Get Cycles Path</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path</from><to>set IO file path vars</to><enabled>Y</enabled> </hop>  <hop> <from>set IO file path vars</from><to>Create output files</to><enabled>Y</enabled> </hop>  <hop> <from>Calc activity day and hour ids</from><to>Get numeric IP </to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle_id and file_id</from><to>Append cycle_id, file_id, fila_name</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id, fila_name</from><to>Get Cycles Path </to><enabled>Y</enabled> </hop>  <hop> <from>Create output files</from><to>iterate file</to><enabled>Y</enabled> </hop>  <hop> <from>parse activity timezone</from><to>Calc activity day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Get numeric IP </from><to>Append cycle_id, file_id, fila_name</to><enabled>Y</enabled> </hop>  <hop> <from>create output file_name</from><to>Bandwdith Text file output</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path </from><to>create output file_name</to><enabled>Y</enabled> </hop>  <hop> <from>Filter by response code</from><to>Regex split row</to><enabled>Y</enabled> </hop>  <hop> <from>Filter by response code</from><to>error response code</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Filter bad entry ids</to><enabled>Y</enabled> </hop>  <hop> <from>Filter bad entry ids</from><to>Filter by response code</to><enabled>Y</enabled> </hop>  <hop> <from>Filter bad entry ids</from><to>bad entry id</to><enabled>Y</enabled> </hop>  <hop> <from>Regex split row</from><to>parse activity timezone</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Get cycle and file</from><to>Get Cycles Path</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path</from><to>set IO file path vars</to><enabled>Y</enabled> </hop>  <hop> <from>set IO file path vars</from><to>Create output files</to><enabled>Y</enabled> </hop>  <hop> <from>Calc activity day and hour ids</from><to>Get numeric IP </to><enabled>Y</enabled> </hop>  <hop> <from>Enrich cycle_id and file_id</from><to>Append cycle_id, file_id, fila_name</to><enabled>Y</enabled> </hop>  <hop> <from>Append cycle_id, file_id, fila_name</from><to>Get Cycles Path </to><enabled>Y</enabled> </hop>  <hop> <from>Create output files</from><to>iterate file</to><enabled>Y</enabled> </hop>  <hop> <from>parse activity timezone</from><to>Calc activity day and hour ids</to><enabled>Y</enabled> </hop>  <hop> <from>Get numeric IP </from><to>Append cycle_id, file_id, fila_name</to><enabled>Y</enabled> </hop>  <hop> <from>create output file_name</from><to>Bandwdith Text file output</to><enabled>Y</enabled> </hop>  <hop> <from>Get Cycles Path </from><to>create output file_name</to><enabled>Y</enabled> </hop>  <hop> <from>Filter by response code</from><to>Regex split row</to><enabled>Y</enabled> </hop>  <hop> <from>Filter by response code</from><to>error response code</to><enabled>Y</enabled> </hop>  <hop> <from>Regex split row</from><to>parse activity timezone</to><enabled>Y</enabled> </hop>  <hop> <from>iterate file</from><to>Filter by response code</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Append cycle_id, file_id, fila_name</name>
     <type>JoinRows</type>
@@ -611,81 +611,6 @@
     </step>
 
   <step>
-    <name>Filter bad entry ids</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>bad entry id</send_true_to>
-<send_false_to>Filter by response code</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>http_string</leftvalue>
-   <function>CONTAINS</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>0_zxmbdhit</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>OR</operator>
-   <leftvalue>http_string</leftvalue>
-   <function>CONTAINS</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>0_fu5mnxml</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>OR</operator>
-   <leftvalue>http_string</leftvalue>
-   <function>CONTAINS</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>origin.kaltura.com&#47;crossdomain.xml</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>OR</operator>
-   <leftvalue>http_string</leftvalue>
-   <function>CONTAINS</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>0_a5lkv8e5</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>OR</operator>
-   <leftvalue>http_string</leftvalue>
-   <function>CONTAINS</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>0_nnitq0qh</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>OR</operator>
-   <leftvalue>http_string</leftvalue>
-   <function>CONTAINS</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>0_nqp76k84</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>OR</operator>
-   <leftvalue>http_string</leftvalue>
-   <function>CONTAINS</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>0_po0bfb3a</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>56</xloc>
-      <yloc>403</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Filter by response code</name>
     <type>FilterRows</type>
     <description/>
@@ -929,15 +854,14 @@ var browser_id = -1;</jsScript_script>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>&#47;&#47;Script here
 
-var entry_id = &quot;&quot;;
+var partner_id = -1;
 var activity_date = str2date(&quot;2099-01-01&quot;, &quot;yyyy-MM-dd&quot;);
-var bandwidth_source_id = 10;
+var bandwidth_source_id = 11;
 activity_date = str2date(substr(raw_datetime,1),&apos;dd&#47;MMM&#47;yyyy:HH:mm:ss&apos;);
 
-var url_regex = &quot;.*&#47;p&#47;([0-9]+)&#47;.*&quot;;
+&#47;&#47;var url_regex = &quot;GET .*&#47;dc-[0-9]*&#47;m&#47;.*&#47;kLive&#47;(.*)&#47;.*&quot;;
+var url_regex = &quot;GET &#47;[^testing].*&#47;p&#47;([0-9]+)&#47;.*&quot;;
 var url = unescape(http_string);
-
-
 
 resArr = str2RegExp(url, url_regex);
 
@@ -950,9 +874,7 @@ url = substr(url, 0, 200);
 
 function is_not_numeric(s) {
 	return isNaN(s) || s == &quot;&quot; || s == null;
-}
-
-</jsScript_script>
+}</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>str2RegExp_Sample</jsScript_name>
         <jsScript_script>&#47;&#47; Split&apos;s a String with a Regular Expression to an Array.
@@ -1057,24 +979,6 @@ Alert(month(d1));
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>331</xloc>
       <yloc>280</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>bad entry id</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>50</xloc>
-      <yloc>504</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1382,8 +1286,8 @@ Alert(month(d1));
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>62</xloc>
-      <yloc>310</yloc>
+      <xloc>77</xloc>
+      <yloc>332</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

@@ -31,3 +31,15 @@ CREATE TABLE `cycles` (
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+
+CREATE TABLE `done_cycles` (
+  `cycle_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `status` VARCHAR(60) DEFAULT NULL,
+  `prev_status` VARCHAR(60) DEFAULT NULL,
+  `insert_time` DATETIME DEFAULT NULL,
+  `run_time` DATETIME DEFAULT NULL,
+  `transfer_time` DATETIME DEFAULT NULL,
+  `process_id` INT(11) DEFAULT '1',
+  `assigned_server_id` INT(11),
+  PRIMARY KEY (`cycle_id`)
+) ENGINE=MYISAM DEFAULT CHARSET=latin1;
