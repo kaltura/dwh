@@ -32,4 +32,4 @@ CREATE TABLE `dwh_fact_api_calls` (
   KEY (`api_call_date_id`,`api_call_hour_id`,`partner_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 /*!50100 PARTITION BY RANGE (api_call_date_id)
-(PARTITION p_20130831 VALUES LESS THAN (20130901) ENGINE = INNODB) */
+(PARTITION p_20170430 VALUES LESS THAN (20170501) ENGINE = INNODB) */

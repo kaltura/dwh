@@ -8,4 +8,5 @@ INSERT INTO kalturadw_ds.fact_tables VALUES (1,'kalturadw.dwh_fact_events'),
 				(4,'kalturadw.dwh_fact_api_calls'),
 				(5,'kalturadw.dwh_fact_incomplete_api_calls'),
 				(6,'kalturadw.dwh_fact_errors'),
-				(7,'kalturadw.dwh_fact_plays');
+				(7,'kalturadw.dwh_fact_plays'),
+                                (8,'kalturadw.dwh_fact_active_users');

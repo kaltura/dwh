@@ -32,4 +32,4 @@ CREATE TABLE `dwh_fact_incomplete_api_calls` (
   PRIMARY KEY (`cycle_id`,`file_id`,`line_number`,`api_call_date_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 /*!50100 PARTITION BY RANGE (api_call_date_id)
-(PARTITION p_20130901 VALUES LESS THAN (20130902) ENGINE = InnoDB) */
+(PARTITION p_20170430 VALUES LESS THAN (20170501) ENGINE = InnoDB) */

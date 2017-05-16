@@ -108,6 +108,7 @@ mysqlexec $DS_ROOT_DIR/populate_repository_for_bandwidth_usage.sql
 mysqlexec $DS_ROOT_DIR/populate_repository_for_api_calls.sql
 mysqlexec $DS_ROOT_DIR/populate_repository_for_transcoding.sql
 mysqlexec $DS_ROOT_DIR/populate_repository_for_plays.sql
+mysqlexec $DS_ROOT_DIR/populate_repository_for_active_users.sql
 mysqlexec $DS_ROOT_DIR/fms_incomplete_session.sql
 mysqlexec $DS_ROOT_DIR/fms_stale_sessions.sql
 mysqlexec $DS_ROOT_DIR/fms_sessionize.sql
@@ -134,6 +135,7 @@ mysqlexec $DS_ROOT_DIR/fact_tables.sql
 mysqlexec $DS_ROOT_DIR/fact_stats.sql
 mysqlexec $DS_ROOT_DIR/ds_plays.sql
 mysqlexec $DS_ROOT_DIR/aggr_type.sql
+mysqlexec $DS_ROOT_DIR/ds_active_users.sql
 
 #etl_log
 mysqlexec $DDL_ROOT_DIR/log/etl_log.sql
@@ -188,6 +190,7 @@ mysqlexec $DW_ROOT_DIR/facts/dwh_fact_entries_sizes.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_convert_job.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_plays.sql
 mysqlexec $DW_ROOT_DIR/facts/dwh_fact_plays_archive.sql
+mysqlexec $DW_ROOT_DIR/facts/dwh_fact_active_users.sql
 
 #dw/dimensions
 mysqlexec $DW_ROOT_DIR/dimensions/dwh_dim_kuser.sql

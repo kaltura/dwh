@@ -21,5 +21,5 @@ CREATE TABLE `dwh_fact_plays` (
   KEY `play_hour_id_play_date_id_partner_id` (play_hour_id, play_date_id, partner_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 /*!50100 PARTITION BY RANGE (play_date_id)
-(PARTITION p_20131231 VALUES LESS THAN (20140101) ENGINE = INNODB) */;
+(PARTITION p_20170430 VALUES LESS THAN (20170501) ENGINE = INNODB) */;
 

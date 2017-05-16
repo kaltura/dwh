@@ -77,6 +77,7 @@ BEGIN
         CALL add_daily_partition_for_table('dwh_fact_incomplete_api_calls');
         CALL add_daily_partition_for_table('dwh_fact_errors');
 		CALL add_daily_partition_for_table('dwh_fact_plays');
+        CALL add_monthly_partition_for_table('dwh_fact_active_users');
         CALL add_monthly_partition_for_table('dwh_fact_entries_sizes');
         CALL add_monthly_partition_for_table('dwh_hourly_events_entry');
         CALL add_monthly_partition_for_table('dwh_hourly_events_domain');
