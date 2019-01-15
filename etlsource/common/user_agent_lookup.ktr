@@ -468,7 +468,7 @@ if (user_agent == null)
 	user_agent = &quot;&quot;;
 }
 
-var ua = new Packages.nl.bitwalker.useragentutils.UserAgent(user_agent);
+var ua = new Packages.eu.bitwalker.useragentutils.UserAgent.parseUserAgentString(user_agent);
 
 var browser = ua.getBrowser();
 var browserVer = ua.getBrowserVersion();
