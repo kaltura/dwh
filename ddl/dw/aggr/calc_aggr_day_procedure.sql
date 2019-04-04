@@ -168,7 +168,7 @@ BEGIN
                                         ' WHERE ev.event_type_id BETWEEN 2 AND 40
                                         AND ev.event_date_id  = DATE(''',p_date_val,''')*1
                                         AND ev.event_hour_id = ',p_hour_id,'
-                                        AND e.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
+                                        AND e.entry_media_type_id IN (1,2,3,5,6)  /* allow only video & audio & mix */
                                 AND e.entry_id = ev.entry_id ' ,v_join_condition,
                                 ' GROUP BY partner_id,event_date_id, event_hour_id',v_aggr_id_field,';');
 
@@ -201,7 +201,7 @@ BEGIN
                                         FROM ',v_table_name,' as ev ', v_use_index, ' , dwh_dim_entries e',v_join_table,
                                         ' WHERE ev.event_date_id  = DATE(''',p_date_val,''')*1
                                                 AND ev.event_hour_id = ',p_hour_id,'
-                                                AND e.entry_media_type_id IN (1,2,5,6)  /* allow only video & audio & mix */
+                                                AND e.entry_media_type_id IN (1,2,3,5,6)  /* allow only video & audio & mix */
                                                 AND e.entry_id = ev.entry_id
                                                 AND ev.event_type_id IN(3,4,5,6,7) /* time viewed only when player reaches 25,50,75,100 */ ',v_join_condition,
                                         ' GROUP BY ev.partner_id, ev.event_date_id, ev.event_hour_id , ev.entry_id',v_aggr_id_field,',ev.session_id) e
