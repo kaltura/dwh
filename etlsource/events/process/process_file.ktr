@@ -4050,7 +4050,7 @@ if (lineType == 2){
 		widgetID = getValue(queryStringDictionary, &quot;widgetId&quot;);
 		uv = getValue(queryStringDictionary, &quot;uniqueViewer&quot;);
 		uiConfID = getValue(queryStringDictionary, &quot;uiconfId&quot;);
-		currentPoint = getValue(queryStringDictionary, &quot;currentPoint&quot;);
+		currentPoint = Math.floor(getValue(queryStringDictionary, &quot;currentPoint&quot;));
 		duration = getValue(queryStringDictionary, &quot;duration&quot;);
 		processDuration = getValue(queryStringDictionary, &quot;processDuration&quot;);
 		controlID = getValue(queryStringDictionary, &quot;controlId&quot;);
@@ -4080,14 +4080,15 @@ function parseQueryString(s){
 	var sDictionary = {};
 	if (s != null) {
 		s.replace(&#47;([^=&amp;]+)=([^&amp;]*)&#47;g, function(m, key, value){ 
-        	sDictionary[key] = value; 
+        	sDictionary[lower(key)] = value; 
     	});
 	} 
 	return sDictionary;
 }
 
 function getValue(dictionary, key){
-	var val = dictionary[keyPrefix + key];
+    var index = keyPrefix + key;
+	var val = dictionary[lower(index)];
 	return val != null ? replace(val, &apos;,&apos;, &apos;~&apos;) : null;
 }
 
