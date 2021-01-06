@@ -4716,12 +4716,7 @@ if (  response_size &lt; 0 ) {
 	error_reason=&quot;bandwidth is invalid&quot;;
 } else if ( partnerID == -1 ) { &#47;&#47; unable to yield partner_id from the url
 	error_reason=&quot;bandwidth: partner_id is missing&quot;;
-} &#47;*else if ( year(eventTime)&gt;2020 ) { &#47;&#47; validate event time is less than 2020
-	error_reason=&quot;date after 2020&#47;12&#47;31 00:00:00&quot;;
-}
-else if ( year(eventTime)&lt;2009 ) { &#47;&#47; validate event time is more than 2009
-	error_reason=&quot;date before 2009&#47;01&#47;01  00:00:00&quot;;
-}*&#47;</jsScript_script>
+} </jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>error_reason</name>
         <rename>error_reason</rename>
         <type>String</type>
@@ -4764,10 +4759,6 @@ else if (partnerID == -1)
 else if (entryID == null)
 {
 	error_reason=&quot;events: missing entry id&quot;;
-}
-else if ( year(eventTime)&gt;2020 ) &#47;&#47; validate event time is less than 2020
-{
-	error_reason=&quot;date after 2020&#47;12&#47;31 00:00:00&quot;;
 }
 else if ( year(eventTime)&lt;2009 )  &#47;&#47; validate event time is more than 2009
 {
