@@ -3108,6 +3108,10 @@ else if (event_time == null)
 {
 	error_reason=&quot;date null&quot;;
 }
+else if ( year(event_time)&gt;2020 ) &#47;&#47; validate event time is less than 2020
+{
+		error_reason=&quot;date after 2020&#47;12&#47;31 00:00:00&quot;;
+}
 else if ( year(event_time)&lt;2009 )  &#47;&#47; validate event time is more than 2009
 {
 		error_reason=&quot;date before 2009&#47;01&#47;01  00:00:00&quot;;
